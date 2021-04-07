@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>hexo-Fluid主题-文章末尾添加作者和版权声明等</title>
+    <link href="/2021/04/07/hexo-Fluid%E4%B8%BB%E9%A2%98-%E6%96%87%E7%AB%A0%E6%9C%AB%E5%B0%BE%E6%B7%BB%E5%8A%A0%E4%BD%9C%E8%80%85%E5%92%8C%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E%E7%AD%89/"/>
+    <url>/2021/04/07/hexo-Fluid%E4%B8%BB%E9%A2%98-%E6%96%87%E7%AB%A0%E6%9C%AB%E5%B0%BE%E6%B7%BB%E5%8A%A0%E4%BD%9C%E8%80%85%E5%92%8C%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E%E7%AD%89/</url>
+    
+    <content type="html"><![CDATA[<p>hexo-Fluid主题中，在文章的末尾添加作者、版权声明和本文链接。</p><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">打开 themes\fluid\layout 中的 post.ejs 文件；<br></code></pre></div></td></tr></table></figure><h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">找到以下内容并进行修改；<br></code></pre></div></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/20210407224015302.png"><br>将红色部分替换为以下代码：</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">   &lt;% <span class="hljs-keyword">if</span>(theme.post.copyright.enable &amp;&amp; theme.post.copyright.content &amp;&amp; page.copyright !== <span class="hljs-literal">false</span>) &#123; %&gt;&lt;p class=<span class="hljs-string">&quot;note note-warning&quot;</span>&gt;<br>&lt;strong&gt;本文作者: &lt;/strong&gt;&lt;a href=<span class="hljs-string">&quot;&lt;%- url_for() %&gt;&quot;</span>&gt;&lt;%- theme.about.name || config.author || config.title %&gt;&lt;/a&gt; &lt;br&gt;<br>&lt;strong&gt;本文链接: &lt;/strong&gt;&lt;a href=<span class="hljs-string">&quot;&lt;%- full_url_for(page.path) %&gt;&quot;</span>&gt;&lt;%-   full_url_for(page.path) %&gt;&lt;/a&gt; &lt;br&gt;<br>&lt;strong&gt;版权声明: &lt;/strong&gt;&lt;%- theme.post.copyright.content %&gt;<br>   &lt;/p&gt;<br>   &lt;% &#125; %&gt;<br></code></pre></div></td></tr></table></figure><h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">保存文本，重启本地预览即可。<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习教程</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CSDN图片一招除去水印</title>
     <link href="/2021/04/07/CSDN%E5%9B%BE%E7%89%87%E4%B8%80%E6%8B%9B%E9%99%A4%E5%8E%BB%E6%B0%B4%E5%8D%B0/"/>
     <url>/2021/04/07/CSDN%E5%9B%BE%E7%89%87%E4%B8%80%E6%8B%9B%E9%99%A4%E5%8E%BB%E6%B0%B4%E5%8D%B0/</url>
