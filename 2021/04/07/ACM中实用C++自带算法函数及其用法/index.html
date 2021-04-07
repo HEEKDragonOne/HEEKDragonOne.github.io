@@ -1,0 +1,517 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="黑墨之阁">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>ACM中实用C++自带算法函数及其用法 - 黑墨之阁</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>黑墨之阁</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于作者
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ACM中实用C++自带算法函数及其用法">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-07 19:20" pubdate>
+        April 7, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      657 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ACM中实用C++自带算法函数及其用法</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：April 7, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>记录一些ACM中可能会用到的一些C++自带函数，记录其函数和具体用法。</p>
+<h1 id="一-头文件"><a href="#一-头文件" class="headerlink" title="一. 头文件"></a>一. 头文件</h1><h2 id="1-主要算法头文件"><a href="#1-主要算法头文件" class="headerlink" title="1. 主要算法头文件"></a>1. 主要算法头文件</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bit/stdc++.h&gt; //万能头文件，包含了目前c++所包含的所有头文件。可替换所有头文件。但有部分编译器不可用。</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt; //包括很多常用函数</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;numeric&gt; //只包括几个在序列上面进行简单数学运算的模板函数，包括加法和乘法在序列上的一些操作。</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;functional&gt; //定义了一些模板类，用以声明函数对象。</span></span><br></code></pre></td></tr></table></figure>
+<h2 id="2-一些其他常用头文件"><a href="#2-一些其他常用头文件" class="headerlink" title="2. 一些其他常用头文件"></a>2. 一些其他常用头文件</h2><h3 id="include-lt-iomanip-gt-头文件"><a href="#include-lt-iomanip-gt-头文件" class="headerlink" title="#include&lt; iomanip&gt;头文件"></a>#include&lt; iomanip&gt;头文件</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iomanip&gt;</span></span><br><span class="hljs-number">1.</span>控制输出小数点位数(根据保留位数的后一位按照四舍五入舍留)<br>例：输出保留小数点后<span class="hljs-number">3</span>位<br><span class="hljs-keyword">double</span> n=<span class="hljs-number">23.15655</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//23.157</span><br><span class="hljs-keyword">double</span> n=<span class="hljs-number">23.15645</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//23.156</span><br><span class="hljs-comment">//注：以后除特别说明外，所有的输出都是一对一。即若有多个输出，则需要多次书写相同的格式。如</span><br><span class="hljs-built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;m&lt;&lt;<span class="hljs-built_in">endl</span>;<br><br><span class="hljs-number">2.</span>设置字段宽度(空格加数字总共占几个宽度)<br>	setw(<span class="hljs-keyword">int</span> n);<br>例：输出数字，并设置宽度分别<span class="hljs-number">1</span>、<span class="hljs-number">3</span>、<span class="hljs-number">5</span><br><span class="hljs-keyword">int</span> n=<span class="hljs-number">7</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">1</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//7 数字前面没有空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//  7 数字前面2个空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">5</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//    7 数字前面4个空格</span><br><span class="hljs-keyword">int</span> n=<span class="hljs-number">17</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 17 数字前面1个空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">5</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//   17 数字前面3个空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//     17 数字前面5个空格</span><br><br><span class="hljs-number">3.</span>设置其他字符填充(是字符!!!)<br>通常配合setw实用<br>例：输出<span class="hljs-number">7</span>位，开始s和结束t,中间都是b<br><span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&#x27;s&#x27;</span>&lt;&lt;setfill(<span class="hljs-string">&#x27;b&#x27;</span>)&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;<span class="hljs-string">&#x27;t&#x27;</span>&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//sbbbbbbt t前面6个b</span><br><span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&#x27;s&#x27;</span>&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;setfill(<span class="hljs-string">&#x27;b&#x27;</span>)&lt;&lt;<span class="hljs-string">&#x27;t&#x27;</span>&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//sbbbbbbt t前面6个b</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;<span class="hljs-string">&#x27;s&#x27;</span>&lt;&lt;setfill(<span class="hljs-string">&#x27;b&#x27;</span>)&lt;&lt;<span class="hljs-string">&#x27;t&#x27;</span>&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//      st s前面6个空格</span><br><br></code></pre></td></tr></table></figure>
+<h1 id="二-String相关"><a href="#二-String相关" class="headerlink" title="二. String相关"></a>二. String相关</h1><h2 id="1-修改string对象的方法"><a href="#1-修改string对象的方法" class="headerlink" title="1. 修改string对象的方法"></a>1. 修改string对象的方法</h2><h3 id="1-s-insert"><a href="#1-s-insert" class="headerlink" title="1) s.insert()"></a>1) s.insert()</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s.insert(p,t)<br></code></pre></td></tr></table></figure>
+
+<h1 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h1><h2 id="1-数字转字符串"><a href="#1-数字转字符串" class="headerlink" title="1.数字转字符串"></a>1.数字转字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">int</span> a=<span class="hljs-number">152</span>;<br><span class="hljs-keyword">char</span> s[<span class="hljs-number">100</span>];<br><span class="hljs-built_in">sprintf</span>(s,<span class="hljs-string">&quot;%d&quot;</span>,a);<br><span class="hljs-keyword">int</span> len=<span class="hljs-built_in">strlen</span>(s); <span class="hljs-comment">//3</span><br></code></pre></td></tr></table></figure>
+
+
+
+<p>持续更新中······</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/ACM/">ACM</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/07/hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">hexo搭建个人博客</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/07/ACM%E4%B8%AD%E9%82%A3%E4%BA%9B%E4%B8%8D%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/">
+                        <span class="hidden-mobile">ACM中那些不为人知的小技巧</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('comments', function() {
+      var light = 'github-light';
+      var dark = 'github-dark';
+      var schema = document.documentElement.getAttribute('data-user-color-scheme');
+      if (schema === 'dark') {
+        schema = dark;
+      } else {
+        schema = light;
+      }
+      window.UtterancesThemeLight = light;
+      window.UtterancesThemeDark = dark;
+      var s = document.createElement('script');
+      s.setAttribute('src', 'https://utteranc.es/client.js');
+      s.setAttribute('repo', 'HEEKDragonOne/HEEKDragonOne.github.io');
+      s.setAttribute('issue-term', 'pathname');
+      
+      s.setAttribute('label', 'utterances');
+      
+      s.setAttribute('theme', schema);
+      s.setAttribute('crossorigin', 'anonymous');
+      document.getElementById('comments').appendChild(s);
+    })
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/img/avatar.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>黑墨之阁</span></a> <i class="iconfont icon-love"></i> <a href="javascript" rel="nofollow noopener"><span>DragonOne</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
