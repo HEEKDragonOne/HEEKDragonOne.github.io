@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>ACM中实用C++自带算法函数及其用法 - 黑墨之阁</title>
+  <title>hexo-Fluid主题搭建个人博客 - 黑墨之阁</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -141,7 +141,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ACM中实用C++自带算法函数及其用法">
+            <span class="h2" id="subtitle" title="hexo-Fluid主题搭建个人博客">
               
             </span>
 
@@ -168,7 +168,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      657 字
+      1.3k 字
     </span>
   
 
@@ -178,7 +178,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      15
        分钟
     </span>
   
@@ -216,7 +216,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ACM中实用C++自带算法函数及其用法</h1>
+            <h1 style="display: none">hexo-Fluid主题搭建个人博客</h1>
             
               <p class="note note-info">
                 
@@ -225,16 +225,82 @@
               </p>
             
             <div class="markdown-body">
-              <p>记录一些ACM中可能会用到的一些C++自带函数，记录其函数和具体用法。</p>
-<h1 id="一-头文件"><a href="#一-头文件" class="headerlink" title="一. 头文件"></a>一. 头文件</h1><h2 id="1-主要算法头文件"><a href="#1-主要算法头文件" class="headerlink" title="1. 主要算法头文件"></a>1. 主要算法头文件</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bit/stdc++.h&gt; //万能头文件，包含了目前c++所包含的所有头文件。可替换所有头文件。但有部分编译器不可用。</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt; //包括很多常用函数</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;numeric&gt; //只包括几个在序列上面进行简单数学运算的模板函数，包括加法和乘法在序列上的一些操作。</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;functional&gt; //定义了一些模板类，用以声明函数对象。</span></span><br></code></pre></td></tr></table></figure>
-<h2 id="2-一些其他常用头文件"><a href="#2-一些其他常用头文件" class="headerlink" title="2. 一些其他常用头文件"></a>2. 一些其他常用头文件</h2><h3 id="include-lt-iomanip-gt-头文件"><a href="#include-lt-iomanip-gt-头文件" class="headerlink" title="#include&lt; iomanip&gt;头文件"></a>#include&lt; iomanip&gt;头文件</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iomanip&gt;</span></span><br><span class="hljs-number">1.</span>控制输出小数点位数(根据保留位数的后一位按照四舍五入舍留)<br>例：输出保留小数点后<span class="hljs-number">3</span>位<br><span class="hljs-keyword">double</span> n=<span class="hljs-number">23.15655</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//23.157</span><br><span class="hljs-keyword">double</span> n=<span class="hljs-number">23.15645</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//23.156</span><br><span class="hljs-comment">//注：以后除特别说明外，所有的输出都是一对一。即若有多个输出，则需要多次书写相同的格式。如</span><br><span class="hljs-built_in">cout</span>&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;fixed&lt;&lt;setprecision(<span class="hljs-number">3</span>)&lt;&lt;m&lt;&lt;<span class="hljs-built_in">endl</span>;<br><br><span class="hljs-number">2.</span>设置字段宽度(空格加数字总共占几个宽度)<br>	setw(<span class="hljs-keyword">int</span> n);<br>例：输出数字，并设置宽度分别<span class="hljs-number">1</span>、<span class="hljs-number">3</span>、<span class="hljs-number">5</span><br><span class="hljs-keyword">int</span> n=<span class="hljs-number">7</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">1</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//7 数字前面没有空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//  7 数字前面2个空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">5</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//    7 数字前面4个空格</span><br><span class="hljs-keyword">int</span> n=<span class="hljs-number">17</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">3</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">// 17 数字前面1个空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">5</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//   17 数字前面3个空格</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;n&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//     17 数字前面5个空格</span><br><br><span class="hljs-number">3.</span>设置其他字符填充(是字符!!!)<br>通常配合setw实用<br>例：输出<span class="hljs-number">7</span>位，开始s和结束t,中间都是b<br><span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&#x27;s&#x27;</span>&lt;&lt;setfill(<span class="hljs-string">&#x27;b&#x27;</span>)&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;<span class="hljs-string">&#x27;t&#x27;</span>&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//sbbbbbbt t前面6个b</span><br><span class="hljs-built_in">cout</span>&lt;&lt;<span class="hljs-string">&#x27;s&#x27;</span>&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;setfill(<span class="hljs-string">&#x27;b&#x27;</span>)&lt;&lt;<span class="hljs-string">&#x27;t&#x27;</span>&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//sbbbbbbt t前面6个b</span><br><span class="hljs-built_in">cout</span>&lt;&lt;setw(<span class="hljs-number">7</span>)&lt;&lt;<span class="hljs-string">&#x27;s&#x27;</span>&lt;&lt;setfill(<span class="hljs-string">&#x27;b&#x27;</span>)&lt;&lt;<span class="hljs-string">&#x27;t&#x27;</span>&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//      st s前面6个空格</span><br><br></code></pre></td></tr></table></figure>
-<h1 id="二-String相关"><a href="#二-String相关" class="headerlink" title="二. String相关"></a>二. String相关</h1><h2 id="1-修改string对象的方法"><a href="#1-修改string对象的方法" class="headerlink" title="1. 修改string对象的方法"></a>1. 修改string对象的方法</h2><h3 id="1-s-insert"><a href="#1-s-insert" class="headerlink" title="1) s.insert()"></a>1) s.insert()</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">s.insert(p,t)<br></code></pre></td></tr></table></figure>
+              <p>Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">hexo官网</a>进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。</p>
+<h1 id="Hexo搭建步骤"><a href="#Hexo搭建步骤" class="headerlink" title="Hexo搭建步骤"></a>Hexo搭建步骤</h1><h3 id="1-安装Git"><a href="#1-安装Git" class="headerlink" title="1.安装Git"></a>1.安装Git</h3><p>Git是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理你的hexo博客文章，上传到GitHub的工具。Git非常强大.</p>
+<p>windows：到git官网上下载,<a target="_blank" rel="noopener" href="https://gitforwindows.org/">Download git</a>,下载后会有一个Git Bash的命令行工具，以后就用这个工具来使用git。</p>
+<p>linux：对linux来说实在是太简单了，因为最早的git就是在linux上编写的，只需要一行代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install git<br></code></pre></div></td></tr></table></figure>
+<p>安装好后，用  git –version 来查看一下版本</p>
+<h3 id="2-安装Node-js"><a href="#2-安装Node-js" class="headerlink" title="2.安装Node.js"></a>2.安装Node.js</h3><p>windows：<a target="_blank" rel="noopener" href="https://nodejs.org/en/download/">nodejs</a>选择LTS版本就行了。<br>linux:</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install nodejs<br>sudo apt-get install npm<br></code></pre></div></td></tr></table></figure>
+<p>安装完后，检查有没有安装成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">node -v<br>npm -v<br></code></pre></div></td></tr></table></figure>
 
-<h1 id="其他函数"><a href="#其他函数" class="headerlink" title="其他函数"></a>其他函数</h1><h2 id="1-数字转字符串"><a href="#1-数字转字符串" class="headerlink" title="1.数字转字符串"></a>1.数字转字符串</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span><br><span class="hljs-keyword">int</span> a=<span class="hljs-number">152</span>;<br><span class="hljs-keyword">char</span> s[<span class="hljs-number">100</span>];<br><span class="hljs-built_in">sprintf</span>(s,<span class="hljs-string">&quot;%d&quot;</span>,a);<br><span class="hljs-keyword">int</span> len=<span class="hljs-built_in">strlen</span>(s); <span class="hljs-comment">//3</span><br></code></pre></td></tr></table></figure>
+<h3 id="3-安装Hexo"><a href="#3-安装Hexo" class="headerlink" title="3.安装Hexo"></a>3.安装Hexo</h3><p>可以先创建一个文件夹blog，然后<code>cd</code>到这个文件夹下（或者在这个文件夹下直接 右键 -&gt; git bash 打开 ）。<br>然后输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g hexo-cli<br></code></pre></div></td></tr></table></figure>
+<p>可以用 hexo -v 查看一下版本</p>
+<h4 id="3-1初始化hexo"><a href="#3-1初始化hexo" class="headerlink" title="3.1初始化hexo"></a>3.1初始化hexo</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo init myblog //myblog为文件夹名字，可以任意取<br><span class="hljs-built_in">cd</span> myblog //进入这个myblog文件夹<br>npm install<br></code></pre></div></td></tr></table></figure>
+<p>之后，我文件夹中就会多一些文件夹</p>
+<ul>
+<li>node_modules: 依赖包</li>
+<li>public：存放生成的页面</li>
+<li>scaffolds：生成文章的一些模板</li>
+<li>source：用来存放你的文章</li>
+<li> themes：主题</li>
+<li> _config.yml: 博客的配置文件</li>
+</ul>
+<p>然后再输入命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo g<br>hexo server  //hexo s<br></code></pre></div></td></tr></table></figure>
 
+<p>再在浏览器输入 localhost:4000 就可以在本地看到你生成的博客了。此时不能关闭 git ，否则将无法在本地看见。也可以在 git 中输入  ctrl+c 来停止本地浏览。</p>
+<h3 id="4-GitHub创建个人仓库"><a href="#4-GitHub创建个人仓库" class="headerlink" title="4.GitHub创建个人仓库"></a>4.GitHub创建个人仓库</h3><p>正常注册即可。</p>
+<p>登录后，在GitHub.com中看到一个New repository，</p>
+<p><img src="https://img-blog.csdnimg.cn/20210407201550136.png" srcset="/img/loading.gif" alt="1"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210407201632462.png" srcset="/img/loading.gif" alt="2"></p>
+<p>点击 new 新建一个，</p>
+<p>创建一个和你用户名相同的仓库，后面加.github.io，只有这样，将来要部署到GitHub page的时候，才会被识别，也就是xxxx.github.io，其中xxx就是你注册GitHub的用户名。我这里是已经建过了。填写好之后就可以 create repository 。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210407201651528.png" srcset="/img/loading.gif" alt="3"></p>
+<h3 id="5-生成SSH添加到GitHub"><a href="#5-生成SSH添加到GitHub" class="headerlink" title="5.生成SSH添加到GitHub"></a>5.生成SSH添加到GitHub</h3><p>在git bash中，输入命令，</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;yourname&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;youremail&quot;</span><br>这里的yourname输入你的GitHub用户名，youremail输入你GitHub的邮箱。这样GitHub才能对应账户。<br></code></pre></div></td></tr></table></figure>
+<p>也可以检查一下你是否输入正确</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config user.name<br>git config user.email<br>可以看是否是你输入的名称和邮箱。<br></code></pre></div></td></tr></table></figure>
+<p>然后创建SSH,一路回车</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail&quot;</span><br>这个时候它会告诉你已经生成了.ssh的文件夹。根据提示，在你的电脑中找到这个文件夹。<br>其中，id_rsa是你这台电脑的私人秘钥，不能给别人看的，id_rsa.pub是公共秘钥，可以随便给别人看。把这个公钥放在GitHub上，这样当你链接GitHub自己的账户时，它就会根据公钥匹配你的私钥，当能够相互匹配时，才能够顺利的通过git上传你的文件到GitHub上。<br></code></pre></div></td></tr></table></figure>
+<p>然后在GitHub的 setting 中，找到SSH keys的设置选项，点击New SSH key<br>把你的id_rsa.pub里面的信息复制进去即可。</p>
+<p><img src="https://img-blog.csdnimg.cn/20210407201710573.png" srcset="/img/loading.gif" alt="4"><br><img src="https://img-blog.csdnimg.cn/20210407201728580.png" srcset="/img/loading.gif" alt="5"><br><img src="https://img-blog.csdnimg.cn/20210407201747105.png" srcset="/img/loading.gif" alt="6"><br><img src="https://img-blog.csdnimg.cn/20210407201804137.png" srcset="/img/loading.gif" alt="7"></p>
+<p>title 可以随便填。</p>
+<p>也可以查看是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh -T git@github.com<br></code></pre></div></td></tr></table></figure>
 
+<h3 id="6-将hexo部署到GitHub"><a href="#6-将hexo部署到GitHub" class="headerlink" title="6.将hexo部署到GitHub"></a>6.将hexo部署到GitHub</h3><p>将hexo和GitHub关联起来，也就是将hexo生成的文章部署到GitHub上，打开站点配置文件 <code>_config.yml</code>，翻到最后，其中，YourgithubName就是你的GitHub账户名称</p>
+<p>修改为</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">deploy:<br>  <span class="hljs-built_in">type</span>: git<br>  repo: https://github.com/YourgithubName/YourgithubName.github.io.git<br>  branch: master<br></code></pre></div></td></tr></table></figure>
 
-<p>持续更新中······</p>
+<p>这个时候需要先安装deploy-git ，也就是部署的命令,这样你才能用命令部署到GitHub。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install hexo-deployer-git --save<br></code></pre></div></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">hexo clean<br>hexo generate <span class="hljs-comment">//hexo g</span><br>hexo deploy <span class="hljs-comment">//hexo d</span><br></code></pre></div></td></tr></table></figure>
+
+<p>注意</p>
+<p>hexo d 时可能要你输入username和password。</p>
+<p>过一会儿就可以在<code>http://yourname.github.io</code> 这个网站看到你的博客了！！</p>
+<p>以后，每当修改了内容，都可以用</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">hexo g<br>hexo d<br></code></pre></div></td></tr></table></figure>
+
+<p>去更新GitHub，也可以先用hexo clean 进行清除，再用上面两个。</p>
+<h3 id="7-设置个人域名"><a href="#7-设置个人域名" class="headerlink" title="7.设置个人域名"></a>7.设置个人域名</h3><p>再购买了域名后，进入解析，添加解析。选择 A记录 即可。</p>
+<p>其中，192.30.252.153 和 192.30.252.154 是GitHub的服务器地址。选择其一即可。</p>
+<p>你也可以自己ping 自己的博客</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ping XXXX.github.io<br></code></pre></div></td></tr></table></figure>
+
+<p>显示出来的就是GitHub服务器的地址。也可以直接用给出的，都是一样的效果。</p>
+<p>在域名解析完成后，再登录GitHub，进入之前创建的仓库，</p>
+<p>在你的仓库中创建一个名为CNAME文件，不要www或者hppt之类的。直接写上你的域名。如：abcdef.com</p>
+<p>过不了多久，再打开你的浏览器，输入你自己的域名，就可以看到搭建的网站啦！</p>
+<hr>
+<h1 id="Hexo配置"><a href="#Hexo配置" class="headerlink" title="Hexo配置"></a>Hexo配置</h1><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。</p>
+<h3 id="1-更换主题"><a href="#1-更换主题" class="headerlink" title="1.更换主题"></a>1.更换主题</h3><p>持续更新中······</p>
 
             </div>
             <hr>
@@ -244,7 +310,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/ACM/">ACM</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/">学习教程</a>
                     
                   </div>
                 
@@ -262,9 +328,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/07/hexo-Fluid%E4%B8%BB%E9%A2%98%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+                      <a href="/2021/04/07/ACM-C++%E4%B8%AD%E7%9A%84%E8%BE%93%E5%85%A5/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">hexo-Fluid主题搭建个人博客</span>
+                        <span class="hidden-mobile">ACM-C++中的输入输出以及在输入时可能会遇到的陨石坑</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -272,8 +338,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/07/ACM%E4%B8%AD%E9%82%A3%E4%BA%9B%E4%B8%8D%E4%B8%BA%E4%BA%BA%E7%9F%A5%E7%9A%84%E5%B0%8F%E6%8A%80%E5%B7%A7/">
-                        <span class="hidden-mobile">ACM中那些不为人知的小技巧</span>
+                      <a href="/2021/04/07/ACM%E4%B8%AD%E5%AE%9E%E7%94%A8C++%E8%87%AA%E5%B8%A6%E7%AE%97%E6%B3%95%E5%87%BD%E6%95%B0%E5%8F%8A%E5%85%B6%E7%94%A8%E6%B3%95/">
+                        <span class="hidden-mobile">ACM中实用C++自带算法函数及其用法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
