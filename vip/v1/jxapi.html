@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!-- saved from url=(0025)https://www.919yy.com/aq/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="avatar.png" rel="icon">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>vip解析工具-电影电视剧在线解析</title>
+<meta name="keywords" content="vip视频解析,vip视频在线解析,vip解析,万能vip视频解析,vip视频全能解析,vip视频,手机vip视频解析,手机在线解析vip视频,优酷vip解析,爱奇艺vip解析,腾讯vip解析,乐视vip解析,芒果vip解析,vip音乐解析">
+<meta name="description" content="2020最新vip解析工具，在线解析vip电影电视剧，可解析优酷vip解析，爱奇艺vip解析，腾讯vip解析，乐视vip解析，全网影视vip，芒果vip解析方便广大用户VIP视频服务，欢迎使用无广告vip解析工具">
+<link href="./jxapi_files/font-awesome.min.css" rel="stylesheet">
+<link type="text/css" href="./jxapi_files/argon.min.css" rel="stylesheet">
+</head>
+<body>
+<header class="header-global">
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-light headroom headroom--not-bottom headroom--not-top">
+<div class="container">
+<a class="navbar-brand smooth " style="font-size: large" href="Javascript:">最新vip视频解析工具</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global" aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
+<span class="navbar-toggler-icon"></span>
+</button>
+<div class="navbar-collapse collapse" id="navbar_global">
+</div>
+ </div>
+</nav>
+</header>
+
+<main class="profile-page">
+<section class="section-profile-cover section-shaped my-0">
+
+<div class="shape shape-style-1 shape-primary alpha-4">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<div class="separator separator-bottom separator-skew">
+<svg x="0" y="0" viewBox="10 10 2660 110" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+<polygon class="fill-white" points="265 110 262 110 110 110"></polygon>
+</svg>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="card card-profile shadow mt--300 ">
+<div class="px-4">
+<div class="row justify-content-center">
+<div class="col-lg-3 order-lg-2">
+<div class="card-profile-image">
+</div>
+</div>
+<div class="col-lg-4 order-lg-3 text-lg-right align-self-lg-center">
+</div>
+<div class="col-lg-4 order-lg-1"><div class="card-profile-stats d-flex justify-content-center"></div>
+</div>
+</div>
+<div class="hr mt-4"></div>
+<form>
+<div class="form-group row focused">
+<span class="col-sm-2 col-form-label text-right">请选择API:</span>
+<div class="col-sm-10">
+<select id="api" name="api" class="form-control">
+  <option>https://api.3jx.top/vip/?url=</option>
+</select>
+</div>
+</div>
+<div class="form-group row">
+<span class="col-sm-2 col-form-label text-right ">视频地址:</span>
+<div class="col-sm-10">
+<input type="" class="form-control" id="url" placeholder="请粘贴解析视频地址">
+</div>
+</div>
+<div class=" text-center">
+<button id="play" class="btn btn-primary btn-round"> 开 始 解 析</button>
+</div>
+<br>
+<div class=" text-center">
+<button href="" class="btn btn-primary btn-round"> 使用方法：复制任意视频网站VIP链接，粘贴到视频地址栏，点击开始解析即可</button>
+</div>
+</form>
+<div class="main text-center sr-only sr-only-focusable">
+<div class="form-horizontal">
+<div class="form-group focused">
+<div class="col-sm-10">
+<textarea rows="10" id="apiList" class="form-control">https://api.3jx.top/vip/?url=</textarea>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-5 py-5 border-top text-center">
+<div class="row justify-content-center">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="footer">
+<div class="container">
+<div class="row row-grid align-items-center mb-5">
+<div class="col-lg-6"></div>
+<div class="col-lg-6 text-lg-center btn-wrapper"></div>
+</div>
+<hr>
+</div><p align="center">本站仅供学习交流使用。本站不存储任何影片资源、链接，播放内容与本站无关，接口源于互联网，仅供学习交流。</p>
+</footer>
+<script src="./jxapi_files/push.js.下载"></script><script src="./jxapi_files/jquery.min.js.下载"></script>
+<script src="./jxapi_files/bootstrap.min.js.下载"></script>
+<script src="./jxapi_files/jquery.cookie.min.js.下载"></script>
+<script>
+  function setApi(){
+    $("#api").children().remove();
+  var apilist = $("#apiList").val().split(/\r?\n/);
+  for(var i=0;i<apilist.length;i++){
+    $("#api").append("<option>"+apilist[i]+"</option>");
+  }
+  }
+$("#apiList").blur(function(){
+  setApi();
+  $.cookie("apiList",$("#apiList").val());
+});
+$("#play").click(function(){
+  $api = $("#api").val();
+  $url = $("#url").val();
+  if($url == "" || $url == null || !/^http.*$/.test($url)){
+    alert('视频地址不正确！');
+    return;
+  }
+  if($url == "" || $url == null || !/^http.*=$/.test($api)){
+    alert('无效API！');
+    return;
+  }
+  window.open($api+$url);
+});
+  function init(){
+    var ckapi = $.cookie("apiList");
+    if(ckapi && ckapi != ""){
+      $("#apiList").val(ckapi);
+    }
+    setApi();
+  }
+  init();
+  function setDefault(){
+    $.cookie("apiList","");
+    window.location.reload();
+  }
+	console.groupEnd();  
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script src="./jxapi_files/jquery.min.js(1).下载"></script>
+<script src="./jxapi_files/popper.min.js.下载"></script>
+<script src="./jxapi_files/bootstrap.min.js(1).下载"></script>
+<script src="./jxapi_files/headroom.min.js.下载"></script>
+<script src="./jxapi_files/argon.min.js.下载"></script>
+
+</body></html>
