@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>MySQL数据库复习 - 墨香记忆</title>
+  <title>JAVA基础知识复习(五)-Scanner 类 - 墨香记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="MySQL数据库复习">
+            <span class="h2" id="subtitle" title="JAVA基础知识复习(五)-Scanner 类">
               
             </span>
 
@@ -169,8 +169,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-04-07 19:20" pubdate>
-        April 7, 2021 pm
+      <time datetime="2021-04-11 17:09" pubdate>
+        April 11, 2021 pm
       </time>
     </span>
   
@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      183 字
+      816 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      10
        分钟
     </span>
   
@@ -234,29 +234,61 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">MySQL数据库复习</h1>
+            <h1 style="display: none">JAVA基础知识复习(五)-Scanner 类</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 7, 2021 pm
+                  本文最后更新于：April 11, 2021 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>简单复习数据库MySQL知识.</p>
-<h2 id="1）创建数据库"><a href="#1）创建数据库" class="headerlink" title="1）创建数据库"></a>1）创建数据库</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create database 数据库名;<br></code></pre></div></td></tr></table></figure>
+              <p>JAVA基础知识复习(五)，与输入有关的Scanner 类。</p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><p>java.util.Scanner 是 Java5 的新特征，我们可以通过 Scanner 类来获取用户的输入。</p>
+<blockquote>
+<p>导包：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner; <br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>创建Scanner类对象</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner s = <span class="hljs-keyword">new</span> Scanner(System.in);<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="2）删除数据库"><a href="#2）删除数据库" class="headerlink" title="2）删除数据库"></a>2）删除数据库</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">drop database 数据库名;<br></code></pre></div></td></tr></table></figure>
+<p>通过 Scanner 类的 next() 与 nextLine() 方法获取输入的字符串，在读取前我们一般需要 使用 hasNext 与 hasNextLine 判断是否还有输入的数据。</p>
+<h3 id="1-使用next输入"><a href="#1-使用next输入" class="headerlink" title="1.使用next输入"></a>1.使用next输入</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">        Scanner cin = <span class="hljs-keyword">new</span> Scanner(System.in);<br>        <span class="hljs-comment">// next方式接收字符串</span><br>        System.out.println(<span class="hljs-string">&quot;next方式接收：&quot;</span>);<br>        <span class="hljs-comment">// 判断是否还有输入</span><br>        <span class="hljs-keyword">if</span> (cin.hasNext()) &#123;<br>            String str1 = cin.next();<br>            System.out.println(<span class="hljs-string">&quot;输入的数据为：&quot;</span> + str1);<br>        &#125;<br>        cin.close();<br><span class="hljs-comment">//输入</span><br>lichengloong com<br><span class="hljs-comment">//输出</span><br>lichengloong <span class="hljs-comment">//没有后面的com</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="2-使用-nextLine-方法"><a href="#2-使用-nextLine-方法" class="headerlink" title="2.使用 nextLine 方法"></a>2.使用 nextLine 方法</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">        Scanner cin = <span class="hljs-keyword">new</span> Scanner(System.in);<br>        System.out.println(<span class="hljs-string">&quot;nextLine方式接收：&quot;</span>);<br>        <span class="hljs-comment">// 判断是否还有输入</span><br>        <span class="hljs-keyword">if</span> (cin.hasNextLine()) &#123;<br>            String str2 = cin.nextLine();<br>            System.out.println(<span class="hljs-string">&quot;输入的数据为：&quot;</span> + str2);<br>        &#125;<br>        cin.close();<br><span class="hljs-comment">//输入</span><br>lichengloong com<br><span class="hljs-comment">//输出</span><br>lichengloong com<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="3）选择数据库"><a href="#3）选择数据库" class="headerlink" title="3）选择数据库"></a>3）选择数据库</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">use 数据库名;<br></code></pre></div></td></tr></table></figure>
+<h3 id="3-next-与-nextLine-区别"><a href="#3-next-与-nextLine-区别" class="headerlink" title="3.next() 与 nextLine() 区别"></a>3.next() 与 nextLine() 区别</h3><p><strong>next()：</strong></p>
+<blockquote>
+<p>1、一定要读取到有效字符后才可以结束输入。<br>2、对输入有效字符之前遇到的空白，next() 方法会自动将其去掉。<br>3、只有输入有效字符后才将其后面输入的空白作为分隔符或者结束符。<br>next() 不能得到带有空格的字符串。</p>
+</blockquote>
+<p><strong>nextLine()：</strong></p>
+<blockquote>
+<p>1、以Enter为结束符,也就是说 nextLine()方法返回的是输入回车之前的所有字符。<br>2、可以获得空白。</p>
+</blockquote>
+<p>如果要输入 int 或 float 类型的数据，在 Scanner 类中也有支持。但是在输入之前最好先使用 hasNextXxx() 方法进行验证，再使用 nextXxx() 来读取。</p>
+<p>输入的时候字符都是可见的，所以Scanner类不适合从控制台读取密码。从Java SE 6开始特别引入了Console类来实现这个目的。具体用法可自行百度。需要注意的是，在Eclipse中用此方法是会报错的。如果直接在集成开发环境下执行代码会报错。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.NullPointerException<br></code></pre></div></td></tr></table></figure>
+<p>可以直接在命令提示符中采用javac XX.java , java XX的方式运行代码，可获得想要的效果。<br>采用Console对象处理输入不如采用Scanner方便。每次只能读取一行输入，而没有能够读取一个单词或者一个数值的方法。</p>
+<h3 id="4-主动对输入字符串进行分割"><a href="#4-主动对输入字符串进行分割" class="headerlink" title="4.主动对输入字符串进行分割"></a>4.主动对输入字符串进行分割</h3><p>通过StringTokenizer类可以分解输入的整行得到的带空格的字符串。默认情况下，StringTokenizer以空格，制表符，换行符和回车符作为分割依据。StringTokenizer类属于 java.util 包。</p>
+<p><strong>例一</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Scanner;<br><span class="hljs-keyword">import</span> java.util.StringTokenizer;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Scanner scanner=<span class="hljs-keyword">new</span> Scanner(System.in);<br>        System.out.println(<span class="hljs-string">&quot;输入数据：&quot;</span>);<br>        StringTokenizer stringTokenizer=<span class="hljs-keyword">new</span> StringTokenizer(scanner.nextLine());<br>        System.out.println(<span class="hljs-string">&quot;分隔后：&quot;</span>);<br>        <span class="hljs-keyword">while</span>(stringTokenizer.hasMoreTokens())&#123; <span class="hljs-comment">//hasMoreTokens()该方法是用来判断是否还有分隔符，返回值是布尔。</span><br>            System.out.println(stringTokenizer.nextToken());<span class="hljs-comment">//nextToken() 用于返回下一个匹配的字段。</span><br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//输入</span><br>lichengloong com<br><span class="hljs-comment">//输出</span><br>lichengloong<br>com<br></code></pre></div></td></tr></table></figure>
+<p><strong>例二</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StringTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        StringTokenizer st = <span class="hljs-keyword">new</span> StringTokenizer(<span class="hljs-string">&quot;www.lichengloong.com&quot;</span>, <span class="hljs-string">&quot;.&quot;</span>);<br>        <span class="hljs-keyword">while</span> (st.hasMoreTokens()) &#123;<br>            System.out.println(<span class="hljs-string">&quot;Token:&quot;</span> + st.nextToken());<br>        &#125;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//输出</span><br>Token:www<br>Token:lichengloong<br>Token:com<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="4）数据类型"><a href="#4）数据类型" class="headerlink" title="4）数据类型"></a>4）数据类型</h2><h4 id="1-数值类型"><a href="#1-数值类型" class="headerlink" title="1.数值类型"></a>1.数值类型</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">tinyint<br>smallint<br>mediumint<br>int或integer<br>bigint<br>float<br>double<br>decimal<br></code></pre></div></td></tr></table></figure>
-<h4 id="2-日期和时间类型"><a href="#2-日期和时间类型" class="headerlink" title="2.日期和时间类型"></a>2.日期和时间类型</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysqll">date &#x2F;&#x2F;YYYY-MM-DD<br>time &#x2F;&#x2F;HH:MM:SS<br>year &#x2F;&#x2F;YYYY<br>datetime &#x2F;&#x2F;YYYY-MM-DD HH:MM:SS<br>timestamp &#x2F;&#x2F;YYYYMMDD HHMMSS<br></code></pre></div></td></tr></table></figure>
-<h4 id="3-字符串类型"><a href="#3-字符串类型" class="headerlink" title="3.字符串类型"></a>3.字符串类型</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">char &#x2F;&#x2F;定长字符串<br>varchar &#x2F;&#x2F;变长字符串<br>tinyblob &#x2F;&#x2F;不超过255个字符的二进制字符串<br>tinytext &#x2F;&#x2F;短文本字符串<br>blob &#x2F;&#x2F;长文本数据<br>text &#x2F;&#x2F;二进制形式的中等长度文本数据<br>mediumblob &#x2F;&#x2F;中等长度文本数据<br>mediumtext &#x2F;&#x2F;<br>longblob<br>longtext<br></code></pre></div></td></tr></table></figure>
 
 
 
-<p>持续更新中······</p>
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -266,7 +298,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a>
+                      <a class="hover-with-bg" href="/categories/JAVA/">JAVA</a>
                     
                   </div>
                 
@@ -281,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨香记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/04/07/MySQL%E5%A4%8D%E4%B9%A0/">http://example.com/2021/04/07/MySQL%E5%A4%8D%E4%B9%A0/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/04/11/JAVA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0(%E4%BA%94)-Scanner%20%E7%B1%BB/">http://example.com/2021/04/11/JAVA%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0(%E4%BA%94)-Scanner%20%E7%B1%BB/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -290,18 +322,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/04/07/hexo-Fluid%E4%B8%BB%E9%A2%98-%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E5%88%86%E9%A1%B5%E5%AE%9E%E7%8E%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">hexo-Fluid主题-博客首页文章分页实现</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/04/07/ACM-C++%E4%B8%AD%E7%9A%84%E8%BE%93%E5%85%A5/">
-                        <span class="hidden-mobile">ACM-C++中的输入输出以及在输入时可能会遇到的陨石坑</span>
+                      <a href="/2021/04/11/Kali-Ddos-Pentmenu/">
+                        <span class="hidden-mobile">Kali-Pentmenu</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
