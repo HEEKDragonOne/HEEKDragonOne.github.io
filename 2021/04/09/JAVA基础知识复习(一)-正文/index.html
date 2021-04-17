@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 11, 2021 pm
+                  本文最后更新于：April 17, 2021 pm
                 
               </p>
             
@@ -743,7 +743,8 @@ String#intern 方法：intern 方法会从字符串常量池中查询当前字�
 <li>对于基本类型，== 判断两个值是否相等，基本类型没有 equals() 方法。</li>
 <li>对于引用类型，== 判断两个变量是否引用同一个对象，而 equals() 判断引用的对象是否等价。<h4 id="“-”和equals的区别"><a href="#“-”和equals的区别" class="headerlink" title="“==”和equals的区别"></a>“==”和equals的区别</h4>==： 用来判断两个对象的内存地址是否相同（比较的是变量(栈)内存中存放的对象的(堆)内存地址，）。比较的是真正意义上的指针操作。</li>
 </ul>
-<p>equals：用来比较的是两个对象的内容是否相等<br>例如：</p>
+<p>equals：用来比较的是两个对象的内容是否相等</p>
+<p>例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s1 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">// s1 为一个引用</span><br>String s2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">// s2 为另一个引用,对象的内容一样</span><br>String s3 = <span class="hljs-string">&quot;ab&quot;</span>; <span class="hljs-comment">// 放在常量池中</span><br>String s4 = <span class="hljs-string">&quot;ab&quot;</span>; <span class="hljs-comment">// 从常量池中查找</span><br>System.out.println(s1 == s2); <span class="hljs-comment">// false</span><br>System.out.println(s3 == s4); <span class="hljs-comment">// true</span><br>System.out.println(s1 == s3); <span class="hljs-comment">// false</span><br>System.out.println(s1.equals(s2)); <span class="hljs-comment">// true</span><br>System.out.println(s3.equals(s4)); <span class="hljs-comment">// true</span><br>System.out.println(s1.equals(s3)); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
 <p>对equals重新需要注意五点：</p>
 <blockquote>
