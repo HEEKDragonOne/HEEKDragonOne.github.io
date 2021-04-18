@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.3k 字
+      7.7k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      84
+      89
        分钟
     </span>
   
@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 17, 2021 pm
+                  本文最后更新于：April 18, 2021 am
                 
               </p>
             
@@ -249,7 +249,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">javac HelloWorld.java <span class="hljs-comment">//编译</span><br>java HelloWorld <span class="hljs-comment">//运行。需要注意的是java命令后面不需要加.class</span><br></code></pre></div></td></tr></table></figure>
 
 <hr>
-<h3 id="2-java三大特性"><a href="#2-java三大特性" class="headerlink" title="2.java三大特性"></a>2.java三大特性</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">封装：封装把一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，如果属性不想被外界访问，我们大可不必提供方法给外界访问优点：减少耦合，代码重用，减轻维护<br>继承：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。<br>多态：指允许不同类的对象对同一消息做出响应。<br></code></pre></div></td></tr></table></figure>
+<h3 id="2-java三大特性"><a href="#2-java三大特性" class="headerlink" title="2.java三大特性"></a>2.java三大特性</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">封装：封装把一个对象的属性私有化，同时提供一些可以被外界访问的属性的方法，如果属性不想被外界访问，我们大可不必提供方法给外界访问优点：减少耦合，代码重用，减轻维护<br>继承：它可以使用现有类的所有功能，并在无需重新编写原来的类的情况下对这些功能进行扩展。<br>多态：指允许不同类的对象对同一消息做出响应。<span class="hljs-comment">//只适用于方法，而不适用于属性。</span><br><span class="hljs-comment">//多态性</span><br><span class="hljs-comment">//针对方法：编译看左，运行看右。针对属性：编译和运行都看左。</span><br></code></pre></div></td></tr></table></figure>
 <p>多态一般分为编译时多态和运行时多态，编译时主要指方法的重载；运行时主要指程序中定义的对象引用所指向的具体类型在运行期间才确定</p>
 <p>运行时多态有三个条件：继承、覆盖和重写、向上转型（父类引用指向子类对象）</p>
 <hr>
@@ -743,13 +743,20 @@ String#intern 方法：intern 方法会从字符串常量池中查询当前字�
 <li>对于基本类型，== 判断两个值是否相等，基本类型没有 equals() 方法。</li>
 <li>对于引用类型，== 判断两个变量是否引用同一个对象，而 equals() 判断引用的对象是否等价。<h4 id="“-”和equals的区别"><a href="#“-”和equals的区别" class="headerlink" title="“==”和equals的区别"></a>“==”和equals的区别</h4>==： 用来判断两个对象的内存地址是否相同（比较的是变量(栈)内存中存放的对象的(堆)内存地址，）。比较的是真正意义上的指针操作。</li>
 </ul>
-<p>equals：用来比较的是两个对象的内容是否相等</p>
+<p>equals：用来比较的是两个对象的内容是否相等。</p>
 <p>例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s1 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">// s1 为一个引用</span><br>String s2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">// s2 为另一个引用,对象的内容一样</span><br>String s3 = <span class="hljs-string">&quot;ab&quot;</span>; <span class="hljs-comment">// 放在常量池中</span><br>String s4 = <span class="hljs-string">&quot;ab&quot;</span>; <span class="hljs-comment">// 从常量池中查找</span><br>System.out.println(s1 == s2); <span class="hljs-comment">// false</span><br>System.out.println(s3 == s4); <span class="hljs-comment">// true</span><br>System.out.println(s1 == s3); <span class="hljs-comment">// false</span><br>System.out.println(s1.equals(s2)); <span class="hljs-comment">// true</span><br>System.out.println(s3.equals(s4)); <span class="hljs-comment">// true</span><br>System.out.println(s1.equals(s3)); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
 <p>对equals重新需要注意五点：</p>
 <blockquote>
 <p>1 自反性：对任意引用值X，x.equals(x)的返回值一定为true；<br>2 对称性：对于任何引用值x,y,当且仅当y.equals(x)返回值为true时，x.equals(y)的返回值一定为true；<br>3 传递性：如果x.equals(y)=true, y.equals(z)=true,则x.equals(z)=true ；<br>4 一致性：如果参与比较的对象没任何改变，则对象比较的结果也不应该有任何改变；<br>5 非空性：任何非空的引用值X，x.equals(null)的返回值一定为false 。</p>
 </blockquote>
+<p><strong>注意</strong><br>自定义的类用equals比较时，仍然用的 == 在比较。因为自定义类默认继承的Object类中的equals方法，而Object类中的equals方法用的是 == 在比较。Object类中的equals方法代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<p>可以看见，用的是 == 来比较。所以，也是比较的地址值。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewJavaTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Man p = <span class="hljs-keyword">new</span> Man(<span class="hljs-number">12</span>,<span class="hljs-string">&quot;abcdef&quot;</span>); <span class="hljs-comment">//这里的Man为自定义类</span><br>        Man p1= <span class="hljs-keyword">new</span> Man(<span class="hljs-number">12</span>,<span class="hljs-string">&quot;abcdef&quot;</span>);<br>        System.out.println(p.equals(p1));<br>        String s1 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;qwer&quot;</span>);<br>        String s2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;qwer&quot;</span>);<br>        System.out.println(s1.equals(s2));<br>    &#125;<br><br>&#125;<br><span class="hljs-comment">//输出</span><br><span class="hljs-keyword">false</span><br><span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure>
+<p>String 类中的equals 方法代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//注释为作者自加，并不是String类中所有的</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object anObject)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == anObject) &#123; <span class="hljs-comment">//首先比较两个的地址，如果地址都相同，那么内容一定是相同的</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123; <span class="hljs-comment">//看两个是不是String类或String类的父类之一，不一定都一样。可以自行建两个类测试。是其之一才比较，不是就不需要比较了</span><br>            String aString = (String)anObject; <span class="hljs-comment">//把两个都转换成相同的String类</span><br>            <span class="hljs-keyword">if</span> (!COMPACT_STRINGS || <span class="hljs-keyword">this</span>.coder == aString.coder) &#123;<br>                <span class="hljs-keyword">return</span> StringLatin1.equals(value, aString.value);<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>要想实现自定义类的 equals 方法比较值，而不是比较地址，可以重写 equals 方法。具体写法可以参考 Object 类和 String 类的equals 方法。</strong></p>
 <h4 id="hashCode"><a href="#hashCode" class="headerlink" title="hashCode()"></a>hashCode()</h4><p>hashCode() 返回散列值，而 equals() 是用来判断两个对象是否等价。等价的两个对象散列值一定相同，但是散列值相同的两个对象不一定等价。</p>
 <p>所以：在覆盖 equals() 方法时应当总是覆盖 hashCode() 方法，保证等价的两个对象散列值也相等。</p>
 <h4 id="hashCode（）与equals（）"><a href="#hashCode（）与equals（）" class="headerlink" title="hashCode（）与equals（）"></a>hashCode（）与equals（）</h4><p>1.如果两个对象相等，则hashcode一定也是相同的<br>2.两个对象相等,对两个对象分别调用equals方法都返回true<br>3.两个对象有相同的hashcode值，它们也不一定是相等的<br>4.因此，equals 方法被覆盖过，则 hashCode 方法也必须被覆盖<br>5.hashCode() 的默认行为是对堆上的对象产生独特值。如果没有重写 hashCode()，则该 class 的两个对象无论如何都不会相等（即使这两个对象指向相同的数据）</p>
