@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.7k 字
+      7.9k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      89
+      92
        分钟
     </span>
   
@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 18, 2021 am
+                  本文最后更新于：April 18, 2021 pm
                 
               </p>
             
@@ -667,11 +667,38 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </li>
 </ul>
 <h4 id="非访问修饰符"><a href="#非访问修饰符" class="headerlink" title="非访问修饰符"></a>非访问修饰符</h4><p>1.static 修饰符，用来修饰类方法和类变量。<br>2.final 修饰符，用来修饰类、方法和变量，final 修饰的类不能够被继承，修饰的方法不能被继承类重新定义，修饰的变量为常量，是不可修改的。<br>3.abstract 修饰符，用来创建抽象类和抽象方法。<br>4.synchronized 和 volatile 修饰符，主要用于线程的编程。</p>
-<h5 id="1-static-修饰符"><a href="#1-static-修饰符" class="headerlink" title="1.static 修饰符"></a>1.static 修饰符</h5><ul>
+<h5 id="1-static-修饰符"><a href="#1-static-修饰符" class="headerlink" title="1.static 修饰符"></a>1.static 修饰符</h5><p>可以用来修饰：属性、方法、代码块、内部类。</p>
+<ul>
 <li>静态变量：<br>static 关键字用来声明独立于对象的静态变量，无论一个类实例化多少对象，它的静态变量只有一份拷贝。 静态变量也被称为类变量。局部变量不能被声明为 static 变量。</li>
 <li>静态方法：<br>static 关键字用来声明独立于对象的静态方法。静态方法不能使用类的非静态变量。静态方法从参数列表得到数据，然后计算这些数据。</li>
 </ul>
 <p>对类变量和方法的访问可以直接使用 classname.variablename 和 classname.methodname 的方式访问。</p>
+<p>使用 类.方法 或 对象.方法：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>静态方法</th>
+<th>非静态方法</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>类</td>
+<td>YES</td>
+<td>NO</td>
+</tr>
+<tr>
+<td>对象</td>
+<td>YES</td>
+<td>YES</td>
+</tr>
+</tbody></table>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewJavaTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        p it = <span class="hljs-keyword">new</span> p();<br>        p.eat();<br><span class="hljs-comment">//      p.sleep(); //不能通过类访问非静态方法</span><br>        it.eat();<br>        it.sleep();<br>    &#125;<br><br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">p</span></span>&#123;<br>    <span class="hljs-keyword">int</span> age;<br>    String s;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">eat</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;吃完了&quot;</span>);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sleep</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;睡觉了&quot;</span>);<br>    &#125;<br>&#125;<br><span class="hljs-comment">//输出</span><br>吃完了<br>吃完了<br>睡觉了<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>静态方法中：只能调用静态方法或属性。在静态方法内不能使用 this、super关键字。<br>非静态方法中：既可以调用非静态方法或属性，也可以调用静态的方法或属性。</p>
+</blockquote>
 <h5 id="2-final修饰符"><a href="#2-final修饰符" class="headerlink" title="2.final修饰符"></a>2.final修饰符</h5><p>变量一旦赋值后，不能被重新赋值。被 final 修饰的实例变量必须显式指定初始值。<br>final 修饰符通常和 static 修饰符一起使用来创建类常量。</p>
 <p>父类中的 final 方法可以被子类继承，但是不能被子类重写。<br>声明 final 方法的主要目的是防止该方法的内容被修改。</p>
 <p>final 类不能被继承，没有类能够继承 final 类的任何特性。</p>
@@ -693,8 +720,13 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <ul>
 <li>对象、数组都是引用数据类型；</li>
 <li>所有引用类型的默认值都是null；</li>
-<li>一个引用变量可以用来引用任何与之兼容的类型<br>我们的基本类型都有对应的引用类型，且基本类型与其对应的引用类型之间的赋值使用自动装箱与拆箱完成<h4 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h4>自动拆箱：故名思议就是将对象重新转化为基本数据类型；是享元模式（flyweight）<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer num = <span class="hljs-number">10</span>;	<span class="hljs-comment">//装箱</span><br><span class="hljs-keyword">int</span> num1 = num;	<span class="hljs-comment">//拆箱</span><br></code></pre></div></td></tr></table></figure>
-基本数据类型和引用数据类型区别</li>
+<li>一个引用变量可以用来引用任何与之兼容的类型<br>我们的基本类型都有对应的引用类型，且基本类型与其对应的引用类型之间的赋值使用自动装箱与拆箱完成<h4 id="自动装箱和拆箱"><a href="#自动装箱和拆箱" class="headerlink" title="自动装箱和拆箱"></a>自动装箱和拆箱</h4></li>
+</ul>
+<p>也可见 《JAVA基础知识复习(八)-包装类、装箱拆箱》博客内容。</p>
+<p>自动拆箱：故名思议就是将对象重新转化为基本数据类型；是享元模式（flyweight）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer num = <span class="hljs-number">10</span>;	<span class="hljs-comment">//装箱</span><br><span class="hljs-keyword">int</span> num1 = num;	<span class="hljs-comment">//拆箱</span><br></code></pre></div></td></tr></table></figure>
+<p>基本数据类型和引用数据类型区别</p>
+<ul>
 <li>基本数据类型在被创建时，数值直接存储在栈上。</li>
 <li>引用数据类型在被创建时，对象的具体信息都存储在堆内存上，对象的引用地址存储在栈上</li>
 </ul>

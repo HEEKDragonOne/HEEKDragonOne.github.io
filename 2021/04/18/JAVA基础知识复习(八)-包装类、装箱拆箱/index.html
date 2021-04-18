@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      376 字
+      587 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      8
        分钟
     </span>
   
@@ -244,7 +244,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>JAVA基础知识复习(八)。包装类、装箱拆箱。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="包装类（Wrapper）"><a href="#包装类（Wrapper）" class="headerlink" title="包装类（Wrapper）"></a>包装类（Wrapper）</h2><p>针对八种基本数据类型定义相应的引用类型 — 包装类（封装类）。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>也可见 《JAVA基础知识复习(一)-正文》博客内容。</p>
+<h2 id="包装类（Wrapper）"><a href="#包装类（Wrapper）" class="headerlink" title="包装类（Wrapper）"></a>包装类（Wrapper）</h2><p>针对八种基本数据类型定义相应的引用类型 — 包装类（封装类）。</p>
 <table>
 <tr><th>基本数据类型</th><th>包装类</th></tr>
 <tr>
@@ -279,6 +280,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>其他的类型用法同样的原理。</p>
 <h2 id="包装类转换为基本数据类型"><a href="#包装类转换为基本数据类型" class="headerlink" title="包装类转换为基本数据类型"></a>包装类转换为基本数据类型</h2><p>实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewJavaTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Integer it = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">13</span>);<br>        <span class="hljs-keyword">int</span> i = it.intValue();<br>        System.out.println(i+<span class="hljs-number">1</span>);<br>    &#125;<br><br>&#125;<br><span class="hljs-comment">//输出</span><br><span class="hljs-number">14</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="基本数据类型、包装类转换成-String"><a href="#基本数据类型、包装类转换成-String" class="headerlink" title="基本数据类型、包装类转换成 String"></a>基本数据类型、包装类转换成 String</h2><p>由于基本数据类型与包装类之间可以自动转换，所以这里就把包装类和基本数据类型当成一种来和 String 之间进行转换。</p>
+<h3 id="方式一"><a href="#方式一" class="headerlink" title="方式一"></a>方式一</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> num = <span class="hljs-number">10</span>;<br>String str = num + <span class="hljs-string">&quot;&quot;</span>;<br><span class="hljs-comment">//输出</span><br><span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="方式二"><a href="#方式二" class="headerlink" title="方式二"></a>方式二</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">float</span> fl = <span class="hljs-number">12.3f</span>;<br><span class="hljs-keyword">double</span> db = <span class="hljs-number">23.5</span>;<br>String str = String.valueOf(fl);<br>String str1 = String.valueOf(db);<br>System.out.println(str);<br>System.out.println(str1);<br><span class="hljs-comment">//输出</span><br><span class="hljs-number">12.3</span><br><span class="hljs-number">23.5</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="String-转换成基本数据类型、包装类"><a href="#String-转换成基本数据类型、包装类" class="headerlink" title="String 转换成基本数据类型、包装类"></a>String 转换成基本数据类型、包装类</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NewJavaTest</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String str = <span class="hljs-string">&quot;234&quot;</span>; <span class="hljs-comment">//不能写非数字字符</span><br>        <span class="hljs-keyword">int</span> num = Integer.parseInt(str);<br>        System.out.println(num+<span class="hljs-number">1</span>);<br><br>        String str2 = <span class="hljs-string">&quot;true&quot;</span>; <span class="hljs-comment">//只有写true输出才为true，其他的都为false，写1也为false</span><br>        <span class="hljs-keyword">boolean</span> fl = Boolean.parseBoolean(str2);<br>        System.out.println(fl);<br>    &#125;<br><br>&#125;<br><span class="hljs-comment">//输出</span><br><span class="hljs-number">235</span><br><span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
 
 <h2 id="转换图"><a href="#转换图" class="headerlink" title="转换图"></a>转换图</h2><p><img src="https://img-blog.csdnimg.cn/20210418123538329.png" srcset="/img/loading.gif"></p>
 <h2 id="自动装箱"><a href="#自动装箱" class="headerlink" title="自动装箱"></a>自动装箱</h2><p>JDK 5.0 新特性。<br>基本数据类型转换成包装类。</p>
@@ -401,6 +412,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/04/18/JAVA%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E7%B1%BB%E5%9E%8B%E7%9B%AE%E5%BD%95%E5%8F%8A%E6%A6%82%E6%8B%AC/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA设计模式-设计模式类型目录及概括</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
