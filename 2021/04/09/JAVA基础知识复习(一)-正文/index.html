@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8k 字
+      8.1k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      93
+      94
        分钟
     </span>
   
@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 18, 2021 pm
+                  本文最后更新于：April 19, 2021 pm
                 
               </p>
             
@@ -616,23 +616,23 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li><p>成员变量可以被 public,private,static 等修饰符所修饰，而局部变量不能被访问控制修饰符及 static 所修饰；但是，成员变量和局部变量都能被 final 所修饰。</p>
 </li>
 </ul>
-<h4 id="abstract-和-interface"><a href="#abstract-和-interface" class="headerlink" title="abstract 和 interface"></a>abstract 和 interface</h4><p>abstract<br>在 Java 中 abstract 即抽象，一般使用 abstract 关键字修饰的类或方法.<br>修饰的类时</p>
+<h4 id="abstract-和-interface"><a href="#abstract-和-interface" class="headerlink" title="abstract 和 interface"></a>abstract 和 interface</h4><h5 id="1-abstract"><a href="#1-abstract" class="headerlink" title="1.abstract"></a>1.abstract</h5><p>在 Java 中 abstract 即抽象，一般使用 abstract 关键字修饰的类或方法.<br>修饰的类时，一定有构造器（构造函数），便于子类实例化时调用。</p>
 <blockquote>
-<p>1.不能被实例化，需要继承抽象类才能实例化其子类。<br>2.访问权限可以使用public、private、protected，其表达形式为：（public）abstract class 类名{}<br>3.抽象类不能使用final关键字修饰，因为final修饰的类是无法被继承<br>4.可以定义构造方法、静态方法、普通方法；非抽象的普通成员变量、静态成员变量</p>
+<p>1.不能被实例化，需要继承抽象类后才能实例化其子类。<br>2.访问权限可以使用public、private、protected，其表达形式为：（public）abstract class 类名{}<br>3.抽象类不能使用final关键字修饰，因为final修饰的类是无法被继承<br>4.可以定义构造方法、静态方法、普通方法；非抽象的普通成员变量、静态成员变量</p>
 </blockquote>
-<p>修饰的方法时</p>
+<p>修饰的方法时，只需要声明方法，不需要写方法体（大括号也不写）。</p>
 <blockquote>
-<p>1.含有该抽象方法的类必须定义为抽象类，但抽象类可以没有抽象方法。<br>2.访问权限可以使用public、default、protected，不能为private，因为抽象方法必须被子类实现（覆写），而private权限对于子类来 说是不能访问的，所以就会产生矛盾，<br>3.不能用static修饰，因为没有主体</p>
+<p>1.含有该抽象方法的类必须定义为抽象类，但抽象类可以没有抽象方法。<br>2.访问权限可以使用public、default、protected，不能为private，因为抽象方法必须被子类实现（覆写），而private权限对于子类来 说是不能访问的，所以就会产生矛盾，<br>3.不能用static修饰，因为没有主体<br>4.若子类没有重写父类中的所有抽象方法，则此子类必须也是一个抽象类，用abstract修饰；否则必须全部重写父类中的抽象类方法。</p>
 </blockquote>
 <p>例如：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span>  <span class="hljs-class"><span class="hljs-keyword">class</span>  <span class="hljs-title">MyAbstract</span> </span>&#123;<br>	<span class="hljs-keyword">public</span> String name=<span class="hljs-string">&quot;小米&quot;</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> price= <span class="hljs-number">1800</span>;<br>	<br>	MyAbstract(String name)&#123;<br>		<span class="hljs-keyword">this</span>.name = name;<br>	&#125;<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(name);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(price);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>;<span class="hljs-comment">//权限不能为 private</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span>  <span class="hljs-class"><span class="hljs-keyword">class</span>  <span class="hljs-title">MyAbstract</span> </span>&#123;<br>	<span class="hljs-keyword">public</span> String name=<span class="hljs-string">&quot;小米&quot;</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> price= <span class="hljs-number">1800</span>;<br>	<br>	MyAbstract(String name)&#123;<br>		<span class="hljs-keyword">this</span>.name = name;<br>	&#125;<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(name);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(price);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>;<span class="hljs-comment">//权限不能为 private //抽象方法</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>interface<br>在 Java中 interface 即接口，是抽象类的延伸，在 Java 8 之前，它可以看成是一个完全抽象的类，Java 8 开始，接口也可以拥有default的方法实现，是因为不支持默认方法的接口的维护成本太高.</p>
+<h5 id="2-interface"><a href="#2-interface" class="headerlink" title="2.interface"></a>2.interface</h5><p>在 Java中 interface 即接口，是抽象类的延伸，在 Java 8 之前，它可以看成是一个完全抽象的类，Java 8 开始，接口也可以拥有default的方法实现，是因为不支持默认方法的接口的维护成本太高.</p>
 <blockquote>
 <p>1.接口的方法访问权限只能为 public ，Java 8可以为default，但是必须有方法体<br>2.接口的方法默认public abstract 也可以由 static 修饰<br>3.接口的方法可以定义为 public static ，但是必须有方法体，且只能有接口类名调用<br>4.成员变量默认为public staic final</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span>  <span class="hljs-title">MyInterface</span> </span>&#123;<br>	<span class="hljs-keyword">int</span> price = <span class="hljs-number">1800</span>;<br><br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">outName</span><span class="hljs-params">()</span></span>;<br><br>	<span class="hljs-function"><span class="hljs-keyword">default</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(<span class="hljs-string">&quot;MyInterface print： default Method&quot;</span>);<br>	&#125;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">price</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(<span class="hljs-string">&quot;MyInterface price=&quot;</span>+price);<br>	&#125;<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyInterfaceImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MyInterface</span> </span>&#123;<br>	<span class="hljs-meta">@Override</span><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">outName</span><span class="hljs-params">()</span> </span>&#123;<br>		 System.out.println(<span class="hljs-string">&quot;I&#x27;m a MyInterfaceImpl&quot;</span>);<br>	&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>		MyInterface my = <span class="hljs-keyword">new</span> MyInterfaceImpl();<br>		my.outName();<br>		my.print();<br><span class="hljs-comment">//		MyInterfaceImpl.print();// 实现类类名调用时， 提示编译错误</span><br>		MyInterface.price();<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>abstract 和 interface 的区别<br>从定义分析</p>
+<h5 id="3-abstract-和-interface-的区别"><a href="#3-abstract-和-interface-的区别" class="headerlink" title="3.abstract 和 interface 的区别"></a>3.abstract 和 interface 的区别</h5><p>从定义分析</p>
 <ul>
 <li><p>抽象类和接口都不能直接实例化；抽象方法必须由子类来进行重写</p>
 </li>
