@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8.1k 字
+      8.2k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      94
+      95
        分钟
     </span>
   
@@ -616,7 +616,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li><p>成员变量可以被 public,private,static 等修饰符所修饰，而局部变量不能被访问控制修饰符及 static 所修饰；但是，成员变量和局部变量都能被 final 所修饰。</p>
 </li>
 </ul>
-<h4 id="abstract-和-interface"><a href="#abstract-和-interface" class="headerlink" title="abstract 和 interface"></a>abstract 和 interface</h4><h5 id="1-abstract"><a href="#1-abstract" class="headerlink" title="1.abstract"></a>1.abstract</h5><p>在 Java 中 abstract 即抽象，一般使用 abstract 关键字修饰的类或方法.<br>修饰的类时，一定有构造器（构造函数），便于子类实例化时调用。</p>
+<h4 id="abstract-和-interface"><a href="#abstract-和-interface" class="headerlink" title="abstract 和 interface"></a>abstract 和 interface</h4><h5 id="1-abstract"><a href="#1-abstract" class="headerlink" title="1.abstract"></a>1.abstract</h5><p>在 Java 中 abstract 即抽象，一般使用 abstract 关键字修饰的类或方法。<br>修饰的类时，一定有构造器（构造函数），便于子类实例化时调用。</p>
 <blockquote>
 <p>1.不能被实例化，需要继承抽象类后才能实例化其子类。<br>2.访问权限可以使用public、private、protected，其表达形式为：（public）abstract class 类名{}<br>3.抽象类不能使用final关键字修饰，因为final修饰的类是无法被继承<br>4.可以定义构造方法、静态方法、普通方法；非抽象的普通成员变量、静态成员变量</p>
 </blockquote>
@@ -626,8 +626,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </blockquote>
 <p>例如：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span>  <span class="hljs-class"><span class="hljs-keyword">class</span>  <span class="hljs-title">MyAbstract</span> </span>&#123;<br>	<span class="hljs-keyword">public</span> String name=<span class="hljs-string">&quot;小米&quot;</span>;<br>	<span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> price= <span class="hljs-number">1800</span>;<br>	<br>	MyAbstract(String name)&#123;<br>		<span class="hljs-keyword">this</span>.name = name;<br>	&#125;<br>	<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(name);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">()</span> </span>&#123;<br>		System.out.println(price);<br>	&#125;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">()</span></span>;<span class="hljs-comment">//权限不能为 private //抽象方法</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<h5 id="2-interface"><a href="#2-interface" class="headerlink" title="2.interface"></a>2.interface</h5><p>在 Java中 interface 即接口，是抽象类的延伸，在 Java 8 之前，它可以看成是一个完全抽象的类，Java 8 开始，接口也可以拥有default的方法实现，是因为不支持默认方法的接口的维护成本太高.</p>
+<p><strong>abstract使用注意点：</strong></p>
+<blockquote>
+<p>1.abstract 不能用来修饰 属性、构造器等结构。<br>2.abstract 不能用来修饰 私有方法、静态方法、final的方法、final的类。</p>
+</blockquote>
+<h5 id="2-interface"><a href="#2-interface" class="headerlink" title="2.interface"></a>2.interface</h5><p>在 Java中 interface 即接口，是抽象类的延伸，在 Java 8 之前，它可以看成是一个完全抽象的类，Java 8 开始，接口也可以拥有default的方法实现，是因为不支持默认方法的接口的维护成本太高。</p>
 <blockquote>
 <p>1.接口的方法访问权限只能为 public ，Java 8可以为default，但是必须有方法体<br>2.接口的方法默认public abstract 也可以由 static 修饰<br>3.接口的方法可以定义为 public static ，但是必须有方法体，且只能有接口类名调用<br>4.成员变量默认为public staic final</p>
 </blockquote>
