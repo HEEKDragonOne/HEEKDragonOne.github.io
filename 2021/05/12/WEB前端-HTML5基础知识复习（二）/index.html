@@ -1,0 +1,706 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水的记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>WEB前端-HTML5基础知识复习（二） - 墨水的记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水的记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于作者
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WEB前端-HTML5基础知识复习（二）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-12 14:21" pubdate>
+        May 12, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      58
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WEB前端-HTML5基础知识复习（二）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：May 12, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>HTML5规范于2014年10月29日由万维网联盟正式宣布，HTML是万维网最核心的超文本标记语言。万维网不等同于互联网，但它是依靠互联网运行的服务之一，万维网又简写为www，它可以实现在互联网的帮助下，访问由许多互相链接的超文本组成的系统。现代的浏览器都支持 HTML5。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-lt-canvas-gt-元素"><a href="#1-lt-canvas-gt-元素" class="headerlink" title="1.&lt;canvas&gt;元素"></a>1.&lt;canvas&gt;元素</h2><p>&lt;canvas&gt;元素是HTML5中的新元素，通过使用该元素，你可以在网页中绘制所需的图形。标签定义图形，比如图表和其他图像，您必须使用脚本来绘制图形。通过脚本 (通常是JavaScript)来完成。标签只是图形容器，您必须使用脚本来绘制图形。可以通过多种方法使用Canva绘制路径,盒、圆、字符以及添加图像。可以在HTML页面中使用多个 &lt;canvas&gt; 元素.</p>
+<h3 id="1-1-创建一个画布"><a href="#1-1-创建一个画布" class="headerlink" title="1.1 创建一个画布"></a>1.1 创建一个画布</h3><p>一个画布在网页中是一个矩形框，通过 &lt;canvas&gt; 元素来绘制。默认情况下 &lt;canvas&gt; 元素没有边框和内容。</p>
+<p>简单使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myCanvas&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;200&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;100&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>标签通常需要指定一个id属性 (脚本中经常引用), width 和 height 属性定义的画布的大小。</p>
+<p><strong>使用style属性来添加边框：</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myCanvas&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;200&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;100&quot;</span></span><br><span class="hljs-tag"><span class="hljs-attr">style</span>=<span class="hljs-string">&quot;border:1px solid #000000;&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="1-2-使用JavaScript来绘制图像"><a href="#1-2-使用JavaScript来绘制图像" class="headerlink" title="1.2 使用JavaScript来绘制图像"></a>1.2 使用JavaScript来绘制图像</h3><p>canvas 元素本身是没有绘图能力的。所有的绘制工作必须在 JavaScript 内部完成。</p>
+<p>简单使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="handlebars"><span class="xml">var c=document.getElementById(&quot;myCanvas&quot;); <span class="hljs-comment">&lt;!--第一步--&gt;</span></span></span><br><span class="handlebars"><span class="xml">var ctx=c.getContext(&quot;2d&quot;); <span class="hljs-comment">&lt;!--第二步--&gt;</span></span></span><br><span class="handlebars"><span class="xml">ctx.fillStyle=&quot;#FF0000&quot;; <span class="hljs-comment">&lt;!--第三步--&gt;</span></span></span><br><span class="handlebars"><span class="xml">ctx.fillRect(0,0,150,75); <span class="hljs-comment">&lt;!--第四步--&gt;</span></span></span><br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span> <br></code></pre></div></td></tr></table></figure>
+<p><strong>代码解析</strong></p>
+<blockquote>
+<p>1.第一步为找到canvas元素。</p>
+</blockquote>
+<blockquote>
+<p>2.第二步创建context对象。<br>getContext(“2d”) 对象是内建的 HTML5 对象，拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</p>
+</blockquote>
+<blockquote>
+<p>3.第三步和第四步是绘制一个红色的矩形。<br>设置fillStyle属性可以是CSS颜色，渐变，或图案。fillStyle默认设置是#000000（黑色）。<br>fillRect(x,y,width,height) 方法定义了矩形当前的填充方式。 </p>
+</blockquote>
+<h3 id="1-3-canvas坐标"><a href="#1-3-canvas坐标" class="headerlink" title="1.3 canvas坐标"></a>1.3 canvas坐标</h3><p>canvas 是一个二维网格。canvas 的左上角坐标为 (0,0)。<br>上面1.2中的 fillRect 方法拥有参数 (0,0,150,75)。意思是：在画布上绘制 150x75 的矩形，从左上角开始 (0,0)。</p>
+<h3 id="1-4-canvas路径"><a href="#1-4-canvas路径" class="headerlink" title="1.4 canvas路径"></a>1.4 canvas路径</h3><p>在Canvas上画线，我们将使用以下两种方法：</p>
+<blockquote>
+<ul>
+<li>moveTo(x,y) 定义线条开始坐标。</li>
+</ul>
+</blockquote>
+<blockquote>
+<ul>
+<li>lineTo(x,y) 定义线条结束坐标。</li>
+</ul>
+</blockquote>
+<p>绘制线条我们必须使用到 “ink” 的方法，就像stroke()。</p>
+<p>使用实例：定义开始坐标(0,0), 和结束坐标 (200,100). 然后使用 stroke() 方法来绘制线条。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br>ctx.moveTo(0,0);<br>ctx.lineTo(200,100);<br>ctx.stroke();<br></code></pre></div></td></tr></table></figure>
+<p>在canvas中绘制圆形，可以这样用：</p>
+<ul>
+<li>arc(x,y,r,start,stop)</li>
+</ul>
+<p>实际上我们在绘制圆形时使用了 “ink” 的方法, 比如 stroke() 或者 fill()。</p>
+<p>使用实例：使用 arc() 方法 绘制一个圆.var c=document.getElementById(“myCanvas”);<br>var ctx=c.getContext(“2d”);<br>ctx.beginPath();<br>ctx.arc(95,50,40,0,2*Math.PI);<br>ctx.stroke();</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br>ctx.beginPath();<br>ctx.arc(95,50,40,0,2*Math.PI);<br>ctx.stroke();<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-5-canvas文本"><a href="#1-5-canvas文本" class="headerlink" title="1.5 canvas文本"></a>1.5 canvas文本</h3><p>使用 canvas 绘制文本，重要的属性和方法如下：</p>
+<blockquote>
+<ul>
+<li>font：定义字体</li>
+<li>fillText(text,x,y) ：在 canvas 上绘制实心的文本</li>
+<li>strokeText(text,x,y)：在 canvas 上绘制空心的文本</li>
+</ul>
+</blockquote>
+<h4 id="1-5-1-使用fillText"><a href="#1-5-1-使用fillText" class="headerlink" title="1.5.1 使用fillText()"></a>1.5.1 使用fillText()</h4><p>使用实例：使用 “Arial” 字体在画布上绘制一个高 30px 的文字（实心）：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br>ctx.font=&quot;30px Arial&quot;;<br>ctx.fillText(&quot;Hello World&quot;,10,50);<br></code></pre></div></td></tr></table></figure>
+<h4 id="1-5-2-使用strokeText"><a href="#1-5-2-使用strokeText" class="headerlink" title="1.5.2 使用strokeText()"></a>1.5.2 使用strokeText()</h4><p>使用实例：使用 “Arial” 字体在画布上绘制一个高 30px 的文字（空心）：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br>ctx.font=&quot;30px Arial&quot;;<br>ctx.strokeText(&quot;Hello World&quot;,10,50);<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-6-canvas渐变"><a href="#1-6-canvas渐变" class="headerlink" title="1.6 canvas渐变"></a>1.6 canvas渐变</h3><p>渐变可以填充在矩形, 圆形, 线条, 文本等等, 各种形状可以自己定义不同的颜色。<br>有两种不同的方式来设置Canvas渐变：</p>
+<blockquote>
+<ul>
+<li>createLinearGradient(x,y,x1,y1) ： 创建线条渐变</li>
+<li>createRadialGradient(x,y,r,x1,y1,r1) ： 创建一个径向/圆渐变</li>
+</ul>
+</blockquote>
+<p>当我们使用渐变对象，必须使用两种或两种以上的停止颜色。addColorStop()方法指定颜色停止，参数使用坐标来描述，可以是0至1。<br>使用渐变，设置fillStyle或strokeStyle的值为渐变，然后绘制形状，如矩形，文本，或一条线。</p>
+<h4 id="1-6-1-使用-createLinearGradient"><a href="#1-6-1-使用-createLinearGradient" class="headerlink" title="1.6.1 使用 createLinearGradient()"></a>1.6.1 使用 createLinearGradient()</h4><p>使用实例：创建一个线性渐变。使用渐变填充矩形:</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br><br>// Create gradient<br>var grd=ctx.createLinearGradient(0,0,200,0);<br>grd.addColorStop(0,&quot;red&quot;);<br>grd.addColorStop(1,&quot;white&quot;);<br><br>// Fill with gradient<br>ctx.fillStyle=grd;<br>ctx.fillRect(10,10,150,80);<br></code></pre></div></td></tr></table></figure>
+<h4 id="1-6-2-使用-createRadialGradient"><a href="#1-6-2-使用-createRadialGradient" class="headerlink" title="1.6.2 使用 createRadialGradient()"></a>1.6.2 使用 createRadialGradient()</h4><p>使用实例：创建一个径向/圆渐变。使用渐变填充矩形：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br><br>// Create gradient<br>var grd=ctx.createRadialGradient(75,50,5,90,60,100);<br>grd.addColorStop(0,&quot;red&quot;);<br>grd.addColorStop(1,&quot;white&quot;);<br><br>// Fill with gradient<br>ctx.fillStyle=grd;<br>ctx.fillRect(10,10,150,80);<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意：</strong>当使用&lt;canvas&gt;元素创建径向渐变的时候 context.createRadialGradient(x , y , r , x1 , y1 , r1) 括号内的参数有如下的含义:</p>
+<blockquote>
+<ul>
+<li> x：表示渐变的开始圆的 x 坐标</li>
+<li> y：表示渐变的开始圆的 y 坐标</li>
+<li> r：表示开始圆的半径</li>
+<li> x1：表示渐变的结束圆的 x 坐标</li>
+<li>  y1：表示渐变的结束圆的 y 坐标</li>
+<li> r1：表示结束圆的半径</li>
+</ul>
+</blockquote>
+<h3 id="1-7-canvas图像"><a href="#1-7-canvas图像" class="headerlink" title="1.7 canvas图像"></a>1.7 canvas图像</h3><p>把一幅图像放置到画布上, 使用方法drawImage(image,x,y)。<br>使用实例：把一幅图像放置到画布上:</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var c=document.getElementById(&quot;myCanvas&quot;);<br>var ctx=c.getContext(&quot;2d&quot;);<br>var img=document.getElementById(&quot;scream&quot;);<br>ctx.drawImage(img,10,10);<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="2-内联SVG"><a href="#2-内联SVG" class="headerlink" title="2.内联SVG"></a>2.内联SVG</h2><p>SVG表示可缩放矢量图形，是基于可扩展标记语言（标准通用标记语言的子集），用于描述二维矢量图形的一种图形格式，它在2003年1月14日成为W3C推荐标准。</p>
+<h3 id="2-1-什么是SVG"><a href="#2-1-什么是SVG" class="headerlink" title="2.1 什么是SVG"></a>2.1 什么是SVG</h3><p>SVG 指可伸缩矢量图形 (Scalable Vector Graphics)， 用于定义用于网络的基于矢量的图形， 使用 XML 格式定义图形， 图像在放大或改变尺寸的情况下其图形质量不会有损失， 是万维网联盟的标准，SVG 与 DOM 和 XSL 之类的 W3C 标准是一个整体。</p>
+<h3 id="2-2-SVG优势"><a href="#2-2-SVG优势" class="headerlink" title="2.2 SVG优势"></a>2.2 SVG优势</h3><p>与其他图像格式相比（比如 JPEG 和 GIF），使用 SVG 的优势在于：</p>
+<ul>
+<li>SVG 图像可通过文本编辑器来创建和修改</li>
+<li>SVG 图像可被搜索、索引、脚本化或压缩</li>
+<li>SVG 是可伸缩的</li>
+<li>SVG 图像可在任何的分辨率下被高质量地打印</li>
+<li>SVG 可在图像质量不下降的情况下被放大</li>
+</ul>
+<h3 id="2-3-SVG直接嵌入HTML页面"><a href="#2-3-SVG直接嵌入HTML页面" class="headerlink" title="2.3 SVG直接嵌入HTML页面"></a>2.3 SVG直接嵌入HTML页面</h3><p>在 HTML5 中，能够将 SVG 元素直接嵌入 HTML 页面中：</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;https://lichengloong.com/&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;1.1&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;190&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">polygon</span> <span class="hljs-attr">points</span>=<span class="hljs-string">&quot;100,10 40,180 190,60 10,60 160,180&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">style</span>=<span class="hljs-string">&quot;fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="2-4-SVG与canvas的区别"><a href="#2-4-SVG与canvas的区别" class="headerlink" title="2.4 SVG与canvas的区别"></a>2.4 SVG与canvas的区别</h3><p>SVG 是一种使用 XML 描述 2D 图形的语言。</p>
+<p>Canvas 通过 JavaScript 来绘制 2D 图形。</p>
+<p>SVG 基于 XML，这意味着 SVG DOM 中的每个元素都是可用的。您可以为某个元素附加 JavaScript 事件处理器。</p>
+<p>在 SVG 中，每个被绘制的图形均被视为对象。如果 SVG 对象的属性发生变化，那么浏览器能够自动重现图形。</p>
+<p>Canvas 是逐像素进行渲染的。在 canvas 中，一旦图形被绘制完成，它就不会继续得到浏览器的关注。如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已被图形覆盖的对象。</p>
+<p><strong>两者的比较</strong></p>
+<p><strong>Canvas</strong></p>
+<ul>
+<li>依赖分辨率</li>
+<li>不支持事件处理器</li>
+<li>弱的文本渲染能力</li>
+<li>能够以 .png 或 .jpg 格式保存结果图像</li>
+<li>最适合图像密集型的游戏，其中的许多对象会被频繁重绘</li>
+</ul>
+<p><strong>SVG</strong></p>
+<ul>
+<li>不依赖分辨率</li>
+<li>支持事件处理器</li>
+<li>最适合带有大型渲染区域的应用程序（比如谷歌地图）</li>
+<li>复杂度高会减慢渲染速度（任何过度使用 DOM 的应用都不快）</li>
+<li>不适合游戏应用</li>
+</ul>
+<h2 id="3-MathML"><a href="#3-MathML" class="headerlink" title="3.MathML"></a>3.MathML</h2><p>MathML 是数学标记语言，是一种基于XML（标准通用标记语言的子集）的标准，用来在互联网上书写数学符号和公式的置标语言。</p>
+<p>MathML 与 HTML相似度很高，但是比较繁琐。它继承了角括号和双标签（&lt;标签&gt;内容&lt;/标签&gt;）的用法。<br>HTML5 可以在文档中使用 MathML 元素，对应的标签是 &lt;math&gt;…&lt;/math&gt; 。</p>
+<p>使用实例1：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>W3Cschool在线教程(w3cschool.cn)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">math</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><br>         <span class="hljs-tag">&lt;<span class="hljs-name">mrow</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">msup</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>a<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">msup</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">msup</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>b<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">msup</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>=<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">msup</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>c<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">msup</span>&gt;</span><br>         <span class="hljs-tag">&lt;/<span class="hljs-name">mrow</span>&gt;</span><br><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">math</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>运行结果：<br>a<sup>2</sup>+b<sup>2</sup>=c<sup>2</sup></p>
+<p>使用实例2：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>W3Cschool在线教程(w3cschool.cn)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">math</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><br>         <span class="hljs-tag">&lt;<span class="hljs-name">mrow</span>&gt;</span>			<br>            <span class="hljs-tag">&lt;<span class="hljs-name">mrow</span>&gt;</span><br>               <span class="hljs-tag">&lt;<span class="hljs-name">msup</span>&gt;</span><br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><br>               <span class="hljs-tag">&lt;/<span class="hljs-name">msup</span>&gt;</span><br>               <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>               <span class="hljs-tag">&lt;<span class="hljs-name">mrow</span>&gt;</span><br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>⁢<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><br>               <span class="hljs-tag">&lt;/<span class="hljs-name">mrow</span>&gt;</span><br>               <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>+<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>               <span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>4<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">mrow</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>=<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">mn</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">mn</span>&gt;</span><br>         <span class="hljs-tag">&lt;/<span class="hljs-name">mrow</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">math</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>运行结果：<br>x<sup>2</sup>+4x+4=0</p>
+<p>使用实例3：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>W3Cschool在线教程(w3cschool.cn)<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">math</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;&quot;</span>&gt;</span><br>         <span class="hljs-tag">&lt;<span class="hljs-name">mrow</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>A<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">mo</span>&gt;</span>=<span class="hljs-tag">&lt;/<span class="hljs-name">mo</span>&gt;</span><br>			<br>            <span class="hljs-tag">&lt;<span class="hljs-name">mfenced</span> <span class="hljs-attr">open</span>=<span class="hljs-string">&quot;[&quot;</span> <span class="hljs-attr">close</span>=<span class="hljs-string">&quot;]&quot;</span>&gt;</span><br>			<br>               <span class="hljs-tag">&lt;<span class="hljs-name">mtable</span>&gt;</span><br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mtr</span>&gt;</span><br>                     <span class="hljs-tag">&lt;<span class="hljs-name">mtd</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>x<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mtd</span>&gt;</span><br>                     <span class="hljs-tag">&lt;<span class="hljs-name">mtd</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>y<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mtd</span>&gt;</span><br>                  <span class="hljs-tag">&lt;/<span class="hljs-name">mtr</span>&gt;</span><br>					<br>                  <span class="hljs-tag">&lt;<span class="hljs-name">mtr</span>&gt;</span><br>                     <span class="hljs-tag">&lt;<span class="hljs-name">mtd</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>z<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mtd</span>&gt;</span><br>                     <span class="hljs-tag">&lt;<span class="hljs-name">mtd</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">mi</span>&gt;</span>w<span class="hljs-tag">&lt;/<span class="hljs-name">mi</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">mtd</span>&gt;</span><br>                  <span class="hljs-tag">&lt;/<span class="hljs-name">mtr</span>&gt;</span><br>               <span class="hljs-tag">&lt;/<span class="hljs-name">mtable</span>&gt;</span><br>               <br>            <span class="hljs-tag">&lt;/<span class="hljs-name">mfenced</span>&gt;</span><br>         <span class="hljs-tag">&lt;/<span class="hljs-name">mrow</span>&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">math</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>实例是一个 2×2 矩阵，可以在 Firefox 3.5 以上版本查看到效果。</p>
+<h2 id="4-拖放（Drag和Drop）"><a href="#4-拖放（Drag和Drop）" class="headerlink" title="4.拖放（Drag和Drop）"></a>4.拖放（Drag和Drop）</h2><p>拖放的目的是可以让你将某个对象放置到你想要放置的位置。拖放（Drag 和 drop）是 HTML5 标准的组成部分。</p>
+<p>拖放是一种常见的特性，即抓取对象以后拖到另一个位置。在 HTML5 中，拖放是标准的一部分，任何元素都能够拖放。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">HTML</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">allowDrop</span>(<span class="hljs-params">ev</span>)</span>&#123;</span><br>ev.preventDefault();<br>&#125;<br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drag</span>(<span class="hljs-params">ev</span>)</span>&#123;</span><br><span class="javascript">ev.dataTransfer.setData(<span class="hljs-string">&quot;Text&quot;</span>,ev.target.id);</span><br>&#125;<br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">drop</span>(<span class="hljs-params">ev</span>)</span>&#123;</span><br>ev.preventDefault();<br><span class="javascript"><span class="hljs-keyword">var</span> data=ev.dataTransfer.getData(<span class="hljs-string">&quot;Text&quot;</span>);</span><br><span class="javascript">ev.target.appendChild(<span class="hljs-built_in">document</span>.getElementById(data));</span><br>&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;div1&quot;</span> <span class="hljs-attr">ondrop</span>=<span class="hljs-string">&quot;drop(event)&quot;</span></span><br><span class="hljs-tag"><span class="hljs-attr">ondragover</span>=<span class="hljs-string">&quot;allowDrop(event)&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;drag1&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;img_logo.gif&quot;</span> <span class="hljs-attr">draggable</span>=<span class="hljs-string">&quot;true&quot;</span></span><br><span class="hljs-tag"><span class="hljs-attr">ondragstart</span>=<span class="hljs-string">&quot;drag(event)&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;336&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;69&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>看上去也许有些复杂，不过我们可以分别研究拖放事件的不同部分。</p>
+<h3 id="4-1-设置元素为可拖放（draggable）"><a href="#4-1-设置元素为可拖放（draggable）" class="headerlink" title="4.1 设置元素为可拖放（draggable）"></a>4.1 设置元素为可拖放（draggable）</h3><p>为了使元素可拖动，把 draggable 属性设置为 true ：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">draggable</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="4-2-拖动什么（ondragstart和setData-）"><a href="#4-2-拖动什么（ondragstart和setData-）" class="headerlink" title="4.2 拖动什么（ondragstart和setData()）"></a>4.2 拖动什么（ondragstart和setData()）</h3><p>规定当元素被拖动时，会发生什么。在上面的例子中，ondragstart 属性调用了一个函数，drag(event)，它规定了被拖动的数据。</p>
+<p>dataTransfer.setData() 方法设置被拖数据的数据类型和值：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">function drag(ev)        &#123;<br>ev.dataTransfer.setData(&quot;Text&quot;,ev.target.id);       <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>数据类型是 “Text”，值是可拖动元素的 id (“drag1”)。</p>
+<h3 id="4-3-放到何处（ondragover）"><a href="#4-3-放到何处（ondragover）" class="headerlink" title="4.3 放到何处（ondragover）"></a>4.3 放到何处（ondragover）</h3><p>规定在何处放置被拖动的数据。默认地，无法将数据/元素放置到其他元素中。如果需要设置允许放置，我们必须阻止对元素的默认处理方式。<br>需要通过调用 ondragover 事件的 event.preventDefault() 方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">event.preventDefault()<br></code></pre></div></td></tr></table></figure>
+<h3 id="4-4-进行放置（ondrop）"><a href="#4-4-进行放置（ondrop）" class="headerlink" title="4.4 进行放置（ondrop）"></a>4.4 进行放置（ondrop）</h3><p>当放置被拖数据时，会发生 drop 事件。<br>在上面的例子中，ondrop 属性调用了一个函数，drop(event)：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">function drop(ev)&#123;        <br>ev.preventDefault();        <br>var data=ev.dataTransfer.getData(&quot;Text&quot;);        <br>ev.target.appendChild(document.getElementById(data));        <br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>代码解析：</p>
+<ul>
+<li>调用 preventDefault() 来避免浏览器对数据的默认处理（drop 事件的默认行为是以链接形式打开）。</li>
+<li>通过 dataTransfer.getData(“Text”) 方法获得被拖的数据。该方法将返回在 setData() 方法中设置为相同类型的任何数据。</li>
+<li>被拖数据是被拖元素的 id (“drag1”)。</li>
+<li>把被拖元素追加到放置元素（目标元素）中。</li>
+</ul>
+<h2 id="5-地理位置（Geolocation）"><a href="#5-地理位置（Geolocation）" class="headerlink" title="5.地理位置（Geolocation）"></a>5.地理位置（Geolocation）</h2><p>HTML5 Geolocation（地理定位）用于定位用户的位置。Geolocation 通过请求一个位置信息，用户同意后，浏览器会返回一个包含经度和维度的位置信息！HTML5 Geolocation API 用于获得用户的地理位置。该特性可能侵犯用户的隐私，除非用户同意，否则用户位置信息是不可用的。</p>
+<h3 id="5-1-使用地理定位"><a href="#5-1-使用地理定位" class="headerlink" title="5.1 使用地理定位"></a>5.1 使用地理定位</h3><p>使用 getCurrentPosition() 方法来获得用户的位置。</p>
+<p>使用实例：可返回用户位置的经度和纬度:</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript"><span class="hljs-keyword">var</span> x=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;demo&quot;</span>);</span><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLocation</span>(<span class="hljs-params"></span>)</span></span><br>  &#123;<br>  if (navigator.geolocation)<br>    &#123;<br>    navigator.geolocation.getCurrentPosition(showPosition);<br>    &#125;<br><span class="javascript">  <span class="hljs-keyword">else</span>&#123;x.innerHTML=<span class="hljs-string">&quot;该浏览器不支持获取地理位置。&quot;</span>;&#125;</span><br>  &#125;<br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showPosition</span>(<span class="hljs-params">position</span>)</span></span><br>  &#123;<br><span class="javascript">  x.innerHTML=<span class="hljs-string">&quot;Latitude: &quot;</span> + position.coords.latitude +</span><br><span class="javascript">  <span class="hljs-string">&quot;&lt;br&gt;Longitude: &quot;</span> + position.coords.longitude;</span><br>  &#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>代码解析：</p>
+<ul>
+<li>检测是否支持地理定位</li>
+<li>如果支持，则运行 getCurrentPosition() 方法。如果不支持，则向用户显示一段消息。</li>
+<li>如果getCurrentPosition()运行成功，则向参数showPosition中规定的函数返回一个coordinates对象</li>
+<li>showPosition() 函数获得并显示经度和纬度</li>
+</ul>
+<p>上面的例子是一个非常基础的地理定位脚本，不含错误处理。</p>
+<p><strong>提示：</strong>geolocation的位置信息来源可以包括GPS、IP地址、RFID、WIFI和蓝牙的MAC地址、以及GSM/CDMS的ID等等。</p>
+<h3 id="5-2-处理错误和拒绝"><a href="#5-2-处理错误和拒绝" class="headerlink" title="5.2 处理错误和拒绝"></a>5.2 处理错误和拒绝</h3><p>getCurrentPosition() 方法的第二个参数用于处理错误。它规定当获取用户位置失败时运行的函数。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">function showError(error)<br>  &#123;<br>  switch(error.code)<br>    &#123;<br>    case error.PERMISSION_DENIED:<br>      x.innerHTML=&quot;用户拒绝对获取地理位置的请求。&quot;<br>      break;<br>    case error.POSITION_UNAVAILABLE:<br>      x.innerHTML=&quot;位置信息是不可用的。&quot;<br>      break;<br>    case error.TIMEOUT:<br>      x.innerHTML=&quot;请求用户地理位置超时。&quot;<br>      break;<br>    case error.UNKNOWN_ERROR:<br>      x.innerHTML=&quot;未知错误。&quot;<br>      break;<br>    &#125;<br>  &#125;<br></code></pre></div></td></tr></table></figure>
+<p>解析：</p>
+<ul>
+<li>Permission denied ： 用户不允许地理定位</li>
+<li>Position unavailable ： 无法获取当前位置</li>
+<li>Timeout ： 操作超时</li>
+</ul>
+<h3 id="5-3-在地图中显示结果"><a href="#5-3-在地图中显示结果" class="headerlink" title="5.3 在地图中显示结果"></a>5.3 在地图中显示结果</h3><p>如需在地图中显示结果，您需要访问可使用经纬度的地图服务，比如谷歌地图或百度地图。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">function showPosition(position)<br>&#123;<br>var latlon=position.coords.latitude+&quot;,&quot;+position.coords.longitude;<br><br>var img_url=&quot;http://maps.googleapis.com/maps/api/staticmap?center=&quot;<br>+latlon+&quot;&amp;zoom=14&amp;size=400x300&amp;sensor=false&quot;;<br><br>document.getElementById(&quot;mapholder&quot;).innerHTML=&quot;<span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&#x27;&quot;+img_url+&quot;&#x27;</span>&gt;</span>&quot;;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>在上例中，我们使用返回的经纬度数据在谷歌地图中显示位置（使用静态图像）。</p>
+<h3 id="5-4-返回数据（getCurrentPosition-）"><a href="#5-4-返回数据（getCurrentPosition-）" class="headerlink" title="5.4  返回数据（getCurrentPosition() ）"></a>5.4  返回数据（getCurrentPosition() ）</h3><p>T若成功，则 getCurrentPosition() 方法返回对象。始终会返回 latitude、longitude 以及 accuracy 属性。如果可用，则会返回其他下面的属性。</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">coords.latitude</td>
+<td align="center">十进制数的纬度</td>
+</tr>
+<tr>
+<td align="center">coords.longitude</td>
+<td align="center">十进制数的经度</td>
+</tr>
+<tr>
+<td align="center">coords.accuracy</td>
+<td align="center">位置精度</td>
+</tr>
+<tr>
+<td align="center">coords.altitude</td>
+<td align="center">海拔，海平面以上以米计</td>
+</tr>
+<tr>
+<td align="center">coords.altitudeAccuracy</td>
+<td align="center">位置的海拔精度</td>
+</tr>
+<tr>
+<td align="center">coords.heading</td>
+<td align="center">方向，从正北开始以度计</td>
+</tr>
+<tr>
+<td align="center">coords.speed</td>
+<td align="center">速度，以米/每秒计</td>
+</tr>
+<tr>
+<td align="center">timestamp</td>
+<td align="center">响应的日期/时间</td>
+</tr>
+</tbody></table>
+<h3 id="5-5-其他方法（Geolocation-对象）"><a href="#5-5-其他方法（Geolocation-对象）" class="headerlink" title="5.5 其他方法（Geolocation 对象）"></a>5.5 其他方法（Geolocation 对象）</h3><p>watchPosition() - 返回用户的当前位置，并继续返回用户移动时的更新位置（就像汽车上的 GPS）。</p>
+<p>clearWatch() - 停止 watchPosition() 方法。<br>展示使用watchPosition() 方法。您需要一台精确的 GPS 设备来测试该例（比如 iPhone）：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript"><span class="hljs-keyword">var</span> x=<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;demo&quot;</span>);</span><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getLocation</span>(<span class="hljs-params"></span>)</span></span><br>  &#123;<br>  if (navigator.geolocation)<br>    &#123;<br>    navigator.geolocation.watchPosition(showPosition);<br>    &#125;<br><span class="javascript">  <span class="hljs-keyword">else</span>&#123;x.innerHTML=<span class="hljs-string">&quot;该浏览器不支持获取地理位置。&quot;</span>;&#125;</span><br>  &#125;<br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">showPosition</span>(<span class="hljs-params">position</span>)</span></span><br>  &#123;<br><span class="javascript">  x.innerHTML=<span class="hljs-string">&quot;纬度: &quot;</span> + position.coords.latitude +</span><br><span class="javascript">  <span class="hljs-string">&quot;&lt;br&gt;经度: &quot;</span> + position.coords.longitude;</span><br>  &#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/WEB%E5%89%8D%E7%AB%AF/">WEB前端</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">http://example.com/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/</a> <br> -->
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WEB前端-HTML5基础知识复习（三）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
+                        <span class="hidden-mobile">WEB前端-HTML5基础知识复习（一）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/img/avatar.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript" rel="nofollow noopener"><span>DragonOne</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
