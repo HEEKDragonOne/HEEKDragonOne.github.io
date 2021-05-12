@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水的记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>WEB前端-HTML5基础知识复习（四） - 墨水的记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水的记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于作者
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WEB前端-HTML5基础知识复习（四）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-12 16:34" pubdate>
+        May 12, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      83
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WEB前端-HTML5基础知识复习（四）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：May 12, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>HTML5规范于2014年10月29日由万维网联盟正式宣布，HTML是万维网最核心的超文本标记语言。万维网不等同于互联网，但它是依靠互联网运行的服务之一，万维网又简写为www，它可以实现在互联网的帮助下，访问由许多互相链接的超文本组成的系统。现代的浏览器都支持 HTML5。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-语义元素"><a href="#1-语义元素" class="headerlink" title="1.语义元素"></a>1.语义元素</h2><p>语义= 意义。<br>语义元素 = 元素的意义。<br>一个语义元素能够清楚的描述其意义给浏览器和开发者。</p>
+<p><strong>新语义元素</strong></p>
+<ul>
+<li>&lt;header&gt;</li>
+<li>&lt;nav&gt;</li>
+<li>&lt;section&gt;</li>
+<li>&lt;article&gt;</li>
+<li>&lt;aside&gt;</li>
+<li>&lt;figcaption&gt;</li>
+<li>&lt;figure&gt;</li>
+<li>&lt;footer&gt;</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/20210512153653905.gif" srcset="/img/loading.gif"></p>
+<h3 id="1-1-lt-header-gt-元素"><a href="#1-1-lt-header-gt-元素" class="headerlink" title="1.1 &lt;header&gt;元素"></a>1.1 &lt;header&gt;元素</h3><p>&lt;header&gt;元素描述了文档的头部区域。&lt;header&gt;元素注意用于定义内容的介绍展示区域。在页面中你可以使用多个&lt;header&gt; 元素。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">header</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Internet Explorer 9<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">time</span> <span class="hljs-attr">pubdate</span> <span class="hljs-attr">datetime</span>=<span class="hljs-string">&quot;2011-03-15&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">time</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">header</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Windows Internet Explorer 9 (abbreviated as IE9) was released to<br>  the  public on March 14, 2011 at 21:00 PDT.....<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-2-lt-nav-gt-元素"><a href="#1-2-lt-nav-gt-元素" class="headerlink" title="1.2 &lt;nav&gt;元素"></a>1.2 &lt;nav&gt;元素</h3><p>&lt;nav&gt; 标签定义导航链接的部分。&gt;nav&lt; 元素用于定义页面的导航链接部分区域。<br>不是所有的链接都需要包含在 &lt;nav&gt; 元素中!</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">nav</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/html/&quot;</span>&gt;</span>HTML<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/css/&quot;</span>&gt;</span>CSS<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/js/&quot;</span>&gt;</span>JavaScript<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> |<br><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;/jquery/&quot;</span>&gt;</span>jQuery<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">nav</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-3-lt-section-gt-元素"><a href="#1-3-lt-section-gt-元素" class="headerlink" title="1.3 &lt;section&gt;元素"></a>1.3 &lt;section&gt;元素</h3><p>&lt;section&gt; 标签定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。<br>根据W3C HTML5文档: section 包含了一组内容及其标题。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">section</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>WWF<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The World Wide Fund for Nature (WWF) is....<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-4-lt-article-gt-元素"><a href="#1-4-lt-article-gt-元素" class="headerlink" title="1.4 &lt;article&gt;元素"></a>1.4 &lt;article&gt;元素</h3><p>&lt;article&gt; 标签定义独立的内容。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">article</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Internet Explorer 9<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Windows Internet Explorer 9 (abbreviated as IE9) was released to<br>  the  public on March 14, 2011 at 21:00 PDT.....<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="1-5-lt-aside-gt-元素"><a href="#1-5-lt-aside-gt-元素" class="headerlink" title="1.5 &lt;aside&gt;元素"></a>1.5 &lt;aside&gt;元素</h3><p>&lt;aside&gt; 标签定义页面主区域内容之外的内容（比如侧边栏）。aside 标签的内容应与主区域的内容相关。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>My family and I visited The Epcot center this summer.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">aside</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Epcot Center<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>The Epcot Center is a theme park in Disney World, Florida.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">aside</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-6-lt-footer-gt-元素"><a href="#1-6-lt-footer-gt-元素" class="headerlink" title="1.6 &lt;footer&gt;元素"></a>1.6 &lt;footer&gt;元素</h3><p>&lt;footer&gt; 元素描述了文档的底部区域。<br>&lt;footer&gt; 元素应该包含它的包含元素。一个页脚通常包含文档的作者，著作权信息，链接的使用条款，联系信息等。文档中你可以使用多个 &lt;footer&gt;元素。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">footer</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Posted by: Hege Refsnes<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">time</span> <span class="hljs-attr">pubdate</span> <span class="hljs-attr">datetime</span>=<span class="hljs-string">&quot;2012-03-01&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">time</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">footer</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-7-lt-figcaption-gt-与-lt-figure-gt-元素"><a href="#1-7-lt-figcaption-gt-与-lt-figure-gt-元素" class="headerlink" title="1.7 &lt;figcaption&gt;与&lt;figure&gt;元素"></a>1.7 &lt;figcaption&gt;与&lt;figure&gt;元素</h3><p>&lt;figure&gt;标签规定独立的流内容（图像、图表、照片、代码等等）。</p>
+<p>&lt;figure&gt; 元素的内容应该与主内容相关，但如果被删除，则不应对文档流产生影响。</p>
+<p>&lt;figcaption&gt;标签定义 &lt;figure&gt; 元素的标题。</p>
+<p>&lt;figcaption&gt;元素应该被置于 “figure” 元素的第一个或最后一个子元素的位置。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">figure</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;img_pulpit.jpg&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;The Pulpit Rock&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;304&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;228&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">figcaption</span>&gt;</span>Fig1. - The Pulpit Pock, Norway.<span class="hljs-tag">&lt;/<span class="hljs-name">figcaption</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">figure</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="2-Web存储"><a href="#2-Web存储" class="headerlink" title="2.Web存储"></a>2.Web存储</h2><p>在HTML5之前，主要是使用cookies存储，cookies的缺点有：需要在请求头上带着数据，存储大小不过在4k之内。<br>使用HTML5可以在本地存储用户的浏览数据，比cookie更好的本地存储方式。</p>
+<h3 id="2-1-localStorage-和-sessionStorage"><a href="#2-1-localStorage-和-sessionStorage" class="headerlink" title="2.1 localStorage 和 sessionStorage"></a>2.1 localStorage 和 sessionStorage</h3><p>客户端存储数据的两个对象为：</p>
+<ul>
+<li>localStorage - 没有时间限制的数据存储</li>
+<li>sessionStorage - 针对一个 session 的数据存储</li>
+</ul>
+<p>在使用 web 存储前,应检查浏览器是否支持 localStorage 和sessionStorage: </p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">if(typeof(Storage)!==&quot;undefined&quot;)        <br>  &#123;        <br>  // 是的! 支持 localStorage  sessionStorage 对象!         <br>  // 一些代码.....         <br>  &#125;        <br>else        <br>  &#123;        <br>  // 抱歉! 不支持 web 存储。         <br>  &#125;<br></code></pre></div></td></tr></table></figure>
+<h4 id="2-1-1-localStorage-对象"><a href="#2-1-1-localStorage-对象" class="headerlink" title="2.1.1 localStorage 对象"></a>2.1.1 localStorage 对象</h4><p>localStorage 对象存储的数据没有时间限制。第二天、第二周或下一年之后，数据依然可用。</p>
+<p>实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">localStorage.sitename=&quot;W3Cschool在线教程&quot;;<br>document.getElementById(&quot;result&quot;).innerHTML=&quot;网站名：&quot; + localStorage.sitename;<br></code></pre></div></td></tr></table></figure>
+<p>解析：</p>
+<ul>
+<li>使用 key=”sitename” 和 value=”在线学习” 创建一个 localStorage 键/值对。</li>
+<li>检索键值为”sitename” 的值然后将数据插入 id=”result”的元素中。</li>
+</ul>
+<p>上实例也可以这么写：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">// 存储<br>localStorage.sitename = &quot;W3Cschool在线教程&quot;;<br>// 查找<br>document.getElementById(&quot;result&quot;).innerHTML = localStorage.sitename;<br></code></pre></div></td></tr></table></figure>
+<p>移除 localStorage 中的 “lastname” :</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">localStorage.removeItem(&quot;lastname&quot;);<br></code></pre></div></td></tr></table></figure>
+<p>不管是 localStorage，还是 sessionStorage，可使用的API都相同，常用的有如下几个（以localStorage为例）：</p>
+<ul>
+<li>保存数据：localStorage.setItem(key,value);</li>
+<li>读取数据：localStorage.getItem(key);</li>
+<li>删除单个数据：localStorage.removeItem(key);</li>
+<li>删除所有数据：localStorage.clear();</li>
+<li>得到某个索引的key：localStorage.key(index);</li>
+</ul>
+<p><strong>提示：</strong>键/值对通常以字符串存储，你可以按自己的需要转换该格式。</p>
+<p>使用实例：展示了用户点击按钮的次数。(字符串值转换为数字类型)</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">if (localStorage.clickcount)&#123;<br>  localStorage.clickcount=Number(localStorage.clickcount)+1;<br>&#125;<br>else&#123;<br>  localStorage.clickcount=1;<br>&#125;<br>document.getElementById(&quot;result&quot;).innerHTML=&quot; 你已经点击了按钮 &quot; + localStorage.clickcount + &quot; 次 &quot;;<br></code></pre></div></td></tr></table></figure>
+<h4 id="2-1-2-sessionStorage-对象"><a href="#2-1-2-sessionStorage-对象" class="headerlink" title="2.1.2 sessionStorage 对象"></a>2.1.2 sessionStorage 对象</h4><p>sessionStorage 方法针对一个 session 进行数据存储。当用户关闭浏览器窗口后，数据会被删除。</p>
+<p>创建并访问一个 sessionStorage：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">if (sessionStorage.clickcount)&#123;<br>  sessionStorage.clickcount=Number(sessionStorage.clickcount)+1;<br>  &#125;<br>else&#123;<br>  sessionStorage.clickcount=1;<br>  &#125;<br>document.getElementById(&quot;result&quot;).innerHTML=&quot;在这个会话中你已经点击了该按钮 &quot; + sessionStorage.clickcount + &quot; 次 &quot;;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="3-Web-SQL"><a href="#3-Web-SQL" class="headerlink" title="3.Web SQL"></a>3.Web SQL</h2><p>Web SQL 是在浏览器上模拟数据库，可以使用 JS 来操作 SQL 完成对数据的读写。Web SQL 数据库 API 并不是 HTML5 规范的一部分，但是它是一个独立的规范，引入了一组使用 SQL 操作客户端数据库的 APIs。</p>
+<h3 id="3-1-核心方法"><a href="#3-1-核心方法" class="headerlink" title="3.1 核心方法"></a>3.1 核心方法</h3><p>规范中定义的三个核心方法：</p>
+<blockquote>
+<ol>
+<li>openDatabase：这个方法使用现有的数据库或者新建的数据库创建一个数据库对象。</li>
+<li>transaction：这个方法让我们能够控制一个事务，以及基于这种情况执行提交或者回滚。</li>
+<li>executeSql：这个方法用于执行实际的 SQL 查询。</li>
+</ol>
+</blockquote>
+<h3 id="3-2-打开数据库"><a href="#3-2-打开数据库" class="headerlink" title="3.2 打开数据库"></a>3.2 打开数据库</h3><p>使用 openDatabase() 方法来打开已存在的数据库，如果数据库不存在，则会创建一个新的数据库。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var db = openDatabase(&#x27;mydb&#x27;, &#x27;1.0&#x27;, &#x27;Test DB&#x27;, 2 * 1024 * 1024);<br></code></pre></div></td></tr></table></figure>
+<p>openDatabase() 方法对应的五个参数说明：</p>
+<blockquote>
+<ol>
+<li>数据库名称</li>
+<li>版本号</li>
+<li>描述文本</li>
+<li>数据库大小</li>
+<li>创建回调</li>
+</ol>
+</blockquote>
+<p>其中，第五个参数创建回调会在创建数据库后被调用。</p>
+<h3 id="3-3-执行查询操作"><a href="#3-3-执行查询操作" class="headerlink" title="3.3 执行查询操作"></a>3.3 执行查询操作</h3><p>使用 database.transaction() 函数：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var db = openDatabase(&#x27;mydb&#x27;, &#x27;1.0&#x27;, &#x27;Test DB&#x27;, 2 * 1024 * 1024);<br>db.transaction(function (tx) &#123;  <br>   tx.executeSql(&#x27;CREATE TABLE IF NOT EXISTS LOGS (id unique, log)&#x27;);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>语句执行后会在 ‘mydb’ 数据库中创建一个名为 LOGS 的表。</p>
+<h3 id="3-4-插入数据"><a href="#3-4-插入数据" class="headerlink" title="3.4 插入数据"></a>3.4 插入数据</h3><p>在执行上面的创建表语句后，我们可以插入一些数据：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var db = openDatabase(&#x27;mydb&#x27;, &#x27;1.0&#x27;, &#x27;Test DB&#x27;, 2 * 1024 * 1024);<br>db.transaction(function (tx) &#123;<br>   tx.executeSql(&#x27;CREATE TABLE IF NOT EXISTS LOGS (id unique, log)&#x27;);<br>   tx.executeSql(&#x27;INSERT INTO LOGS (id, log) VALUES (1, &quot;HTML5教程&quot;)&#x27;);<br>   tx.executeSql(&#x27;INSERT INTO LOGS (id, log) VALUES (2, &quot;https://lichengloong.com/&quot;)&#x27;);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>使用多态值来插入数据：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var db = openDatabase(&#x27;mydb&#x27;, &#x27;1.0&#x27;, &#x27;Test DB&#x27;, 2 * 1024 * 1024);<br>db.transaction(function (tx) &#123;  <br>  tx.executeSql(&#x27;CREATE TABLE IF NOT EXISTS LOGS (id unique, log)&#x27;);<br>  tx.executeSql(&#x27;INSERT INTO LOGS (id,log) VALUES (?, ?)&#x27;, [e_id, e_log]);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>实例中的 e_id 和 e_log 是外部变量，executeSql 会映射数组参数中的每个条目给 “?”。</p>
+<h3 id="3-5-读取数据"><a href="#3-5-读取数据" class="headerlink" title="3.5 读取数据"></a>3.5 读取数据</h3><p>读取数据库中已经存在的数据：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var db = openDatabase(&#x27;mydb&#x27;, &#x27;1.0&#x27;, &#x27;Test DB&#x27;, 2 * 1024 * 1024);<br><br>db.transaction(function (tx) &#123;<br>   tx.executeSql(&#x27;CREATE TABLE IF NOT EXISTS LOGS (id unique, log)&#x27;);<br>   tx.executeSql(&#x27;INSERT INTO LOGS (id, log) VALUES (1, &quot;HTML5教程&quot;)&#x27;);<br>   tx.executeSql(&#x27;INSERT INTO LOGS (id, log) VALUES (2, &quot;https://lichengloong.com/&quot;)&#x27;);<br>&#125;);<br><br>db.transaction(function (tx) &#123;<br>   tx.executeSql(&#x27;SELECT * FROM LOGS&#x27;, [], function (tx, results) &#123;<br>      var len = results.rows.length, i;<br>      msg = &quot;<br>查询记录条数: &quot; + len + &quot;<br><br>&quot;;<br>      document.querySelector(&#x27;#status&#x27;).innerHTML +=  msg;<br>	<br>      for (i = 0; i &lt; len; i++)&#123;<br>         alert(results.rows.item(i).log );<br>      &#125;<br>	<br>   &#125;, null);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p><strong>完整实例</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> db = openDatabase(<span class="hljs-string">&#x27;mydb&#x27;</span>, <span class="hljs-string">&#x27;1.0&#x27;</span>, <span class="hljs-string">&#x27;Test DB&#x27;</span>, <span class="hljs-number">2</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>);<br><span class="hljs-keyword">var</span> msg;<br><br>db.transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx</span>) </span>&#123;<br><br>            tx.executeSql(<span class="hljs-string">&#x27;CREATE TABLE IF NOT EXISTS LOGS (id unique, log)&#x27;</span>);<br><br>            tx.executeSql(<span class="hljs-string">&#x27;INSERT INTO LOGS (id, log) VALUES (1, &quot;HTML5教程&quot;)&#x27;</span>);<br><br>            tx.executeSql(<span class="hljs-string">&#x27;INSERT INTO LOGS (id, log) VALUES (2, &quot;https://lichengloong.com/&quot;)&#x27;</span>);<br><br>            msg = <span class="hljs-string">&#x27;&lt;p&gt;数据表已创建，且插入了两条数据。&lt;/p&gt;&#x27;</span>;<br><br>            <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML =  msg;<br><br>         &#125;);<br><br>			<br>db.transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx</span>) </span>&#123;<br><br>            tx.executeSql(<span class="hljs-string">&#x27;SELECT * FROM LOGS&#x27;</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx, results</span>) </span>&#123;<br><br>               <span class="hljs-keyword">var</span> len = results.rows.length, i;<br><br>               msg = <span class="hljs-string">&quot;&lt;p&gt;查询记录条数: &quot;</span> + len + <span class="hljs-string">&quot;&lt;/p&gt;&quot;</span>;<br><br>               <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML +=  msg;<br><br>               <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; len; i++)&#123;<br><br>                  msg = <span class="hljs-string">&quot;&lt;p&gt;&lt;b&gt;&quot;</span> + results.rows.item(i).log + <span class="hljs-string">&quot;&lt;/b&gt;&lt;/p&gt;&quot;</span>;<br><br>                  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML +=  msg;<br><br>               &#125;<br><br>            &#125;, <span class="hljs-literal">null</span>);<br><br>         &#125;);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-6-删除记录"><a href="#3-6-删除记录" class="headerlink" title="3.6 删除记录"></a>3.6 删除记录</h3><p>删除记录的格式：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">db.transaction(function (tx) &#123;<br>    tx.executeSql(&#x27;DELETE FROM LOGS  WHERE id=1&#x27;);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>删除指定的数据 id 也可以是动态的：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">db.transaction(function(tx) &#123;<br>    tx.executeSql(&#x27;DELETE FROM LOGS WHERE id=?&#x27;, [id]);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<h3 id="3-7-更新记录"><a href="#3-7-更新记录" class="headerlink" title="3.7 更新记录"></a>3.7 更新记录</h3><p>更新记录的格式：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">db.transaction(function (tx) &#123;<br>    tx.executeSql(&#x27;UPDATE LOGS SET log=\&#x27;https://lichengloong.com/&#x27; WHERE id=2&#x27;);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p>更新指定的数据 id 也可以是动态的：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">db.transaction(function(tx) &#123;<br>    tx.executeSql(&#x27;UPDATE LOGS SET log=\&#x27;https://lichengloong.com/&#x27; WHERE id=?&#x27;, [id]);<br>&#125;);<br></code></pre></div></td></tr></table></figure>
+<p><strong>完整实例</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">HTML</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">&quot;UTF-8&quot;</span>&gt;</span>  <br>      <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;</span><br>      <br><span class="javascript">         <span class="hljs-keyword">var</span> db = openDatabase(<span class="hljs-string">&#x27;mydb&#x27;</span>, <span class="hljs-string">&#x27;1.0&#x27;</span>, <span class="hljs-string">&#x27;Test DB&#x27;</span>, <span class="hljs-number">2</span> * <span class="hljs-number">1024</span> * <span class="hljs-number">1024</span>);</span><br><span class="javascript">         <span class="hljs-keyword">var</span> msg;</span><br>         <br><span class="javascript">         db.transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx</span>) </span>&#123;</span><br><span class="javascript">            tx.executeSql(<span class="hljs-string">&#x27;CREATE TABLE IF NOT EXISTS LOGS (id unique, log)&#x27;</span>);</span><br><span class="javascript">            tx.executeSql(<span class="hljs-string">&#x27;INSERT INTO LOGS (id, log) VALUES (1, &quot;HTML5教程&quot;)&#x27;</span>);</span><br><span class="javascript">            tx.executeSql(<span class="hljs-string">&#x27;INSERT INTO LOGS (id, log) VALUES (2, &quot;https://lichengloong.com/&quot;)&#x27;</span>);</span><br><span class="handlebars"><span class="xml">            msg = &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>数据表已创建，且插入了两条数据。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>&#x27;;</span></span><br><span class="javascript">            <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML =  msg;</span><br>         &#125;);<br><br><span class="javascript">         db.transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx</span>) </span>&#123;</span><br><span class="javascript">              tx.executeSql(<span class="hljs-string">&#x27;DELETE FROM LOGS  WHERE id=1&#x27;</span>);</span><br><span class="handlebars"><span class="xml">              msg = &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>删除 id 为 1 的记录。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>&#x27;;</span></span><br><span class="javascript">              <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML =  msg;</span><br>         &#125;);<br><br><span class="javascript">         db.transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx</span>) </span>&#123;</span><br><span class="javascript">             tx.executeSql(<span class="hljs-string">&#x27;UPDATE LOGS SET log=\&#x27;https://lichengloong.com/&#x27;</span> WHERE id=<span class="hljs-number">2</span><span class="hljs-string">&#x27;);</span></span><br><span class="handlebars"><span class="xml">              msg = &#x27;<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>更新 id 为 2 的记录。<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>&#x27;;</span></span><br><span class="javascript">              <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML =  msg;</span><br>         &#125;);<br><br><span class="javascript">         db.transaction(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx</span>) </span>&#123;</span><br><span class="javascript">            tx.executeSql(<span class="hljs-string">&#x27;SELECT * FROM LOGS&#x27;</span>, [], <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">tx, results</span>) </span>&#123;</span><br><span class="javascript">               <span class="hljs-keyword">var</span> len = results.rows.length, i;</span><br><span class="javascript">               msg = <span class="hljs-string">&quot;&lt;p&gt;查询记录条数: &quot;</span> + len + <span class="hljs-string">&quot;&lt;/p&gt;&quot;</span>;</span><br><span class="javascript">               <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML +=  msg;</span><br>               <br>               for (i = 0; i &lt; len; i++)&#123;<br><span class="handlebars"><span class="xml">                  msg = &quot;<span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">b</span>&gt;</span>&quot; + results.rows.item(i).log + &quot;<span class="hljs-tag">&lt;/<span class="hljs-name">b</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>&quot;;</span></span><br><span class="javascript">                  <span class="hljs-built_in">document</span>.querySelector(<span class="hljs-string">&#x27;#status&#x27;</span>).innerHTML +=  msg;</span><br>               &#125;<br><span class="javascript">            &#125;, <span class="hljs-literal">null</span>);</span><br>         &#125;);<br>         <br>      <span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br>      <br>   <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span><br>   <br>   <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;status&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;status&quot;</span>&gt;</span>状态信息<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span><br>   <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="4-应用程序缓存"><a href="#4-应用程序缓存" class="headerlink" title="4.应用程序缓存"></a>4.应用程序缓存</h2><p>使用 HTML5，通过创建 cache manifest 文件，可以轻松地创建 web 应用的离线版本。这意味着，你可以在没有网络连接的情况下进行访问。</p>
+<p>应用程序缓存为应用带来三个优势：</p>
+<blockquote>
+<ol>
+<li>离线浏览 - 用户可在应用离线时使用它们</li>
+<li>速度 - 已缓存资源加载得更快</li>
+<li>减少服务器负载 - 浏览器将只从服务器下载更新过或更改过的资源。</li>
+</ol>
+</blockquote>
+<h3 id="4-1-Cache-Manifest-实例"><a href="#4-1-Cache-Manifest-实例" class="headerlink" title="4.1 Cache Manifest 实例"></a>4.1 Cache Manifest 实例</h3><p>展示带有 cache manifest 的 HTML 文档（供离线浏览）：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">HTML</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">manifest</span>=<span class="hljs-string">&quot;demo.appcache&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br>The content of the document......<br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="4-2-Cache-Manifest-基础"><a href="#4-2-Cache-Manifest-基础" class="headerlink" title="4.2 Cache Manifest 基础"></a>4.2 Cache Manifest 基础</h3><p>如需启用应用程序缓存，需要在文档的&lt;html&gt; 标签中包含 manifest 属性：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">HTML</span>&gt;</span>        <br><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">manifest</span>=<span class="hljs-string">&quot;demo.appcache&quot;</span>&gt;</span>        <br>...        <br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>每个指定了 manifest 的页面在用户对其访问时都会被缓存。如果未指定 manifest 属性，则页面不会被缓存（除非在 manifest 文件中直接指定了该页面）。manifest 文件的建议的文件扩展名是：”.appcache”。</p>
+<p>manifest 文件需要配置正确的 MIME-type，即 “text/cache-manifest”。必须在 web 服务器上进行配置。</p>
+<h3 id="4-3-Manifest-文件"><a href="#4-3-Manifest-文件" class="headerlink" title="4.3 Manifest 文件"></a>4.3 Manifest 文件</h3><p>manifest 文件是简单的文本文件，它告知浏览器被缓存的内容（以及不缓存的内容）。</p>
+<p>manifest 文件可分为三个部分：</p>
+<blockquote>
+<ul>
+<li>CACHE MANIFEST - 在此标题下列出的文件将在首次下载后进行缓存</li>
+<li>NETWORK - 在此标题下列出的文件需要与服务器的连接，且不会被缓存</li>
+<li>FALLBACK - 在此标题下列出的文件规定当页面无法访问时的回退页面（比如 404 页面）</li>
+</ul>
+</blockquote>
+<h3 id="4-4-CACHE-MANIFEST"><a href="#4-4-CACHE-MANIFEST" class="headerlink" title="4.4 CACHE MANIFEST"></a>4.4 CACHE MANIFEST</h3><p>第一行，CACHE MANIFEST，是必需的：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">CACHE MANIFEST        <br>/theme.css        <br>/logo.gif        <br>/main.js<br></code></pre></div></td></tr></table></figure>
+<p>上面的 manifest 文件列出了三个资源：一个 CSS 文件，一个 GIF 图像，以及一个 JavaScript 文件。当 manifest 文件加载后，浏览器会从网站的根目录下载这三个文件。然后，无论用户何时与因特网断开连接，这些资源依然是可用的。</p>
+<h3 id="4-5-NETWORK"><a href="#4-5-NETWORK" class="headerlink" title="4.5 NETWORK"></a>4.5 NETWORK</h3><p>下面的 NETWORK 小节规定文件 “login.php” 永远不会被缓存，且离线时是不可用的：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">NETWORK:        <br>login.php<br></code></pre></div></td></tr></table></figure>
+<p>可以使用星号来指示所有其他其他资源/文件都需要因特网连接：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">NETWORK:        <br>*<br></code></pre></div></td></tr></table></figure>
+<h3 id="4-6-FALLBACK"><a href="#4-6-FALLBACK" class="headerlink" title="4.6 FALLBACK"></a>4.6 FALLBACK</h3><p>下面的 FALLBACK 小节规定如果无法建立因特网连接，则用 “offline.html” 替代 /html5/ 目录中的所有文件：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">FALLBACK:       <br>/html/ /offline.html<br></code></pre></div></td></tr></table></figure>
+<p>第一个 URI 是资源，第二个是替补。</p>
+<h3 id="4-7-更新缓存"><a href="#4-7-更新缓存" class="headerlink" title="4.7 更新缓存"></a>4.7 更新缓存</h3><p>一旦应用被缓存，它就会保持缓存直到发生下列情况：</p>
+<blockquote>
+<ul>
+<li>用户清空浏览器缓存</li>
+<li>manifest 文件被修改（参阅下面的提示）</li>
+<li>由程序来更新应用缓存</li>
+</ul>
+</blockquote>
+<h3 id="4-8-完整的-Manifest-文件"><a href="#4-8-完整的-Manifest-文件" class="headerlink" title="4.8 完整的 Manifest 文件"></a>4.8 完整的 Manifest 文件</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">CACHE MANIFEST        <br># 2012-02-21 v1.0.0       <br>/theme.css        <br>/logo.gif        <br>/main.js        <br>        <br>NETWORK:        <br>login.php        <br>        <br>FALLBACK:       <br>/html/ /offline.html<br></code></pre></div></td></tr></table></figure>
+<p>以 “#” 开头的是注释行，但也可满足其他用途。应用的缓存会在其 manifest 文件更改时被更新。如果您编辑了一幅图片，或者修改了一个 JavaScript 函数，这些改变都不会被重新缓存。更新注释行中的日期和版本号是一种使浏览器重新缓存文件的办法。</p>
+<h3 id="4-9-关于应用程序缓存的说明"><a href="#4-9-关于应用程序缓存的说明" class="headerlink" title="4.9 关于应用程序缓存的说明"></a>4.9 关于应用程序缓存的说明</h3><p>请留心缓存的内容。一旦文件被缓存，则浏览器会继续展示已缓存的版本，即使您修改了服务器上的文件。为了确保浏览器更新缓存，您需要更新 manifest 文件。</p>
+<p>浏览器对缓存数据的容量限制可能不太一样（某些浏览器设置的限制是每个站点 5MB）。</p>
+<h2 id="5-Web-Workers"><a href="#5-Web-Workers" class="headerlink" title="5.Web Workers"></a>5.Web Workers</h2><p>web worker 是运行在后台的 JavaScript，不会影响页面的性能，更好的解释是，你可以使用web worker提供的一种简单的方法来为web内容在后台线程中运行脚本，这些线程在执行任务的过程中并不会干扰用户界面！</p>
+<p>当在 HTML 页面中执行脚本时，页面的状态是不可响应的，直到脚本已完成。<br>web worker 是运行在后台的 JavaScript，独立于其他脚本，不会影响页面的性能。您可以继续做任何愿意做的事情：点击、选取内容等等，而此时 web worker 在后台运行。</p>
+<h3 id="5-1-实例"><a href="#5-1-实例" class="headerlink" title="5.1 实例"></a>5.1 实例</h3><p>一个简单的 web worker，在后台计数：<br>demo_workers.js 文件代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var i=0;<br><br>function timedCount()<br>&#123;<br>    i=i+1;<br>    postMessage(i);<br>    setTimeout(&quot;timedCount()&quot;,500);<br>&#125;<br><br>timedCount(); <br></code></pre></div></td></tr></table></figure>
+
+<p>完整实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>计数： <span class="hljs-tag">&lt;<span class="hljs-name">output</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;result&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">output</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;startWorker()&quot;</span>&gt;</span>开始工作<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span> <br><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;stopWorker()&quot;</span>&gt;</span>停止工作<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>注意：<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span> Internet Explorer 9 及更早 IE 版本浏览器不支持 Web Workers.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript"><span class="hljs-keyword">var</span> w;</span><br><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startWorker</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span>(Worker) !== <span class="hljs-string">&quot;undefined&quot;</span>) &#123;</span><br><span class="javascript">        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span>(w) == <span class="hljs-string">&quot;undefined&quot;</span>) &#123;</span><br><span class="javascript">            w = <span class="hljs-keyword">new</span> Worker(<span class="hljs-string">&quot;/statics/demosource/demo_workers.js&quot;</span>);</span><br>        &#125;<br><span class="javascript">        w.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">event</span>) </span>&#123;</span><br><span class="javascript">            <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;result&quot;</span>).innerHTML = event.data;</span><br>        &#125;;<br><span class="javascript">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="javascript">        <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;result&quot;</span>).innerHTML = <span class="hljs-string">&quot;抱歉，你的浏览器不支持 Web Workers...&quot;</span>;</span><br>    &#125;<br>&#125;<br><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stopWorker</span>(<span class="hljs-params"></span>) </span>&#123; </span><br>    w.terminate();<br><span class="javascript">    w = <span class="hljs-literal">undefined</span>;</span><br>&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-2-检测浏览器是否支持-Web-Worker"><a href="#5-2-检测浏览器是否支持-Web-Worker" class="headerlink" title="5.2 检测浏览器是否支持 Web Worker"></a>5.2 检测浏览器是否支持 Web Worker</h3><p>在创建 web worker 之前，应该检测用户的浏览器是否支持它：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">if(typeof(Worker)!==&quot;undefined&quot;)<br>  &#123;<br>  // 是的! Web worker 支持!<br>  // 一些代码.....<br>  &#125;<br>else<br>  &#123;<br>  // //抱歉! Web Worker 不支持<br>  &#125; <br></code></pre></div></td></tr></table></figure>
+<p>必须先检测才能保证接下来可以顺利操作 web worker！</p>
+<h3 id="5-3-创建-web-worker-文件"><a href="#5-3-创建-web-worker-文件" class="headerlink" title="5.3 创建 web worker 文件"></a>5.3 创建 web worker 文件</h3><p>在一个外部 JavaScript 中创建我们的 web worker。在这里，我们创建了计数脚本。该脚本存储于 “demo_workers.js” 文件中：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var i=0;<br><br>function timedCount()<br>&#123;<br>i=i+1;<br>postMessage(i);<br>setTimeout(&quot;timedCount()&quot;,500);<br>&#125;<br><br>timedCount(); <br></code></pre></div></td></tr></table></figure>
+<p>以上代码中重要的部分是 postMessage() 方法 - 它用于向 HTML 页面传回一段消息。<br>web worker 通常不用于如此简单的脚本，而是用于更耗费 CPU 资源的任务。</p>
+<h3 id="5-4-创建-Web-Worker-对象"><a href="#5-4-创建-Web-Worker-对象" class="headerlink" title="5.4 创建 Web Worker 对象"></a>5.4 创建 Web Worker 对象</h3><p>已经有了 web worker 文件，现在需要从 HTML 页面调用它。<br>下面的代码检测是否存在 worker，如果不存在，- 就会创建一个新的 web worker 对象，然后运行 “demo_workers.js” 中的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">if(typeof(w)==&quot;undefined&quot;)<br>  &#123;<br>  w=new Worker(&quot;demo_workers.js&quot;);<br>  &#125;<br></code></pre></div></td></tr></table></figure>
+<p>然后就可以从 web worker 发送和接收消息了。</p>
+<p>向 web worker 添加一个 “onmessage” 事件监听器：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">w.onmessage=function(event)&#123;<br>document.getElementById(&quot;result&quot;).innerHTML=event.data;<br>&#125;; <br></code></pre></div></td></tr></table></figure>
+<p>当 web worker 传递消息时，会执行事件监听器中的代码。event.data 中存有来自 event.data 的数据。</p>
+<h3 id="5-5-终止-Web-Worker"><a href="#5-5-终止-Web-Worker" class="headerlink" title="5.5 终止 Web Worker"></a>5.5 终止 Web Worker</h3><p>创建 web worker 对象后，它会继续监听消息（即使在外部脚本完成之后）直到其被终止为止。如需终止 web worker，并释放浏览器/计算机资源，使用 terminate() 方法：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">w.terminate(); <br></code></pre></div></td></tr></table></figure>
+<h3 id="5-6-完整实例"><a href="#5-6-完整实例" class="headerlink" title="5.6 完整实例"></a>5.6 完整实例</h3><p>已经有了 .js 文件中的 Worker 代码。下面是 HTML 页面的代码：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Count numbers: <span class="hljs-tag">&lt;<span class="hljs-name">output</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;result&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">output</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;startWorker()&quot;</span>&gt;</span>Start Worker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">&quot;stopWorker()&quot;</span>&gt;</span>Stop Worker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><span class="javascript"><span class="hljs-keyword">var</span> w;</span><br><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">startWorker</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="javascript"><span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span>(Worker)!==<span class="hljs-string">&quot;undefined&quot;</span>)</span><br>&#123;<br><span class="javascript">  <span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span>(w)==<span class="hljs-string">&quot;undefined&quot;</span>)</span><br>    &#123;<br><span class="javascript">    w=<span class="hljs-keyword">new</span> Worker(<span class="hljs-string">&quot;demo_workers.js&quot;</span>);</span><br>    &#125;<br><span class="javascript">  w.onmessage = <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;result&quot;</span>).innerHTML=event.data;</span><br>  &#125;;<br>&#125;<br><span class="javascript"><span class="hljs-keyword">else</span></span><br>&#123;<br><span class="javascript"><span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&quot;result&quot;</span>).innerHTML=<span class="hljs-string">&quot;Sorry, your browser does not support Web Workers...&quot;</span>;</span><br>&#125;<br>&#125;<br><br><span class="javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">stopWorker</span>(<span class="hljs-params"></span>)</span>&#123;</span><br>w.terminate();<br>&#125;<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span><br><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-7-Web-Workers-和-DOM"><a href="#5-7-Web-Workers-和-DOM" class="headerlink" title="5.7 Web Workers 和 DOM"></a>5.7 Web Workers 和 DOM</h3><p>由于 web worker 位于外部文件中，它们无法访问下例 JavaScript 对象：</p>
+<ul>
+<li>window 对象</li>
+<li>document 对象</li>
+<li>parent 对象</li>
+</ul>
+<h2 id="6-服务器发送事件-Server-Sent-Events-SSE"><a href="#6-服务器发送事件-Server-Sent-Events-SSE" class="headerlink" title="6.服务器发送事件(Server-Sent Events) SSE"></a>6.服务器发送事件(Server-Sent Events) SSE</h2><p>服务器发送事件（Server-sent Events）是基于 WebSocket 协议的一种服务器向客户端发送事件和数据的单向通讯。HTML5 服务器发送事件（server-sent event）允许网页获得来自服务器的更新。</p>
+<h3 id="6-1-Server-Sent-事件-单向消息传递"><a href="#6-1-Server-Sent-事件-单向消息传递" class="headerlink" title="6.1 Server-Sent 事件 - 单向消息传递"></a>6.1 Server-Sent 事件 - 单向消息传递</h3><p>Server-Sent 事件指的是网页自动获取来自服务器的更新。</p>
+<p>以前也可能做到这一点，前提是网页不得不询问是否有可用的更新。通过服务器发送事件，更新能够自动到达。</p>
+<p>例子：Facebook/Twitter 更新、估价更新、新的博文、赛事结果等。</p>
+<h3 id="6-2-接收-Server-Sent-事件通知"><a href="#6-2-接收-Server-Sent-事件通知" class="headerlink" title="6.2 接收 Server-Sent 事件通知"></a>6.2 接收 Server-Sent 事件通知</h3><p>EventSource 对象用于接收服务器发送事件通知：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var source=new EventSource(&quot;demo_sse.php&quot;);<br>source.onmessage=function(event)&#123;<br>  document.getElementById(&quot;result&quot;).innerHTML+=event.data + &quot;<span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span>&quot;;<br>  &#125;;<br></code></pre></div></td></tr></table></figure>
+<p>解析：</p>
+<ul>
+<li><p>创建一个新的 EventSource 对象，然后规定发送更新的页面的 URL（本例中是 “demo_sse.php”）</p>
+</li>
+<li><p>每接收到一次更新，就会发生 onmessage 事件</p>
+</li>
+<li><p>当 onmessage 事件发生时，把已接收的数据推入 id 为 “result” 的元素中</p>
+</li>
+</ul>
+<h3 id="6-3-检测-Server-Sent-事件支持"><a href="#6-3-检测-Server-Sent-事件支持" class="headerlink" title="6.3 检测 Server-Sent 事件支持"></a>6.3 检测 Server-Sent 事件支持</h3><p>检测服务器发送事件的浏览器支持情况：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">if(typeof(EventSource)!==&quot;undefined&quot;)<br>   &#123;<br>   // 浏览器支持 Server-Sent<br>   // 一些代码.....<br>   &#125;<br> else<br>   &#123;<br>   // 浏览器不支持 Server-Sent..<br>   &#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="6-4-服务器端代码实例"><a href="#6-4-服务器端代码实例" class="headerlink" title="6.4 服务器端代码实例"></a>6.4 服务器端代码实例</h3><p>为了让上面的例子可以运行，您还需要能够发送数据更新的服务器（比如 PHP 和 ASP）。</p>
+<p>服务器端事件流的语法是非常简单的。把 “Content-Type” 报头设置为 “text/event-stream”。现在，就可以开始发送事件流了。<br>demo_sse.php：</p>
+<figure class="highlight php"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>header(<span class="hljs-string">&#x27;Content-Type: text/event-stream&#x27;</span>);<br> header(<span class="hljs-string">&#x27;Cache-Control: no-cache&#x27;</span>);<br><br><span class="hljs-variable">$time</span> = date(<span class="hljs-string">&#x27;r&#x27;</span>);<br><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;data: The server time is: <span class="hljs-subst">&#123;$time&#125;</span>nn&quot;</span>;<br>flush();<br><span class="hljs-meta">?&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>ASP 代码 (VB) (demo_sse.asp):</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asp">&lt;%<br>Response.ContentType&#x3D;&quot;text&#x2F;event-stream&quot;<br>Response.Expires&#x3D;-1<br> Response.Write(&quot;data: &quot; &amp; now())<br>Response.Flush()<br>%&gt;<br></code></pre></div></td></tr></table></figure>
+<p>解析：</p>
+<ul>
+<li><p>把报头 “Content-Type” 设置为 “text/event-stream”</p>
+</li>
+<li><p>规定不对页面进行缓存</p>
+</li>
+<li><p>输出发送日期（始终以 “data: “ 开头）</p>
+</li>
+<li><p>向网页刷新输出数据</p>
+</li>
+</ul>
+<h3 id="6-5-EventSource-对象"><a href="#6-5-EventSource-对象" class="headerlink" title="6.5 EventSource 对象"></a>6.5 EventSource 对象</h3><p>可以使用 onmessage 事件来获取消息。还可以使用其他事件：</p>
+<table>
+<thead>
+<tr>
+<th align="center">事件</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">onopen</td>
+<td align="center">当通往服务器的连接被打开</td>
+</tr>
+<tr>
+<td align="center">onmessage</td>
+<td align="center">当接收到消息</td>
+</tr>
+<tr>
+<td align="center">onerror</td>
+<td align="center">当发生错误</td>
+</tr>
+</tbody></table>
+<h2 id="7-WebSocket"><a href="#7-WebSocket" class="headerlink" title="7.WebSocket"></a>7.WebSocket</h2><p>WebSocket是HTML5开始提供的一种在单个 TCP 连接上进行全双工通讯的协议。</p>
+<p>在WebSocket API中，浏览器和服务器只需要做一个握手的动作，然后，浏览器和服务器之间就形成了一条快速通道。两者之间就直接可以数据互相传送。</p>
+<p>浏览器通过 JavaScript 向服务器发出建立 WebSocket 连接的请求，连接建立以后，客户端和服务器端就可以通过 TCP 连接直接交换数据。</p>
+<p>当你获取 Web Socket 连接后，你可以通过 send() 方法来向服务器发送数据，并通过 onmessage 事件来接收服务器返回的数据。</p>
+<p>以下 API 用于创建 WebSocket 对象。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">var Socket = new WebSocket(url, [protocal] );<br></code></pre></div></td></tr></table></figure>
+<p>代码中的第一个参数 url, 指定连接的 URL。第二个参数 protocol 是可选的，指定了可接受的子协议。</p>
+<h3 id="7-1-WebSocket-属性"><a href="#7-1-WebSocket-属性" class="headerlink" title="7.1 WebSocket 属性"></a>7.1 WebSocket 属性</h3><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Socket.readyState</td>
+<td align="center">只读属性 <strong>readyState</strong> 表示连接状态，可以是以下值：0 - 表示连接尚未建立。1 - 表示连接已建立，可以进行通信。2 - 表示连接正在进行关闭。3 - 表示连接已经关闭或者连接不能打开。</td>
+</tr>
+<tr>
+<td align="center">Socket.bufferedAmount</td>
+<td align="center">只读属性 <strong>bufferedAmount</strong> 已被 send() 放入正在队列中等待传输，但是还没有发出的 UTF-8 文本字节数。</td>
+</tr>
+</tbody></table>
+<h3 id="7-2-WebSocket-事件"><a href="#7-2-WebSocket-事件" class="headerlink" title="7.2 WebSocket 事件"></a>7.2 WebSocket 事件</h3><table>
+<thead>
+<tr>
+<th align="center">事件</th>
+<th align="center">事件处理程序</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">open</td>
+<td align="center">Socket.onopen</td>
+<td align="center">连接建立时触发</td>
+</tr>
+<tr>
+<td align="center">message</td>
+<td align="center">Socket.onmessage</td>
+<td align="center">客户端接收服务端数据时触发</td>
+</tr>
+<tr>
+<td align="center">error</td>
+<td align="center">Socket.onerror</td>
+<td align="center">通信发生错误时触发</td>
+</tr>
+<tr>
+<td align="center">close</td>
+<td align="center">Socket.onclose</td>
+<td align="center">连接关闭时触发</td>
+</tr>
+</tbody></table>
+<h3 id="7-3-WebSocket-方法"><a href="#7-3-WebSocket-方法" class="headerlink" title="7.3 WebSocket 方法"></a>7.3 WebSocket 方法</h3><table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Socket.send()</td>
+<td align="center">使用连接发送数据</td>
+</tr>
+<tr>
+<td align="center">Socket.close()</td>
+<td align="center">关闭连接</td>
+</tr>
+</tbody></table>
+<h3 id="7-4-WebSocket-实例"><a href="#7-4-WebSocket-实例" class="headerlink" title="7.4 WebSocket 实例"></a>7.4 WebSocket 实例</h3><p>WebSocket 协议本质上是一个基于 TCP 的协议。</p>
+<p>为了建立一个 WebSocket 连接，客户端浏览器首先要向服务器发起一个 HTTP 请求，这个请求和通常的 HTTP 请求不同，包含了一些附加头信息，其中附加头信息”Upgrade: WebSocket”表明这是一个申请协议升级的 HTTP 请求，服务器端解析这些附加的头信息然后产生应答信息返回给客户端，客户端和服务器端的 WebSocket 连接就建立起来了，双方就可以通过这个连接通道自由的传递信息，并且这个连接会持续存在直到客户端或者服务器端的某一方主动的关闭连接。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/WEB%E5%89%8D%E7%AB%AF/">WEB前端</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/">http://example.com/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E5%9B%9B%EF%BC%89/</a> <br> -->
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/12/WEB%E5%89%8D%E7%AB%AF-HTML5%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">
+                        <span class="hidden-mobile">WEB前端-HTML5基础知识复习（三）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/img/avatar.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript" rel="nofollow noopener"><span>DragonOne</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
