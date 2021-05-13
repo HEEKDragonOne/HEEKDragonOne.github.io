@@ -1,0 +1,934 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水的记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>WEB前端-CSS基础知识复习（三） - 墨水的记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水的记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于作者
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WEB前端-CSS基础知识复习（三）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-13 19:31" pubdate>
+        May 13, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      54
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WEB前端-CSS基础知识复习（三）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：May 13, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>CSS 指层叠样式表（Cascading Style Sheets）。通过与 XHTML 结合，CSS 可以帮助我们实行表现与结构分离的开发模式。 通过使用 CSS 来提升工作效率！<br>外部样式表通常存储在 CSS 文件中，外部样式表可以极大提高工作效率。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-边框（Border）"><a href="#1-边框（Border）" class="headerlink" title="1.边框（Border）"></a>1.边框（Border）</h2><p>CSS 边框 (border) 可以是围绕元素内容和内边距的一条或多条线，对于这些线条，您可以自定义它们的样式、宽度以及颜色。使用 CSS 边框属性，我们可以创建出比 HTML 中更加优秀的效果。</p>
+<p>CSS边框属性允许你指定一个元素边框的样式和颜色。</p>
+<p>边框属性：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">border</td>
+<td align="center">简写属性，用于把针对四个边的属性设置在一个声明。</td>
+</tr>
+<tr>
+<td align="center">border-style</td>
+<td align="center">用于设置元素所有边框的样式，或者单独地为各边设置边框样式。</td>
+</tr>
+<tr>
+<td align="center">border-width</td>
+<td align="center">简写属性，用于为元素的所有边框设置宽度，或者单独地为各边边框设置宽度。</td>
+</tr>
+<tr>
+<td align="center">border-color</td>
+<td align="center">简写属性，设置元素的所有边框中可见部分的颜色，或为 4 个边分别设置颜色。</td>
+</tr>
+<tr>
+<td align="center">border-bottom</td>
+<td align="center">简写属性，用于把下边框的所有属性设置到一个声明中。</td>
+</tr>
+<tr>
+<td align="center">border-bottom-color</td>
+<td align="center">设置元素的下边框的颜色。</td>
+</tr>
+<tr>
+<td align="center">border-bottom-style</td>
+<td align="center">设置元素的下边框的样式。</td>
+</tr>
+<tr>
+<td align="center">border-bottom-width</td>
+<td align="center">设置元素的下边框的宽度。</td>
+</tr>
+<tr>
+<td align="center">border-left</td>
+<td align="center">简写属性，用于把左边框的所有属性设置到一个声明中。</td>
+</tr>
+<tr>
+<td align="center">border-left-color</td>
+<td align="center">设置元素的左边框的颜色。</td>
+</tr>
+<tr>
+<td align="center">border-left-style</td>
+<td align="center">设置元素的左边框的样式。</td>
+</tr>
+<tr>
+<td align="center">border-left-width</td>
+<td align="center">设置元素的左边框的宽度。</td>
+</tr>
+<tr>
+<td align="center">border-right</td>
+<td align="center">简写属性，用于把右边框的所有属性设置到一个声明中。</td>
+</tr>
+<tr>
+<td align="center">border-right-color</td>
+<td align="center">设置元素的右边框的颜色。</td>
+</tr>
+<tr>
+<td align="center">border-right-style</td>
+<td align="center">设置元素的右边框的样式。</td>
+</tr>
+<tr>
+<td align="center">border-right-width</td>
+<td align="center">设置元素的右边框的宽度。</td>
+</tr>
+<tr>
+<td align="center">border-top</td>
+<td align="center">简写属性，用于把上边框的所有属性设置到一个声明中。</td>
+</tr>
+<tr>
+<td align="center">border-top-color</td>
+<td align="center">设置元素的上边框的颜色。</td>
+</tr>
+<tr>
+<td align="center">border-top-style</td>
+<td align="center">设置元素的上边框的样式。</td>
+</tr>
+<tr>
+<td align="center">border-top-width</td>
+<td align="center">设置元素的上边框的宽度。</td>
+</tr>
+</tbody></table>
+<h3 id="1-1-边框样式（border-style）"><a href="#1-1-边框样式（border-style）" class="headerlink" title="1.1 边框样式（border-style）"></a>1.1 边框样式（border-style）</h3><p>边框样式属性指定要显示什么样的边界。border-style属性用来定义边框的样式。</p>
+<p>border-style 值:</p>
+<blockquote>
+<ol>
+<li>none: 默认无边框</li>
+<li>dotted: 定义一个点线框</li>
+<li>dashed: 定义一个虚线框</li>
+<li>solid: 定义实线边界</li>
+<li>double: 定义两个边界。 两个边界的宽度和border-width的值相同</li>
+<li>groove: 定义3D沟槽边界。效果取决于边界的颜色值</li>
+<li>ridge: 定义3D脊边界。效果取决于边界的颜色值</li>
+<li>inset:定义一个3D的嵌入边框。效果取决于边界的颜色值</li>
+<li>outset: 定义一个3D突出边框。 效果取决于边界的颜色值</li>
+</ol>
+</blockquote>
+<h3 id="1-2-边框宽度（border-width）"><a href="#1-2-边框宽度（border-width）" class="headerlink" title="1.2 边框宽度（border-width）"></a>1.2 边框宽度（border-width）</h3><p>可以通过 border-width 属性为边框指定宽度。为边框指定宽度有两种方法：可以指定长度值，比如 2px 或 0.1em；或者使用 3 个关键字之一，它们分别是 thin 、medium（默认值） 和 thick。</p>
+<p><strong>注意：</strong>CSS 没有定义 3 个关键字的具体宽度，所以一个用户代理可能把 thin 、medium 和 thick 分别设置为等于 5px、3px 和 2px，而另一个用户代理则分别设置为 3px、2px 和 1px。</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.one</span>&#123;<br><span class="hljs-attribute">border-style</span>:solid;<br><span class="hljs-attribute">border-width</span>:<span class="hljs-number">5px</span>;<br>&#125;<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.two</span>&#123;<br><span class="hljs-attribute">border-style</span>:solid;<br><span class="hljs-attribute">border-width</span>:medium;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-3-边框颜色（border-color）"><a href="#1-3-边框颜色（border-color）" class="headerlink" title="1.3 边框颜色（border-color）"></a>1.3 边框颜色（border-color）</h3><p>border-color 属性用于设置边框的颜色，它一次可以接受最多 4 个颜色值。还可以设置边框的颜色为”transparent”。</p>
+<p>border-color 单独使用是不起作用的，必须得先使用 border-style 来设置边框样式。</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.one</span>&#123;<br><span class="hljs-attribute">border-style</span>:solid;<br><span class="hljs-attribute">border-color</span>:red;<br>&#125;<br><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.two</span>&#123;<br><span class="hljs-attribute">border-style</span>:solid;<br><span class="hljs-attribute">border-color</span>:<span class="hljs-number">#98bf21</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-4-单独设置边框各边"><a href="#1-4-单独设置边框各边" class="headerlink" title="1.4 单独设置边框各边"></a>1.4 单独设置边框各边</h3><p>在 CSS 中，可以指定不同的侧面不同的边框：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">border-top-style</span>:dotted;<br><span class="hljs-attribute">border-right-style</span>:solid;<br><span class="hljs-attribute">border-bottom-style</span>:dotted;<br><span class="hljs-attribute">border-left-style</span>:solid;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>上面的例子也可以设置一个单一属性：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-attribute">border-style</span>:dotted solid;<br></code></pre></div></td></tr></table></figure>
+<p>border-style 属性可以有 1-4 个值：</p>
+<blockquote>
+<ol>
+<li>border-style:dotted solid double dashed;（4个值）<br>上边框是 dotted<br>右边框是 solid<br>底边框是 double<br>左边框是 dashed</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>border-style:dotted solid double;（3个值）<br>上边框是 dotted<br>左、右边框是 solid<br>底边框是 double</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>border-style:dotted solid;（2个值）<br>上、底边框是 dotted<br>左、右边框是 solid</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>border-style:dotted;（1个值）<br>四面边框是 dotted</li>
+</ol>
+</blockquote>
+<p>上面的例子用了 border-style。然而，它也可以和 border-width 、 border-color 一起使用。</p>
+<h3 id="1-5-透明边框（transparent）"><a href="#1-5-透明边框（transparent）" class="headerlink" title="1.5 透明边框（transparent）"></a>1.5 透明边框（transparent）</h3><p>CSS2 引入了边框颜色值 transparent，这个值用于创建有宽度的不可见边框。</p>
+<p>透明样式实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:link</span>, <span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:visited</span> &#123;    <br><span class="hljs-attribute">border-style</span>: solid; <span class="hljs-attribute">border-width</span>: <span class="hljs-number">5px</span>; <span class="hljs-attribute">border-color</span>: transparent;<br>&#125; <span class="hljs-selector-tag">a</span><span class="hljs-selector-pseudo">:hover</span> &#123;<span class="hljs-attribute">border-color</span>: gray;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>利用 transparent，使用边框就像是额外的内边距一样；此外还有一个好处，就是能在你需要的时候使其可见。这种透明边框相当于内边距，因为元素的背景会延伸到边框区域（如果有可见背景的话）。 </p>
+<h3 id="1-6-简写属性"><a href="#1-6-简写属性" class="headerlink" title="1.6 简写属性"></a>1.6 简写属性</h3><p>上面的例子用了很多属性来设置边框。也可以在一个属性中设置边框。<br>可以在”border”属性中设置：</p>
+<ul>
+<li>border-width</li>
+<li>border-style (required)</li>
+<li>border-color</li>
+</ul>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-attribute">border</span>:<span class="hljs-number">5px</span> solid red;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="2-轮廓（outline）"><a href="#2-轮廓（outline）" class="headerlink" title="2.轮廓（outline）"></a>2.轮廓（outline）</h2><p>轮廓（outline）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用。<br>轮廓（outline）属性指定了样式，颜色和外边框的宽度。<br>轮廓（outline）属性的位置让它不像边框那样参与到文档流中，因此轮廓出现或消失时不会影响文档流，即不会导致文档的重新显示。</p>
+<p>轮廓（outline）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用。<br>CSS outline 属性规定元素轮廓的样式、颜色和宽度。如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210513183904643.gif" srcset="/img/loading.gif"></p>
+<p>轮廓属性：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">说明</th>
+<th align="center">值</th>
+<th align="center">CSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">outline</td>
+<td align="center">在一个声明中设置所有的外边框属性</td>
+<td align="center">*outline-color outline-style outline-width *inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">outline-color</td>
+<td align="center">设置外边框的颜色</td>
+<td align="center">*color-name hex-number rgb-number *invert inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">outline-style</td>
+<td align="center">设置外边框的样式</td>
+<td align="center">none dotted dashed solid double groove ridge inset outset inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">outline-width</td>
+<td align="center">设置外边框的宽度</td>
+<td align="center">thin medium thick *length *inherit</td>
+<td align="center">2</td>
+</tr>
+</tbody></table>
+<h2 id="3-外边距（Margin）"><a href="#3-外边距（Margin）" class="headerlink" title="3.外边距（Margin）"></a>3.外边距（Margin）</h2><p>CSS Margin (外边距)属性定义元素周围的空间。CSS Margin 属性接受任何长度单位、百分数值甚至负值。</p>
+<p>margin 清除周围的元素（外边框）的区域。margin 没有背景颜色，是完全透明的。margin 可以单独改变元素的上，下，左，右边距。也可以一次改变所有的属性。</p>
+<h2 id="4-填充（Padding）"><a href="#4-填充（Padding）" class="headerlink" title="4.填充（Padding）"></a>4.填充（Padding）</h2><p>CSS Padding（填充）属性定义元素边框与元素内容之间的空间。当元素的 Padding（填充）（内边距）被清除时，所”释放”的区域将会受到元素背景颜色的填充。单独使用填充属性可以改变上下左右的填充。缩写填充属性也可以使用，一旦改变一切都改变。</p>
+<p>CSS padding 属性可以使用长度值或百分比值，但与 margin 属性不同，它不允许使用负值。</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">padding</td>
+<td align="center">使用缩写属性设置在一个声明中的所有填充属性</td>
+</tr>
+<tr>
+<td align="center">padding-bottom</td>
+<td align="center">设置元素的底部填充</td>
+</tr>
+<tr>
+<td align="center">padding-left</td>
+<td align="center">设置元素的左部填充</td>
+</tr>
+<tr>
+<td align="center">padding-right</td>
+<td align="center">设置元素的右部填充</td>
+</tr>
+<tr>
+<td align="center">padding-top</td>
+<td align="center">设置元素的顶部填充</td>
+</tr>
+</tbody></table>
+<h3 id="4-1-内边距的百分比数值"><a href="#4-1-内边距的百分比数值" class="headerlink" title="4.1 内边距的百分比数值"></a>4.1 内边距的百分比数值</h3><p>CSS padding 属性的百分比数值是相对于其父元素的 width 计算的，如果改变了父元素的 width，则它们也会改变。</p>
+<p>使用实例：段落的内边距设置为父元素 width 的 20% </p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span> &#123;<span class="hljs-attribute">padding</span>: <span class="hljs-number">20%</span>;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>如果一个段落的父元素是 div 元素，那么它的 padding 的 width 计算是根据 div 进行的：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css">&lt;div style=&quot;width: 200px;&quot;&gt;        <br>&lt;<span class="hljs-selector-tag">p</span>&gt;这个段落包含在一个宽度为<span class="hljs-number">200</span>像素的<span class="hljs-selector-tag">DIV</span>中。&lt;/<span class="hljs-selector-tag">p</span>&gt;    <br>&lt;/<span class="hljs-selector-tag">div</span>&gt;<br></code></pre></div></td></tr></table></figure>
+<p>上下内边距与左右内边距一致，即上下内边距的百分数会相对于父元素宽度设置，而不是相对于高度。</p>
+<h3 id="4-2-单边内边距属性"><a href="#4-2-单边内边距属性" class="headerlink" title="4.2 单边内边距属性"></a>4.2 单边内边距属性</h3><p>在CSS中，可以指定不同的侧面不同的填充：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-attribute">padding-top</span>:<span class="hljs-number">25px</span>;<br><span class="hljs-attribute">padding-bottom</span>:<span class="hljs-number">25px</span>;<br><span class="hljs-attribute">padding-right</span>:<span class="hljs-number">50px</span>;<br><span class="hljs-attribute">padding-left</span>:<span class="hljs-number">50px</span>;<br></code></pre></div></td></tr></table></figure>
+<h3 id="4-3-简写属性"><a href="#4-3-简写属性" class="headerlink" title="4.3 简写属性"></a>4.3 简写属性</h3><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-attribute">padding</span>:<span class="hljs-number">25px</span> <span class="hljs-number">50px</span>;<br></code></pre></div></td></tr></table></figure>
+<p>Padding 属性，可以有一到四个值：</p>
+<blockquote>
+<ol>
+<li>padding:25px 50px 75px 100px;（4个值）<br>上填充为25px<br>右填充为50px<br>下填充为75px<br>左填充为100px</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>padding:25px 50px 75px;（3个值）<br>上填充为25px<br>左右填充为50px<br>下填充为75px</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>padding:25px 50px;（2个值）<br>上下填充为25px<br>左右填充为50px</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>padding:25px;（1个值）<br>所有的填充都是25px</li>
+</ol>
+</blockquote>
+<h2 id="5-分组和嵌套"><a href="#5-分组和嵌套" class="headerlink" title="5.分组和嵌套"></a>5.分组和嵌套</h2><p>CSS 分组可以将具有相同样式的选择器进行分组，减少代码量。</p>
+<p>CSS 嵌套适用于选择器内部的选择器的样式。</p>
+<h3 id="5-1-分组选择器"><a href="#5-1-分组选择器" class="headerlink" title="5.1 分组选择器"></a>5.1 分组选择器</h3><p>在样式表中有很多具有相同样式的元素。为了尽量减少代码，可以使用分组选择器。每个选择器用逗号分隔。</p>
+<p>如正常样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span>&#123;<br>    <span class="hljs-attribute">color</span>:green;<br>&#125;<br><span class="hljs-selector-tag">h2</span>&#123;<br>    <span class="hljs-attribute">color</span>:green;<br>&#125;<br><span class="hljs-selector-tag">p</span>&#123;<br>    <span class="hljs-attribute">color</span>:green;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>对上面代码采用分组选择器：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span>,<span class="hljs-selector-tag">h2</span>,<span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">color</span>:green;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>可以对任意多个选择器进行分组，CSS 对此没有任何限制。</p>
+<h3 id="5-2-嵌套选择器"><a href="#5-2-嵌套选择器" class="headerlink" title="5.2 嵌套选择器"></a>5.2 嵌套选择器</h3><p>可能适用于选择器内部的选择器的样式。</p>
+<p>实例：为所有 p 元素指定一个样式，为所有元素指定一个 class=”marked”的样式，并仅用于class=”marked”，类内的 p 元素指定第三个样式：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">color</span>:blue;<br><span class="hljs-attribute">text-align</span>:center;<br>&#125;<br><span class="hljs-selector-class">.marked</span>&#123;<br><span class="hljs-attribute">background-color</span>:red;<br>&#125;<br><span class="hljs-selector-class">.marked</span> <span class="hljs-selector-tag">p</span>&#123;<br><span class="hljs-attribute">color</span>:white;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="6-尺寸（Dimension）"><a href="#6-尺寸（Dimension）" class="headerlink" title="6.尺寸（Dimension）"></a>6.尺寸（Dimension）</h2><p>CSS 尺寸 (Dimension) 属性允许控制元素的高度和宽度。同样，允许增加行间距。</p>
+<p>尺寸属性：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">height</td>
+<td align="center">设置元素的高度。</td>
+</tr>
+<tr>
+<td align="center">line-height</td>
+<td align="center">设置行高。</td>
+</tr>
+<tr>
+<td align="center">max-height</td>
+<td align="center">设置元素的最大高度。</td>
+</tr>
+<tr>
+<td align="center">max-width</td>
+<td align="center">设置元素的最大宽度。</td>
+</tr>
+<tr>
+<td align="center">min-height</td>
+<td align="center">设置元素的最小高度。</td>
+</tr>
+<tr>
+<td align="center">min-width</td>
+<td align="center">设置元素的最小宽度。</td>
+</tr>
+<tr>
+<td align="center">width</td>
+<td align="center">设置元素的宽度。</td>
+</tr>
+</tbody></table>
+<h2 id="7-显示（Display）与可见性（Visibility）"><a href="#7-显示（Display）与可见性（Visibility）" class="headerlink" title="7.显示（Display）与可见性（Visibility）"></a>7.显示（Display）与可见性（Visibility）</h2><p>CSS display 属性和 visibility 属性都可以用来隐藏某个元素，但是这两个属性有不同的定义。display 属性设置一个元素应如何显示，visibility 属性指定一个元素应可见还是隐藏。</p>
+<h3 id="7-1-隐藏元素（display-none-或-visibility-hidden）"><a href="#7-1-隐藏元素（display-none-或-visibility-hidden）" class="headerlink" title="7.1 隐藏元素（display:none 或 visibility:hidden）"></a>7.1 隐藏元素（display:none 或 visibility:hidden）</h3><p>隐藏一个元素可以通过把 display 属性设置为”none”，或把 visibility 属性设置为”hidden”。但是请注意，这两种方法会产生不同的结果。</p>
+<p>visibility:hidden 可以隐藏某个元素，但隐藏的元素 <span style="color:green">仍需占用与未隐藏之前一样的空间</span> 。也就是说，该元素虽然被隐藏了，但仍然会影响布局。</p>
+<p>display:none 可以隐藏某个元素，且隐藏的元素 <span style="color:green">不会占用任何空间</span> 。也就是说，该元素不但被隐藏了，而且该元素原本占用的空间也会从页面布局中消失。</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">h1</span><span class="hljs-selector-class">.hidden</span> &#123;<span class="hljs-attribute">visibility</span>:hidden;&#125;<br><br><span class="hljs-selector-tag">h1</span><span class="hljs-selector-class">.hidden</span> &#123;<span class="hljs-attribute">display</span>:none;&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="7-2-块和内联元素"><a href="#7-2-块和内联元素" class="headerlink" title="7.2 块和内联元素"></a>7.2 块和内联元素</h3><p>块元素是一个元素，占用了全部宽度，在前后都是换行符。即会单独占据一行。<br>如：h1、p、div 等。</p>
+<p>内联元素只需要必要的宽度，不强制换行。即不是单独占据一行。可以在后面继续放其他元素。<br>如：span、a 等。</p>
+<h3 id="7-3-更改内联元素为块元素"><a href="#7-3-更改内联元素为块元素" class="headerlink" title="7.3 更改内联元素为块元素"></a>7.3 更改内联元素为块元素</h3><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">span</span> &#123;<span class="hljs-attribute">display</span>:block;&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="7-4-更改内块元素为内联元素"><a href="#7-4-更改内块元素为内联元素" class="headerlink" title="7.4 更改内块元素为内联元素"></a>7.4 更改内块元素为内联元素</h3><figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">li</span> &#123;<span class="hljs-attribute">display</span>:inline;&#125;<br></code></pre></div></td></tr></table></figure>
+<p>变更元素的显示类型看该元素是如何显示，它是什么样的元素。例如：一个内联元素设置为 display:block 是不允许有它内部的嵌套块元素。</p>
+<h2 id="8-定位（Positioning）"><a href="#8-定位（Positioning）" class="headerlink" title="8.定位（Positioning）"></a>8.定位（Positioning）</h2><p>CSS position 属性，允许将布局的一部分与另一部分重叠。<br>CSS 定位属性允许为一个元素定位。也可以将一个元素放在另一个元素后面，并指定一个元素的内容太大时，应该发生什么。</p>
+<p>元素可以使用的顶部，底部，左侧和右侧属性定位。然而，这些属性无法工作，除非事先设定 position 属性。他们也有不同的工作方式，这取决于定位方法.</p>
+<p>有四种不同的定位方法：Static 定位、Fixed 定位、Relative 定位、Absolute 定位。</p>
+<p>定位属性：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">说明</th>
+<th align="center">值</th>
+<th align="center">CSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">bottom</td>
+<td align="center">定义了定位元素下外边距边界与其包含块下边界之间的偏移。</td>
+<td align="center">auto *length % *inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">clip</td>
+<td align="center">剪辑一个绝对定位的元素</td>
+<td align="center">*shape *auto inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">cursor</td>
+<td align="center">显示光标移动到指定的类型</td>
+<td align="center"><em>url</em> auto crosshair default pointer move e-resize ne-resize nw-resize n-resize se-resize sw-resize s-resize w-resize text wait help</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">left</td>
+<td align="center">定义了定位元素左外边距边界与其包含块左边界之间的偏移。</td>
+<td align="center">auto *length % *inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">overflow</td>
+<td align="center">设置当元素的内容溢出其区域时发生的事情。</td>
+<td align="center">auto hidden scroll visible inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">position</td>
+<td align="center">指定元素的定位类型</td>
+<td align="center">absolute fixed relative static inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">right</td>
+<td align="center">定义了定位元素右外边距边界与其包含块右边界之间的偏移。</td>
+<td align="center">auto *length % *inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">top</td>
+<td align="center">定义了一个定位元素的上外边距边界与其包含块上边界之间的偏移。</td>
+<td align="center">auto *length % *inherit</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">z-index</td>
+<td align="center">设置元素的堆叠顺序</td>
+<td align="center">*number *auto inherit</td>
+<td align="center">2</td>
+</tr>
+</tbody></table>
+<h3 id="8-1-Static-定位"><a href="#8-1-Static-定位" class="headerlink" title="8.1 Static 定位"></a>8.1 Static 定位</h3><p>HTML 元素的默认值，即没有定位，元素出现在正常的流中。静态定位的元素不会受到 top, bottom, left, right 影响。</p>
+<h3 id="8-2-Fixed-定位"><a href="#8-2-Fixed-定位" class="headerlink" title="8.2 Fixed 定位"></a>8.2 Fixed 定位</h3><p>元素的位置相对于浏览器窗口是固定位置。即使窗口是滚动的它也不会移动：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">p</span><span class="hljs-selector-class">.pos_fixed</span>&#123;<br><span class="hljs-attribute">position</span>:fixed;<br><span class="hljs-attribute">top</span>:<span class="hljs-number">30px</span>;<br><span class="hljs-attribute">right</span>:<span class="hljs-number">5px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Fixed 定位使元素的位置与文档流无关，因此不占据空间。Fixed 定位的元素和其他元素重叠。</p>
+<h3 id="8-3-Relative-定位"><a href="#8-3-Relative-定位" class="headerlink" title="8.3 Relative 定位"></a>8.3 Relative 定位</h3><p>相对定位元素的定位是相对其正常位置。</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">h2</span><span class="hljs-selector-class">.pos_left</span>&#123;<br><span class="hljs-attribute">position</span>:relative;<br><span class="hljs-attribute">left</span>:-<span class="hljs-number">20px</span>;<br>&#125;<br><span class="hljs-selector-tag">h2</span><span class="hljs-selector-class">.pos_right</span>&#123;<br><span class="hljs-attribute">position</span>:relative;<br><span class="hljs-attribute">left</span>:<span class="hljs-number">20px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>可以移动的相对定位元素的内容和相互重叠的元素，它原本所占的空间不会改变。<br>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">h2</span><span class="hljs-selector-class">.pos_top</span>&#123;<br><span class="hljs-attribute">position</span>:relative;<br><span class="hljs-attribute">top</span>:-<span class="hljs-number">50px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>相对定位元素经常被用来作为绝对定位元素的容器块。</p>
+<h3 id="8-4-Absolute-定位"><a href="#8-4-Absolute-定位" class="headerlink" title="8.4 Absolute 定位"></a>8.4 Absolute 定位</h3><p>绝对定位的元素的位置相对于最近的已定位父元素，如果元素没有已定位的父元素，那么它的位置相对于 &lt;html&gt;：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">h2</span>&#123;<br><span class="hljs-attribute">position</span>:absolute;<br><span class="hljs-attribute">left</span>:<span class="hljs-number">100px</span>;<br><span class="hljs-attribute">top</span>:<span class="hljs-number">150px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>Absolutely 定位使元素的位置与文档流无关，因此不占据空间。Absolutely 定位的元素和其他元素重叠。</p>
+<h3 id="8-5-重叠的元素"><a href="#8-5-重叠的元素" class="headerlink" title="8.5 重叠的元素"></a>8.5 重叠的元素</h3><p>元素的定位与文档流无关，所以它们可以覆盖页面上的其它元素。z-index 属性指定了一个元素的堆叠顺序（哪个元素应该放在前面，或后面），具有更高堆叠顺序的元素总是在较低的堆叠顺序元素的前面。一个元素可以有正数或负数的堆叠顺序：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">img</span>&#123;<br><span class="hljs-attribute">position</span>:absolute;<br><span class="hljs-attribute">left</span>:<span class="hljs-number">0px</span>;<br><span class="hljs-attribute">top</span>:<span class="hljs-number">0px</span>;<br><span class="hljs-attribute">z-index</span>:-<span class="hljs-number">1</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>如果两个定位元素重叠，没有指定 z - index，最后定位在 HTML 代码中的元素将被显示在最前面。</p>
+<h2 id="9-浮动（Float）"><a href="#9-浮动（Float）" class="headerlink" title="9.浮动（Float）"></a>9.浮动（Float）</h2><p>CSS float 属性定义元素在哪个方向浮动，浮动元素会生成一个块级框，直到该块级框的外边缘碰到包含框或者其他的浮动框为止。CSS 的 Float（浮动），会使元素向左或向右移动，其周围的元素也会重新排列。Float（浮动），往往是用于图像，但它在布局时一样非常有用。</p>
+<p>元素的水平方向浮动，意味着元素只能左右移动而不能上下移动。一个浮动元素会尽量向左或向右移动，直到它的外边缘碰到包含框或另一个浮动框的边框为止。浮动元素之后的元素将围绕它。浮动元素之前的元素将不会受到影响。</p>
+<p>浮动属性：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">描述</th>
+<th align="center">值</th>
+<th align="center">CSS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">clear</td>
+<td align="center">指定不允许元素周围有浮动元素。</td>
+<td align="center">left right both none inherit</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">float</td>
+<td align="center">指定一个盒子（元素）是否可以浮动。</td>
+<td align="center">left right none inherit</td>
+<td align="center">1</td>
+</tr>
+</tbody></table>
+<p>实例：如果图像是右浮动，文本流将环绕在它左边：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-tag">img</span>&#123;<br><span class="hljs-attribute">float</span><span class="hljs-selector-pseudo">:right</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="9-1-彼此相邻的浮动元素"><a href="#9-1-彼此相邻的浮动元素" class="headerlink" title="9.1 彼此相邻的浮动元素"></a>9.1 彼此相邻的浮动元素</h3><p>如果把几个浮动的元素放到一起，如果有空间的话，它们将彼此相邻。</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.thumbnail</span>&#123;<br><span class="hljs-attribute">float</span><span class="hljs-selector-pseudo">:left</span>;<br><span class="hljs-attribute">width</span>:<span class="hljs-number">110px</span>;<br><span class="hljs-attribute">height</span>:<span class="hljs-number">90px</span>;<br><span class="hljs-attribute">margin</span>:<span class="hljs-number">5px</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="9-2-清除浮动（clear）"><a href="#9-2-清除浮动（clear）" class="headerlink" title="9.2 清除浮动（clear）"></a>9.2 清除浮动（clear）</h3><p>元素浮动之后，周围的元素会重新排列，为了避免这种情况，使用 clear 属性。clear 属性指定元素两侧不能出现浮动元素。</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.text_line</span>&#123;<br><span class="hljs-attribute">clear</span>:both;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="10-水平对齐（Horizontal-Align）"><a href="#10-水平对齐（Horizontal-Align）" class="headerlink" title="10.水平对齐（Horizontal Align）"></a>10.水平对齐（Horizontal Align）</h2><p>关于 CSS 中元素的水平对齐 (Horizontal Align)，可以使用多种属性来进行设置。</p>
+<h3 id="10-1-块元素对齐"><a href="#10-1-块元素对齐" class="headerlink" title="10.1 块元素对齐"></a>10.1 块元素对齐</h3><p>块元素是一个元素，占用了全宽，前后都是换行符。</p>
+<h3 id="10-2-中心对齐（margin）"><a href="#10-2-中心对齐（margin）" class="headerlink" title="10.2 中心对齐（margin）"></a>10.2 中心对齐（margin）</h3><p>块元素可以把左，右页边距设置为”自动”对齐。margin属性可任意拆分为左，右页边距设置自动指定，结果都是出现居中元素：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.center</span>&#123;<br><span class="hljs-attribute">margin-left</span>:auto;<br><span class="hljs-attribute">margin-right</span>:auto;<br><span class="hljs-attribute">width</span>:<span class="hljs-number">70%</span>;<br><span class="hljs-attribute">background-color</span>:<span class="hljs-number">#b0e0e6</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="10-3-左右对齐（position）"><a href="#10-3-左右对齐（position）" class="headerlink" title="10.3 左右对齐（position）"></a>10.3 左右对齐（position）</h3><p>元素对齐的方法之一是使用绝对定位：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.right</span>&#123;<br><span class="hljs-attribute">position</span>:absolute;<br><span class="hljs-attribute">right</span>:<span class="hljs-number">0px</span>;<br><span class="hljs-attribute">width</span>:<span class="hljs-number">300px</span>;<br><span class="hljs-attribute">background-color</span>:<span class="hljs-number">#b0e0e6</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>绝对定位与文档流无关，所以它们可以覆盖页面上的其它元素。</p>
+<h3 id="10-4-左右对齐（float）"><a href="#10-4-左右对齐（float）" class="headerlink" title="10.4 左右对齐（float）"></a>10.4 左右对齐（float）</h3><p>使用 float 属性是对齐元素的方法之一：</p>
+<p>实例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.right</span>&#123;<br><span class="hljs-attribute">float</span><span class="hljs-selector-pseudo">:right</span>;<br><span class="hljs-attribute">width</span>:<span class="hljs-number">300px</span>;<br><span class="hljs-attribute">background-color</span>:<span class="hljs-number">#b0e0e6</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="垂直居中对齐（padding）"><a href="#垂直居中对齐（padding）" class="headerlink" title="垂直居中对齐（padding）"></a>垂直居中对齐（padding）</h3><p>CSS 中一个简单的设置垂直居中对齐的方式就是头部顶部使用 padding：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.center</span> &#123; <span class="hljs-attribute">padding</span>: <span class="hljs-number">70px</span> <span class="hljs-number">0</span>; <span class="hljs-attribute">border</span>: <span class="hljs-number">3px</span> solid green; &#125;<br></code></pre></div></td></tr></table></figure>
+<p>如果要水平和垂直都居中，可以使用 padding 和 text-align: center：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-class">.center</span> &#123; <span class="hljs-attribute">padding</span>: <span class="hljs-number">70px</span> <span class="hljs-number">0</span>; <span class="hljs-attribute">border</span>: <span class="hljs-number">3px</span> solid green; <span class="hljs-attribute">text-align</span>: center; &#125;<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/WEB%E5%89%8D%E7%AB%AF/">WEB前端</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/05/13/WEB%E5%89%8D%E7%AB%AF-CSS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/">http://example.com/2021/05/13/WEB%E5%89%8D%E7%AB%AF-CSS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%89%EF%BC%89/</a> <br> -->
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/13/WEB%E5%89%8D%E7%AB%AF-CSS%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+                        <span class="hidden-mobile">WEB前端-CSS基础知识复习（二）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/img/avatar.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript" rel="nofollow noopener"><span>DragonOne</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
