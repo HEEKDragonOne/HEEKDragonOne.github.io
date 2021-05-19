@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      4.3k 字
+      4.5k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      57
+      59
        分钟
     </span>
   
@@ -370,6 +370,115 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </blockquote>
 <h3 id="2-3-使用SimpleDateFormat格式化日期"><a href="#2-3-使用SimpleDateFormat格式化日期" class="headerlink" title="2.3 使用SimpleDateFormat格式化日期"></a>2.3 使用SimpleDateFormat格式化日期</h3><p>SimpleDateFormat是一个以语言环境敏感的方式来格式化和分析日期的类。SimpleDateFormat允许用户选择任何自定义日期时间格式来运行。<br>实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">import</span> java.text.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br><br>      Date dNow = <span class="hljs-keyword">new</span> Date( );<br>      SimpleDateFormat ft = <br>      <span class="hljs-keyword">new</span> SimpleDateFormat (<span class="hljs-string">&quot;E yyyy.MM.dd &#x27;at&#x27; hh:mm:ss a zzz&quot;</span>);<br><br>      System.out.println(<span class="hljs-string">&quot;Current Date: &quot;</span> + ft.format(dNow));<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Current Date: Sun <span class="hljs-number">2004.07</span><span class="hljs-number">.18</span> at <span class="hljs-number">04</span>:<span class="hljs-number">14</span>:09 PM PDT<br></code></pre></div></td></tr></table></figure>
+<h4 id="2-3-1-简单的DateFormat格式化编码"><a href="#2-3-1-简单的DateFormat格式化编码" class="headerlink" title="2.3.1 简单的DateFormat格式化编码"></a>2.3.1 简单的DateFormat格式化编码</h4><table>
+<thead>
+<tr>
+<th align="center"><strong>字母</strong></th>
+<th align="center"><strong>描述</strong></th>
+<th align="center"><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">G</td>
+<td align="center">纪元标记</td>
+<td align="center">AD</td>
+</tr>
+<tr>
+<td align="center">y</td>
+<td align="center">四位年份</td>
+<td align="center">2001</td>
+</tr>
+<tr>
+<td align="center">M</td>
+<td align="center">月份</td>
+<td align="center">July or 07</td>
+</tr>
+<tr>
+<td align="center">d</td>
+<td align="center">一个月的日期</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">h</td>
+<td align="center">A.M./P.M. (1~12)格式小时</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">H</td>
+<td align="center">一天中的小时 (0~23)</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td align="center">分钟数</td>
+<td align="center">30</td>
+</tr>
+<tr>
+<td align="center">s</td>
+<td align="center">秒数</td>
+<td align="center">55</td>
+</tr>
+<tr>
+<td align="center">S</td>
+<td align="center">微妙数</td>
+<td align="center">234</td>
+</tr>
+<tr>
+<td align="center">E</td>
+<td align="center">星期几</td>
+<td align="center">Tuesday</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td align="center">一年中的日子</td>
+<td align="center">360</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">一个月中第几周的周几</td>
+<td align="center">2 (second Wed. in July)</td>
+</tr>
+<tr>
+<td align="center">w</td>
+<td align="center">一年中第几周</td>
+<td align="center">40</td>
+</tr>
+<tr>
+<td align="center">W</td>
+<td align="center">一个月中第几周</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">a</td>
+<td align="center">A.M./P.M. 标记</td>
+<td align="center">PM</td>
+</tr>
+<tr>
+<td align="center">k</td>
+<td align="center">一天中的小时(1~24)</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td align="center">K</td>
+<td align="center">A.M./P.M. (0~11)格式小时</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">z</td>
+<td align="center">时区</td>
+<td align="center">Eastern Standard Time</td>
+</tr>
+<tr>
+<td align="center">‘</td>
+<td align="center">文字定界符</td>
+<td align="center">Delimiter</td>
+</tr>
+<tr>
+<td align="center">“</td>
+<td align="center">单引号</td>
+<td align="center">`</td>
+</tr>
+</tbody></table>
 <h3 id="2-4-使用printf格式化日期"><a href="#2-4-使用printf格式化日期" class="headerlink" title="2.4 使用printf格式化日期"></a>2.4 使用printf格式化日期</h3><p>printf方法可以很轻松地格式化时间和日期。使用两个字母格式，它以t开头并且以下面表格中的一个字母结尾。<br>实例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>     <span class="hljs-comment">// 初始化 Date 对象</span><br>     Date date = <span class="hljs-keyword">new</span> Date();<br><br>     <span class="hljs-comment">// 使用toString()显示日期和时间</span><br>     String str = String.format(<span class="hljs-string">&quot;Current Date/Time : %tc&quot;</span>, date );<br><br>     System.out.printf(str);<br>  &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Current Date/Time : Sat Dec <span class="hljs-number">15</span> <span class="hljs-number">16</span>:<span class="hljs-number">37</span>:<span class="hljs-number">57</span> MST <span class="hljs-number">2012</span><br></code></pre></div></td></tr></table></figure>
 
