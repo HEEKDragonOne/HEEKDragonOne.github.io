@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 17, 2021 pm
+                  本文最后更新于：May 20, 2021 pm
                 
               </p>
             
@@ -294,10 +294,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p><strong>3.严格按字母表顺序排序，也就是忽略大小写排序</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String[] strArray = <span class="hljs-keyword">new</span> String[] &#123; “z”, “a”, “C” &#125;;<br>   Arrays.sort(strArray, String.CASE_INSENSITIVE_ORDER);<br>   <span class="hljs-comment">//输出： [a, C, z]</span><br></code></pre></div></td></tr></table></figure>
 
-<p><strong>4.反向排序</strong><br>在数字数组中可以实现降序排序。大写字母的ASCII码比小写字母的小。</p>
+<p><strong>4.反向排序</strong><br>在数字数组中可以实现降序排序。大写字母的ASCII码比小写字母的小。需要导包 import java.util.Collections; 或者使用import java.util.*;。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String[] strArray = <span class="hljs-keyword">new</span> String[] &#123; “z”, “a”, “C” &#125;;<br>   Arrays.sort(strArray, Collections.reverseOrder());<br>   <span class="hljs-comment">//输出：[z, a, C]</span><br></code></pre></div></td></tr></table></figure>
 
-<p><strong>5.忽略大小写反向排序</strong><br>可以理解成把所有的字母转换成对应小写字母或大写字母。转换成一种进行比较。</p>
+<p><strong>5.忽略大小写反向排序</strong><br>可以理解成把所有的字母转换成对应小写字母或大写字母。转换成一种进行比较。<br>但是，当数组中有一个大写字母C和一个小写字母c时，大写字母C会在小写字母c前面，其他同理。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String[] strArray = <span class="hljs-keyword">new</span> String[] &#123; “z”, “a”, “C” &#125;;<br>   Arrays.sort(strArray, String.CASE_INSENSITIVE_ORDER);<br>   Collections.reverse(Arrays.asList(strArray));<br>   <span class="hljs-comment">//输出： [z, C, a]</span><br></code></pre></div></td></tr></table></figure>
 
 <p><strong>6.选择数组指定位置进行排序</strong></p>
