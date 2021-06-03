@@ -297,7 +297,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h3 id="21-1-使用-with-rollup"><a href="#21-1-使用-with-rollup" class="headerlink" title="21.1 使用 with rollup"></a>21.1 使用 with rollup</h3><p>WITH ROLLUP 可以实现在分组统计数据基础上再进行相同的统计（SUM,AVG,COUNT…）。</p>
 <figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 字段名，function(字段名)<br>from 表名<br>where 字段名 operator value<br>group by 字段名 &#x2F;&#x2F;是按照这个字段名进行分组，这个一般与输出的字段名一样<br>with rollup;<br></code></pre></div></td></tr></table></figure>
 
-
+<h2 id="22-查看当前数据库名称"><a href="#22-查看当前数据库名称" class="headerlink" title="22.查看当前数据库名称"></a>22.查看当前数据库名称</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select database();<br></code></pre></div></td></tr></table></figure>
 
 
 
