@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 3, 2021 pm
+                  本文最后更新于：June 6, 2021 am
                 
               </p>
             
@@ -455,6 +455,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <h2 id="7-配置SSH公钥"><a href="#7-配置SSH公钥" class="headerlink" title="7.配置SSH公钥"></a>7.配置SSH公钥</h2><h3 id="7-1-生成公钥"><a href="#7-1-生成公钥" class="headerlink" title="7.1 生成公钥"></a>7.1 生成公钥</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh-keygen -t rsa <span class="hljs-comment"># -t rsa 为加密方式</span><br>ssh-keygen -t rsa -C <span class="hljs-string">&quot;你的邮箱&quot;</span><br></code></pre></div></td></tr></table></figure>
 <p>这时，在C盘中的 用户（user）中的 Adminstr（以自己的名称为准）中，有一个 .ssh 的文件夹，其中的 .pub 就是公钥。还没有生成过的没有这个文件。需要先生成公钥才能看见。</p>
+<h3 id="7-2-验证是否成功"><a href="#7-2-验证是否成功" class="headerlink" title="7.2 验证是否成功"></a>7.2 验证是否成功</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">//GitHub<br>ssh -T git@github.com<br>//Gitee<br>ssh -T git@gitee.com<br></code></pre></div></td></tr></table></figure>
+
+
 <h2 id="8-Git操作命令"><a href="#8-Git操作命令" class="headerlink" title="8.Git操作命令"></a>8.Git操作命令</h2><h3 id="1-查看仓库当前的状态"><a href="#1-查看仓库当前的状态" class="headerlink" title="1. 查看仓库当前的状态"></a>1. 查看仓库当前的状态</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git status<br></code></pre></div></td></tr></table></figure>
 <h3 id="2-查看修改内容"><a href="#2-查看修改内容" class="headerlink" title="2. 查看修改内容"></a>2. 查看修改内容</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git diff<br></code></pre></div></td></tr></table></figure>
 <p>加上 文件名，如 git diff 文件 ，可以查看某个文件的修改内容。</p>
