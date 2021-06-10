@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      7.2k 字
+      7.3k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      89
+      90
        分钟
     </span>
   
@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 29, 2021 pm
+                  本文最后更新于：June 10, 2021 pm
                 
               </p>
             
@@ -349,48 +349,48 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <tr>
 <th align="center">数据类型</th>
 <th align="center">取值范围</th>
-<th>转换函数</th>
+<th align="center">转换函数</th>
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">有符号 8 位整数</td>
-<td align="center">-27 ~ -27 - 1</td>
-<td>int8()</td>
+<td align="center">有符号<code>8</code>位整数</td>
+<td align="center">-2<sup>7</sup> ~ -2<sup>7</sup> - 1</td>
+<td align="center"><code>int8()</code></td>
 </tr>
 <tr>
-<td align="center">有符号 16 位整数</td>
-<td align="center">-215 ~ -215 - 1</td>
-<td>int16()</td>
+<td align="center">有符号 <code>16</code> 位整数</td>
+<td align="center">-2<sup>15</sup> ~ -2<sup>15</sup> - 1</td>
+<td align="center"><code>int16()</code></td>
 </tr>
 <tr>
-<td align="center">有符号 32 位整数</td>
-<td align="center">-231 ~ -231 - 1</td>
-<td>int32()</td>
+<td align="center">有符号 <code>32</code> 位整数</td>
+<td align="center">-2<sup>31</sup> ~ -2<sup>31</sup> - 1</td>
+<td align="center"><code>int32()</code></td>
 </tr>
 <tr>
-<td align="center">有符号 64 位整数</td>
-<td align="center">-263 ~ -263 - 1</td>
-<td>int64()</td>
+<td align="center">有符号 <code>64</code> 位整数</td>
+<td align="center">-2<sup>63</sup> ~ -2<sup>63</sup> - 1</td>
+<td align="center"><code>int64()</code></td>
 </tr>
 <tr>
-<td align="center">无符号 8 位整数</td>
-<td align="center">0 ~ 28 - 1</td>
-<td>uint8()</td>
+<td align="center">无符号 <code>8</code> 位整数</td>
+<td align="center">0 ~ 2<sup>8</sup> - 1</td>
+<td align="center"><code>uint8()</code></td>
 </tr>
 <tr>
-<td align="center">无符号 16 位整数</td>
-<td align="center">0 ~ 216 - 1</td>
-<td>uint16()</td>
+<td align="center">无符号 <code>16</code> 位整数</td>
+<td align="center">0 ~ 2<sup>16</sup> - 1</td>
+<td align="center"><code>uint16()</code></td>
 </tr>
 <tr>
-<td align="center">无符号 32 位整数</td>
-<td align="center">0 ~ 232 - 1</td>
-<td>uint32()</td>
+<td align="center">无符号 <code>32</code> 位整数</td>
+<td align="center">0 ~ 2<sup>32</sup> - 1</td>
+<td align="center"><code>uint32()</code></td>
 </tr>
 <tr>
-<td align="center">无符号 64 位整数</td>
-<td align="center">0 ~ 264 - 1</td>
-<td>uint64()</td>
+<td align="center">无符号 <code>64</code> 位整数</td>
+<td align="center">0 ~ 2<sup>64</sup> - 1</td>
+<td align="center"><code>uint64()</code></td>
 </tr>
 </tbody></table>
 <p>应用时要尽可能用字节数少的数据类型表示数据，这样可以节约存储空间和提高运算速度。</p>
@@ -440,7 +440,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; k=cast(<span class="hljs-string">&#x27;hellothere&#x27;</span>, <span class="hljs-string">&#x27;uint8&#x27;</span>)  <span class="hljs-comment">%将字符串转换为uint8类型</span><br>k =<br>   <span class="hljs-number">104</span>   <span class="hljs-number">101</span>   <span class="hljs-number">108</span>   <span class="hljs-number">108</span>   <span class="hljs-number">111</span>   <span class="hljs-number">116</span>   <span class="hljs-number">104</span>   <span class="hljs-number">101</span>   <span class="hljs-number">114</span>   <span class="hljs-number">101</span><br><br>&gt;&gt; double(k)+<span class="hljs-number">150</span>  <span class="hljs-comment">%double类型的加法</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">258</span>   <span class="hljs-number">258</span>   <span class="hljs-number">261</span>   <span class="hljs-number">266</span>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">264</span>   <span class="hljs-number">251</span><br><br>&gt;&gt; k+<span class="hljs-number">150</span>  <span class="hljs-comment">%uint8类型的加法，向上溢出</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">255</span>   <span class="hljs-number">255</span>   <span class="hljs-number">255</span>   <span class="hljs-number">255</span>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">255</span>   <span class="hljs-number">251</span><br><br>&gt;&gt; k<span class="hljs-number">-110</span>  <span class="hljs-comment">%uint8类型的减法，向下溢出</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">6</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">4</span>   <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
 
 <p>混合数据类型的运算仅限于在一个双精度标量和一个整数数据类型数组之间进行。整数数据类型中不存在双精度数据类型中常见的 inf 和 NaN。除 64 位整数数据类型外，其他整数数据类型都具有比双精度类型更高的存储效率。基于同一整数数据类型的数学运算将产生相同数据类型的结果。</p>
-<h3 id="2-2-小数类型"><a href="#2-2-小数类型" class="headerlink" title="2.2 小数类型"></a>2.2 小数类型</h3><p>MATLAB 用双精度或单精度格式表示浮点数，默认格式是双精度，但可以用转换函数转换为单精度。如果某个数据没有被指定数据类型，那么 MATLAB 会用双精度浮点数来存储它。为了得到其他类型的数值类型，可以使用类型转换函数。MATLAB 中的双精度浮点数和单精度浮点数均采用 IEEE 754 中规定的格式来定义。</p>
+<h3 id="2-2-浮点类型"><a href="#2-2-浮点类型" class="headerlink" title="2.2 浮点类型"></a>2.2 浮点类型</h3><p>MATLAB 用双精度或单精度格式表示浮点数，默认格式是双精度，但可以用转换函数转换为单精度。如果某个数据没有被指定数据类型，那么 MATLAB 会用双精度浮点数来存储它。为了得到其他类型的数值类型，可以使用类型转换函数。MATLAB 中的双精度浮点数和单精度浮点数均采用 IEEE 754 中规定的格式来定义。</p>
 <table>
 <thead>
 <tr>
@@ -451,16 +451,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">双精度浮点数</td>
+<td align="center"><code>双精度</code>浮点数</td>
 <td align="center">4 字节</td>
-<td align="center">-1.79769 × 10308 ~+ 1.79769 ×10308</td>
-<td>double()</td>
+<td align="center">-1.79769 × 10<sup>308</sup> ~+ 1.79769 ×10<sup>308</sup></td>
+<td><code>double()</code></td>
 </tr>
 <tr>
-<td align="center">单精度浮点数</td>
+<td align="center"><code>单精度</code>浮点数</td>
 <td align="center">8 字节</td>
-<td align="center">-3.40282 × 1038 ~+ 3.40282 × 1038</td>
-<td>single()</td>
+<td align="center">-3.40282 × 10<sup>38</sup> ~+ 3.40282 × 10<sup>38</sup></td>
+<td><code>single()</code></td>
 </tr>
 </tbody></table>
 <h4 id="2-2-1-双精度浮点数"><a href="#2-2-1-双精度浮点数" class="headerlink" title="2.2.1 双精度浮点数"></a>2.2.1 双精度浮点数</h4><p>MATLAB 按照 IEEE 754 标准构造双精度型数据。作为双精度存储的任何数据，都需要 64 位。</p>
@@ -673,7 +673,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; b=<span class="hljs-number">1</span>;  <span class="hljs-comment">%创建非空变量</span><br>&gt;&gt; b==[]  <span class="hljs-comment">%将非空变量与空变量进行比较会产生空结果</span><br><span class="hljs-built_in">ans</span> =<br>    []<br><br>&gt;&gt; b~=[]  <span class="hljs-comment">%即使不相等的比较也会产生空结果</span><br><span class="hljs-built_in">ans</span> =<br>    []<br></code></pre></div></td></tr></table></figure>
 
 <p>对空数组执行关系运算时，要么返回一个错误信息（如在两个不同维数的空数组之间进行比较时），要么返回一个空数组（如前面的两个例子），这通常都不是我们想要的结果，因此，当有空数组出现时，建议用户使用 isempty() 函数，尽量不要使用关系运算。</p>
-<h3 id="2-5-复数类型"><a href="#2-5-复数类型" class="headerlink" title="2.5 复数类型"></a>2.5 复数类型</h3><p>复数是指既包含实部又包含虚部的数，虚部的单位是 -1 的开平方根，在 MATLAB 中用字母 i 或 j 中的一个表示，i 和 j 的作用是完全一样的。</p>
+<h3 id="2-5-复数类型"><a href="#2-5-复数类型" class="headerlink" title="2.5 复数类型"></a>2.5 复数类型</h3><p>复数是指既包含实部又包含虚部的数，虚部的单位是 -1 的开平方根，在 MATLAB 中用字母 i 或 j 中的一个表示，i 和 j 的作用是完全一样的。即：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-number">2</span>+<span class="hljs-number">3</span><span class="hljs-built_in">i</span><br><span class="hljs-number">2</span>+<span class="hljs-number">3</span><span class="hljs-built_in">j</span><br><span class="hljs-comment">% 两者的结果是一样的</span><br></code></pre></div></td></tr></table></figure>
+
+
 <p>复数的一般形式：C = a + bi（其中 C 为复数，a 和 b 均为实数，i 代表 -1 的开平方根。a、b 分别为 C 的实部和虚部。）</p>
 <p>由于复数有两个部分，所以它能在平面内标出。这个平面的横轴是实轴，纵轴是虚轴，所以复数在这个平面内为一个点，横轴为 a，纵轴为 b。用上面的方式表示一个复数，称为直角坐标表示，坐标的横轴与纵轴分别代表复数的实部与虚部。</p>
 <p>若复数在一个平面内，则有另一种表达方式，即极坐标表示：c = a + bi = z∠θ（其中 z 代表向量的模，θ 代表辐角。）</p>
@@ -696,27 +699,27 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">conj(c)</td>
+<td align="center"><code>conj(c)</code></td>
 <td align="center">计算 c 的共轭复数，如果 c=a+bi，那么 conj(c)=a-bi</td>
 </tr>
 <tr>
-<td align="center">real(c)</td>
+<td align="center"><code>real(c)</code></td>
 <td align="center">返回复数 c 的实部</td>
 </tr>
 <tr>
-<td align="center">inag(c)</td>
+<td align="center"><code>imag(c)</code></td>
 <td align="center">返回复数 c 的虚部</td>
 </tr>
 <tr>
-<td align="center">isreal(c)</td>
+<td align="center"><code>isreal(c)</code></td>
 <td align="center">如果数组 c 中没有一个元素有虚部，函数 isreal(c) 将返回 1；所以如果一个数组 c 是 复数组成，那么 isreal(c) 将返回 0</td>
 </tr>
 <tr>
-<td align="center">abs(c)</td>
+<td align="center"><code>abs(c)</code></td>
 <td align="center">返回复数 c 的模</td>
 </tr>
 <tr>
-<td align="center">angle(c)</td>
+<td align="center"><code>angle(c)</code></td>
 <td align="center">返回复数 c 的幅角</td>
 </tr>
 </tbody></table>
@@ -728,75 +731,75 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </tr>
 </thead>
 <tbody><tr>
-<td align="center">double</td>
+<td align="center"><code>double</code></td>
 <td align="center">创建或转化为双精度数据类型</td>
 </tr>
 <tr>
-<td align="center">single</td>
+<td align="center"><code>single</code></td>
 <td align="center">创建或转化为单精度数据类型</td>
 </tr>
 <tr>
-<td align="center">int8，int16，int32，int64</td>
+<td align="center"><code>int8</code>，<code>int16</code>，<code>int32</code>，<code>int64</code></td>
 <td align="center">创建或转化为有符号整数数据类型</td>
 </tr>
 <tr>
-<td align="center">uint8，uint16，uint32，uint64</td>
+<td align="center"><code>uint8</code>，<code>uint16</code>，<code>uint32</code>，<code>uint64</code></td>
 <td align="center">创建或转化为无符号整数数据类型</td>
 </tr>
 <tr>
-<td align="center">isnumeric</td>
+<td align="center"><code>isnumeric</code></td>
 <td align="center">若是整数或浮点数据类型，返回 true</td>
 </tr>
 <tr>
-<td align="center">isinteger</td>
+<td align="center"><code>isinteger</code></td>
 <td align="center">若是整数数据类型，返回 true</td>
 </tr>
 <tr>
-<td align="center">isfloat</td>
+<td align="center"><code>isfloat</code></td>
 <td align="center">若是单精度或双精度数据类型，返回 true</td>
 </tr>
 <tr>
-<td align="center">isa(x,’type’)</td>
+<td align="center"><code>isa(x,&#39;type&#39;)</code></td>
 <td align="center">type 包括 numeric、integer 和 float，当 x 类型为 type 时，返回 true</td>
 </tr>
 <tr>
-<td align="center">case(x,’type’)</td>
+<td align="center"><code>case(x,&#39;type&#39;)</code></td>
 <td align="center">将 x 类型置为 type</td>
 </tr>
 <tr>
-<td align="center">intmax(‘type’)</td>
+<td align="center"><code>intmax(&#39;type&#39;)</code></td>
 <td align="center">type 数据类型的最大整数值</td>
 </tr>
 <tr>
-<td align="center">intmin(‘type’)</td>
+<td align="center"><code>intmin(&#39;type&#39;)</code></td>
 <td align="center">type 数据类型的最小整数值</td>
 </tr>
 <tr>
-<td align="center">realmax(‘type’)</td>
+<td align="center"><code>realmax(&#39;type&#39;)</code></td>
 <td align="center">type 数据类型的最大浮点实数值</td>
 </tr>
 <tr>
-<td align="center">realmin(‘type’)</td>
+<td align="center"><code>realmin(&#39;type&#39;)</code></td>
 <td align="center">type 数据类型的最小浮点实数值</td>
 </tr>
 <tr>
-<td align="center">eps(‘type’)</td>
+<td align="center"><code>eps(&#39;type&#39;)</code></td>
 <td align="center">type 数据类型的 eps 值（浮点值）</td>
 </tr>
 <tr>
-<td align="center">eps(x)</td>
+<td align="center"><code>eps(x)</code></td>
 <td align="center">x 的 eps 值，即 x 与 MATLAB 能表示的和其相邻的同数据类型的那个数之间的距离</td>
 </tr>
 <tr>
-<td align="center">zeros(…,’type’)</td>
+<td align="center"><code>zeros(...,&#39;type&#39;)</code></td>
 <td align="center">创建数据类型为 type 的全 0 阵列</td>
 </tr>
 <tr>
-<td align="center">ones(…,’type’)</td>
+<td align="center"><code>ones(...,&#39;type&#39;)</code></td>
 <td align="center">创建数据类型为 type 的全 1 阵列</td>
 </tr>
 <tr>
-<td align="center">eye(…,’type’)</td>
+<td align="center"><code>eye(...,&#39;type&#39;)</code></td>
 <td align="center">创建数据类型为 type 的单位阵列</td>
 </tr>
 </tbody></table>
@@ -816,62 +819,62 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </tr>
 <tr>
 <td align="center">逗号</td>
-<td align="center">,</td>
+<td align="center"><code>,</code></td>
 <td align="center">用于要显示计算结果的命令之间的分隔符；用于输入变量之间的分隔符；用于数组行元素之间的分隔符</td>
 </tr>
 <tr>
 <td align="center">点号</td>
-<td align="center">.</td>
+<td align="center"><code>.</code></td>
 <td align="center">用于数值中的小数点</td>
 </tr>
 <tr>
 <td align="center">分号</td>
-<td align="center">;</td>
+<td align="center"><code>;</code></td>
 <td align="center">用于不显示命令行的结尾；用于不显示结果直接的分隔符；用户数组行元素之间的分隔</td>
 </tr>
 <tr>
 <td align="center">冒号</td>
-<td align="center">:</td>
+<td align="center"><code>:</code></td>
 <td align="center">用于生成一维数值数组，表示一维数值的全部元素或多维数组某一维的全部元素</td>
 </tr>
 <tr>
 <td align="center">百分号</td>
-<td align="center">%</td>
+<td align="center"><code>%</code></td>
 <td align="center">用于注释的前面，在它后面的命令不需要执行</td>
 </tr>
 <tr>
 <td align="center">单引号</td>
-<td align="center">‘</td>
+<td align="center"><code>&#39;</code></td>
 <td align="center">用于括住字符串</td>
 </tr>
 <tr>
 <td align="center">圆括号</td>
-<td align="center">()</td>
+<td align="center"><code>()</code></td>
 <td align="center">用于引用数组元素；用于函数输入变量列表；用于确定算术运算的先后次序</td>
 </tr>
 <tr>
 <td align="center">方括号</td>
-<td align="center">[]</td>
+<td align="center"><code>[]</code></td>
 <td align="center">用于构成向量和矩阵；用于函数输出列表</td>
 </tr>
 <tr>
 <td align="center">花括号</td>
-<td align="center">{}</td>
+<td align="center"><code>&#123;&#125;</code></td>
 <td align="center">用于构成元胞数组</td>
 </tr>
 <tr>
 <td align="center">下划线</td>
-<td align="center">_</td>
+<td align="center"><code>_</code></td>
 <td align="center">用于一个变量、函数或文件名的连字符</td>
 </tr>
 <tr>
 <td align="center">续行号</td>
-<td align="center">…</td>
+<td align="center"><code>...</code></td>
 <td align="center">用于把后面的行与该行连接以构成一个较长的命令</td>
 </tr>
 <tr>
 <td align="center">“@”号</td>
-<td align="center">@</td>
+<td align="center"><code>@</code></td>
 <td align="center">用于放在函数名前形成函数句柄；用于放在目录名前形成用户对象类目录</td>
 </tr>
 </tbody></table>
