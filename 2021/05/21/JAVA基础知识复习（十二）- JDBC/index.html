@@ -181,7 +181,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.6k 字
     </span>
   
 
@@ -191,7 +191,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      34
+      37
        分钟
     </span>
   
@@ -238,7 +238,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 21, 2021 pm
+                  本文最后更新于：June 12, 2021 pm
                 
               </p>
             
@@ -364,6 +364,20 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <h4 id="1-6-2-使用-select"><a href="#1-6-2-使用-select" class="headerlink" title="1.6.2 使用 select"></a>1.6.2 使用 select</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.*;<br><span class="hljs-keyword">import</span> java.sql.*;<br><br>        Connection conn = <span class="hljs-keyword">null</span>;<br>        Statement stmt = <span class="hljs-keyword">null</span>;<br>        ResultSet rs = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver()&quot;</span>);<br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            conn = DriverManager.getConnection(url,user,password);<br>            <span class="hljs-comment">//第三步</span><br>            stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot; &quot;</span>;<br>            rs = stmt.executeQuery(sql);<br>            <span class="hljs-comment">//第五步</span><br>            <span class="hljs-keyword">while</span>(rs.next())&#123;<br>                String em = rs.getString(<span class="hljs-number">1</span>);<span class="hljs-comment">//这里下标表示列并且从1开始，并不是从0开始</span><br>                String name = rs.getString(<span class="hljs-number">2</span>);<br>                String sal = rs.getString(<span class="hljs-number">3</span>);<br>                System.out.println(em+<span class="hljs-string">&quot;,&quot;</span>+name+<span class="hljs-string">&quot;,&quot;</span>+sal);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">if</span>(rs != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    rs.close();<br>                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(stmt != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    stmt.close();<br>                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(conn != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    conn.close();<br>                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>        &#125;<br></code></pre></div></td></tr></table></figure>
 
+
+<h2 id="报错解决（2021-06-12）："><a href="#报错解决（2021-06-12）：" class="headerlink" title="报错解决（2021/06/12）："></a>报错解决（2021/06/12）：</h2><blockquote>
+<ol>
+<li>Loading class <code>com.mysql.jdbc.Driver&#39;. This is deprecated. The new driver class is </code>com.mysql.cj.jdbc.Driver’. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">根据官网最新更改，需要将原来的<br>com.mysql.jdbc.Driver <br>改为如下<br>com.mysql.cj.jdbc.Driver<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>Exception in thread “main” java.sql.SQLException: The server time zone value ‘�й���׼ʱ��’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the ‘serverTimezone’ configuration property) to use a more specific time zone value if you want to utilize time zone support.</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">需要在原来的<br>jdbc:mysql:<span class="hljs-comment">//localhost:3306/teamc</span><br>添加 ?serverTimezone=GMT%2B8，如下<br>jdbc:mysql:<span class="hljs-comment">//localhost:3306/teamc?serverTimezone=GMT%2B8</span><br></code></pre></div></td></tr></table></figure>
 
 <h2 id="2-从属性资源文件（配置文件）中读取连接数据库数据"><a href="#2-从属性资源文件（配置文件）中读取连接数据库数据" class="headerlink" title="2.从属性资源文件（配置文件）中读取连接数据库数据"></a>2.从属性资源文件（配置文件）中读取连接数据库数据</h2><blockquote>
 <ol>
