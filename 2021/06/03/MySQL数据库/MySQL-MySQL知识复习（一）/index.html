@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水的记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>MySQL-MySQL知识复习（一） - 墨水的记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>ToTheFor</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于作者
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MySQL-MySQL知识复习（一）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-03 19:38" pubdate>
+        June 3, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script>
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MySQL-MySQL知识复习（一）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 12, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>MySQL是一个关系型数据库管理系统。简单复习数据库MySQL知识。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="0-数据库用户设置"><a href="#0-数据库用户设置" class="headerlink" title="0.数据库用户设置"></a>0.数据库用户设置</h2><h3 id="0-1-创建用户"><a href="#0-1-创建用户" class="headerlink" title="0.1 创建用户"></a>0.1 创建用户</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create user 用户名@主机名 identified by &#39;密码&#39;;<br># 例如<br>create user loong@localhost identified by &#39;123&#39;;<br># 主机名是允许登录的主机名，可以写通配符表示 % 表示允许所有<br>create user loong@&#39;%&#39; identified by &#39;123&#39;;<br></code></pre></div></td></tr></table></figure>
+<h3 id="0-2-删除用户"><a href="#0-2-删除用户" class="headerlink" title="0.2 删除用户"></a>0.2 删除用户</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">drop user 用户名@主机名;<br>drop user loong@localhost;<br>drop user loong@&#39;%&#39;;<br></code></pre></div></td></tr></table></figure>
+<h3 id="0-3-修改用户密码"><a href="#0-3-修改用户密码" class="headerlink" title="0.3 修改用户密码"></a>0.3 修改用户密码</h3><blockquote>
+<ol>
+<li>方法一</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">update user set password &#x3D; password(&#39;新密码&#39;) where user &#x3D; &#39;用户名&#39;;<br># password 为给密码加密的函数<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>方法二</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">set password for 用户名@主机名 &#x3D; password(&#39;新密码&#39;);<br></code></pre></div></td></tr></table></figure>
+<h3 id="0-4-root用户密码忘记"><a href="#0-4-root用户密码忘记" class="headerlink" title="0.4 root用户密码忘记"></a>0.4 root用户密码忘记</h3><blockquote>
+<ol>
+<li>先停止MySQL服务</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql"># CMD命令窗口（以管理员身份运行）<br>net stop mysql <br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>使用无验证方式启动MySQL服务</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">mysqld --skip-grant-tables<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="3">
+<li>打开新的CMD窗口，直接输入命令：<code>mysql</code>，再回车就可以登录成功。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="4">
+<li>use mysql;</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">use mysql;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="5">
+<li>update user set password = password(‘新密码’) where user =’root’;</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">update user set password &#x3D; password(&#39;新密码&#39;) where user &#x3D;&#39;root&#39;;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="6">
+<li>关闭两个窗口</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="7">
+<li>打开任务管理器，手动结束<code>mysqld.exe</code>的进程。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="8">
+<li>启动MySQL服务。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="9">
+<li>使用新密码登录。 </li>
+</ol>
+</blockquote>
+<h3 id="0-5-查询用户权限"><a href="#0-5-查询用户权限" class="headerlink" title="0.5 查询用户权限"></a>0.5 查询用户权限</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show grants for 用户名@主机名;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="0-6-授予权限"><a href="#0-6-授予权限" class="headerlink" title="0.6 授予权限"></a>0.6 授予权限</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">grant 权限列表 on 数据库名.表名 to 用户名@主机名;<br>grant all on *.* to 用户名@主机名;# 所有权限<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="0-7-撤销权限"><a href="#0-7-撤销权限" class="headerlink" title="0.7 撤销权限"></a>0.7 撤销权限</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">revoke 权限列表 on 数据库名.表名 from 用户名@主机名;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="1-数据库的使用"><a href="#1-数据库的使用" class="headerlink" title="1.数据库的使用"></a>1.数据库的使用</h2><h3 id="1-1-MySQL服务启动和关闭"><a href="#1-1-MySQL服务启动和关闭" class="headerlink" title="1.1 MySQL服务启动和关闭"></a>1.1 MySQL服务启动和关闭</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">&#x2F;&#x2F;开启<br>net start mysql80 &#x2F;&#x2F;mysql80为服务器的默认名称<br><br>&#x2F;&#x2F;关闭<br>net stop mysql80<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-2-登录MySQL"><a href="#1-2-登录MySQL" class="headerlink" title="1.2 登录MySQL"></a>1.2 登录MySQL</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">mysql -h 服务器地址 -u 用户名 -p密码 &#x2F;&#x2F;-p与密码间没用空格，当是在本地时 -h 可以省略或者写localhost或127.0.0.1<br><br>mysql -u root -prootmm &#x2F;&#x2F;root 为用户名，rootmm 为命名，这种写法容易造成密码泄露<br><br>mysql -u root -p &#x2F;&#x2F;回车后再输入密码，这时输入的密码是加密后的<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-3-查看数据库字符集"><a href="#1-3-查看数据库字符集" class="headerlink" title="1.3 查看数据库字符集"></a>1.3 查看数据库字符集</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show character set;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>MySQL字符集系统变量</li>
+</ol>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th align="center">系统变量名</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">character_set_server</td>
+<td align="center">服务器安装时指定的默认编码格式。服务器启动时通过该变量设置字符集。使用utf8mb4作为MySQL的默认字符集。</td>
+</tr>
+<tr>
+<td align="center">character_set_client</td>
+<td align="center">用来设置客户端使用的字符集。用来决定MySQL如何解释客户端发到服务端的SQL命令。</td>
+</tr>
+<tr>
+<td align="center">character_set_connection</td>
+<td align="center">用来设置连接数据库时的字符集。用来决定MySQL如何处理客户端发来的SQL命令。</td>
+</tr>
+<tr>
+<td align="center">character_set_results</td>
+<td align="center">数据库给客户端返回时使用的编码格式，当SQL返回结果时，这个变量的取值决定了发给客户端的字符编码。</td>
+</tr>
+<tr>
+<td align="center">character_set_database</td>
+<td align="center">用来设置默认创建数据库的编码格式，如果在创建数据库时没用设置编码格式，就按照这个默认字符集设置当前选中的数据库。</td>
+</tr>
+<tr>
+<td align="center">character_set_system</td>
+<td align="center">数据库系统使用的编码格式，这个值一直是utf8，不需要设置。它是为存储系统元数据的编码格式。数据库、表和字段都用这个字符集。</td>
+</tr>
+</tbody></table>
+<h3 id="1-4-查看当前系统参数"><a href="#1-4-查看当前系统参数" class="headerlink" title="1.4 查看当前系统参数"></a>1.4 查看当前系统参数</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">shwo variables like &#39;char%&#39;;<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-5-修改系统参数"><a href="#1-5-修改系统参数" class="headerlink" title="1.5 修改系统参数"></a>1.5 修改系统参数</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">character_set_database&#x3D;utf8; &#x2F;&#x2F;其他类似，直接赋结果即可。<br></code></pre></div></td></tr></table></figure>
+<p><strong>需要注意的是，这种修改方式只在当前客户端有效，关闭后就会恢复成默认值。若要永久性生效，则需要在配置文件 my.ini 中修改。</strong></p>
+<h2 id="2-退出MySQL"><a href="#2-退出MySQL" class="headerlink" title="2.退出MySQL"></a>2.退出MySQL</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">&#x2F;&#x2F;两种方法都行<br>exit <br>quit <br></code></pre></div></td></tr></table></figure>
+<h2 id="3-数据库"><a href="#3-数据库" class="headerlink" title="3.数据库"></a>3.数据库</h2><h3 id="3-1-创建数据库（create）"><a href="#3-1-创建数据库（create）" class="headerlink" title="3.1 创建数据库（create）"></a>3.1 创建数据库（create）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create database 数据库名;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-2-删除数据库（drop）"><a href="#3-2-删除数据库（drop）" class="headerlink" title="3.2 删除数据库（drop）"></a>3.2 删除数据库（drop）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">drop database 数据库名;<br>drop database if exists 数据库名; &#x2F;&#x2F;如果存在此数据库才执行<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-3-选择数据库（use）"><a href="#3-3-选择数据库（use）" class="headerlink" title="3.3 选择数据库（use）"></a>3.3 选择数据库（use）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">use 数据库名;<br></code></pre></div></td></tr></table></figure>
+<h3 id="3-4-查看数据库（show）"><a href="#3-4-查看数据库（show）" class="headerlink" title="3.4 查看数据库（show）"></a>3.4 查看数据库（show）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show databases;<br></code></pre></div></td></tr></table></figure>
+<h3 id="3-5-修改数据库（alter）"><a href="#3-5-修改数据库（alter）" class="headerlink" title="3.5 修改数据库（alter）"></a>3.5 修改数据库（alter）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter database 数据库名 <br>default character set gb2312<br>default collate gb2312_chinese_ci;<br></code></pre></div></td></tr></table></figure>
+<h3 id="3-6-显示数据库中所有表的信息"><a href="#3-6-显示数据库中所有表的信息" class="headerlink" title="3.6 显示数据库中所有表的信息"></a>3.6 显示数据库中所有表的信息</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show table status from 数据库名;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>表名以 loong 开头的表的信息</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show table status from 数据库名 like &#39;loong&#39;;<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>查询结果按列打印</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show table status from 数据库名 like &#39;loong&#39;\G;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h2 id="4-表"><a href="#4-表" class="headerlink" title="4.表"></a>4.表</h2><h3 id="4-1-创建表（create）"><a href="#4-1-创建表（create）" class="headerlink" title="4.1 创建表（create）"></a>4.1 创建表（create）</h3><h4 id="4-1-1-常规创建"><a href="#4-1-1-常规创建" class="headerlink" title="4.1.1 常规创建"></a>4.1.1 常规创建</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create table 表名(<br>	字段名 字段类型<br>);<br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create table loong(<br>   tutorial_id INT NOT NULL AUTO_INCREMENT comment &#39;编号&#39;,<br>   tutorial_title VARCHAR(100) NOT NULL,<br>   tutorial_author VARCHAR(40) NOT NULL,<br>   submission_date DATE,<br>   PRIMARY KEY ( tutorial_id )<br>);<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-1-2-复制其他表"><a href="#4-1-2-复制其他表" class="headerlink" title="4.1.2 复制其他表"></a>4.1.2 复制其他表</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create table 表名1 [[like 表名2] | select 语句 ];<br></code></pre></div></td></tr></table></figure>
+<h5 id="1-复制表结构"><a href="#1-复制表结构" class="headerlink" title="1. 复制表结构"></a>1. 复制表结构</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create table 表名1 like 表名2; &#x2F;&#x2F;表1复制表2的结构<br></code></pre></div></td></tr></table></figure>
+<h5 id="2-复制表结构及数据"><a href="#2-复制表结构及数据" class="headerlink" title="2. 复制表结构及数据"></a>2. 复制表结构及数据</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create table 表名1 select * from 表名2;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="4-2-删除表（drop）"><a href="#4-2-删除表（drop）" class="headerlink" title="4.2 删除表（drop）"></a>4.2 删除表（drop）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">drop table [if exists] 表名;<br></code></pre></div></td></tr></table></figure>
+<h3 id="4-3-查看表（show"><a href="#4-3-查看表（show" class="headerlink" title="4.3 查看表（show)"></a>4.3 查看表（show)</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show tables;<br></code></pre></div></td></tr></table></figure>
+<h3 id="4-4-修改表（alter）"><a href="#4-4-修改表（alter）" class="headerlink" title="4.4 修改表（alter）"></a>4.4 修改表（alter）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter table 表名 修改选项<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-4-1-添加字段（add）"><a href="#4-4-1-添加字段（add）" class="headerlink" title="4.4.1 添加字段（add）"></a>4.4.1 添加字段（add）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter table 表名 add 新字段名 数据类型 [约束条件] [first|after 已存在的字段名];<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>first：将新添加的字段设置为表的第一个字段；</li>
+<li>after：将新添加的字段添加到指定的已存在字段名的后面。</li>
+</ul>
+<h4 id="4-4-2-修改字段数据类型（modify）"><a href="#4-4-2-修改字段数据类型（modify）" class="headerlink" title="4.4.2 修改字段数据类型（modify）"></a>4.4.2 修改字段数据类型（modify）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter table 表名 modify 字段名 新数据类型;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4-4-3-删除字段（drop）"><a href="#4-4-3-删除字段（drop）" class="headerlink" title="4.4.3 删除字段（drop）"></a>4.4.3 删除字段（drop）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter table 表名 drop 字段名;<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-4-4-修改字段名（change）"><a href="#4-4-4-修改字段名（change）" class="headerlink" title="4.4.4 修改字段名（change）"></a>4.4.4 修改字段名（change）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter table 表名 change 旧字段名 新字段名 新数据类型<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-4-5-修改表名（rename）"><a href="#4-4-5-修改表名（rename）" class="headerlink" title="4.4.5 修改表名（rename）"></a>4.4.5 修改表名（rename）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">alter table 旧表名 rename [to] 新表名;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>to：为可选参数，用否不影响。</li>
+</ul>
+<h3 id="4-5-查看表结构（desc）"><a href="#4-5-查看表结构（desc）" class="headerlink" title="4.5 查看表结构（desc）"></a>4.5 查看表结构（desc）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">describe tablename; &#x2F;&#x2F;tablename 为表名，describe 也可以简写为 desc<br>desc tablename;<br><br>&#x2F;&#x2F;显示数据表的属性，属性类型，主键信息 ，是否为 NULL，默认值等其他信息。两则的效果差不多<br>show columns from 表名;<br></code></pre></div></td></tr></table></figure>
+<h3 id="4-6-显示建表语句"><a href="#4-6-显示建表语句" class="headerlink" title="4.6 显示建表语句"></a>4.6 显示建表语句</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show create table 表名;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="4-7-表的数据操作"><a href="#4-7-表的数据操作" class="headerlink" title="4.7 表的数据操作"></a>4.7 表的数据操作</h3><h4 id="4-7-1-插入数据（insert-into）"><a href="#4-7-1-插入数据（insert-into）" class="headerlink" title="4.7.1 插入数据（insert into）"></a>4.7.1 插入数据（insert into）</h4><h5 id="1-指定字段插入数据"><a href="#1-指定字段插入数据" class="headerlink" title="1. 指定字段插入数据"></a>1. 指定字段插入数据</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">insert into 表名(字段1，字段2，····，字段n)<br>value<br>(值1，值2，····，值n);<br></code></pre></div></td></tr></table></figure>
+<h5 id="2-不指定字段插入数据"><a href="#2-不指定字段插入数据" class="headerlink" title="2. 不指定字段插入数据"></a>2. 不指定字段插入数据</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">insert into 表名 value<br>(值1，值2，···，值n);<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>两者区别：</strong></p>
+<ul>
+<li>指定字段：可以不按照表中字段的顺序。</li>
+<li>不指定字段：值的顺序必须与表中字段的顺序相同。</li>
+</ul>
+<h5 id="3-同时插入多条数据"><a href="#3-同时插入多条数据" class="headerlink" title="3. 同时插入多条数据"></a>3. 同时插入多条数据</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">insert into 表名(字段1，字段2，····，字段n)<br>value<br>(值1，值2，···),<br>(值1，值2，···),<br>.......<br>(值1，值2，···);<br></code></pre></div></td></tr></table></figure>
+<h5 id="4-将其他表的数据插入表中"><a href="#4-将其他表的数据插入表中" class="headerlink" title="4. 将其他表的数据插入表中"></a>4. 将其他表的数据插入表中</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">insert into 表名1(字段1，字段2，····)<br>select 对应字段1，对应字段2，····<br>from 表名2;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="4-7-2-修改数据"><a href="#4-7-2-修改数据" class="headerlink" title="4.7.2 修改数据"></a>4.7.2 修改数据</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">update 表名 set 字段1&#x3D;值1[,字段2&#x3D;值2,字段3&#x3D;值3····] [where 子句] [limit 子句];<br></code></pre></div></td></tr></table></figure>
+<h4 id="4-8-删除数据"><a href="#4-8-删除数据" class="headerlink" title="4.8 删除数据"></a>4.8 删除数据</h4><h5 id="4-8-1"><a href="#4-8-1" class="headerlink" title="4.8.1"></a>4.8.1</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">delete from 表名 [where 子句] [order by 子句] [limit 子句];<br></code></pre></div></td></tr></table></figure>
+<p><strong>如果不使用 where 条件，将删除所有数据。</strong></p>
+<h5 id="4-8-2"><a href="#4-8-2" class="headerlink" title="4.8.2"></a>4.8.2</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">truncate table 表名;<br></code></pre></div></td></tr></table></figure>
+<p><strong>删除表中全部数据。</strong></p>
+<h3 id="4-8-显示表的详细索引信息"><a href="#4-8-显示表的详细索引信息" class="headerlink" title="4.8 显示表的详细索引信息"></a>4.8 显示表的详细索引信息</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show index from 表名;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="5-查看版本支持的数据库存储引擎"><a href="#5-查看版本支持的数据库存储引擎" class="headerlink" title="5.查看版本支持的数据库存储引擎"></a>5.查看版本支持的数据库存储引擎</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show engines \G;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="6-数据类型"><a href="#6-数据类型" class="headerlink" title="6.数据类型"></a>6.数据类型</h2><h3 id="6-1-数值类型"><a href="#6-1-数值类型" class="headerlink" title="6.1 数值类型"></a>6.1 数值类型</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">tinyint<br>smallint<br>mediumint<br>int或integer<br>bigint<br>float<br>double<br>decimal<br></code></pre></div></td></tr></table></figure>
+<h3 id="6-2-日期和时间类型"><a href="#6-2-日期和时间类型" class="headerlink" title="6.2 日期和时间类型"></a>6.2 日期和时间类型</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysqll">date &#x2F;&#x2F;YYYY-MM-DD<br>time &#x2F;&#x2F;HH:MM:SS<br>year &#x2F;&#x2F;YYYY<br>datetime &#x2F;&#x2F;YYYY-MM-DD HH:MM:SS<br>timestamp &#x2F;&#x2F;YYYYMMDD HHMMSS<br></code></pre></div></td></tr></table></figure>
+<h3 id="6-3-字符串类型"><a href="#6-3-字符串类型" class="headerlink" title="6.3 字符串类型"></a>6.3 字符串类型</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">char &#x2F;&#x2F;定长字符串<br>varchar &#x2F;&#x2F;变长字符串<br>tinyblob &#x2F;&#x2F;不超过255个字符的二进制字符串<br>tinytext &#x2F;&#x2F;短文本字符串<br>blob &#x2F;&#x2F;长文本数据<br>text &#x2F;&#x2F;二进制形式的中等长度文本数据<br>mediumblob &#x2F;&#x2F;中等长度文本数据<br>mediumtext &#x2F;&#x2F;<br>longblob<br>longtext<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="7-查询数据（select）"><a href="#7-查询数据（select）" class="headerlink" title="7.查询数据（select）"></a>7.查询数据（select）</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 字段1，字段2····<br>from 表名;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="8-where子句"><a href="#8-where子句" class="headerlink" title="8.where子句"></a>8.where子句</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 数据1，数据2，···· from 表名1，表名2·····<br>where 条件1 [and 或者 or] 条件2····;<br></code></pre></div></td></tr></table></figure>
+<p>表之间使用逗号（，）分割，并使用 WHERE 语句来设定查询条件。可以使用AND或者OR指定一个或多个条件。</p>
+<p>以 A=10，B=20 为例：</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">描述</th>
+<th align="center">实例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">=</td>
+<td align="center">等号，检测两个值是否相等，如果相等返回true</td>
+<td align="center">(A = B) 返回false。</td>
+</tr>
+<tr>
+<td align="center">&lt;&gt; 或 !=</td>
+<td align="center">不等于，检测两个值是否相等，如果不相等返回true</td>
+<td align="center">(A != B) 返回 true。</td>
+</tr>
+<tr>
+<td align="center">&gt;</td>
+<td align="center">大于号，检测左边的值是否大于右边的值, 如果左边的值大于右边的值返回true</td>
+<td align="center">(A &gt; B) 返回false。</td>
+</tr>
+<tr>
+<td align="center">&lt;</td>
+<td align="center">小于号，检测左边的值是否小于右边的值, 如果左边的值小于右边的值返回true</td>
+<td align="center">(A &lt; B) 返回 true。</td>
+</tr>
+<tr>
+<td align="center">&gt;=</td>
+<td align="center">大于等于号，检测左边的值是否大于或等于右边的值, 如果左边的值大于或等于右边的值返回true</td>
+<td align="center">(A &gt;= B) 返回false。</td>
+</tr>
+<tr>
+<td align="center">&lt;=</td>
+<td align="center">小于等于号，检测左边的值是否小于于或等于右边的值, 如果左边的值小于或等于右边的值返回true</td>
+<td align="center">(A &lt;= B) 返回 true。</td>
+</tr>
+</tbody></table>
+<h2 id="9-update更新"><a href="#9-update更新" class="headerlink" title="9.update更新"></a>9.update更新</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">update 表名 set 字段1&#x3D;新值，字段2&#x3D;新值;<br></code></pre></div></td></tr></table></figure>
+<p>可以同时更新一个或多个字段。也可以在后面加上 WHERE 子句来指定任何条件，更新数据表中指定行的数据时 WHERE 子句是非常有用的。</p>
+<h2 id="10-delete语句"><a href="#10-delete语句" class="headerlink" title="10.delete语句"></a>10.delete语句</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">delete from 表名;<br></code></pre></div></td></tr></table></figure>
+<p>如果没有指定 WHERE 子句，MySQL表中的所有记录将被删除。可以在 WHERE 子句中指定任何条件，想删除数据表中指定的记录时 WHERE 子句是非常有用的。</p>
+<h2 id="11-like语句"><a href="#11-like语句" class="headerlink" title="11.like语句"></a>11.like语句</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 字段1，字段2，···字段n<br>from 表名1，表名2，···表名<br>where 字段1 like 条件 [and 或者 or] 字段2&#x3D;&#39;其他值&#39;;<br></code></pre></div></td></tr></table></figure>
+<p>可以在WHERE子句中指定任何条件，可以在WHERE子句中使用LIKE子句。使用LIKE子句代替等号(=)。LIKE 通常与 % 一同使用，类似于一个元字符的搜索。</p>
+<h2 id="12-排序（order-by）"><a href="#12-排序（order-by）" class="headerlink" title="12.排序（order by）"></a>12.排序（order by）</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 字段1，字段2，···字段n from<br>表名1，表名2，···<br>order by 字段1，[字段2，····] [asc 或者 desc]<br></code></pre></div></td></tr></table></figure>
+<p>可以使用任何字段来作为排序的条件，从而返回排序后的查询结果。使用 ASC 或 DESC 关键字来设置查询结果是按升序或降序排列。 默认情况下，它是按升排列。</p>
+<h2 id="13-分组"><a href="#13-分组" class="headerlink" title="13.分组"></a>13.分组</h2><p>根据一个或多个列对结果集进行分组。在分组的列上可以使用 COUNT, SUM, AVG,等函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 字段名，function(字段名)<br>from 表名<br>where 字段名 operator value<br>group by 字段名;&#x2F;&#x2F;是按照这个字段名进行分组<br></code></pre></div></td></tr></table></figure>
+<h3 id="13-1-使用-with-rollup"><a href="#13-1-使用-with-rollup" class="headerlink" title="13.1 使用 with rollup"></a>13.1 使用 with rollup</h3><p>WITH ROLLUP 可以实现在分组统计数据基础上再进行相同的统计（SUM,AVG,COUNT…）。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select 字段名，function(字段名)<br>from 表名<br>where 字段名 operator value<br>group by 字段名 &#x2F;&#x2F;是按照这个字段名进行分组，这个一般与输出的字段名一样<br>with rollup;<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="14-查看当前数据库名称"><a href="#14-查看当前数据库名称" class="headerlink" title="14.查看当前数据库名称"></a>14.查看当前数据库名称</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select database();<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">http://example.com/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/</a> <br> -->
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/05/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL-MySQL知识复习（二）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Navicat%20Premium%20v15.0.22%20%E4%B8%AD%E6%96%87%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/">
+                        <span class="hidden-mobile">MySQL-数据库管理工具Navicat Premium v15.0.22 中文安装及破解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/img/avatar.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript" rel="nofollow noopener"><span>DragonOne</span></a> 
+  </div>
+  
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<script type="text/javascript" src="\js\snow.js"></script>
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</html>
