@@ -1,972 +1,113 @@
-
-
 <!DOCTYPE html>
-<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+<html lang="en">
 
-
-
-<head>
-  <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
-  <link rel="icon" href="/img/avatar.png">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>
+    墨水记忆-DragonOne</title>
   
-  <meta name="theme-color" content="#2f4154">
+<!--    <link rel="shortcut icon" href="./OurSources/favicon.png"> -->
+	<link rel="icon" href="./OurSources/favicon.png">
   
-    <meta name="description" content="墨水的记忆">
+  <link rel="stylesheet" href="./OurSources/css/style.css">
+  <link rel="stylesheet" href="./OurSources/css/technology.css">
   
-  <meta name="author" content="DragonOne">
-  <meta name="keywords" content="">
+    <link rel="stylesheet" href="./OurSources/fancybox/jquery.fancybox.min.css">
   
-  <title>墨水的记忆</title>
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
-
+  <script src="./OurSources/js/pace.min.js"></script>
+</head>
 
 
-<!-- 主题依赖的图标库，不要自行修改 -->
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
-
-
-
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
-
-
-<link  rel="stylesheet" href="/css/main.css" />
-
-<!-- 自定义样式保持在最底部 -->
-
-
-  <script id="fluid-configs">
-    var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
-  </script>
-  <script  src="/js/utils.js" ></script>
-  <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-
-
+</html>
 <body>
-  <header style="height: 100vh;">
-    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
-    <a class="navbar-brand"
-       href="/">&nbsp;<strong>ToTheFor</strong>&nbsp;</a>
+	
+  <div id="container">
+    <div id="wrap">
+      <canvas id="canvas"></canvas>
 
-    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
-            data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <div class="animated-icon"><span></span><span></span><span></span></div>
-    </button>
-
-    <!-- Collapsible content -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav ml-auto text-center">
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/">
-                <i class="iconfont icon-home-fill"></i>
-                首页
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/categories/">
-                <i class="iconfont icon-category-fill"></i>
-                分类
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/about/">
-                <i class="iconfont icon-user-fill"></i>
-                关于作者
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/links/">
-                <i class="iconfont icon-link-fill"></i>
-                友情链接
-              </a>
-            </li>
-          
-        
-        
-          <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
-                class="iconfont icon-search"></i>&nbsp;</a>
-          </li>
-        
-        
-          <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
-                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
-          </li>
-        
-      </ul>
+<div class="technology-body">
+    <div class="technology-frame">
+      <section>
+        <div></div>
+        <div></div>
+        <div></div>
+      </section>
+      <section>
+        <div></div>
+        <div></div>
+        <div></div>
+      </section>
+      <section>
+        <div></div>
+        <div></div>
+        <div></div>
+      </section>
+      <section>
+        <div></div>
+        <div></div>
+        <div></div>
+      </section>
     </div>
-  </div>
-</nav>
-
-    <div class="banner" id="banner" parallax=true
-         style="background: url('/img/default.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="The palest ink is better than the best memory.">
-              
-            </span>
-
-            
-          </div>
-
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
-          
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!--动态线条背景-->
-<!-- <script type="text/javascript"
-color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
-</script> -->
-
-    
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/04/12/%E5%8D%9A%E5%AE%A2%E5%A3%B0%E6%98%8E/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="博客声明">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-          <i class="index-pin iconfont icon-top" title="Pin on top"></i>
-        
-        <a href="/2021/04/12/%E5%8D%9A%E5%AE%A2%E5%A3%B0%E6%98%8E/">博客声明</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/12/%E5%8D%9A%E5%AE%A2%E5%A3%B0%E6%98%8E/">
-          
-          
-            
-          
-          本博客网站仅为写者学习记录整理所用，部分博客内容来源于网络。
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-12 08:57" pubdate>
-              2021-04-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%8D%9A%E5%AE%A2%E5%A3%B0%E6%98%8E/">博客声明</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/15/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="MyBatis学习-（三）参数">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/15/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0/">MyBatis学习-（三）参数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/15/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%B8%89%EF%BC%89%E4%BC%A0%E5%85%A5%E5%8F%82%E6%95%B0/">
-          
-          
-            
-          
-          MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。
-目录MyBatis 中文文档：https://m
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-15 08:37" pubdate>
-              2021-06-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MyBatis%E5%AD%A6%E4%B9%A0/">MyBatis学习</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/14/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="MyBatis学习-（二）动态代理实现">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/14/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0/">MyBatis学习-（二）动态代理实现</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/14/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E5%AE%9E%E7%8E%B0/">
-          
-          
-            
-          
-          MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。
-目录MyBatis 中文文档：https://m
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-14 14:26" pubdate>
-              2021-06-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MyBatis%E5%AD%A6%E4%B9%A0/">MyBatis学习</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/13/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%EF%BC%89Xml%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="JavaWEB-（三）Xml简单入门">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/13/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%EF%BC%89Xml%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8/">JavaWEB-（三）Xml简单入门</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/13/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%EF%BC%89Xml%E7%AE%80%E5%8D%95%E5%85%A5%E9%97%A8/">
-          
-          
-            
-          
-          XML 指可扩展标记语言（EXtensible Markup Language），是一种标记语言，很类似 HTML。XML 不会做任何事情。XML 被设计用来结构化、存储以及传输信息。XML 没什么特别的。它仅仅是纯文本而已。有能力处理纯文本的软件都可以处理 XML。通过 XML 可以发明自己的标签。
-目录1.认识XML1234567&lt;?xml version=&quot;1.0&quot;
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-13 20:35" pubdate>
-              2021-06-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaWEB/">JavaWEB</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/13/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%B8%80%EF%BC%89MyBatis%E5%85%A5%E9%97%A8%E4%BE%8B%E5%AD%90/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="MyBatis学习-（一）MyBatis入门例子">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/13/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%B8%80%EF%BC%89MyBatis%E5%85%A5%E9%97%A8%E4%BE%8B%E5%AD%90/">MyBatis学习-（一）MyBatis入门例子</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/13/MyBatis%E5%AD%A6%E4%B9%A0/MyBatis%E5%AD%A6%E4%B9%A0-%EF%BC%88%E4%B8%80%EF%BC%89MyBatis%E5%85%A5%E9%97%A8%E4%BE%8B%E5%AD%90/">
-          
-          
-            
-          
-          MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。
-目录MyBatis 中文文档：https://m
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-13 13:32" pubdate>
-              2021-06-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MyBatis%E5%AD%A6%E4%B9%A0/">MyBatis学习</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/12/JavaWEB/JavaWEB-%EF%BC%88%E4%BA%8C%EF%BC%89JUnit%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="JavaWEB-（二）JUnit基本使用">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/12/JavaWEB/JavaWEB-%EF%BC%88%E4%BA%8C%EF%BC%89JUnit%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">JavaWEB-（二）JUnit基本使用</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/12/JavaWEB/JavaWEB-%EF%BC%88%E4%BA%8C%EF%BC%89JUnit%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/">
-          
-          
-            
-          
-          JUnit 是一个 Java 编程语言的单元测试框架。JUnit 在测试驱动的开发方面有很重要的发展，是起源于 JUnit 的一个统称为 xUnit 的单元测试框架之一。JUnit 促进了“先测试后编码”的理念，强调建立测试数据的一段代码，可以先测试，然后再应用。这个方法就好比“测试一点，编码一点，测试一点，编码一点……”，增加了程序员的产量和程序的稳定性，可以减少程序员的压力和花费在排错上的时间
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-12 09:07" pubdate>
-              2021-06-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaWEB/">JavaWEB</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/12/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%80%EF%BC%89Maven%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="JavaWEB-（一）Maven搭建及配置">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/12/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%80%EF%BC%89Maven%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">JavaWEB-（一）Maven搭建及配置</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/12/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%80%EF%BC%89Maven%E6%90%AD%E5%BB%BA%E5%8F%8A%E9%85%8D%E7%BD%AE/">
-          
-          
-            
-          
-          Maven是 Apache 下的一个纯 Java 开发的开源项目。基于项目对象模型（缩写：POM）概念，Maven利用一个中央信息片断能管理一个项目的构建、报告和文档等步骤。Maven 也可被用于构建和管理各种项目，例如 C#，Ruby，Scala 和其他语言编写的项目。Maven 曾是 Jakarta 项目的子项目，现为由 Apache 软件基金会主持的独立 Apache 项目。
-Maven 是
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-12 08:02" pubdate>
-              2021-06-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/JavaWEB/">JavaWEB</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/05/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="MySQL-MySQL知识复习（二）">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/05/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">MySQL-MySQL知识复习（二）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/05/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/">
-          
-          
-            
-          
-          MySQL是一个关系型数据库管理系统。简单复习数据库MySQL知识。
-目录1.主键约束主键的取值不能为 NULL ，且取值唯一，不能重复。用关键字 primary key 标识，可以分为单一主键和复合主键，每一个数据表最多只能有一个主键约束。可以在创建表时创建，也可以对已存在的表添加主键。
-1.1 创建主键1.1 创建表时创建主键1.1.1 单一主键在表定义语句时，在其后面加上关键字 primar
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-05 09:09" pubdate>
-              2021-06-05
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="MySQL-MySQL知识复习（一）">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">MySQL-MySQL知识复习（一）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-MySQL%E7%9F%A5%E8%AF%86%E5%A4%8D%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/">
-          
-          
-            
-          
-          MySQL是一个关系型数据库管理系统。简单复习数据库MySQL知识。
-目录0.数据库用户设置0.1 创建用户12345create user 用户名@主机名 identified by &#39;密码&#39;;# 例如create user loong@localhost identified by &#39;123&#39;;# 主机名是允许登录的主机名，可以写通配符表示 % 表示允许所有cr
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-03 19:38" pubdate>
-              2021-06-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Navicat%20Premium%20v15.0.22%20%E4%B8%AD%E6%96%87%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="MySQL-数据库管理工具Navicat Premium v15.0.22 中文安装及破解">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Navicat%20Premium%20v15.0.22%20%E4%B8%AD%E6%96%87%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/">MySQL-数据库管理工具Navicat Premium v15.0.22 中文安装及破解</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/03/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/MySQL-%E6%95%B0%E6%8D%AE%E5%BA%93%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Navicat%20Premium%20v15.0.22%20%E4%B8%AD%E6%96%87%E5%AE%89%E8%A3%85%E5%8F%8A%E7%A0%B4%E8%A7%A3/">
-          
-          
-            
-          
-          Navicat premium 是一款数据库管理工具，是一个可多重连线资料库的管理工具，可以让你以单一程式同时连线到 MySQL、SQLite、Oracle、MariaDB、Mssql、及PostgreSQL 资料库，让管理不同类型的资料库更加的方便。
-目录1.软件及注册机下载链接：https://pan.baidu.com/s/1557K0n97MhPSelzSc8uYyw提取码：jkt3 
-2
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-03 15:50" pubdate>
-              2021-06-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93/">MySQL数据库</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/03/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="Git学习笔记">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/03/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">Git学习笔记</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/03/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Git%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-          
-          
-            
-          
-          Git （分布式版本控制系统）。是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。Git 是用于 Linux内核开发的版本控制工具。与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式。
-
-目录1.Git安装可以去官网下载：https://git-scm.com/ ，但下载速度较慢。也可以在淘宝镜像下载：http://npm.ta
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-03 12:58" pubdate>
-              2021-06-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/06/01/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="静态博客网站生成工具">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/01/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">静态博客网站生成工具</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/01/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E7%94%9F%E6%88%90%E5%B7%A5%E5%85%B7/">
-          
-          
-            
-          
-          静态网站非常适合专注于内容的网站，例如，博客。静态网站占用的系统资源少，不经过php解析器，不用数据库，速度比动态网站快；免疫很多web攻击方式。服务器端配置简单，只需要一个web server（apache、nginx）。
-
-目录1.Jekyll官网：https://jekyllrb.com/
-2.Octopress官网：http://octopress.org/
-3.Hexo官网：https:
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-01 13:35" pubdate>
-              2021-06-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/">实用小技能</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/05/29/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_blank">
-          <img src="/img/avatar.png" srcset="/img/loading.gif" alt="数学建模-Matlab学习笔记（四）">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/29/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">数学建模-Matlab学习笔记（四）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/29/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1-Matlab%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E5%9B%9B%EF%BC%89/">
-          
-          
-            
-          
-          MATLAB（矩阵实验室）是第四代高层次的编程语言和交互式环境数值计算，可视化和编程。由美国MathWorks公司开发的一种编程语言。用于算法开发、数据可视化、数据分析以及数值计算的高级技术计算语言和交互式环境，主要包括MATLAB和Simulink两大部分。拥有众多的内置命令和数学函数，可以帮助您在数学计算，绘图和执行数值计算方法。 
-目录1.MATLAT 的M文件MATLAB允许写两个程序文件
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-29 19:57" pubdate>
-              2021-05-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-
-
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/#board">8</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
-    </span>
-  </nav>
-
-
-
-              </div>
+    <section class="technology-circle">
+      <div class="wrap">
+        <div class="inner">
+          <div class="middle">
+            <div class="middle2">
             </div>
           </div>
         </div>
       </div>
-    
+    </section>
+    <section class="technology-nav">
+      <nav class="nav-box">
+        <section>
+          <a data-href="profile-page" data-color="pink" href="./index2.html">顽强</a>
+          <a class="nav-item-search" data-color="light-pink" href="./index2.html">奋斗</a>
+        </section>
+        <section>
+          <a data-href="history-page" data-color="light-purple" href="./index2.html">坚持</a>
+          <a data-href="product-page" data-color="purple" href="./index2.html">拼搏</a>
+        </section>
+      </nav>
+      <div class="message"><h3>墨水记忆</h3></div>
+	 <!-- <a href="www.baidu.com">开启</a> -->
+    </section>
+    <div class="video-inner text-center text-white">
 
-    
-      <a id="scroll-top-button" href="#" role="button">
-        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
-      </a>
-    
-
-    
-      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
-     aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header text-center">
-        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
-        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body mx-3">
-        <div class="md-form mb-5">
-          <input type="text" id="local-search-input" class="form-control validate">
-          <label data-error="x" data-success="v"
-                 for="local-search-input">keyword</label>
-        </div>
-        <div class="list-group" id="local-search-result"></div>
-      </div>
+      <h1 style="text-align: center">墨水记忆</h1>
+      <p>最好的记忆不如最淡的墨水。</p>
+      <div class="brand-wapper">
+		
+		  <!-- <img src="images/hexo-inverted.png" class="brand" alt="墨水"> --></div>
     </div>
   </div>
-</div>
-    
+  <!-- <a data-href="profile-page" data-color="pink" href="javascript:void(0)">顽强</a> -->
+  <div class="search-form-wrap">
+<!--    <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+ -->  <div id="local-search-result" class="local-search-result"></div>
+</div> 
 
-    
-  </main>
-
-  <footer class="text-center mt-5 py-3">
-  <div class="footer-content">
-     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript" rel="nofollow noopener"><span>DragonOne</span></a> 
-  </div>
-  
-
-  
-  <!-- 备案信息 -->
-  <div class="beian">
-    <span>
-      <a href="javascript:" rel="nofollow noopener">
-        最好的记忆不如最淡的墨水
-      </a>
-    </span>
-    
   </div>
 
-
-  
-</footer>
-
-<!-- SCRIPTS -->
-
-  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
-
-  <script>
-    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
-    NProgress.start()
-    window.addEventListener('load', function() {
-      NProgress.done();
-    })
-  </script>
+    </div>
+    <script src="./OurSources/js/jquery-2.0.3.min.js"></script>
+<script src="./OurSources/js/lazyload.min.js"></script>
+<script src="./OurSources/js/busuanzi-2.3.pure.min.js"></script>
 
 
-<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
-<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
-<script  src="/js/events.js" ></script>
-<script  src="/js/plugins.js" ></script>
-
-<!-- Plugins -->
-
-
-  
-    <script  src="/js/lazyload.js" ></script>
-  
+  <script src="./OurSources/fancybox/jquery.fancybox.min.js"></script>
 
 
 
-  
+  <script src="./OurSources/js/search.js"></script>
 
 
+<script src="./OurSources/js/technology.js"></script>
+
+  </div>
 
 
-
-
-
-
-
-  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
-
-
-
-  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
-
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
-  <script>
-    (function (window, document) {
-      var typing = Fluid.plugins.typing;
-      var title = document.getElementById('subtitle').title;
-      
-      typing(title)
-      
-    })(window, document);
-  </script>
-
-
-
-  <script  src="/js/local-search.js" ></script>
-  <script>
-    (function () {
-      var path = "/local-search.xml";
-      $('#local-search-input').on('click', function() {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      });
-      $('#modalSearch').on('shown.bs.modal', function() {
-        $('#local-search-input').focus();
-      });
-    })()
-  </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 主题的启动项 保持在最底部 -->
-<script  src="/js/boot.js" ></script>
-
-
-<!-- 雪花特效 -->
-<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
-
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+</body>
 </html>
