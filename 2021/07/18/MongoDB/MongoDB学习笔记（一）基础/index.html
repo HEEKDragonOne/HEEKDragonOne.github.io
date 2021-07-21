@@ -472,7 +472,46 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>向指定集合更新多个文档。</p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">db.tothe.updateMany(&#123;&quot;age&quot;:&#123;$gt:&quot;10&quot;&#125;&#125;,&#123;$set:&#123;&quot;status&quot;:&quot;xyz&quot;&#125;&#125;) # $gt 表示大于<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="1-11-查询文档"><a href="#1-11-查询文档" class="headerlink" title="1.11 查询文档"></a>1.11 查询文档</h3><p>条件语句表。<br>|操作|格式|示例|<br>|:—-:|:—-:|:—-:|<br>|等于|{&lt;key&gt;:&lt;value&gt;}|db.col.find({“by”:”tototo”}).pretty()|<br>|小于|{&lt;key&gt;:{$lt:&lt;value&gt;}}    |    db.col.find({“likes”:{$lt:50}}).pretty()|<br>|小于等于|{&lt;key&gt;:{$lte:&lt;value&gt;}}|db.col.find({“likes”:{$lte:50}}).pretty()|<br>|大于|{&lt;key&gt;:{$gt:&lt;value&gt;}}|db.col.find({“likes”:{$gt:50}}).pretty()|<br>|大于等于|{&lt;key&gt;:{$gte:&lt;value&gt;}}|db.col.find({“likes”:{$gte:50}}).pretty()|<br>|不等于|{&lt;key&gt;:{$ne:&lt;value&gt;}}|db.col.find({“likes”:{$ne:50}}).pretty()|</p>
+<h3 id="1-11-查询文档"><a href="#1-11-查询文档" class="headerlink" title="1.11 查询文档"></a>1.11 查询文档</h3><p>条件语句表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">操作</th>
+<th align="center">格式</th>
+<th align="center">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">等于</td>
+<td align="center">{&lt;key&gt;:&lt;value&gt;}</td>
+<td align="center">db.col.find({“by”:”tototo”}).pretty()</td>
+</tr>
+<tr>
+<td align="center">小于</td>
+<td align="center">{&lt;key&gt;:{$lt:&lt;value&gt;}}</td>
+<td align="center">db.col.find({“likes”:{$lt:50}}).pretty()</td>
+</tr>
+<tr>
+<td align="center">小于等于</td>
+<td align="center">{&lt;key&gt;:{$lte:&lt;value&gt;}}</td>
+<td align="center">db.col.find({“likes”:{$lte:50}}).pretty()</td>
+</tr>
+<tr>
+<td align="center">大于</td>
+<td align="center">{&lt;key&gt;:{$gt:&lt;value&gt;}}</td>
+<td align="center">db.col.find({“likes”:{$gt:50}}).pretty()</td>
+</tr>
+<tr>
+<td align="center">大于等于</td>
+<td align="center">{&lt;key&gt;:{$gte:&lt;value&gt;}}</td>
+<td align="center">db.col.find({“likes”:{$gte:50}}).pretty()</td>
+</tr>
+<tr>
+<td align="center">不等于</td>
+<td align="center">{&lt;key&gt;:{$ne:&lt;value&gt;}}</td>
+<td align="center">db.col.find({“likes”:{$ne:50}}).pretty()</td>
+</tr>
+</tbody></table>
 <blockquote>
 <ol>
 <li>find()</li>
