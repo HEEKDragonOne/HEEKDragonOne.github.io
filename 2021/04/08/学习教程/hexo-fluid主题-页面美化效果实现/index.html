@@ -228,7 +228,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      5.5k 字
+      5.8k 字
     </span>
   
 
@@ -238,7 +238,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      91
+      96
        分钟
     </span>
   
@@ -285,7 +285,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 8, 2021 am
+                  本文最后更新于：July 22, 2021 pm
                 
               </p>
             
@@ -355,6 +355,29 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>然后在主题的 layout.ejs 文件中引入即可：</p>
 <figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 数字雨 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;canvas&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;1440&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;900&quot;</span> &gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text/javascript&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;/js/DigitalRain.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><br></code></pre></div></td></tr></table></figure>
 <p>之后就可以看见效果了。</p>
+<h3 id="14-背景图片固定"><a href="#14-背景图片固定" class="headerlink" title="14.背景图片固定"></a>14.背景图片固定</h3><blockquote>
+<ol>
+<li>在<code>主题目录</code>下的<code>scripts</code>文件夹下新建<code>injector.js</code>，在injector.js中写下这些代码。</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 全屏背景的需要导入这些js</span><br><span class="hljs-keyword">const</span> &#123; <span class="hljs-attr">root</span>: siteRoot = <span class="hljs-string">&quot;/&quot;</span> &#125; = hexo.config;<br>hexo.extend.injector.register(<span class="hljs-string">&quot;body_begin&quot;</span>, <span class="hljs-string">`&lt;div id=&quot;web_bg&quot;&gt;&lt;/div&gt;`</span>);<br>hexo.extend.injector.register(<br>  <span class="hljs-string">&quot;body_end&quot;</span>,<br>  <span class="hljs-string">`&lt;script src=&quot;<span class="hljs-subst">$&#123;siteRoot&#125;</span>js/backgroundize.js&quot;&gt;&lt;/script&gt;</span><br><span class="hljs-string">  &lt;link defer rel=&quot;stylesheet&quot; href=&quot;<span class="hljs-subst">$&#123;siteRoot&#125;</span>styles/backgroundize.css&quot; /&gt;</span><br><span class="hljs-string">  `</span><br>);<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>在主题目录下的<code>source</code>文件夹下的<code>js文件夹</code>中新建<code>backgroundize.js</code>文件，内容如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">const</span> bannerContainer = $(<span class="hljs-string">&quot;#banner&quot;</span>);<br><span class="hljs-keyword">const</span> viewBg = $(<span class="hljs-string">&quot;#web_bg&quot;</span>);<br><span class="hljs-keyword">const</span> bannerMask = $(<span class="hljs-string">&quot;#banner .mask&quot;</span>);<br><span class="hljs-keyword">const</span> bg = $(bannerContainer).css(<span class="hljs-string">&quot;background-image&quot;</span>);<br>$(viewBg).css(<span class="hljs-string">&quot;background-image&quot;</span>, bg);<br>$(bannerContainer).css(<span class="hljs-string">&quot;background-image&quot;</span>, <span class="hljs-string">&quot;url()&quot;</span>);<br><span class="hljs-keyword">const</span> color = $(bannerMask).css(<span class="hljs-string">&quot;background-color&quot;</span>);<br>$(bannerMask).css(<span class="hljs-string">&quot;background-color&quot;</span>, <span class="hljs-string">`rgba(0,0,0,0)`</span>);<br>$(viewBg).css(<span class="hljs-string">&quot;background-color&quot;</span>, color);<br></code></pre></div></td></tr></table></figure>
+<p>以上文件和代码也可以在<code>public</code>文件夹中的<code>js</code>文件夹中建，但推荐上面的做法。</p>
+<blockquote>
+<ol start="3">
+<li>在<code>public</code>文件夹中新建<code>styles文件夹</code>，并在其中新增<code>backgroundize.css</code>文件，内容如下：</li>
+</ol>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-selector-id">#web_bg</span> &#123;<br>  <span class="hljs-attribute">position</span>: fixed;<br>  <span class="hljs-attribute">z-index</span>: -<span class="hljs-number">999</span>;<br>  <span class="hljs-attribute">width</span>: <span class="hljs-number">100%</span>;<br>  <span class="hljs-attribute">height</span>: <span class="hljs-number">100%</span>;<br>  <span class="hljs-attribute">background-attachment</span>: local;<br>  <span class="hljs-attribute">background-position</span>: center;<br>  -webkit-<span class="hljs-attribute">background-size</span>: cover;<br>  -moz-<span class="hljs-attribute">background-size</span>: cover;<br>  <span class="hljs-attribute">background-size</span>: cover;<br>  <span class="hljs-attribute">background-repeat</span>: repeat;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
 
             </div>
             <hr>
