@@ -1665,6 +1665,25 @@
   
   
   <entry>
+    <title>Windows登录密码破解</title>
+    <link href="/2021/04/07/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/Windows%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/"/>
+    <url>/2021/04/07/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/Windows%E7%99%BB%E5%BD%95%E5%AF%86%E7%A0%81%E7%A0%B4%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<p>Windows登录密码破解。</p><hr><h2 id="1-方法一"><a href="#1-方法一" class="headerlink" title="1.方法一"></a>1.方法一</h2><blockquote><ol><li>首先需要有Windows的启动盘。</li></ol></blockquote><blockquote><ol start="2"><li>插入U盘进入BIOS，选择U盘启动。</li></ol></blockquote><blockquote><ol start="3"><li>出现界面后，先点下一步。再点击左下角的<code>修复计算机</code>。</li></ol></blockquote><blockquote><ol start="4"><li>再选择 <code>疑难解答</code>，在高级选项中，选择<code>命令提示符</code>进入命令窗口界面。</li></ol></blockquote><blockquote><ol start="5"><li>将启动的界面（即Windows登录界面）换成可以用命令输入的窗口。依次输入以下命令：</li></ol></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 需要先cd到d盘</span><br>move d:\Windows\System32\Utilman.exe d:\Windows\System32\utilman.exe.bak<br><br>copy d:\Windows\System32\cmd.exe d:\Windows\System32\utilman.exe<br>(move d:\Windows\System32\cmd.exe d:\Windows\System32\utilman.exe)<br><br>wpeutil reboot <span class="hljs-comment"># 重启   这时候需要把U盘拔掉</span><br></code></pre></div></td></tr></table></figure><blockquote><ol start="6"><li>在登录界面点击<code>轻松使用</code>图标，在弹出的命令窗口中开始创建一个新用户，这个用户的权限和之前的用户一样，可以访问之前的所有的文件。</li></ol></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">net user name /add  <span class="hljs-comment"># 删除用户 net user name /del</span><br>net localgroup administrators name /add<br></code></pre></div></td></tr></table></figure><p>然后再点击右下角的<code>电源</code> ，重启一下。</p><blockquote><ol start="7"><li>重启之后可以在<code>左下角</code>看见有一个刚才创建的用户，点击进入。如果没有出现，按两次<code>Ctrl+ALT+del</code></li></ol></blockquote><h2 id="2-方法二"><a href="#2-方法二" class="headerlink" title="2.方法二"></a>2.方法二</h2><blockquote><ol><li>制作启动盘</li></ol></blockquote><p>优启通、微PE</p><blockquote><ol start="2"><li>进入启动盘</li></ol></blockquote><blockquote><ol start="3"><li>开始-&gt;程序-&gt;密码相关</li></ol></blockquote><blockquote><ol start="4"><li>点击 打开，选择对应账号的用户名，修改密码（解锁是把密码清空，不设置密码），保持修改，退出，再重新启动即可。</li></ol></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>实用小技能</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>hexo-Fluid主题-博客首页文章分页实现</title>
     <link href="/2021/04/07/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/hexo-Fluid%E4%B8%BB%E9%A2%98-%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E5%88%86%E9%A1%B5%E5%AE%9E%E7%8E%B0/"/>
     <url>/2021/04/07/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/hexo-Fluid%E4%B8%BB%E9%A2%98-%E5%8D%9A%E5%AE%A2%E9%A6%96%E9%A1%B5%E6%96%87%E7%AB%A0%E5%88%86%E9%A1%B5%E5%AE%9E%E7%8E%B0/</url>
