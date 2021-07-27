@@ -29,6 +29,33 @@
   
   
   <entry>
+    <title>每日一点-JAVA大数处理</title>
+    <link href="/2021/07/26/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-JAVA%E5%A4%A7%E6%95%B0%E5%A4%84%E7%90%86/"/>
+    <url>/2021/07/26/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-JAVA%E5%A4%A7%E6%95%B0%E5%A4%84%E7%90%86/</url>
+    
+    <content type="html"><![CDATA[<p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p><hr><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>导包：import java,math.*;<br>或者：import java,math.BigInteger; import java,math.BigDecimal;</p><h2 id="1-整数（BigInteger类）"><a href="#1-整数（BigInteger类）" class="headerlink" title="1.整数（BigInteger类）"></a>1.整数（BigInteger类）</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner cin = <span class="hljs-keyword">new</span> Scanner(System.in);<br>BigInteger a,b;<br>a = cin.nextBigInteger();<br>b = cin.nextBigInteger();<br>System.out.println(a.add(b)); <span class="hljs-comment">//加</span><br>System.out.println(a.subtract(b)); <span class="hljs-comment">//减</span><br>System.out.println(a.multiply(b)); <span class="hljs-comment">//乘</span><br>System.out.println(a.divide(b)); <span class="hljs-comment">//除</span><br><br>System.out.println(a.mod(b)); <span class="hljs-comment">//求余,不能用于小数</span><br>System.out.println(a.remainder(b)); <span class="hljs-comment">//求余</span><br><br><span class="hljs-comment">// a=7 b=3</span><br><span class="hljs-number">10</span><br><span class="hljs-number">4</span><br><span class="hljs-number">21</span><br><span class="hljs-number">2</span><br><span class="hljs-number">1</span><br><span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure><h2 id="2-小数（BigDecimal类）"><a href="#2-小数（BigDecimal类）" class="headerlink" title="2.小数（BigDecimal类）"></a>2.小数（BigDecimal类）</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner cin = <span class="hljs-keyword">new</span> Scanner(System.in);<br>BigDecimal a,b;<br>a = cin.nextBigDecimal();<br>b = cin.nextBigDecimal();<br>System.out.println(a.add(b)); <span class="hljs-comment">//加</span><br>System.out.println(a.subtract(b)); <span class="hljs-comment">//减</span><br>System.out.println(a.multiply(b)); <span class="hljs-comment">//乘</span><br>System.out.println(a.divide(b)); <span class="hljs-comment">//除</span><br>System.out.println(a.remainder(b)); <span class="hljs-comment">//求余</span><br><span class="hljs-comment">// a=7.3 b=3.2</span><br><span class="hljs-number">10.5</span><br><span class="hljs-number">4.1</span><br><span class="hljs-number">23.36</span><br><span class="hljs-number">2.28125</span><br><span class="hljs-number">0.9</span><br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>每日一点</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+      <tag>大数处理</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>算法学习-数据结构大纲</title>
     <link href="/2021/07/25/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%A7%E7%BA%B2/"/>
     <url>/2021/07/25/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%A4%A7%E7%BA%B2/</url>
