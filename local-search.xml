@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>每日一点-Python项目打包</title>
+    <link href="/2021/07/28/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-Python%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/"/>
+    <url>/2021/07/28/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-Python%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/</url>
+    
+    <content type="html"><![CDATA[<p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote><ol><li>安装python环境</li></ol></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">brew install python3<br></code></pre></div></td></tr></table></figure><blockquote><ol start="2"><li>用pip安装pyinstaller</li></ol></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pip3 install pyinstaller<br></code></pre></div></td></tr></table></figure><blockquote><ol start="3"><li>打包成可执行文件</li></ol></blockquote><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">pyinstaller -F -w main.py # main为项目名称<br><span class="hljs-comment">/*</span><br><span class="hljs-comment">-F 是打包为一个可执行文件（文件会比较大）</span><br><span class="hljs-comment">-w 是控制为没有cmd窗口的可执行文件,不加运行时就会出现cmd窗口。</span><br><span class="hljs-comment">*/</span><br></code></pre></div></td></tr></table></figure><p>完成后，会生成一个<code>dist</code>文件夹，其中有一个可执行文件，即打包后的程序。</p><blockquote><ol start="4"><li>自定义图标</li></ol></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pyinstaller -i xxx.ico -F -w main.py <span class="hljs-comment"># main为项目名称，xxx为图标名称，且需要把ico图标放到main.py同级目录下</span><br></code></pre></div></td></tr></table></figure><p><img src="https://img-blog.csdnimg.cn/1389021b73984f2b9740c68f3c8ea35c.jpg"></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>每日一点</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>每日一点-JAVA保留小数点位数</title>
     <link href="/2021/07/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-JAVA%E4%BF%9D%E7%95%99%E5%B0%8F%E6%95%B0%E7%82%B9%E4%BD%8D%E6%95%B0/"/>
     <url>/2021/07/27/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-JAVA%E4%BF%9D%E7%95%99%E5%B0%8F%E6%95%B0%E7%82%B9%E4%BD%8D%E6%95%B0/</url>
