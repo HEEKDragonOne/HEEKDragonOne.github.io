@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      44
+      45
        分钟
     </span>
   
@@ -297,7 +297,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 15, 2021 am
+                  本文最后更新于：July 30, 2021 pm
                 
               </p>
             
@@ -505,8 +505,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>忽略文件中的空行或以井号（#）开始的行将会被忽略。</li>
 <li>可以使用 Linux 通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1，string2……}）代表可选的字符串等。</li>
 <li>如果名称的最前面有一个感叹号（！），表示例外规则，将不被忽略。</li>
-<li>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。</li>
-<li>如果名称的最前面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。</li>
+<li>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。即忽略此目录前面的文件。</li>
+<li>如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。即忽略此目录后面的文件。</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#为注释</span><br>*.txt	<span class="hljs-comment">#忽略所有 .txt结尾的文件,上传时不会被选中</span><br>!lib.txt	<span class="hljs-comment">#但lib.txt除外</span><br>/temp	<span class="hljs-comment">#仅忽略项目根目录下的TODO文件，不包括其他目录temp</span><br>build/	<span class="hljs-comment">#忽略build/目录下的所有文件</span><br>doc/*.txt	<span class="hljs-comment">#会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span><br></code></pre></div></td></tr></table></figure>
 
