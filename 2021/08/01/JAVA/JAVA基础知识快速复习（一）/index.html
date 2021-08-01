@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      2.7k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36
+      38
        分钟
     </span>
   
@@ -476,6 +476,14 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <p><strong>要特别注意，Integer有个getInteger(String)方法，它不是将字符串转换为int，而是把该字符串对应的系统变量转换为Integer。例如：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer.getInteger(<span class="hljs-string">&quot;java.version&quot;</span>); <span class="hljs-comment">// 版本号，11</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="3">
+<li>将整数格式化为指定进制的字符串</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"> System.out.println(Integer.toString(<span class="hljs-number">100</span>)); <span class="hljs-comment">// &quot;100&quot;,表示为10进制</span><br> System.out.println(Integer.toString(<span class="hljs-number">100</span>, <span class="hljs-number">36</span>)); <span class="hljs-comment">// &quot;2s&quot;,表示为36进制</span><br> System.out.println(Integer.toHexString(<span class="hljs-number">100</span>)); <span class="hljs-comment">// &quot;64&quot;,表示为16进制</span><br> System.out.println(Integer.toOctalString(<span class="hljs-number">100</span>)); <span class="hljs-comment">// &quot;144&quot;,表示为8进制</span><br> System.out.println(Integer.toBinaryString(<span class="hljs-number">100</span>)); <span class="hljs-comment">// &quot;1100100&quot;,表示为2进制</span><br><br><span class="hljs-comment">//或者</span><br>System.out.println(Integer.toString(<span class="hljs-number">100</span>, radix)); <span class="hljs-comment">// 将100转换为radix进制的字符串</span><br></code></pre></div></td></tr></table></figure>
+
 
 <h3 id="3-10-字符串与char-相互转化"><a href="#3-10-字符串与char-相互转化" class="headerlink" title="3.10 字符串与char[]相互转化"></a>3.10 字符串与char[]相互转化</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">char</span>[] cs = <span class="hljs-string">&quot;Hello&quot;</span>.toCharArray(); <span class="hljs-comment">// String -&gt; char[]</span><br>String s = <span class="hljs-keyword">new</span> String(cs); <span class="hljs-comment">// char[] -&gt; String</span><br></code></pre></div></td></tr></table></figure>
 <p>如果修改了char[]数组，String并不会改变。因为通过new String(char[])创建新的String实例时，它并不会直接引用传入的char[]数组，而是会复制一份，所以，修改外部的char[]数组不会影响String实例内部的char[]数组，因为这是两个不同的数组。</p>
