@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      270 字
+      769 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      10
        分钟
     </span>
   
@@ -297,7 +297,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：July 27, 2021 am
+                  本文最后更新于：August 1, 2021 am
                 
               </p>
             
@@ -309,7 +309,25 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <h2 id="2-小数（BigDecimal类）"><a href="#2-小数（BigDecimal类）" class="headerlink" title="2.小数（BigDecimal类）"></a>2.小数（BigDecimal类）</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner cin = <span class="hljs-keyword">new</span> Scanner(System.in);<br>BigDecimal a,b;<br>a = cin.nextBigDecimal();<br>b = cin.nextBigDecimal();<br>System.out.println(a.add(b)); <span class="hljs-comment">//加</span><br>System.out.println(a.subtract(b)); <span class="hljs-comment">//减</span><br>System.out.println(a.multiply(b)); <span class="hljs-comment">//乘</span><br>System.out.println(a.divide(b)); <span class="hljs-comment">//除</span><br>System.out.println(a.remainder(b)); <span class="hljs-comment">//求余</span><br><span class="hljs-comment">// a=7.3 b=3.2</span><br><span class="hljs-number">10.5</span><br><span class="hljs-number">4.1</span><br><span class="hljs-number">23.36</span><br><span class="hljs-number">2.28125</span><br><span class="hljs-number">0.9</span><br></code></pre></div></td></tr></table></figure>
 
+<h3 id="2-1-小数位数"><a href="#2-1-小数位数" class="headerlink" title="2.1 小数位数"></a>2.1 小数位数</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Scanner cin = <span class="hljs-keyword">new</span> Scanner(System.in);<br>BigDecimal big ;<br>big = cin.nextBigDecimal();<br>System.out.println(big.scale()); <span class="hljs-comment">//scale() 获取小数位数；若是整数则为负数，表示的末尾的0个数</span><br>System.out.println(big);<br>big = big.stripTrailingZeros(); <span class="hljs-comment">// 去掉小数末尾的无用0</span><br>System.out.println(big.scale());<br>System.out.println(big);<br><br><br><br><span class="hljs-comment">//控制台</span><br><span class="hljs-number">123.4500000</span><br><br><span class="hljs-number">7</span><br><span class="hljs-number">123.4500000</span><br><span class="hljs-number">2</span><br><span class="hljs-number">123.45</span><br><br><span class="hljs-comment">//控制台</span><br><span class="hljs-number">12340000</span><br><span class="hljs-number">0</span><br><span class="hljs-number">12340000</span><br>-<span class="hljs-number">4</span><br><span class="hljs-number">1.234E+7</span><br></code></pre></div></td></tr></table></figure>
 
+<blockquote>
+<ol>
+<li>对一个BigDecimal设置它的scale，如果精度比原始值低，那么按照指定的方法进行四舍五入或者直接截断。</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.math.BigDecimal;<br><span class="hljs-keyword">import</span> java.math.RoundingMode;<br><br>BigDecimal d1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;123.456789&quot;</span>);<br>BigDecimal d2 = d1.setScale(<span class="hljs-number">4</span>, RoundingMode.HALF_UP); <span class="hljs-comment">// 四舍五入</span><br>BigDecimal d3 = d1.setScale(<span class="hljs-number">4</span>, RoundingMode.DOWN); <span class="hljs-comment">// 直接截断</span><br>System.out.println(d2); <span class="hljs-comment">//123.4568</span><br>System.out.println(d3); <span class="hljs-comment">//123.4567</span><br></code></pre></div></td></tr></table></figure>
+
+<p>对BigDecimal做加、减、乘时，精度不会丢失，但是做除法时，存在无法除尽的情况，这时，就必须指定精度以及如何进行截断。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal d1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;123.456&quot;</span>);<br>BigDecimal d2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;23.456789&quot;</span>);<br>BigDecimal d3 = d1.divide(d2, <span class="hljs-number">10</span>, RoundingMode.HALF_UP); <span class="hljs-comment">//保留10位小数并四舍五入</span><br>BigDecimal d4 = d1.divide(d2); <span class="hljs-comment">// 报错：ArithmeticException，因为除不尽</span><br></code></pre></div></td></tr></table></figure>
+
+
+<p>对BigDecimal做除法的同时求余数。调用divideAndRemainder()方法时，返回的数组包含两个BigDecimal，分别是商和余数，其中商总是整数，余数不会大于除数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal n = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;12.345&quot;</span>);<br>BigDecimal m = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;0.12&quot;</span>);<br>BigDecimal[] dr = n.divideAndRemainder(m);<br>System.out.println(dr[<span class="hljs-number">0</span>]); <span class="hljs-comment">// 102</span><br>System.out.println(dr[<span class="hljs-number">1</span>]); <span class="hljs-comment">// 0.105</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-2-比较BigDecimal"><a href="#2-2-比较BigDecimal" class="headerlink" title="2.2 比较BigDecimal"></a>2.2 比较BigDecimal</h3><p>在比较两个BigDecimal的值是否相等时，要特别注意，使用equals()方法不但要求两个BigDecimal的值相等，还要求它们的scale()相等。<br>必须使用compareTo()方法来比较，它根据两个值的大小分别返回负数、正数和0，分别表示小于、大于和等于。总是使用compareTo()比较两个BigDecimal的值，不使用equals()。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal d1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;123.456&quot;</span>);<br>BigDecimal d2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-string">&quot;123.45600&quot;</span>);<br>System.out.println(d1.equals(d2)); <span class="hljs-comment">// false,因为scale不同</span><br>System.out.println(d1.equals(d2.stripTrailingZeros()));<span class="hljs-comment">// true,因为d2去除尾部0后scale变为2</span><br>System.out.println(d1.compareTo(d2)); <span class="hljs-comment">// 0</span><br></code></pre></div></td></tr></table></figure>
 
 
             </div>
@@ -389,7 +407,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
           el: "#vcomments",
           app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
           app_key: "tL3DrseUcom3imP7y6HAnTfh",
-          placeholder: "无需登录，即可评论\n客官，来说点什么吧！(*╹▽╹*)",
+          placeholder: "无需登录，即可评论  \n客官，来说点什么吧！(*╹▽╹*)",
           path: window.location.pathname,
           avatar: "retro",
           meta: ["nick","mail"],
