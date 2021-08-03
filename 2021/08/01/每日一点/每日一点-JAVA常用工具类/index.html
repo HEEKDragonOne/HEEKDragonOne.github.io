@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      804 字
+      830 字
     </span>
   
 
@@ -297,7 +297,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：August 1, 2021 pm
+                  本文最后更新于：August 2, 2021 am
                 
               </p>
             
@@ -374,7 +374,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Math.random(); <span class="hljs-comment">// 0.53907... 每次都不一样</span><br></code></pre></div></td></tr></table></figure>
 
 <h2 id="2-Random"><a href="#2-Random" class="headerlink" title="2.Random"></a>2.Random</h2><p>Random用来创建伪随机数。<br>要生成一个随机数，可以使用nextInt()、nextLong()、nextFloat()、nextDouble()。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Random r = <span class="hljs-keyword">new</span> Random();<br>r.nextInt(); <span class="hljs-comment">// 2071575453,每次都不一样</span><br>r.nextInt(<span class="hljs-number">10</span>); <span class="hljs-comment">// 5,生成一个[0,10)之间的int</span><br>r.nextLong(); <span class="hljs-comment">// 8811649292570369305,每次都不一样</span><br>r.nextFloat(); <span class="hljs-comment">// 0.54335...生成一个[0,1)之间的float</span><br>r.nextDouble(); <span class="hljs-comment">// 0.3716...生成一个[0,1)之间的double</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Random r = <span class="hljs-keyword">new</span> Random();<br>r.nextInt(); <span class="hljs-comment">// 2071575453,每次都不一样</span><br>r.nextInt(<span class="hljs-number">10</span>); <span class="hljs-comment">// 5,生成一个[0,10)之间的int</span><br>r.nextInt()%<span class="hljs-number">10</span>; <span class="hljs-comment">// 生成-10到10的数</span><br><br>r.nextLong(); <span class="hljs-comment">// 8811649292570369305,每次都不一样，不支持r.nextLong(10)这种写法</span><br>r.nextLong()%<span class="hljs-number">10</span>; <span class="hljs-comment">// 生成-10到10的数</span><br><br>r.nextFloat(); <span class="hljs-comment">// 0.54335...生成一个[0,1)之间的float</span><br>r.nextDouble(); <span class="hljs-comment">// 0.3716...生成一个[0,1)之间的double</span><br></code></pre></div></td></tr></table></figure>
 
 
 <h2 id="3-SecureRandom"><a href="#3-SecureRandom" class="headerlink" title="3.SecureRandom"></a>3.SecureRandom</h2><p>有伪随机数，就有真随机数。实际上真正的真随机数只能通过量子力学原理来获取，而我们想要的是一个不可预测的安全的随机数，SecureRandom就是用来创建安全的随机数的。</p>
@@ -422,6 +422,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/08/03/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-%E6%B3%A8%E8%A7%A3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA基础学习-注解</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
