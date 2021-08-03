@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>每日一点-String与StringBuilder</title>
+    <link href="/2021/08/03/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-String%E4%B8%8EStringBuilder/"/>
+    <url>/2021/08/03/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-String%E4%B8%8EStringBuilder/</url>
+    
+    <content type="html"><![CDATA[<p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-String与StringBuilder相互转化"><a href="#1-String与StringBuilder相互转化" class="headerlink" title="1.String与StringBuilder相互转化"></a>1.String与StringBuilder相互转化</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String ss = <span class="hljs-string">&quot;abcder&quot;</span>;<br>StringBuilder sbs = <span class="hljs-keyword">new</span> StringBuilder(ss); <span class="hljs-comment">//String转换为StringBuffer</span><br>StringBuilder resbs = sbs.reverse();<br>String news = resbs.toString(); <span class="hljs-comment">//StringBuffer转换为String</span><br>System.out.println(news);<br></code></pre></div></td></tr></table></figure><h2 id="2-重写equals比较方法"><a href="#2-重写equals比较方法" class="headerlink" title="2.重写equals比较方法"></a>2.重写equals比较方法</h2><p>java中所有的对象都默认继承自Object类，所以当我们没有重写equals的方法时，若使用equals来判断两个对象的是否相等时，只有这两个对象指向的是同一个内存地址时，才会返回true，否则即使内容完全相同但在内存中是两个不同的内存地址也是返回false。StringBuilder没有重写equals方法，所以比较判断的是地址。而String的equals与==的比较结果却不一样。</p><blockquote><ol><li>String的equals函数</li></ol></blockquote><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object anObject)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == anObject) &#123; <span class="hljs-comment">//首先判断其内存地址是否为同一个</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        &#125;<br>        <span class="hljs-comment">//再判断其内容是否相同</span><br>        <span class="hljs-keyword">if</span> (anObject <span class="hljs-keyword">instanceof</span> String) &#123;<br>            String anotherString = (String) anObject;<br>            <span class="hljs-keyword">int</span> n = value.length;<br>            <span class="hljs-keyword">if</span> (n == anotherString.value.length) &#123;<br>                <span class="hljs-keyword">char</span> v1[] = value;<br>                <span class="hljs-keyword">char</span> v2[] = anotherString.value;<br>                <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>;<br>                <span class="hljs-keyword">while</span> (n-- != <span class="hljs-number">0</span>) &#123;<br>                    <span class="hljs-keyword">if</span> (v1[i] != v2[i])<br>                            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>                    i++;<br>                &#125;<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    &#125;<br></code></pre></div></td></tr></table></figure><blockquote><ol start="2"><li>Object的equals函数</li></ol></blockquote><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);<br>    &#125;<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>每日一点</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JAVA基础学习-注解</title>
     <link href="/2021/08/03/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-%E6%B3%A8%E8%A7%A3/"/>
     <url>/2021/08/03/JAVA/JAVA%E5%9F%BA%E7%A1%80%E5%AD%A6%E4%B9%A0-%E6%B3%A8%E8%A7%A3/</url>
