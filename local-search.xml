@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>每日一点-double与Double的区别</title>
+    <link href="/2021/08/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-double%E4%B8%8EDouble%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <url>/2021/08/04/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-double%E4%B8%8EDouble%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    
+    <content type="html"><![CDATA[<p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote><ol><li>数据类型。double是基本数据类型，Double是原始数据类型。Double是java定义的类，而double是预定义数据类型（8种中的一种）</li></ol></blockquote><blockquote><ol start="2"><li>存放位置。double存放在栈中，Double存放在堆中。</li></ol></blockquote><blockquote><ol start="3"><li>属性与方法。double没有方法，Double有自己的属性和方法。</li></ol></blockquote><blockquote><ol start="4"><li>其他：</li></ol></blockquote><ul><li><p>double只创建引用，Double创建对象。hashCode只能做用于对象。</p></li><li><p>集合类不能存放double，只能存放Double。</p></li><li><p>栈的存取速度要高于堆，另外栈中的数据可以共享。</p></li><li><p>从效率来讲用double合适，而Double提供的属性和方法会使操作各种操作更加方便和灵活。</p></li><li><p>Double就好比是对double类型的封装，内置很多方法可以实现String到double的转换，以及获取各种double类型的属性值（MAX_VALUE、SIZE等等）。</p></li></ul><h2 id="1-数据的共享"><a href="#1-数据的共享" class="headerlink" title="1.数据的共享"></a>1.数据的共享</h2><p>数据共享，如：</p><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// double</span><br><span class="hljs-keyword">double</span> a = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">double</span> b = <span class="hljs-number">0</span>;<br><span class="hljs-comment">//不会创建对象，只会建立两个引用，同时指向变量“0”（栈数据共享）</span><br><br><span class="hljs-comment">// Double</span><br>Double a = <span class="hljs-keyword">new</span> Double(<span class="hljs-number">0</span>);<br>Double b = <span class="hljs-keyword">new</span> Double(<span class="hljs-number">0</span>);<br><span class="hljs-comment">//会创建两个对象，即使对象所代表的值一样（堆数据不共享）</span><br>System.out.println(mdd==midd); <span class="hljs-comment">//false ,==符号比较的是地址，equals比较的是值</span><br><br><span class="hljs-comment">//示例</span><br><span class="hljs-keyword">double</span> a = <span class="hljs-number">1.0</span>;<br><span class="hljs-keyword">double</span> b = <span class="hljs-number">1.0</span>;<br>Double c = <span class="hljs-number">1.0</span>;<br>Double d = <span class="hljs-number">1.0</span>;<br>System.out.println(a == b);  <span class="hljs-comment">// true</span><br>System.out.println(c == d);  <span class="hljs-comment">// false</span><br></code></pre></div></td></tr></table></figure><blockquote><p>double定义的不能为NULL，Double是可以为NULL的。</p></blockquote><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> qw = <span class="hljs-keyword">null</span>; <span class="hljs-comment">//报错</span><br>Double qqw = <span class="hljs-keyword">null</span>;<br></code></pre></div></td></tr></table></figure><h2 id="2-计算哈希值"><a href="#2-计算哈希值" class="headerlink" title="2.计算哈希值"></a>2.计算哈希值</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> ew = <span class="hljs-number">234.324</span>;<br><span class="hljs-comment">// 1.直接计算hash值</span><br>System.out.println(Double.hashCode(ew));<br><span class="hljs-comment">// 2.先将double转化为Double，再求hash值</span><br>Double re = <span class="hljs-keyword">new</span> Double(ew); <span class="hljs-comment">// double转化为Double</span><br>System.out.println(re);<br>System.out.println(re.hashCode());<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">1968322224</span><br><span class="hljs-number">234.324</span><br><span class="hljs-number">1968322224</span><br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>每日一点</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>JAVA</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>每日一点-String与StringBuilder</title>
     <link href="/2021/08/03/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-String%E4%B8%8EStringBuilder/"/>
     <url>/2021/08/03/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9/%E6%AF%8F%E6%97%A5%E4%B8%80%E7%82%B9-String%E4%B8%8EStringBuilder/</url>
