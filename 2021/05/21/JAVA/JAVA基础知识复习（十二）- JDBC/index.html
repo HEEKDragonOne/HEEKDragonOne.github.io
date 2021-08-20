@@ -169,7 +169,7 @@
                   
                   
                   
-                  <a class="dropdown-item" target="_blank" rel="noopener" href="https://tothefor.com/">
+                  <a class="dropdown-item" href="/databases/">
                     
                     资料库
                   </a>
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.6k 字
+      2.9k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      37
+      42
        分钟
     </span>
   
@@ -297,7 +297,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 12, 2021 pm
+                  本文最后更新于：August 11, 2021 pm
                 
               </p>
             
@@ -448,7 +448,39 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>java 代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.*;<br><span class="hljs-keyword">import</span> java.sql.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><br>ResourceBundle bundle = ResourceBundle.getBundle(jdbc);<br>        String driver = bundle.getString(<span class="hljs-string">&quot;driver&quot;</span>);<br>        String url = bundle.getString(<span class="hljs-string">&quot;url&quot;</span>);<br>        String user = bundle.getString(<span class="hljs-string">&quot;user&quot;</span>);<br>        String password = bundle.getString(<span class="hljs-string">&quot;password&quot;</span>);<br><br>        Connection conn = <span class="hljs-keyword">null</span>;<br>        Statement stmt = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            Class.forName(driver);<br>            <span class="hljs-comment">//第二步</span><br>            conn = DriverManager.getConnection(url,user,password);<br>            <span class="hljs-comment">//第三步</span><br>            stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot; &quot;</span>; <span class="hljs-comment">/*根据情况而定*/</span><br>            <span class="hljs-keyword">int</span> count = stmt.executeUpdate(sql);<br>        &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">if</span>(stmt != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    stmt.close();<br>                &#125;<span class="hljs-keyword">catch</span> (SQLException e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(conn != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    conn.close();<br>                &#125;<span class="hljs-keyword">catch</span> (SQLException e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>        &#125;<br></code></pre></div></td></tr></table></figure>
 
-<hr>
+
+<h2 id="3-PreparedStatement的应用"><a href="#3-PreparedStatement的应用" class="headerlink" title="3.PreparedStatement的应用"></a>3.PreparedStatement的应用</h2><blockquote>
+<p>作用：</p>
+</blockquote>
+<ul>
+<li><p>预编译SQL语句，效率高。</p>
+</li>
+<li><p>避免SQL注入。</p>
+</li>
+<li><p>可以动态填充数据，执行多个同构的SQL语句。</p>
+</li>
+</ul>
+<h3 id="3-1-参数标记"><a href="#3-1-参数标记" class="headerlink" title="3.1 参数标记"></a>3.1 参数标记</h3><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">PreparedStatement pstmt <span class="hljs-operator">=</span> conn.prepareStatement(<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> username <span class="hljs-operator">=</span> ? <span class="hljs-keyword">and</span> password <span class="hljs-operator">=</span> ?);<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>JDBC中所有参数都是由 ？ 符号占位，称为参数标记，在执行SQL语句前，必须要为每一个参数提供值。</li>
+</ul>
+<h3 id="3-2-动态参数绑定"><a href="#3-2-动态参数绑定" class="headerlink" title="3.2 动态参数绑定"></a>3.2 动态参数绑定</h3><blockquote>
+<p>方法：pstmt.setXxxx(下标，值) //参数下标从1开始，为指定参数下标绑定值</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-number">1.</span>预编译 <span class="hljs-keyword">SQL</span> 语句<br>PreparedStatement pstmt <span class="hljs-operator">=</span> conn.prepareStatement(<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> username <span class="hljs-operator">=</span> ? <span class="hljs-keyword">and</span> password <span class="hljs-operator">=</span> ?);<br><br><span class="hljs-number">2.</span>为参数下标赋值<br>pstmt.setString(<span class="hljs-number">1</span>,username); # 不是所有地方都是String<br>pstmt.setString(<span class="hljs-number">2</span>,password);<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="3-3-数据操作"><a href="#3-3-数据操作" class="headerlink" title="3.3 数据操作"></a>3.3 数据操作</h3><p>使用PreparedStatement时，还需要执行的操作。</p>
+<ul>
+<li><p>增删改：int cnt = <code>ps.executeUpdate();</code></p>
+</li>
+<li><p>查：ResultSet  rs =<code> ps.executeQuery();</code></p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 增删改，这里以插入数据为例</span><br>String url = <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/WeekDay?serverTimezone=GMT%2B8&quot;</span>;<br>        String user = <span class="hljs-string">&quot;root&quot;</span>;<br>        String password = <span class="hljs-string">&quot;loong461&quot;</span>;<br>        Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>        Connection connection = DriverManager.getConnection(url, user, password);<br>        <br>        String sql = <span class="hljs-string">&quot;insert into Te(id,name,money) values (?,&#x27;qqewr&#x27;,34)&quot;</span>;<br>        PreparedStatement ps = connection.prepareStatement(sql);<br>        ps.setInt(<span class="hljs-number">1</span>,<span class="hljs-number">908</span>);<br><br>        <span class="hljs-keyword">int</span> cnt = ps.executeUpdate(); <span class="hljs-comment">//重点</span><br><br>        ps.close();<br>        connection.close();<br><br><br><span class="hljs-comment">//查</span><br>只需要将<br><span class="hljs-keyword">int</span> cnt = ps.executeUpdate();<br>改为<br>ResultSet rs = ps.executeQuery();<br>即可。<br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -518,7 +550,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
           el: "#vcomments",
           app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
           app_key: "tL3DrseUcom3imP7y6HAnTfh",
-          placeholder: "无需登录，即可评论  \n客官，来说点什么吧！(*╹▽╹*)",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
           path: window.location.pathname,
           avatar: "retro",
           meta: ["nick","mail"],
