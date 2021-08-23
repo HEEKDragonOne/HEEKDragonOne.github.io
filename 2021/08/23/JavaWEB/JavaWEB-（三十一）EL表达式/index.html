@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>JavaWEB-（三十）JSP常用动作标签 - 墨水的记忆</title>
+  <title>JavaWEB-（三十一）EL表达式 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JavaWEB-（三十）JSP常用动作标签">
+            <span class="h2" id="subtitle" title="JavaWEB-（三十一）EL表达式">
               
             </span>
 
@@ -228,7 +228,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-23 17:21" pubdate>
+      <time datetime="2021-08-23 21:10" pubdate>
         August 23, 2021 pm
       </time>
     </span>
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      1k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      16
        分钟
     </span>
   
@@ -293,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JavaWEB-（三十）JSP常用动作标签</h1>
+            <h1 style="display: none">JavaWEB-（三十一）EL表达式</h1>
             
               <p class="note note-info">
                 
@@ -302,93 +302,32 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               </p>
             
             <div class="markdown-body">
-              <p>JSP全称Java Server Pages，是一种动态网页开发技术。它使用JSP标签在HTML网页中插入Java代码。JSP是一种Java servlet，主要用于实现Java web应用程序的用户界面部分。通过结合HTML代码、XHTML代码、XML元素以及嵌入JSP操作和命令来编写JSP。通过网页表单获取用户输入数据、访问数据库及其他数据源，然后动态地创建网页。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-常用动作标签"><a href="#1-常用动作标签" class="headerlink" title="1.常用动作标签"></a>1.常用动作标签</h2><p>动作标签指的是JSP页面在运行期间的命令。</p>
-<blockquote>
-<p>&lt;jsp:action_name attribute=”value” /&gt;</p>
-</blockquote>
-<p><strong>注意：最后面的斜杠不能忘！！！</strong></p>
-<h3 id="1-1-include"><a href="#1-1-include" class="headerlink" title="1.1 include"></a>1.1 include</h3><p>&lt;jsp:include &gt;动作元素会将外部文件的<span style="color:red">输出结果</span>包含在JSP中（动态包含）。</p>
-<blockquote>
-<p>&lt;jsp:include page=”相对URL地址” /&gt; </p>
-</blockquote>
-<p>与前面的include指令不同，指令是将外部文件的输出代码复制到了当前JSP文件中。而动作是将外部文件的输出结果引入到当前JSP文件中。</p>
-<p>将指令那儿的名称冲突问题的代码用来做比较，只需要将其指令改为动作即可解决名称冲突问题。<br>即，将一下代码：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;%@ include file=<span class="hljs-string">&quot;B.jsp&quot;</span>%&gt;<br></code></pre></div></td></tr></table></figure>
-<p>修改为：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;jsp:include page=<span class="hljs-string">&quot;B.jsp&quot;</span> /&gt;<br></code></pre></div></td></tr></table></figure>
-<p>即可解决问题。需要注意的一点：<strong>后面的斜杠（/）不能忘记，不然会报错！！！</strong></p>
-<p>和指令的区别，可以自行查看java类的代码，可以看见其区别。最主要的是那行带有参数的 include。这一行代码就是打印的外部文件的结果。也就是通过include实现了动态包含。</p>
-<h3 id="1-2-useBean"><a href="#1-2-useBean" class="headerlink" title="1.2 useBean"></a>1.2 useBean</h3><p>jsp:useBean动作用来加载一个将在JSP页面中使用的JavaBean。</p>
-<blockquote>
-<p>&lt;jsp:useBean id=”name” class=”包名.类名” /&gt;</p>
-</blockquote>
-<p>在类加载载入后，可以通过jsp:setProperty和jsp:getProperty动作来修改和获取bean的属性。</p>
-<h4 id="1-2-1-setProperty（赋值）"><a href="#1-2-1-setProperty（赋值）" class="headerlink" title="1.2.1 setProperty（赋值）"></a>1.2.1 setProperty（赋值）</h4><p>在jsp:useBean元素之后使用 jsp:setProperty进行属性的赋值。有三个参数。</p>
-<blockquote>
+              <p>EL语言的灵感来自于ECMAScript和XPath表达式语言。EL是JSP 2.0增加的技术规范，其全称是表达式语言(Expression Language)。EL 是为了使JSP写起来更加简单。主要用于获取作用域中的数据。EL表达式语言是一种简单的语言，提供了在JSP中简化表达式的方法，目的是为了尽量减少JSP页面中的Java代码，使得JSP页面的处理程序编写起来更加简洁，便于开发和维护。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-EL获取基本类型、字符串"><a href="#1-EL获取基本类型、字符串" class="headerlink" title="1.EL获取基本类型、字符串"></a>1.EL获取基本类型、字符串</h2><blockquote>
 <ol>
-<li>name：必需的。表示给哪一个Bean设置属性。</li>
+<li>${scope.name} 获取具体某个作用域中的数据。scope表示作用域。</li>
 </ol>
 </blockquote>
 <blockquote>
 <ol start="2">
-<li>property：必需的。表示设置哪个属性。</li>
+<li>${name} 获取作用域中的数据，逐级进行查找（从小到大），pageContext（当前）、request（一次请求）、session（一次会话）、application（就是ServletContext，整个项目）。先找到谁用谁。</li>
 </ol>
 </blockquote>
+<p>对照示例：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;%--<br>  Created by IntelliJ IDEA.<br>  User: DragonOne<br>  Date: <span class="hljs-number">2021</span>/<span class="hljs-number">8</span>/<span class="hljs-number">23</span><br>  Time: <span class="hljs-number">21</span>:<span class="hljs-number">48</span><br>  To change <span class="hljs-keyword">this</span> template use File | Settings | File Templates.<br>--%&gt;<br>&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;EL表达式&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>    &lt;%<br>        request.setAttribute(<span class="hljs-string">&quot;req&quot;</span>,<span class="hljs-string">&quot;request&quot;</span>);<br>        session.setAttribute(<span class="hljs-string">&quot;ses&quot;</span>,<span class="hljs-string">&quot;session&quot;</span>);<br>        application.setAttribute(<span class="hljs-string">&quot;app&quot;</span>,<span class="hljs-string">&quot;application&quot;</span>);<br><br>        request.setAttribute(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong&quot;</span>);<br>        session.setAttribute(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong&quot;</span>);<br>        application.setAttribute(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong&quot;</span>);<br>    %&gt;<br><br>&lt;%--    通过作用域对象获取数据--%&gt;<br>    &lt;h1&gt;&lt;%=request.getAttribute(&quot;req&quot;)%&gt;&lt;/h1&gt;<br>    &lt;h1&gt;&lt;%=session.getAttribute(&quot;ses&quot;)%&gt;&lt;/h1&gt;<br>    &lt;h1&gt;&lt;%=application.getAttribute(&quot;app&quot;)%&gt;&lt;/h1&gt;<br><br>    &lt;hr&gt;<br>&lt;%--    通过EL表达式获取数据--%&gt;<br>    &lt;h1&gt;$&#123;requestScope.req&#125;&lt;/h1&gt;<br>    &lt;h1&gt;$&#123;sessionScope.ses&#125;&lt;/h1&gt;<br>    &lt;h1&gt;$&#123;applicationScope.app&#125;&lt;/h1&gt;<br><br>    &lt;hr&gt;<br>&lt;%--    EL方法二--%&gt;<br><br>    &lt;h1&gt;$&#123;name&#125;&lt;/h1&gt;<br>    &lt;h1&gt;$&#123;name&#125;&lt;/h1&gt;<br>    &lt;h1&gt;$&#123;name&#125;&lt;/h1&gt;<br><br>&lt;/body&gt;<br>&lt;/html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>在网页上可见，前两种的输出都是一样的。而最后一种输出的都是一样的，说明都是同一个，因为都是从最小的request作用域中拿取的。</p>
+<h3 id="1-1-EL和JSP脚本的区别"><a href="#1-1-EL和JSP脚本的区别" class="headerlink" title="1.1 EL和JSP脚本的区别"></a>1.1 EL和JSP脚本的区别</h3><p>&lt;%=request.getAttribute() %&gt; 如果没有找到返回 null；${requestScope.name} 没有找到返回空（””）。</p>
+<h2 id="2-EL获取引用类型"><a href="#2-EL获取引用类型" class="headerlink" title="2.EL获取引用类型"></a>2.EL获取引用类型</h2><p>使用EL获取作用域中的对象调用属性时，只能访问对象的get()方法，get()方法的定义必须遵守命名规范定义。</p>
 <blockquote>
-<ol start="3">
-<li>value：可选的。用来指定属性的值。</li>
-</ol>
+<p>${scope.a.name} 是通过调用getName()方法实现的。</p>
 </blockquote>
-<p>用法：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;jsp:setProperty name=<span class="hljs-string">&quot;&quot;</span> property=<span class="hljs-string">&quot;&quot;</span> value=<span class="hljs-string">&quot;&quot;</span>/&gt;<br></code></pre></div></td></tr></table></figure>
-
-<h4 id="1-2-2-getProperty（取值）"><a href="#1-2-2-getProperty（取值）" class="headerlink" title="1.2.2 getProperty（取值）"></a>1.2.2 getProperty（取值）</h4><p>获取指定Bean属性的值，转换成字符串，然后输出。有两个参数。</p>
-<blockquote>
-<ol>
-<li>name：表示要检索的Bean属性名称。Bean必须是已经定义了的。</li>
-</ol>
-</blockquote>
-<blockquote>
-<ol start="2">
-<li>property：表示要获取的Bean属性的值。</li>
-</ol>
-</blockquote>
-<p>用法：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;jsp:getProperty name=<span class="hljs-string">&quot;&quot;</span> property=<span class="hljs-string">&quot;&quot;</span>/&gt;<br></code></pre></div></td></tr></table></figure>
-
-
-<h4 id="1-2-3-自我总结"><a href="#1-2-3-自我总结" class="headerlink" title="1.2.3 自我总结"></a>1.2.3 自我总结</h4><p>类似于一般的定义一个类，然后创建类，类中有其他属性，然后给类中的属性变量赋值，然后再获取属性变量的值。唯一不同的是，类必须要标准化（有：有参无参的构造函数、get、set方法等）。</p>
-<p>因为useBean中需要两个参数：一个id，一个class。刚好对应正常类中的：对象的名字，类的全限定名称。<br>setProperty中需要三个参数，刚好对应正常类中的给对象属性赋值的操作：对象名.属性名=值，刚好三个参数。<br>getProperty中需要两个参数，刚好对应正常类中取值：对象名.属性名。</p>
-<p>对应的关系为：<br>useBean -&gt; 创建（new）一个对象 。<br>setProperty -&gt; 给对象中的属性变量赋值。（对象.属性=value）<br>getProperty -&gt; 获取对象中属性变量的值。（对象.属性）</p>
-<p>对照示例：（已经创建好了一个叫Person的类并标准化，其中有name、age、money三个成员变量）</p>
-<p>创建对象：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//java</span><br>Person user = <span class="hljs-keyword">new</span> Person();<br>Person root = <span class="hljs-keyword">new</span> Person();<br><br><span class="hljs-comment">//jsp</span><br>&lt;jsp:useBean id=<span class="hljs-string">&quot;user&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.tothefor.Entity.Person&quot;</span> /&gt;<br>&lt;jsp:useBean id=<span class="hljs-string">&quot;root&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;com.tothefor.Entity.Person&quot;</span> /&gt;<br></code></pre></div></td></tr></table></figure>
-
-<p>赋值：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//java</span><br>user.setName(<span class="hljs-string">&quot;loong&quot;</span>);<br>root.setAge(<span class="hljs-number">13</span>);<br><br><span class="hljs-comment">//jsp</span><br>&lt;jsp:setProperty name=<span class="hljs-string">&quot;user&quot;</span> property=<span class="hljs-string">&quot;name&quot;</span> value=<span class="hljs-string">&quot;loong&quot;</span> /&gt;<br>&lt;jsp:setProperty name=<span class="hljs-string">&quot;root&quot;</span> property=<span class="hljs-string">&quot;age&quot;</span> value=<span class="hljs-string">&quot;13&quot;</span> /&gt;<br></code></pre></div></td></tr></table></figure>
-
-<p>取值：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//java</span><br>String s1 = user.getName();<br><span class="hljs-keyword">int</span> ta = root.getAge();<br><br><span class="hljs-comment">//jsp</span><br>&lt;jsp:getProperty name=<span class="hljs-string">&quot;user&quot;</span> property=<span class="hljs-string">&quot;name&quot;</span>/&gt;<br>&lt;jsp:getProperty name=<span class="hljs-string">&quot;root&quot;</span> property=<span class="hljs-string">&quot;age&quot;</span>/&gt;<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h3 id="1-3-forward（转发）"><a href="#1-3-forward（转发）" class="headerlink" title="1.3 forward（转发）"></a>1.3 forward（转发）</h3><p>jsp:forward 动作把请求转到另外的页面。</p>
-<blockquote>
-<p>&lt;jsp:forward page=”相对URL地址” /&gt;</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;jsp:forward page=&quot;C.jsp&quot;&gt;&lt;/jsp:forward&gt;<br></code></pre></div></td></tr></table></figure>
-
-<p><strong>注意：有两种写法，一种是没有结束标签，一种是有结束标签的。</strong></p>
-<h3 id="1-4-param"><a href="#1-4-param" class="headerlink" title="1.4 param"></a>1.4 param</h3><p>在转发动作内部使用，用来做参数传递的。有参数传递时，就必须要用forward有结束标签的方式。</p>
-<blockquote>
-<p>&lt;jsp:param name=”” value=”” /&gt;</p>
-</blockquote>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;body&gt;<br><br>    &lt;jsp:forward page=<span class="hljs-string">&quot;C.jsp&quot;</span>&gt;<br>        &lt;jsp:param name=<span class="hljs-string">&quot;lee&quot;</span> value=<span class="hljs-string">&quot;loong&quot;</span>/&gt;<br>    &lt;/jsp:forward&gt;<br><br>&lt;/body&gt;<br></code></pre></div></td></tr></table></figure>
-
-<p>如果需要在C.jsp中进行获取参数，如下：</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;body&gt;<br>&lt;h1&gt;C页面内容&lt;/h1&gt;<br>&lt;%<br>    String na = request.getParameter(<span class="hljs-string">&quot;lee&quot;</span>);<br>%&gt;<br>&lt;%=na%&gt;<br>&lt;/body&gt;<br></code></pre></div></td></tr></table></figure>
-
+<p>示例：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;body&gt;<br>    &lt;%<br>        Person root = <span class="hljs-keyword">new</span> Person(<span class="hljs-string">&quot;loong&quot;</span>,<span class="hljs-string">&quot;tothefor&quot;</span>);<br>        request.setAttribute(<span class="hljs-string">&quot;roots&quot;</span>,root);<br>    %&gt;<br>		$&#123;root&#125; &lt;!--获取的是地址--&gt;<br>    $&#123;requestScope.roots.username&#125;<br>    $&#123;requestScope.roots.password&#125;<br><br>&lt;/body&gt;<br></code></pre></div></td></tr></table></figure>
+<p>**需要注意的是：${requestScope.root.username}和${requestScope.root.password}中的username和password不是通过直接属性名拿到的，而是通过get()方法拿到的，如果Person类中没有get()方法，则无法获取。 **</p>
+<h2 id="3-EL获取数组、集合"><a href="#3-EL获取数组、集合" class="headerlink" title="3.EL获取数组、集合"></a>3.EL获取数组、集合</h2><p>EL还可以获取Array、List、Map中的元素，Set由于没有下标，无法直接访问元素，但可遍历访问。</p>
+<p>示例：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;com.tothefor.entity.Person&quot;</span> %&gt;<br>&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.lang.String&quot;</span> %&gt;<br>&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.util.*&quot;</span> %&gt;<br>&lt;%--<br>  Created by IntelliJ IDEA.<br>  User: dragonone<br>  Date: <span class="hljs-number">2021</span>/<span class="hljs-number">8</span>/<span class="hljs-number">23</span><br>  Time: <span class="hljs-number">21</span>:<span class="hljs-number">48</span><br>  To change <span class="hljs-keyword">this</span> template use File | Settings | File Templates.<br>--%&gt;<br>&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;EL表达式&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>    &lt;%<br>        <span class="hljs-keyword">int</span>[] array = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[]&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>&#125;;<br>        request.setAttribute(<span class="hljs-string">&quot;arr&quot;</span>,array);<br><br>        List&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>        list.add(<span class="hljs-string">&quot;A&quot;</span>);<br>        list.add(<span class="hljs-string">&quot;B&quot;</span>);<br>        list.add(<span class="hljs-string">&quot;C&quot;</span>);<br>        request.setAttribute(<span class="hljs-string">&quot;li&quot;</span>,list);<br><br>        Map&lt;String,String&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>        map.put(<span class="hljs-string">&quot;CN&quot;</span>,<span class="hljs-string">&quot;中国&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;US&quot;</span>,<span class="hljs-string">&quot;M国&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;IT&quot;</span>,<span class="hljs-string">&quot;意大利&quot;</span>);<br>        request.setAttribute(<span class="hljs-string">&quot;ma&quot;</span>,map);<br><br>    %&gt;<br><br>    $&#123;arr&#125; &lt;br&gt;<br>    $&#123;arr[<span class="hljs-number">0</span>]&#125; &lt;br&gt;<br><br>    &lt;hr&gt;<br>    $&#123;li&#125; &lt;br&gt;<br>    $&#123;li[<span class="hljs-number">0</span>]&#125; &lt;br&gt;<br>    $&#123;li.get(<span class="hljs-number">0</span>)&#125; &lt;br&gt;<br><br>    &lt;hr&gt;<br>    $&#123;ma&#125; &lt;br&gt;<br>    $&#123;ma[<span class="hljs-string">&quot;CN&quot;</span>]&#125; &lt;br&gt;<br>    $&#123;ma.US&#125; &lt;br&gt;<br><br><br>&lt;/body&gt;<br>&lt;/html&gt;<br><br><br><span class="hljs-comment">//结果</span><br>[I@245c4786<br><span class="hljs-number">1</span><br>[A, B, C]<br>A<br>A<br>&#123;CN=中国, IT=意大利, US=M国&#125;<br>中国<br>M国<br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -428,7 +367,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%EF%BC%89JSP%E5%B8%B8%E7%94%A8%E5%8A%A8%E4%BD%9C%E6%A0%87%E7%AD%BE/">http://example.com/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%EF%BC%89JSP%E5%B8%B8%E7%94%A8%E5%8A%A8%E4%BD%9C%E6%A0%87%E7%AD%BE/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%B8%80%EF%BC%89EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/">http://example.com/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%B8%80%EF%BC%89EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -437,9 +376,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%B8%80%EF%BC%89EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
+                      <a href="/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%BA%8C%EF%BC%89EL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8E%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaWEB-（三十一）EL表达式</span>
+                        <span class="hidden-mobile">JavaWEB-（三十二）EL基础操作符与隐含对象</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -447,8 +386,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%BA%8C%E5%8D%81%E4%B9%9D%EF%BC%89JSP%E5%9F%BA%E7%A1%80/">
-                        <span class="hidden-mobile">JavaWEB-（二十九）JSP基础</span>
+                      <a href="/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%EF%BC%89JSP%E5%B8%B8%E7%94%A8%E5%8A%A8%E4%BD%9C%E6%A0%87%E7%AD%BE/">
+                        <span class="hidden-mobile">JavaWEB-（三十）JSP常用动作标签</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
