@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>JavaWEB-（三十二）EL基础操作符与隐含对象 - 墨水的记忆</title>
+  <title>Ubuntu18.04安装MySQL8.0教程 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JavaWEB-（三十二）EL基础操作符与隐含对象">
+            <span class="h2" id="subtitle" title="Ubuntu18.04安装MySQL8.0教程">
               
             </span>
 
@@ -228,8 +228,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-23 22:53" pubdate>
-        August 23, 2021 pm
+      <time datetime="2021-08-24 13:23" pubdate>
+        August 24, 2021 pm
       </time>
     </span>
   
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      652 字
+      589 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      7
        分钟
     </span>
   
@@ -293,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JavaWEB-（三十二）EL基础操作符与隐含对象</h1>
+            <h1 style="display: none">Ubuntu18.04安装MySQL8.0教程</h1>
             
               <p class="note note-info">
                 
@@ -302,154 +302,66 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               </p>
             
             <div class="markdown-body">
-              <p>EL语言的灵感来自于ECMAScript和XPath表达式语言。EL是JSP 2.0增加的技术规范，其全称是表达式语言(Expression Language)。EL 是为了使JSP写起来更加简单。主要用于获取作用域中的数据。EL表达式语言是一种简单的语言，提供了在JSP中简化表达式的方法，目的是为了尽量减少JSP页面中的Java代码，使得JSP页面的处理程序编写起来更加简洁，便于开发和维护。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-基础操作符"><a href="#1-基础操作符" class="headerlink" title="1.基础操作符"></a>1.基础操作符</h2><p>EL表达式支持大部分Java所提供的算术和逻辑操作符，符号或者关键字：</p>
-<table>
-<thead>
-<tr>
-<th align="left"><strong>操作符</strong></th>
-<th align="left"><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">.</td>
-<td align="left">访问一个Bean属性或者一个映射条目</td>
-</tr>
-<tr>
-<td align="left">[]</td>
-<td align="left">访问一个数组或者链表的元素</td>
-</tr>
-<tr>
-<td align="left">( )</td>
-<td align="left">组织一个子表达式以改变优先级</td>
-</tr>
-<tr>
-<td align="left">+</td>
-<td align="left">加</td>
-</tr>
-<tr>
-<td align="left">-</td>
-<td align="left">减或负</td>
-</tr>
-<tr>
-<td align="left">*</td>
-<td align="left">乘</td>
-</tr>
-<tr>
-<td align="left">/ or div</td>
-<td align="left">除</td>
-</tr>
-<tr>
-<td align="left">% or mod</td>
-<td align="left">取模</td>
-</tr>
-<tr>
-<td align="left">== or eq</td>
-<td align="left">测试是否相等</td>
-</tr>
-<tr>
-<td align="left">!= or ne</td>
-<td align="left">测试是否不等</td>
-</tr>
-<tr>
-<td align="left">&lt; or lt</td>
-<td align="left">测试是否小于</td>
-</tr>
-<tr>
-<td align="left">&gt; or gt</td>
-<td align="left">测试是否大于</td>
-</tr>
-<tr>
-<td align="left">&lt;= or le</td>
-<td align="left">测试是否小于等于</td>
-</tr>
-<tr>
-<td align="left">&gt;= or ge</td>
-<td align="left">测试是否大于等于</td>
-</tr>
-<tr>
-<td align="left">&amp;&amp; or and</td>
-<td align="left">测试逻辑与</td>
-</tr>
-<tr>
-<td align="left">|| or or</td>
-<td align="left">测试逻辑或</td>
-</tr>
-<tr>
-<td align="left">! or not</td>
-<td align="left">测试取反</td>
-</tr>
-<tr>
-<td align="left">empty</td>
-<td align="left">测试是否空值</td>
-</tr>
-</tbody></table>
-<p>演示部分使用：</p>
-<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;com.tothefor.entity.Person&quot;</span> %&gt;<br>&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.lang.String&quot;</span> %&gt;<br>&lt;%@ page <span class="hljs-keyword">import</span>=<span class="hljs-string">&quot;java.util.*&quot;</span> %&gt;<br>&lt;%--<br>  Created by IntelliJ IDEA.<br>  User: dragonone<br>  Date: <span class="hljs-number">2021</span>/<span class="hljs-number">8</span>/<span class="hljs-number">23</span><br>  Time: <span class="hljs-number">21</span>:<span class="hljs-number">48</span><br>  To change <span class="hljs-keyword">this</span> template use File | Settings | File Templates.<br>--%&gt;<br>&lt;%@ page contentType=<span class="hljs-string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="hljs-string">&quot;java&quot;</span> %&gt;<br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;title&gt;EL表达式&lt;/title&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>    &lt;%<br>        request.setAttribute(<span class="hljs-string">&quot;num&quot;</span>,<span class="hljs-number">1234</span>);<br>        request.setAttribute(<span class="hljs-string">&quot;str&quot;</span>,<span class="hljs-string">&quot;&quot;</span>);<br>        request.setAttribute(<span class="hljs-string">&quot;strs&quot;</span>,<span class="hljs-keyword">null</span>);<br>    %&gt;<br><br>    $&#123;num + <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;num - <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;num * <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;num / <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;num div <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;num % <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;num mod <span class="hljs-number">5</span>&#125; &lt;br&gt;<br>    $&#123;empty str&#125; &lt;br&gt;<br>    $&#123;empty strs&#125; &lt;br&gt;<br><br>&lt;/body&gt;<br>&lt;/html&gt;<br><br><br><span class="hljs-comment">//结果</span><br><span class="hljs-number">1239</span><br><span class="hljs-number">1229</span><br><span class="hljs-number">6170</span><br><span class="hljs-number">246.8</span><br><span class="hljs-number">246.8</span><br><span class="hljs-number">4</span><br><span class="hljs-number">4</span><br><span class="hljs-keyword">true</span><br><span class="hljs-keyword">true</span><br></code></pre></div></td></tr></table></figure>
+              <p>Ubuntu18.04安装MySQL8.0教程及相应问题的解决方法。这里是在服务器中进行的，所以包含了删除Mysql5.7版本的方法。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-卸载MySQL5-7"><a href="#1-卸载MySQL5-7" class="headerlink" title="1.卸载MySQL5.7"></a>1.卸载MySQL5.7</h2><h3 id="1-1-查看MySQL的依赖项："><a href="#1-1-查看MySQL的依赖项：" class="headerlink" title="1.1 查看MySQL的依赖项："></a>1.1 查看MySQL的依赖项：</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">dpkg --list|grep mysql<br></code></pre></div></td></tr></table></figure>
 
+<h3 id="1-2-卸载"><a href="#1-2-卸载" class="headerlink" title="1.2 卸载"></a>1.2 卸载</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get remove mysql-common<br></code></pre></div></td></tr></table></figure>
 
+<h3 id="1-3-再次卸载"><a href="#1-3-再次卸载" class="headerlink" title="1.3 再次卸载"></a>1.3 再次卸载</h3><p>**最后的版本数字根据自己具体的版本进行相应的修改。 **</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get autoremove --purge mysql-server-5.7<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="2-隐含对象"><a href="#2-隐含对象" class="headerlink" title="2.隐含对象"></a>2.隐含对象</h2><p>JSP EL支持的隐含对象：</p>
-<table>
-<thead>
-<tr>
-<th align="left"><strong>隐含对象</strong></th>
-<th align="left"><strong>描述</strong></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">pageScope</td>
-<td align="left">page 作用域</td>
-</tr>
-<tr>
-<td align="left">requestScope</td>
-<td align="left">request 作用域</td>
-</tr>
-<tr>
-<td align="left">sessionScope</td>
-<td align="left">session 作用域</td>
-</tr>
-<tr>
-<td align="left">applicationScope</td>
-<td align="left">application 作用域</td>
-</tr>
-<tr>
-<td align="left">param</td>
-<td align="left">Request 对象的参数，字符串</td>
-</tr>
-<tr>
-<td align="left">paramValues</td>
-<td align="left">Request对象的参数，字符串集合</td>
-</tr>
-<tr>
-<td align="left">header</td>
-<td align="left">HTTP 信息头，字符串</td>
-</tr>
-<tr>
-<td align="left">headerValues</td>
-<td align="left">HTTP 信息头，字符串集合</td>
-</tr>
-<tr>
-<td align="left">initParam</td>
-<td align="left">上下文初始化参数</td>
-</tr>
-<tr>
-<td align="left"><code>cookie</code></td>
-<td align="left">Cookie值</td>
-</tr>
-<tr>
-<td align="left"><code>pageContext</code></td>
-<td align="left">当前页面的pageContext</td>
-</tr>
-</tbody></table>
-<h3 id="2-1-获取应用上下文"><a href="#2-1-获取应用上下文" class="headerlink" title="2.1 获取应用上下文"></a>2.1 获取应用上下文</h3><figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;%=request.getContextPath() %&gt;<br>$&#123;pageContext.request.contextPath&#125;<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-4-清除残留数据"><a href="#1-4-清除残留数据" class="headerlink" title="1.4 清除残留数据"></a>1.4 清除残留数据</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">dpkg -l|grep ^rc|awk <span class="hljs-string">&#x27;&#123;print$2&#125;&#x27;</span>|sudo xargs dpkg -P<br></code></pre></div></td></tr></table></figure>
 
+<h3 id="1-5-再次查看依赖项"><a href="#1-5-再次查看依赖项" class="headerlink" title="1.5 再次查看依赖项"></a>1.5 再次查看依赖项</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">dpkg --list|grep mysql<br></code></pre></div></td></tr></table></figure>
+<p><code>若命令输入之后无反应直接出现命令提示符，则说明依赖项完全删除。</code><br>若仍有其他内容，则继续清除剩余依赖项：（这里的命令与上一条清除命令不同）</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get autoremove --purge mysql-apt-config<br></code></pre></div></td></tr></table></figure>
+<p>最后可再次查看依赖项。</p>
+<h2 id="2-安装MySQL8-0"><a href="#2-安装MySQL8-0" class="headerlink" title="2.安装MySQL8.0"></a>2.安装MySQL8.0</h2><h3 id="2-1-下载存储库软件包"><a href="#2-1-下载存储库软件包" class="headerlink" title="2.1 下载存储库软件包"></a>2.1 下载存储库软件包</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget -c https://dev.mysql.com/get/mysql-apt-config_0.8.10-1_all.deb<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="2-2-获取Cookie对象"><a href="#2-2-获取Cookie对象" class="headerlink" title="2.2 获取Cookie对象"></a>2.2 获取Cookie对象</h3><figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">$&#123;cookie.username&#125; <span class="hljs-comment">//获取名为username的cookie对象</span><br>$&#123;cookie.username,value&#125; <span class="hljs-comment">//获取username的cookie的value值。</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="2-2-安装下载的软件包"><a href="#2-2-安装下载的软件包" class="headerlink" title="2.2 安装下载的软件包"></a>2.2 安装下载的软件包</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo dpkg -i mysql-apt-config_0.8.10-1_all.deb<br></code></pre></div></td></tr></table></figure>
+<p>安装过程中提示选择安装版本，默认安装的就是8.0版本，所以直接选择“OK”确认即可（ok是选项中的OK）。</p>
+<h3 id="2-3-下载软件包信息"><a href="#2-3-下载软件包信息" class="headerlink" title="2.3 下载软件包信息"></a>2.3 下载软件包信息</h3><p>从所有已配置的存储库（包括新添加的 MySQL 8存储库）中下载最新的软件包信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt update<br></code></pre></div></td></tr></table></figure>
+<p>如果命令执行后正常的可跳过下面的内容，若是出现仓库签名无效等错误的进行查看。</p>
+<h4 id="2-3-1-错误处理"><a href="#2-3-1-错误处理" class="headerlink" title="2.3.1 错误处理"></a>2.3.1 错误处理</h4><p>错误如下：</p>
+<p><img src="https://img-blog.csdnimg.cn/1c70b2b73c5e4ccca78bd1c43ace0469.png" srcset="/img/loading.gif"></p>
+<p>表示的是签名无效或已经过期。</p>
+<h5 id="2-3-1-1-解决办法"><a href="#2-3-1-1-解决办法" class="headerlink" title="2.3.1.1 解决办法"></a>2.3.1.1 解决办法</h5><blockquote>
+<ol>
+<li>查看签名列表</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">apt-key list<br></code></pre></div></td></tr></table></figure>
 
+<blockquote>
+<ol start="2">
+<li>删除过期的签名</li>
+</ol>
+</blockquote>
+<p>del 后跟上条指令查到的pub。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-key del dsa1024<br></code></pre></div></td></tr></table></figure>
 
+<p><img src="https://img-blog.csdnimg.cn/36996dc4e2dc481cbc342cc1a2cec130.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<ol start="3">
+<li>重新添加新的签名</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 8C718D3B5072E1F5<br></code></pre></div></td></tr></table></figure>
 
+<blockquote>
+<ol start="4">
+<li>更新</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt update<br></code></pre></div></td></tr></table></figure>
 
+<p>以上就是错误处理。</p>
+<h3 id="2-4-安装MySQL"><a href="#2-4-安装MySQL" class="headerlink" title="2.4 安装MySQL"></a>2.4 安装MySQL</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt install mysql-server<br></code></pre></div></td></tr></table></figure>
+<p>安装过程中会提示<span style="color:red">设置root密码</span>。输入之后会出现选择加密方式的提示界面，网上的教程中，默认的mysql8.0的加密方式与ubuntu18.04 不兼容，所以选择5.x的加密方式；建议选择下边的那个，即选择：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Use Legacy Authentication Method (Retain MySQL 5.x Compatibility)    <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-5-验证"><a href="#2-5-验证" class="headerlink" title="2.5 验证"></a>2.5 验证</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mysql -uroot -ppassword<br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -462,7 +374,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/JavaWEB/">JavaWEB</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/">学习教程</a>
                     
                   </div>
                 
@@ -470,7 +382,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/JavaWEB/">JavaWEB</a>
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Ubuntu/">Ubuntu</a>
                     
                   </div>
                 
@@ -484,7 +398,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%BA%8C%EF%BC%89EL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8E%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1/">http://example.com/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%BA%8C%EF%BC%89EL%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C%E7%AC%A6%E4%B8%8E%E9%9A%90%E5%90%AB%E5%AF%B9%E8%B1%A1/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/08/24/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/Ubuntu18.04%E5%AE%89%E8%A3%85MySQL8.0%E6%95%99%E7%A8%8B/">http://example.com/2021/08/24/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/Ubuntu18.04%E5%AE%89%E8%A3%85MySQL8.0%E6%95%99%E7%A8%8B/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -493,18 +407,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/24/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%B8%89%EF%BC%89JSTL%E6%A0%87%E5%87%86%E6%A0%87%E7%AD%BE%E5%BA%93/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JavaWEB-（三十三）JSTL标准标签库</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/23/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%B8%80%EF%BC%89EL%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-                        <span class="hidden-mobile">JavaWEB-（三十一）EL表达式</span>
+                      <a href="/2021/08/24/JavaWEB/JavaWEB-%EF%BC%88%E4%B8%89%E5%8D%81%E4%B8%89%EF%BC%89JSTL%E6%A0%87%E5%87%86%E6%A0%87%E7%AD%BE%E5%BA%93/">
+                        <span class="hidden-mobile">JavaWEB-（三十三）JSTL标准标签库</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
