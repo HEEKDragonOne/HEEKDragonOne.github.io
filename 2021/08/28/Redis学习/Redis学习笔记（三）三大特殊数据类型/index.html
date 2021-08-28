@@ -1,0 +1,798 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水的记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>Redis学习笔记（三）三大特殊数据类型 - 墨水的记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis学习笔记（三）三大特殊数据类型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-28 10:43" pubdate>
+        August 28, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis学习笔记（三）三大特殊数据类型</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：August 28, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Redis 是当前互联网世界最为流行的 NoSQL（Not Only SQL）数据库。Redis 是一个开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存、分布式、可选持久性的键值对(Key-Value)存储数据库，并提供多种语言的 API。Redis 具备一定持久层的功能，也可以作为一种缓存工具。对于 NoSQL 数据库而言，作为持久层，它存储的数据是半结构化的，这就意味着计算机在读入内存中有更少的规则，读入速度更快。Redis 通常被称为数据结构服务器，因为值（value）可以是字符串(String)、哈希(Hash)、列表(list)、集合(sets)和有序集合(sorted sets)等类型。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-地理空间（geospatial）"><a href="#1-地理空间（geospatial）" class="headerlink" title="1.地理空间（geospatial）"></a>1.地理空间（geospatial）</h2><p>Geospatial是Redis在3.2版本以后增加的地理位置GEO模块，加入了地理空间(geospatial)以及索引半径查询的功能。这个模块可以用来实现微信附近的人，在线点餐“附近的餐馆”等位置功能。主要用在需要地理位置的应用上。</p>
+<h3 id="1-1-GEOADD"><a href="#1-1-GEOADD" class="headerlink" title="1.1 GEOADD"></a>1.1 GEOADD</h3><blockquote>
+<p>时间复杂度：每一个元素添加是O(log(N)) ，N是sorted set的元素数量。</p>
+</blockquote>
+<p>将指定的地理空间位置（维度、经度、名字）添加到指定的键里面，数据以有序集合的形式被存放在键中。GEOADD接收的参数必须先输入经度，然后输入维度，经度必须在纬度之前。</p>
+<ul>
+<li>有效的经度从-180°到180°。</li>
+<li>有效的纬度从-85.05112878°到85.05112878°。</li>
+</ul>
+<p>当坐标位置超出上述指定范围时，该命令将会返回一个错误。</p>
+<blockquote>
+<p>GEOADD key longitude latitude member [longitude latitude member …]</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">geoadd city 121.472641 31.231707 shanghai<br>geoadd city 116.405289 39.904987 beijing<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="1-2-GEOPOS"><a href="#1-2-GEOPOS" class="headerlink" title="1.2 GEOPOS"></a>1.2 GEOPOS</h3><p>根据键（key）获取给定位置元素的经度和纬度。</p>
+<blockquote>
+<p>GEOPOS key member [member …]</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">geopos city beijing<br>geopos city beijing shanghai<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h3 id="1-3-GEODIST"><a href="#1-3-GEODIST" class="headerlink" title="1.3 GEODIST"></a>1.3 GEODIST</h3><p>返回两个给定位置之间的距离，以双精度浮点数的形式被返回。如果给定的位置其中一个不存在（两个都不存在也是一样），将会返回空值（nil）。</p>
+<blockquote>
+<p>GEODIST key member1 member2 [unit]</p>
+</blockquote>
+<p>其中，unit是单位，如下：</p>
+<ul>
+<li><strong>m</strong> 表示单位为米。默认情况。</li>
+<li><strong>km</strong> 表示单位为千米。</li>
+<li><strong>mi</strong> 表示单位为英里。</li>
+<li><strong>ft</strong> 表示单位为英尺。</li>
+</ul>
+<p><strong>注意：GEODIST 计算的算法会将地球考虑为一个完全球体，在极限情况下，存在最大0.5%的误差</strong></p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">geodist city shanghai beijing km<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-4-GEORADIUS"><a href="#1-4-GEORADIUS" class="headerlink" title="1.4 GEORADIUS"></a>1.4 GEORADIUS</h3><p>以给定的经纬度为中心， 返回键包含的位置元素当中， 与中心的距离不超过给定最大距离的所有位置元素。即：求以给定的位置为中心，以给定的半径画圆，求有多少在圈里面。</p>
+<blockquote>
+<p>GEORADIUS key longitude latitude radius m|km|ft|mi [WITHCOORD] [WITHDIST] [WITHHASH] [ASC|DESC] [COUNT count]</p>
+</blockquote>
+<p>GEORADIUS 的返回值是一个数组，但是数组的内容会根据是否存在上述参数而改变。<br>其中：</p>
+<blockquote>
+<p>[WITHCOORD] [WITHDIST] [WITHHASH]选项：（可多选）</p>
+</blockquote>
+<ul>
+<li>[WITHCOORD]：将位置元素的经度和纬度也一并返回。</li>
+<li>[WITHDIST] ：在返回位置元素的同时， 将位置元素与中心之间的距离也一并返回。 距离的单位和用户给定的范围单位保持一致。</li>
+<li>[WITHHASH]： 以 52 位有符号整数的形式， 返回位置元素经过原始 geohash 编码的有序集合分值。 这个选项主要用于底层应用或者调试， 实际中的作用并不大。</li>
+</ul>
+<blockquote>
+<p>[ASC|DESC] 选项：</p>
+</blockquote>
+<ul>
+<li>ASC：根据给定的中心位置，从近到远返回位置元素。</li>
+<li>DESC：根据给定的中心位置，从远到近返回位置元素。（默认情况）</li>
+</ul>
+<p>GEORADIUS 默认会返回符合条件的全部位置元素。但是用户可以通过[COUNT count] 参数去指定获取前N个匹配元素。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">georadius city 116.405289 39.904987 1000 km<br>georadius city 116.405289 39.904987 1000 km withcoord withdist<br>georadius city 116.405289 39.904987 1000 km withcoord asc<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h3 id="1-5-GEORADIUSBYMEMBER"><a href="#1-5-GEORADIUSBYMEMBER" class="headerlink" title="1.5 GEORADIUSBYMEMBER"></a>1.5 GEORADIUSBYMEMBER</h3><p>GEORADIUSBYMEMBER与GEORADIUS的区别在于，GEORADIUSBYMEMBER无需给定经纬度，只需要给定成员的key就行，具体使用与GEORADIUS一致。<br>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">georadiusbymember city beijing 1000 km<br>georadiusbymember city beijing 1000 km withcoord<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-6-GEOHASH"><a href="#1-6-GEOHASH" class="headerlink" title="1.6 GEOHASH"></a>1.6 GEOHASH</h3><p>返回一个或多个位置元素的 Geohash 表示。通常使用表示位置的元素使用不同的技术，使用Geohash位置52点整数编码。由于编码和解码过程中所使用的初始最小和最大坐标不同，编码的编码也不同于标准。此命令返回一个标准的Geohash。该命令将返回11个字符的Geohash字符串。</p>
+<blockquote>
+<p>GEOHASH key member [member …]</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">geohash city beijing<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-HyperLogLog"><a href="#2-HyperLogLog" class="headerlink" title="2.HyperLogLog"></a>2.HyperLogLog</h2><p>HyperLogLog是用来做基数统计的算法，它提供不精确的去重计数方案，标准误差是0.81%，对于UV这种统计来说这样的误差范围是被允许的。HyperLogLog的优点在于，输入元素的数量或者体积非常大时，基数计算的存储空间是固定的。在Redis中，每个HyperLogLog键只需要花费12KB内存，就可以计算接近2^64个不同的基数。但是，HyperLogLog只能统计基数的大小（也就是数据集的大小，集合的个数），不能存储元素的本身，不能向set集合那样存储元素本身，也就是说无法返回元素。HyperLogLog指令都是PF开头的。</p>
+<h3 id="2-1-添加（PFADD）"><a href="#2-1-添加（PFADD）" class="headerlink" title="2.1 添加（PFADD）"></a>2.1 添加（PFADD）</h3><blockquote>
+<p>PFADD key element [element …]</p>
+</blockquote>
+<p>将任意数量的元素添加到指定的 HyperLogLog 里面，</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pfadd code c c++ java python html css js<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-2-计数（PFCOUNT）"><a href="#2-2-计数（PFCOUNT）" class="headerlink" title="2.2 计数（PFCOUNT）"></a>2.2 计数（PFCOUNT）</h3><blockquote>
+<p>PFCOUNT key [key …]</p>
+</blockquote>
+<p>统计个数。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pfcount code<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-3-合并（PDMERGE）"><a href="#2-3-合并（PDMERGE）" class="headerlink" title="2.3 合并（PDMERGE）"></a>2.3 合并（PDMERGE）</h3><blockquote>
+<p>PFMERGE destkey sourcekey [sourcekey …]</p>
+</blockquote>
+<p>将多个HyperLogLog合并到一个HyperLogLog中，合并后HyperLogLog的基数接近于所有输入HyperLogLog的可见集合的并集。destkey是合并生成的新HyperLogLog，后面是需要合并的HyperLogLog。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">pfadd code c c++ java python html css js<br>pfadd code2 c<span class="hljs-comment"># c c++</span><br>pfmerge code3 code code2 //code3有8个<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-BitMaps"><a href="#3-BitMaps" class="headerlink" title="3.BitMaps"></a>3.BitMaps</h2><p>Bitmaps 称为位图，底层就是字符串（key-value），byte数组。Bitmaps 的“位数组”每个单元格只能存储0和1（两种状态），数组的下标在Bitmaps中称为偏移量。设置时key不存在会自动生成一个新的字符串，如果设置的偏移量超出了现有内容的范围，就会自动将位数组进行零扩充。简单理解就是一串二进制。</p>
+<h3 id="3-1-设置（setbit）"><a href="#3-1-设置（setbit）" class="headerlink" title="3.1 设置（setbit）"></a>3.1 设置（setbit）</h3><blockquote>
+<p>setbit key offset value</p>
+</blockquote>
+<p>这里的key可以理解成一个数组，而offset就是下标。<br>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">setbit wee 0 1<br>setbit wee 1 1<br>setbit wee 2 0<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="3-2-获取（getbit）"><a href="#3-2-获取（getbit）" class="headerlink" title="3.2 获取（getbit）"></a>3.2 获取（getbit）</h3><blockquote>
+<p>getbit key offset</p>
+</blockquote>
+<p>就像是获取数组中的元素一样（通过下标）。<br>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">getbit wee 2<br>getbit wee 0<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-3-统计（bitcount）"><a href="#3-3-统计（bitcount）" class="headerlink" title="3.3 统计（bitcount）"></a>3.3 统计（bitcount）</h3><blockquote>
+<p>BITCOUNT key [start] [end]</p>
+</blockquote>
+<p>计算给定字符串中，被设置为1的bit位的数量。start和end参数可以指定查询的范围，可以使用负数值。-1代表最后一个字节，-2代表倒是第二个字节。<br>注意：start和end是字节索引，因此每增加1 代表的是增加一个字符，也就是8位，所以位的查询范围必须是8的倍数。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">127.0.0.1:6379&gt; setbit w 0 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 1 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 2 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 3 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 4 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 5 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 6 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 7 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 8 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 9 1<br>(<span class="hljs-built_in">integer</span>) 0<br>127.0.0.1:6379&gt; setbit w 10 1<br>(<span class="hljs-built_in">integer</span>) 0<br><br><br>bitcount wee //11<br>biucount wee 0 0 //8。表示第1字节中1的个数<br>biucount wee 1 1 //3。表示第2字节中1的个数<br>biucount wee 0 1 //11。表示第1、2字节中1的个数<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：设置的时候是设置的某一位的值，而一字节等于8位；所以需要8位8位的一起看，即：从0-7是第一字节，8-15是第二字节！！！而此命令的start和end是字节，所以0表示第一字节，1表示第二字节。这也是上面的注意事项中说的，必须是8的倍数，一字节就是8位，也就是8的倍数。</strong></p>
+<p>如果还没懂，可见下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/e99d2589445645268a754919e04e5345.png" srcset="/img/loading.gif"></p>
+<h3 id="3-4-查找（bitpos）"><a href="#3-4-查找（bitpos）" class="headerlink" title="3.4 查找（bitpos）"></a>3.4 查找（bitpos）</h3><blockquote>
+<p>BITPOS key bit [start] [end]</p>
+</blockquote>
+<p>返回第一个置为bit的二进制位的位置，默认检测整个Bitmaps，也可以通过start和end参数指定查询范围。</p>
+<p><strong>注意：start和end是字节索引，因此每增加1 代表的是增加一个字符，也就是8位，所以位的查询范围必须是8的倍数。</strong></p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">bitpos w 0 <span class="hljs-comment"># 在全部中，找表示第一个0的位置</span><br>bitpos w 1 <span class="hljs-comment"># 在全部中，找表示第一个1的位置</span><br>bitpos w 1 0 0 <span class="hljs-comment"># 在第一个字符中，找第一个1的位置</span><br>bitpos w 1 1 1 <span class="hljs-comment"># 在第二个字符中，找第一个1的位置</span><br>bitpos w 1 0 1 <span class="hljs-comment"># 在第一个和第二个字符中，找第一个1的位置</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="3-5-位运算（bitop）"><a href="#3-5-位运算（bitop）" class="headerlink" title="3.5 位运算（bitop）"></a>3.5 位运算（bitop）</h3><blockquote>
+<p>BITOP operation destkey key [key …]</p>
+</blockquote>
+<p>其中，operation可以为：and、or、xor、not。如下：</p>
+<ul>
+<li>BITOP AND destkey key [key …] ，对一个或多个 key 求逻辑并，并将结果保存到 destkey。</li>
+<li>BITOP OR destkey key [key …] ，对一个或多个 key 求逻辑或，并将结果保存到 destkey。</li>
+<li>BITOP XOR destkey key [key …] ，对一个或多个 key 求逻辑异或，并将结果保存到 destkey。</li>
+<li>BITOP NOT destkey key ，对给定 key 求逻辑非（取反），并将结果保存到 destkey。</li>
+</ul>
+<p>当字符串长度不一致是，较短的那个字符串所缺失的部分会被看作0，空的key也会被看作是包含0的字符串序列。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">bitop and result key1 key2<br>bitop or result key1 key2<br>bitop xor result key1 key2<br>bitop not result key<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Redis%E5%AD%A6%E4%B9%A0/">Redis学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/08/28/Redis%E5%AD%A6%E4%B9%A0/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B8%89%E5%A4%A7%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">http://example.com/2021/08/28/Redis%E5%AD%A6%E4%B9%A0/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%E4%B8%89%E5%A4%A7%E7%89%B9%E6%AE%8A%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</a> <br> -->
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/26/Redis%E5%AD%A6%E4%B9%A0/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89%E5%85%A5%E9%97%A8%E5%9F%BA%E7%A1%80/">
+                        <span class="hidden-mobile">Redis学习笔记（二）入门基础</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
