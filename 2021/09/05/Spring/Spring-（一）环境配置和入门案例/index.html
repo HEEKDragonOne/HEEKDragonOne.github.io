@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      820 字
+      928 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      11
        分钟
     </span>
   
@@ -313,6 +313,17 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>其中，id具有唯一性，可以自取，下面将会用到；class属性是类的全限定名称。一个bean就是一个对象，若有多个对象，则创建多个bean。<br>声明bean就是告诉Spring要创建某个类的对象，Spring会通过id找到对象，class必须使用类，不能是接口，因为Spring是反射机制创建对象。Spring会将创建好的对象放到一个map中，map的存储形式是map.put（id的值，对象），实际是：map.put(“id”，new PersonServiceImpl())。</p>
 <h2 id="3-创建容器对象（ApplicationContext）"><a href="#3-创建容器对象（ApplicationContext）" class="headerlink" title="3.创建容器对象（ApplicationContext）"></a>3.创建容器对象（ApplicationContext）</h2><p>创建一个测试类。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//正常创建对象</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test01</span><span class="hljs-params">()</span></span>&#123;<br>        PersonService personService = <span class="hljs-keyword">new</span> PersonServiceImpl();<br>        personService.show();<br>    &#125;<br><span class="hljs-comment">//Spring容器创建对象</span><br>    <span class="hljs-meta">@Test</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test02</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">//配置文件的名称</span><br>        String config = <span class="hljs-string">&quot;beans.xml&quot;</span>;<br>    <span class="hljs-comment">//创建Spring容器的对象，ClassPathXxmlApplicationContext：表示从类路径中加载Spring的配置文件，这里的类路径是target下的classes目录。</span><br>        ApplicationContext applicationContext = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(config);<span class="hljs-comment">//实质上，在执行这句代码时就已经创建好了对象，可以在类的无参构造函数中添加打印语句进行查看，在创建Spring的容器时，会创建配置文件中的所有的对象</span><br>    <span class="hljs-comment">//从容器中获取某个对象，返回值是Object，需要强转。</span><br>        PersonService test = (PersonService) applicationContext.getBean(<span class="hljs-string">&quot;test&quot;</span>); <span class="hljs-comment">//getBean(&quot;配置文件中的id值&quot;)</span><br>        test.show(); <span class="hljs-comment">//使用对象</span><br>    &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="3-1-获取容器中对象的数量"><a href="#3-1-获取容器中对象的数量" class="headerlink" title="3.1 获取容器中对象的数量"></a>3.1 获取容器中对象的数量</h3><blockquote>
+<p>getBeanDefinitionCount() 。返回个数。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test03</span><span class="hljs-params">()</span></span>&#123;<br>    String config = <span class="hljs-string">&quot;beans.xml&quot;</span>;<br>    ApplicationContext applicationContext = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(config);<br>    <span class="hljs-keyword">int</span> ans = applicationContext.getBeanDefinitionCount();<br>    System.out.println(ans); <span class="hljs-comment">//2</span><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-2-获取容器中定义的对象的名称"><a href="#3-2-获取容器中定义的对象的名称" class="headerlink" title="3.2 获取容器中定义的对象的名称"></a>3.2 获取容器中定义的对象的名称</h3><blockquote>
+<p>getBeanDefinitionNames() 。返回一个String数组。<br>获取的是Spring配置文件的id值。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test03</span><span class="hljs-params">()</span></span>&#123;<br>    String config = <span class="hljs-string">&quot;beans.xml&quot;</span>;<br>    ApplicationContext applicationContext = <span class="hljs-keyword">new</span> ClassPathXmlApplicationContext(config);<br>    String[] ans = applicationContext.getBeanDefinitionNames();<br>    <span class="hljs-keyword">for</span>(String it : ans)&#123;<br>        System.out.println(it);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
