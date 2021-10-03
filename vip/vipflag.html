@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta name="baidu-site-verification" content="be8lgh5frJ" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>资源旗-全网VIP视频解析</title>
+    <!-- Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <style>
+	    .header{
+		    margin-top:10%;
+	    }
+	    .main{
+		    padding:10px 15%;
+	    }
+	    .footer{
+		    padding:10px 15%;
+	    }
+	    .btn-primary {
+                    color: #fff;
+                    background-color: #4D73A0;
+                    border-color: #4D73A0;
+           }
+            .btn-primary:hover,.btn-primary:focus,.btn-primary:active,.btn-primary.active,.open>.dropdown-toggle.btn-primary {
+                    color: #fff;
+                    background-color: #3B5779;
+                    border-color: #3B5779
+           }
+            #qiqi_cpv_adsiframe{
+                    width: 100%;
+           }
+    </style>
+<body style="background: url('https://img-blog.csdnimg.cn/4c57d55728d14179928b73a9c7d5d9ad.png') no-repeat fixed bottom center;background-size: cover;">
+<body>
+	<div class="container">
+	    <div class="header h1 text-center">
+		    <h1 style="color: aqua;"><a href="http://www.moreoj.com/" target="_blank" style="color: aqua">资源旗</a>-全网VIP视频解析</h1>
+		    <small style="color: chartreuse;">选取有效的解析API地址，并输入视频地址即可免VIP播放</small>
+	    </div>
+	    <!-- <hr /> -->
+	    <div class="main">
+			<form class="form-horizontal" method="post">
+			  <div class="form-group">
+			    <label for="api" class="col-sm-2 control-label" style="color: aqua;">API地址</label>
+			    <div class="col-sm-10">
+				  <select id="api" name="api" class="form-control"></select>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="url" class="col-sm-2 control-label" style="color: aqua;">视频地址</label>
+			    <div class="col-sm-10">
+			      <input type="url" class="form-control" id="url" name="url" placeholder="请输入视频完整地址，例如：http://www.iqiyi.com/v_xxxxxxxx.html">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+				  <button type="button" id="play" class="btn btn-primary" style="color: aqua;">解析播放</button>
+			    </div>
+			  </div>
+			</form>
+		</div>
+			<!-- <hr /> -->
+			
+	    <div class="main">
+			<h4 align="center" style="color: aquamarine;">更多资源获取，资源旗社区：<a href="http://www.moreoj.com/" target="_blank" style="color: aqua">www.moreoj.com</a></h4>
+			<h3 align="center" style="color: aquamarine;">关注微信公众号：<span style="color: aqua">Hacks工具</span></h3>
+			<img src="https://img-blog.csdnimg.cn/0710f4e4754d49f9a13a4581ca428c0f.jpg" alt="" style="float: right;visibility: hidden;"> 
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<img src="https://img-blog.csdnimg.cn/0710f4e4754d49f9a13a4581ca428c0f.jpg" alt="" align="center" style="visibility: hidden;">
+			<img src="https://img-blog.csdnimg.cn/0710f4e4754d49f9a13a4581ca428c0f.jpg" alt="">
+			
+			<div class="form-horizontal" style="display: none;">
+				<div class="form-group">
+			    <label for="url" class="col-sm-2 control-label">API列表</label>
+			    <div class="col-sm-10">
+			      <textarea rows="10" id="apiList" class="form-control">https://www.qianyicp.com/jiexi/index.php?url=
+				  https://www.xymav.com/?url=</textarea>
+			    </div>
+			  </div>
+	    	</div>
+	    </div>
+
+	</div>
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <script>
+	    function setApi(){
+		    $("#api").children().remove();
+			var apilist = $("#apiList").val().split(/\r?\n/);
+			for(var i=0;i<apilist.length;i++){
+				$("#api").append("<option>"+apilist[i]+"</option>");
+			}
+	    }
+		$("#apiList").blur(function(){
+			setApi();
+			$.cookie("apiList",$("#apiList").val());
+		});
+		$("#play").click(function(){
+			$api = $("#api").val();
+			$url = $("#url").val();
+			if($api != "http://z1.m1907.cn/?jx=" && ($url == "" || $url == null || !/^http.*$/.test($url))){
+				alert('视频地址不正确！');
+				return;
+			}
+			if($api != "http://z1.m1907.cn/?jx=" && ($url == "" || $url == null || !/^http.*$/.test($url))){
+				alert('视频地址不正确！');
+				return;
+			}
+			if($api != "http://z1.m1907.cn/?jx=" && ($url == "" || $url == null || !/^http.*=$/.test($api))){
+				alert('无效API！');
+				return;
+			}
+			window.open($api+$url);
+		});
+
+	    function init(){
+		    var ckapi = $.cookie("apiList");
+		    if(ckapi && ckapi != ""){
+			    $("#apiList").val(ckapi);
+		    }
+		    setApi();
+	    }
+	    init();
+      function setDefault(){
+        $.cookie("apiList","");
+        window.location.reload();
+      }
+    </script>
+</body>
+</html>
