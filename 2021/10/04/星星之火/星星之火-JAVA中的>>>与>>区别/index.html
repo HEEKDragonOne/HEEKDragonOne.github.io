@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      681 字
+      755 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      9
        分钟
     </span>
   
@@ -319,6 +319,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">        System.out.println(<span class="hljs-string">&quot;=====================================&quot;</span>);<br>        System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>);<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>);<br>        <span class="hljs-comment">// 00000000000000000000000000001100  原码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110011  反码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110100  补码</span><br><br><span class="hljs-comment">//输出</span><br>========================================<br><span class="hljs-number">1100</span><br><span class="hljs-number">11111111111111111111111111110100</span> <span class="hljs-comment">// -12</span><br><span class="hljs-number">11111111111111111111111111111110</span> <span class="hljs-comment">// -2</span><br>-<span class="hljs-number">2</span><br><span class="hljs-number">11111111111111111111111111110</span>    <span class="hljs-comment">// 536870910</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">00011111111111111111111111111110</span><br><span class="hljs-comment">*/</span><br><span class="hljs-number">536870910</span><br></code></pre></div></td></tr></table></figure>
 
 <p>可以看见，是 &gt;&gt; 运算符时，左边添加的是符号位1；如果是正数，添加的就是0；而是 &gt;&gt;&gt; 运算符时，没有管符号位，是直接左边添加的0。</p>
+<blockquote>
+<p>再如：</p>
+</blockquote>
+<p>如 -12 的二进制为：1111  1111  1111  1111  1111  1111  1111  0100；</p>
+<p>-12 &gt;&gt; 3 即带符号右移3位，结果是：1111  1111  1111  1111  1111  1111  1111  1110，十进制为： -2；</p>
+<p>-12 &gt;&gt;&gt; 3 就是右移三位，前面补零，为：0001  1111  1111  1111  1111  1111  1111  1110，十进制为：536870910。</p>
 
             </div>
             <hr>
