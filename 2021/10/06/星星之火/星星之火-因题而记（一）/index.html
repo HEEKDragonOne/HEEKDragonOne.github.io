@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.6k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      21
        分钟
     </span>
   
@@ -307,7 +307,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>第三大的数<br>给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。（样例自行查看）</li>
 </ol>
 <p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/third-maximum-number/">题目链接</a></p>
-<h2 id="设计知识点"><a href="#设计知识点" class="headerlink" title="设计知识点"></a>设计知识点</h2><h3 id="1-排序方法"><a href="#1-排序方法" class="headerlink" title="1.排序方法"></a>1.排序方法</h3><p>自己写排序算法就不说了，这里着重说的是JAVA中的sort方法。</p>
+<h2 id="涉及知识点"><a href="#涉及知识点" class="headerlink" title="涉及知识点"></a>涉及知识点</h2><h3 id="1-排序方法"><a href="#1-排序方法" class="headerlink" title="1.排序方法"></a>1.排序方法</h3><p>自己写排序算法就不说了，这里着重说的是JAVA中的sort方法。</p>
 <h4 id="1-1-Arrays类中的sort"><a href="#1-1-Arrays类中的sort" class="headerlink" title="1.1 Arrays类中的sort()"></a>1.1 Arrays类中的sort()</h4><p>(1)Arrays类中的sort()使用的是“经过调优的快速排序法”;<br>(2)比如int[]，double[]，char[]等基数据类型的数组，Arrays类之只是提供了默认的升序排列，没有提供相应的降序排列方法。<br>(3)要对基础类型的数组进行降序排序，需要将这些数组转化为对应的封装类数组，如Integer[]，Double[]，Character[]等，对这些类数组进行排序。(其实还不如先进行升序排序，自己在转为将序)。</p>
 <blockquote>
 <p>用法</p>
@@ -350,10 +350,21 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h5 id="2-2-3-用List和Set实现"><a href="#2-2-3-用List和Set实现" class="headerlink" title="2.2.3 用List和Set实现"></a>2.2.3 用List和Set实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] nums = &#123; <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span> &#125;;<br>        List&lt;Integer&gt; numList = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i : nums)<br>            numList.add(i);<br>        Set&lt;Integer&gt; numSet = <span class="hljs-keyword">new</span> HashSet&lt;Integer&gt;();<br>        numSet.addAll(numList);<br>        System.out.println(numSet);<br></code></pre></div></td></tr></table></figure>
 <p>实现了排序去重。</p>
 <h3 id="3-数组输出（扩充）"><a href="#3-数组输出（扩充）" class="headerlink" title="3.数组输出（扩充）"></a>3.数组输出（扩充）</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Arrays.stream(result).forEach(System.out::println); <span class="hljs-comment">//result 为数组名</span><br></code></pre></div></td></tr></table></figure>
-
+<p>这是Java8中的特性。这里只是简单介绍一下，更多用法可自行搜索。<br>几种常见的获取数据源的方式：</p>
+<ul>
+<li>Collection.stream(); 从集合获取流。</li>
+<li>Collection.parallelStream(); 从集合获取并行流。</li>
+<li>Arrays.stream(T array) or Stream.of(); 从数组获取流。</li>
+<li>BufferedReader.lines(); 从输入流中获取流。</li>
+<li>IntStream.of() ; 从静态方法中获取流。</li>
+<li>Stream.generate(); 自己生成流</li>
+</ul>
+<p>着重看Arrays.stream(T array) or Stream.of(); 从数组获取流。</p>
+<p>其中，forEach(); 是 Stream 流中的一个重要方法，用于遍历 Stream 流，它支持传入一个标准的 Lambda 表达式。但是它的遍历不能通过 return/break 进行终止。同时它也是一个 terminal 操作，执行之后 Stream 流中的数据会被消费掉。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] nums = &#123; <span class="hljs-number">5</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span> &#125;;<br>        Arrays.stream(nums).forEach(it -&gt; System.out.print(it+<span class="hljs-string">&quot;,&quot;</span>));<br>        System.out.println();<br>        Arrays.stream(nums).forEach(System.out::print);<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">5</span>,<span class="hljs-number">8</span>,<span class="hljs-number">8</span>,<span class="hljs-number">6</span>,<span class="hljs-number">6</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<br><span class="hljs-number">5886687</span><br></code></pre></div></td></tr></table></figure>
 
 <h3 id="4-对数组排序去重示例"><a href="#4-对数组排序去重示例" class="headerlink" title="4.对数组排序去重示例"></a>4.对数组排序去重示例</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">sortArray</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         思路：</span><br><span class="hljs-comment">         1、使用 HashSet 进行去重</span><br><span class="hljs-comment">         2、将 HashSet 变为 TreeSet</span><br><span class="hljs-comment">         3、使用 TreeSet 进行排序</span><br><span class="hljs-comment">         4、将 Set 变为 Integer 数组</span><br><span class="hljs-comment">         5、将 Integer 数组变为 int 数组</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">int</span>[] candidates = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">76</span>,<span class="hljs-number">84</span>,<span class="hljs-number">54</span>,<span class="hljs-number">45</span>&#125;; <span class="hljs-comment">// 初始化一个需要排序、去重的int数组</span><br>        HashSet&lt;Integer&gt; hashSet = <span class="hljs-keyword">new</span> HashSet&lt;Integer&gt;(); <span class="hljs-comment">// 去重</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; candidates.length; i++)&#123;<br>            hashSet.add(candidates[i]);<br>        &#125;<br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> TreeSet(hashSet);            <span class="hljs-comment">// 利用TreeSet排序</span><br>        Integer[] integers = set.toArray(<span class="hljs-keyword">new</span> Integer[]&#123;&#125;);<br><br>        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[integers.length];            <span class="hljs-comment">// 排序、去重后的结果数组</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; integers.length; i++)&#123;<br>            result[i] = integers[i].intValue();<br>        &#125;<br><br>        Arrays.stream(result).forEach(System.out::println); <span class="hljs-comment">// 将结果数组输出</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
 
 
 
