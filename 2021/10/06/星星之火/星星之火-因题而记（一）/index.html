@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别 - 墨水的记忆</title>
+  <title>星星之火-因题而记（一） - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-JAVA中的>>>与>>区别">
+            <span class="h2" id="subtitle" title="星星之火-因题而记（一）">
               
             </span>
 
@@ -228,8 +228,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-04 14:30" pubdate>
-        October 4, 2021 pm
+      <time datetime="2021-10-06 17:40" pubdate>
+        October 6, 2021 pm
       </time>
     </span>
   
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      755 字
+      1.4k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      17
        分钟
     </span>
   
@@ -293,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别</h1>
+            <h1 style="display: none">星星之火-因题而记（一）</h1>
             
               <p class="note note-info">
                 
@@ -303,28 +303,64 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-预备知识"><a href="#1-预备知识" class="headerlink" title="1.预备知识"></a>1.预备知识</h2><p>计算机中整数的存储形式：在计算机系统中，数值一律用补码来表示和存储。原因在于，使用补码，可以将符号位和数值域统一处理，加法和减法也可以统一处理。「正数的补码等于原码；负数的补码等于反码加1，而反码等于原码符号位不变，其余各位取反」（符号位不反！！！）</p>
-<p>负数在计算机中以补码的形式存储，正数在计算机中以原码的形式存储。</p>
-<p>二进制最左端的数字为符号位，0代表正，1代表负。</p>
-<p><strong>注意：没有&lt;&lt;&lt;运算符！！因为左移都是补零，没有正负数的区别。</strong></p>
-<p>&lt;&lt; 、&gt;&gt; 为算术运算符；&gt;&gt;&gt; 为逻辑运算符。&gt;&gt;(带符号右移) 和 &gt;&gt;&gt;(无符号右移) 。</p>
-<p><strong>其中，&gt;&gt;&gt; 表示<code>不带符号</code>向右移动二进制数，移动后前面统统补0； &gt;&gt; 表示<code>带符号</code>移动。</strong></p>
-<p>都可以理解成是在补码的形式上进行移动的！！。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><ol start="414">
+<li>第三大的数<br>给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。（样例自行查看）</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/third-maximum-number/">题目链接</a></p>
+<h2 id="设计知识点"><a href="#设计知识点" class="headerlink" title="设计知识点"></a>设计知识点</h2><h3 id="1-排序方法"><a href="#1-排序方法" class="headerlink" title="1.排序方法"></a>1.排序方法</h3><p>自己写排序算法就不说了，这里着重说的是JAVA中的sort方法。</p>
+<h4 id="1-1-Arrays类中的sort"><a href="#1-1-Arrays类中的sort" class="headerlink" title="1.1 Arrays类中的sort()"></a>1.1 Arrays类中的sort()</h4><p>(1)Arrays类中的sort()使用的是“经过调优的快速排序法”;<br>(2)比如int[]，double[]，char[]等基数据类型的数组，Arrays类之只是提供了默认的升序排列，没有提供相应的降序排列方法。<br>(3)要对基础类型的数组进行降序排序，需要将这些数组转化为对应的封装类数组，如Integer[]，Double[]，Character[]等，对这些类数组进行排序。(其实还不如先进行升序排序，自己在转为将序)。</p>
 <blockquote>
-<p>负数求补码</p>
+<p>用法</p>
 </blockquote>
-<p>如下步骤：<br>1、首先求出负数的原码，如-8的原码为 1000 1000，<br>2、通过原码求出它的反码，负数的反码就是 除符号为以外，其余的全部求反，如-8 反码为 1111 0111，<br>3、负数的补码 +1，就是它的补码，如 -8 的补码为 1111 1000</p>
-<p><strong>简单说就是：负数的补码是在原码的基础上除符号位外其余位取反后+1。<br>也可以是：先写出负数的相反数的原码，再将最高位变1，再将除符号位外的其他位取反+1。</strong></p>
-<h2 id="2-示例"><a href="#2-示例" class="headerlink" title="2.示例"></a>2.示例</h2><p>以-12为例：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">        System.out.println(<span class="hljs-string">&quot;=====================================&quot;</span>);<br>        System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>);<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>);<br>        <span class="hljs-comment">// 00000000000000000000000000001100  原码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110011  反码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110100  补码</span><br><br><span class="hljs-comment">//输出</span><br>========================================<br><span class="hljs-number">1100</span><br><span class="hljs-number">11111111111111111111111111110100</span> <span class="hljs-comment">// -12</span><br><span class="hljs-number">11111111111111111111111111111110</span> <span class="hljs-comment">// -2</span><br>-<span class="hljs-number">2</span><br><span class="hljs-number">11111111111111111111111111110</span>    <span class="hljs-comment">// 536870910</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">00011111111111111111111111111110</span><br><span class="hljs-comment">*/</span><br><span class="hljs-number">536870910</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] a=&#123;&#125;;<br><span class="hljs-comment">//全部排序</span><br>Arrays.sort(a);<br><span class="hljs-comment">//部分排序</span><br>Arrays.sort(a,<span class="hljs-number">1</span>,<span class="hljs-number">5</span>); <span class="hljs-comment">//[1,5)</span><br></code></pre></div></td></tr></table></figure>
 
-<p>可以看见，是 &gt;&gt; 运算符时，左边添加的是符号位1；如果是正数，添加的就是0；而是 &gt;&gt;&gt; 运算符时，没有管符号位，是直接左边添加的0。</p>
-<blockquote>
-<p>再如：</p>
+<h3 id="2-去重实现"><a href="#2-去重实现" class="headerlink" title="2.去重实现"></a>2.去重实现</h3><h4 id="2-1-预知识"><a href="#2-1-预知识" class="headerlink" title="2.1 预知识"></a>2.1 预知识</h4><blockquote>
+<p>Set（集合）</p>
 </blockquote>
-<p>如 -12 的二进制为：1111  1111  1111  1111  1111  1111  1111  0100；</p>
-<p>-12 &gt;&gt; 3 即带符号右移3位，结果是：1111  1111  1111  1111  1111  1111  1111  1110，十进制为： -2；</p>
-<p>-12 &gt;&gt;&gt; 3 就是右移三位，前面补零，为：0001  1111  1111  1111  1111  1111  1111  1110，十进制为：536870910。</p>
+<p><code>Set中的对象不按特定(HashCode)的方式排序，并且没有重复对象</code>，Set主要有以下两个实现类：</p>
+<ul>
+<li>HashSet： HashSet按照哈希算法来存取集合中的对象，存取速度比较快。当HashSet中的元素个数超过数组大小 * loadFactor（默认值为0.75）时，就会进行近似两倍扩容（newCapacity = (oldCapacity &lt;&lt; 1) + 1）。</li>
+<li>TreeSet ：<code>TreeSet实现了SortedSet接口，能够对集合中的对象进行排序</code>。</li>
+</ul>
+<h4 id="2-2-去重"><a href="#2-2-去重" class="headerlink" title="2.2 去重"></a>2.2 去重</h4><h5 id="2-2-1-使用List集合实现"><a href="#2-2-1-使用List集合实现" class="headerlink" title="2.2.1 使用List集合实现"></a>2.2.1 使用List集合实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] str = &#123;<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>,<span class="hljs-number">4</span>&#125;;<br>List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;str.length; i++) &#123;<br>  <span class="hljs-keyword">if</span>(!list.contains(str[i])) &#123;<br>    list.add(str[i]);<br>  &#125;<br>&#125;<br>System.out.println(<span class="hljs-string">&quot;去除重复后的list集合&quot;</span>+list);<br></code></pre></div></td></tr></table></figure>
+
+
+<h5 id="2-2-2-使用HashSet或TreeSet实现"><a href="#2-2-2-使用HashSet或TreeSet实现" class="headerlink" title="2.2.2 使用HashSet或TreeSet实现"></a>2.2.2 使用HashSet或TreeSet实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer[] nums = &#123; <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span> &#125;;<br><span class="hljs-comment">//         HashSet hset = new HashSet(Arrays.asList(nums));</span><br>        TreeSet&lt;Integer&gt; hset = <span class="hljs-keyword">new</span> TreeSet&lt;Integer&gt;(Arrays.asList(nums));<br>        System.out.println(hset);<br></code></pre></div></td></tr></table></figure>
+<p>实现了排序去重。<br>Arrays.asList() 该方法是将数组转化成List集合的方法。用此方法得到的List的长度是不可改变的。<br>注意：我在网上搜此知识点的时候，很多都在说，使用这个方法有坑。在自己测试后发现确实有问题，但自己也发现有解决的办法。</p>
+<blockquote>
+<p>使用方法：List&lt;Integer&gt; list = Arrays.asList(“a”,”b”,”c”);</p>
+</blockquote>
+<p>这种使用方法是会和网上说的一样，会出现坑的。如：不支持add()、remove()、clear()等方法。</p>
+<ul>
+<li>此方法使用注意：</li>
+</ul>
+<p>（1）该方法适用于对象型数据的数组（String、Integer…）</p>
+<p>（2）该方法<code>不建议</code>使用于基本数据类型的数组（byte,short,int,long,float,double,boolean）</p>
+<p>（3）该方法将数组与List列表链接起来：当更新其一个时，另一个自动更新</p>
+<p>（4）不支持add()、remove()、clear()等方法</p>
+<p>当你向这个List添加或删除一个元素时（例如 list.add(“d”);）程序就会抛出异常（java.lang.UnsupportedOperationException）。 这个原因是需要看看asList()方法是怎么实现的就行了。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">List&lt;T&gt; <span class="hljs-title">asList</span><span class="hljs-params">(T... a)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(a);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>这个ArrayList不是java.util包下的，而是java.util.Arrays.ArrayList。可自行将鼠标移到上面进行查看。它是Arrays类自己定义的一个静态内部类，这个内部类没有实现add()、remove()方法，而是直接使用它的父类AbstractList的相应方法。而AbstractList中的add()和remove()是直接抛出java.lang.UnsupportedOperationException异常的！</p>
+<p>总结一下：如果List只是用来遍历，可以用Arrays.asList()。如果List还要添加或删除元素，还是new一个java.util.ArrayList，然后一个一个的添加元素。</p>
+<ul>
+<li>自己发现的解决办法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer[] nums = &#123; <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>, <span class="hljs-number">18</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span>, <span class="hljs-number">11</span>, <span class="hljs-number">12</span>, <span class="hljs-number">12</span> &#125;;<br>List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(Arrays.asList(nums));<br></code></pre></div></td></tr></table></figure>
+<p>这样的list是可以正常使用方法的。</p>
+<h5 id="2-2-3-用List和Set实现"><a href="#2-2-3-用List和Set实现" class="headerlink" title="2.2.3 用List和Set实现"></a>2.2.3 用List和Set实现</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span>[] nums = &#123; <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>, <span class="hljs-number">8</span>, <span class="hljs-number">7</span> &#125;;<br>        List&lt;Integer&gt; numList = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i : nums)<br>            numList.add(i);<br>        Set&lt;Integer&gt; numSet = <span class="hljs-keyword">new</span> HashSet&lt;Integer&gt;();<br>        numSet.addAll(numList);<br>        System.out.println(numSet);<br></code></pre></div></td></tr></table></figure>
+<p>实现了排序去重。</p>
+<h3 id="3-数组输出（扩充）"><a href="#3-数组输出（扩充）" class="headerlink" title="3.数组输出（扩充）"></a>3.数组输出（扩充）</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Arrays.stream(result).forEach(System.out::println); <span class="hljs-comment">//result 为数组名</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="4-对数组排序去重示例"><a href="#4-对数组排序去重示例" class="headerlink" title="4.对数组排序去重示例"></a>4.对数组排序去重示例</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">sortArray</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        <span class="hljs-comment">/**</span><br><span class="hljs-comment">         思路：</span><br><span class="hljs-comment">         1、使用 HashSet 进行去重</span><br><span class="hljs-comment">         2、将 HashSet 变为 TreeSet</span><br><span class="hljs-comment">         3、使用 TreeSet 进行排序</span><br><span class="hljs-comment">         4、将 Set 变为 Integer 数组</span><br><span class="hljs-comment">         5、将 Integer 数组变为 int 数组</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-keyword">int</span>[] candidates = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">9</span>,<span class="hljs-number">8</span>,<span class="hljs-number">7</span>,<span class="hljs-number">76</span>,<span class="hljs-number">84</span>,<span class="hljs-number">54</span>,<span class="hljs-number">45</span>&#125;; <span class="hljs-comment">// 初始化一个需要排序、去重的int数组</span><br>        HashSet&lt;Integer&gt; hashSet = <span class="hljs-keyword">new</span> HashSet&lt;Integer&gt;(); <span class="hljs-comment">// 去重</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; candidates.length; i++)&#123;<br>            hashSet.add(candidates[i]);<br>        &#125;<br>        Set&lt;Integer&gt; set = <span class="hljs-keyword">new</span> TreeSet(hashSet);            <span class="hljs-comment">// 利用TreeSet排序</span><br>        Integer[] integers = set.toArray(<span class="hljs-keyword">new</span> Integer[]&#123;&#125;);<br><br>        <span class="hljs-keyword">int</span>[] result = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[integers.length];            <span class="hljs-comment">// 排序、去重后的结果数组</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; integers.length; i++)&#123;<br>            result[i] = integers[i].intValue();<br>        &#125;<br><br>        Arrays.stream(result).forEach(System.out::println); <span class="hljs-comment">// 将结果数组输出</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -344,6 +380,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                     
                       <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
                     
+                      <a class="hover-with-bg" href="/tags/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">刷题笔记</a>
+                    
                   </div>
                 
               </div>
@@ -356,7 +394,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/04/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-JAVA%E4%B8%AD%E7%9A%84%3E%3E%3E%E4%B8%8E%3E%3E%E5%8C%BA%E5%88%AB/">http://example.com/2021/10/04/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-JAVA%E4%B8%AD%E7%9A%84%3E%3E%3E%E4%B8%8E%3E%3E%E5%8C%BA%E5%88%AB/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/06/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%9B%A0%E9%A2%98%E8%80%8C%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">http://example.com/2021/10/06/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%9B%A0%E9%A2%98%E8%80%8C%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -365,18 +403,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/06/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%9B%A0%E9%A2%98%E8%80%8C%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">星星之火-因题而记（一）</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/02/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-JAVA%E4%B8%AD%E4%BB%BB%E6%84%8F%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%9C%89%E5%85%B3%E5%87%BD%E6%95%B0/">
-                        <span class="hidden-mobile">星星之火-JAVA中任意进制转换有关函数</span>
+                      <a href="/2021/10/04/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-JAVA%E4%B8%AD%E7%9A%84%3E%3E%3E%E4%B8%8E%3E%3E%E5%8C%BA%E5%88%AB/">
+                        <span class="hidden-mobile">星星之火-JAVA中的>>>与>>区别</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
