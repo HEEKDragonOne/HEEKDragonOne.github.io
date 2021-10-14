@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>ACM-JAVA快速输入输出 - 墨水的记忆</title>
+  <title>ACM-JAVA获取数组中的最大（最小）值 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="ACM-JAVA快速输入输出">
+            <span class="h2" id="subtitle" title="ACM-JAVA获取数组中的最大（最小）值">
               
             </span>
 
@@ -228,8 +228,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-13 18:03" pubdate>
-        October 13, 2021 pm
+      <time datetime="2021-10-14 19:13" pubdate>
+        October 14, 2021 pm
       </time>
     </span>
   
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.2k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      15
        分钟
     </span>
   
@@ -293,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">ACM-JAVA快速输入输出</h1>
+            <h1 style="display: none">ACM-JAVA获取数组中的最大（最小）值</h1>
             
               <p class="note note-info">
                 
@@ -303,49 +303,170 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="0-获取程序运行时间"><a href="#0-获取程序运行时间" class="headerlink" title="0.获取程序运行时间"></a>0.获取程序运行时间</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">1000000</span>;i++)&#123;&#125;<br><span class="hljs-keyword">long</span> end = System.currentTimeMillis();<br>System.out.println(<span class="hljs-string">&quot;time=&quot;</span>+(end-start)+<span class="hljs-string">&quot;ms&quot;</span>);<br><br><span class="hljs-comment">//以纳秒为单位</span><br><span class="hljs-keyword">long</span> start = System.nanoTime();<br></code></pre></div></td></tr></table></figure>
-
-
-
-<p>一般使用：就是StreamTokenizer与PrintWriter，前者输入，后者输出。具体情况具体而定。</p>
-<h2 id="1-输出"><a href="#1-输出" class="headerlink" title="1.输出"></a>1.输出</h2><p>之所以先说输出，是因为输出比较简单。(#^.^#)</p>
-<h3 id="1-1-常规输出"><a href="#1-1-常规输出" class="headerlink" title="1.1 常规输出"></a>1.1 常规输出</h3><p>这里的常规输出，就是平常用的最多的 <code>System.out.println();</code> 。这也没什么好说的了。</p>
-<h3 id="1-2-PrintWriter输出"><a href="#1-2-PrintWriter输出" class="headerlink" title="1.2 PrintWriter输出"></a>1.2 PrintWriter输出</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">/* 下面这是IO流包装，直接套用就好*/</span><br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>        out.println(<span class="hljs-string">&quot;Greater than&quot;</span>);<span class="hljs-comment">/*输出语句*/</span><br>        out.println(<span class="hljs-string">&quot;Less than&quot;</span>);<br>        out.println(<span class="hljs-string">&quot;Equal&quot;</span>);<br>    out.flush();<span class="hljs-comment">/*刷新输出缓冲区*/</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h2 id="2-输入"><a href="#2-输入" class="headerlink" title="2.输入"></a>2.输入</h2><h3 id="2-1-传统输入"><a href="#2-1-传统输入" class="headerlink" title="2.1 传统输入"></a>2.1 传统输入</h3><p>这里的常规输出，就是平常用的最多的 <code>Scanner</code> 。这也没什么好说的了。</p>
-<h3 id="2-2-StreamTokenizer输入"><a href="#2-2-StreamTokenizer输入" class="headerlink" title="2.2 StreamTokenizer输入"></a>2.2 StreamTokenizer输入</h3><h4 id="2-2-1-输入数字（nval）"><a href="#2-2-1-输入数字（nval）" class="headerlink" title="2.2.1 输入数字（nval）"></a>2.2.1 输入数字（nval）</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">/* 下面这是IO流包装，可以看不懂，直接套用就好*/</span><br>    StreamTokenizer in = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    in.nextToken();<span class="hljs-comment">/*nextToken()方法相当于让光标指向下一个位置*/</span><br>    <span class="hljs-keyword">int</span> n = (<span class="hljs-keyword">int</span>) in.nval;<span class="hljs-comment">//获取整数;</span><br>        out.println(n);<br>    out.flush();<span class="hljs-comment">/*刷新输出缓冲区*/</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h4 id="2-2-2-获取字符串（sval）"><a href="#2-2-2-获取字符串（sval）" class="headerlink" title="2.2.2 获取字符串（sval）"></a>2.2.2 获取字符串（sval）</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">/* 下面这是IO流包装，可以看不懂，直接套用就好*/</span><br>    StreamTokenizer in = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    in.nextToken();<span class="hljs-comment">/*nextToken()方法相当于让光标指向下一个位置*/</span><br>    String str = in.sval;<span class="hljs-comment">/*注意：sval是获取不带空格的字符串，含有空格的字符串无法全部读取，只会获取空格之前的。并且只能用来获取含字母和数字、中英文句号的字符串。具体情况需要自行尝试，至少写者在测试时是这样的。因为网上有些说的是只能是字母串，不能含数字或其他，否则会返回null。*/</span><br>        out.println(str);<br>    out.flush();<span class="hljs-comment">/*刷新输出缓冲区*/</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h4 id="2-2-3-处理到文件尾（多组输入）"><a href="#2-2-3-处理到文件尾（多组输入）" class="headerlink" title="2.2.3 处理到文件尾（多组输入）"></a>2.2.3 处理到文件尾（多组输入）</h4><p>判断是否到达文件结尾，如C语言的while(scanf(“%d”,&amp;n)!=EOF)</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">while</span> (in.nextToken() != StreamTokenizer.TT_EOF) <span class="hljs-comment">//StreamTokenizer.TT_EOF这个是个参数，就是相当于EOF了。</span><br></code></pre></div></td></tr></table></figure>
-
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>今天遇到一道简单题，是有关山峰数组（山脉数组）的。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/B1IidL/">题目链接</a></p>
+<p>也不知道怎么滴。然后搜了一下java中是否有直接获取数组中最大最小值的这种方法，所以这篇博客就主要针对java中怎样获取数组中的最大最下值进行一下简单的总结整理。</p>
+<h2 id="1-排序"><a href="#1-排序" class="headerlink" title="1.排序"></a>1.排序</h2><p>不说了，心累。</p>
+<h2 id="2-通过Array-stream方式"><a href="#2-通过Array-stream方式" class="headerlink" title="2.通过Array.stream方式"></a>2.通过Array.stream方式</h2><p>Arrays.stream(arr).min().getAsInt()和Arrays.stream(arr).max().getAsInt()。分别是用来获取数组arr中的最小值和最大值。</p>
+<p>stream是JDK8新增的核心功能之一，使用它可以很方便的实现很多功能，如查找最大最小值等。</p>
 <p>示例：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    StreamTokenizer in = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br><br>    <span class="hljs-keyword">while</span> (in.nextToken() != StreamTokenizer.TT_EOF)&#123;<br>        <span class="hljs-keyword">int</span> n = (<span class="hljs-keyword">int</span>) in.nval;<br>        in.nextToken();<br>        <span class="hljs-keyword">int</span> m = (<span class="hljs-keyword">int</span>) in.nval;<br>        out.println(n+<span class="hljs-string">&quot; &quot;</span>+m);<br>        out.flush();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    StreamTokenizer in = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    <span class="hljs-keyword">int</span>[] arr= &#123;<span class="hljs-number">23</span>,<span class="hljs-number">43</span>,<span class="hljs-number">324</span>,<span class="hljs-number">22223</span>,<span class="hljs-number">432</span>,<span class="hljs-number">234</span>,<span class="hljs-number">2312</span>&#125;;<br>   out.println(Arrays.stream(arr).max().getAsInt()); <span class="hljs-comment">//只用于int，不能用于Integer</span><br>   out.println(Arrays.stream(arr).min().getAsInt());<br>   out.println(Arrays.stream(arr).sum());<br>   out.flush();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h3 id="2-3-BufferedReader输入"><a href="#2-3-BufferedReader输入" class="headerlink" title="2.3 BufferedReader输入"></a>2.3 BufferedReader输入</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        <span class="hljs-comment">//高性能输入，用于数据量大，要求输入输出速度快</span><br>        BufferedReader in =<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in));<br>        PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(System.out);<br><br>        <span class="hljs-keyword">int</span> i=Integer.parseInt(in.readLine());           <span class="hljs-comment">//int型输入</span><br>        out.println(i);<br>        out.flush();<br>        <br>        <span class="hljs-keyword">long</span> l=Long.parseLong(in.readLine());            <span class="hljs-comment">//long型输入</span><br>        out.println(l);<br>        out.flush();<br>        <br>        <span class="hljs-keyword">float</span> f=Float.parseFloat(in.readLine());         <span class="hljs-comment">//float型输入</span><br>        out.println(f);<br>        out.flush();<br>        <br>        <span class="hljs-keyword">double</span> d=Double.parseDouble(in.readLine());      <span class="hljs-comment">//double型输入</span><br>        out.println(d);<br>        out.flush();<br>        <br>        String s=in.readLine();                          <span class="hljs-comment">//String型输入</span><br>        out.println(s);<br>        out.flush();<br>        <br>        BigInteger b=<span class="hljs-keyword">new</span> BigInteger(in.readLine());      <span class="hljs-comment">//BigInteger型输入</span><br>        out.println(b);<br>        out.flush();<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="3-通过Collections类"><a href="#3-通过Collections类" class="headerlink" title="3.通过Collections类"></a>3.通过Collections类</h2><p>Collections.min()和Collections.max()方法。分别用来获取数组中的最小值和最大值。</p>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    StreamTokenizer in = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    Integer[] arr= &#123;<span class="hljs-number">23</span>,<span class="hljs-number">43</span>,<span class="hljs-number">324</span>,<span class="hljs-number">22223</span>,<span class="hljs-number">432</span>,<span class="hljs-number">234</span>,<span class="hljs-number">2312</span>&#125;;<br>    <span class="hljs-keyword">int</span> min = (<span class="hljs-keyword">int</span>) Collections.min(Arrays.asList(arr)); <span class="hljs-comment">//只能用于Integer，不能用于int。如果要用于int，则需要进行转换。如示例2。</span><br>    <span class="hljs-keyword">int</span> max = (<span class="hljs-keyword">int</span>) Collections.max(Arrays.asList(arr));<br>   out.println(min);<br>   out.println(max);<br>   out.flush();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
+<p><strong>说明：</strong></p>
+<p>Collections.max();参数需要的是一个集合。</p>
+<p>Arrays.asList();是将数组变成集合，返回的也是一个可变的集合。</p>
+<p>示例2：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    StreamTokenizer in = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    <span class="hljs-keyword">int</span>[] arr= &#123;<span class="hljs-number">23</span>,<span class="hljs-number">43</span>,<span class="hljs-number">324</span>,<span class="hljs-number">22223</span>,<span class="hljs-number">432</span>,<span class="hljs-number">234</span>,<span class="hljs-number">2312</span>&#125;;<br>    Integer[] integerArray = Arrays.stream(arr).boxed().collect(Collectors.toList()).toArray(<span class="hljs-keyword">new</span> Integer[<span class="hljs-number">0</span>]);<br>    <span class="hljs-keyword">int</span> min = (<span class="hljs-keyword">int</span>) Collections.min(Arrays.asList(integerArray));<br>    <span class="hljs-keyword">int</span> max = (<span class="hljs-keyword">int</span>) Collections.max(Arrays.asList(integerArray));<br>   out.println(min);<br>   out.println(max);<br>   out.flush();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-
-<h3 id="2-4-使用System-in-read-方法"><a href="#2-4-使用System-in-read-方法" class="headerlink" title="2.4 使用System.in.read();方法"></a>2.4 使用System.in.read();方法</h3><p>System.in从标注输入获取数据，数据类型为InputStream。通过read();方法返回ASCII码，若返回值为-1，说明没有读取到任何字符结束工作。使用时需要添加抛出声明或用try/catch包围。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>   PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>   <span class="hljs-keyword">int</span> c;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-keyword">while</span>((c = System.in.read()) != -<span class="hljs-number">1</span>)<br>        &#123;<br>            out.print((<span class="hljs-keyword">char</span>)c);<br>            out.flush();<br>        &#125;<br>    &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>        System.out.println(e.toString());<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
+<p><strong>说明：</strong></p>
+<p>boxed()的作用就是将int类型的stream转成了Integer类型的Stream。</p>
+<p><code>Collectors.toList()</code>是java8中的。</p>
+<p>collect是一个终端操作,它接收的参数是将流中的元素累积到汇总结果的各种方式(称为收集器)。</p>
+<p>预定义收集器包括将流元素归约和汇总到一个值，如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">工厂方法</th>
+<th align="center">返回类型</th>
+<th align="center">用于</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">toList</td>
+<td align="center">List<T></td>
+<td align="center">把流中所有元素收集到List中</td>
+</tr>
+<tr>
+<td align="center">示例:List<Menu> menus=Menu.getMenus.stream().collect(Collectors.toList())</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">toSet</td>
+<td align="center">Set<T></td>
+<td align="center">把流中所有元素收集到Set中,删除重复项</td>
+</tr>
+<tr>
+<td align="center">示例:Set<Menu> menus=Menu.getMenus.stream().collect(Collectors.toSet())</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">toCollection</td>
+<td align="center">Collection<T></td>
+<td align="center">把流中所有元素收集到给定的供应源创建的集合中</td>
+</tr>
+<tr>
+<td align="center">示例:ArrayList<Menu> menus=Menu.getMenus.stream().collect(Collectors.toCollection(ArrayList::new))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Counting</td>
+<td align="center">Long</td>
+<td align="center">计算流中元素个数</td>
+</tr>
+<tr>
+<td align="center">示例:Long count=Menu.getMenus.stream().collect(counting);</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">SummingInt</td>
+<td align="center">Integer</td>
+<td align="center">对流中元素的一个整数属性求和</td>
+</tr>
+<tr>
+<td align="center">示例:Integer count=Menu.getMenus.stream().collect(summingInt(Menu::getCalories))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">averagingInt</td>
+<td align="center">Double</td>
+<td align="center">计算流中元素integer属性的平均值</td>
+</tr>
+<tr>
+<td align="center">示例:Double averaging=Menu.getMenus.stream().collect(averagingInt(Menu::getCalories))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Joining</td>
+<td align="center">String</td>
+<td align="center">连接流中每个元素的toString方法生成的字符串</td>
+</tr>
+<tr>
+<td align="center">示例:String name=Menu.getMenus.stream().map(Menu::getName).collect(joining(“, ”))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">maxBy</td>
+<td align="center">Optional<T></td>
+<td align="center">一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
+</tr>
+<tr>
+<td align="center">示例:Optional<Menu> fattest=Menu.getMenus.stream().collect(maxBy(Menu::getCalories))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">minBy</td>
+<td align="center">Optional<T></td>
+<td align="center">一个包裹了流中按照给定比较器选出的最大元素的optional 如果为空返回的是Optional.empty()</td>
+</tr>
+<tr>
+<td align="center">示例: Optional<Menu> lessest=Menu.getMenus.stream().collect(minBy(Menu::getCalories))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">Reducing</td>
+<td align="center">归约操作产生的类型</td>
+<td align="center">从一个作为累加器的初始值开始,利用binaryOperator与流中的元素逐个结合,从而将流归约为单个值</td>
+</tr>
+<tr>
+<td align="center">示例:int count=Menu.getMenus.stream().collect(reducing(0,Menu::getCalories,Integer::sum));</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">collectingAndThen</td>
+<td align="center">转换函数返回的类型</td>
+<td align="center">包裹另一个转换器,对其结果应用转换函数</td>
+</tr>
+<tr>
+<td align="center">示例:Int count=Menu.getMenus.stream().collect(collectingAndThen(toList(),List::size))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">groupingBy</td>
+<td align="center">Map&lt;K,List<T>&gt;</td>
+<td align="center">根据流中元素的某个值对流中的元素进行分组,并将属性值做为结果map的键</td>
+</tr>
+<tr>
+<td align="center">示例:Map&lt;Type,List<Menu>&gt; menuType=Menu.getMenus.stream().collect(groupingby(Menu::getType))</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">partitioningBy</td>
+<td align="center">Map&lt;Boolean,List<T>&gt;</td>
+<td align="center">根据流中每个元素应用谓语的结果来对项目进行分区</td>
+</tr>
+<tr>
+<td align="center">示例:Map&lt;Boolean,List<Menu>&gt; menuType=Menu.getMenus.stream().collect(partitioningBy(Menu::isType));</td>
+<td align="center"></td>
+<td align="center"></td>
+</tr>
+</tbody></table>
 
             </div>
             <hr>
@@ -377,7 +498,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/13/ACM/ACM-JAVA%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">http://example.com/2021/10/13/ACM/ACM-JAVA%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/14/ACM/ACM-JAVA%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%EF%BC%88%E6%9C%80%E5%B0%8F%EF%BC%89%E5%80%BC/">http://example.com/2021/10/14/ACM/ACM-JAVA%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%EF%BC%88%E6%9C%80%E5%B0%8F%EF%BC%89%E5%80%BC/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -386,18 +507,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/14/ACM/ACM-JAVA%E8%8E%B7%E5%8F%96%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E6%9C%80%E5%A4%A7%EF%BC%88%E6%9C%80%E5%B0%8F%EF%BC%89%E5%80%BC/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ACM-JAVA获取数组中的最大（最小）值</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/12/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-MySQL%E5%BB%BA%E8%A1%A8%E6%97%B6%E6%8A%A5%E9%94%99%5B42000%5D%5B1064%5D/">
-                        <span class="hidden-mobile">星星之火-MySQL建表时报错[42000][1064]</span>
+                      <a href="/2021/10/13/ACM/ACM-JAVA%E5%BF%AB%E9%80%9F%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA/">
+                        <span class="hidden-mobile">ACM-JAVA快速输入输出</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
