@@ -809,6 +809,69 @@ java.nio 定义了以下几个 Buffer 的实现，这个图读者应该也在不
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/2021/10/17/JAVA/JAVA-%E4%B8%80%E8%A1%8C%E4%B8%80%E8%A1%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90AbstractQueuedSynchronizer(%E4%BA%8C)/" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="JAVA-一行一行源码分析AbstractQueuedSynchronizer(二)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/10/17/JAVA/JAVA-%E4%B8%80%E8%A1%8C%E4%B8%80%E8%A1%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90AbstractQueuedSynchronizer(%E4%BA%8C)/">JAVA-一行一行源码分析AbstractQueuedSynchronizer(二)</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/10/17/JAVA/JAVA-%E4%B8%80%E8%A1%8C%E4%B8%80%E8%A1%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90AbstractQueuedSynchronizer(%E4%BA%8C)/">
+          
+          
+            
+          
+          文章比较长，信息量比较大，建议在 pc 上阅读。文章标题是为了呼应前文，其实可以单独成文的，主要是希望读者看文章能系统看。
+本文关注以下几点内容：
+
+深入理解 ReentrantLock 公平锁和非公平锁的区别
+深入分析 AbstractQueuedSynchronizer 中的 ConditionObject
+深入理解 Java 线程中断和 InterruptedException 异常
+
+基本
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 11:55" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JAVA/">JAVA</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">JAVA</a>
+            
+              <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/2021/10/17/JAVA/JAVA-%E4%B8%80%E8%A1%8C%E4%B8%80%E8%A1%8C%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90AbstractQueuedSynchronizer(%E4%B8%80)/" target="_blank">
           <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="JAVA-一行一行源码分析AbstractQueuedSynchronizer(一)">
         </a>
@@ -912,63 +975,6 @@ Google 一下 AbstractQueuedSynchr
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Spring/">Spring</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/2021/10/17/Spring/Spring-Spring+AOP%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="Spring-Spring+AOP源码解析">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/10/17/Spring/Spring-Spring+AOP%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">Spring-Spring+AOP源码解析</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/10/17/Spring/Spring-Spring+AOP%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
-          
-          
-            
-          
-          之前写过 IOC 的源码分析，那篇文章真的有点长，看完需要点耐心。很多读者希望能写一写 Spring AOP 的源码分析文章，这样读者看完 IOC + AOP 也就对 Spring 会有比较深的理解了。今天终于成文了，可能很多读者早就不再等待了，不过主要为了后来者吧。
-本文不会像 IOC 源码分析那篇文章一样，很具体地分析每一行 Spring AOP 的源码，目标读者是已经知道 Spring IO
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-17 10:25" pubdate>
-              2021-10-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Spring/">Spring</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Spring/">Spring</a>
-            
-              <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
             
           </div>
         
