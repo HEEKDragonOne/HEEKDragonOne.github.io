@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>hexo-博客迁移 - 墨水的记忆</title>
+  <title>Vue基础知识-（一）入门 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hexo-博客迁移">
+            <span class="h2" id="subtitle" title="Vue基础知识-（一）入门">
               
             </span>
 
@@ -228,8 +228,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-20 10:16" pubdate>
-        October 20, 2021 am
+      <time datetime="2021-10-20 13:53" pubdate>
+        October 20, 2021 pm
       </time>
     </span>
   
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      640 字
+      1.3k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      17
        分钟
     </span>
   
@@ -293,35 +293,45 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hexo-博客迁移</h1>
+            <h1 style="display: none">Vue基础知识-（一）入门</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：October 20, 2021 am
+                  本文最后更新于：October 23, 2021 pm
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>防患于未然。还是记录一下博客怎么迁移吧，说不定换新电脑了呢，也怕后面遇到一些极端情况。</p>
-<h2 id="1-配置环境"><a href="#1-配置环境" class="headerlink" title="1.配置环境"></a>1.配置环境</h2><p>安装Git、Node.js、hexo环境。可见另一篇搭建教程。<br>安装后进行查看版本。（Mac和Windows的有一点点区别）</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git version<br>node -v<br>hexo -v<br></code></pre></div></td></tr></table></figure>
+              <p>Vue(读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。与其它框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>学校近期要搞一个用Vue做项目的班，而今天也是真的巧，看见了比较好的博客。觉得要不就先学学吧，所以，就正式打响了 “Vue战役”。</p>
+<h2 id="1-入门"><a href="#1-入门" class="headerlink" title="1.入门"></a>1.入门</h2><p>不推荐使用CDN链接。建议自行下载Vue.js文件到本地。<br>Vue.js下载链接：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/installation.html">https://cn.vuejs.org/v2/guide/installation.html</a><br>直接点击下载官方文件：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/js/vue.js">开发版本</a> 、<a target="_blank" rel="noopener" href="https://cn.vuejs.org/js/vue.min.js">生成版本</a> 。</p>
+<p>浏览器中的控制台：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Download the Vue Devtools extension <span class="hljs-keyword">for</span> a better development experience:<br>https://github.com/vuejs/vue-devtools<br></code></pre></div></td></tr></table></figure>
+<p>这不是报错也不是警告，仅仅是告诉开发者下载它可以获得更好的开发体验。阻止Vue在启动时生成生产提示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&#x2F;&#x2F;非必需<br>&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>			Vue.config.productionTip &#x3D; false<br>&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="2-备份"><a href="#2-备份" class="headerlink" title="2.备份"></a>2.备份</h2><p>将你原来电脑上已经配置好并生成的hexo目录拷到你的新电脑上，注意无需拷全部，只拷如下几个目录：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">_config.yml<br>package.json<br>scaffolds/<br><span class="hljs-built_in">source</span>/<br>themes/<br></code></pre></div></td></tr></table></figure>
-<p><strong>注意：这是网上的，具体情况根据自己而定。实在不知道，就全部进行备份。</strong><br>将这些放到一个目录下，如：blog文件夹下。</p>
-<h2 id="3-关联"><a href="#3-关联" class="headerlink" title="3.关联"></a>3.关联</h2><p>进入上述文件夹（blog文件夹），<br>一般情况只需要安装如下模块后即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">将文章部署到github上的模块<br>npm install hexo-deployer-git --save<br></code></pre></div></td></tr></table></figure>
+<h3 id="1-1-初体验"><a href="#1-1-初体验" class="headerlink" title="1.1 初体验"></a>1.1 初体验</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello，tothefor&lt;&#x2F;h1&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>		&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>			Vue.config.productionTip &#x3D; false<br>			<br>			&#x2F;&#x2F;创建vue示例<br>			const x &#x3D; new Vue()<br>		&lt;&#x2F;script&gt;<br>	<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br></code></pre></div></td></tr></table></figure>
+<p>注意：Vue的开始是从创建的示例开始。而创建vue实例需要提供一个参数对象。用于指定当前Vue实例为哪个容器服务，其值<strong>通常</strong>是css选择器字符串，但也不是绝对的。</p>
+<p>对象的写法有两种，第一种是常用的，但第二种也得知道。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>			Vue.config.productionTip &#x3D; false<br>			<br>			&#x2F;&#x2F;创建vue示例<br>			const x &#x3D; new Vue(&#123; &#x2F;&#x2F;第一种，推荐<br>				el:&#39;#root&#39; &#x2F;&#x2F;用于指定当前Vue实例为哪个容器服务<br>			&#125;)<br>			<br>			const x &#x3D; new Vue(&#123; &#x2F;&#x2F;第二种<br>				el:document.getElementById(&#39;root&#39;)<br>			&#125;)<br>		&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+<p>第一种相当于告诉名字目标让vue自己去找，第二种相当于我把目标找到了再给vue。当然了，肯定是第一种比较简单快捷些。这里演示的是id选择器的，class形式（类选择器）的同理变换即可。</p>
+<p>这样，vue实例对象就和容器建立起了关系。但是建立关系后干嘛呢？肯定是要操作数据的嘛。还是先看代码，再解释。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;div id&#x3D;&quot;root&quot;&gt;<br>	&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt; &#x2F;&#x2F;区别<br>&lt;&#x2F;div&gt;<br><br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:document.getElementById(&#39;root&#39;),<br>			data:&#123;<br>				name:&#39;loong&#39;<br>			&#125;<br>		&#125;)<br>	&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+<p>看了代码后，可以自行跑起来看看页面效果，这样比较好理解。现在解释一下。data中用于存储数据，而数据供对象所指定的容器使用。简单理解就是用来写数据的，其他地方直接使用名称即可。如上述代码”hello，”后面的是用两个{}包起来的name，取出name的值loong放在使用处。看完代码最好再看看页面效果，这样比较好理解。</p>
+<p>再放一个例子，自行看效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue"> &lt;div id&#x3D;&quot;root&quot;&gt;<br>	&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>	&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>&lt;&#x2F;div&gt;<br><br>&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>	Vue.config.productionTip &#x3D; false<br>	<br>	&#x2F;&#x2F;创建vue示例<br>	const x &#x3D; new Vue(&#123;<br>		el:document.getElementById(&#39;root&#39;),<br>		data:&#123;<br>			name:&#39;loong&#39;,<br>			age:23<br>		&#125;<br>	&#125;)<br>&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+<p>还有一点说的就是，实践上那个x从头带尾都没有用过，所以可以不需要的，直接new。即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>	Vue.config.productionTip &#x3D; false<br>	<br>	&#x2F;&#x2F;创建vue示例<br>	new Vue(&#123;<br>		el:document.getElementById(&#39;root&#39;),<br>		data:&#123;<br>			name:&#39;loong&#39;,<br>			age:23<br>		&#125;<br>	&#125;)<br>&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
 
-<p>但为了后面可能增加其他功能之类的，把一些可能用到的模块也写上。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install<br>本地测试的时候需要用hexo server<br>npm i hexo-server<br>将文章部署到github上的模块<br>npm install hexo-deployer-git --save<br>安装RSS插件<br>npm install hexo-generator-feed --save<br>添加Sitemap,加速网页收录速度<br>npm install hexo-generator-sitemap --save<br></code></pre></div></td></tr></table></figure>
 
 
-<h3 id="3-1-换源问题（选择性执行）"><a href="#3-1-换源问题（选择性执行）" class="headerlink" title="3.1 换源问题（选择性执行）"></a>3.1 换源问题（选择性执行）</h3><p>避免下载缓慢可以先换源。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org <br>npm info underscore (输出正常反馈信息则说明换源成功)<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="4-最重要"><a href="#4-最重要" class="headerlink" title="4.最重要"></a>4.最重要</h2><p><strong>需要重新生成秘钥，重新在GitHub上配置新的秘钥。这个不能忘了！！！！</strong><br>具体生成秘钥的具体方法也在另外一篇搭建博客中有写，自行查看即可。</p>
-<p>上述完成之后，就可以进行部署了（hexo g、hexo d）。</p>
-<h2 id="5-目录文件参考内容"><a href="#5-目录文件参考内容" class="headerlink" title="5.目录文件参考内容"></a>5.目录文件参考内容</h2><p>.deploy：执行hexo deploy命令部署到GitHub上的内容目录<br>public：执行hexo generate命令，输出的静态网页内容目录<br>scaffolds：layout模板文件目录，其中的md文件可以添加编辑<br>scripts：扩展脚本目录，这里可以自定义一些javascript脚本<br>source：文章源码目录，该目录下的markdown和html文件均会被hexo处理。该页面对应repo的根目录，404文件、favicon.ico文件，CNAME文件等都应该放这里，该目录下可新建页面目录。<br>_drafts：草稿文章<br>_posts：发布文章<br>themes：主题文件目录<br>_config.yml：全局配置文件，大多数的设置都在这里<br>package.json：应用程序数据，指明hexo的版本等信息，类似于一般软件中的关于按钮</p>
+<h3 id="1-2-总结"><a href="#1-2-总结" class="headerlink" title="1.2 总结"></a>1.2 总结</h3><ol>
+<li>使用vue，就必须要创建一个Vue实例，并且要传入一个配置对象。</li>
+<li>容器里面的代码依旧符合html规范，只不过加入了一些vue语法。</li>
+<li>容器里的代码被称为Vue模板。</li>
+<li>一个Vue不能同时接管两个容器（class的也不行），也不能两个Vue接管一个容器。他们之间的关系是一对一的。</li>
+<li>两个大括号中的xxxxx必须是js表达式（一个表达式会产生一个值，可以放在任何一个需要值的地方。而js代码或语句则不会）且xxxxx可以自动读取到data中的所有属性。</li>
+</ol>
 
             </div>
             <hr>
@@ -331,7 +341,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/">学习教程</a>
+                      <a class="hover-with-bg" href="/categories/Vue/">Vue</a>
                     
                   </div>
                 
@@ -339,7 +349,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Hexo/">Hexo</a>
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
                     
                   </div>
                 
@@ -353,7 +363,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/20/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/hexo-%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">http://example.com/2021/10/20/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/hexo-%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/20/Vue/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%EF%BC%88%E4%B8%80%EF%BC%89%E5%85%A5%E9%97%A8/">http://example.com/2021/10/20/Vue/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%EF%BC%88%E4%B8%80%EF%BC%89%E5%85%A5%E9%97%A8/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -362,9 +372,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/20/Vue/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%EF%BC%88%E4%B8%80%EF%BC%89%E5%85%A5%E9%97%A8/">
+                      <a href="/2021/10/22/JAVA/JAVA-HotSpot%20JVM%20%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue基础知识-（一）入门</span>
+                        <span class="hidden-mobile">JAVA-HotSpot JVM 内存管理</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -372,8 +382,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/19/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Java%E5%AE%9E%E7%8E%B0Excel%E6%95%B0%E6%8D%AE%E6%93%8D%E4%BD%9C%E5%92%8C%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA/">
-                        <span class="hidden-mobile">Java实现Excel数据操作和导入导出</span>
+                      <a href="/2021/10/20/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/hexo-%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">
+                        <span class="hidden-mobile">hexo-博客迁移</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
