@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-Java中的2+2=5和1+1=3等原理 - 墨水的记忆</title>
+  <title>星星之火-实现一台服务器跑多个项目 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-Java中的2+2=5和1+1=3等原理">
+            <span class="h2" id="subtitle" title="星星之火-实现一台服务器跑多个项目">
               
             </span>
 
@@ -228,8 +228,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-22 18:03" pubdate>
-        October 22, 2021 pm
+      <time datetime="2021-10-23 21:23" pubdate>
+        October 23, 2021 pm
       </time>
     </span>
   
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      779 字
+      1.1k 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      12
        分钟
     </span>
   
@@ -293,34 +293,79 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-Java中的2+2=5和1+1=3等原理</h1>
+            <h1 style="display: none">星星之火-实现一台服务器跑多个项目</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：October 22, 2021 pm
+                  本文最后更新于：October 23, 2021 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>我们接着上一篇说，上一篇讲了java中的1000==1000和100==100的区别。留下了一个为什么2+2=5的问题。现在说一说。</p>
-<p>先再看一下那个代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> NoSuchFieldException, IllegalAccessException </span>&#123;<br>        Class cache = Integer.class.getDeclaredClasses()[<span class="hljs-number">0</span>]; <span class="hljs-comment">//1</span><br>        Field myCache = cache.getDeclaredField(<span class="hljs-string">&quot;cache&quot;</span>); <span class="hljs-comment">//2</span><br>        myCache.setAccessible(<span class="hljs-keyword">true</span>);<span class="hljs-comment">//3</span><br>        Integer[] newCache = (Integer[]) myCache.get(cache); <span class="hljs-comment">//4</span><br>        newCache[<span class="hljs-number">132</span>] = newCache[<span class="hljs-number">133</span>]; <span class="hljs-comment">//5</span><br>  <br>  	<span class="hljs-comment">//System.out.printf(&quot;2 + 2 = %d&quot;,2 + 2); //输出：5</span><br>    <span class="hljs-comment">//System.out.println(Integer.valueOf(4)); //输出：5</span><br>        <span class="hljs-keyword">int</span> a = <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">int</span> b = a + a; <span class="hljs-comment">//在输出的时候，a 和 b 分别装箱成了 Integer 对象，</span><br>        System.out.printf(<span class="hljs-string">&quot;%d + %d = %d&quot;</span>, a, a, b); <span class="hljs-comment">//输出：5</span><br>    &#125;<br></code></pre></div></td></tr></table></figure>
-<p>后面的那些输出语句不是重点，重点是前面的5句代码。<br><strong>注意：我多放了一条输出语句，这是为了后面的时候好理解。所有，要记住输出4，但结果为5。</strong></p>
-<h2 id="1-解释"><a href="#1-解释" class="headerlink" title="1.解释"></a>1.解释</h2><p>由上一篇我们知道，java中Integer在小整数范围内的整形数据是有缓存的，获取到的都是缓冲区中的。而那5句核心代码中，前四行获取了 Integer 类中的缓存区，第五行将缓存区133位置的对象放到了132位置。</p>
-<blockquote>
-<p>重点理解：cache[]数组存了-128~127之间的数据，即cache[0] = -128; cache[1]=-127….cache[132] = 4。</p>
-</blockquote>
-<p>经过推算，可以发现，133位置放的是5，132原来放的是4。所以现在132位置就从之前的4变成了现在的5。</p>
-<p>这里通过反射缓存中的第133号数据（既整数5）赋值给了第132号数据（既整数4），所以4就会变成5来表示。在使用int数据计算时结果是正常的，但是在打印时由于做了装箱，int数据变成了Integer，这时会采用缓存，所以4就会打印出5来。</p>
-<p>再看看以下代码，如何让1+1=3：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IllegalAccessException, NoSuchFieldException </span>&#123;<br>	Class cache = Integer.class.getDeclaredClasses()[<span class="hljs-number">0</span>];<br>	Field c = cache.getDeclaredField(<span class="hljs-string">&quot;cache&quot;</span>);<br>	c.setAccessible(<span class="hljs-keyword">true</span>);<br>	Integer[] array = (Integer[]) c.get(cache);<br>	array[<span class="hljs-number">130</span>] = array[<span class="hljs-number">131</span>];<br>	System.out.printf(<span class="hljs-string">&quot;%d&quot;</span>, <span class="hljs-number">1</span> + <span class="hljs-number">1</span>); <span class="hljs-comment">// 3</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
-<p>原理和上面的一样，<br>原来：130位置是2，131位置是3；现在用131的给130的覆盖了，所以现在130的是3。而1+1是输出130位置的数。</p>
-<h2 id="2-参考"><a href="#2-参考" class="headerlink" title="2.参考"></a>2.参考</h2><p>内部类IntgerCache的源码：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntegerCache</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> low = -<span class="hljs-number">128</span>;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> high;<br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer cache[];<br>    <span class="hljs-keyword">static</span> &#123;<br>        <span class="hljs-comment">// high value may be configured by property</span><br>        <span class="hljs-keyword">int</span> h = <span class="hljs-number">127</span>;<br>        String integerCacheHighPropValue =<br>            sun.misc.VM.getSavedProperty(<span class="hljs-string">&quot;java.lang.Integer.IntegerCache.high&quot;</span>);<br>        <span class="hljs-keyword">if</span> (integerCacheHighPropValue != <span class="hljs-keyword">null</span>) &#123;<br>            <span class="hljs-keyword">int</span> i = parseInt(integerCacheHighPropValue);<br>            i = Math.max(i, <span class="hljs-number">127</span>);<br>            <span class="hljs-comment">// Maximum array size is Integer.MAX_VALUE</span><br>            h = Math.min(i, Integer.MAX_VALUE - (-low) -<span class="hljs-number">1</span>);<br>        &#125;<br>        high = h;<br><br>        cache = <span class="hljs-keyword">new</span> Integer[(high - low) + <span class="hljs-number">1</span>];<br>        <span class="hljs-keyword">int</span> j = low;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; cache.length; k++)<br>            cache[k] = <span class="hljs-keyword">new</span> Integer(j++);<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">IntegerCache</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><strong>路径不一样的，需要自行根据需要进行改变。推荐先按照步骤走，熟悉后再改路径。</strong></p>
+<h2 id="1-JDK的环境配置"><a href="#1-JDK的环境配置" class="headerlink" title="1.JDK的环境配置"></a>1.JDK的环境配置</h2><ol>
+<li><p>先利用xftp上传jdk的安装包到opt目录下。</p>
+</li>
+<li><p>解压。输入命令：tar -zxvf jdk-8u161-linux-x64.tar.gz ,对jdk进行解压。</p>
+</li>
+<li><p>解压后修改安装包的名字为jdk。</p>
+</li>
+<li><p>输入命令：cd  /        回到顶级目录。</p>
+</li>
+<li><p>输入命令：cd etc     进入到etc文件夹下面。</p>
+</li>
+<li><p>输入命令：vi profile ，进入到profile文件的最末尾，按键盘的i键，进入编辑模式。</p>
+</li>
+<li><p>配置jdk环境变量，如下配置（直接复制即可）</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#JAVA PATH</span><br><span class="hljs-built_in">export</span> JAVA_HOME=/opt/jdk<br><span class="hljs-built_in">export</span> CLASSPATH=<span class="hljs-variable">$CLASSPATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/lib:<span class="hljs-variable">$JAVA_HOME</span>/jre/lib<br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JAVA_HOME</span>/bin:<span class="hljs-variable">$JAVA_HOME</span>/jre/bin:<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$HOME</span>/bin<br></code></pre></div></td></tr></table></figure>
+<p>如果安装位置不一样，则需要进行改变。</p>
+</li>
+<li><p>按键盘的ESC键，退出编辑状态，然后输入 :wq保存好编辑内容。</p>
+</li>
+<li><p>输入：source profile 让配置生效。</p>
+</li>
+<li><p>查看是否生效：输入java -version ，出现类似如下则表示配置成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">java version <span class="hljs-string">&quot;1.8.0_144&quot;</span><br>Java(TM) SE Runtime Environment (build 1.8.0_144-b01)<br>Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<h2 id="2-安装第一个Tomcat并跑项目"><a href="#2-安装第一个Tomcat并跑项目" class="headerlink" title="2.安装第一个Tomcat并跑项目"></a>2.安装第一个Tomcat并跑项目</h2><ol>
+<li>先利用xftp上传tomcat的安装到opt目录下。</li>
+<li>输入命令：tar -zxvf jdk-8u161-linux-x64.tar.gz ,对tomcat进行解压。</li>
+<li>解压后修改文件名称为：tomcat_1。</li>
+<li>与jdk的环境变量配置步骤一样，我们进入到profile里面去进行编辑，环境变量的配置如下所示：<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#tomcat_1</span><br><span class="hljs-built_in">export</span> CATALINA_HOME_1=/opt/tomcat_1<br><span class="hljs-built_in">export</span> CATALINA_BASE_1=/opt/tomcat_1<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<p><strong>注意：等号的后面不能加空格，不然后面让配置生效时会报找不到。至少我在弄的时候报错了。</strong></p>
+<ol start="5">
+<li>让配置生效，输入：source profile    再输入命令 cd / 回到顶级目录。</li>
+<li>输入命令 cd opt/tomcat_1  进入到tomcat_1的文件夹下面。</li>
+<li>输入命令 chmod 777 bin  给他赋予比较高的权限，方便我们启动tomcat。</li>
+<li>输入命令 cd bin 进入到bin文件夹下面，修改catalina.sh文件，在文件这个位置，输入以下内容：<br><img src="https://img-blog.csdnimg.cn/eebaeff6b220464eb7caaad38e139233.png" srcset="/img/loading.gif"><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CATALINA_BASE=<span class="hljs-variable">$CATALINA_BASE_1</span><br><span class="hljs-built_in">export</span> CATALINA_HOME=<span class="hljs-variable">$CATALINA_HOME_1</span><br></code></pre></div></td></tr></table></figure></li>
+<li>然后输入tomcat启动命令：./startup.sh 。</li>
+<li>启动完毕后，在浏览器里面输入：服务器ip地址:8080 。就可以看见熟悉的Tomcat的界面了。</li>
+</ol>
+<p><strong>注意：如果前面的配置没有问题，而又不能访问，多半端口没有开！至少我自己是这样的，开了端口就可以了。</strong><br>然后就可以把项目上传到webapps下了，url再加上文件夹名称访问即可。</p>
+<h2 id="3-安装配置第二个Tomcat和跑项目"><a href="#3-安装配置第二个Tomcat和跑项目" class="headerlink" title="3.安装配置第二个Tomcat和跑项目"></a>3.安装配置第二个Tomcat和跑项目</h2><ol>
+<li>先利用xftp上传tomcat的安装到opt目录下。</li>
+<li>输入命令：tar -zxvf jdk-8u161-linux-x64.tar.gz ,对tomcat进行解压。</li>
+<li>解压后修改文件名称为：tomcat_2。</li>
+<li>与jdk的环境变量配置步骤一样，我们进入到profile里面去进行编辑，环境变量的配置如下所示：<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#tomcat_2</span><br><span class="hljs-built_in">export</span> CATALINA_HOME_2=/opt/tomcat_2<br><span class="hljs-built_in">export</span> CATALINA_BASE_2=/opt/tomcat_2<br></code></pre></div></td></tr></table></figure></li>
+<li>让配置生效，输入：source profile  。输入命令 cd / 回到顶级目录。</li>
+<li>输入命令 cd opt/tomcat_2  进入到tomcat_1的文件夹下面。</li>
+<li>输入命令 chmod 777 bin  给他赋予比较高的权限，方便我们启动tomcat。</li>
+<li>由于第一个tomcat用了端口是8080，所以我们这里就不能再用8080端口，否则会端口冲突报错。进入到tomcat_2下面的conf文件夹下面，修改sever.xml文件，修改之处如下所示：<br><img src="https://img-blog.csdnimg.cn/570d751cda094680bfcaf3ffd9dc9ea3.png" srcset="/img/loading.gif"></li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/b7dfd5527fe14e0599229c21c9218391.png" srcset="/img/loading.gif"></p>
+<p><img src="https://img-blog.csdnimg.cn/889bb01e4d674cf1a0a8dd6d080894be.png" srcset="/img/loading.gif"></p>
+<ol start="9">
+<li>输入命令： cd .. ,回到tomcat_2路径下。</li>
+<li>输入命令 chmod 777 bin  给他赋予比较高的权限，方便我们启动tomcat。</li>
+<li>输入命令 cd bin 进入到bin文件夹下面，修改catalina.sh文件，在文件这个位置，输入以下内容：<br><img src="https://img-blog.csdnimg.cn/5667fde2f25f4756bc03fa83c2264bb5.png" srcset="/img/loading.gif"></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> CATALINA_BASE=<span class="hljs-variable">$CATALINA_BASE_2</span><br><span class="hljs-built_in">export</span> CATALINA_HOME=<span class="hljs-variable">$CATALINA_HOME_2</span><br></code></pre></div></td></tr></table></figure>
 
-
-
+<ol start="12">
+<li>然后输入tomcat启动命令：./startup.sh 。启动完毕后，在浏览器里面输入：服务器ip地址:8090 。具体其他操作同Tomcat_1。</li>
+</ol>
 
             </div>
             <hr>
@@ -352,7 +397,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/22/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-Java%E4%B8%AD%E7%9A%842+2=5%E5%92%8C1+1=3%E7%AD%89%E5%8E%9F%E7%90%86/">http://example.com/2021/10/22/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-Java%E4%B8%AD%E7%9A%842+2=5%E5%92%8C1+1=3%E7%AD%89%E5%8E%9F%E7%90%86/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/23/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%91%E5%A4%9A%E4%B8%AA%E9%A1%B9%E7%9B%AE/">http://example.com/2021/10/23/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%91%E5%A4%9A%E4%B8%AA%E9%A1%B9%E7%9B%AE/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -361,18 +406,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/23/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%91%E5%A4%9A%E4%B8%AA%E9%A1%B9%E7%9B%AE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">星星之火-实现一台服务器跑多个项目</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/22/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-Java%E4%B8%AD%E7%9A%841000==1000%E4%B8%8E100==100%E7%9A%84%E4%B8%8D%E5%90%8C%E4%B9%8B%E5%A4%84/">
-                        <span class="hidden-mobile">星星之火-Java中的1000==1000与100==100的不同之处</span>
+                      <a href="/2021/10/22/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-Java%E4%B8%AD%E7%9A%842+2=5%E5%92%8C1+1=3%E7%AD%89%E5%8E%9F%E7%90%86/">
+                        <span class="hidden-mobile">星星之火-Java中的2+2=5和1+1=3等原理</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
