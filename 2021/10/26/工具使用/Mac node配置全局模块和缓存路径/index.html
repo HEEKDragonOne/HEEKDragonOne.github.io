@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>压力测试工具的下载和使用 - 墨水的记忆</title>
+  <title>Mac node配置全局模块和缓存路径 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="压力测试工具的下载和使用">
+            <span class="h2" id="subtitle" title="Mac node配置全局模块和缓存路径">
               
             </span>
 
@@ -228,7 +228,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-26 12:13" pubdate>
+      <time datetime="2021-10-26 20:13" pubdate>
         October 26, 2021 pm
       </time>
     </span>
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      577 字
+      334 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      4
        分钟
     </span>
   
@@ -293,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">压力测试工具的下载和使用</h1>
+            <h1 style="display: none">Mac node配置全局模块和缓存路径</h1>
             
               <p class="note note-info">
                 
@@ -302,44 +302,23 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               </p>
             
             <div class="markdown-body">
-              <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-WebBench"><a href="#1-WebBench" class="headerlink" title="1.WebBench"></a>1.WebBench</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget http://www.ha97.com/webbench-1.5.tar.gz<br>tar -zxvf webbench-1.5.tar.gz<br><span class="hljs-built_in">cd</span> webbench-1.5<br>make<br>make install<br></code></pre></div></td></tr></table></figure>
-<p>安装中遇到的问题如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ctags *.c <br>/bin/sh: ctags: <span class="hljs-built_in">command</span> not found <br>make: [tags] Error 127 (ignored) <br></code></pre></div></td></tr></table></figure>
-<p>缺少ctags命令，用apt install ctags安装即可。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">apt install ctags //ubuntu<br>yum install ctags  //centos<br></code></pre></div></td></tr></table></figure>
-
-<p>测试webbench：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">webbench <br></code></pre></div></td></tr></table></figure>
-
-<p>实战：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">webbench -c 1000 -t 60 http://192.168.80.157/phpinfo.php //1000个并发，执行60秒<br></code></pre></div></td></tr></table></figure>
-
-<p>参数说明：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">webbench [option]... URL<br>  -f|--force               Don<span class="hljs-string">&#x27;t wait for reply from server.</span><br><span class="hljs-string">  -r|--reload              Send reload request - Pragma: no-cache.</span><br><span class="hljs-string">  -t|--time &lt;sec&gt;          运行测试时间  Run benchmark for &lt;sec&gt; seconds. Default 30.</span><br><span class="hljs-string">  -p|--proxy &lt;server:port&gt; Use proxy server for request.</span><br><span class="hljs-string">  -c|--clients &lt;n&gt;         并发数  Run &lt;n&gt; HTTP clients at once. Default one.</span><br><span class="hljs-string">  -9|--http09              Use HTTP/0.9 style requests.</span><br><span class="hljs-string">  -1|--http10              Use HTTP/1.0 protocol.</span><br><span class="hljs-string">  -2|--http11              Use HTTP/1.1 protocol.</span><br><span class="hljs-string">  --get                    Use GET request method.</span><br><span class="hljs-string">  --head                   Use HEAD request method.</span><br><span class="hljs-string">  --options                Use OPTIONS request method.</span><br><span class="hljs-string">  --trace                  Use TRACE request method.</span><br><span class="hljs-string">  -?|-h|--help             This information.</span><br><span class="hljs-string">  -V|--version             Display program version.</span><br></code></pre></div></td></tr></table></figure>
-<p>结果说明：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">每秒钟响应请求数：24525 pages/min，每秒钟传输数据量20794612 bytes/sec.<br>并发1000运行60秒后产生的TCP连接数12000多个,已经显示有87个连接failed了，说明超负荷了。<br></code></pre></div></td></tr></table></figure>
-
-
-<h2 id="2-Siege"><a href="#2-Siege" class="headerlink" title="2.Siege"></a>2.Siege</h2><p>Siege是一款高性能的Http压力测试工具。<br>Siege支持身份验证、cookies、http、https和ftp协议。<br>支持多链接，支持get和post请求，可以对web系统进行多并发下持续请求的压力测试。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/src<br>wget http://download.joedog.org/siege/siege-4.0.4.tar.gz<br>tar -zxvf siege-4.0.4.tar.gz<br><span class="hljs-built_in">cd</span> siege-4.0.4/<br>./configure --prefix=/usr/<span class="hljs-built_in">local</span>/siege<br>make &amp;&amp; make install<br><span class="hljs-comment">#将命令加入全局</span><br>ln -s /usr/<span class="hljs-built_in">local</span>/siege/bin/siege /usr/bin/siege<br></code></pre></div></td></tr></table></figure>
-
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">siege -c 200 -r 100 http://www.google.com //200个并发，请求100次<br></code></pre></div></td></tr></table></figure>
-
-
-<p><strong>注意：siege默认只支持255个并发数，可以自己自定义，修改/root/.siege/siege.conf下的limit数值。</strong></p>
-<h2 id="3-Jmeter"><a href="#3-Jmeter" class="headerlink" title="3.Jmeter"></a>3.Jmeter</h2><blockquote>
-<p>前提环境：需要java环境（配置jdk），可见《星星之火-实现一台服务器跑多个项目 》一文。</p>
-</blockquote>
-<p>安装：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget https://mirror.bit.edu.cn/apache//jmeter/binaries/apache-jmeter-5.2.1.tgz<br>tar -zxvf apache-jmeter-5.2.1.tgz<br></code></pre></div></td></tr></table></figure>
-<p>也可以自行下载安装包再上传到服务器后，再解压。<br>解压完后，添加环境变量。 </p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vi /etc/profile<br></code></pre></div></td></tr></table></figure>
-<p>将以下内容输入进去：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> JMETER_HOME=/root/apache-jmeter-5.2.1<br><br><span class="hljs-built_in">export</span> CLASSPATH=<span class="hljs-variable">$JMETER_HOME</span>/lib/ext/ApacheJMeter_core.jar:<span class="hljs-variable">$JMETER_HOME</span>/lib/jorphan.jar:<span class="hljs-variable">$CLASSPATH</span><br><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-variable">$JMETER_HOME</span>/bin:<span class="hljs-variable">$PATH</span><br><br></code></pre></div></td></tr></table></figure>
-<p>让配置生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> /etc/profile <br></code></pre></div></td></tr></table></figure>
-<p>再输入jmeter检验是否成功。</p>
+              <p>写者的电脑环境为Mac的。且安装的路径为默认路径。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><ol>
+<li><p>node 默认安装在 /usr/local/bin 目录下，我在 local 目录下新建 node_package ，并在 node_package 下新建 node_cache , node_global 目录;（注意地址！）</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 操作命令</span><br><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span><br>sudo mkdir -p node_package<br>sudo mkdir -p node_package/node_global<br>sudo mkdir -p node_package/node_cache<br></code></pre></div></td></tr></table></figure></li>
+<li><p>修改node的配置文件，设置global、cache目录路径。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># global位置</span><br>sudo npm config <span class="hljs-built_in">set</span> prefix <span class="hljs-string">&quot;/usr/local/bin/node_package/node_global&quot;</span><br><span class="hljs-comment"># cache位置</span><br>sudo npm config <span class="hljs-built_in">set</span> cache <span class="hljs-string">&quot;/usr/local/bin/node_package/node_cache&quot;</span><br><span class="hljs-comment"># 通过下面这个命令查看配置</span><br>npm config list<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<p>写者只执行到此，后面的就没有再执行了。自行根据情况而定。</p>
+<ol start="3">
+<li><p>为正在使用的用户设置权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 设置权限</span><br>sudo chown -R [owner] /usr/<span class="hljs-built_in">local</span>/bin/node_package <span class="hljs-comment"># owner应该是用户名，写者没有执行，所有可自行尝试。</span><br><span class="hljs-comment">#sudo chown -R $USER /usr/local/bin/node_package </span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>配置环境变量，在.bash_profile文件中加入以下内容。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 执行命令</span><br>$ vim ~/.bash_profile<br><br><span class="hljs-comment"># 需要加入的环境变量</span><br>NODE_HOME=/usr/<span class="hljs-built_in">local</span>/bin<br>NODE_MODULES=/usr/<span class="hljs-built_in">local</span>/node_package/node_global<br>PATH=<span class="hljs-variable">$NODE_HOME</span>:<span class="hljs-variable">$NODE_MODULES</span>:<span class="hljs-variable">$PATH</span><br><span class="hljs-built_in">export</span> NODE_HOME NODE_MODULES PATH<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+<ol start="5">
+<li>换源。因为node的服务器在国外，下载速度会比较慢，所以我把默认的镜像源，设置成阿里云的。<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 1、设置阿里云镜像</span><br>sudo npm config <span class="hljs-built_in">set</span> registry https://registry.npm.taobao.org<br><span class="hljs-comment"># 2、测试配置之后是否成功</span><br>sudo npm config get registry<br></code></pre></div></td></tr></table></figure></li>
+</ol>
 
             </div>
             <hr>
@@ -357,7 +336,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">压力测试</a>
+                      <a class="hover-with-bg" href="/tags/Node/">Node</a>
                     
                   </div>
                 
@@ -371,7 +350,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8/">http://example.com/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Mac%20node%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9D%97%E5%92%8C%E7%BC%93%E5%AD%98%E8%B7%AF%E5%BE%84/">http://example.com/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Mac%20node%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9D%97%E5%92%8C%E7%BC%93%E5%AD%98%E8%B7%AF%E5%BE%84/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -380,18 +359,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Mac%20node%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9D%97%E5%92%8C%E7%BC%93%E5%AD%98%E8%B7%AF%E5%BE%84/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Mac node配置全局模块和缓存路径</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/23/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E5%AE%9E%E7%8E%B0%E4%B8%80%E5%8F%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%B7%91%E5%A4%9A%E4%B8%AA%E9%A1%B9%E7%9B%AE/">
-                        <span class="hidden-mobile">星星之火-实现一台服务器跑多个项目</span>
+                      <a href="/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E4%BD%BF%E7%94%A8/">
+                        <span class="hidden-mobile">压力测试工具的下载和使用</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
