@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      755 字
+      943 字
     </span>
   
 
@@ -250,7 +250,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -297,7 +297,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：October 6, 2021 pm
+                  本文最后更新于：October 27, 2021 pm
                 
               </p>
             
@@ -310,13 +310,14 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>&lt;&lt; 、&gt;&gt; 为算术运算符；&gt;&gt;&gt; 为逻辑运算符。&gt;&gt;(带符号右移) 和 &gt;&gt;&gt;(无符号右移) 。</p>
 <p><strong>其中，&gt;&gt;&gt; 表示<code>不带符号</code>向右移动二进制数，移动后前面统统补0； &gt;&gt; 表示<code>带符号</code>移动。</strong></p>
 <p>都可以理解成是在补码的形式上进行移动的！！。</p>
+<p><strong>&gt;&gt;&gt;只是java中的！！！</strong></p>
 <blockquote>
 <p>负数求补码</p>
 </blockquote>
 <p>如下步骤：<br>1、首先求出负数的原码，如-8的原码为 1000 1000，<br>2、通过原码求出它的反码，负数的反码就是 除符号为以外，其余的全部求反，如-8 反码为 1111 0111，<br>3、负数的补码 +1，就是它的补码，如 -8 的补码为 1111 1000</p>
-<p><strong>简单说就是：负数的补码是在原码的基础上除符号位外其余位取反后+1。<br>也可以是：先写出负数的相反数的原码，再将最高位变1，再将除符号位外的其他位取反+1。</strong></p>
+<p><strong>简单说就是：负数的补码是在原码的基础上除符号位外其余位取反后+1。<br>也可以是：先写出负数的相反数的原码，再将最高位变1（已经是1了就不管了），再将除符号位外的其他位取反+1。</strong></p>
 <h2 id="2-示例"><a href="#2-示例" class="headerlink" title="2.示例"></a>2.示例</h2><p>以-12为例：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">        System.out.println(<span class="hljs-string">&quot;=====================================&quot;</span>);<br>        System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>);<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>);<br>        <span class="hljs-comment">// 00000000000000000000000000001100  原码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110011  反码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110100  补码</span><br><br><span class="hljs-comment">//输出</span><br>========================================<br><span class="hljs-number">1100</span><br><span class="hljs-number">11111111111111111111111111110100</span> <span class="hljs-comment">// -12</span><br><span class="hljs-number">11111111111111111111111111111110</span> <span class="hljs-comment">// -2</span><br>-<span class="hljs-number">2</span><br><span class="hljs-number">11111111111111111111111111110</span>    <span class="hljs-comment">// 536870910</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">00011111111111111111111111111110</span><br><span class="hljs-comment">*/</span><br><span class="hljs-number">536870910</span><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">        System.out.println(<span class="hljs-string">&quot;=====================================&quot;</span>);<br>        System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>);<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>);<br>        <span class="hljs-comment">// 00000000000000000000000000001100  12原码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110011  反码</span><br>        <span class="hljs-comment">// 11111111111111111111111111110100  补码</span><br><br><span class="hljs-comment">//输出</span><br>========================================<br><span class="hljs-number">00000000000000000000000000001100</span> <span class="hljs-comment">//12</span><br><span class="hljs-number">11111111111111111111111111110100</span> <span class="hljs-comment">// -12</span><br><span class="hljs-number">11111111111111111111111111111110</span> <span class="hljs-comment">// -2，用&gt;&gt;移动后用的1在左边进行补充</span><br>-<span class="hljs-number">2</span><br><span class="hljs-number">11111111111111111111111111110</span>    <span class="hljs-comment">// 536870910，用&gt;&gt;&gt;移动后用的0在左边进行补充,完整见下</span><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">00011111111111111111111111111110</span><br><span class="hljs-comment">*/</span><br><span class="hljs-number">536870910</span><br></code></pre></div></td></tr></table></figure>
 
 <p>可以看见，是 &gt;&gt; 运算符时，左边添加的是符号位1；如果是正数，添加的就是0；而是 &gt;&gt;&gt; 运算符时，没有管符号位，是直接左边添加的0。</p>
 <blockquote>
@@ -325,6 +326,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>如 -12 的二进制为：1111  1111  1111  1111  1111  1111  1111  0100；</p>
 <p>-12 &gt;&gt; 3 即带符号右移3位，结果是：1111  1111  1111  1111  1111  1111  1111  1110，十进制为： -2；</p>
 <p>-12 &gt;&gt;&gt; 3 就是右移三位，前面补零，为：0001  1111  1111  1111  1111  1111  1111  1110，十进制为：536870910。</p>
+<p>最后再加一个对照示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(Integer.toBinaryString(<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(<span class="hljs-string">&quot;==========================================&quot;</span>);<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;<span class="hljs-number">3</span>));<br>        System.out.println(Integer.toBinaryString(-<span class="hljs-number">12</span>&gt;&gt;&gt;<span class="hljs-number">3</span>));<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">1100</span><br><span class="hljs-number">1</span><br><span class="hljs-number">1</span><br>==========================================<br><span class="hljs-number">11111111111111111111111111110100</span><br><span class="hljs-number">11111111111111111111111111111110</span><br><span class="hljs-number">11111111111111111111111111110</span><br>  <br>  <br><span class="hljs-comment">//将他们格式化一下</span><br><span class="hljs-number">00000000000000000000000000001100</span> <span class="hljs-comment">//12</span><br><span class="hljs-number">00000000000000000000000000000001</span> <span class="hljs-comment">//1</span><br><span class="hljs-number">00000000000000000000000000000001</span> <span class="hljs-comment">//1</span><br>==========================================<br><span class="hljs-number">11111111111111111111111111110100</span> <span class="hljs-comment">//-12</span><br><span class="hljs-number">11111111111111111111111111111110</span> <span class="hljs-comment">//左边补充的1</span><br><span class="hljs-number">00011111111111111111111111111110</span> <span class="hljs-comment">//左边补充的0</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这下应该清除了。&gt;&gt;移动的时候是用的符号位的数进行补充，而&gt;&gt;&gt;是直接补充的0。</p>
 
             </div>
             <hr>
