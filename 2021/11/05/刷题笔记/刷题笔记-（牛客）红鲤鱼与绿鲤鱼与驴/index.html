@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>刷题笔记-（牛客）红鲤鱼与绿鲤鱼与驴 - 墨水的记忆</title>
+  <title>刷题笔记-（牛客NC54287）红鲤鱼与绿鲤鱼与驴-输入问题 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -213,7 +213,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="刷题笔记-（牛客）红鲤鱼与绿鲤鱼与驴">
+            <span class="h2" id="subtitle" title="刷题笔记-（牛客NC54287）红鲤鱼与绿鲤鱼与驴-输入问题">
               
             </span>
 
@@ -240,7 +240,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      565 字
+      579 字
     </span>
   
 
@@ -293,7 +293,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">刷题笔记-（牛客）红鲤鱼与绿鲤鱼与驴</h1>
+            <h1 style="display: none">刷题笔记-（牛客NC54287）红鲤鱼与绿鲤鱼与驴-输入问题</h1>
             
               <p class="note note-info">
                 
@@ -316,7 +316,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//in</span><br><span class="hljs-number">123123</span><br><span class="hljs-comment">//out</span><br>hongliyulvliyulvhongliyulvliyulv<br></code></pre></div></td></tr></table></figure>
 <p>输入字符串长度&lt;=100。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这道题很简单。只是在做的过程中，总结一些输入的问题。以下是输入模板。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>一些输入问题。</p>
+<p>这道题很简单。只是在做的过程中，总结一些输入的问题。以下是输入模板。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//1</span><br>Scanner Scin = <span class="hljs-keyword">new</span> Scanner(System.in);<br><span class="hljs-comment">//2</span><br>StreamTokenizer STcin = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br><span class="hljs-comment">//3</span><br>BufferedReader BRcin = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in));<br><br><span class="hljs-comment">//输出</span><br>PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br></code></pre></div></td></tr></table></figure>
 
 <p>在提交过程中发现，用第二种方法进行输入，会存在空指针异常的情况。而其他两种情况输入则没有问题，且能直接AC。代码如下：</p>
@@ -325,7 +326,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.NullPointerException<br>	at Main.main(Main.java:<span class="hljs-number">23</span>)<br><br></code></pre></div></td></tr></table></figure>
 
 <p>具体原因不知道，所以在此记录一下。ε=(´ο｀*)))唉</p>
-<p>所以，一般在输入的时候，如果是字符串，则不用第二种输入方法。</p>
+<p>甚至在后面的一些题中，输入数也会包这个错。好像数字和下标、数组有关的都不行。</p>
 
             </div>
             <hr>
@@ -370,8 +371,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/03/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93/">
-                        <span class="hidden-mobile">刷题笔记-知识点总结</span>
+                      <a href="/2021/11/05/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0-%EF%BC%88%E7%89%9B%E5%AE%A2NC24743%EF%BC%89%5BUSACO%202010%20Nov%20B%5DRace%20Results%EF%BC%88%E6%AF%94%E8%B5%9B%E7%BB%93%E6%9E%9C%EF%BC%89-%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E6%8E%92%E5%BA%8F/">
+                        <span class="hidden-mobile">刷题笔记-（牛客NC24743）[USACO 2010 Nov B]Race Results（比赛结果）-自定义类排序</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
