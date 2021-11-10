@@ -62,7 +62,8 @@
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
-<meta name="generator" content="Hexo 5.4.0"></head>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水的记忆" type="application/atom+xml">
+</head>
 
 
 
@@ -240,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.7k 字
     </span>
   
 
@@ -250,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      22
        分钟
     </span>
   
@@ -297,7 +298,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 3, 2021 pm
+                  本文最后更新于：November 10, 2021 pm
                 
               </p>
             
@@ -378,8 +379,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <hr>
 <h1 id="Hexo配置"><a href="#Hexo配置" class="headerlink" title="Hexo配置"></a>Hexo配置</h1><p>在文件根目录下的<code>_config.yml</code>，就是整个hexo框架的配置文件了。</p>
 <h3 id="1-更换主题"><a href="#1-更换主题" class="headerlink" title="1.更换主题"></a>1.更换主题</h3><p>持续更新中······</p>
-<h1 id="Mac安装（自记）"><a href="#Mac安装（自记）" class="headerlink" title="Mac安装（自记）"></a>Mac安装（自记）</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装brew</span><br>/bin/zsh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)</span>&quot;</span><br><span class="hljs-comment"># 安装git</span><br>brew install git<br><span class="hljs-comment"># 配置本地git</span><br>git config --global user.name <span class="hljs-string">&quot;yourname&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;youremail&quot;</span><br><span class="hljs-comment"># 生成公钥</span><br>ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail&quot;</span><br><span class="hljs-comment"># 查看</span><br>git config --global --list<br><span class="hljs-comment"># 安装nodejs</span><br>brew install nodejs<br>brew install npm<br><span class="hljs-comment"># 安装hexo</span><br>npm install -g hexo-cli<br><span class="hljs-comment"># 报错处理（权限问题）</span><br>sudo chown -R `whoami` /usr/<span class="hljs-built_in">local</span>/lib/node_modules<br></code></pre></div></td></tr></table></figure>
+<h1 id="Mac安装（自记）"><a href="#Mac安装（自记）" class="headerlink" title="Mac安装（自记）"></a>Mac安装（自记）</h1><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 安装brew</span><br>/bin/zsh -c <span class="hljs-string">&quot;<span class="hljs-subst">$(curl -fsSL https://gitee.com/cunkai/HomebrewCN/raw/master/Homebrew.sh)</span>&quot;</span><br><span class="hljs-comment"># 安装git</span><br>brew install git<br><span class="hljs-comment"># 配置本地git</span><br>git config --global user.name <span class="hljs-string">&quot;yourname&quot;</span><br>git config --global user.email <span class="hljs-string">&quot;youremail&quot;</span><br><span class="hljs-comment"># 生成公钥</span><br>ssh-keygen -t rsa -C <span class="hljs-string">&quot;youremail&quot;</span><br><span class="hljs-comment"># 查看</span><br>git config --global --list<br><span class="hljs-comment"># 安装nodejs</span><br>brew install nodejs<br>brew install npm<br><span class="hljs-comment"># 安装hexo</span><br>npm install -g hexo-cli<br><span class="hljs-comment"># 报错处理（权限问题）报的错看后面</span><br>sudo chown -R `whoami` /usr/<span class="hljs-built_in">local</span>/lib/node_modules<br></code></pre></div></td></tr></table></figure>
 
+<p>权限问题报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  blog git:(master) ✗ npm install hexo-generator-feed --save<br><br>&gt; fsevents@1.2.13 install /Users/dragonone/ToTheFor/blog/node_modules/hexo-helper-live2d/node_modules/fsevents<br>&gt; node install.js<br><br>No receipt <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;com.apple.pkg.CLTools_Executables&#x27;</span> found at <span class="hljs-string">&#x27;/&#x27;</span>.<br><br>No receipt <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;com.apple.pkg.DeveloperToolsCLILeo&#x27;</span> found at <span class="hljs-string">&#x27;/&#x27;</span>.<br><br>No receipt <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;com.apple.pkg.DeveloperToolsCLI&#x27;</span> found at <span class="hljs-string">&#x27;/&#x27;</span>.<br><br>gyp: No Xcode or CLT version detected!<br>gyp ERR! configure error <br>gyp ERR! stack Error: `gyp` failed with <span class="hljs-built_in">exit</span> code: 1<br>gyp ERR! stack     at ChildProcess.onCpExit (/usr/<span class="hljs-built_in">local</span>/lib/node_modules/npm/node_modules/node-gyp/lib/configure.js:351:16)<br>gyp ERR! stack     at ChildProcess.emit (events.js:375:28)<br>gyp ERR! stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:277:12)<br>gyp ERR! System Darwin 20.6.0<br>gyp ERR! <span class="hljs-built_in">command</span> <span class="hljs-string">&quot;/usr/local/bin/node&quot;</span> <span class="hljs-string">&quot;/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js&quot;</span> <span class="hljs-string">&quot;rebuild&quot;</span><br>gyp ERR! cwd /Users/dragonone/ToTheFor/blog/node_modules/hexo-helper-live2d/node_modules/fsevents<br>gyp ERR! node -v v14.17.3<br>gyp ERR! node-gyp -v v5.1.0<br>gyp ERR! not ok <br>+ hexo-generator-feed@3.0.0<br>added 6 packages from 14 contributors and audited 647 packages <span class="hljs-keyword">in</span> 17.903s<br><br>19 packages are looking <span class="hljs-keyword">for</span> funding<br>  run `npm fund` <span class="hljs-keyword">for</span> details<br><br>found 37 vulnerabilities (2 low, 18 moderate, 17 high)<br>  run `npm audit fix` to fix them, or `npm audit` <span class="hljs-keyword">for</span> details<br></code></pre></div></td></tr></table></figure>
 
 
 
