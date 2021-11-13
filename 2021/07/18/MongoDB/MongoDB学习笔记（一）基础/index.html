@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.3k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      42
+      44
        分钟
     </span>
   
@@ -298,7 +298,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 1, 2021 pm
+                  本文最后更新于：November 13, 2021 pm
                 
               </p>
             
@@ -337,6 +337,21 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </ol>
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo mongod --dbpath /usr/<span class="hljs-built_in">local</span>/mongodb/data/db/ --logpath /usr/<span class="hljs-built_in">local</span>/mongodb/logs/mongodb.log --logappend --port 27017 --bind_ip 0.0.0.0 --fork<br></code></pre></div></td></tr></table></figure>
+
+<p>先执行：<code>export PATH=/usr/local/mongodb/bin:$PATH</code>，在执行：<code>sudo mongod --dbpath /usr/local/mongodb/data/db/ --logpath /usr/local/mongodb/logs/mongodb.log --logappend --port 27017 --bind_ip 0.0.0.0 --fork</code>。</p>
+<blockquote>
+<p>时间：2021/11/13 19:13:27</p>
+</blockquote>
+<p>启动MongoDB的方式：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/mongodb/bin<br>./mongo<br></code></pre></div></td></tr></table></figure>
+
+<p>另外一种，使用配置文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">配置文件位置：/usr/<span class="hljs-built_in">local</span>/mongodb/etc/mongodb.conf<br>内容：<br>dbpath=/usr/<span class="hljs-built_in">local</span>/mongodb/data/db<br>logpath=/usr/<span class="hljs-built_in">local</span>/mongodb/logs/mongodb.log<br>port=27017<br>bind_ip=0.0.0.0<br>fork=<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后只需要在bin目录下，使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./mongod --config /usr/<span class="hljs-built_in">local</span>/mongodb/etc/mongodb.conf<br></code></pre></div></td></tr></table></figure>
+
+
 
 
 <h2 id="0-1-MongoDB与MySQL"><a href="#0-1-MongoDB与MySQL" class="headerlink" title="0.1 MongoDB与MySQL"></a>0.1 MongoDB与MySQL</h2><p><img src="https://img-blog.csdnimg.cn/2021071908485373.jpg" srcset="/img/loading.gif"></p>
