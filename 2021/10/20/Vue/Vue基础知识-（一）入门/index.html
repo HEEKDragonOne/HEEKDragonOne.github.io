@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      1.7k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      22
        分钟
     </span>
   
@@ -298,13 +298,32 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 1, 2021 pm
+                  本文最后更新于：November 16, 2021 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>Vue(读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。与其它框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>学校近期要搞一个用Vue做项目的班，而今天也是真的巧，看见了比较好的博客。觉得要不就先学学吧，所以，就正式打响了 “Vue战役”。</p>
+<h2 id="0-安装vue-cli"><a href="#0-安装vue-cli" class="headerlink" title="0.安装vue-cli"></a>0.安装vue-cli</h2><p>在Mac系统的本地上安，安到了我想放弃。ε=(´ο｀*)))唉。最后终于找到了一个好的，记一下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">命令行输入：sudo npm install --global vue-cli<br>输入密码回车<br></code></pre></div></td></tr></table></figure>
+<p>然后会出现下面情况：（网图一张）</p>
+<p><img src="https://img-blog.csdnimg.cn/ac908fc553794bd282cad15b30896a55.png" srcset="/img/loading.gif"></p>
+<p>然后再输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/Users/panchenchen/.npm-global/bin/&quot;</span>  <br></code></pre></div></td></tr></table></figure>
+
+<p>上面代码是针对上面的图，但我在实际中，因意外发现了另一种方法。现在都附上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 1 意外</span><br><span class="hljs-built_in">export</span> PATH=/usr/<span class="hljs-built_in">local</span>/bin:/usr/<span class="hljs-built_in">local</span>/bin/node_package/node_global/lib/node_modules/vue-cli/bin<br><br><span class="hljs-comment"># 2 正常</span><br><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/usr/local/bin/node_package/node_global/lib/node_modules/vue-cli/bin&quot;</span><br><br><span class="hljs-comment"># 3 这种是不可以，没想到吧。哈哈哈，我也没想到。</span><br><span class="hljs-built_in">export</span> PATH=/usr/<span class="hljs-built_in">local</span>/bin/node_package/node_global/lib/node_modules/vue-cli/bin<br></code></pre></div></td></tr></table></figure>
+
+<p>执行完毕后，再执行<code>vue或者vue -V</code> 就可以看见版本号了。</p>
+<h3 id="0-1-本地运行项目"><a href="#0-1-本地运行项目" class="headerlink" title="0.1 本地运行项目"></a>0.1 本地运行项目</h3><p>保证先安装 Node 环境，然后使用下载Node时自带的 npm (node 的包管理工具) 下载各种依赖，比如：vue-cli，安装 vue-cli后才能使用 vue 命令来初始化项目</p>
+<ol>
+<li>全局安装vue的脚手架：vue-cli<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install vue-cli -g<br></code></pre></div></td></tr></table></figure></li>
+<li>使用初始化 vue 项目: （使用 webpack模板搭建项目）<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vue init webpack &amp;lt;project-name&amp;gt;<br></code></pre></div></td></tr></table></figure></li>
+<li>进入刚刚新建的项目文件：<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> &amp;lt;project-name&amp;gt;<br></code></pre></div></td></tr></table></figure></li>
+<li>安装vue项目所需要的依赖<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install<br></code></pre></div></td></tr></table></figure></li>
+<li>运行启动项目：<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm run dev<br></code></pre></div></td></tr></table></figure></li>
+</ol>
 <h2 id="1-入门"><a href="#1-入门" class="headerlink" title="1.入门"></a>1.入门</h2><p>不推荐使用CDN链接。建议自行下载Vue.js文件到本地。<br>Vue.js下载链接：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/installation.html">https://cn.vuejs.org/v2/guide/installation.html</a><br>直接点击下载官方文件：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/js/vue.js">开发版本</a> 、<a target="_blank" rel="noopener" href="https://cn.vuejs.org/js/vue.min.js">生成版本</a> 。</p>
 <p>浏览器中的控制台：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Download the Vue Devtools extension <span class="hljs-keyword">for</span> a better development experience:<br>https://github.com/vuejs/vue-devtools<br></code></pre></div></td></tr></table></figure>
