@@ -15,12 +15,12 @@
   
   <meta name="theme-color" content="#2f4154">
   
-    <meta name="description" content="墨水的记忆">
+    <meta name="description" content="在Servlet中使用getRequestDispatcher转发到其他页面时，样式、链接、图片会失去效果。">
   
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-Linux禁止PING - 墨水的记忆</title>
+  <title>星星之火-Servlet中使用getRequestDispatcher转发到页面失去样式等问题 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -214,7 +214,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-Linux禁止PING">
+            <span class="h2" id="subtitle" title="星星之火-Servlet中使用getRequestDispatcher转发到页面失去样式等问题">
               
             </span>
 
@@ -229,8 +229,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-28 16:23" pubdate>
-        October 28, 2021 pm
+      <time datetime="2021-11-18 08:23" pubdate>
+        November 18, 2021 am
       </time>
     </span>
   
@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      197 字
+      499 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      5
        分钟
     </span>
   
@@ -294,7 +294,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-Linux禁止PING</h1>
+            <h1 style="display: none">星星之火-Servlet中使用getRequestDispatcher转发到页面失去样式等问题</h1>
             
               <p class="note note-info">
                 
@@ -304,13 +304,20 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>禁止ping后，不让别人通过域名ping到你的ip。这样可以减少IP暴露，增加一点安全。</p>
-<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><p>编辑 /etc/sysctl.conf 里面配置，如果没有添加上：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">net.ipv4.icmp_echo_ignore_all=1<br></code></pre></div></td></tr></table></figure>
-<p>再执行命令让其生效：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sysctl -p<br></code></pre></div></td></tr></table></figure>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>今天在弄验证码生成后的显示效果时，在Servlet中处理后转发遇到的一些问题。主要是转发后页面的样式、链接等资源失效的原因和解决办法。下面是我在Servlet中转发到JSP文件中遇到的，在其他页面等同。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>当我们在引用外部样式和js时，我们在后台处理完数据后，转发或重定向到jsp页面时就会出现样式丢失的情况，我们通过引用时写的是<code>相对路径</code>，而不是<code>绝对路径</code>。在servlet中转发时css和图片的路径变成相对于这个servlet的相对路径而非相对于web项目的路径了。</p>
+<p>简单说就是我们的URL的问题，我们写成了相对路径，在转发后，相对的就不是之前的那个目录了，所以样式之类的资源就丢失了。所以应该写成绝对路径。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>在路径上加上当前项目的名称即可。如：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;link rel=<span class="hljs-string">&quot;stylesheet&quot;</span> href=<span class="hljs-string">&quot;/demo1_war/static/css/codePagestyle.css&quot;</span>&gt;<br></code></pre></div></td></tr></table></figure>
 
-<p>生效之后会改变 /proc/sys/net/ipv4/icmp_echo_ignore_all 文件里的值。（不管）</p>
+<p>其中，<code>/demo1_war</code>是我当前的项目名称。项目名称也可以动态获取，如下：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;link rel=<span class="hljs-string">&quot;stylesheet&quot;</span> href=<span class="hljs-string">&quot;$&#123;pageContext.request.contextPath&#125;/static/css/codePagestyle.css&quot;</span>&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>这个等于上面的效果。同理，也可以用于其他的路径上，如：</p>
+<figure class="highlight jsp"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;img src=<span class="hljs-string">&quot;$&#123;pageContext.request.contextPath&#125;/images/logo.gif&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+
+<p>当然了，解决办法不止这一种，其他方法可自行百度。</p>
 
             </div>
             <hr>
@@ -342,7 +349,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/10/28/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A6%81%E6%AD%A2PING/">http://example.com/2021/10/28/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%A6%81%E6%AD%A2PING/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/11/18/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-Servlet%E4%B8%AD%E4%BD%BF%E7%94%A8getRequestDispatcher%E8%BD%AC%E5%8F%91%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%A4%B1%E5%8E%BB%E6%A0%B7%E5%BC%8F%E7%AD%89%E9%97%AE%E9%A2%98/">http://example.com/2021/11/18/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB-Servlet%E4%B8%AD%E4%BD%BF%E7%94%A8getRequestDispatcher%E8%BD%AC%E5%8F%91%E5%88%B0%E9%A1%B5%E9%9D%A2%E5%A4%B1%E5%8E%BB%E6%A0%B7%E5%BC%8F%E7%AD%89%E9%97%AE%E9%A2%98/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -351,18 +358,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/01/Vue/Vue%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86-%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue基础知识-（二）基础知识</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/26/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/Mac%20node%E9%85%8D%E7%BD%AE%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9D%97%E5%92%8C%E7%BC%93%E5%AD%98%E8%B7%AF%E5%BE%84/">
-                        <span class="hidden-mobile">Mac node配置全局模块和缓存路径</span>
+                      <a href="/2021/11/14/MongoDB/MongoDB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89JAVA%E8%BF%9E%E6%8E%A5MongoDB/">
+                        <span class="hidden-mobile">MongoDB学习笔记（三）JAVA连接MongoDB</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
