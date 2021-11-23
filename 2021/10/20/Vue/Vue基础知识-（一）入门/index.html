@@ -241,7 +241,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.7k 字
+      1.9k 字
     </span>
   
 
@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      23
+      26
        分钟
     </span>
   
@@ -298,7 +298,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 21, 2021 am
+                  本文最后更新于：November 22, 2021 pm
                 
               </p>
             
@@ -337,6 +337,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
+<h3 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h3><p>在使用CSDN的codechina做仓库，用Hbuilder拉时报错，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  demoTest git:(master) npm run dev<br><br>&gt; <span class="hljs-built_in">test</span>@1.0.0 dev /Users/dragonone/Desktop/VueProject/demoTest<br>&gt; webpack-dev-server --inline --progress --config build/webpack.dev.conf.js<br><br>sh: webpack-dev-server: <span class="hljs-built_in">command</span> not found<br>npm ERR! code ELIFECYCLE<br>npm ERR! syscall spawn<br>npm ERR! file sh<br>npm ERR! errno ENOENT<br>npm ERR! <span class="hljs-built_in">test</span>@1.0.0 dev: `webpack-dev-server --inline --progress --config build/webpack.dev.conf.js`<br>npm ERR! spawn ENOENT<br>npm ERR! <br>npm ERR! Failed at the <span class="hljs-built_in">test</span>@1.0.0 dev script.<br>npm ERR! This is probably not a problem with npm. There is likely additional logging output above.<br>npm WARN Local package.json exists, but node_modules missing, did you mean to install?<br><br>npm ERR! A complete <span class="hljs-built_in">log</span> of this run can be found <span class="hljs-keyword">in</span>:<br>npm ERR!     /usr/<span class="hljs-built_in">local</span>/bin/node_package/node_cache/_logs/2021-11-22T12_08_36_738Z-debug.log<br></code></pre></div></td></tr></table></figure>
+
+<p>解决办法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm uninstall webpack-dev-server<br>npm i webpack-dev-server@2.9.7<br></code></pre></div></td></tr></table></figure>
 
 
 

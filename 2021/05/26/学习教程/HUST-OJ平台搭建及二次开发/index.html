@@ -251,7 +251,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      35
+      36
        分钟
     </span>
   
@@ -298,7 +298,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 15, 2021 am
+                  本文最后更新于：November 23, 2021 pm
                 
               </p>
             
@@ -315,6 +315,21 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h2 id="3-修改OJ名称"><a href="#3-修改OJ名称" class="headerlink" title="3.修改OJ名称"></a>3.修改OJ名称</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">在 /home/judge/src/web/include/db_info.inc.php 中，找到 <span class="hljs-variable">$OJ_NAME</span>=<span class="hljs-string">&quot;HUSTOJ&quot;</span>; 再修改为自己的名称即可。<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="4-修改首页"><a href="#4-修改首页" class="headerlink" title="4.修改首页"></a>4.修改首页</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">在 /home/judge/src/web/template/syzoj/index.php 中，调整代码之间的位置即可修改布局。<br>在 /home/judge/src/web/template/syzoj/footer.php 中，可以修改页脚显示信息。<br>在 /home/judge/src/web/template/syzoj/header.php 中，可以修改显示文字等。<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="引入JAVA"><a href="#引入JAVA" class="headerlink" title="引入JAVA"></a>引入JAVA</h2><p><strong>2021/11/23</strong></p>
+<p>根据作者说，重启一下就行。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo reboot <span class="hljs-comment">#作者说的</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>我在网上也找了一下，仅供参考：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#选择其一执行即可</span><br>sudo apt-get install default-jdk<br>sudo apt-get install openjdk-7-jdk -y<br></code></pre></div></td></tr></table></figure>
+
+
+
+
 
 <h2 id="5-导题"><a href="#5-导题" class="headerlink" title="5.导题"></a>5.导题</h2><h3 id="5-1-方法一"><a href="#5-1-方法一" class="headerlink" title="5.1 方法一"></a>5.1 方法一</h3><p>直接下载 xml 文件，再进行导入即可。</p>
 <h3 id="5-2-方法二"><a href="#5-2-方法二" class="headerlink" title="5.2 方法二"></a>5.2 方法二</h3><p>直接在后台的 问题-添加 中，手动添加。</p>
