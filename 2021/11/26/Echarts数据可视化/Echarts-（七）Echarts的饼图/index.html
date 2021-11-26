@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>Echarts-（六）直角坐标系中的常用配置 - 墨水的记忆</title>
+  <title>Echarts-（七）Echarts的饼图 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -218,7 +218,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Echarts-（六）直角坐标系中的常用配置">
+            <span class="h2" id="subtitle" title="Echarts-（七）Echarts的饼图">
               
             </span>
 
@@ -233,7 +233,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-26 13:33" pubdate>
+      <time datetime="2021-11-26 14:03" pubdate>
         November 26, 2021 pm
       </time>
     </span>
@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      977 字
+      891 字
     </span>
   
 
@@ -298,7 +298,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Echarts-（六）直角坐标系中的常用配置</h1>
+            <h1 style="display: none">Echarts-（七）Echarts的饼图</h1>
             
               <p class="note note-info">
                 
@@ -310,80 +310,36 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               <p>Apache ECharts一个基于 JavaScript 的开源可视化图表库。ECharts，一个使用 JavaScript 实现的开源可视化库，可以流畅的运行在 PC 和移动设备上，兼容当前绝大部分浏览器（IE9/10/11，Chrome，Firefox，Safari等），底层依赖矢量图形库 ZRender，提供直观，交互丰富，可高度个性化定制的数据可视化图表。提供了常规的折线图、柱状图、散点图、饼图、K线图，用于统计的盒形图，用于地理数据可视化的地图、热力图、线图，用于关系数据可视化的关系图、treemap、旭日图，多维数据可视化的平行坐标，还有用于 BI 的漏斗图，仪表盘，并且支持图与图之间的混搭。还提供了自定义系列，只需要传入一个renderItem函数，就可以从数据映射到任何你想要的图形，更棒的是这些都还能和已有的交互组件结合使用而不需要操心其它事情。</p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>推荐学习时，多看看官方文档。</p>
 <p><a target="_blank" rel="noopener" href="https://echarts.apache.org/zh/option.html#title">官方文档</a></p>
-<h2 id="直角坐标系常用配置"><a href="#直角坐标系常用配置" class="headerlink" title="直角坐标系常用配置"></a>直角坐标系常用配置</h2><p>直角坐标系图表：柱状图、折线图、散点图。</p>
-<h2 id="1-网格（grid）"><a href="#1-网格（grid）" class="headerlink" title="1.网格（grid）"></a>1.网格（grid）</h2><p>用来控制直角坐标系的布局和大小。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;<br>		&lt;title&gt;入门第一天&lt;/title&gt;<br>		&lt;script src=<span class="hljs-string">&quot;echarts.min.js&quot;</span>&gt;&lt;/script&gt;<br>	&lt;/head&gt;<br>	&lt;body&gt;<br>		&lt;div id=<span class="hljs-string">&quot;echarts&quot;</span> style=<span class="hljs-string">&quot;width: 100%;height: 400px;&quot;</span>&gt;&lt;/div&gt;<br>		&lt;script type=<span class="hljs-string">&quot;text/javascript&quot;</span>&gt;<br>			<span class="hljs-keyword">var</span> myec = echarts.init(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&#x27;echarts&#x27;</span>));<br>			<span class="hljs-keyword">var</span> xarr = [<span class="hljs-string">&#x27;张三&#x27;</span>,<span class="hljs-string">&#x27;李四&#x27;</span>,<span class="hljs-string">&#x27;王五&#x27;</span>,<span class="hljs-string">&#x27;张麻子&#x27;</span>,<span class="hljs-string">&#x27;干豇豆&#x27;</span>,<span class="hljs-string">&#x27;王宝器&#x27;</span>];<br>			<span class="hljs-keyword">var</span> yarr1 = [<span class="hljs-number">112</span>,<span class="hljs-number">116</span>,<span class="hljs-number">511</span>,<span class="hljs-number">511</span>,<span class="hljs-number">165</span>,<span class="hljs-number">156</span>];<br>			<span class="hljs-keyword">var</span> option = &#123;<br>				grid:&#123;<br>					show:<span class="hljs-literal">true</span>, <span class="hljs-comment">//控制显示</span><br>					borderWidth: <span class="hljs-number">10</span>, <span class="hljs-comment">//边框大小</span><br>					borderColor: <span class="hljs-string">&#x27;green&#x27;</span>, <span class="hljs-comment">//颜色</span><br>					left:<span class="hljs-number">130</span>, <span class="hljs-comment">//距离左边</span><br>					top:<span class="hljs-number">50</span>, <span class="hljs-comment">//上边</span><br>					width:<span class="hljs-number">400</span>, <span class="hljs-comment">//图表宽度</span><br>					height:<span class="hljs-number">200</span> <span class="hljs-comment">//图表高度</span><br>				&#125;,<br>				xAxis:&#123;<br>					type: <span class="hljs-string">&#x27;category&#x27;</span>,<br>					data: xarr<br>				&#125;,<br>				yAxis:&#123;<br>					type: <span class="hljs-string">&#x27;value&#x27;</span><br>				&#125;,<br>				series:[<br>					&#123;<br>						name: <span class="hljs-string">&#x27;语文&#x27;</span>,<br>						type: <span class="hljs-string">&#x27;line&#x27;</span>,<br>						data: yarr1,<br>					&#125;<br>				]<br>			&#125;<br>			myec.setOption(option);<br>		&lt;/script&gt;<br>	&lt;/body&gt;<br>&lt;/html&gt;<br><br></code></pre></div></td></tr></table></figure>
+<h2 id="1-饼图基本实现"><a href="#1-饼图基本实现" class="headerlink" title="1.饼图基本实现"></a>1.饼图基本实现</h2><p>方法同前面的柱状图一样，只是数据的存储方式不一样了。饼图需要的是用一个对象存储。[{name：？？？，value：？？？}，{}，{}]</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> arr = [<br>				&#123;<br>					name: <span class="hljs-string">&#x27;京东&#x27;</span>,<br>					value: <span class="hljs-number">1256</span><br>				&#125;,<br>				&#123;<br>					name: <span class="hljs-string">&#x27;腾讯&#x27;</span>,<br>					value: <span class="hljs-number">2343</span><br>				&#125;,<br>				&#123;<br>					name: <span class="hljs-string">&#x27;阿里&#x27;</span>,<br>					value: <span class="hljs-number">432</span><br>				&#125;,<br>				&#123;<br>					name: <span class="hljs-string">&#x27;天猫&#x27;</span>,<br>					value: <span class="hljs-number">678</span><br>				&#125;,<br>				&#123;<br>					name: <span class="hljs-string">&#x27;TiMi&#x27;</span>,<br>					value: <span class="hljs-number">3249</span><br>				&#125;,<br>				&#123;<br>					name: <span class="hljs-string">&#x27;网易&#x27;</span>,<br>					value: <span class="hljs-number">8654</span><br>				&#125;,<br>				&#123;<br>					name: <span class="hljs-string">&#x27;苏宁&#x27;</span>,<br>					value: <span class="hljs-number">4231</span><br>				&#125;<br>			];<br>			<span class="hljs-keyword">var</span> option = &#123;<br>				series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr<br>					&#125;<br>				]<br>				<br>			&#125;<br>			myec.setOption(option);<br></code></pre></div></td></tr></table></figure>
 
 
-<h2 id="2-坐标轴（Axis）"><a href="#2-坐标轴（Axis）" class="headerlink" title="2.坐标轴（Axis）"></a>2.坐标轴（Axis）</h2><p>分为x轴和y轴。默认情况下x轴在底部，y轴在左边。也可以自行更改调整。</p>
-<blockquote>
-<ol>
-<li>坐标轴类型type：</li>
-</ol>
-</blockquote>
+
+<h2 id="2-常见效果"><a href="#2-常见效果" class="headerlink" title="2.常见效果"></a>2.常见效果</h2><h3 id="2-1-显示数值"><a href="#2-1-显示数值" class="headerlink" title="2.1 显示数值"></a>2.1 显示数值</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> option = &#123;<br>				series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr,<br>						label:&#123;<br>							show:<span class="hljs-literal">true</span>,<br>							formatter:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arg</span>)</span>&#123;<br>								<span class="hljs-comment">// console.log(arg)</span><br>								<span class="hljs-keyword">return</span> arg.name+<span class="hljs-string">&quot;:\n&quot;</span>+arg.value+<span class="hljs-string">&quot;:\n&quot;</span>+arg.percent+<span class="hljs-string">&quot;%&quot;</span><br>							&#125;<br>						&#125;<br>					&#125;<br>				]<br>				<br>			&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-2-饼图大小（radius）"><a href="#2-2-饼图大小（radius）" class="headerlink" title="2.2 饼图大小（radius）"></a>2.2 饼图大小（radius）</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr,<br>						label:&#123;<br>							show:<span class="hljs-literal">true</span>,<br>							formatter:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arg</span>)</span>&#123;<br>								<span class="hljs-comment">// console.log(arg)</span><br>								<span class="hljs-keyword">return</span> arg.name+<span class="hljs-string">&quot;:\n&quot;</span>+arg.value+<span class="hljs-string">&quot;:\n&quot;</span>+arg.percent+<span class="hljs-string">&quot;%&quot;</span><br>							&#125;<br>						&#125;,<br>						radius: <span class="hljs-number">60</span> <span class="hljs-comment">//半径60</span><br>					&#125;<br>				]<br></code></pre></div></td></tr></table></figure>
+
+<p>也可以是百分比。而百分比参照的是盒子宽度和高度中较小的一个的一半来进行百分比设置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr,<br>						label:&#123;<br>							show:<span class="hljs-literal">true</span>,<br>							formatter:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arg</span>)</span>&#123;<br>								<span class="hljs-comment">// console.log(arg)</span><br>								<span class="hljs-keyword">return</span> arg.name+<span class="hljs-string">&quot;:\n&quot;</span>+arg.value+<span class="hljs-string">&quot;:\n&quot;</span>+arg.percent+<span class="hljs-string">&quot;%&quot;</span><br>							&#125;<br>						&#125;,<br>						radius: <span class="hljs-string">&#x27;30%&#x27;</span> <span class="hljs-comment">//半径60</span><br>					&#125;<br>				]<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-3-圆环"><a href="#2-3-圆环" class="headerlink" title="2.3 圆环"></a>2.3 圆环</h3><p>通过设置两个半径：radius：[’30%‘，’50%‘] 来实现。第一个参数是表示内圆的半径，第二个参数是外圆的半径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr,<br>						label:&#123;<br>							show:<span class="hljs-literal">true</span>,<br>							formatter:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arg</span>)</span>&#123;<br>								<span class="hljs-comment">// console.log(arg)</span><br>								<span class="hljs-keyword">return</span> arg.name+<span class="hljs-string">&quot;:\n&quot;</span>+arg.value+<span class="hljs-string">&quot;:\n&quot;</span>+arg.percent+<span class="hljs-string">&quot;%&quot;</span><br>							&#125;<br>						&#125;,<br>						radius: [<span class="hljs-string">&#x27;40%&#x27;</span>,<span class="hljs-string">&#x27;60%&#x27;</span>]<br>					&#125;<br>				]<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-4-蓝丁格尔图（roseType）"><a href="#2-4-蓝丁格尔图（roseType）" class="headerlink" title="2.4 蓝丁格尔图（roseType）"></a>2.4 蓝丁格尔图（roseType）</h3><p>就是不同的数据对应不同的半径。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr,<br>						label:&#123;<br>							show:<span class="hljs-literal">true</span>,<br>							formatter:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arg</span>)</span>&#123;<br>								<span class="hljs-comment">// console.log(arg)</span><br>								<span class="hljs-keyword">return</span> arg.name+<span class="hljs-string">&quot;:\n&quot;</span>+arg.value+<span class="hljs-string">&quot;:\n&quot;</span>+arg.percent+<span class="hljs-string">&quot;%&quot;</span><br>							&#125;<br>						&#125;,<br>						roseType: <span class="hljs-string">&#x27;radius&#x27;</span><br>					&#125;<br>				]<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-5-选中效果（selectedMode）"><a href="#2-5-选中效果（selectedMode）" class="headerlink" title="2.5 选中效果（selectedMode）"></a>2.5 选中效果（selectedMode）</h3><p>有两种模式：一种是点击选中某一个的区域后会偏离，当再点击其他的时会返回；另一种就是点击选中的区域后只离开，再点击其他的时候不返回。还可以自定义设置偏离的距离。</p>
 <ul>
-<li><p>value：数值轴，自动会从目标数据中读取数据。即从series的data中读取。如上面的yAxis。</p>
+<li><p>selectedMode：single（偏离会返回）、multiple（只偏离）。</p>
 </li>
-<li><p>category：类目轴，该类型必须通过data设置类目数据。如上面的xAxis。</p>
+<li><p>selectedOffset：30。偏离距离的设置。</p>
 </li>
 </ul>
-<blockquote>
-<ol start="2">
-<li>显示位置position</li>
-</ol>
-</blockquote>
-<ul>
-<li>xAxis：可取值为 top 或者bottom。</li>
-<li>yAxis：可取值为 left 或者right。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">xAxis:&#123;<br>					type: <span class="hljs-string">&#x27;category&#x27;</span>,<br>					data: xarr,<br>					position: <span class="hljs-string">&#x27;top&#x27;</span><br>				&#125;,<br>				yAxis:&#123;<br>					type: <span class="hljs-string">&#x27;value&#x27;</span>,<br>					position: <span class="hljs-string">&#x27;right&#x27;</span><br>				&#125;,<br></code></pre></div></td></tr></table></figure>
-
-
-<h2 id="3-区域缩放（dataZoom）"><a href="#3-区域缩放（dataZoom）" class="headerlink" title="3.区域缩放（dataZoom）"></a>3.区域缩放（dataZoom）</h2><p>用于区域缩放，对数据范围过滤，x轴和y轴都可以拥有。dataZoom是一个数组，可以配置多个区域缩放器。</p>
-<p>这与之前的那个用toolbox的不一样。</p>
-<blockquote>
-<ol>
-<li>类型type</li>
-</ol>
-</blockquote>
-<ul>
-<li><p>slider：滑块。图表附近会显示一个可以调整的滑块条。</p>
-</li>
-<li><p>inside：内置，可以用鼠标滑轮缩放。</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> option = &#123;<br>dataZoom:[<br>					&#123;<br>						<span class="hljs-comment">// type: &#x27;slider&#x27;</span><br>						type: <span class="hljs-string">&#x27;inside&#x27;</span><br>					&#125;,<br>				],<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<p>默认只有x轴，即使写了两个也不行。如果要y轴，则需要进行指定。</p>
-<blockquote>
-<ol start="2">
-<li>指明产生作用的轴</li>
-</ol>
-</blockquote>
-<ul>
-<li><p>xAxisIndex：设置缩放组件控制的是哪个x轴，一般写0即可（如果有多个则根据具体情况）。</p>
-</li>
-<li><p>yAxisIndex：设置缩放组件控制的是哪个y轴，一般写0即可（如果有多个则根据具体情况）。</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">dataZoom:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;slider&#x27;</span>,<br>						xAxisIndex: <span class="hljs-number">0</span> <span class="hljs-comment">//指定x轴</span><br>					&#125;,<br>					&#123;<br>						type: <span class="hljs-string">&#x27;slider&#x27;</span>,<br>						yAxisIndex: <span class="hljs-number">0</span> <span class="hljs-comment">//指定y轴</span><br>					&#125;<br>				],<br></code></pre></div></td></tr></table></figure>
-
-
-<blockquote>
-<ol start="3">
-<li>指定初始状态的缩放情况</li>
-</ol>
-</blockquote>
-<p>默认情况下，是所有数据都有。</p>
-<ul>
-<li><p>start：数据窗口范围的起始百分比。</p>
-</li>
-<li><p>end：数据窗口范围的结束百分比。</p>
-</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">dataZoom:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;slider&#x27;</span>,<br>						xAxisIndex: <span class="hljs-number">0</span><br>					&#125;,<br>					&#123;<br>						type: <span class="hljs-string">&#x27;slider&#x27;</span>,<br>						yAxisIndex: <span class="hljs-number">0</span>,<br>						start: <span class="hljs-number">100</span>,<br>						end: <span class="hljs-number">150</span><br>					&#125;<br>				],<br></code></pre></div></td></tr></table></figure>
-
-
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">series:[<br>					&#123;<br>						type: <span class="hljs-string">&#x27;pie&#x27;</span>,<br>						data: arr,<br>						label:&#123;<br>							show:<span class="hljs-literal">true</span>,<br>							formatter:<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">arg</span>)</span>&#123;<br>								<span class="hljs-comment">// console.log(arg)</span><br>								<span class="hljs-keyword">return</span> arg.name+<span class="hljs-string">&quot;:\n&quot;</span>+arg.value+<span class="hljs-string">&quot;:\n&quot;</span>+arg.percent+<span class="hljs-string">&quot;%&quot;</span><br>							&#125;<br>						&#125;,<br>						roseType: <span class="hljs-string">&#x27;radius&#x27;</span>,<br>						<span class="hljs-comment">// selectedMode: &#x27;single&#x27;</span><br>						selectedMode: <span class="hljs-string">&#x27;multiple&#x27;</span>,<br>						selectedOffset: <span class="hljs-number">50</span><br>					&#125;<br>				]<br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -420,7 +376,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E5%85%AD%EF%BC%89%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">http://example.com/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E5%85%AD%EF%BC%89%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E4%B8%83%EF%BC%89Echarts%E7%9A%84%E9%A5%BC%E5%9B%BE/">http://example.com/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E4%B8%83%EF%BC%89Echarts%E7%9A%84%E9%A5%BC%E5%9B%BE/</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -429,18 +385,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E4%B8%83%EF%BC%89Echarts%E7%9A%84%E9%A5%BC%E5%9B%BE/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Echarts-（七）Echarts的饼图</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E4%BA%94%EF%BC%89Echarts%E7%9A%84%E6%95%A3%E7%82%B9%E5%9B%BE/">
-                        <span class="hidden-mobile">Echarts-（五）Echarts的散点图</span>
+                      <a href="/2021/11/26/Echarts%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/Echarts-%EF%BC%88%E5%85%AD%EF%BC%89%E7%9B%B4%E8%A7%92%E5%9D%90%E6%A0%87%E7%B3%BB%E4%B8%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E9%85%8D%E7%BD%AE/">
+                        <span class="hidden-mobile">Echarts-（六）直角坐标系中的常用配置</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
