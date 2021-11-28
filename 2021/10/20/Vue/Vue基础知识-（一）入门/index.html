@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.9k 字
+      2.2k 字
     </span>
   
 
@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      26
+      30
        分钟
     </span>
   
@@ -302,7 +302,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 22, 2021 pm
+                  本文最后更新于：November 28, 2021 pm
                 
               </p>
             
@@ -379,6 +379,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>一个Vue不能同时接管两个容器（class的也不行），也不能两个Vue接管一个容器。他们之间的关系是一对一的。</li>
 <li>两个大括号 { { xxxxx } } 中的xxxxx必须是js表达式（一个表达式会产生一个值，可以放在任何一个需要值的地方。而js代码或语句则不会）且xxxxx可以自动读取到data中的所有属性。</li>
 </ol>
+<h2 id="Vue项目运行命令的区别（临时：2021-11-28）"><a href="#Vue项目运行命令的区别（临时：2021-11-28）" class="headerlink" title="Vue项目运行命令的区别（临时：2021/11/28）"></a>Vue项目运行命令的区别（临时：2021/11/28）</h2><p>在运行一些 vue 项目的时候，输入npm run serve或者 npm run dev的其中一个时，系统会报错，类似如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">PS C:\Users\LENOVO\Desktop&gt; npm run dev<br>npm ERR! missing script: dev<br><br>npm ERR! A complete <span class="hljs-built_in">log</span> of this run can be found <span class="hljs-keyword">in</span>:<br>npm ERR!     C:\Users\LENOVO\AppData\Roaming\npm-cache\_logs\2020-05-27T01_05_59_189Z-debug.log<br>PS C:\Users\LENOVO\Desktop\website&gt; npm run serve<br></code></pre></div></td></tr></table></figure>
+
+<p>所以，到底什么时候用<code>npm run dev</code>、什么时候用<code>npm run serve</code>。这其实都是同一个东西，只是名字换了一个而已。</p>
+<p>打开 package.json 文件，观察这段代码：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>   &quot;serve&quot;: &quot;vue-cli-service serve&quot;,<br>   &quot;build&quot;: &quot;vue-cli-service build&quot;,<br>   &quot;lint&quot;: &quot;vue-cli-service lint&quot;<br> &#125;,<br></code></pre></div></td></tr></table></figure>
+<p>可以把这个 npm run serve 当做是 npm run package.json 里面的scripts的serve，而serve又表示vue-cli-service serve 。所以npm run serve 实际运行的是 vue-cli-service serve；而如果你想使用npm run dev 的话，只需把前面的 “serve” 修改为 “dev” 就行。如下：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>   &quot;dev&quot;: &quot;vue-cli-service serve&quot;,<br>   &quot;build&quot;: &quot;vue-cli-service build&quot;,<br>   &quot;lint&quot;: &quot;vue-cli-service lint&quot;<br> &#125;,<br></code></pre></div></td></tr></table></figure>
+
+
 
             </div>
             <hr>
