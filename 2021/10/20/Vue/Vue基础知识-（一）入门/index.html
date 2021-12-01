@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.2k 字
+      2.4k 字
     </span>
   
 
@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      30
+      33
        分钟
     </span>
   
@@ -302,7 +302,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 28, 2021 pm
+                  本文最后更新于：December 1, 2021 pm
                 
               </p>
             
@@ -341,7 +341,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
-<h3 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h3><p>在使用CSDN的codechina做仓库，用Hbuilder拉时报错，如下：</p>
+<h3 id="报错处理"><a href="#报错处理" class="headerlink" title="报错处理"></a>报错处理</h3><blockquote>
+<ol>
+<li>在使用CSDN的codechina做仓库，用Hbuilder拉时报错，如下：</li>
+</ol>
+</blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  demoTest git:(master) npm run dev<br><br>&gt; <span class="hljs-built_in">test</span>@1.0.0 dev /Users/dragonone/Desktop/VueProject/demoTest<br>&gt; webpack-dev-server --inline --progress --config build/webpack.dev.conf.js<br><br>sh: webpack-dev-server: <span class="hljs-built_in">command</span> not found<br>npm ERR! code ELIFECYCLE<br>npm ERR! syscall spawn<br>npm ERR! file sh<br>npm ERR! errno ENOENT<br>npm ERR! <span class="hljs-built_in">test</span>@1.0.0 dev: `webpack-dev-server --inline --progress --config build/webpack.dev.conf.js`<br>npm ERR! spawn ENOENT<br>npm ERR! <br>npm ERR! Failed at the <span class="hljs-built_in">test</span>@1.0.0 dev script.<br>npm ERR! This is probably not a problem with npm. There is likely additional logging output above.<br>npm WARN Local package.json exists, but node_modules missing, did you mean to install?<br><br>npm ERR! A complete <span class="hljs-built_in">log</span> of this run can be found <span class="hljs-keyword">in</span>:<br>npm ERR!     /usr/<span class="hljs-built_in">local</span>/bin/node_package/node_cache/_logs/2021-11-22T12_08_36_738Z-debug.log<br></code></pre></div></td></tr></table></figure>
 
 <p>解决办法：</p>
@@ -349,8 +353,18 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
+<blockquote>
+<ol start="2">
+<li>针对在上述安装vue-cli过程中可能出现的报错问题。报错信息借网上一用。其实都差不多。</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm ERR! code EEXIST<br>npm ERR! path D:\nodejs\node_globalnpm\node_modules\@vue\cli\bin\vue.js<br>npm ERR! dest D:\nodejs\node_globalnpm\vue<br>npm ERR! EEXIST: file already exists, cmd shim <span class="hljs-string">&#x27;D:\nodejs\node_globalnpm\node_modules\@vue\cli\bin\vue.js&#x27;</span> -&gt; <span class="hljs-string">&#x27;D:\nodejs\node_globalnpm\vue&#x27;</span><br>npm ERR! File exists: D:\nodejs\node_globalnpm\vue<br>npm ERR! Remove the existing file and try again, or run npm<br>npm ERR! with --force to overwrite files recklessly.<br><br>npm ERR! A complete <span class="hljs-built_in">log</span> of this run can be found <span class="hljs-keyword">in</span>:<br>npm ERR!     D:\Program Files\nodejs\node_cache\_logs\2021-01-25T07_14_17_763Z-debug.log<br></code></pre></div></td></tr></table></figure>
 
+<p>原因在于：主要原因是安装vue的版本过低。</p>
+<p>解决办法：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install -g @vue/cli --force <br></code></pre></div></td></tr></table></figure>
 
+<p>强制覆盖以前旧版本的vue-cli脚手架。</p>
 <h2 id="1-入门"><a href="#1-入门" class="headerlink" title="1.入门"></a>1.入门</h2><p>不推荐使用CDN链接。建议自行下载Vue.js文件到本地。<br>Vue.js下载链接：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/installation.html">https://cn.vuejs.org/v2/guide/installation.html</a><br>直接点击下载官方文件：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/js/vue.js">开发版本</a> 、<a target="_blank" rel="noopener" href="https://cn.vuejs.org/js/vue.min.js">生成版本</a> 。</p>
 <p>浏览器中的控制台：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Download the Vue Devtools extension <span class="hljs-keyword">for</span> a better development experience:<br>https://github.com/vuejs/vue-devtools<br></code></pre></div></td></tr></table></figure>
@@ -387,7 +401,6 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>   &quot;serve&quot;: &quot;vue-cli-service serve&quot;,<br>   &quot;build&quot;: &quot;vue-cli-service build&quot;,<br>   &quot;lint&quot;: &quot;vue-cli-service lint&quot;<br> &#125;,<br></code></pre></div></td></tr></table></figure>
 <p>可以把这个 npm run serve 当做是 npm run package.json 里面的scripts的serve，而serve又表示vue-cli-service serve 。所以npm run serve 实际运行的是 vue-cli-service serve；而如果你想使用npm run dev 的话，只需把前面的 “serve” 修改为 “dev” 就行。如下：</p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>   &quot;dev&quot;: &quot;vue-cli-service serve&quot;,<br>   &quot;build&quot;: &quot;vue-cli-service build&quot;,<br>   &quot;lint&quot;: &quot;vue-cli-service lint&quot;<br> &#125;,<br></code></pre></div></td></tr></table></figure>
-
 
 
             </div>
