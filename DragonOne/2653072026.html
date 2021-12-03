@@ -1,0 +1,1120 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水的记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="">
+  
+  <title>JAVA基础知识复习（十一）-日期时间 - 墨水的记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水的记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JAVA基础知识复习（十一）-日期时间">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-19 21:15" pubdate>
+        May 19, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      59
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JAVA基础知识复习（十一）-日期时间</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>JAVA基础知识复习（十一）。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-Java-StringBuffer-和-StringBuilder-类"><a href="#1-Java-StringBuffer-和-StringBuilder-类" class="headerlink" title="1.Java StringBuffer 和 StringBuilder 类"></a>1.Java StringBuffer 和 StringBuilder 类</h2><p>StringBuffer 类是可变字符串类，创建 StringBuffer 类的对象后可以随意修改字符串的内容。每个 StringBuffer 类的对象都能够存储指定容量的字符串，如果字符串的长度超过了 StringBuffer 类对象的容量，则该对象的容量会自动扩大。</p>
+<p>当对字符串进行修改的时候，需要使用 StringBuffer 和 StringBuilder 类。和String类不同的是，StringBuffer 和 StringBuilder 类的对象能够被多次的修改，并且不产生新的未使用对象。</p>
+<p>StringBuilder 类在 Java 5 中被提出，它和 StringBuffer 之间的最大不同在于 StringBuilder 的方法不是线程安全的（线程安全就是多线程访问时，采用了加锁机制，当一个线程访问该类的某个数据时，进行保护，其他线程不能进行访问直到该线程读取完，其他线程才可使用。不会出现数据不一致或者数据污染。线程不安全就是不提供数据访问保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据）。</p>
+<p>由于 StringBuilder 相较于 StringBuffer 有速度优势，所以多数情况下建议使用 StringBuilder 类。然而在应用程序要求线程安全的情况下，则必须使用 StringBuffer 类。</p>
+<p>StringBuffer 类支持的主要方法。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">方法描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">public StringBuffer append(String s)</td>
+<td align="center">将指定的字符串追加到此字符序列。</td>
+</tr>
+<tr>
+<td align="center">public StringBuffer reverse()</td>
+<td align="center">将此字符序列用其反转形式取代。</td>
+</tr>
+<tr>
+<td align="center">public delete(int start, int end)</td>
+<td align="center">移除此序列的子字符串中的字符。</td>
+</tr>
+<tr>
+<td align="center">public insert(int offset, int i)</td>
+<td align="center">将 <code>int</code> 参数的字符串表示形式插入此序列中。</td>
+</tr>
+<tr>
+<td align="center">replace(int start, int end, String str)</td>
+<td align="center">使用给定 <code>String</code> 中的字符替换此序列的子字符串中的字符。</td>
+</tr>
+</tbody></table>
+<h3 id="1-1-创建"><a href="#1-1-创建" class="headerlink" title="1.1 创建"></a>1.1 创建</h3><p>StringBuffer 类提供了 3 个构造方法来创建一个字符串。</p>
+<blockquote>
+<p>1.StringBuffer() 构造一个空的字符串缓冲区，并且初始化为 16 个字符的容量。<br>2.StringBuffer(int length) 创建一个空的字符串缓冲区，并且初始化为指定长度 length 的容量。<br>3.StringBuffer(String str) 创建一个字符串缓冲区，并将其内容初始化为指定的字符串内容 str，字符串缓冲区的初始容量为 16 加上字符串 str 的长度。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringBuffer str1 = <span class="hljs-keyword">new</span> StringBuffer();<br>StringBuffer str2 = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-number">10</span>);<br>StringBuffer str3 = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-string">&quot;青春无悔&quot;</span>);<br>System.out.println(str1.capacity());    <span class="hljs-comment">// 输出 16 str1.capacity() 用于查看 str1 的容量</span><br>System.out.println(str2.capacity());    <span class="hljs-comment">// 输出 10</span><br>System.out.println(str3.capacity());    <span class="hljs-comment">// 输出 20</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="1-2-追加字符串"><a href="#1-2-追加字符串" class="headerlink" title="1.2 追加字符串"></a>1.2 追加字符串</h3><p>StringBuffer 类的 append() 方法用于向原有 StringBuffer 对象中追加字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringBuffer 对象.append(String str)<br><br>StringBuffer buffer = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-string">&quot;hello,&quot;</span>);    <span class="hljs-comment">// 创建一个 StringBuffer 对象</span><br>String str = <span class="hljs-string">&quot;World!&quot;</span>;<br>buffer.append(str);    <span class="hljs-comment">// 向 StringBuffer 对象追加 str 字符串</span><br><span class="hljs-comment">// 输出：Hello,World!</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="1-3-替换字符"><a href="#1-3-替换字符" class="headerlink" title="1.3 替换字符"></a>1.3 替换字符</h3><p>StringBuffer 类的 setCharAt() 方法用于在字符串的指定索引位置替换一个字符。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringBuffer 对象.setCharAt(<span class="hljs-keyword">int</span> index, <span class="hljs-keyword">char</span> ch);<br><br>StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-string">&quot;hello&quot;</span>);<br>sb.setCharAt(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;E&#x27;</span>);<br>System.out.println(sb);    <span class="hljs-comment">// 输出：hEllo</span><br>sb.setCharAt(<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;H&#x27;</span>);<br>System.out.println(sb);    <span class="hljs-comment">// 输出：HEllo</span><br>sb.setCharAt(<span class="hljs-number">2</span>,<span class="hljs-string">&#x27;p&#x27;</span>);<br>System.out.println(sb);    <span class="hljs-comment">// 输出：HEplo</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="1-4-反转字符串"><a href="#1-4-反转字符串" class="headerlink" title="1.4 反转字符串"></a>1.4 反转字符串</h3><p>StringBuffer 类中的 reverse() 方法用于将字符串序列用其反转的形式取代。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringBuffer 对象.reverse();<br><br>StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-string">&quot;java&quot;</span>);<br>sb.reverse();<br>System.out.println(sb);    <span class="hljs-comment">// 输出：avaj</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="1-5-删除字符串"><a href="#1-5-删除字符串" class="headerlink" title="1.5 删除字符串"></a>1.5 删除字符串</h3><p>StringBuffer 类提供了 deleteCharAt() 和 delete() 两个删除字符串的方法。</p>
+<h4 id="1-5-1-deleteCharAt-方法"><a href="#1-5-1-deleteCharAt-方法" class="headerlink" title="1.5.1 deleteCharAt() 方法"></a>1.5.1 deleteCharAt() 方法</h4><p>deleteCharAt() 方法用于移除(删除)序列中指定位置的字符，然后将剩余的内容形成一个新的字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringBuffer 对象.deleteCharAt(<span class="hljs-keyword">int</span> index);<br><br>StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-string">&quot;She&quot;</span>);<br>sb.deleteCharAt(<span class="hljs-number">2</span>);<br>System.out.println(sb);    <span class="hljs-comment">// 输出：Sh</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="1-5-2-delete-方法"><a href="#1-5-2-delete-方法" class="headerlink" title="1.5.2 delete() 方法"></a>1.5.2 delete() 方法</h4><p>delete() 方法用于移除序列中子字符串的字符。该方法的作用是删除指定区域以内的所有字符。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringBuffer 对象.delete(<span class="hljs-keyword">int</span> start,<span class="hljs-keyword">int</span> end);<br><span class="hljs-comment">//start 表示要删除字符的起始索引值（包括索引值所对应的字符），end 表示要删除字符串的结束索引值（不包括索引值所对应的字符）。</span><br><br>StringBuffer sb = <span class="hljs-keyword">new</span> StringBuffer(<span class="hljs-string">&quot;hello jack&quot;</span>);<br>sb.delete(<span class="hljs-number">2</span>,<span class="hljs-number">5</span>);<br>System.out.println(sb);    <span class="hljs-comment">// 输出：he jack</span><br>sb.delete(<span class="hljs-number">2</span>,<span class="hljs-number">5</span>);<br>System.out.println(sb);    <span class="hljs-comment">// 输出：heck</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="2-Java-日期时间"><a href="#2-Java-日期时间" class="headerlink" title="2.Java 日期时间"></a>2.Java 日期时间</h2><p>java.util包提供了Date类来封装当前的日期和时间。 Date类提供两个构造函数来实例化Date对象。</p>
+<p>第一个构造函数使用当前日期和时间来初始化对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Date( )<br></code></pre></div></td></tr></table></figure>
+<p>第二个构造函数接收一个参数，该参数是从1970年1月1日起的微秒数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Date(<span class="hljs-keyword">long</span> millisec)<br></code></pre></div></td></tr></table></figure>
+<p>Date对象创建以后，可以调用的方法。</p>
+<table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>boolean after(Date date)</strong></td>
+<td align="center">若当调用此方法的Date对象在指定日期之后返回true,否则返回false。</td>
+</tr>
+<tr>
+<td align="center"><strong>boolean before(Date date)</strong></td>
+<td align="center">若当调用此方法的Date对象在指定日期之前返回true,否则返回false。</td>
+</tr>
+<tr>
+<td align="center"><strong>Object clone( )</strong></td>
+<td align="center">返回此对象的副本。</td>
+</tr>
+<tr>
+<td align="center"><strong>int compareTo(Date date)</strong></td>
+<td align="center">比较当调用此方法的Date对象和指定日期。两者相等时候返回0。调用对象在指定日期之前则返回负数。调用对象在指定日期之后则返回正数。</td>
+</tr>
+<tr>
+<td align="center"><strong>int compareTo(Object obj)</strong></td>
+<td align="center">若obj是Date类型则操作等同于compareTo(Date) 。否则它抛出ClassCastException。</td>
+</tr>
+<tr>
+<td align="center"><strong>boolean equals(Object date)</strong></td>
+<td align="center">当调用此方法的Date对象和指定日期相等时候返回true,否则返回false。</td>
+</tr>
+<tr>
+<td align="center"><strong>long getTime( )</strong></td>
+<td align="center">返回自 1970 年 1 月 1 日 00:00:00 GMT 以来此 Date 对象表示的毫秒数。</td>
+</tr>
+<tr>
+<td align="center"><strong>int hashCode( )</strong></td>
+<td align="center">返回此对象的哈希码值。</td>
+</tr>
+<tr>
+<td align="center"><strong>void setTime(long time)</strong></td>
+<td align="center">用自1970年1月1日00:00:00 GMT以后time毫秒数设置时间和日期。</td>
+</tr>
+<tr>
+<td align="center"><strong>String toString( )</strong></td>
+<td align="center">转换Date对象为String表示形式，并返回该字符串。</td>
+</tr>
+</tbody></table>
+<h3 id="2-1-获取当前日期时间"><a href="#2-1-获取当前日期时间" class="headerlink" title="2.1 获取当前日期时间"></a>2.1 获取当前日期时间</h3><p>使用Date对象的 toString()方法来打印当前日期和时间。<br>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>       <span class="hljs-comment">// 初始化 Date 对象</span><br>       Date date = <span class="hljs-keyword">new</span> Date();<br>        <br>       <span class="hljs-comment">// 使用 toString() 函数显示日期时间</span><br>       System.out.println(date.toString());<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Mon May <span class="hljs-number">04</span> 09:<span class="hljs-number">51</span>:<span class="hljs-number">52</span> CDT <span class="hljs-number">2013</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-2-日期比较"><a href="#2-2-日期比较" class="headerlink" title="2.2 日期比较"></a>2.2 日期比较</h3><p>Java使用三种方法来比较两个日期。</p>
+<blockquote>
+<ol>
+<li>使用getTime( ) 方法获取两个日期（自1970年1月1日经历的微秒数值），然后比较这两个值。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>使用方法before()，after()和equals()。例如，一个月的12号比18号早，则new Date(99, 2, 12).before(new Date (99, 2, 18))返回true。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>使用compareTo()方法，它是由Comparable接口定义的，Date类实现了这个接口。</li>
+</ol>
+</blockquote>
+<h3 id="2-3-使用SimpleDateFormat格式化日期"><a href="#2-3-使用SimpleDateFormat格式化日期" class="headerlink" title="2.3 使用SimpleDateFormat格式化日期"></a>2.3 使用SimpleDateFormat格式化日期</h3><p>SimpleDateFormat是一个以语言环境敏感的方式来格式化和分析日期的类。SimpleDateFormat允许用户选择任何自定义日期时间格式来运行。<br>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">import</span> java.text.*;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br><br>      Date dNow = <span class="hljs-keyword">new</span> Date( );<br>      SimpleDateFormat ft = <br>      <span class="hljs-keyword">new</span> SimpleDateFormat (<span class="hljs-string">&quot;E yyyy.MM.dd &#x27;at&#x27; hh:mm:ss a zzz&quot;</span>);<br><br>      System.out.println(<span class="hljs-string">&quot;Current Date: &quot;</span> + ft.format(dNow));<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Current Date: Sun <span class="hljs-number">2004.07</span><span class="hljs-number">.18</span> at <span class="hljs-number">04</span>:<span class="hljs-number">14</span>:09 PM PDT<br></code></pre></div></td></tr></table></figure>
+<h4 id="2-3-1-简单的DateFormat格式化编码"><a href="#2-3-1-简单的DateFormat格式化编码" class="headerlink" title="2.3.1 简单的DateFormat格式化编码"></a>2.3.1 简单的DateFormat格式化编码</h4><table>
+<thead>
+<tr>
+<th align="center"><strong>字母</strong></th>
+<th align="center"><strong>描述</strong></th>
+<th align="center"><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">G</td>
+<td align="center">纪元标记</td>
+<td align="center">AD</td>
+</tr>
+<tr>
+<td align="center">y</td>
+<td align="center">四位年份</td>
+<td align="center">2001</td>
+</tr>
+<tr>
+<td align="center">M</td>
+<td align="center">月份</td>
+<td align="center">July or 07</td>
+</tr>
+<tr>
+<td align="center">d</td>
+<td align="center">一个月的日期</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">h</td>
+<td align="center">A.M./P.M. (1~12)格式小时</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">H</td>
+<td align="center">一天中的小时 (0~23)</td>
+<td align="center">22</td>
+</tr>
+<tr>
+<td align="center">m</td>
+<td align="center">分钟数</td>
+<td align="center">30</td>
+</tr>
+<tr>
+<td align="center">s</td>
+<td align="center">秒数</td>
+<td align="center">55</td>
+</tr>
+<tr>
+<td align="center">S</td>
+<td align="center">微妙数</td>
+<td align="center">234</td>
+</tr>
+<tr>
+<td align="center">E</td>
+<td align="center">星期几</td>
+<td align="center">Tuesday</td>
+</tr>
+<tr>
+<td align="center">D</td>
+<td align="center">一年中的日子</td>
+<td align="center">360</td>
+</tr>
+<tr>
+<td align="center">F</td>
+<td align="center">一个月中第几周的周几</td>
+<td align="center">2 (second Wed. in July)</td>
+</tr>
+<tr>
+<td align="center">w</td>
+<td align="center">一年中第几周</td>
+<td align="center">40</td>
+</tr>
+<tr>
+<td align="center">W</td>
+<td align="center">一个月中第几周</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">a</td>
+<td align="center">A.M./P.M. 标记</td>
+<td align="center">PM</td>
+</tr>
+<tr>
+<td align="center">k</td>
+<td align="center">一天中的小时(1~24)</td>
+<td align="center">24</td>
+</tr>
+<tr>
+<td align="center">K</td>
+<td align="center">A.M./P.M. (0~11)格式小时</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">z</td>
+<td align="center">时区</td>
+<td align="center">Eastern Standard Time</td>
+</tr>
+<tr>
+<td align="center">‘</td>
+<td align="center">文字定界符</td>
+<td align="center">Delimiter</td>
+</tr>
+<tr>
+<td align="center">“</td>
+<td align="center">单引号</td>
+<td align="center">`</td>
+</tr>
+</tbody></table>
+<h3 id="2-4-使用printf格式化日期"><a href="#2-4-使用printf格式化日期" class="headerlink" title="2.4 使用printf格式化日期"></a>2.4 使用printf格式化日期</h3><p>printf方法可以很轻松地格式化时间和日期。使用两个字母格式，它以t开头并且以下面表格中的一个字母结尾。<br>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>     <span class="hljs-comment">// 初始化 Date 对象</span><br>     Date date = <span class="hljs-keyword">new</span> Date();<br><br>     <span class="hljs-comment">// 使用toString()显示日期和时间</span><br>     String str = String.format(<span class="hljs-string">&quot;Current Date/Time : %tc&quot;</span>, date );<br><br>     System.out.printf(str);<br>  &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Current Date/Time : Sat Dec <span class="hljs-number">15</span> <span class="hljs-number">16</span>:<span class="hljs-number">37</span>:<span class="hljs-number">57</span> MST <span class="hljs-number">2012</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果需要重复提供日期，那么利用这种方式来格式化它的每一部分就有点复杂了。因此，可以利用一个格式化字符串指出要被格式化的参数的索引。索引必须紧跟在%后面，而且必须以$结束。</p>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>       <span class="hljs-comment">// 初始化 Date 对象</span><br>       Date date = <span class="hljs-keyword">new</span> Date();<br>        <br>       <span class="hljs-comment">// 使用toString()显示日期和时间</span><br>       System.out.printf(<span class="hljs-string">&quot;%1$s %2$tB %2$td, %2$tY&quot;</span>, <br>                         <span class="hljs-string">&quot;Due date:&quot;</span>, date);<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Due date: February 09, <span class="hljs-number">2004</span><br></code></pre></div></td></tr></table></figure>
+
+<p>或者，可以使用 &lt; 标志。它表明先前被格式化的参数要被再次使用。</p>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.Date;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>       <span class="hljs-comment">// 初始化 Date 对象</span><br>       Date date = <span class="hljs-keyword">new</span> Date();<br>        <br>       <span class="hljs-comment">// 显示格式化时间</span><br>       System.out.printf(<span class="hljs-string">&quot;%s %tB %&lt;te, %&lt;tY&quot;</span>,<br>                           <span class="hljs-string">&quot;Due date:&quot;</span>, date);<br>   &#125;<br>&#125; <br><span class="hljs-comment">/*输出结果*/</span><br>Due date: February 09, <span class="hljs-number">2004</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-5-解析字符串为时间"><a href="#2-5-解析字符串为时间" class="headerlink" title="2.5 解析字符串为时间"></a>2.5 解析字符串为时间</h3><p>SimpleDateFormat 类有一些附加的方法，特别是parse()，它试图按照给定的SimpleDateFormat 对象的格式化存储来解析字符串。</p>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br><span class="hljs-keyword">import</span> java.text.*;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DateDemo</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>      SimpleDateFormat ft = <span class="hljs-keyword">new</span> SimpleDateFormat (<span class="hljs-string">&quot;yyyy-MM-dd&quot;</span>); <br><br>      String input = args.length == <span class="hljs-number">0</span> ? <span class="hljs-string">&quot;1818-11-11&quot;</span> : args[<span class="hljs-number">0</span>]; <br><br>      System.out.print(input + <span class="hljs-string">&quot; Parses as &quot;</span>); <br><br>      Date t; <br><br>      <span class="hljs-keyword">try</span> &#123; <br>          t = ft.parse(input); <br>          System.out.println(t); <br>      &#125; <span class="hljs-keyword">catch</span> (ParseException e) &#123; <br>          System.out.println(<span class="hljs-string">&quot;Unparseable using &quot;</span> + ft); <br>      &#125;<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>$ java DateDemo<br><span class="hljs-number">1818</span>-<span class="hljs-number">11</span>-<span class="hljs-number">11</span> Parses as Wed Nov <span class="hljs-number">11</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT <span class="hljs-number">1818</span><br>$ java DateDemo <span class="hljs-number">2007</span>-<span class="hljs-number">12</span>-<span class="hljs-number">01</span><br><span class="hljs-number">2007</span>-<span class="hljs-number">12</span>-<span class="hljs-number">01</span> Parses as Sat Dec <span class="hljs-number">01</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span> GMT <span class="hljs-number">2007</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-6-休眠-sleep"><a href="#2-6-休眠-sleep" class="headerlink" title="2.6 休眠(sleep)"></a>2.6 休眠(sleep)</h3><p>可以让程序休眠一毫秒的时间或者到您的计算机的寿命长的任意段时间。</p>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SleepDemo</span> </span>&#123;<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>      <span class="hljs-keyword">try</span> &#123; <br>         System.out.println(<span class="hljs-keyword">new</span> Date( ) + <span class="hljs-string">&quot;\n&quot;</span>); <br>         Thread.sleep(<span class="hljs-number">5</span>*<span class="hljs-number">60</span>*<span class="hljs-number">10</span>); <br>         System.out.println(<span class="hljs-keyword">new</span> Date( ) + <span class="hljs-string">&quot;\n&quot;</span>); <br>      &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123; <br>          System.out.println(<span class="hljs-string">&quot;Got an exception!&quot;</span>); <br>      &#125;<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Sun May <span class="hljs-number">03</span> <span class="hljs-number">18</span>:<span class="hljs-number">04</span>:<span class="hljs-number">41</span> GMT <span class="hljs-number">2009</span><br><br>Sun May <span class="hljs-number">03</span> <span class="hljs-number">18</span>:<span class="hljs-number">04</span>:<span class="hljs-number">44</span> GMT <span class="hljs-number">2009</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="2-7-测量时间"><a href="#2-7-测量时间" class="headerlink" title="2.7 测量时间"></a>2.7 测量时间</h3><p>实例：测量时间间隔（以毫秒为单位）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DiffDemo</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>      <span class="hljs-keyword">try</span> &#123;<br>         <span class="hljs-keyword">long</span> start = System.currentTimeMillis( );<br>         System.out.println(<span class="hljs-keyword">new</span> Date( ) + <span class="hljs-string">&quot;\n&quot;</span>);<br>         Thread.sleep(<span class="hljs-number">5</span>*<span class="hljs-number">60</span>*<span class="hljs-number">10</span>);<br>         System.out.println(<span class="hljs-keyword">new</span> Date( ) + <span class="hljs-string">&quot;\n&quot;</span>);<br>         <span class="hljs-keyword">long</span> end = System.currentTimeMillis( );<br>         <span class="hljs-keyword">long</span> diff = end - start;<br>         System.out.println(<span class="hljs-string">&quot;Difference is : &quot;</span> + diff);<br>      &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>         System.out.println(<span class="hljs-string">&quot;Got an exception!&quot;</span>);<br>      &#125;<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Sun May <span class="hljs-number">03</span> <span class="hljs-number">18</span>:<span class="hljs-number">16</span>:<span class="hljs-number">51</span> GMT <span class="hljs-number">2009</span><br><br>Sun May <span class="hljs-number">03</span> <span class="hljs-number">18</span>:<span class="hljs-number">16</span>:<span class="hljs-number">57</span> GMT <span class="hljs-number">2009</span><br><br>Difference is : <span class="hljs-number">5993</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="2-8-Calendar类"><a href="#2-8-Calendar类" class="headerlink" title="2.8 Calendar类"></a>2.8 Calendar类</h3><p>使用Calendar 类。能设置和获取日期数据的特定部分，比如小时，日，或者分钟。 又可以在日期的这些部分加上或者减去值。</p>
+<p>Calendar类的功能要比Date类强大很多，而且在实现方式上也比Date类要复杂一些。Calendar类是一个抽象类，在实际使用时实现特定的子类的对象，创建对象的过程对程序员来说是透明的，只需要使用getInstance方法创建即可。</p>
+<h4 id="2-8-1-创建一个代表系统当前日期的Calendar对象"><a href="#2-8-1-创建一个代表系统当前日期的Calendar对象" class="headerlink" title="2.8.1 创建一个代表系统当前日期的Calendar对象"></a>2.8.1 创建一个代表系统当前日期的Calendar对象</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Calendar c = Calendar.getInstance();<span class="hljs-comment">//默认是当前日期</span><br></code></pre></div></td></tr></table></figure>
+<h4 id="2-8-2-创建一个指定日期的Calendar对象"><a href="#2-8-2-创建一个指定日期的Calendar对象" class="headerlink" title="2.8.2 创建一个指定日期的Calendar对象"></a>2.8.2 创建一个指定日期的Calendar对象</h4><p>使用Calendar类代表特定的时间，需要首先创建一个Calendar的对象，然后再设定该对象中的年月日参数来完成。<br>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//创建一个代表2009年6月12日的Calendar对象</span><br>Calendar c1 = Calendar.getInstance();<br>c1.set(<span class="hljs-number">2009</span>, <span class="hljs-number">6</span> - <span class="hljs-number">1</span>, <span class="hljs-number">12</span>);<br></code></pre></div></td></tr></table></figure>
+<h4 id="2-8-3-Calendar类对象字段类型"><a href="#2-8-3-Calendar类对象字段类型" class="headerlink" title="2.8.3 Calendar类对象字段类型"></a>2.8.3 Calendar类对象字段类型</h4><p>Calendar类中用以下这些常量表示不同的意义。</p>
+<table>
+<thead>
+<tr>
+<th align="center">常量</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Calendar.YEAR</td>
+<td align="center">年份</td>
+</tr>
+<tr>
+<td align="center">Calendar.MONTH</td>
+<td align="center">月份</td>
+</tr>
+<tr>
+<td align="center">Calendar.DATE</td>
+<td align="center">日期</td>
+</tr>
+<tr>
+<td align="center">Calendar.DAY_OF_MONTH</td>
+<td align="center">日期，和上面的字段意义完全相同</td>
+</tr>
+<tr>
+<td align="center">Calendar.HOUR</td>
+<td align="center">12小时制的小时</td>
+</tr>
+<tr>
+<td align="center">Calendar.HOUR_OF_DAY</td>
+<td align="center">24小时制的小时</td>
+</tr>
+<tr>
+<td align="center">Calendar.MINUTE</td>
+<td align="center">分钟</td>
+</tr>
+<tr>
+<td align="center">Calendar.SECOND</td>
+<td align="center">秒</td>
+</tr>
+<tr>
+<td align="center">Calendar.DAY_OF_WEEK</td>
+<td align="center">星期几</td>
+</tr>
+</tbody></table>
+<h4 id="2-8-4-Calendar类对象信息的设置"><a href="#2-8-4-Calendar类对象信息的设置" class="headerlink" title="2.8.4 Calendar类对象信息的设置"></a>2.8.4 Calendar类对象信息的设置</h4><h5 id="2-8-4-1-Set设置"><a href="#2-8-4-1-Set设置" class="headerlink" title="2.8.4.1 Set设置"></a>2.8.4.1 Set设置</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Calendar c1 = Calendar.getInstance();<br></code></pre></div></td></tr></table></figure>
+<p>调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-keyword">int</span> year,<span class="hljs-keyword">int</span> month,<span class="hljs-keyword">int</span> date)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">c1.<span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-number">2009</span>, <span class="hljs-number">6</span> - <span class="hljs-number">1</span>, <span class="hljs-number">12</span>)</span></span>;<span class="hljs-comment">//把Calendar对象c1的年月日分别设这为：2009、5、12</span><br></code></pre></div></td></tr></table></figure>
+<h5 id="2-8-4-2-利用字段类型设置"><a href="#2-8-4-2-利用字段类型设置" class="headerlink" title="2.8.4.2 利用字段类型设置"></a>2.8.4.2 利用字段类型设置</h5><p>如果只设定某个字段，例如日期的值，则可以使用如下set方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-keyword">int</span> field,<span class="hljs-keyword">int</span> value)</span></span><br></code></pre></div></td></tr></table></figure>
+<p>把 c1对象代表的日期设置为10号，其它所有的数值会被重新计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">c1.set(Calendar.DATE,<span class="hljs-number">10</span>);<br></code></pre></div></td></tr></table></figure>
+<p>把c1对象代表的年份设置为2008年，其他的所有数值会被重新计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">c1.set(Calendar.YEAR,<span class="hljs-number">2008</span>);<br></code></pre></div></td></tr></table></figure>
+<p>其他字段属性set的意义以此类推。</p>
+<h4 id="2-8-5-Add设置"><a href="#2-8-5-Add设置" class="headerlink" title="2.8.5 Add设置"></a>2.8.5 Add设置</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Calendar c1 = Calendar.getInstance();<br></code></pre></div></td></tr></table></figure>
+<p>把c1对象的日期加上10，也就是c1所表的日期的10天后的日期，其它所有的数值会被重新计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">c1.add(Calendar.DATE, <span class="hljs-number">10</span>);<br></code></pre></div></td></tr></table></figure>
+<p>把c1对象的日期减去10，也就是c1所表的日期的10天前的日期，其它所有的数值会被重新计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">c1.add(Calendar.DATE, -<span class="hljs-number">10</span>);<br></code></pre></div></td></tr></table></figure>
+<p>其他字段属性的add的意义以此类推。</p>
+<h4 id="2-8-6-Calendar类对象信息的获得"><a href="#2-8-6-Calendar类对象信息的获得" class="headerlink" title="2.8.6 Calendar类对象信息的获得"></a>2.8.6 Calendar类对象信息的获得</h4><p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Calendar c1 = Calendar.getInstance();<br><span class="hljs-comment">// 获得年份</span><br><span class="hljs-keyword">int</span> year = c1.get(Calendar.YEAR);<br><span class="hljs-comment">// 获得月份</span><br><span class="hljs-keyword">int</span> month = c1.get(Calendar.MONTH) + <span class="hljs-number">1</span>;<br><span class="hljs-comment">// 获得日期</span><br><span class="hljs-keyword">int</span> date = c1.get(Calendar.DATE);<br><span class="hljs-comment">// 获得小时</span><br><span class="hljs-keyword">int</span> hour = c1.get(Calendar.HOUR_OF_DAY);<br><span class="hljs-comment">// 获得分钟</span><br><span class="hljs-keyword">int</span> minute = c1.get(Calendar.MINUTE);<br><span class="hljs-comment">// 获得秒</span><br><span class="hljs-keyword">int</span> second = c1.get(Calendar.SECOND);<br><span class="hljs-comment">// 获得星期几（注意（这个与Date类是不同的）：1代表星期日、2代表星期1、3代表星期二，以此类推）</span><br><span class="hljs-keyword">int</span> day = c1.get(Calendar.DAY_OF_WEEK);<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-9-GregorianCalendar类"><a href="#2-9-GregorianCalendar类" class="headerlink" title="2.9 GregorianCalendar类"></a>2.9 GregorianCalendar类</h3><p>Calendar类实现了公历日历，GregorianCalendar是Calendar类的一个具体实现。Calendar 的getInstance（）方法返回一个默认用当前的语言环境和时区初始化的GregorianCalendar对象。GregorianCalendar定义了两个字段：AD和BC。这些代表公历定义的两个时代。</p>
+<h4 id="2-9-1-GregorianCalendar对象的构造方法"><a href="#2-9-1-GregorianCalendar对象的构造方法" class="headerlink" title="2.9.1 GregorianCalendar对象的构造方法"></a>2.9.1 GregorianCalendar对象的构造方法</h4><table>
+<thead>
+<tr>
+<th align="center">构造函数</th>
+<th align="center"><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>GregorianCalendar()</strong></td>
+<td align="center">在具有默认语言环境的默认时区内使用当前时间构造一个默认的 GregorianCalendar。</td>
+</tr>
+<tr>
+<td align="center"><strong>GregorianCalendar(int year, int month, int date)</strong></td>
+<td align="center">在具有默认语言环境的默认时区内构造一个带有给定日期设置的 GregorianCalendar</td>
+</tr>
+<tr>
+<td align="center"><strong>GregorianCalendar(int year, int month, int date, int hour, int minute)</strong></td>
+<td align="center">为具有默认语言环境的默认时区构造一个具有给定日期和时间设置的 GregorianCalendar。</td>
+</tr>
+<tr>
+<td align="center"><strong>GregorianCalendar(int year, int month, int date, int hour, int minute, int second)</strong></td>
+<td align="center">为具有默认语言环境的默认时区构造一个具有给定日期和时间设置的 GregorianCalendar。</td>
+</tr>
+<tr>
+<td align="center"><strong>GregorianCalendar(Locale aLocale)</strong></td>
+<td align="center">在具有给定语言环境的默认时区内构造一个基于当前时间的 GregorianCalendar。</td>
+</tr>
+<tr>
+<td align="center"><strong>GregorianCalendar(TimeZone zone)</strong></td>
+<td align="center">在具有默认语言环境的给定时区内构造一个基于当前时间的 GregorianCalendar。</td>
+</tr>
+<tr>
+<td align="center"><strong>GregorianCalendar(TimeZone zone, Locale aLocale)</strong></td>
+<td align="center">在具有给定语言环境的给定时区内构造一个基于当前时间的 GregorianCalendar。</td>
+</tr>
+</tbody></table>
+<h4 id="2-9-2-GregorianCalendar-类的方法"><a href="#2-9-2-GregorianCalendar-类的方法" class="headerlink" title="2.9.2 GregorianCalendar 类的方法"></a>2.9.2 GregorianCalendar 类的方法</h4><table>
+<thead>
+<tr>
+<th align="center">方法</th>
+<th align="center"><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>void add(int field, int amount)</strong></td>
+<td align="center">根据日历规则，将指定的（有符号的）时间量添加到给定的日历字段中。</td>
+</tr>
+<tr>
+<td align="center"><strong>protected void computeFields()</strong></td>
+<td align="center">转换UTC毫秒值为时间域值</td>
+</tr>
+<tr>
+<td align="center"><strong>protected void computeTime()</strong></td>
+<td align="center">覆盖Calendar ，转换时间域值为UTC毫秒值</td>
+</tr>
+<tr>
+<td align="center"><strong>boolean equals(Object obj)</strong></td>
+<td align="center">比较此 GregorianCalendar 与指定的 Object。</td>
+</tr>
+<tr>
+<td align="center"><strong>int get(int field)</strong></td>
+<td align="center">获取指定字段的时间值</td>
+</tr>
+<tr>
+<td align="center"><strong>int getActualMaximum(int field)</strong></td>
+<td align="center">返回当前日期，给定字段的最大值</td>
+</tr>
+<tr>
+<td align="center"><strong>int getActualMinimum(int field)</strong></td>
+<td align="center">返回当前日期，给定字段的最小值</td>
+</tr>
+<tr>
+<td align="center"><strong>int getGreatestMinimum(int field)</strong></td>
+<td align="center">返回此 GregorianCalendar 实例给定日历字段的最高的最小值。</td>
+</tr>
+<tr>
+<td align="center"><strong>Date getGregorianChange()</strong></td>
+<td align="center">获得格里高利历的更改日期。</td>
+</tr>
+<tr>
+<td align="center"><strong>int getLeastMaximum(int field)</strong></td>
+<td align="center">返回此 GregorianCalendar 实例给定日历字段的最低的最大值</td>
+</tr>
+<tr>
+<td align="center"><strong>int getMaximum(int field)</strong></td>
+<td align="center">返回此 GregorianCalendar 实例的给定日历字段的最大值。</td>
+</tr>
+<tr>
+<td align="center"><strong>Date getTime()</strong></td>
+<td align="center">获取日历当前时间。</td>
+</tr>
+<tr>
+<td align="center"><strong>long getTimeInMillis()</strong></td>
+<td align="center">获取用长整型表示的日历的当前时间</td>
+</tr>
+<tr>
+<td align="center"><strong>TimeZone getTimeZone()</strong></td>
+<td align="center">获取时区。</td>
+</tr>
+<tr>
+<td align="center"><strong>int getMinimum(int field)</strong></td>
+<td align="center">返回给定字段的最小值。</td>
+</tr>
+<tr>
+<td align="center"><strong>int hashCode()</strong></td>
+<td align="center">重写hashCode.</td>
+</tr>
+<tr>
+<td align="center"><strong>boolean isLeapYear(int year)</strong></td>
+<td align="center">确定给定的年份是否为闰年。</td>
+</tr>
+<tr>
+<td align="center"><strong>void roll(int field, boolean up)</strong></td>
+<td align="center">在给定的时间字段上添加或减去（上/下）单个时间单元，不更改更大的字段。</td>
+</tr>
+<tr>
+<td align="center"><strong>void set(int field, int value)</strong></td>
+<td align="center">用给定的值设置时间字段。</td>
+</tr>
+<tr>
+<td align="center"><strong>void set(int year, int month, int date)</strong></td>
+<td align="center">设置年、月、日的值。</td>
+</tr>
+<tr>
+<td align="center"><strong>void set(int year, int month, int date, int hour, int minute)</strong></td>
+<td align="center">设置年、月、日、小时、分钟的值。</td>
+</tr>
+<tr>
+<td align="center"><strong>void set(int year, int month, int date, int hour, int minute, int second)</strong></td>
+<td align="center">设置年、月、日、小时、分钟、秒的值。</td>
+</tr>
+<tr>
+<td align="center"><strong>void setGregorianChange(Date date)</strong></td>
+<td align="center">设置 GregorianCalendar 的更改日期。</td>
+</tr>
+<tr>
+<td align="center"><strong>void setTime(Date date)</strong></td>
+<td align="center">用给定的日期设置Calendar的当前时间。</td>
+</tr>
+<tr>
+<td align="center"><strong>void setTimeInMillis(long millis)</strong></td>
+<td align="center">用给定的long型毫秒数设置Calendar的当前时间。</td>
+</tr>
+<tr>
+<td align="center"><strong>void setTimeZone(TimeZone value)</strong></td>
+<td align="center">用给定时区值设置当前时区。</td>
+</tr>
+<tr>
+<td align="center"><strong>String toString()</strong></td>
+<td align="center">返回代表日历的字符串。</td>
+</tr>
+</tbody></table>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.util.*;<br>  <br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GregorianCalendarDemo</span> </span>&#123;<br><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String args[])</span> </span>&#123;<br>      String months[] = &#123;<br>      <span class="hljs-string">&quot;Jan&quot;</span>, <span class="hljs-string">&quot;Feb&quot;</span>, <span class="hljs-string">&quot;Mar&quot;</span>, <span class="hljs-string">&quot;Apr&quot;</span>,<br>      <span class="hljs-string">&quot;May&quot;</span>, <span class="hljs-string">&quot;Jun&quot;</span>, <span class="hljs-string">&quot;Jul&quot;</span>, <span class="hljs-string">&quot;Aug&quot;</span>,<br>      <span class="hljs-string">&quot;Sep&quot;</span>, <span class="hljs-string">&quot;Oct&quot;</span>, <span class="hljs-string">&quot;Nov&quot;</span>, <span class="hljs-string">&quot;Dec&quot;</span>&#125;;<br>      <br>      <span class="hljs-keyword">int</span> year;<br>      <span class="hljs-comment">// 初始化 Gregorian 日历</span><br>      <span class="hljs-comment">// 使用当前时间和日期</span><br>      <span class="hljs-comment">// 默认为本地时间和时区</span><br>      GregorianCalendar gcalendar = <span class="hljs-keyword">new</span> GregorianCalendar();<br>      <span class="hljs-comment">// 显示当前时间和日期的信息</span><br>      System.out.print(<span class="hljs-string">&quot;Date: &quot;</span>);<br>      System.out.print(months[gcalendar.get(Calendar.MONTH)]);<br>      System.out.print(<span class="hljs-string">&quot; &quot;</span> + gcalendar.get(Calendar.DATE) + <span class="hljs-string">&quot; &quot;</span>);<br>      System.out.println(year = gcalendar.get(Calendar.YEAR));<br>      System.out.print(<span class="hljs-string">&quot;Time: &quot;</span>);<br>      System.out.print(gcalendar.get(Calendar.HOUR) + <span class="hljs-string">&quot;:&quot;</span>);<br>      System.out.print(gcalendar.get(Calendar.MINUTE) + <span class="hljs-string">&quot;:&quot;</span>);<br>      System.out.println(gcalendar.get(Calendar.SECOND));<br>      <br>      <span class="hljs-comment">// 测试当前年份是否为闰年</span><br>      <span class="hljs-keyword">if</span>(gcalendar.isLeapYear(year)) &#123;<br>         System.out.println(<span class="hljs-string">&quot;当前年份是闰年&quot;</span>);<br>      &#125;<br>      <span class="hljs-keyword">else</span> &#123;<br>         System.out.println(<span class="hljs-string">&quot;当前年份不是闰年&quot;</span>);<br>      &#125;<br>   &#125;<br>&#125;<br><span class="hljs-comment">/*输出结果*/</span><br>Date: Apr <span class="hljs-number">22</span> <span class="hljs-number">2009</span><br>Time: <span class="hljs-number">11</span>:<span class="hljs-number">25</span>:<span class="hljs-number">27</span><br>当前年份不是闰年<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA/">JAVA</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <!-- <strong>本文链接: </strong><a href="http://example.com/DragonOne/2653072026.html">http://example.com/DragonOne/2653072026.html</a> <br> -->
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/1628167943.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IDEA快捷键</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/2999728930.html">
+                        <span class="hidden-mobile">JAVA基础知识复习（十）-Java各种封装类</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水的记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
