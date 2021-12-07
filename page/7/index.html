@@ -240,6 +240,354 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
     
     
       <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/DragonOne/191149948.html" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="JAVA-一行一行源码分析AbstractQueuedSynchronizer(三)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/DragonOne/191149948.html">JAVA-一行一行源码分析AbstractQueuedSynchronizer(三)</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/DragonOne/191149948.html">
+          
+          
+            
+          
+          这篇文章是 AQS 系列的最后一篇，第一篇，我们通过 ReentrantLock 公平锁分析了 AQS 的核心，第二篇的重点是把 Condition 说明白，同时也说清楚了对于线程中断的使用。
+这篇，我们的关注点是 AQS 最后的部分，AQS 共享模式的使用。有前两篇文章的铺垫，剩下的源码分析将会简单很多。
+本文先用 CountDownLatch 将共享模式说清楚，然后顺着把其他 AQS 相关的类
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 12:11" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JAVA/">JAVA</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">JAVA</a>
+            
+              <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/DragonOne/1972868951.html" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="JAVA-一行一行源码分析AbstractQueuedSynchronizer(二)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/DragonOne/1972868951.html">JAVA-一行一行源码分析AbstractQueuedSynchronizer(二)</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/DragonOne/1972868951.html">
+          
+          
+            
+          
+          文章比较长，信息量比较大，建议在 pc 上阅读。文章标题是为了呼应前文，其实可以单独成文的，主要是希望读者看文章能系统看。
+本文关注以下几点内容：
+
+深入理解 ReentrantLock 公平锁和非公平锁的区别
+深入分析 AbstractQueuedSynchronizer 中的 ConditionObject
+深入理解 Java 线程中断和 InterruptedException 异常
+
+基本
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 11:55" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JAVA/">JAVA</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">JAVA</a>
+            
+              <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/DragonOne/3668315189.html" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="JAVA-一行一行源码分析AbstractQueuedSynchronizer(一)">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/DragonOne/3668315189.html">JAVA-一行一行源码分析AbstractQueuedSynchronizer(一)</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/DragonOne/3668315189.html">
+          
+          
+            
+          
+          在分析 Java 并发包 java.util.concurrent 源码的时候，少不了需要了解 AbstractQueuedSynchronizer（以下简写AQS）这个抽象类，因为它是 Java 并发包的基础工具类，是实现 ReentrantLock、CountDownLatch、Semaphore、FutureTask 等类的基础。
+Google 一下 AbstractQueuedSynchr
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 11:03" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/JAVA/">JAVA</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/JAVA/">JAVA</a>
+            
+              <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/DragonOne/3720721208.html" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="Spring-AspectJ使用介绍">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/DragonOne/3720721208.html">Spring-AspectJ使用介绍</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/DragonOne/3720721208.html">
+          
+          
+            
+          
+          说过 Spring  AOP 的各种用法，包括随着 Spring 的演进而发展出来的几种配置方式。
+但是我们始终没有使用到 AspectJ，即使是在基于注解的 @AspectJ 的配置方式中，Spring 也仅仅是使用了 AspectJ 包中的一些注解而已，并没有依赖于 AspectJ 实现具体的功能。
+本文将介绍使用 AspectJ，介绍它的 3 种织入方式。
+目录AspectJ 使用介绍Asp
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 10:44" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Spring/">Spring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spring/">Spring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/DragonOne/3711499947.html" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="Spring-Spring+AOP源码解析">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/DragonOne/3711499947.html">Spring-Spring+AOP源码解析</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/DragonOne/3711499947.html">
+          
+          
+            
+          
+          之前写过 IOC 的源码分析，那篇文章真的有点长，看完需要点耐心。很多读者希望能写一写 Spring AOP 的源码分析文章，这样读者看完 IOC + AOP 也就对 Spring 会有比较深的理解了。今天终于成文了，可能很多读者早就不再等待了，不过主要为了后来者吧。
+本文不会像 IOC 源码分析那篇文章一样，很具体地分析每一行 Spring AOP 的源码，目标读者是已经知道 Spring IO
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 10:25" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Spring/">Spring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spring/">Spring</a>
+            
+              <a href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
+        <a href="/DragonOne/3232753410.html" target="_blank">
+          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="Spring-Spring+AOP使用介绍">
+        </a>
+      </div>
+    
+    <article class="col-12 col-md-8 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/DragonOne/3232753410.html">Spring-Spring+AOP使用介绍</a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/DragonOne/3232753410.html">
+          
+          
+            
+          
+          前面写过 Spring IOC 的源码分析，本文不介绍源码分析，而是介绍 Spring AOP 中的一些概念，以及它的各种配置方法，涵盖了 Spring AOP 发展到现在出现的全部 3 种配置方式。
+由于 Spring 强大的向后兼容性，实际代码中往往会出现很多配置混杂的情况，而且居然还能工作，本文希望帮助大家理清楚这些知识。
+目录AOP, AspectJ, Spring AOP我们先来把它们的
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-17 10:11" pubdate>
+              2021-10-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Spring/">Spring</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Spring/">Spring</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+      <div class="col-12 col-md-4 m-auto index-img">
         <a href="/DragonOne/2288416285.html" target="_blank">
           <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="Spring-Spring+IOC+容器源码分析">
         </a>
@@ -632,349 +980,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/1846140473.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="Redis学习笔记（四）Java使用Jedis操作Redis">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/1846140473.html">Redis学习笔记（四）Java使用Jedis操作Redis</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/1846140473.html">
-          
-          
-            
-          
-          Redis 是当前互联网世界最为流行的 NoSQL（Not Only SQL）数据库。Redis 是一个开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存、分布式、可选持久性的键值对(Key-Value)存储数据库，并提供多种语言的 API。Redis 具备一定持久层的功能，也可以作为一种缓存工具。对于 NoSQL 数据库而言，作为持久层，它存储的数据是半结构化的，这就意
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-07 08:23" pubdate>
-              2021-10-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Redis%E5%AD%A6%E4%B9%A0/">Redis学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Redis/">Redis</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/3021411802.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="星星之火-因题而记（一）排序去重">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/3021411802.html">星星之火-因题而记（一）排序去重</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/3021411802.html">
-          
-          
-            
-          
-          积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。
-目录题目
-第三大的数给你一个非空数组，返回此数组中 第三大的数 。如果不存在，则返回数组中最大的数。（样例自行查看）
-
-题目链接
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-06 17:40" pubdate>
-              2021-10-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">刷题笔记</a>
-            
-              <a href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/101422168.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/101422168.html">星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/101422168.html">
-          
-          
-            
-          
-          积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。
-目录1.预备知识计算机中整数的存储形式：在计算机系统中，数值一律用补码来表示和存储。原因在于，使用补码，可以将符号位和数值域统一处
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-04 14:30" pubdate>
-              2021-10-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/2848527714.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="星星之火-JAVA中任意进制转换有关函数">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/2848527714.html">星星之火-JAVA中任意进制转换有关函数</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/2848527714.html">
-          
-          
-            
-          
-          积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。
-目录1.十进制转其他进制
-一个重要的函数：Integer.toString(k,r) ，将十进制的数k转换为r进制的数。返回一个S
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-02 17:30" pubdate>
-              2021-10-02
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/3142297652.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="压力测试工具-JMeter">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/3142297652.html">压力测试工具-JMeter</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/3142297652.html">
-          
-          
-            
-          
-          Apache JMeter是Apache组织开发的基于Java的压力测试工具。用于对软件做压力测试，最初被设计用于Web应用测试，但后来扩展到其他测试领域。 它可以用于测试静态和动态资源，例如静态文件、Java 小服务程序、CGI 脚本、Java 对象、数据库、FTP 服务器， 等等。JMeter 可以用于对服务器、网络或对象模拟巨大的负载，来自不同压力类别下测试它们的强度和分析整体性能。另外，J
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-01 08:13" pubdate>
-              2021-10-01
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95/">压力测试</a>
-            
-              <a href="/tags/JMeter/">JMeter</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/1401529976.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="星星之火-JAVA数组复制的五种方法">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/1401529976.html">星星之火-JAVA数组复制的五种方法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/1401529976.html">
-          
-          
-            
-          
-          积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。
-目录1.for遍历直接for进行遍历。不多说。╭(╯^╰)╮
-2.直接赋值。1234567int[] a=&#123;2,4,2,
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-09-29 18:56" pubdate>
-              2021-09-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/#board">20</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
+      <a class="extend prev" rel="prev" href="/page/6/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="page-number" href="/page/6/#board">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/#board">8</a><a class="page-number" href="/page/9/#board">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/#board">21</a><a class="extend next" rel="next" href="/page/8/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
