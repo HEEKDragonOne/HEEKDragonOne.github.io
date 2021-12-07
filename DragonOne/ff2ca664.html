@@ -15,12 +15,12 @@
   
   <meta name="theme-color" content="#2f4154">
   
-    <meta name="description" content="IDEA设置自动添加注释">
+    <meta name="description" content="墨水的记忆">
   
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-设置IDEA自动给类头部和方法体内部添加注释 - 墨水的记忆</title>
+  <title>ACM-JAVA中使用StreamTokenizer输入纯数字字符串 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -218,7 +218,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-设置IDEA自动给类头部和方法体内部添加注释">
+            <span class="h2" id="subtitle" title="ACM-JAVA中使用StreamTokenizer输入纯数字字符串">
               
             </span>
 
@@ -233,8 +233,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-04 16:13" pubdate>
-        December 4, 2021 pm
+      <time datetime="2021-12-07 19:33" pubdate>
+        December 7, 2021 pm
       </time>
     </span>
   
@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      528 字
+      1.8k 字
     </span>
   
 
@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      20
        分钟
     </span>
   
@@ -298,45 +298,100 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-设置IDEA自动给类头部和方法体内部添加注释</h1>
+            <h1 style="display: none">ACM-JAVA中使用StreamTokenizer输入纯数字字符串</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 4, 2021 pm
+                  本文最后更新于：December 7, 2021 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-文件头部注释"><a href="#1-文件头部注释" class="headerlink" title="1.文件头部注释"></a>1.文件头部注释</h2><p><img src="https://img-blog.csdnimg.cn/606a8c84cb174cf0a4a433c9a02ab078.png" srcset="/img/loading.gif"></p>
-<h2 id="2-类中方法快捷键添加注释"><a href="#2-类中方法快捷键添加注释" class="headerlink" title="2.类中方法快捷键添加注释"></a>2.类中方法快捷键添加注释</h2><ol>
-<li><p>第一步勾选Enable  Live  Templates（上图中的，勾不勾都没影响，看自愿）</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>今天做到了一道题，需要读入数字字符串，结果发现用StreamTokenizer不能输入，输出永远都是null。然后就搜了一下，现在整理记录一下。</p>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>先把解决办法说出来。后面就是讲原理。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">cin.ordinaryChars(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>) ; <span class="hljs-comment">//做题时，注意要将5改成9</span><br>cin.wordChars(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>); <span class="hljs-comment">//做题时，注意要将5改成9</span><br>cin.nextToken();<br>String ss = (String)cin.sval;<br>cout.println(ss);<br>cout.flush();<br></code></pre></div></td></tr></table></figure>
+
+<p>大概说一下。两个参数，第二个参数做题时需要写到9。因为不写到9，那么当字符串全是9时，任然会输出null。现在是5，那么输入全是6及其后面数字的字符串就会输出null。还有一点就是，虽然现在只写到了5，但是只要纯数字字符串中有一个在5前面的数字出现，那么5后面的数字也可以出现。也就是，只要在纯数字字符串中出现了范围内的数字，那么再写范围外的数字一样会输出。如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">cin.ordinaryChars(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>) ;<br>cin.wordChars(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>);<br>cin.nextToken();<br>String ss = (String)cin.sval;<br>cout.println(ss);<br>cout.flush();<br><br><span class="hljs-comment">//输入</span><br><span class="hljs-number">168976897968</span><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">168976897968</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="前知"><a href="#前知" class="headerlink" title="前知"></a>前知</h2><ul>
+<li><p><strong>ordinaryChar(int ch)</strong> - 指定字符在这个tokenizer中保持原义，即只会把当前字符认为普通的字符，不会有其他的语义。</p>
 </li>
-<li><p>新建一个Group。打开LiveTemplates 然后新建一个Group。</p>
+<li><p><strong>ordinaryChars(int low, int hi)</strong> - 指定范围内的字符保持语义，同上</p>
 </li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/ca2aac439444437e89fb62d0cc018534.png" srcset="/img/loading.gif" alt="1"></p>
-<p>在弹窗口中输入你想要的group名称（自定义）。这里以loong为例。再点击OK，你就新建了一个模板组，名称叫loong。</p>
-<ol start="3">
-<li>选中新建的group，也就是选中loong，在这个group下新建一个LiveTemplate。</li>
-</ol>
-<p><img src="https://img-blog.csdnimg.cn/4f259f7a00344805be7e500af1234605.png" srcset="/img/loading.gif" alt="2"></p>
-<p>点击Live Template之后，将会新建一个模板，并且光标定位到了需要你输入快捷键的方框中。如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/eef1d61f4dd54cd9917b9d843db12691.png" srcset="/img/loading.gif" alt="3"></p>
-<p>这里我以设置快捷键test为例。快捷键就和你输入psvm可以快速输入完整的语句一样。</p>
-<ol start="4">
-<li><p>点击上图中的Ok按钮左上方的define。在弹出的下拉框内选择作用域，这里选择java文件。</p>
+<li><p><strong>wordChars(int low, int hi)</strong> - 字符low与hi之间的所有字符都被当作为单词的要素。 一个单词是由一个单词要素后面跟着0个或者更多个单词要素或者数字要素。</p>
 </li>
-<li><p>填写注释模板。Templatetext框内的内容可以编辑了，在Template text 内写入模板。</p>
+</ul>
+<p>上面的三个方法需要知道，因为后面就需要用到。在这也列一些其他的基本方法，了解就好。</p>
+<ul>
+<li><p><strong>commenChar(int ch)</strong> - 指定某个字符为注释字符，此字符之后直到行结尾都被stream tokenizer忽略。</p>
 </li>
-</ol>
-<p><strong>说明：在此步骤中，模板内容你可以自己写，两个$号内部是参数名称，都有哪些参数呢，你可以点击Editvariables，然后在弹窗口中自己查看和选择。</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/3928bb3a03974be4b19f39981fd200c4.png" srcset="/img/loading.gif" alt="4"></p>
-<p>点击Edit variables会弹出框。点击Expression这一列的单元格，即可出现下拉框。Name这一列是你可以设置的参数名称，Expression这一列是你可以选择的表达式。在下拉框选择你需要的。</p>
-<p><img src="https://img-blog.csdnimg.cn/a220643f86b0429ea88dcc6eacbc20f1.png" srcset="/img/loading.gif" alt="5"></p>
-<p>之后一路OK、APPLY即可。</p>
-<h3 id="2-1-测试"><a href="#2-1-测试" class="headerlink" title="2.1 测试"></a>2.1 测试</h3><p>随便创建一个类，随便在一个方法中输入test（test是我设置快捷键，看你自己设置的快捷键）。如图。</p>
-<p><img src="https://img-blog.csdnimg.cn/cbd6704a921a4e00ae1420f3aadbedd8.png" srcset="/img/loading.gif" alt="6"></p>
+<li><p><strong>eolIsSignificant(boolean flag)</strong> - 决定一个行结束符是否被当作一个基本的符号处理，如果是true，则被当作一个基本符号，不当作普通的分隔符，如果是false，则保持原义，即当作普通的分隔符。</p>
+</li>
+<li><p><strong>lineno()</strong> - 返回当前流所在的行号。</p>
+</li>
+<li><p><strong>lowerCaseMode(boolean flag)</strong> - 决定是否读取一个单词时是否转变成小写。</p>
+</li>
+<li><p><strong>nextToken()</strong> - 分析下一个。</p>
+</li>
+<li><p><strong>ordinaryChar(int ch)</strong> - 指定字符在这个tokenizer中保持原义，即只会把当前字符认为普通的字符，不会有其他的语义。</p>
+</li>
+<li><p><strong>ordinaryChars(int low, int hi)</strong> - 指定范围内的字符保持语义，同上</p>
+</li>
+<li><p><strong>parseNumbers()</strong> - 当stream tokenizer遭遇到一个单词为双精度的浮点数时，会把它当作一个数字，而不是一个单词。</p>
+</li>
+<li><p><strong>pushBack()</strong> - 回退，会引起下一个nextToken方法返回当前值。</p>
+</li>
+<li><p><strong>quoteChar(int ch)</strong> - 指定当前字符为当前tokenizer中的分隔符，在两个符号之间被当作一个字符串解析。</p>
+</li>
+<li><p><strong>resetSyntax()</strong> - 重置语法表使所有的字符都被认为是“ordinary”。</p>
+</li>
+<li><p><strong>slashSlashComments(boolean flag)</strong> - 如果为true，则/<em>与</em>/之间的都被认为是注释，反之，不是。</p>
+</li>
+<li><p><strong>slashStartComments(boolean flag)</strong> - 如果为true，则//之后到行结尾的所有都被认为是注释，反之，不是。 </p>
+</li>
+<li><p><strong>whitespaceChars(int low, int hi)</strong> - 字符low与hi之间的所有字符都被当作为空格符，即被认识为tokenzier的分隔符。</p>
+</li>
+<li><p><strong>wordChars(int low, int hi)</strong> - 字符low与hi之间的所有字符都被当作为单词的要素。 一个单词是由一个单词要素后面跟着0个或者更多个单词要素或者数字要素。</p>
+</li>
+</ul>
+<h2 id="源码解释"><a href="#源码解释" class="headerlink" title="源码解释"></a>源码解释</h2><p>StreamTokenizer源码和解释：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">StreamTokenizer</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-comment">// 将a-z的字符作为一个普通单词要素，即可以正常将这些字符解析</span><br>  wordChars(<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;z&#x27;</span>);<br>  wordChars(<span class="hljs-string">&#x27;A&#x27;</span>, <span class="hljs-string">&#x27;Z&#x27;</span>);<br>  <span class="hljs-comment">// 将ASCII码表中160-255的字符作为一个普通单词要素，即可以正常将这些字符解析。一个单词(String)是通过多个单词要素(char)组成的</span><br>  wordChars(<span class="hljs-number">128</span> + <span class="hljs-number">32</span>, <span class="hljs-number">255</span>);<br>  <span class="hljs-comment">// StreamTokenizer默认认为空白符就是分隔符</span><br>  <span class="hljs-comment">// 将ASCII码表中0-&#x27; &#x27;的字符作为空白分隔符，因为StreamTokenizer默认认为空白符就是分隔符，所以这些字符也就变成了分隔符</span><br>  whitespaceChars(<span class="hljs-number">0</span>, <span class="hljs-string">&#x27; &#x27;</span>);<br>  <span class="hljs-comment">// 将/字符作为注解符，也就是说当一个token中包括/时，/后面的字符全部不再解析</span><br>  commentChar(<span class="hljs-string">&#x27;/&#x27;</span>);<br>  <span class="hljs-comment">// 指定 &quot; 为分隔符</span><br>  quoteChar(<span class="hljs-string">&#x27;&quot;&#x27;</span>);<br>  <span class="hljs-comment">// 指定 &#x27; 为分隔符</span><br>  quoteChar(<span class="hljs-string">&#x27;\&#x27;&#x27;</span>);<br>  <span class="hljs-comment">//当stream tokenizer遭遇到一个单词为双精度的浮点数时，会把它当作一个数字，而不是一个单词</span><br>  parseNumbers();<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>StreamTokenizer类的使用，这个类的读入非常迅速。但当输入的字符串为数字时，该串不会被读取。原因是，sval读取的是被定界符所包围的单词，单词是由一个单词要素后面跟着0个或者更多个单词要素或者数字要素组成的，而数字不是单词要素。所以我们得先将数字转化为单词要素后再读入。最开始的解决办法就是这么处理的。</p>
+<h2 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h2><p>在上面的源码中，要注意区分<strong>whitespaceChars</strong>和<strong>quoteChar</strong>，他们两个都是指定分隔符，但是他们两个指定的分隔符是有区别的，whitespaceChars指定的分隔符是空白分隔符。</p>
+<p>在用StreamTokenizer做算法题的时候主要就用quoteChar和wordChars两个方法。</p>
+<ul>
+<li><p><strong>quoteChar</strong>：用来设置分隔符。</p>
+</li>
+<li><p><strong>whitespaceChars</strong>：用来设置空白分隔符。</p>
+</li>
+<li><p><strong>wordChars</strong>：用来设置单词要素。</p>
+</li>
+</ul>
+<h3 id="指定单词要素"><a href="#指定单词要素" class="headerlink" title="指定单词要素"></a>指定单词要素</h3><p>StreamTokenizer默认将/作为注解符，/后面的东西都不会被解析。如果想读取/，就可以直接用</p>
+<p>st.wordChars(‘/‘, ‘/‘);</p>
+<p>这个方法将/作为一个普通的单词要素，这样/就可以作为一个普通的字符被读取解析了。</p>
+<p>如果不想用空格作为分隔符了，也可以用这个方法，这样就可以读入有空的字符串了</p>
+<p>st.wordChars(‘ ‘, ‘ ‘);</p>
+<h3 id="指定分隔符"><a href="#指定分隔符" class="headerlink" title="指定分隔符"></a>指定分隔符</h3><p>如果想设置别的字符作为分隔符，可以使用quoteChar方法来设置</p>
+<p>如想让a作为分隔符</p>
+<p>st.quoteChar(‘a’);</p>
+<p><strong>但是最好还是用</strong></p>
+<p>st.whitespaceChars(‘a’, ‘a’);</p>
+<p>这个来设置分割符，因为：</p>
+<p>使用StreamTokenizer时要注意它默认设置是有很多字符不是单词要素的，所以会读取解析不了，如有需要需要自己用wordChars方法手动设置。我们可以简单的理解为StreamTokenizer只能读取26个英文字母、汉字、数字（只是简单的理解，他其实还可以读入别的字符，只是那些字符在算法题中几乎用不到）。其他的符号都是不可以读入的，需要我们自己用wordChars()方法设置。</p>
 
             </div>
             <hr>
@@ -346,7 +401,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/categories/ACM/">ACM</a>
                     
                   </div>
                 
@@ -354,7 +409,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/tags/ACM/">ACM</a>
                     
                   </div>
                 
@@ -368,7 +423,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/DragonOne/e071038c.html">http://example.com/DragonOne/e071038c.html</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/DragonOne/ff2ca664.html">http://example.com/DragonOne/ff2ca664.html</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -377,18 +432,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/ff2ca664.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ACM-JAVA中使用StreamTokenizer输入纯数字字符串</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/61a962e8.html">
-                        <span class="hidden-mobile">Hexo-Fluid主题-给文章设置密码</span>
+                      <a href="/DragonOne/e071038c.html">
+                        <span class="hidden-mobile">星星之火-设置IDEA自动给类头部和方法体内部添加注释</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
