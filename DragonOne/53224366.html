@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.7k 字
+      3k 字
     </span>
   
 
@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      38
+      44
        分钟
     </span>
   
@@ -311,7 +311,23 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>介绍一些在竞赛中会用到的集合（容器），和使用方法。具体一些的用法可见<a target="_blank" rel="noopener" href="https://tothefor.com/DragonOne/3264474202.html">《JAVA基础学习-集合》</a></p>
 <p>而本文是快速介绍和一些基本用法。最主要的还是要知道有这些东西，比赛时针对不同的场景用不同的集合（容器）。因为我从C++转过来的，所以对C++里面的容器使用比较了解。而本文不仅会把JAVA中特有的集合介绍一下，还会把C++中的容器如何在JAVA中使用也介绍一下。因为，C++中的一些容器确实很好用而且用的还挺多，但在JAVA中却很少。</p>
 <h2 id="1-JAVA"><a href="#1-JAVA" class="headerlink" title="1.JAVA"></a>1.JAVA</h2><p>ArrayList、LinkedList、HashSet、TreeSet、LinkedHashSet、TreeMap、HashMap、LinkedHashMap 可见<a target="_blank" rel="noopener" href="https://tothefor.com/DragonOne/3264474202.html">《JAVA基础学习-集合》</a></p>
-<h2 id="2-C"><a href="#2-C" class="headerlink" title="2.C++"></a>2.C++</h2><p>如何把C++中的容器用在JAVA中，但这部分集合（容器）中有的已经过时了，这点需要注意。</p>
+<h3 id="Map-Entry"><a href="#Map-Entry" class="headerlink" title="Map.Entry"></a>Map.Entry</h3><p>一个Java中类似于C++中的Pair的容器。Map.Entry是Map的一个内部接口。配合Map使用。</p>
+<p>主要的三个方法。</p>
+<ul>
+<li>K getKey()：</li>
+<li>V getValue()：</li>
+<li>V setValue(V value)</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);<br>        LinkedHashMap&lt;String,Integer&gt; lm = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();<br>        lm.put(<span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-number">3</span>);<br>        lm.put(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-number">1</span>);<br>        lm.put(<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-number">2</span>);<br>        lm.put(<span class="hljs-string">&quot;D&quot;</span>,<span class="hljs-number">4</span>);<br>        Set&lt;Map.Entry&lt;String, Integer&gt;&gt; ent = lm.entrySet();<br>        Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; it = ent.iterator();<br>        <span class="hljs-keyword">while</span>(it.hasNext())&#123;<br>            Map.Entry&lt;String,Integer&gt; mid = it.next();<br>            System.out.println(mid.getKey());<br>            System.out.println(mid.getValue());<br>        &#125;<br>    &#125;<br><br><span class="hljs-comment">//输出</span><br>C<br><span class="hljs-number">3</span><br>A<br><span class="hljs-number">1</span><br>B<br><span class="hljs-number">2</span><br>D<br><span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);<br>        LinkedHashMap&lt;String,Integer&gt; lm = <span class="hljs-keyword">new</span> LinkedHashMap&lt;&gt;();<br>        lm.put(<span class="hljs-string">&quot;C&quot;</span>,<span class="hljs-number">3</span>);<br>        lm.put(<span class="hljs-string">&quot;A&quot;</span>,<span class="hljs-number">1</span>);<br>        lm.put(<span class="hljs-string">&quot;B&quot;</span>,<span class="hljs-number">2</span>);<br>        lm.put(<span class="hljs-string">&quot;D&quot;</span>,<span class="hljs-number">4</span>);<br>        Set&lt;Map.Entry&lt;String, Integer&gt;&gt; ent = lm.entrySet();<br>        Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; it = ent.iterator();<br>        <span class="hljs-keyword">while</span>(it.hasNext())&#123;<br>            Map.Entry&lt;String,Integer&gt; mid = it.next();<br>            System.out.println(mid.getKey());<br>            System.out.println(mid.getValue());<br>            mid.setValue(<span class="hljs-number">23</span>);<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;修改后：&quot;</span>);<br>        Iterator&lt;Map.Entry&lt;String, Integer&gt;&gt; it2 = ent.iterator();<br>        <span class="hljs-keyword">while</span>(it2.hasNext())&#123;<br>            Map.Entry&lt;String,Integer&gt; mid = it2.next();<br>            System.out.println(mid.getKey());<br>            System.out.println(mid.getValue());<br>        &#125;<br>    &#125;<br><br><span class="hljs-comment">//输出</span><br>C<br><span class="hljs-number">3</span><br>A<br><span class="hljs-number">1</span><br>B<br><span class="hljs-number">2</span><br>D<br><span class="hljs-number">4</span><br>修改后：<br>C<br><span class="hljs-number">23</span><br>A<br><span class="hljs-number">23</span><br>B<br><span class="hljs-number">23</span><br>D<br><span class="hljs-number">23</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="2-C"><a href="#2-C" class="headerlink" title="2.C++"></a>2.C++</h2><p>如何把C++中有的容器也用在JAVA中。需要注意的是，尽管C++中的容器在JAVA中也能使用，但是，并不是完全一样的，可能在JAVA中效率很低。这里只是说明在JAVA中也有，具体的使用情况根据实际而定。</p>
 <h3 id="2-1-Stack（栈）"><a href="#2-1-Stack（栈）" class="headerlink" title="2.1 Stack（栈）"></a>2.1 Stack（栈）</h3><p>Stack 类表示后进先出（LIFO）的对象堆栈。它通过五个操作对类 Vector 进行了扩展 ，允许将向量视为堆栈。它提供了通常的 push 和 pop 操作，以及取堆栈顶点的 peek 方法、测试堆栈是否为空的 empty 方法、在堆栈中查找项并确定到堆栈顶距离的 search 方法。</p>
 <p>因为它继承自Vector,那么它的实现原理是以数组实现堆栈的。如果要以链表方式实现堆栈可以使用LinkedList！Stack只有下面几个方法！由于Stack继承了Vector ，它也有Vector的API方法！</p>
 <table>
@@ -506,6 +522,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/DragonOne/4c06c38d.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法学习-普通并查集模板</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

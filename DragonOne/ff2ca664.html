@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      1.9k 字
     </span>
   
 
@@ -315,12 +315,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>大概说一下。两个参数，第二个参数做题时需要写到9。因为不写到9，那么当字符串全是9时，任然会输出null。现在是5，那么输入全是6及其后面数字的字符串就会输出null。还有一点就是，虽然现在只写到了5，但是只要纯数字字符串中有一个在5前面的数字出现，那么5后面的数字也可以出现。也就是，只要在纯数字字符串中出现了范围内的数字，那么再写范围外的数字一样会输出。如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">cin.ordinaryChars(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>) ;<br>cin.wordChars(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;5&#x27;</span>);<br>cin.nextToken();<br>String ss = (String)cin.sval;<br>cout.println(ss);<br>cout.flush();<br><br><span class="hljs-comment">//输入</span><br><span class="hljs-number">168976897968</span><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">168976897968</span><br></code></pre></div></td></tr></table></figure>
 
-
-
-
-
-
-
+<p><strong>只能用于输入字符串，如果在正常输入数字时没有删除（注释），或者是放在输入数字的语句前面，则数字不能正常输入。</strong></p>
 <h2 id="前知"><a href="#前知" class="headerlink" title="前知"></a>前知</h2><ul>
 <li><p><strong>ordinaryChar(int ch)</strong> - 指定字符在这个tokenizer中保持原义，即只会把当前字符认为普通的字符，不会有其他的语义。</p>
 </li>

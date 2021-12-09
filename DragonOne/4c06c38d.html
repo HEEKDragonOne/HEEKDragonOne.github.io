@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>蓝桥杯JAVA-3.自定义类排序、进制转换、保留小数位数 - 墨水的记忆</title>
+  <title>算法学习-普通并查集模板 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -218,7 +218,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="蓝桥杯JAVA-3.自定义类排序、进制转换、保留小数位数">
+            <span class="h2" id="subtitle" title="算法学习-普通并查集模板">
               
             </span>
 
@@ -233,8 +233,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-05 20:53" pubdate>
-        December 5, 2021 pm
+      <time datetime="2021-12-09 18:33" pubdate>
+        December 9, 2021 pm
       </time>
     </span>
   
@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      568 字
+      934 字
     </span>
   
 
@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      11
        分钟
     </span>
   
@@ -298,40 +298,36 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">蓝桥杯JAVA-3.自定义类排序、进制转换、保留小数位数</h1>
+            <h1 style="display: none">算法学习-普通并查集模板</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 8, 2021 pm
+                  本文最后更新于：December 9, 2021 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-进制转换"><a href="#1-进制转换" class="headerlink" title="1.进制转换"></a>1.进制转换</h2><h3 id="1-1-十进制转其他进制"><a href="#1-1-十进制转其他进制" class="headerlink" title="1.1 十进制转其他进制"></a>1.1 十进制转其他进制</h3><blockquote>
-<p>一个重要的函数：Integer.toString(k,r) ，将十进制的数k转换为r进制的数。返回一个String。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> k = <span class="hljs-number">17</span>;<br>System.out.println(Integer.toBinaryString(k)); <span class="hljs-comment">//转二进制</span><br>System.out.println(Integer.toOctalString(k)); <span class="hljs-comment">//转八进制</span><br>System.out.println(Integer.toHexString(k)); <span class="hljs-comment">//转十六进制</span><br><br><span class="hljs-keyword">int</span> r =<span class="hljs-number">2</span>;<br>System.out.println(Integer.toString(k,r)); <span class="hljs-comment">//转r进制</span><br>r=<span class="hljs-number">8</span>;<br>System.out.println(Integer.toString(k,r)); <span class="hljs-comment">//转r进制</span><br>r=<span class="hljs-number">16</span>;<br>System.out.println(Integer.toString(k,r)); <span class="hljs-comment">//转r进制</span><br></code></pre></div></td></tr></table></figure>
+              <p>纸上得来终觉浅，绝知此事要躬行。路漫漫其修远兮，吾将上下而求索！知识是经过历史的巨人沉淀下来的，别总想着自己能够快速学会，多花点时间去看看，也许会发现些不同的东西。你能快速学会的、觉得简单的东西，对于别人来说也是一样的。人外有人，天外有天。当努力到达了一定的程度，幸运自会与你不期而遇。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>碰到了一个感觉可以用并查集解决的题，所以就复习一下普通并查集吧。因为学过也比较熟悉，所以本文主要是记录一下模板。</p>
+<p>并查集（Union-find Sets）是一种非常精巧而实用的数据结构，它主要用于处理一些<code>不相交集合</code>的合并问题。一些常见的用途有求连通子图、求最小生成树的 Kruskal 算法和求最近公共祖先（Least Common Ancestors, LCA）等。</p>
+<p>它用于处理一些不交集的 合并 及 查询 问题。 它支持两种操作：</p>
+<ul>
+<li>查找（Find）：确定某个元素处于哪个子集；</li>
+<li>合并（Union）：将两个子集合并成一个集合。</li>
+</ul>
+<p>在一些有N个元素的集合应用问题中，我们通常是在开始时让每个元素构成一个单元素的集合（即自己单独一个集合），然后按一定顺序将属于同一组的元素所在的集合合并，其间要反复查找一个元素在哪个集合中。</p>
+<h2 id="普通并查集模板"><a href="#普通并查集模板" class="headerlink" title="普通并查集模板"></a>普通并查集模板</h2><p>并查集(带路径压缩)：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//并查集(路径压缩)</span><br><br><span class="hljs-comment">//par数组用来存储根节点，par[x]=y表示x的根节点为y</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] par = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10005</span>];<br><span class="hljs-comment">//初始化</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        par[i]=i;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//查找x所在集合的根</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(par[x]!=x) par[x]=find(par[x]); <span class="hljs-comment">//递归返回的同时压缩路径</span><br>    <span class="hljs-keyword">return</span> par[x];<br>&#125;<br><span class="hljs-comment">//合并x与y所在集合</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unite</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> tx = find(x);<br>    <span class="hljs-keyword">int</span> ty = find(y);<br>    <span class="hljs-keyword">if</span>(tx!=ty)&#123; <span class="hljs-comment">//不是同一个根，即不在同一个集合，就合并</span><br>        par[tx]=ty;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
-<h3 id="1-2-其他进制转换为十进制"><a href="#1-2-其他进制转换为十进制" class="headerlink" title="1.2 其他进制转换为十进制"></a>1.2 其他进制转换为十进制</h3><blockquote>
-<p>函数：Integer.parseInt(str,r) ，将r进制的数字字符串str转换为十进制，并返回十进制的数。</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">System.out.println(Integer.parseInt(<span class="hljs-string">&quot;10001&quot;</span>,<span class="hljs-number">2</span>));<br>System.out.println(Integer.parseInt(<span class="hljs-string">&quot;21&quot;</span>,<span class="hljs-number">8</span>));<br>System.out.println(Integer.parseInt(<span class="hljs-string">&quot;11&quot;</span>,<span class="hljs-number">16</span>));<br>        <br><span class="hljs-comment">//输出结果</span><br><span class="hljs-number">17</span><br><span class="hljs-number">17</span><br><span class="hljs-number">17</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="普通并查集（统计集合中元素个数）"><a href="#普通并查集（统计集合中元素个数）" class="headerlink" title="普通并查集（统计集合中元素个数）"></a>普通并查集（统计集合中元素个数）</h2><p>用来计算每一个集合中元素的个数有多少。在普通并查集的基础上加一个数组来统计每一个集合中元素的个数即可。在初始化的时候每一个集合中的个数都为1，在合并的时候将子节点中的元素个数加到根节点的元素个数中去。</p>
+<p>就只是在普通并查集的基础上修改两个地方：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//初始化</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        par[i]=i;<br>        sum[i]=<span class="hljs-number">1</span>; <span class="hljs-comment">//每一个集合开始都是1</span><br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//合并x与y所在集合</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unite</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> tx = find(x);<br>    <span class="hljs-keyword">int</span> ty = find(y);<br>    <span class="hljs-keyword">if</span>(tx!=ty)&#123;<br>        par[tx]=ty; <span class="hljs-comment">//让ty成为tx的根节点</span><br>        sum[ty]+=sum[tx]; <span class="hljs-comment">//让根节点加上子节点中的元素个数</span><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>完整代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">//并查集(路径压缩)</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] par = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10005</span>];<br><span class="hljs-comment">//sum数组用来存储每一个集合中的元素个数</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span>[] sum = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">10005</span>];<br><span class="hljs-comment">//初始化</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) &#123;<br>        par[i]=i;<br>        sum[i]=<span class="hljs-number">1</span>;<br>    &#125;<br>&#125;<br><span class="hljs-comment">//查找x所在集合的根</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>&#123;<br>    <span class="hljs-keyword">if</span>(par[x]!=x) par[x]=find(par[x]); <span class="hljs-comment">//递归返回的同时压缩路径</span><br>    <span class="hljs-keyword">return</span> par[x];<br>&#125;<br><span class="hljs-comment">//合并x与y所在集合</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">unite</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> tx = find(x);<br>    <span class="hljs-keyword">int</span> ty = find(y);<br>    <span class="hljs-keyword">if</span>(tx!=ty)&#123;<br>        par[tx]=ty;<br>        sum[ty]+=sum[tx];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
-
-
-
-<h2 id="2-保留小数位数"><a href="#2-保留小数位数" class="headerlink" title="2.保留小数位数"></a>2.保留小数位数</h2><h3 id="2-1-String-format"><a href="#2-1-String-format" class="headerlink" title="2.1 String.format()"></a>2.1 String.format()</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> a = <span class="hljs-number">123.456789</span>;<br><span class="hljs-keyword">double</span> b = <span class="hljs-number">123.444444</span>;<br>String sa = String.format(<span class="hljs-string">&quot;%.2f&quot;</span>,a);<br>System.out.println(sa);<br>String sb = String.format(<span class="hljs-string">&quot;%.2f&quot;</span>,b);<br>System.out.println(sb);<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">123.46</span><br><span class="hljs-number">123.44</span><br><br><span class="hljs-comment">//简写</span><br>System.out.println(String.format(<span class="hljs-string">&quot;%.2f&quot;</span>,a));<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="2-2-DecimalFormat的format方法"><a href="#2-2-DecimalFormat的format方法" class="headerlink" title="2.2 DecimalFormat的format方法"></a>2.2 DecimalFormat的format方法</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> a = <span class="hljs-number">123.456789</span>;<br><span class="hljs-keyword">double</span> b = <span class="hljs-number">123.444444</span>;<br>DecimalFormat dfa = <span class="hljs-keyword">new</span> DecimalFormat(<span class="hljs-string">&quot;0.00&quot;</span>);<br>System.out.println(dfa.format(a));<br>DecimalFormat dfb = <span class="hljs-keyword">new</span> DecimalFormat(<span class="hljs-string">&quot;0.00&quot;</span>);<br>System.out.println(dfb.format(b));<br><br><span class="hljs-comment">//输出 </span><br><span class="hljs-number">123.46</span><br><span class="hljs-number">123.44</span><br><br><span class="hljs-comment">//简写</span><br>System.out.println(<span class="hljs-keyword">new</span> DecimalFormat(<span class="hljs-string">&quot;0.00&quot;</span>).format(a));<br></code></pre></div></td></tr></table></figure>
-<p>DecimalFormat 类主要靠 # 和 0 两种占位符号来指定数字长度。0 表示如果位数不足则以 0 填充，# 表示只要有可能就把数字拉上这个位置。如：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> a = <span class="hljs-number">123.00</span>;<br>DecimalFormat dfa = <span class="hljs-keyword">new</span> DecimalFormat(<span class="hljs-string">&quot;#.##&quot;</span>);<br>System.out.println(dfa.format(a));<br>DecimalFormat dfb = <span class="hljs-keyword">new</span> DecimalFormat(<span class="hljs-string">&quot;0.00&quot;</span>);<br>System.out.println(dfb.format(a));<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">123</span><br><span class="hljs-number">123.00</span><br></code></pre></div></td></tr></table></figure>
-
-<h3 id="2-3-BigDecimal的setScale方法（了解）"><a href="#2-3-BigDecimal的setScale方法（了解）" class="headerlink" title="2.3 BigDecimal的setScale方法（了解）"></a>2.3 BigDecimal的setScale方法（了解）</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> f = <span class="hljs-number">111231.5585</span>;<br>BigDecimal bg = <span class="hljs-keyword">new</span> BigDecimal(f);           <br><span class="hljs-keyword">double</span> f1 = bg.setScale(<span class="hljs-number">2</span>, BigDecimal.ROUND_HALF_UP).doubleValue();   <span class="hljs-comment">//setScale已经过时        </span><br>System.out.println(f1);<br></code></pre></div></td></tr></table></figure>
-
-<h3 id="2-4-NumberFormat的setMaximumFractionDigits方法（了解）"><a href="#2-4-NumberFormat的setMaximumFractionDigits方法（了解）" class="headerlink" title="2.4 NumberFormat的setMaximumFractionDigits方法（了解）"></a>2.4 NumberFormat的setMaximumFractionDigits方法（了解）</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">double</span> f = <span class="hljs-number">111231.5585</span>;<br>NumberFormat nf = NumberFormat.getNumberInstance();           <br>nf.setMaximumFractionDigits(<span class="hljs-number">2</span>);           <br>System.out.println(nf.format(f));<br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -344,7 +340,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a>
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a>
                     
                   </div>
                 
@@ -352,7 +348,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a>
+                      <a class="hover-with-bg" href="/tags/ACM/">ACM</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
                     
                   </div>
                 
@@ -366,7 +364,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <!-- <strong>本文链接: </strong><a href="http://example.com/DragonOne/eca70530.html">http://example.com/DragonOne/eca70530.html</a> <br> -->
+                <!-- <strong>本文链接: </strong><a href="http://example.com/DragonOne/4c06c38d.html">http://example.com/DragonOne/4c06c38d.html</a> <br> -->
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -375,18 +373,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/a9c73287.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">蓝桥杯JAVA-4.常用数据类型</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/c91e474c.html">
-                        <span class="hidden-mobile">蓝桥杯JAVA-2.数组操作</span>
+                      <a href="/DragonOne/53224366.html">
+                        <span class="hidden-mobile">蓝桥杯JAVA-7.集合（容器）在竞赛中的使用</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
