@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.9k 字
+      4.2k 字
     </span>
   
 
@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45
+      49
        分钟
     </span>
   
@@ -302,7 +302,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：December 16, 2021 pm
                 
               </p>
             
@@ -620,6 +620,32 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
+<h3 id="11-报错处理"><a href="#11-报错处理" class="headerlink" title="11.报错处理"></a>11.报错处理</h3><h4 id="11-1-文件大小问题"><a href="#11-1-文件大小问题" class="headerlink" title="11.1 文件大小问题"></a>11.1 文件大小问题</h4><p>我在上传一个压缩包时，报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  CodeTool git:(main) git push -u origin main<br>Enumerating objects: 25, <span class="hljs-keyword">done</span>.<br>Counting objects: 100% (25/25), <span class="hljs-keyword">done</span>.<br>Delta compression using up to 12 threads<br>Compressing objects: 100% (22/22), <span class="hljs-keyword">done</span>.<br>error: RPC failed; curl 92 HTTP/2 stream 0 was not closed cleanly: CANCEL (err 8)<br>fatal: the remote end hung up unexpectedly<br>Writing objects: 100% (23/23), 30.37 MiB | 1.03 MiB/s, <span class="hljs-keyword">done</span>.<br>Total 23 (delta 7), reused 0 (delta 0)<br>fatal: the remote end hung up unexpectedly<br>Everything up-to-date<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>原因是因为自己的git库上面有一些数据导致整个git库比较大，而curl的postBuffer 默认值较小,所以出现了这个错误。</strong>简单说，就是上传的文件中有的超过了默认文件限制大小，需要更改限制才行。</p>
+<p>默认 Git 设置 http post 的缓存为 1MB，使用命令将git的缓存设为500M，重新配置一下postBuffer值。</p>
+<blockquote>
+<ol>
+<li>命令行输入：git config –global http.postBuffer 524288000</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>在配置文件中添加参数。</li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>windows：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">[http]<br>postBuffer = 524288000<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><strong>linux：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config http.postBuffer 524288000<br></code></pre></div></td></tr></table></figure>
+
+<p>而我自己的报错原因，就是单纯的是因为压缩文件过大，所以解压之后再上传就可以了。</p>
 
             </div>
             <hr>
