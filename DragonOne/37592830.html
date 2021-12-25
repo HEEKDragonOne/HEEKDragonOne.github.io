@@ -255,7 +255,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      41
+      40
        分钟
     </span>
   
@@ -302,7 +302,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：December 26, 2021 am
                 
               </p>
             
@@ -331,7 +331,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myP&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.tothefor.dao.bao2.Person&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;loong&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;age&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;234&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;money&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;34&quot;</span> /&gt;</span><br>    <span class="hljs-comment">&lt;!--引用类型--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;school&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;myS&quot;</span> /&gt;</span> <span class="hljs-comment">&lt;!--这里使用ref属性来指向引用类型的配置--&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br><span class="hljs-comment">&lt;!--声明引用类型--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myS&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.tothefor.dao.bao2.School&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ad&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;cdut&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;ttttttt&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
 <p>其他使用同上，测试类可参考 <code>1.1</code> 。</p>
-<h2 id="2-构造注入"><a href="#2-构造注入" class="headerlink" title="2.构造注入"></a>2.构造注入</h2><p>调用有参构造函数。在创建对象的同时，在构造方法中给属性赋值。使用 <code>&amp;lt;constructor-arg&amp;gt;</code>标签，且一个此标签表示构造方法中的一个参数，若有多个参数则需要写多个此标签。<br>标签的属性：</p>
+<h2 id="2-构造注入"><a href="#2-构造注入" class="headerlink" title="2.构造注入"></a>2.构造注入</h2><p>调用有参构造函数。在创建对象的同时，在构造方法中给属性赋值。使用 <code>&lt;constructor-arg&gt;</code>标签，且一个此标签表示构造方法中的一个参数，若有多个参数则需要写多个此标签。<br>标签的属性：</p>
 <ul>
 <li>name：表示构造方法中的形参名；</li>
 <li>inde：表示构造方法中参数的位置，从左到右以0开始表示；</li>
