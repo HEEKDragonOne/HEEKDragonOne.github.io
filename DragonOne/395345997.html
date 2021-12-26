@@ -302,7 +302,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：December 27, 2021 am
                 
               </p>
             
@@ -483,7 +483,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">select</span>&gt;</span><br>	select * from student where name = #&#123;myname&#125; or age = #&#123;myage&#125;;<br><span class="hljs-tag">&lt;/<span class="hljs-name">select</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
 <h2 id="7-和-的区别"><a href="#7-和-的区别" class="headerlink" title="7. # 和 $ 的区别"></a>7. # 和 $ 的区别</h2><h3 id="7-1-占位符（-）"><a href="#7-1-占位符（-）" class="headerlink" title="7.1 占位符（#）"></a>7.1 占位符（#）</h3><p>#：是告诉mybatis使用实际的参数值代替。并使用 PrepareStatement 对象执行 SQL 语句，#{····} 代替 SQL<br>语句的  <code>&quot;?&quot;</code> ，这样可以防止SQL注入，更加安全，更迅速，通常也是首选做法。</p>
-<h3 id="7-2-字符串替换（-）"><a href="#7-2-字符串替换（-）" class="headerlink" title="7.2 字符串替换（$）"></a>7.2 字符串替换（$）</h3><p>￥：告诉mybatis使用 $ 包含的 “字符串”替换所在位置。使用Statement 把 SQL 语句和 ${} 的内容连接起来。主要用在替换表名，列名，不同列排序等操作。</p>
+<h3 id="7-2-字符串替换（-）"><a href="#7-2-字符串替换（-）" class="headerlink" title="7.2 字符串替换（$）"></a>7.2 字符串替换（$）</h3><p>$：告诉mybatis使用 $ 包含的 “字符串”替换所在位置。使用Statement 把 SQL 语句和 ${} 的内容连接起来。主要用在替换表名，列名，不同列排序等操作。</p>
 <p>理解：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/* studentid=1001 */</span><br><br><span class="hljs-comment">/* #的运行结果 */</span><br>select * from student where id=#&#123;studentid&#125;<br>select * from student where id=?<br><span class="hljs-comment">/* $的运行结果 */</span><br>select * from student where id=$&#123;studentid&#125;<br>select * from student where id=<span class="hljs-number">1001</span><br></code></pre></div></td></tr></table></figure>
 
