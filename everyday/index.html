@@ -1,0 +1,191 @@
+<!doctype html>
+<html>
+<head>
+	<!-- 1 -->
+	<link rel="stylesheet" type="text/css" href="css/default.css"/> 
+	<link rel="stylesheet" type="text/css" href="css/mobile.css"/>
+	<link rel='stylesheet' href='css/jquery-ui.css'>
+	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="js/common.js"></script>
+	
+	<!-- 2 -->
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="./js/jquery-1.11.0.min.js"></script>
+	<script src="./js/main.js"></script>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,maximum-scale=1.0,user-scalable=no">
+	<title>时间提醒官-DragonOne</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h1>时间提醒官-DragonOne</h1>
+        <h2>
+			<strong>当前时间</strong>
+			<sub>www.tothefor.com</sub>
+			<b class="logoline"></b>
+			<b class="logoline1"></b>
+			<b class="logoline2"></b>
+			<b class="logoline3"></b>
+			<b class="logoline4"></b>
+		</h2>
+	   
+		<!--左上角时间区-->
+        <div class="date-timer">
+           <p>
+               <strong id="H"></strong>
+               <strong>:</strong>
+               <strong id="M"></strong>
+               <strong id="S" class="hide"></strong>
+           </p>
+           <em id="D"></em>
+            <ul>
+                <li id="Y"></li>年
+                <li id="MH"></li>月
+                <li id="TD"></li>日
+            </ul>
+        </div>
+        <!-- 消息显示 -->
+		<div class="big-index-1">
+			<ul>
+				<li>
+					<b class="animation-1"></b><b class="animation-2"></b><b class="animation-3"></b>
+					<p>本项目交流QQ群</p>
+					<strong>1234567890</strong>
+				</li>
+			</ul>
+		</div>
+		
+		<!--  左边栏    -->
+		<div class="submenu">
+            <ul>
+				<!-- 简单解决抖动问题 -->
+				<li style="display: none;"><a href="#this"><b></b> <span><em></em></span></a> </li><br>
+				<li style="display: none;"><a href="#this"><b></b> <span><em></em></span></a> </li><br>
+				<!-- 正式列表 -->
+                <li><a href="#this"><b>总览</b> <span>总览情况<em></em></span></a> </li><br>
+                <li><a href="#this"><b>牛客</b> <span>牛客赛事<em></em></span></a> </li><br>
+                <li><a href="#this"><b>力扣</b> <span>力扣赛事<em></em></span></a> </li><br>
+                <li><a href="#this"><b>洛谷</b> <span>洛谷赛事<em></em></span></a> </li>
+            </ul>
+        </div>
+        
+		<!-- 赛事详细信息展示 -->
+		<!-- <div class="center-area"> -->
+			<div class="main">
+			    <!-- 地球 -->
+			    <div class="total">
+			        <canvas class="rain"></canvas>
+			        <div class="sphere">
+			            <div class="sphere-bg"></div>
+						<div class="sum">
+							<span>今日赛事</span>
+							<p id="week"><em id="D2"></em></p> 
+							<p>
+								<em id="Y2"></em>-
+								<em id="MH2"></em>-
+								<em id="TD2"></em>
+							</p>  
+						</div>
+			        </div>
+			        <div class="cicle3"></div>
+			        <div class="cicle4"></div>
+			        <div class="cicle5"></div>
+			        <div class="cicle6"></div>
+			        <div class="cicle7"></div>
+					<div>
+						<a href="https://tothefor.com" target="_blank">
+							<div class="cicle8">
+								<span>19:15</span>
+								<p>牛客</p>
+							</div>
+						</a>
+						<a href="">
+							<div class="cicle9">
+								<span>22:30</span>
+								<p>CodeForces</p>
+							</div>	
+						</a>
+						<a href="">
+							<div class="cicle10">
+								<span>20:00</span>
+								<p>洛谷</p>
+							</div>
+						</a>
+						<a href="">
+							<div class="cicle11">
+								<span>10:00</span>
+								<p>力扣</p>
+							</div>
+						</a>
+						
+					</div>
+			    </div>
+			
+			</div>
+			
+       <!-- </div> -->
+       
+		<!-- 赛事情况 -->
+		<div class="right-area">
+            <h3>近 日 赛 事 情 况<b></b></h3>
+            <div class="area-inbox-1">
+                <dl>
+                    <dt>昨日赛事</dt>
+                    <dd class="font12"><span>76.525%</span><b></b></dd>
+                    <dt class="ml-20">今天赛事</dt>
+                    <dd class="font-red ml-20"><span>74.113%</span><b></b></dd>
+                    <dt>明天赛事</dt>
+                    <dd><span>68.113%</span><b></b></dd>
+                </dl>
+                <div class="round-1"></div>
+                <div class="round-2"></div>
+                <div class="round-3">30%</div>
+                <div class="round-4"></div>
+            </div>
+			<h3> 本项目开源地址 <b></b></h3> <br>
+            <div class="area-inbox-2">
+                    <ul>
+                        <li><strong>12</strong>Gitee<b></b></li>
+                        <li><strong>16</strong>GitHub<b></b><em></em></li>
+                    </ul>
+                    <!-- <div class="area-text"> -->
+						<!-- 左边线 -->
+                        <!-- <b class="animation-line1"></b> -->
+						
+                       <!-- <h4 style="color: greenyellow;">使用提示：</h4>
+                        <p class="text_container">
+                            <script>
+                            	var s = '这里可以放置提示信息内容'; 
+                            	var con = $('.text_container'); 
+                            	var index = 0; 
+                            	var length = s.length; 
+                            	var tId = null; 
+                            	function start(){ 
+                            		con.text(''); 
+                            		tId=setInterval(function(){ 
+                            			con.append(s.charAt(index)); 
+                            			if(index++ === length){ 
+                            				setTimeout(function (){
+                            					clearInterval(tId); 
+                            					index = 0;
+                            					start() 
+                            				}, 3000); //延迟3秒
+                            			} 
+                            		},130);  //出字速度
+                            	} 
+                            	start();
+                            </script>
+						</p> -->
+						
+						<!-- 右边线 -->
+                        <!-- <b class="animation-line2"></b> -->
+						
+                    <!-- </div> -->
+            </div>
+        </div>
+	   
+    </div>
+</body>
+
+</html>
