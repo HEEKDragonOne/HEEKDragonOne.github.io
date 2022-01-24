@@ -245,7 +245,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      604 字
+      612 字
     </span>
   
 
@@ -302,7 +302,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：January 23, 2022 pm
+                  本文最后更新于：January 24, 2022 pm
                 
               </p>
             
@@ -324,14 +324,24 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
-<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><h3 id="–mixed"><a href="#–mixed" class="headerlink" title="–mixed"></a>–mixed</h3><p>不删除工作空间改动代码，撤销<code>commit</code>操作，并且撤销<code>git add . </code>操作。这个为默认参数，<code>git reset --mixed HEAD^</code> 和 <code>git reset HEAD^</code> 效果是一样的。</p>
-<h3 id="–soft"><a href="#–soft" class="headerlink" title="–soft"></a>–soft</h3><p>不删除工作空间改动代码，撤销<code>commit</code>操作，不撤销<code>git add .</code> 操作。</p>
+<h2 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h2><h3 id="—mixed"><a href="#—mixed" class="headerlink" title="—mixed"></a>—mixed</h3><p>不删除工作空间改动代码，撤销<code>commit</code>操作，并且撤销<code>git add . </code>操作。这个为默认参数，<code>git reset --mixed HEAD^</code> 和 <code>git reset HEAD^</code> 效果是一样的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reset --mixed HEAD^<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="—soft"><a href="#—soft" class="headerlink" title="—soft"></a>—soft</h3><p>不删除工作空间改动代码，撤销<code>commit</code>操作，不撤销<code>git add .</code> 操作。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reset --soft HEAD^<br>git reset --soft HEAD~1 //等同上面，都是返回上一次，将1写为2则为返回上上次<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h3 id="–hard"><a href="#–hard" class="headerlink" title="–hard"></a>–hard</h3><p>删除工作空间改动代码，撤销<code>commit</code>操作，撤销<code>git add .</code> 操作。</p>
+<h3 id="—hard"><a href="#—hard" class="headerlink" title="—hard"></a>—hard</h3><p>删除工作空间改动代码，撤销<code>commit</code>操作，撤销<code>git add .</code> 操作。</p>
 <p>完成这个操作后，就恢复到了上一次的<code>commit</code>状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reset --hard HEAD^<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
 <h2 id="修改commit的注释"><a href="#修改commit的注释" class="headerlink" title="修改commit的注释"></a>修改commit的注释</h2><p>如果commit注释写错了，只是想改一下注释，执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git commit --amend<br></code></pre></div></td></tr></table></figure>
 
