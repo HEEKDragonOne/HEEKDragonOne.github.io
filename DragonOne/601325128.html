@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.4k 字
+      2.5k 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      36
        分钟
     </span>
   
@@ -310,7 +310,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：February 7, 2022 pm
                 
               </p>
             
@@ -409,6 +409,30 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>   &quot;serve&quot;: &quot;vue-cli-service serve&quot;,<br>   &quot;build&quot;: &quot;vue-cli-service build&quot;,<br>   &quot;lint&quot;: &quot;vue-cli-service lint&quot;<br> &#125;,<br></code></pre></div></td></tr></table></figure>
 <p>可以把这个 npm run serve 当做是 npm run package.json 里面的scripts的serve，而serve又表示vue-cli-service serve 。所以npm run serve 实际运行的是 vue-cli-service serve；而如果你想使用npm run dev 的话，只需把前面的 “serve” 修改为 “dev” 就行。如下：</p>
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;scripts&quot;: &#123;<br>   &quot;dev&quot;: &quot;vue-cli-service serve&quot;,<br>   &quot;build&quot;: &quot;vue-cli-service build&quot;,<br>   &quot;lint&quot;: &quot;vue-cli-service lint&quot;<br> &#125;,<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="Vue3安装（2022-2-7）"><a href="#Vue3安装（2022-2-7）" class="headerlink" title="Vue3安装（2022/2/7）"></a>Vue3安装（2022/2/7）</h2><p>今天再一次安装了vue3。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo chmod -R 777 /usr/<span class="hljs-built_in">local</span>/lib/node_modules <span class="hljs-comment"># 这句赋权好像没用</span><br>npm install -g @vue/cli<br></code></pre></div></td></tr></table></figure>
+
+<p>安装完毕后，出现：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">/usr/<span class="hljs-built_in">local</span>/bin/node_package/node_global/bin/vue -&gt; /usr/<span class="hljs-built_in">local</span>/bin/node_package/node_global/lib/node_modules/@vue/cli/bin/vue.js<br>+ @vue/cli@4.5.15<br>updated 1 package <span class="hljs-keyword">in</span> 20.307s<br></code></pre></div></td></tr></table></figure>
+
+<p>此时输入 vue -V 还是不行。再输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/usr/local/bin/node_package/node_global/bin/&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这些就可以了用vue -V看版本信息了。注意后面的地址是上面报出来的。</p>
+<h2 id="其他操作-可有可无"><a href="#其他操作-可有可无" class="headerlink" title="其他操作(可有可无)"></a>其他操作(可有可无)</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim ~/.bash_profile<br></code></pre></div></td></tr></table></figure>
+
+<p>再将以下命令存入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$PATH</span>:/usr/local/bin/node_package/node_global/bin/&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>保存退出后，</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bash_profile<br></code></pre></div></td></tr></table></figure>
+
+
 
 
             </div>
