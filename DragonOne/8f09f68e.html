@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>电脑内存一直高居90以上解决办法 - 墨水的记忆</title>
+  <title>Vue基础知识-（九）父子组件间通信 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="电脑内存一直高居90以上解决办法">
+            <span class="h2" id="subtitle" title="Vue基础知识-（九）父子组件间通信">
               
             </span>
 
@@ -241,8 +241,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-07 21:20" pubdate>
-        February 7, 2022 pm
+      <time datetime="2022-02-08 22:47" pubdate>
+        February 8, 2022 pm
       </time>
     </span>
   
@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      114 字
+      1k 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      14
        分钟
     </span>
   
@@ -306,19 +306,34 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">电脑内存一直高居90以上解决办法</h1>
+            <h1 style="display: none">Vue基础知识-（九）父子组件间通信</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：February 7, 2022 pm
+                  本文最后更新于：February 8, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
-              <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>最近家里电脑莫名其妙的内存占用非常高，不开任何软件都是占用90以上（如图），而且也很卡顿。今天终于搞定了。。。</p>
-<p><img src="https://img-blog.csdnimg.cn/eada4a95eb3343c7a0d85d3b1cb3a447.png" srcset="/img/loading.gif"></p>
-<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p><code>控制面板</code> &gt;&gt; <code>系统</code> &gt;&gt; <code>高级系统设置</code> &gt;&gt; <code>高级</code> &gt;&gt; <code>性能</code> &gt;&gt; <code>设置</code> &gt;&gt; <code>高级</code> &gt;&gt; <code>虚拟内存</code> &gt;&gt; <code>更改</code>，然后将虚拟内存设置成8G-16G，然后<code>重启</code>即可。如图。</p>
-<p><img src="https://img-blog.csdnimg.cn/4896f09eebb44dcdaf290ee457afd9b4.png" srcset="/img/loading.gif"></p>
+              <p>Vue(读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。与其它框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>在vue中，父子组件的关系可以总结为<code>prop</code>向下传递，<code>事件</code>向上传递。父组件通过<code>prop</code>给子组件下发数据，子组件通过<code>事件</code>给父组件发送信息。</p>
+<h2 id="父组件传子组件"><a href="#父组件传子组件" class="headerlink" title="父组件传子组件"></a>父组件传子组件</h2><h3 id="子组件"><a href="#子组件" class="headerlink" title="子组件"></a>子组件</h3><p>定义从父组件传过来的参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!--儿子组件--&gt;<br><br>&lt;template&gt;<br>  &lt;h1&gt;这是儿子组件&lt;&#x2F;h1&gt;<br>  &lt;h4&gt;&#123;&#123;arr&#125;&#125;&lt;&#x2F;h4&gt;<br>  &lt;h4&gt;&#123;&#123;num&#125;&#125;&lt;&#x2F;h4&gt;<br>  &lt;h4&gt;&#123;&#123;str&#125;&#125;&lt;&#x2F;h4&gt;<br>  &lt;h4&gt;&#123;&#123;str2&#125;&#125;&lt;&#x2F;h4&gt;<br>  &lt;h4&gt;&#123;&#123;obj&#125;&#125;&lt;&#x2F;h4&gt;<br>  &lt;h4&gt;&#123;&#123;func&#125;&#125;&lt;&#x2F;h4&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  name: &quot;son&quot;,<br>  props:&#123;&#x2F;&#x2F;props列表<br>    arr: Array,&#x2F;&#x2F;定义参数类型<br>    num: Number,<br>    str: String,<br>    str2:&#123;<br>      type:String,<br>      default:&quot;我是默认字符串&quot;&#x2F;&#x2F;定义参数默认值<br>    &#125;,<br>    obj:&#123;<br>      type: Object,<br>      required:false &#x2F;&#x2F;定义参数是否必须值<br>    &#125;,<br>    func:&#123;<br>      type:Function,<br>      required:false&#x2F;&#x2F;定义参数是否必须值<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="父组件"><a href="#父组件" class="headerlink" title="父组件"></a>父组件</h3><p>根据子组件进行参参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!--父亲组件--&gt;<br><br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;这是父节点&lt;&#x2F;h1&gt; &lt;!-- 绑定数据 --&gt;<br>    &lt;son<br>        v-bind:arr&#x3D;&quot;testarr&quot; <br>        v-bind:num&#x3D;&quot;testnum&quot;<br>        v-bind:str&#x3D;&quot;teststr&quot;<br>        v-bind:obj&#x3D;&quot;testobj&quot;<br>        v-bind:func&#x3D;&quot;testfunc&quot;&gt;<br>    &lt;&#x2F;son&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import son from &#39;@&#x2F;views&#x2F;son&#39;<br><br>export default &#123;<br>  name: &quot;father&quot;,<br>  data() &#123;<br>    return &#123;<br>      testarr:[1,2,3],<br>      testnum: 23,<br>      teststr: &#39;loong&#39;,<br>      testobj:&#123;<br>        name: &#39;lee&#39;,<br>        age: 23<br>      &#125;,<br>      testfunc: this.testfunc<br>    &#125;<br>  &#125;,<br>  methods:&#123;<br>    testfunc()&#123;<br>      console.log(&quot;测试函数!&quot;)<br>    &#125;<br>  &#125;<br>  ,<br>  components:&#123;<br>    son<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="子组件传父组件"><a href="#子组件传父组件" class="headerlink" title="子组件传父组件"></a>子组件传父组件</h2><p>父组件在组件上定义了一个自定义事件，事件名是用于接受子组件传过来的值。</p>
+<p>在子组件中创建一个按钮，给按钮绑定一个点击事件。在响应该点击事件的函数中使用<code>$emit</code>来触发一个自定义事件，并传递一个参数。</p>
+<h3 id="子组件-1"><a href="#子组件-1" class="headerlink" title="子组件"></a>子组件</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;h1&gt;这是儿子组件&lt;&#x2F;h1&gt;<br>  &lt;button v-on:click&#x3D;&quot;toFa&quot;&gt;向父组件传值&lt;&#x2F;button&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>export default &#123;<br>  name: &quot;son&quot;,<br>  methods:&#123;<br>    toFa()&#123;<br>      this.$emit(&quot;getmsg&quot;,&quot;这是一个从子组件传过来的信息&quot;);<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p><code>toFa</code> 只是子组件中的触发事件函数，<code>$emit</code> 中的<code>getmsg</code> 需要在父组件中进行绑定，后面是传入的信息。</p>
+<h3 id="父组件-1"><a href="#父组件-1" class="headerlink" title="父组件"></a>父组件</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h1&gt;这是父节点&lt;&#x2F;h1&gt;<br>    &lt;son v-on:getmsg&#x3D;&quot;getData&quot;&gt;&lt;&#x2F;son&gt;<br>    &lt;h3&gt;&#123;&#123;msg&#125;&#125;&lt;&#x2F;h3&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import son from &#39;@&#x2F;views&#x2F;son&#39;<br><br>export default &#123;<br>  name: &quot;father&quot;,<br>  data() &#123;<br>    return &#123;<br>      msg: &#39;&#39;<br>    &#125;<br>  &#125;,<br>  methods:&#123;<br>    getData(data)&#123;<br>      this.msg &#x3D; data<br>    &#125;<br>  &#125;<br>  ,<br>  components:&#123;<br>    son<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p><code>getData</code> 是一个函数，会接受传过来的信息。而 <code>getmsg</code> 是子组件中定义的，进行连通绑定的。</p>
+<p><strong>还需要注意的是，点按钮的时候是点击访问父组件中的，而不是点击直接访问子组件中的。</strong></p>
 
             </div>
             <hr>
@@ -328,7 +343,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/">实用小技能</a>
+                      <a class="hover-with-bg" href="/categories/Vue/">Vue</a>
                     
                   </div>
                 
@@ -336,7 +351,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Windows/">Windows</a>
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
                     
                   </div>
                 
@@ -350,7 +365,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/c01ab339.html">https://tothefor.com/DragonOne/c01ab339.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/8f09f68e.html">https://tothefor.com/DragonOne/8f09f68e.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -359,18 +374,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/8f09f68e.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue基础知识-（九）父子组件间通信</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/3c7a1102.html">
-                        <span class="hidden-mobile">Vue基础知识-（八）Vue3+ElementUI搭建前后端分离项目以及跨越问题解决</span>
+                      <a href="/DragonOne/c01ab339.html">
+                        <span class="hidden-mobile">电脑内存一直高居90以上解决办法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
