@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.1k 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -410,15 +410,17 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
-<h3 id="之前（好像没什么用）"><a href="#之前（好像没什么用）" class="headerlink" title="之前（好像没什么用）"></a>之前（好像没什么用）</h3><blockquote>
-<p>启动后端</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nohup java -jar xxxxxx.jar &amp;<br></code></pre></div></td></tr></table></figure>
+<h2 id="重新部署"><a href="#重新部署" class="headerlink" title="重新部署"></a>重新部署</h2><p>替换之前的前端或后端（Jar包）。</p>
+<p>然后关闭之前的进程。因为如果再一次直接启动后端，会出现端口已经被占用的的信息，也就重新部署失败，后端还是之前的。</p>
+<p>用命令查看有关java的进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ps -ef |grep java<br></code></pre></div></td></tr></table></figure>
 
-<p>&amp; 表示后台运行。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">tail nohup.out<br></code></pre></div></td></tr></table></figure>
+<p>然后关闭之前的后端进程：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">kill</span> 进程编号<br></code></pre></div></td></tr></table></figure>
 
-<p>可以看见已经启动。</p>
+<p>然后再启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">java -jar xxxx.jar --server.port=8081 &amp;<br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
