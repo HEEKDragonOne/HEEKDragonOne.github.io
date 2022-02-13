@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-Nginx配置Vue前端，在url中输入路由访问时跳到出错页面 - 墨水的记忆</title>
+  <title>SpringBoot-（七）SpringBoot整合Redis - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-Nginx配置Vue前端，在url中输入路由访问时跳到出错页面">
+            <span class="h2" id="subtitle" title="SpringBoot-（七）SpringBoot整合Redis">
               
             </span>
 
@@ -241,8 +241,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-12 22:52" pubdate>
-        February 12, 2022 pm
+      <time datetime="2022-02-13 12:07" pubdate>
+        February 13, 2022 pm
       </time>
     </span>
   
@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      273 字
+      689 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      10
        分钟
     </span>
   
@@ -306,27 +306,59 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-Nginx配置Vue前端，在url中输入路由访问时跳到出错页面</h1>
+            <h1 style="display: none">SpringBoot-（七）SpringBoot整合Redis</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：February 12, 2022 pm
+                  本文最后更新于：February 13, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>在搭建好项目后，发现一刷新页面就会跳到出错页面，结果发现是Nginx配置的问题。</p>
-<p>出错配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">location / &#123;<br>   try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ =404;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <p>SpringBoot框架中有两个非常重要的策略：开箱即用和约定优于配置。其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>在SpringBoot2.x之后，原来使用的 Jedis被替换为了 Lettuce。</p>
+<h2 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h2><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">&lt;dependency&gt;</span><br>    <span class="hljs-string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br>    <span class="hljs-string">&lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="hljs-string">&lt;/dependency&gt;</span><br></code></pre></div></td></tr></table></figure>
 
-<p>原因就在于 =404，当不匹配时，所有的都会跳到出错页面。修改后：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">location / &#123;<br>   try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.html;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>这样，每次一刷新就不会跳到出错页面了，只会进行刷新。</p>
-<blockquote>
-<p>📢注意：我这里的配置是只配置了 /index.html 就可以，是因为我只有一级路由，即：ip/page1、ip/page2 类似于这种的，对于多级的路由我并不知道这样配置是否有效！！！</p>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">redis:</span><br>    <span class="hljs-attr">host:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">6379</span><br>    <span class="hljs-attr">database:</span> <span class="hljs-number">0</span> <span class="hljs-comment"># 默认为 0 号数据库</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><h3 id="预知"><a href="#预知" class="headerlink" title="预知"></a>预知</h3><blockquote>
+<p>操作</p>
 </blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RedisTemplate redisTemplate;<br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//opsForValue() 是操作字符串，类似于String</span><br>    <span class="hljs-comment">//opsForList() 是操作list，类似于list，其他的等同使用。</span><br>    <span class="hljs-comment">//常用的操作是直接点的，如：redisTemplate.delete() 。具体其他用法自行尝试查看</span><br>    redisTemplate.opsForValue().set(<span class="hljs-string">&quot;key&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>);<br>    redisTemplate.delete(<span class="hljs-string">&quot;key&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>获取连接</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RedisTemplate redisTemplate;<br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>    RedisConnection connection = redisTemplate.getConnectionFactory().getConnection();<br>    connection.flushDb();<br>    connection.flushAll();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="测试实例"><a href="#测试实例" class="headerlink" title="测试实例"></a>测试实例</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RedisTemplate redisTemplate;<br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>    redisTemplate.opsForValue().set(<span class="hljs-string">&quot;key&quot;</span>,<span class="hljs-string">&quot;value&quot;</span>);<br>    System.out.println(redisTemplate.opsForValue().get(<span class="hljs-string">&quot;key&quot;</span>));<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="自定义RedisTemplate"><a href="#自定义RedisTemplate" class="headerlink" title="自定义RedisTemplate"></a>自定义RedisTemplate</h2><p>在将java对象存入时，需要将对象转换为JSON格式的（如下），否则会报错。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RedisTemplate redisTemplate;<br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> JsonProcessingException </span>&#123;<br>    User user = <span class="hljs-keyword">new</span> User(<span class="hljs-string">&quot;测试&quot;</span>,<span class="hljs-number">56</span>);<br>    String json = <span class="hljs-keyword">new</span> ObjectMapper().writeValueAsString(user); <span class="hljs-comment">//对象转化为json</span><br>    redisTemplate.opsForValue().set(<span class="hljs-string">&quot;user&quot;</span>,json);<br>    System.out.println(redisTemplate.opsForValue().get(<span class="hljs-string">&quot;user&quot;</span>));<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果不将对象转化为json，则会出错。</p>
+<p>如果说，不想转化为json，则需要将对象类序列化。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Serializable</span></span>&#123;<br>    <span class="hljs-keyword">private</span> String username;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> age;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这样就可以不用转换为json，而直接存入对象。而这是默认JDK的序列化，我们可以自己序列化。</p>
+<h3 id="序列化模板"><a href="#序列化模板" class="headerlink" title="序列化模板"></a>序列化模板</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.config;<br><br><span class="hljs-keyword">import</span> com.fasterxml.jackson.annotation.JsonAutoDetect;<br><span class="hljs-keyword">import</span> com.fasterxml.jackson.annotation.PropertyAccessor;<br><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.connection.RedisConnectionFactory;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.core.RedisTemplate;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;<br><span class="hljs-keyword">import</span> org.springframework.data.redis.serializer.StringRedisSerializer;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RedisConfig</span> </span>&#123;<br>    <span class="hljs-comment">//自定义RedisTemplate</span><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> RedisTemplate&lt;String,Object&gt; <span class="hljs-title">redisTemplate</span><span class="hljs-params">(RedisConnectionFactory factory)</span></span>&#123;<br>        <span class="hljs-comment">//一般使用&lt;String,Object&gt;</span><br>        RedisTemplate&lt;String,Object&gt; template = <span class="hljs-keyword">new</span> RedisTemplate&lt;&gt;();<br>        template.setConnectionFactory(factory);<br><br>        <span class="hljs-comment">//Json序列化配置</span><br>        Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = <span class="hljs-keyword">new</span> Jackson2JsonRedisSerializer(Object.class);<br>        ObjectMapper om = <span class="hljs-keyword">new</span> ObjectMapper();<br>        om.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);<br>        om.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);<br>        jackson2JsonRedisSerializer.setObjectMapper(om);<br><br>        <span class="hljs-comment">//String 序列化</span><br>        StringRedisSerializer stringRedisSerializer = <span class="hljs-keyword">new</span> StringRedisSerializer();<br><br>        <span class="hljs-comment">//key采用String的序列化方式</span><br>        template.setKeySerializer(stringRedisSerializer);<br>        <span class="hljs-comment">//hash的key采用String的序列化方式</span><br>        template.setHashKeySerializer(stringRedisSerializer);<br>        <span class="hljs-comment">//value序列化采用jackson</span><br>        template.setValueSerializer(jackson2JsonRedisSerializer);<br>        <span class="hljs-comment">//hash的value序列化采用jackson</span><br>        template.setHashValueSerializer(jackson2JsonRedisSerializer);<br>        template.afterPropertiesSet();<br><br>        <span class="hljs-keyword">return</span> template;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后在使用的时候，使用自己的即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-meta">@Qualifier(&quot;redisTemplate&quot;)</span><br><span class="hljs-keyword">private</span> RedisTemplate redisTemplate;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后点左边的叶子，看是否跳到了自己写的 RedisTemplate 里面。</p>
 
             </div>
             <hr>
@@ -336,7 +368,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/categories/SpringBoot/">SpringBoot</a>
                     
                   </div>
                 
@@ -344,11 +376,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
                     
                       <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
-                    
-                      <a class="hover-with-bg" href="/tags/Nginx/">Nginx</a>
                     
                   </div>
                 
@@ -362,7 +392,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/57a69100.html">https://tothefor.com/DragonOne/57a69100.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/28f5cb33.html">https://tothefor.com/DragonOne/28f5cb33.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -371,9 +401,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/28f5cb33.html">
+                      <a href="/DragonOne/e43784ad.html">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SpringBoot-（七）SpringBoot整合Redis</span>
+                        <span class="hidden-mobile">SpringBoot-（八）SpringBoot实现邮件发送</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -381,8 +411,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/d9b27835.html">
-                        <span class="hidden-mobile">SpringBoot-（六）Springboot+Vue前后端分离项目中使用ElementUI的时间日期选择器传参问题</span>
+                      <a href="/DragonOne/57a69100.html">
+                        <span class="hidden-mobile">星星之火-Nginx配置Vue前端，在url中输入路由访问时跳到出错页面</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
