@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>MyBatis-Plus-（三）MyBatis-Plus的条件构造器 - 墨水的记忆</title>
+  <title>SpringBoot-（十三）SpringBoot整合Swagger3 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="MyBatis-Plus-（三）MyBatis-Plus的条件构造器">
+            <span class="h2" id="subtitle" title="SpringBoot-（十三）SpringBoot整合Swagger3">
               
             </span>
 
@@ -241,8 +241,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-19 16:17" pubdate>
-        February 19, 2022 pm
+      <time datetime="2022-02-20 11:17" pubdate>
+        February 20, 2022 am
       </time>
     </span>
   
@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      711 字
+      821 字
     </span>
   
 
@@ -306,72 +306,45 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">MyBatis-Plus-（三）MyBatis-Plus的条件构造器</h1>
+            <h1 style="display: none">SpringBoot-（十三）SpringBoot整合Swagger3</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：February 19, 2022 pm
+                  本文最后更新于：February 20, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>MyBatis-Plus (opens new window)（简称 MP）是一个 MyBatis (opens new window)的增强工具，在 MyBatis 的基础上只做增强不做改变，为简化开发、提高效率而生。支持任何能使用 MyBatis 进行 CRUD, 并且支持标准 SQL 的数据库。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="条件构造器-wrapper"><a href="#条件构造器-wrapper" class="headerlink" title="条件构造器(wrapper)"></a>条件构造器(wrapper)</h2><p><a target="_blank" rel="noopener" href="https://baomidou.com/pages/10c804/#abstractwrapper">官方文档</a> 已经写的很详细了。直接套用即可。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">del</span><span class="hljs-params">()</span> </span>&#123;<br>    QueryWrapper&lt;User&gt; wrapper = <span class="hljs-keyword">new</span> QueryWrapper&lt;&gt;();<br>    wrapper.isNotNull(<span class="hljs-string">&quot;name&quot;</span>) <span class="hljs-comment">//name不为null</span><br>        .ge(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-number">23</span>) <span class="hljs-comment">//age大于等于23，gt是大于</span><br>        .eq(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong&quot;</span>) <span class="hljs-comment">//name等于loong</span><br>        .between(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-number">13</span>,<span class="hljs-number">23</span>) <span class="hljs-comment">//age在13~23之间的</span><br>        .notLike(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;e&quot;</span>) <span class="hljs-comment">//name中不包含e的</span><br>        .likeRight(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-comment">//name是以w开头的，w%</span><br>        .likeLeft(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;w&quot;</span>) <span class="hljs-comment">//name是以w结尾的，%w</span><br>        .orderByAsc(<span class="hljs-string">&quot;age&quot;</span>) <span class="hljs-comment">//通过age排序</span><br>        <br>    userMapper.selectList(wrapper); <span class="hljs-comment">//根据条件进行查询</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <p>SpringBoot框架中有两个非常重要的策略：开箱即用和约定优于配置。其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><p>创建SpringBoot项目，并添加</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">&lt;dependency&gt;</span><br>    <span class="hljs-string">&lt;groupId&gt;io.springfox&lt;/groupId&gt;</span><br>    <span class="hljs-string">&lt;artifactId&gt;springfox-boot-starter&lt;/artifactId&gt;</span><br>    <span class="hljs-string">&lt;version&gt;3.0.0&lt;/version&gt;</span><br><span class="hljs-string">&lt;/dependency&gt;</span><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><h4 id="allEq"><a href="#allEq" class="headerlink" title="allEq"></a>allEq</h4><p>全部等于（满足）。</p>
-<ul>
-<li>例1: <code>allEq(&#123;id:1,name:&quot;老王&quot;,age:null&#125;)</code>—&gt;<code>id = 1 and name = &#39;老王&#39; and age is null</code></li>
-<li>例2: <code>allEq(&#123;id:1,name:&quot;老王&quot;,age:null&#125;, false)</code>—&gt;<code>id = 1 and name = &#39;老王&#39;</code></li>
-</ul>
-<h4 id="eq"><a href="#eq" class="headerlink" title="eq"></a>eq</h4><p>等于 </p>
-<ul>
-<li>例: <code>eq(&quot;name&quot;, &quot;老王&quot;)</code>—&gt;<code>name = &#39;老王&#39;</code></li>
-</ul>
-<h4 id="ne"><a href="#ne" class="headerlink" title="ne"></a>ne</h4><p>不等于 </p>
-<ul>
-<li>例: <code>ne(&quot;name&quot;, &quot;老王&quot;)</code>—&gt;<code>name &lt;&gt; &#39;老王&#39;</code></li>
-</ul>
-<h4 id="gt"><a href="#gt" class="headerlink" title="gt"></a>gt</h4><p>大于 </p>
-<ul>
-<li>例: <code>gt(&quot;age&quot;, 18)</code>—&gt;<code>age &gt; 18</code></li>
-</ul>
-<h4 id="ge"><a href="#ge" class="headerlink" title="ge"></a>ge</h4><p>大于等于</p>
-<ul>
-<li>例: <code>ge(&quot;age&quot;, 18)</code>—&gt;<code>age &gt;= 18</code></li>
-</ul>
-<h4 id="lt"><a href="#lt" class="headerlink" title="lt"></a>lt</h4><p>小于</p>
-<ul>
-<li>例: <code>lt(&quot;age&quot;, 18)</code>—&gt;<code>age &lt; 18</code></li>
-</ul>
-<h4 id="le"><a href="#le" class="headerlink" title="le"></a>le</h4><p>小于等于</p>
-<ul>
-<li>例: <code>le(&quot;age&quot;, 18)</code>—&gt;<code>age &lt;= 18</code></li>
-</ul>
-<h4 id="between"><a href="#between" class="headerlink" title="between"></a>between</h4><p>在两者之间。BETWEEN 值1 AND 值2</p>
-<ul>
-<li>例: <code>between(&quot;age&quot;, 18, 30)</code>—&gt;<code>age between 18 and 30</code></li>
-</ul>
-<h4 id="notBetween"><a href="#notBetween" class="headerlink" title="notBetween"></a>notBetween</h4><p>不再两者之间。NOT BETWEEN 值1 AND 值2</p>
-<ul>
-<li>例: <code>notBetween(&quot;age&quot;, 18, 30)</code>—&gt;<code>age not between 18 and 30</code></li>
-</ul>
-<h4 id="like"><a href="#like" class="headerlink" title="like"></a>like</h4><p>LIKE &#39;%值%&#39;</p>
-<ul>
-<li>例: <code>like(&quot;name&quot;, &quot;王&quot;)</code>—&gt;<code>name like &#39;%王%&#39;</code></li>
-</ul>
-<p>更多见 <a target="_blank" rel="noopener" href="https://baomidou.com/pages/10c804/#abstractwrapper">官方文档</a> 。</p>
-<h2 id="代码生成器"><a href="#代码生成器" class="headerlink" title="代码生成器"></a>代码生成器</h2><h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">&lt;dependency&gt;</span><br>    <span class="hljs-string">&lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br>    <span class="hljs-string">&lt;artifactId&gt;mybatis-plus-boot-starter&lt;/artifactId&gt;</span><br>    <span class="hljs-string">&lt;version&gt;3.5.1&lt;/version&gt;</span><br><span class="hljs-string">&lt;/dependency&gt;</span><br><span class="hljs-string">&lt;dependency&gt;</span><br>    <span class="hljs-string">&lt;groupId&gt;com.baomidou&lt;/groupId&gt;</span><br>    <span class="hljs-string">&lt;artifactId&gt;mybatis-plus-generator&lt;/artifactId&gt;</span><br>    <span class="hljs-string">&lt;version&gt;3.5.1&lt;/version&gt;</span><br><span class="hljs-string">&lt;/dependency&gt;</span><br><span class="hljs-string">&lt;dependency&gt;</span><br>    <span class="hljs-string">&lt;groupId&gt;org.apache.velocity&lt;/groupId&gt;</span><br>    <span class="hljs-string">&lt;artifactId&gt;velocity&lt;/artifactId&gt;</span><br>    <span class="hljs-string">&lt;version&gt;1.7&lt;/version&gt;</span><br><span class="hljs-string">&lt;/dependency&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="开启"><a href="#开启" class="headerlink" title="开启"></a>开启</h2><p>在主启动类中加入注解以开启Swagger：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><span class="hljs-keyword">import</span> org.mybatis.spring.annotation.MapperScan;<br><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;<br><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;<br><span class="hljs-keyword">import</span> springfox.documentation.oas.annotations.EnableOpenApi;<br><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-meta">@EnableOpenApi</span> <span class="hljs-comment">//Swagger</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MybatisplusDemoApplication</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        SpringApplication.run(MybatisplusDemoApplication.class, args);<br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">generate</span><span class="hljs-params">()</span></span>&#123;<br>    FastAutoGenerator.create(<span class="hljs-string">&quot;url&quot;</span>, <span class="hljs-string">&quot;username&quot;</span>, <span class="hljs-string">&quot;password&quot;</span>)<br>        .globalConfig(builder -&gt; &#123;<br>            builder.author(<span class="hljs-string">&quot;baomidou&quot;</span>) <span class="hljs-comment">// 设置作者</span><br>                .enableSwagger() <span class="hljs-comment">// 开启 swagger 模式</span><br>                .fileOverride() <span class="hljs-comment">// 覆盖已生成文件</span><br>                .outputDir(<span class="hljs-string">&quot;D://&quot;</span>); <span class="hljs-comment">// 指定输出目录</span><br>        &#125;)<br>        .packageConfig(builder -&gt; &#123;<br>            builder.parent(<span class="hljs-string">&quot;com.baomidou.mybatisplus.samples.generator&quot;</span>) <span class="hljs-comment">// 设置父包名</span><br>                .moduleName(<span class="hljs-string">&quot;system&quot;</span>) <span class="hljs-comment">// 设置父包模块名</span><br>                .pathInfo(Collections.singletonMap(OutputFile.mapperXml, <span class="hljs-string">&quot;D://&quot;</span>)); <span class="hljs-comment">// 设置mapperXml生成路径</span><br>        &#125;)<br>        .strategyConfig(builder -&gt; &#123;<br>            builder.addInclude(<span class="hljs-string">&quot;t_simple&quot;</span>) <span class="hljs-comment">// 设置需要生成的表名</span><br>                .addTablePrefix(<span class="hljs-string">&quot;t_&quot;</span>, <span class="hljs-string">&quot;c_&quot;</span>); <span class="hljs-comment">// 设置过滤表前缀</span><br>        &#125;)<br>        <span class="hljs-comment">//                .templateEngine(new FreemarkerTemplateEngine()) // 使用Freemarker引擎模板，默认的是Velocity引擎模板</span><br>        .execute();<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="配置类"><a href="#配置类" class="headerlink" title="配置类"></a>配置类</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.config;<br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;<br><span class="hljs-keyword">import</span> springfox.documentation.builders.ApiInfoBuilder;<br><span class="hljs-keyword">import</span> springfox.documentation.builders.RequestHandlerSelectors;<br><span class="hljs-keyword">import</span> springfox.documentation.service.ApiInfo;<br><span class="hljs-keyword">import</span> springfox.documentation.spi.DocumentationType;<br><span class="hljs-keyword">import</span> springfox.documentation.spring.web.plugins.Docket;<br><span class="hljs-keyword">import</span> springfox.documentation.service.Contact;<br><br><span class="hljs-meta">@Configuration</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">swaggerConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Docket <span class="hljs-title">docket</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Docket(DocumentationType.OAS_30).apiInfo(<br>                <span class="hljs-keyword">new</span> ApiInfoBuilder()<br>                        .contact(<span class="hljs-keyword">new</span> Contact(<span class="hljs-string">&quot;loong&quot;</span>,<span class="hljs-string">&quot;https://tothefor.com/&quot;</span>,<span class="hljs-string">&quot;123456@qq.com&quot;</span>))<br>                        .title(<span class="hljs-string">&quot;测试标题&quot;</span>)<br>                        .description(<span class="hljs-string">&quot;描述&quot;</span>)<br>                        .termsOfServiceUrl(<span class="hljs-string">&quot;https://tothefor.com/&quot;</span>)<br>                        .version(<span class="hljs-string">&quot;1.0.0&quot;</span>)<br>                        .license(<span class="hljs-string">&quot;Team&quot;</span>)<br>                        .licenseUrl(<span class="hljs-string">&quot;http://www.tothefor.com&quot;</span>)<br>                        .build()<br>        ).groupName(<span class="hljs-string">&quot;墨水记忆&quot;</span>) <span class="hljs-comment">//分组，多个分组只需要多个Docket实例即可</span><br>         .select()<br>         .apis(RequestHandlerSelectors.basePackage(<span class="hljs-string">&quot;com.tothefor.controller&quot;</span>)) <span class="hljs-comment">//扫描指定的包,any扫描全部，none不扫描</span><br>         .build()<br>                ;<br>    &#125;<br><br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
 
 
-<p>但感觉EasyCode更简单好用。</p>
+<h2 id="启动报错"><a href="#启动报错" class="headerlink" title="启动报错"></a>启动报错</h2><p>在实现上述步骤后，在启动时报错，以至于启动不了</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Failed to start bean <span class="hljs-string">&#x27;documentationPluginsBootstrapper&#x27;</span>; nested exception is java.lang.NullPointerException<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>在配置文件 <code>application.yml</code> 中加入：</p>
+<figure class="highlight yml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">mvc:</span><br>    <span class="hljs-attr">pathmatch:</span><br>      <span class="hljs-attr">matching-strategy:</span> <span class="hljs-string">ant_path_matcher</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>然后就可以启动成功。</p>
+<h2 id="访问查看"><a href="#访问查看" class="headerlink" title="访问查看"></a>访问查看</h2><p>访问链接</p>
+<p><a target="_blank" rel="noopener" href="http://localhost:8080/swagger-ui/index.html">http://localhost:8080/swagger-ui/index.html</a></p>
+<h2 id="详细注解使用"><a href="#详细注解使用" class="headerlink" title="详细注解使用"></a>详细注解使用</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Api</span>：用在请求的类上，表示对类的说明<br>    tags=<span class="hljs-string">&quot;说明该类的作用，可以在UI界面上看到的注解&quot;</span><br>    value=<span class="hljs-string">&quot;该参数没什么意义，在UI界面上也看到，所以不需要配置&quot;</span><br><br><span class="hljs-meta">@ApiOperation</span>：用在请求的方法上，说明方法的用途、作用<br>    value=<span class="hljs-string">&quot;说明方法的用途、作用&quot;</span><br>    notes=<span class="hljs-string">&quot;方法的备注说明&quot;</span><br><br><span class="hljs-meta">@ApiImplicitParams</span>：用在请求的方法上，表示一组参数说明<br>    <span class="hljs-meta">@ApiImplicitParam</span>：用在<span class="hljs-meta">@ApiImplicitParams</span>注解中，指定一个请求参数的各个方面<br>        name：参数名<br>        value：参数的汉字说明、解释<br>        required：参数是否必须传<br>        paramType：参数放在哪个地方<br>            · header --&gt; 请求参数的获取：<span class="hljs-meta">@RequestHeader</span><br>            · query --&gt; 请求参数的获取：<span class="hljs-meta">@RequestParam</span><br>            · path（用于restful接口）--&gt; 请求参数的获取：<span class="hljs-meta">@PathVariable</span><br>            · div（不常用）<br>            · form（不常用）    <br>        dataType：参数类型，默认String，其它值dataType=<span class="hljs-string">&quot;Integer&quot;</span>       <br>        defaultValue：参数的默认值<br><br><span class="hljs-meta">@ApiResponses</span>：用在请求的方法上，表示一组响应<br>    <span class="hljs-meta">@ApiResponse</span>：用在<span class="hljs-meta">@ApiResponses</span>中，一般用于表达一个错误的响应信息<br>        code：数字，例如<span class="hljs-number">400</span><br>        message：信息，例如<span class="hljs-string">&quot;请求参数没填好&quot;</span><br>        response：抛出异常的类<br><br><span class="hljs-meta">@ApiModel</span>：用于响应类上，表示一个返回响应数据的信息<br>            （这种一般用在post创建的时候，使用<span class="hljs-meta">@RequestBody</span>这样的场景，<br>            请求参数无法使用<span class="hljs-meta">@ApiImplicitParam</span>注解进行描述的时候）<br>    <span class="hljs-meta">@ApiModelProperty</span>：用在属性上，描述响应类的属性<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
 
             </div>
             <hr>
@@ -381,7 +354,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/MyBatis-Plus/">MyBatis-Plus</a>
+                      <a class="hover-with-bg" href="/categories/SpringBoot/">SpringBoot</a>
                     
                   </div>
                 
@@ -391,7 +364,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                     
                       <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
                     
-                      <a class="hover-with-bg" href="/tags/MyBatis-Plus/">MyBatis-Plus</a>
+                      <a class="hover-with-bg" href="/tags/Swagger3/">Swagger3</a>
                     
                   </div>
                 
@@ -405,7 +378,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/56093ce6.html">https://tothefor.com/DragonOne/56093ce6.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/46b5328a.html">https://tothefor.com/DragonOne/46b5328a.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -414,18 +387,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/46b5328a.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SpringBoot-（十三）SpringBoot整合Swagger3</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/1da8d378.html">
-                        <span class="hidden-mobile">MyBatis-Plus-（二）MyBatis-Plus操作数据库</span>
+                      <a href="/DragonOne/56093ce6.html">
+                        <span class="hidden-mobile">MyBatis-Plus-（三）MyBatis-Plus的条件构造器</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
