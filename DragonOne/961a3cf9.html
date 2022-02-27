@@ -363,6 +363,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo journalctl -u elasticsearch<br></code></pre></div></td></tr></table></figure>
 
 <p>这样，Elasticsearch 已经在 Ubuntu 上安装好了。</p>
+<h3 id="查看状态"><a href="#查看状态" class="headerlink" title="查看状态"></a>查看状态</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl status elasticsearch.service<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>Elasticsearch 数据被存储在 <code>/var/lib/elasticsearch</code> 目录。配置文件被定位在<code>/etc/elasticsearch</code> 并且 Java 启动选项可以通过<code>/etc/default/elasticsearch</code>文件来配置。</p>
 <h3 id="远程访问"><a href="#远程访问" class="headerlink" title="远程访问"></a>远程访问</h3><p>开箱可用的 Elasticsearch，没有实现授权，因此它可以被任何人通过 HTTP API 来访问。</p>
 <p><strong>想要允许远程访问你的 Elasticsearch 服务器，你将需要配置你的防火墙，并且打开 TCP 端口 9200。</strong></p>
