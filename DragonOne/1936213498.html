@@ -310,7 +310,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 10, 2021 pm
+                  本文最后更新于：March 18, 2022 pm
                 
               </p>
             
@@ -392,7 +392,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>好。明白上面后。单个修改没问题了。那我们再来算一个区间的。把a数组中的[ l, r]区间中的每一个数都加上c。</p>
 </blockquote>
-<p>最容易想到的就是对b[l]+c，那么a[l]及其后面的数都加上了c。然后对b[r]+c吗？这不是就不对了嘛。<br>对a[r+1]-c即可，那么a[r+1]及其后面的都减去了c，就把前面加的抵消了。见图。</p>
+<p>最容易想到的就是对b[l]+c，那么a[l]及其后面的数都加上了c。然后对b[r]+c吗？这不是就不对了嘛。<br>对b[r+1]-c即可，那么a[r+1]及其后面的都减去了c，就把前面加的抵消了。见图。</p>
 <p><img src="https://img-blog.csdnimg.cn/cdc30fcf7ea0450b9a49991f84279bfa.png" srcset="/img/loading.gif"></p>
 <p>b[l] + c，效果使得a数组中 a[l]及以后的数都加上了c(红色部分)，但我们只要求l到r区间加上c, 因此还需要执行 b[r+1] - c,让a数组中a[r+1]及往后的区间再减去c(绿色部分)，这样对于a[r] 以后区间的数相当于没有发生改变。</p>
 <blockquote>
