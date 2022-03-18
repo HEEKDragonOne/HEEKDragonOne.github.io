@@ -436,7 +436,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li><p>b[x2+1][y2+1]+=c; 对应编号图4,让整个a数组中红色矩形面积的元素再加上c，红色内的相当于被减了两次，再加上一次c，才能使其恢复。</p>
 </li>
 </ul>
-<p>这里，再说一下为什么不用构造差分数组。因为我们可以先假想a数组为空，那么b数组一开始也为空，但是实际上a数组并不为空，因此我们每次让以(i,j)为左上角到以(i,j)为右上角面积内元素(其实就是一个小方格的面积)去插入 c=a[i][j]，等价于原数组a中(i,j) 到(i,j)范围内 加上了 a[i][j] ,因此执行n * m次插入操作，就成功构建了差分b数组。</p>
+<p>这里，再说一下为什么不用构造差分数组。因为我们可以先假想a数组为空，那么b数组一开始也为空，但是实际上a数组并不为空，因此我们每次让以(i,j)为左上角到以(i,j)为右下角面积内元素(其实就是一个小方格的面积)去插入 c=a[i][j]，等价于原数组a中(i,j) 到(i,j)范围内 加上了 a[i][j] ,因此执行n * m次插入操作，就成功构建了差分b数组。</p>
 <p>实现：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x1,<span class="hljs-keyword">int</span> y1,<span class="hljs-keyword">int</span> x2,<span class="hljs-keyword">int</span> y2,<span class="hljs-keyword">int</span> c)</span></span><br><span class="hljs-function"></span>&#123;     <span class="hljs-comment">//对b数组执行插入操作，等价于对a数组中的(x1,y1)到(x2,y2)之间的元素都加上了c</span><br>    b[x1][y1]+=c;<br>    b[x2+<span class="hljs-number">1</span>][y1]-=c;<br>    b[x1][y2+<span class="hljs-number">1</span>]-=c;<br>    b[x2+<span class="hljs-number">1</span>][y2+<span class="hljs-number">1</span>]+=c;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
