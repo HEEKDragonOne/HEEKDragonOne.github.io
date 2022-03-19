@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2k 字
+      2.1k 字
     </span>
   
 
@@ -310,7 +310,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：January 26, 2022 pm
+                  本文最后更新于：March 19, 2022 pm
                 
               </p>
             
@@ -322,7 +322,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>ST算法分成两部分：离线预处理O(n*log<sup>n</sup>)和在线查询O(1)。</p>
 <h4 id="预处理思路"><a href="#预处理思路" class="headerlink" title="预处理思路"></a>预处理思路</h4><p>运用DP思想求解区间最值，并将结果保存到一个二维数组中。不过区间在增加时，每次并不是增加一个长度，而是使用倍增的思想，每次增加2<sup>i</sup>个长度。</p>
 <p>我们定义一个二维数组<code>F[i][j]</code>表示以<code> i</code> 为起点，区间长度为 2<sup>j</sup> 的区间的最大（最小）值。此时对应的区间为 [i，i+2<sup>j</sup>-1]，因为区间长度为 2<sup>j</sup> 。所以，<code>F[i][0]</code> 表示以 i 为起点，区间长度为1的区间的最大（最下）值，所以，<code>F[i][0]</code> 就等于a[i]，因为区间中就只有一个元素。（a数组表示原数组。）</p>
-<p>例如（以找区间最小值为例）：给一个数组a[]={5，4，6，10，1，12}，则 F[0][2] 表示区间以a[0]开始区间长度为 2<sup>2</sup> 的区间：a[0]<del>a[3]；所以 F[0][2] 的最小值为 4。F[2][2] 表示区间[2</del>5]的最小值，等于1。</p>
+<p>例如（以找区间最小值为例）：给一个数组a[]={5，4，6，10，1，12}，则 F[0][2] 表示区间以a[0]开始区间长度为 2<sup>2</sup> 的区间：a[0] ~ a[3]；所以 F[0][2] 的最小值为 4。F[2][2] 表示区间[2 ~ 5]的最小值，等于1。</p>
 <p>预处理的方法类似于二分，即，将一个区间分为两个小区间，再分别求两个小区间的最值，再求两个小区间最值中的最值。</p>
 <p>例如：在求解 F[i][j] 时，ST算法先将长度为 2<sup>j</sup> 的区间【i，i+2<sup>j</sup>-1】分成【i，i+2<sup>j-1</sup>-1】和【i+2<sup>j-1</sup> ，i+2<sup>j-1</sup>+2<sup>j-1</sup> -1】两等份，分别对应于 F[i][j-1] 和F[i+2<sup>j-1</sup>][j-1]（分别是大区间的前半部分和后半部分）。因为区间中元素的个数为 2<sup>j</sup> 个，所以，从中间平均分成两部分后，每一部分的个数都是 2<sup>j-1</sup> 个。如图：</p>
 <p><img src="https://img-blog.csdnimg.cn/490ce2840e7b46f29b77eeb249f80895.png" srcset="/img/loading.gif"></p>
