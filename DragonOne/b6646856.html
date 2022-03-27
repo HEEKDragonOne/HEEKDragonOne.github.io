@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-Nginx配置腾讯云的SSL证书到阿里云的服务器和域名上 - 墨水的记忆</title>
+  <title>微信小程序-（六）发起数据请求 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-Nginx配置腾讯云的SSL证书到阿里云的服务器和域名上">
+            <span class="h2" id="subtitle" title="微信小程序-（六）发起数据请求">
               
             </span>
 
@@ -241,7 +241,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-27 19:18" pubdate>
+      <time datetime="2022-03-27 18:11" pubdate>
         March 27, 2022 pm
       </time>
     </span>
@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      881 字
+      561 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      7
        分钟
     </span>
   
@@ -306,7 +306,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-Nginx配置腾讯云的SSL证书到阿里云的服务器和域名上</h1>
+            <h1 style="display: none">微信小程序-（六）发起数据请求</h1>
             
               <p class="note note-info">
                 
@@ -315,42 +315,63 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               </p>
             
             <div class="markdown-body">
-              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>服务器、域名：阿里云的。</p>
-<p>SSL证书：腾讯云申请的。证书申请的域名是阿里云的。</p>
-<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">腾讯官方配置教程</a></p>
-<p>建议看官方教程！！！</p>
-<p>注意开端口！！！！！！！！！！</p>
-<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
-<li><p>本文档以证书名称 <code>cloud.tencent.com</code> 为例。</p>
-</li>
-<li><p>Nginx版本为 nginx/1.18.0 。</p>
-</li>
-<li><p>服务器操作系统为 Ubuntu20.04</p>
-</li>
+              <p>微信小程序，小程序的一种，英文名Wechat Mini Program，是一种不需要下载安装即可使用的应用，它实现了应用“触手可及”的梦想，用户扫一扫或搜一下即可打开应用。也体现了“用完即走”的理念，用户不用关心是否安装太多应用的问题。应用将无处不在，随时可用，但又无需安装卸载。对于开发者而言，微信小程序开发门槛相对较低，难度不及APP，能够满足简单的基础应用，适合生活服务类线下商铺以及非刚需低频应用的转换。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h2><ul>
+<li>只能请求HTTPS类型的接口。</li>
+<li>必须将接口的域名添加到信任列表中。</li>
 </ul>
-<h2 id="上传证书"><a href="#上传证书" class="headerlink" title="上传证书"></a>上传证书</h2><p>在腾讯云控制台下载证书，下载Nginx形式的文件到本地，然后解压。</p>
-<p>将获取到的 <code>cloud.tencent.com_bundle.crt</code> 证书文件和 <code>cloud.tencent.com.key</code> 私钥文件从本地目录拷贝到 Nginx 服务器的 <code>/usr/local/nginx/conf</code> 目录（此处为 Nginx 默认安装目录，请根据实际情况操作）下。</p>
 <blockquote>
-<p>备注</p>
+<p>注意事项</p>
 </blockquote>
-<p>只需要把 <code>.crt</code> 文件和 <code>.key</code> 文件上传即可。</p>
-<p>可能会有人找不到这个 <code>/usr/local/nginx/conf</code>  目录，你的可能不是这个，所以只需要找到你自己的Nginx的安装目录即可。其实最后都是到了一个包含 <code>nginx.conf</code> 的目录，无需关心是否有conf目录，只要到了有这个 <code>nginx.conf</code> 文件的目录即可。</p>
-<h2 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h2><p>然后修改你网站的配置文件。如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">server &#123;<br>        <span class="hljs-comment">#SSL 访问端口号为 443</span><br>        listen 443 ssl; <br>        <span class="hljs-comment">#填写绑定证书的域名</span><br>        server_name cloud.tencent.com; <br>        <span class="hljs-comment">#证书文件名称</span><br>        ssl_certificate cloud.tencent.com_bundle.crt; <br>        <span class="hljs-comment">#私钥文件名称</span><br>        ssl_certificate_key cloud.tencent.com.key; <br>        ssl_session_timeout 5m;<br>        <span class="hljs-comment">#请按照以下协议配置</span><br>        ssl_protocols TLSv1.2 TLSv1.3; <br>        <span class="hljs-comment">#请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。</span><br>        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; <br>        ssl_prefer_server_ciphers on;<br>        location / &#123;<br>           <span class="hljs-comment">#网站主页路径。此路径仅供参考，具体请您按照实际目录操作。</span><br>           <span class="hljs-comment">#例如，您的网站运行目录在/etc/www下，则填写/etc/www。</span><br>            root html; <br>            index  index.html index.htm;<br>        &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>域名只支持https协议</li>
+<li>域名不能使用IP地址或localhost</li>
+<li>域名必须ICP备案</li>
+</ul>
+<h2 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h2><p>首先需要将域名加入到 <code>request合法域名</code> 里面。</p>
+<h2 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h2><p>调用微信小程序提供的<code> wx.request()</code> 方法，发起GET数据请求：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/list/list.js</span><br>Page(&#123;<br>  <span class="hljs-function"><span class="hljs-title">getD</span>(<span class="hljs-params"></span>)</span>&#123; <span class="hljs-comment">//触发事件</span><br>    wx.request(&#123; <span class="hljs-comment">//发送请求</span><br>      url: <span class="hljs-string">&#x27;https://www.escook.cn/api/get&#x27;</span>,<br>      method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>      data:&#123;<br>        name: <span class="hljs-string">&#x27;zs&#x27;</span>,<br>        age: <span class="hljs-number">22</span><br>      &#125;,<br>      success:<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(res);<br>        <span class="hljs-built_in">console</span>.log(res.data);<br>      &#125;,<br>      fail:<span class="hljs-function">(<span class="hljs-params">err</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(err);<br>      &#125;<br>    &#125;)<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
-<p>然后在你上传文件的目录下执行：（选其一执行）</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./sbin/nginx -t <br>sudo nginx -t <span class="hljs-comment">#针对没有conf目录的人，比如我自己就是执行的这个命令</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h2><p>和GET请求类似。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/list/list.js</span><br>Page(&#123;<br>  <span class="hljs-function"><span class="hljs-title">getD</span>(<span class="hljs-params"></span>)</span>&#123; <span class="hljs-comment">//触发事件</span><br>    wx.request(&#123; <span class="hljs-comment">//发送请求</span><br>      url: <span class="hljs-string">&#x27;https://www.escook.cn/api/post&#x27;</span>,<br>      method: <span class="hljs-string">&#x27;post&#x27;</span>,<br>      data:&#123;<br>        name: <span class="hljs-string">&#x27;ls&#x27;</span>,<br>        age: <span class="hljs-number">33</span><br>      &#125;,<br>      success:<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(res);<br>        <span class="hljs-built_in">console</span>.log(res.data);<br>      &#125;,<br>      fail:<span class="hljs-function">(<span class="hljs-params">err</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(err);<br>      &#125;<br>    &#125;)<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="重启Nginx"><a href="#重启Nginx" class="headerlink" title="重启Nginx"></a>重启Nginx</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo systemctl restart nginx<br></code></pre></div></td></tr></table></figure>
+<h2 id="页面加载时请求数据"><a href="#页面加载时请求数据" class="headerlink" title="页面加载时请求数据"></a>页面加载时请求数据</h2><p>即初始化数据。此时需要在页面的 <code>onLoad</code> 事件中调用获取数据的函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">  <span class="hljs-comment">// pages/list/list.js</span><br>Page(&#123;<br>  <span class="hljs-function"><span class="hljs-title">getD</span>(<span class="hljs-params"></span>)</span>&#123; <span class="hljs-comment">//触发事件</span><br>    wx.request(&#123; <span class="hljs-comment">//发送请求</span><br>      url: <span class="hljs-string">&#x27;https://www.escook.cn/api/post&#x27;</span>,<br>      method: <span class="hljs-string">&#x27;post&#x27;</span>,<br>      data:&#123;<br>        name: <span class="hljs-string">&#x27;ls&#x27;</span>,<br>        age: <span class="hljs-number">33</span><br>      &#125;,<br>      success:<span class="hljs-function">(<span class="hljs-params">res</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(res);<br>        <span class="hljs-built_in">console</span>.log(res.data);<br>      &#125;,<br>      fail:<span class="hljs-function">(<span class="hljs-params">err</span>)=&gt;</span>&#123;<br>        <span class="hljs-built_in">console</span>.log(err);<br>      &#125;<br>    &#125;)<br>  &#125;,<br>  <br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 生命周期函数--监听页面加载</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-title">onLoad</span>(<span class="hljs-params">options</span>)</span> &#123;<br>     <span class="hljs-built_in">this</span>.getD()<br>  &#125;,<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 生命周期函数--监听页面初次渲染完成</span><br><span class="hljs-comment">   */</span><br>  <span class="hljs-function"><span class="hljs-title">onReady</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-comment">//放在这里也可以实现加载进来就发送请求</span><br>  &#125;,<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
-<p>然后就可以使用 <code>https://cloud.tencent.com</code> 进行访问了。</p>
-<h2 id="HTTP自动跳转HTTPS"><a href="#HTTP自动跳转HTTPS" class="headerlink" title="HTTP自动跳转HTTPS"></a>HTTP自动跳转HTTPS</h2><p>在配置文件中添加即可：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">server &#123;<br>   listen 443 ssl;<br>    <span class="hljs-comment">#填写绑定证书的域名，修改为自己的域名，这里可写多个，还可加再加一个带www的</span><br>    server_name cloud.tencent.com; <br>    <span class="hljs-comment">#证书文件名称，修改为自己的crt文件名称</span><br>    ssl_certificate  cloud.tencent.com_bundle.crt; <br>    <span class="hljs-comment">#私钥文件名称，修改为自己的key文件名称</span><br>    ssl_certificate_key cloud.tencent.com.key; <br>    ssl_session_timeout 5m;<br>    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;<br>    ssl_protocols TLSv1.2 TLSv1.3;<br>    ssl_prefer_server_ciphers on;<br>    location / &#123;<br>            <span class="hljs-comment">#网站主页路径。此路径仅供参考，具体请您按照实际目录操作。 </span><br>            <span class="hljs-comment">#例如，您的网站运行目录在/etc/www下，则填写/etc/www。</span><br>        root html;<br>        index index.html index.htm;<br>    &#125;<br>&#125;<br>server &#123;<br>    listen 80;<br>    <span class="hljs-comment">#填写绑定证书的域名，这里修改为自己的域名,还可以添加一个带www的</span><br>    server_name cloud.tencent.com; <br>    <span class="hljs-comment">#把http的域名请求转成https,这里不需要更改</span><br>    <span class="hljs-built_in">return</span> 301 https://$host<span class="hljs-variable">$request_uri</span>; <br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p>然后再重启Nginx。</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -360,7 +381,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
                     
                   </div>
                 
@@ -368,9 +389,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%A1%B9%E7%9B%AE%E9%83%A8%E7%BD%B2/">项目部署</a>
-                    
-                      <a class="hover-with-bg" href="/tags/SSL%E9%83%A8%E7%BD%B2/">SSL部署</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
                     
                   </div>
                 
@@ -384,7 +403,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/62eea881.html">https://tothefor.com/DragonOne/62eea881.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/b6646856.html">https://tothefor.com/DragonOne/b6646856.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -393,12 +412,18 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/DragonOne/62eea881.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">星星之火-Nginx配置腾讯云的SSL证书到阿里云的服务器和域名上</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/b6646856.html">
-                        <span class="hidden-mobile">微信小程序-（六）发起数据请求</span>
+                      <a href="/DragonOne/9aa7cc52.html">
+                        <span class="hidden-mobile">微信小程序-（五）WXML模板语法-页面渲染</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
