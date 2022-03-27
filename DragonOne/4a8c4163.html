@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-服务器部署Springboot+Vue项目 - 墨水的记忆</title>
+  <title>星星之火-服务器部署Springboot+Vue项目以及配置SSL - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-服务器部署Springboot+Vue项目">
+            <span class="h2" id="subtitle" title="星星之火-服务器部署Springboot+Vue项目以及配置SSL">
               
             </span>
 
@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.8k 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      23
        分钟
     </span>
   
@@ -306,11 +306,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-服务器部署Springboot+Vue项目</h1>
+            <h1 style="display: none">星星之火-服务器部署Springboot+Vue项目以及配置SSL</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：February 12, 2022 pm
+                  本文最后更新于：March 27, 2022 pm
                 
               </p>
             
@@ -420,6 +420,35 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <p>然后再启动：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">java -jar xxxx.jar --server.port=8081 &amp;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="配置SSL"><a href="#配置SSL" class="headerlink" title="配置SSL"></a>配置SSL</h2><p><strong>注意开端口！！！</strong></p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">官方教程</a> 需要注意的是，我这里是腾讯云的SSL证书，阿里云的域名和服务器。</p>
+<p>这里只记录以<code>上面讲述的方式</code>部署项目，怎么部署SSL。若是其他的建议看<a target="_blank" rel="noopener" href="https://cloud.tencent.com/document/product/400/35244">官网</a>。</p>
+<p>首先在腾讯云申请SSL证书并下载Nginx版本的到本地解压。只需要把 <code>.crt</code> 文件和 <code>.key</code> 文件上传到 <code>/etc/nginx</code> 目录下 。</p>
+<p>再去修改配置：(文件位置 <code>/etc/nginx/sites-available/example.com</code>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">server &#123;<br>        <span class="hljs-comment">#SSL 访问端口号为 443</span><br>        listen 443 ssl; <br>        <span class="hljs-comment">#填写绑定证书的域名，可以再加一个带www的，具体可见最后我自己的配置</span><br>        server_name cloud.tencent.com; <br>        <span class="hljs-comment">#证书文件名称</span><br>        ssl_certificate cloud.tencent.com_bundle.crt; <br>        <span class="hljs-comment">#私钥文件名称</span><br>        ssl_certificate_key cloud.tencent.com.key; <br>        ssl_session_timeout 5m;<br>        <span class="hljs-comment">#请按照以下协议配置</span><br>        ssl_protocols TLSv1.2 TLSv1.3; <br>        <span class="hljs-comment">#请按照以下套件配置，配置加密套件，写法遵循 openssl 标准。</span><br>        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; <br>        ssl_prefer_server_ciphers on;<br>        location / &#123;<br>           <span class="hljs-comment">#网站主页路径。此路径仅供参考，具体请您按照实际目录操作。</span><br>           <span class="hljs-comment">#例如，您的网站运行目录在/etc/www下，则填写/etc/www。</span><br>            root /var/www/example.com/html;<br>            index index.html index.htm index.nginx-debian.html;<br>            try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.html;<br>        &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>然后执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo nginx -t<br></code></pre></div></td></tr></table></figure>
+
+<p>再重启Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo systemctl restart nginx<br></code></pre></div></td></tr></table></figure>
+
+<p>然后就可以使用 <code>https://cloud.tencent.com</code> 进行访问了。但是，只是这样还不行。我们还需要设置从HTTP自动跳转HTTPS。也比较简单。</p>
+<p>在刚刚修改的配置文件中加入配置即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">server &#123;<br>   listen 443 ssl;<br>    <span class="hljs-comment">#填写绑定证书的域名，修改为自己的域名，这里可写多个，还可加再加一个带www的</span><br>    server_name cloud.tencent.com; <br>    <span class="hljs-comment">#证书文件名称，修改为自己的crt文件名称</span><br>    ssl_certificate  cloud.tencent.com_bundle.crt; <br>    <span class="hljs-comment">#私钥文件名称，修改为自己的key文件名称</span><br>    ssl_certificate_key cloud.tencent.com.key; <br>    ssl_session_timeout 5m;<br>    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;<br>    ssl_protocols TLSv1.2 TLSv1.3;<br>    ssl_prefer_server_ciphers on;<br>    location / &#123;<br>            <span class="hljs-comment">#网站主页路径。此路径仅供参考，具体请您按照实际目录操作。 </span><br>            <span class="hljs-comment">#例如，您的网站运行目录在/etc/www下，则填写/etc/www。</span><br>        root /var/www/example.com/html;<br>        index index.html index.htm index.nginx-debian.html;<br>        try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.html;<br>    &#125;<br>&#125;<br>server &#123;<br>    listen 80;<br>    <span class="hljs-comment">#填写绑定证书的域名，这里修改为自己的域名,还可以添加一个带www的</span><br>    server_name cloud.tencent.com; <br>    <span class="hljs-comment">#把http的域名请求转成https,这里不需要更改</span><br>    <span class="hljs-built_in">return</span> 301 https://$host<span class="hljs-variable">$request_uri</span>; <br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后再重启Nginx。</p>
+<blockquote>
+<p>记录自己的配置</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">server &#123;<br>        listen 443 ssl; <br>        server_name moreoj.com www.moreoj.com; <br>		ssl_certificate moreoj.com_bundle.crt;<br>		ssl_certificate_key moreoj.com.key;<br>		ssl_session_timeout 5m;<br>		ssl_protocols TLSv1.2 TLSv1.3; <br>		ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:HIGH:!aNULL:!MD5:!RC4:!DHE; <br>		ssl_prefer_server_ciphers on;<br>		<br>        location / &#123;<br>			root /var/www/moreoj.com/html;<br>			index index.html index.htm index.nginx-debian.html;<br>            try_files <span class="hljs-variable">$uri</span> <span class="hljs-variable">$uri</span>/ /index.html;<br>        &#125;<br>&#125;<br>server &#123;<br>    listen 80;<br>    <span class="hljs-comment">#填写绑定证书的域名</span><br>    server_name moreoj.com www.moreoj.com;<br>    <span class="hljs-comment">#把http的域名请求转成https</span><br>    <span class="hljs-built_in">return</span> 301 https://$host<span class="hljs-variable">$request_uri</span>; <br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
             </div>
