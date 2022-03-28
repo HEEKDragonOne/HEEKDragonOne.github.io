@@ -20,9 +20,25 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>墨水的记忆</title>
+  <title>微信小程序-（八）页面事件 - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -56,7 +72,7 @@
 
 
 <body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
-  <header style="height: 100vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -210,17 +226,63 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="The palest ink is better than the best memory.">
+            <span class="h2" id="subtitle" title="微信小程序-（八）页面事件">
               
             </span>
 
             
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-28 18:31" pubdate>
+        March 28, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      637 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -234,281 +296,172 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </script> -->
 
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          style=margin-top:0>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微信小程序-（八）页面事件</h1>
+            
+              <p class="note note-info">
                 
-
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/2835796331.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="hexo-Fluid主题-搭建个人博客">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/2835796331.html">hexo-Fluid主题-搭建个人博客</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/2835796331.html">
-          
-          
+                  本文最后更新于：March 28, 2022 pm
+                
+              </p>
             
-          
-          Hexo是一款基于Node.js的静态博客框架，依赖少易于安装使用，可以方便的生成静态网页托管在GitHub和Coding上，是搭建博客的首选框架。大家可以进入hexo官网进行详细查看，因为Hexo的创建者是台湾人，对中文的支持很友好，可以选择中文进行查看。
-Hexo搭建步骤1.安装GitGit是目前世界上最先进的分布式版本控制系统，可以有效、高速的处理从很小到非常大的项目版本管理。也就是用来管理
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-07 19:20" pubdate>
-              2021-04-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AD%A6%E4%B9%A0%E6%95%99%E7%A8%8B/">学习教程</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/300345353.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="ACM-实用C++自带算法函数及其用法">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/300345353.html">ACM-实用C++自带算法函数及其用法</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/300345353.html">
-          
-          
-            
-          
-          记录一些ACM中可能会用到的一些C++自带函数，记录其函数和具体用法。
-一. 头文件1. 主要算法头文件1234#include&lt;bit/stdc++.h&gt; //万能头文件，包含了目前c++所包含的所有头文件。可替换所有头文件。但有部分编译器不可用。#include&lt;algorithm&gt; //包括很多常用函数#include&lt;numeric&gt; //只包括几个在序
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-07 19:20" pubdate>
-              2021-04-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/ACM/">ACM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/166314578.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="ACM-拓展知识点">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/166314578.html">ACM-拓展知识点</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/166314578.html">
-          
-          
-            
-          
-          记录ACM中一些好用的小技巧、方法，以及一些见的少的知识点及其用法。
-1.求负数的绝对值12345方法：取反加1例：求-125的绝对值int n=~-125+1; //n=125int m=-125;int t=~m+1; //t=125
-2.求素数12345678分为奇、偶数求。bool isprime(int n)&#123;	if(n%2==0) return false; //2需特判	f
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-07 19:20" pubdate>
-              2021-04-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/ACM/">ACM</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/3325278709.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="LCY算法培训-进阶班-第1讲（STL在竞赛中的应用）">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/3325278709.html">LCY算法培训-进阶班-第1讲（STL在竞赛中的应用）</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/3325278709.html">
-          
-          
-            
-          
-          2021杭电ACM-LCY算法培训进阶班知识总结。STL在竞赛中的应用PPT内容整理。、、
-
-知识目录
-相关头文件1#include&lt;bits/stdc++.h&gt;//万能头文件
-
-迭代器
-1.队列(queue)1）特点1231.先进先出(FIFO)2.从队头删除元素3.在队尾加入元素
-
-2）常见操作123创建队列对象queue&lt;元素类型&gt; 队列名;queue&lt;int&
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-31 10:32" pubdate>
-              2021-03-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/2021%E6%9D%AD%E7%94%B5ACM-LCY%E7%AE%97%E6%B3%95%E5%9F%B9%E8%AE%AD%E8%BF%9B%E9%98%B6%E7%8F%AD/">2021杭电ACM-LCY算法培训进阶班</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-      <div class="col-12 col-md-4 m-auto index-img">
-        <a href="/DragonOne/1604321693.html" target="_blank">
-          <img src="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png" srcset="/img/loading.gif" alt="实现批量生成文本/文件等">
-        </a>
-      </div>
-    
-    <article class="col-12 col-md-8 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/DragonOne/1604321693.html">实现批量生成文本/文件等</a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/DragonOne/1604321693.html">
-          
-          
-            
-          
-          在工作或者生活中，可能会遇见需要批量生成一些文本或者文件夹的情况，今天以批量生成txt文本为例，教大家怎么批量新建文档的技巧。同样适用于创建其他文本或文档等。
-方法/步骤1.第一步12首先在C盘任意的地方新建一个文件夹或文本，比如在桌面新建一个txt文本，名称任意起就行了。这里以建一个 test.txt 文本为例。
-
-2.第二步1打开office工具中的Excel表格文件，在任意中输入 c:&gt
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-07 13:06" pubdate>
-              2021-03-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/">实用小技能</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
+            <div class="markdown-body">
+              <p>微信小程序，小程序的一种，英文名Wechat Mini Program，是一种不需要下载安装即可使用的应用，它实现了应用“触手可及”的梦想，用户扫一扫或搜一下即可打开应用。也体现了“用完即走”的理念，用户不用关心是否安装太多应用的问题。应用将无处不在，随时可用，但又无需安装卸载。对于开发者而言，微信小程序开发门槛相对较低，难度不及APP，能够满足简单的基础应用，适合生活服务类线下商铺以及非刚需低频应用的转换。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h2><h3 id="全局设置下拉刷新"><a href="#全局设置下拉刷新" class="headerlink" title="全局设置下拉刷新"></a>全局设置下拉刷新</h3><ul>
+<li>在全局 <code>app.json</code> 的 <code>window</code> 节点中，将 <code>enablePullDownRefresh</code> 设置为 true 即可。</li>
+</ul>
+<h3 id="局部设置下拉刷新"><a href="#局部设置下拉刷新" class="headerlink" title="局部设置下拉刷新"></a>局部设置下拉刷新</h3><ul>
+<li>在页面的 .json 配置文件中，将  <code>enablePullDownRefresh</code> 设置为 true 即可。</li>
+</ul>
+<h2 id="设置下拉刷新窗口的样式"><a href="#设置下拉刷新窗口的样式" class="headerlink" title="设置下拉刷新窗口的样式"></a>设置下拉刷新窗口的样式</h2><p>在全局或页面的 <code>.json</code> 配置文件中，通过 <code>backgroundColor</code> 和 <code>backgroundTextStyle</code> 来配置下拉沙墟窗口的样式，其中：</p>
+<ul>
+<li>backgroundColor 用来配置下拉刷新窗口的背景颜色，仅支持16进制的颜色值。</li>
+<li>backgroundTextStyle 用来配置下拉刷新 loading 的样式，仅支持 <code>dark</code> 和 <code>light</code> 两种模式。</li>
+</ul>
+<h2 id="下拉刷新事件"><a href="#下拉刷新事件" class="headerlink" title="下拉刷新事件"></a>下拉刷新事件</h2><p>在页面的 <code>.js</code> 文件中，通过 <code>onPullDownRefresh()</code> 函数来监听当前页面的下拉刷新事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/home/home.js</span><br>Page(&#123; <br>  <span class="hljs-function"><span class="hljs-title">onPullDownRefresh</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;页面刷新了&#x27;</span>);<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
 
 
 
-  <nav aria-label="navigation">
-    <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/page/29/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/28/#board">28</a><a class="page-number" href="/page/29/#board">29</a><span class="page-number current">30</span>
-    </span>
-  </nav>
+<h2 id="上拉触底"><a href="#上拉触底" class="headerlink" title="上拉触底"></a>上拉触底</h2><p>在页面的 <code>.js</code> 文件中，通过 <code>onReachBottom()</code> 函数来监听当前页面的上拉触底事件。</p>
+<h3 id="设置上拉触底距离"><a href="#设置上拉触底距离" class="headerlink" title="设置上拉触底距离"></a>设置上拉触底距离</h3><p>指触发上拉触底事件时，滚动条距离页面底部的距离。可以在全局或页面的 .json 配置文件中，通过  属性来配置上拉触底的距离。小程序默认距离为50px。</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;usingComponents&quot;</span>: &#123;&#125;,<br>  <span class="hljs-attr">&quot;onReachBottomDistance&quot;</span>: <span class="hljs-number">150</span> <span class="hljs-comment">//默认单位为px</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-              </div>
+<h3 id="上拉触底进行节流处理"><a href="#上拉触底进行节流处理" class="headerlink" title="上拉触底进行节流处理"></a>上拉触底进行节流处理</h3><p>防止一次请求未完成时，再一次发送相同请求。</p>
+<ul>
+<li><p>定义一个变量（这里以isloading为例），来表示当前是否正在进行数据的请求。（false表示没有进行任何数据请求；true表示当前正在进行数据请求）</p>
+</li>
+<li><p>在发送数据请求时，修改 isloading 的值。在刚开始调用时设置为true，在回调函数（complete）中，将值设置为false。</p>
+</li>
+<li><p>在 <code>onReachBottom</code> 中对isloading 进行判断。如果为true，则阻止（直接return）；如果为false，则发送数据请求。</p>
+</li>
+</ul>
+
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/2a337a41.html">https://tothefor.com/DragonOne/2a337a41.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/6dd1eb53.html">
+                        <span class="hidden-mobile">微信小程序-（七）页面导航</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
     
 
     
@@ -622,9 +575,15 @@ Hexo搭建步骤1.安装GitGit是目前世界上最先进的分布式版本控�
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
 
 
 
