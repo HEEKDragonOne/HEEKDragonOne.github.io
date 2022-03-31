@@ -20,7 +20,7 @@
   <meta name="author" content="DragonOne">
   <meta name="keywords" content="">
   
-  <title>星星之火-正则表达式基础快速入门 - 墨水的记忆</title>
+  <title>刷题笔记-（CF1085B）-Div Times Mod - 墨水的记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -226,7 +226,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-正则表达式基础快速入门">
+            <span class="h2" id="subtitle" title="刷题笔记-（CF1085B）-Div Times Mod">
               
             </span>
 
@@ -241,7 +241,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-31 19:18" pubdate>
+      <time datetime="2022-03-31 22:13" pubdate>
         March 31, 2022 pm
       </time>
     </span>
@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      961 字
+      535 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      7
        分钟
     </span>
   
@@ -306,7 +306,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-正则表达式基础快速入门</h1>
+            <h1 style="display: none">刷题笔记-（CF1085B）-Div Times Mod</h1>
             
               <p class="note note-info">
                 
@@ -316,236 +316,15 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><a target="_blank" rel="noopener" href="https://regex101.com/">正则表达式练习</a></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/ziishaned/learn-regex/blob/master/translations/README-cn.md">一个使用教程(国外)</a></p>
-<h2 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h2><table>
-<thead>
-<tr>
-<th align="center">限定符</th>
-<th align="center">描述</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>？</code></td>
-<td align="center">在<code>问号</code>前面的字符需要出现<code>0次</code>或<code>一次</code>（即可有可无）。</td>
-<td align="center">tea?：te、tel、tea</td>
-</tr>
-<tr>
-<td align="center"><code>*</code></td>
-<td align="center">在<code>星号</code>前面的字符需要出现<code>0次</code>或<code>多次</code>。</td>
-<td align="center">ab*c：ac、abc、abbbc</td>
-</tr>
-<tr>
-<td align="center"><code>+</code></td>
-<td align="center">在<code>加号</code>前面的字符需要出现<code>1次及以上</code>。</td>
-<td align="center">ab+c：abc、abbc、abbbc</td>
-</tr>
-<tr>
-<td align="center"><code>&#123;n,m&#125;</code></td>
-<td align="center">精准匹配。需要匹配的次数。n表示最少多少次，m表示最多多少次。有四种写法。</td>
-<td align="center">ab{3}c：abbbc(三个b)；ab{2,4}c：abbc、abbbc、abbbbc(2~4个b)</td>
-</tr>
-</tbody></table>
-<p>上面只是单个字符，如果是用于多个字符（字符串），用括号括起来即可。如：</p>
-<p>(ab)+c：表示ab一起出现1次及以上次数的字符串，会找到 abababc 这种的。</p>
-<h2 id="位置限定符"><a href="#位置限定符" class="headerlink" title="位置限定符"></a>位置限定符</h2><table>
-<thead>
-<tr>
-<th align="center">字符</th>
-<th align="center">描述</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>^</code></td>
-<td align="center">匹配<code>行首</code>的位置</td>
-<td align="center">^Content 匹配位于一行开头的Content</td>
-</tr>
-<tr>
-<td align="center"><code>$</code></td>
-<td align="center">匹配<code>行末</code>的位置</td>
-<td align="center">;$ 匹配位于一行结尾的分号（;），^$表示匹配空行</td>
-</tr>
-<tr>
-<td align="center"><code>\&lt;</code></td>
-<td align="center">匹配<code>单词</code>开头的位置</td>
-<td align="center"><code>\&lt;th</code> 匹配 this,但不匹配 ether、tenth等</td>
-</tr>
-<tr>
-<td align="center"><code>\&gt;</code></td>
-<td align="center">匹配<code>单词</code>结尾的位置</td>
-<td align="center"><code>p\&gt;</code> 匹配leap</td>
-</tr>
-<tr>
-<td align="center"><code>\b</code></td>
-<td align="center">匹配以<code>单词</code>开头或结尾的位置</td>
-<td align="center"><code>\bwe\b</code>匹配we …或 …. we，不会匹配wee、wwe。精准匹配。</td>
-</tr>
-<tr>
-<td align="center"><code>\B</code></td>
-<td align="center">匹配<code>非单词</code>开头或结尾的位置</td>
-<td align="center"><code>\Bwe\B</code>匹配fwef、fwewo，不会匹配we、qwe、wefq</td>
-</tr>
-</tbody></table>
-<h2 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h2><table>
-<thead>
-<tr>
-<th align="center">字符</th>
-<th align="center">描述</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>.</code></td>
-<td align="center">匹配任意一个字符</td>
-<td align="center">abc.</td>
-</tr>
-<tr>
-<td align="center"><code>【】</code></td>
-<td align="center">匹配中括号中的任意一个字符</td>
-<td align="center">【abc】</td>
-</tr>
-<tr>
-<td align="center"><code>-</code></td>
-<td align="center">表示范围</td>
-<td align="center">【0-9a-zA-Z】</td>
-</tr>
-<tr>
-<td align="center"><code>^</code></td>
-<td align="center">位于【】中括号内的开头，匹配除括号中的字符外的任意一个字符</td>
-<td align="center">[^xy]匹配xy之外的任意一个字符</td>
-</tr>
-<tr>
-<td align="center"><code>[[:xxx:]]</code></td>
-<td align="center">grep工具预定义的一些命名字符类（并不是所有地方均可用）</td>
-<td align="center">【:alpha:】匹配一个字母，【:digit:】匹配一个数字</td>
-</tr>
-</tbody></table>
-<h2 id="元字符"><a href="#元字符" class="headerlink" title="元字符"></a>元字符</h2><table>
-<thead>
-<tr>
-<th align="center">元字符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>.</code></td>
-<td align="center">匹配除换行符以外的任何字符。</td>
-</tr>
-<tr>
-<td align="center"><code>\d</code></td>
-<td align="center">匹配数字：【0-9】</td>
-</tr>
-<tr>
-<td align="center"><code>\D</code></td>
-<td align="center">匹配非数字：【^0-9】</td>
-</tr>
-<tr>
-<td align="center"><code>\s</code></td>
-<td align="center">匹配空格字符：【\t\r\n\f】</td>
-</tr>
-<tr>
-<td align="center"><code>\S</code></td>
-<td align="center">匹配非空格字符：【^\t\r\n\f】</td>
-</tr>
-<tr>
-<td align="center"><code>\w</code></td>
-<td align="center">匹配单字字符：【a-zA-Z0-9_】</td>
-</tr>
-<tr>
-<td align="center"><code>\W</code></td>
-<td align="center">匹配非单字字符：【^a-zA-Z0-9_】</td>
-</tr>
-<tr>
-<td align="center"><code>^</code></td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center"><code>$</code></td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><table>
-<thead>
-<tr>
-<th align="center">字符</th>
-<th align="center">描述</th>
-<th align="center">示例</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>\</code></td>
-<td align="center">转义字符，普通字符转义为特殊字符，特殊字符转义为普通字符。</td>
-<td align="center">普通字符<code>&lt;</code>写成 <code>\&lt;</code>表示单词开头位置，特殊字符 <code>.</code>写成<code>\.</code>以及<code>\</code>写成<code>\\</code>就当作普通字符匹配。</td>
-</tr>
-<tr>
-<td align="center"><code>()</code></td>
-<td align="center">将正则表达式的一部分括起来组成一个单元，可以对整个单元使用数量限定符。</td>
-<td align="center">（【0-9】{1,3} <code>\.</code>）{3}【0-9】{1,3} 匹配IP地址</td>
-</tr>
-<tr>
-<td align="center">`</td>
-<td align="center">`</td>
-<td align="center">连接两个子表达式，表示或的关系</td>
-</tr>
-</tbody></table>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><table>
-<thead>
-<tr>
-<th align="center">元字符</th>
-<th align="center">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center"><code>.</code></td>
-<td align="center">句号匹配任意单个字符除了换行符。</td>
-</tr>
-<tr>
-<td align="center"><code>[ ]</code></td>
-<td align="center">字符种类。匹配方括号内的任意字符。</td>
-</tr>
-<tr>
-<td align="center"><code>[^ ]</code></td>
-<td align="center">否定的字符种类。匹配除了方括号里的任意字符</td>
-</tr>
-<tr>
-<td align="center"><code>*</code></td>
-<td align="center">匹配&gt;=0个重复的在*号之前的字符。</td>
-</tr>
-<tr>
-<td align="center"><code>+</code></td>
-<td align="center">匹配&gt;=1个重复的+号前的字符。</td>
-</tr>
-<tr>
-<td align="center"><code>?</code></td>
-<td align="center">标记?之前的字符为可选.</td>
-</tr>
-<tr>
-<td align="center"><code>&#123;n,m&#125;</code></td>
-<td align="center">匹配num个大括号之前的字符或字符集 (n &lt;= num &lt;= m).</td>
-</tr>
-<tr>
-<td align="center"><code>(xyz)</code></td>
-<td align="center">字符集，匹配与 xyz 完全相等的字符串.</td>
-</tr>
-<tr>
-<td align="center">`</td>
-<td align="center">`</td>
-</tr>
-<tr>
-<td align="center"><code>\</code></td>
-<td align="center">转义字符,用于匹配一些保留的字符 `[ ] ( ) { } . * + ? ^ $ \</td>
-</tr>
-<tr>
-<td align="center"><code>^</code></td>
-<td align="center">从开始行开始匹配.</td>
-</tr>
-<tr>
-<td align="center"><code>$</code></td>
-<td align="center">从末端开始匹配.</td>
-</tr>
-</tbody></table>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1085/problem/B">题目链接</a></p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>由题目给出的条件： (𝑥 div 𝑘)⋅(𝑥 mod 𝑘) = 𝑛 。可以知道 (𝑥 mod 𝑘) 是 n 的一个因数。即 n % (𝑥 mod 𝑘) = 0。而题目给出的数据范围 n 是大于 1 的，所以要让 n % (𝑥 mod 𝑘) = 0 成立，必须是  (𝑥 mod 𝑘) 不等于0。而 k 又是大于 2 的，所以 x 就不能等于 k（相等时 x mod k 就等于0了）。</p>
+<p>把 (𝑥 mod 𝑘) 看作是 i ，所以 <code>n % i==0</code>。而 i 的范围是<code>1~k-1</code>（因为 i = x mod k）。</p>
+<p>又因为 i = x mod k ，所以 x div k 就可以替换为 (x-i) / k （例如2=5%3，则5/3==(5-2) / 3）。</p>
+<p>所以，原题目给出的公式就替换为：<code>(x-i) / k \* i = n</code>；所以，<code>x = n / i * k + i</code> ；（1 ≤ i ≤ k-1）</p>
+<p>所以，用一个循环遍历 i 即可。  而条件就是 <code>n % i==0</code> 。</p>
+<p>因为题目又要求输出最小值，所以从大到小遍历 1 ~ k-1即可（除大的剩余的少）。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.io.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2021/12/5 21:27</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> BufferedReader in = <span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in));<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> BufferedWriter out = <span class="hljs-keyword">new</span> BufferedWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> StreamTokenizer cin = <span class="hljs-keyword">new</span> StreamTokenizer(<span class="hljs-keyword">new</span> BufferedReader(<span class="hljs-keyword">new</span> InputStreamReader(System.in)));<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> PrintWriter cout = <span class="hljs-keyword">new</span> PrintWriter(<span class="hljs-keyword">new</span> OutputStreamWriter(System.out));<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Scanner sc = <span class="hljs-keyword">new</span> Scanner(System.in);<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br><br>        <span class="hljs-keyword">int</span> n = nextInt();<br>        <span class="hljs-keyword">int</span> k = nextInt();<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=k-<span class="hljs-number">1</span>;i&gt;<span class="hljs-number">0</span>;--i)&#123;<br>            <span class="hljs-keyword">if</span>(n%i==<span class="hljs-number">0</span>)&#123;<br>                System.out.println(n/i*k+i);<br>                <span class="hljs-keyword">break</span>;<br>            &#125;<br>        &#125;<br><br>        closeAll();<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">nextInt</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        cin.nextToken();<br>        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">int</span>) cin.nval;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">long</span> <span class="hljs-title">nextLong</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        cin.nextToken();<br>        <span class="hljs-keyword">return</span> (<span class="hljs-keyword">long</span>) cin.nval;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">double</span> <span class="hljs-title">nextDouble</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        cin.nextToken();<br>        <span class="hljs-keyword">return</span> cin.nval;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">nextString</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        cin.nextToken();<br>        <span class="hljs-keyword">return</span> cin.sval;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">closeAll</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        cout.close();<br>        in.close();<br>        out.close();<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -555,7 +334,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">刷题笔记</a>
                     
                   </div>
                 
@@ -563,9 +342,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">正则表达式</a>
+                      <a class="hover-with-bg" href="/tags/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">刷题笔记</a>
                     
                   </div>
                 
@@ -579,7 +356,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/19358d36.html">https://tothefor.com/DragonOne/19358d36.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/16d5aa0c.html">https://tothefor.com/DragonOne/16d5aa0c.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -588,18 +365,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/16d5aa0c.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">刷题笔记-（CF1085B）-Div Times Mod</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/65964508.html">
-                        <span class="hidden-mobile">水滴石穿-子类示例化时，父子类的执行顺序</span>
+                      <a href="/DragonOne/19358d36.html">
+                        <span class="hidden-mobile">星星之火-正则表达式基础快速入门</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
