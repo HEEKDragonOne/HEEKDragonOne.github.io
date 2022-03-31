@@ -253,7 +253,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      153 字
+      330 字
     </span>
   
 
@@ -263,7 +263,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -310,7 +310,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 19, 2022 pm
+                  本文最后更新于：March 31, 2022 am
                 
               </p>
             
@@ -319,6 +319,15 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="不能表示出的最大数"><a href="#不能表示出的最大数" class="headerlink" title="不能表示出的最大数"></a>不能表示出的最大数</h2><blockquote>
 <p>当正整数 <code>a</code> 与 <code>b</code> 互质时（gcd(a,b)=1）, 用 <code>a</code> 和 <code>b</code> 表示不出的最大数为 <code>ab−a−b</code>。</p>
 </blockquote>
+<h2 id="统计方形"><a href="#统计方形" class="headerlink" title="统计方形"></a>统计方形</h2><p>有一个 <code>n x m </code> 方格的棋盘，求方格包含多少正方形、长方形（不包含正方形）。</p>
+<blockquote>
+<p>思路</p>
+</blockquote>
+<ul>
+<li>以(i,j)作为一个图形的右下端点，那么以这个点为右下端点的<strong>正方形个数为i,j当中的最小值</strong>，<strong>矩形个数有 <code>i * j</code> 个</strong>；则长方形的个数就等于矩形的个数减去正方形的个数。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br><br>    <span class="hljs-keyword">int</span> n = nextInt();<br>    <span class="hljs-keyword">int</span> m = nextInt();<br>    <span class="hljs-keyword">long</span> sum = <span class="hljs-number">0</span>; <span class="hljs-comment">//矩形的个数</span><br>    <span class="hljs-keyword">long</span> ans = <span class="hljs-number">0</span>; <span class="hljs-comment">//正方形的个数</span><br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;++i)&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=m;++j)&#123;<br>            ans+=Math.min(i,j);<br>            sum+=(i*j);<br>        &#125;<br>    &#125;<br>    System.out.println(ans+<span class="hljs-string">&quot; &quot;</span>+(sum-ans));<br>    closeAll();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
