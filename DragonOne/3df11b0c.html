@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      460 字
+      691 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      8
        分钟
     </span>
   
@@ -344,6 +344,22 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>构建npm 包</li>
 </ul>
 <p>打开微信开发者工具，点击 <strong>工具 -&gt; 构建 npm</strong>，并勾选 <strong>使用 npm 模块</strong> 选项，构建完成后，即可引入组件。</p>
+<h2 id="实现API-Promise化"><a href="#实现API-Promise化" class="headerlink" title="实现API Promise化"></a>实现API Promise化</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>小程序中，实现API Promise化主要依赖于 <code>miniprogram-api-promise</code> 第三方的npm包。</p>
+<ul>
+<li>安装</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install --save miniprogram-api-promise<br></code></pre></div></td></tr></table></figure>
+
+<p>安装完成后，还需要构建npm包。打开微信开发者工具，点击 <strong>工具 -&gt; 构建 npm</strong>，并勾选 <strong>使用 npm 模块</strong> 选项，构建完成后，即可使用。</p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>在小程序入口文件中（app.js），只需要调用一次promisifyAll()方法。即可实现异步API<br>的Promise化。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// app.js</span><br><span class="hljs-keyword">import</span> &#123;promisifyAll&#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;miniprogram-api-promise&#x27;</span><br><span class="hljs-keyword">const</span> wxp = wx.p = &#123;&#125;<br>promisifyAll(wx,wxp)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>调用Promise化之后的异步API</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/message/message.js</span><br>Page(&#123;<br>  <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-title">GetIF</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">const</span> res = <span class="hljs-keyword">await</span> wx.p.request(&#123;<br>      method: <span class="hljs-string">&#x27;GET&#x27;</span>,<br>      url: <span class="hljs-string">&#x27;https://www.escook.cn/api/get&#x27;</span>,<br>      data:&#123;<br>        name:<span class="hljs-string">&#x27;zs&#x27;</span>,<br>        age: <span class="hljs-number">20</span><br>      &#125;<br>    &#125;)<br>    <span class="hljs-built_in">console</span>.log(res);<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>可以先自行不添加方法前的async和请求前的await，发送请求查看res是什么；然后再加上再看res是什么。</strong></p>
 
             </div>
             <hr>
