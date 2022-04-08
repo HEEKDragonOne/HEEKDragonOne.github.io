@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-9Ovxk6LCbY" />
   
-  <title>星星之火-Vue3使用MdEditorV3 - 墨水记忆</title>
+  <title>Vue3-（六）Vue3实现监测滚动条和滚动条滑动效果 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -228,7 +228,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-Vue3使用MdEditorV3">
+            <span class="h2" id="subtitle" title="Vue3-（六）Vue3实现监测滚动条和滚动条滑动效果">
               
             </span>
 
@@ -243,8 +243,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-05 10:27" pubdate>
-        April 5, 2022 am
+      <time datetime="2022-04-08 09:47" pubdate>
+        April 8, 2022 am
       </time>
     </span>
   
@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      610 字
+      465 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      6
        分钟
     </span>
   
@@ -308,34 +308,25 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-Vue3使用MdEditorV3</h1>
+            <h1 style="display: none">Vue3-（六）Vue3实现监测滚动条和滚动条滑动效果</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 5, 2022 am
+                  本文最后更新于：April 8, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><a target="_blank" rel="noopener" href="https://imzbf.github.io/md-editor-v3/index">MdEditorV3官方文档</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install md-editor-v3<br><span class="hljs-comment"># yarn add md-editor-v3</span><br></code></pre></div></td></tr></table></figure>
+              <p>Vue(读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。与其它框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="检测滚动条"><a href="#检测滚动条" class="headerlink" title="检测滚动条"></a>检测滚动条</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.windowScroll)<br>&#125;,<br>methods: &#123;<br>  <span class="hljs-function"><span class="hljs-title">windowScroll</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">//检测滚动条</span><br>    <span class="hljs-comment">// 滚动条距离页面顶部的距离</span><br>    <span class="hljs-comment">// 以下写法原生兼容</span><br>    <span class="hljs-keyword">let</span> scrollTop = <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">document</span>.body.scrollTop;<br>     <span class="hljs-built_in">console</span>.log(scrollTop); <span class="hljs-comment">//输出距离顶部的距离</span><br>  &#125;<br>&#125;,<br><span class="hljs-function"><span class="hljs-title">beforeDestroy</span>(<span class="hljs-params"></span>)</span> &#123;<br>  <span class="hljs-built_in">window</span>.removeEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.windowScroll)<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;md-editor v-model&#x3D;&quot;text&quot; &#x2F;&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import MdEditor from &#39;md-editor-v3&#39;;<br>import &#39;md-editor-v3&#x2F;lib&#x2F;style.css&#39;;<br>export default &#123;<br>  name: &quot;index&quot;,<br>  components:&#123;<br>    MdEditor<br>  &#125;,<br>  data()&#123;<br>    return&#123;<br>      text: &#39;&#39;<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
-
-<p>其中有一个需要注意的属性：editorId。默认值：<code>md-editor-v3</code> 。编辑器唯一标识，非必须项，但当相同页面存在两个编辑器时，请务必区别该属性。</p>
-<h2 id="实现展示"><a href="#实现展示" class="headerlink" title="实现展示"></a>实现展示</h2><p>在写好之后，进行展示。一般需要使用某解析器将其解析成html。而此插件就比较方便，只展示预览效果即可。只需要添加一个属性 <code>previewOnly</code>即可，这样就不会显示编辑框之类的其他东西，只会显示在预览状态下的效果。 如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;md-editor v-model&#x3D;&quot;text&quot; &#x2F;&gt;<br>    &lt;md-editor v-model&#x3D;&quot;text&quot; previewOnly &#x2F;&gt;--&gt;<br>    &lt;br&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import MdEditor from &#39;md-editor-v3&#39;;<br>import &#39;md-editor-v3&#x2F;lib&#x2F;style.css&#39;;<br>export default &#123;<br>  name: &quot;index&quot;,<br>  components:&#123;<br>    MdEditor<br>  &#125;,<br>  data()&#123;<br>    return&#123;<br>      text: &#39;&#39;<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br></code></pre></div></td></tr></table></figure>
-
-<p><strong>注意：上面存在了两个编辑器，不推荐这样写。这里只是为了方便开效果，所以放在了同一个页面之内。</strong></p>
-<h2 id="实现显示代码块行数"><a href="#实现显示代码块行数" class="headerlink" title="实现显示代码块行数"></a>实现显示代码块行数</h2><p>通过 <code>showCodeRowNumber</code> 属性值来控制是否显示行数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;md-editor v-model&#x3D;&quot;text&quot; :showCodeRowNumber&#x3D;&quot;true&quot;&#x2F;&gt;<br>    &lt;br&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import MdEditor from &#39;md-editor-v3&#39;;<br>import &#39;md-editor-v3&#x2F;lib&#x2F;style.css&#39;;<br>export default &#123;<br>  name: &quot;index&quot;,<br>  components:&#123;<br>    MdEditor<br>  &#125;,<br>  data()&#123;<br>    return&#123;<br>      text: &#39;&#39;<br>    &#125;<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style scoped&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+<h2 id="滚动条滑动"><a href="#滚动条滑动" class="headerlink" title="滚动条滑动"></a>滚动条滑动</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">&quot;header&quot;</span>,  <br>  <span class="hljs-function"><span class="hljs-title">setup</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">const</span> toTop = <span class="hljs-function">()=&gt;</span>&#123;<br>      <span class="hljs-built_in">window</span>.scrollTo(&#123;<span class="hljs-attr">top</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">behavior</span>:<span class="hljs-string">&#x27;smooth&#x27;</span>&#125;) <span class="hljs-comment">////距离顶部距离0</span><br>    &#125;<br>    <span class="hljs-keyword">const</span> showM = <span class="hljs-function">(<span class="hljs-params">val</span>)=&gt;</span>&#123; <span class="hljs-comment">//点击箭头向下滑动</span><br>      <span class="hljs-comment">// document.getElementById(&quot;Main&quot;).scrollIntoView(); //这种是直接跳转到id元素处</span><br>      <span class="hljs-built_in">window</span>.scrollTo(&#123;<span class="hljs-attr">top</span>:<span class="hljs-number">710</span>,<span class="hljs-attr">behavior</span>:<span class="hljs-string">&#x27;smooth&#x27;</span>&#125;) <span class="hljs-comment">//距离顶部距离710</span><br>    &#125;<br><br>    <span class="hljs-keyword">return</span>&#123;<br>      showM,toTop<br>    &#125;<br>  &#125;,<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-
+<h2 id="较完整代码"><a href="#较完整代码" class="headerlink" title="较完整代码"></a>较完整代码</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;script&gt;<br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>  name: <span class="hljs-string">&quot;header&quot;</span>,<br>  data () &#123;<br>    <span class="hljs-keyword">return</span> &#123;<br>      scrollDis: <span class="hljs-number">0</span><br>    &#125;<br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-title">setup</span>(<span class="hljs-params"></span>)</span>&#123;<br>    <span class="hljs-keyword">const</span> toTop = <span class="hljs-function">()=&gt;</span>&#123;<br>      <span class="hljs-built_in">window</span>.scrollTo(&#123;<span class="hljs-attr">top</span>:<span class="hljs-number">0</span>,<span class="hljs-attr">behavior</span>:<span class="hljs-string">&#x27;smooth&#x27;</span>&#125;)<br>    &#125;<br>    <span class="hljs-keyword">const</span> showM = <span class="hljs-function">(<span class="hljs-params">val</span>)=&gt;</span>&#123; <span class="hljs-comment">//点击箭头向下滑动</span><br>      <span class="hljs-comment">// document.getElementById(&quot;Main&quot;).scrollIntoView();</span><br>      <span class="hljs-built_in">window</span>.scrollTo(&#123;<span class="hljs-attr">top</span>:<span class="hljs-number">710</span>,<span class="hljs-attr">behavior</span>:<span class="hljs-string">&#x27;smooth&#x27;</span>&#125;)<br>    &#125;<br><br>    <span class="hljs-keyword">return</span>&#123;<br>      showM,toTop<br>    &#125;<br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-title">mounted</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">window</span>.addEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.windowScroll)<br>  &#125;,<br>  methods: &#123;<br>    <span class="hljs-function"><span class="hljs-title">windowScroll</span>(<span class="hljs-params"></span>)</span> &#123; <span class="hljs-comment">//检测滚动条</span><br>      <span class="hljs-comment">// 滚动条距离页面顶部的距离</span><br>      <span class="hljs-comment">// 以下写法原生兼容</span><br>      <span class="hljs-keyword">let</span> scrollTop = <span class="hljs-built_in">window</span>.pageYOffset || <span class="hljs-built_in">document</span>.documentElement.scrollTop || <span class="hljs-built_in">document</span>.body.scrollTop;<br>      <span class="hljs-built_in">this</span>.scrollDis = scrollTop<br>      <span class="hljs-comment">// console.log(scrollTop);</span><br>    &#125;<br>  &#125;,<br>  <span class="hljs-function"><span class="hljs-title">beforeDestroy</span>(<span class="hljs-params"></span>)</span> &#123;<br>    <span class="hljs-built_in">window</span>.removeEventListener(<span class="hljs-string">&#x27;scroll&#x27;</span>, <span class="hljs-built_in">this</span>.windowScroll)<br>  &#125;<br><br>&#125;<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -348,7 +339,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                      <a class="hover-with-bg" href="/categories/Vue3/">Vue3</a>
                     
                   </div>
                 
@@ -356,11 +347,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-                    
                       <a class="hover-with-bg" href="/tags/Vue3/">Vue3</a>
-                    
-                      <a class="hover-with-bg" href="/tags/MdEditorV3/">MdEditorV3</a>
                     
                   </div>
                 
@@ -374,7 +361,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/2e1d522a.html">https://tothefor.com/DragonOne/2e1d522a.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/287ddf56.html">https://tothefor.com/DragonOne/287ddf56.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -383,18 +370,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/287ddf56.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue3-（六）Vue3实现监测滚动条和滚动条滑动效果</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/d0f1be01.html">
-                        <span class="hidden-mobile">Vue3-（五）Vue3实现集成MarkDown</span>
+                      <a href="/DragonOne/2e1d522a.html">
+                        <span class="hidden-mobile">星星之火-Vue3使用MdEditorV3</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
