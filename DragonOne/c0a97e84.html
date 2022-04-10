@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-9Ovxk6LCbY" />
   
-  <title>微信小程序-（十六）uni-app网络请求的封装 - 墨水记忆</title>
+  <title>微信小程序-（十七）uni-app引用和使用Vant - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -228,7 +228,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="微信小程序-（十六）uni-app网络请求的封装">
+            <span class="h2" id="subtitle" title="微信小程序-（十七）uni-app引用和使用Vant">
               
             </span>
 
@@ -243,8 +243,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-09 15:50" pubdate>
-        April 9, 2022 pm
+      <time datetime="2022-04-10 15:40" pubdate>
+        April 10, 2022 pm
       </time>
     </span>
   
@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      602 字
+      781 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -308,27 +308,48 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">微信小程序-（十六）uni-app网络请求的封装</h1>
+            <h1 style="display: none">微信小程序-（十七）uni-app引用和使用Vant</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 9, 2022 pm
+                  本文最后更新于：April 10, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>微信小程序，小程序的一种，英文名Wechat Mini Program，是一种不需要下载安装即可使用的应用，它实现了应用“触手可及”的梦想，用户扫一扫或搜一下即可打开应用。也体现了“用完即走”的理念，用户不用关心是否安装太多应用的问题。应用将无处不在，随时可用，但又无需安装卸载。对于开发者而言，微信小程序开发门槛相对较低，难度不及APP，能够满足简单的基础应用，适合生活服务类线下商铺以及非刚需低频应用的转换。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>拿来即用的。已成功测试。</p>
-<p>先建一个 <code>request</code> 的文件夹，再在其中建以下两个文件。</p>
-<h2 id="request-js"><a href="#request-js" class="headerlink" title="request.js"></a>request.js</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// 全局请求封装</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (url, method, params) =&gt; &#123;<br><span class="hljs-comment">// const token = uni.getStorageSync(&#x27;token&#x27;);</span><br>	uni.showLoading(&#123;<br>		title: <span class="hljs-string">&quot;加载中&quot;</span><br>	&#125;);<br>	<span class="hljs-comment">// if(!token )&#123;</span><br>	<span class="hljs-comment">// 	// 执行没有登录的逻辑</span><br><br>	<span class="hljs-comment">// 	return;</span><br>	<span class="hljs-comment">// &#125;</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>		wx.request(&#123;<br>			url: <span class="hljs-string">&quot;https://www.uinav.com/api&quot;</span> + url,<br>			method: method,<br>			<span class="hljs-comment">// header: &#123;</span><br>			<span class="hljs-comment">// 	token: token</span><br>			<span class="hljs-comment">// &#125;,</span><br>			data: &#123;<br>				...params<br>			&#125;,<br>			<span class="hljs-function"><span class="hljs-title">success</span>(<span class="hljs-params">res</span>)</span> &#123;<br>				resolve(res.data);<br>			&#125;,<br>			<span class="hljs-function"><span class="hljs-title">fail</span>(<span class="hljs-params">err</span>)</span> &#123;<br>				reject(err);<br>			&#125;,<br>			<span class="hljs-function"><span class="hljs-title">complete</span>(<span class="hljs-params"></span>)</span> &#123;<br>				uni.hideLoading();<br>			&#125;<br>		&#125;);<br>	&#125;);<br>&#125;;<br><br></code></pre></div></td></tr></table></figure>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="下载Vant"><a href="#下载Vant" class="headerlink" title="下载Vant"></a>下载Vant</h2><p><a target="_blank" rel="noopener" href="https://github.com/youzan/vant-weapp">下载地址</a> (国外，有时可能无法访问。)</p>
+<h2 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h2><p>首先在和<code>pages</code>同级下建一个名为 <code>wxcomponents</code>的文件夹。然后将下载下来的文件夹解压后，找到文件中的 <code>dist</code> 文件。并将其复制到建好的文件夹下，并改名为 <code>vant</code> 。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在 <code>pages.json</code> 中进行配置。</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&quot;globalStyle&quot;: &#123;<br>		&quot;navigationBarTextStyle&quot;: &quot;black&quot;,<br>		&quot;navigationBarTitleText&quot;: &quot;uni-app&quot;,<br>		&quot;navigationBarBackgroundColor&quot;: &quot;#F8F8F8&quot;,<br>		&quot;backgroundColor&quot;: &quot;#F8F8F8&quot;,<br>		&quot;usingComponents&quot;:&#123; //配置vant的组件<br>			&quot;van-search&quot;: &quot;/wxcomponents/vant/search/index&quot;<br>		&#125;<br>	&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>需要注意的是：如果你的路径不是上面的，则需要将路径改成自己的！</strong></p>
+<p>再在 <code>App.vue</code> 的 <code>style</code> 标签中加入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">@import &quot;&#x2F;wxcomponents&#x2F;vant&#x2F;common&#x2F;index.wxss&quot;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="封装api-js"><a href="#封装api-js" class="headerlink" title="封装api.js"></a>封装api.js</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./request.js&quot;</span><br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>	<span class="hljs-comment">//test</span><br>	<span class="hljs-function"><span class="hljs-title">getSwiper</span>(<span class="hljs-params">params</span>)</span>&#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/public/v1/home/swiperdata&quot;</span>,<span class="hljs-string">&quot;GET&quot;</span>,params);<br>	&#125;,<br>	<br>	<span class="hljs-comment">// 密码登录</span><br>	<span class="hljs-function"><span class="hljs-title">passwordLogin</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/logon&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 短信登录</span><br>	<span class="hljs-function"><span class="hljs-title">noteLogin</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/login&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 获取验证码：用于短信登陆、密码找回、用户注销</span><br>	<span class="hljs-function"><span class="hljs-title">getAuthCode</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/sms&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 获取注册账号验证码</span><br>	<span class="hljs-function"><span class="hljs-title">getRegistAuthCode</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/sms1&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 登录者信息</span><br>	<span class="hljs-function"><span class="hljs-title">getMyInfo</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/bindinfo&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 注册账号</span><br>	<span class="hljs-function"><span class="hljs-title">registerAccount</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/register&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 找回密码</span><br>	<span class="hljs-function"><span class="hljs-title">retrievePassword</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/back&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br><br>	<span class="hljs-comment">// 注销账号</span><br>	<span class="hljs-function"><span class="hljs-title">offAccount</span>(<span class="hljs-params">params</span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> request(<span class="hljs-string">&quot;/platform/metadata/cancel&quot;</span>, <span class="hljs-string">&quot;GET&quot;</span>, params)<br>	&#125;,<br>	<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>然后就能正常的在页面中进行使用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>	&lt;view class&#x3D;&quot;content&quot;&gt;<br>		&lt;image class&#x3D;&quot;logo&quot; src&#x3D;&quot;&#x2F;static&#x2F;logo.png&quot;&gt;&lt;&#x2F;image&gt;<br>		&lt;view class&#x3D;&quot;text-area&quot;&gt;<br>			&lt;text class&#x3D;&quot;title&quot;&gt;&#123;&#123;title&#125;&#125;&lt;&#x2F;text&gt;<br>		&lt;&#x2F;view&gt;<br>		&lt;button type&#x3D;&quot;primary&quot;&gt;点击&lt;&#x2F;button&gt;<br>		&lt;van-search<br>		  value&#x3D;&quot;sfdf&quot;<br>		  shape&#x3D;&quot;round&quot;<br>		  background&#x3D;&quot;#4fc08d&quot;<br>		  placeholder&#x3D;&quot;请输入搜索关键词&quot;<br>		&#x2F;&gt;<br>	&lt;&#x2F;view&gt;<br>&lt;&#x2F;template&gt;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">&lt;template&gt;<br>	&lt;view&gt;<br>		Home<br>	&lt;/view&gt;<br>&lt;/template&gt;<br><br>&lt;script&gt;<br><span class="hljs-keyword">import</span> api <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../request/api.js&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;<br>	<span class="hljs-function"><span class="hljs-title">data</span>(<span class="hljs-params"></span>)</span> &#123;<br>		<span class="hljs-keyword">return</span> &#123;<br>			list:[]<br>		&#125;;<br>	&#125;,<br>	<span class="hljs-function"><span class="hljs-title">onLoad</span>(<span class="hljs-params"></span>)</span>&#123;<br>		<span class="hljs-built_in">this</span>.getList()<br>	&#125;,<br>	methods:&#123;<br>		<span class="hljs-function"><span class="hljs-title">getList</span>(<span class="hljs-params"></span>)</span>&#123;<br>			api.getSwiper() <span class="hljs-comment">//直接调用封装的api，有参可以传参</span><br>			.then(<span class="hljs-function"><span class="hljs-params">res</span>=&gt;</span>&#123;<br>				<span class="hljs-comment">// uni.setStorageSync(&#x27;token&#x27;,res.token)</span><br>				<span class="hljs-built_in">console</span>.log(res)<br>			&#125;).catch(<span class="hljs-function"><span class="hljs-params">err</span>=&gt;</span>&#123;<br>				<span class="hljs-built_in">console</span>.log(err)<br>			&#125;)<br>		&#125;<br>	&#125;<br>&#125;<br>&lt;/script&gt;<br><br>&lt;style lang=<span class="hljs-string">&quot;scss&quot;</span>&gt;<br><br>&lt;/style&gt;<br><br></code></pre></div></td></tr></table></figure>
+<h2 id="消息通知"><a href="#消息通知" class="headerlink" title="消息通知"></a>消息通知</h2><p>除了配置 <code>usingComponents</code> 外，还另外需要导入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>	&lt;view class&#x3D;&quot;content&quot;&gt;<br>		&lt;image class&#x3D;&quot;logo&quot; src&#x3D;&quot;&#x2F;static&#x2F;logo.png&quot;&gt;&lt;&#x2F;image&gt;<br>		&lt;view class&#x3D;&quot;text-area&quot;&gt;<br>			&lt;text class&#x3D;&quot;title&quot;&gt;&#123;&#123;title&#125;&#125;&lt;&#x2F;text&gt;<br>		&lt;&#x2F;view&gt;<br>		&lt;button type&#x3D;&quot;primary&quot;&gt;点击&lt;&#x2F;button&gt;<br>		&lt;van-search<br>		  value&#x3D;&quot;sfdf&quot;<br>		  shape&#x3D;&quot;round&quot;<br>		  background&#x3D;&quot;#4fc08d&quot;<br>		  placeholder&#x3D;&quot;请输入搜索关键词&quot;<br>		&#x2F;&gt;<br>		&lt;button @click&#x3D;&quot;showNotify&quot;&gt;弹出提示&lt;&#x2F;button&gt;<br>		&lt;van-notify id&#x3D;&quot;van-notify&quot; &#x2F;&gt;<br>	&lt;&#x2F;view&gt;<br>	<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import Notify from &#39;@&#x2F;wxcomponents&#x2F;vant&#x2F;notify&#x2F;notify&#39;;<br>	export default &#123;<br>		data() &#123;<br>			return &#123;<br>				title: &#39;Hello&#39;<br>			&#125;<br>		&#125;,<br>		onLoad() &#123;<br><br>		&#125;,<br>		methods: &#123;<br>			showNotify() &#123;<br>			       Notify(&#123; type: &#39;primary&#39;, message: &#39;通知内容&#39; &#125;);<br>			    &#125;<br>		&#125;<br>	&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="自定义选择器"><a href="#自定义选择器" class="headerlink" title="自定义选择器"></a>自定义选择器</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">Notify(&#123;<br>  message: <span class="hljs-string">&#x27;自定义节点选择器&#x27;</span>,  <span class="hljs-comment">//弹出消息</span><br>  duration: <span class="hljs-number">1000</span>, <span class="hljs-comment">//显示时间</span><br>  selector: <span class="hljs-string">&#x27;#custom-selector&#x27;</span>, <span class="hljs-comment">//选择器</span><br>&#125;);<br><br>&lt;!-- 在页面内添加自定义节点 --&gt;<br>&lt;van-notify id=<span class="hljs-string">&quot;custom-selector&quot;</span> /&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
 
 
 
@@ -353,6 +374,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                     
                       <a class="hover-with-bg" href="/tags/uni-app/">uni-app</a>
                     
+                      <a class="hover-with-bg" href="/tags/Vant/">Vant</a>
+                    
                   </div>
                 
               </div>
@@ -365,7 +388,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/65823225.html">https://tothefor.com/DragonOne/65823225.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/c0a97e84.html">https://tothefor.com/DragonOne/c0a97e84.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -374,18 +397,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/c0a97e84.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">微信小程序-（十七）uni-app引用和使用Vant</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/a219a995.html">
-                        <span class="hidden-mobile">蓝桥杯JAVA-番外篇之考前复习</span>
+                      <a href="/DragonOne/65823225.html">
+                        <span class="hidden-mobile">微信小程序-（十六）uni-app网络请求的封装</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
