@@ -312,7 +312,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 30, 2022 am
+                  本文最后更新于：April 16, 2022 am
                 
               </p>
             
@@ -379,6 +379,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li><code>/src/main.ts</code></li>
 </ul>
 <figure class="highlight typescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs typescript"><span class="hljs-keyword">import</span> &#123; createApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App.vue&#x27;</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router/index&#x27;</span><br><span class="hljs-keyword">import</span> ElementPlus <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;element-plus&#x27;</span><br><span class="hljs-keyword">import</span> <span class="hljs-string">&#x27;element-plus/dist/index.css&#x27;</span><br><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> ElIcons <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@element-plus/icons-vue&#x27;</span><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./store/index&#x27;</span><br><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;./request/request&quot;</span>;<br><br><span class="hljs-keyword">const</span> app = createApp(App)<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> icname <span class="hljs-keyword">in</span> ElIcons)&#123;<br>    <span class="hljs-comment">// @ts-ignore</span><br>    app.component(icname,ElIcons[icname])<br>&#125;<br>app.config.globalProperties.$http = request<br>app.use(router)<br>app.use(store)<br>app.use(ElementPlus)<br>app.mount(<span class="hljs-string">&#x27;#app&#x27;</span>)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="安装scss-sass"><a href="#安装scss-sass" class="headerlink" title="安装scss/sass"></a>安装scss/sass</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install node-sass sass-loader sass -D<br></code></pre></div></td></tr></table></figure>
 
 
 
