@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      674 字
+      902 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      11
        分钟
     </span>
   
@@ -369,6 +369,22 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <h2 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h2><p>Socket开发网络应用程序被广泛使用。通信的两端都要有Socket，是两台机器间通信的端点。网络通信其实就是Socket间的通信。Socket运行程序把网络连接当成一个流，数据在两个Socket间通过IO传输。一般主动发起通信的应用程序属客户端，等待通信请求的为服务端。</p>
+<h3 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h3><blockquote>
+<p>客户端</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.networkTest;<br><br><span class="hljs-keyword">import</span> java.io.OutputStream;<br><span class="hljs-keyword">import</span> java.net.InetAddress;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><span class="hljs-keyword">import</span> java.net.UnknownHostException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/22 10:52</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SocketClient</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Socket socket = <span class="hljs-keyword">new</span> Socket(InetAddress.getLocalHost(), <span class="hljs-number">9999</span>); <span class="hljs-comment">//或ip地址加端口</span><br>        System.out.println(<span class="hljs-string">&quot;客户端的socket：&quot;</span>+socket.getClass());<br><br>        OutputStream outputStream = socket.getOutputStream();<br>        outputStream.write(<span class="hljs-string">&quot;我是客户端&quot;</span>.getBytes());<br><br>        outputStream.close();<br>        socket.close();<br>        System.out.println(<span class="hljs-string">&quot;客户端退出...&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>服务端</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.networkTest;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><span class="hljs-keyword">import</span> java.net.ServerSocket;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/22 10:52</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SocketServer</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        ServerSocket serverSocket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">9999</span>);<br>        Socket accept = serverSocket.accept();<br>        InputStream inputStream = accept.getInputStream();<br>        System.out.println(<span class="hljs-string">&quot;服务端的Socket为：&quot;</span>+accept.getClass());<br>        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-keyword">int</span> rlen = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>((rlen=inputStream.read(bytes))!=-<span class="hljs-number">1</span>)&#123;<br>            System.out.println(<span class="hljs-keyword">new</span> String(bytes,<span class="hljs-number">0</span>,rlen));<br>        &#125;<br><br><br>        inputStream.close();<br>        accept.close();<br>        serverSocket.close();<br>        System.out.println(<span class="hljs-string">&quot;服务端退出...&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
 
             </div>
             <hr>
