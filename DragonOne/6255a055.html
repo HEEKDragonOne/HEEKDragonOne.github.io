@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-9Ovxk6LCbY" />
   
-  <title>JAVA网络编程-初始网络编程 - 墨水记忆</title>
+  <title>JAVA面试知识点-知识点总结（一） - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -228,7 +228,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JAVA网络编程-初始网络编程">
+            <span class="h2" id="subtitle" title="JAVA面试知识点-知识点总结（一）">
               
             </span>
 
@@ -243,8 +243,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-22 09:03" pubdate>
-        April 22, 2022 am
+      <time datetime="2022-04-24 13:53" pubdate>
+        April 24, 2022 pm
       </time>
     </span>
   
@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      902 字
+      3.4k 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      36
        分钟
     </span>
   
@@ -308,83 +308,142 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JAVA网络编程-初始网络编程</h1>
+            <h1 style="display: none">JAVA面试知识点-知识点总结（一）</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 22, 2022 am
+                  本文最后更新于：April 24, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="TCP和UDP"><a href="#TCP和UDP" class="headerlink" title="TCP和UDP"></a>TCP和UDP</h2><blockquote>
-<p>TCP协议</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="常见的HTTP协议状态码"><a href="#常见的HTTP协议状态码" class="headerlink" title="常见的HTTP协议状态码"></a>常见的HTTP协议状态码</h2><blockquote>
+<p>常见的状态码有：</p>
+<p>1xx代表服务器端已经接受了请求。</p>
+<p>2xx代表请求已经被服务器端成功接收，最常见的有200、201状态码。</p>
+<p>3xx代表路径被服务器端重定向到了一个新的URL，最常见的有301、302状态码。</p>
+<p>4xx代表客户端的请求发生了错误，最常见的有401、404状态码。</p>
+<p>5xx代表服务器端的响应出现了错误。</p>
+</blockquote>
+<h3 id="拓展"><a href="#拓展" class="headerlink" title="拓展"></a>拓展</h3><p>HTTP状态码（HTTP Status Code）是用来表示超文本传输协议响应状态的3位数字代码，所有状态码的第一个数字代表了响应的五种状态之一，所示的消息短语是典型的，但是可以提供任何可读取的替代方案。</p>
+<blockquote>
+<p>1xx：</p>
+<p>指定客户端相应的某些动作，代表请求已被接受，需要继续处理。由于 HTTP/1.0 协议中没有定义任何 1xx 状态码，所以除非在某些试验条件下，服务器禁止向此类客户端发送 1xx 响应。</p>
+</blockquote>
+<blockquote>
+<p>2xx：</p>
+<p>代表请求已成功被服务器接收、理解、并接受。这系列中最常见的有200、201状态码。</p>
 </blockquote>
 <ul>
-<li>使用TCP协议前，需要建立TCP连接，形成传输数据通道。</li>
-<li>传输前，会采用 “三次握手” 方式建立连接，所以是可靠的。</li>
-<li>TCP协议进行通信的两个应用进程：客户端、服务端。</li>
-<li>在连接中可以进行大数据量的传输。</li>
-<li>传输完毕后，需要释放已建立的连接，效率低。（如打电话，你在通话时别人无法再次打通）</li>
+<li>200（成功）：服务器已成功处理了请求。 通常，这表示服务器提供了请求的网页。</li>
+<li>201（已创建）：请求成功并且服务器创建了新的资源。</li>
+<li>202（已接受）：服务器已接受请求，但尚未处理。</li>
+<li>203（非授权信息）：服务器已成功处理了请求，但返回的信息可能来自另一来源。</li>
+<li>204（无内容）：服务器成功处理了请求，但没有返回任何内容。</li>
+<li>205（重置内容）：服务器成功处理了请求，但没有返回任何内容。</li>
+<li>206（部分内容）：服务器成功处理了部分 GET 请求。</li>
 </ul>
 <blockquote>
-<p>UDP协议</p>
+<p>3xx：</p>
+<p>代表需要客户端采取进一步的操作才能完成请求，这些状态码用来重定向，后续的请求地址（重定向目标）在响应头Location字段中指明。这系列中最常见的有301、302状态码。</p>
 </blockquote>
 <ul>
-<li>将数据、源、目的封装成数据包，不需要建立连接。</li>
-<li>每个数据包的大小限制在64K内。</li>
-<li>不可靠的，因为无需连接。</li>
-<li>发送数据结束时无需释放资源，速度快。因为不需要连接，所以不需要释放。</li>
+<li>300（多种选择）：针对请求，服务器可执行多种操作。 服务器可根据请求者 (user agent) 选择一项操作，或提供操作列表供请求者选择。</li>
+<li>301（永久移动）：请求的网页已永久移动到新位置。 服务器返回此响应（对 GET 或 HEAD 请求的响应）时，会自动将请求者转到新位置。</li>
+<li>302（临时移动）：服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</li>
+<li>303（查看其他位置）：请求者应当对不同的位置使用单独的 GET 请求来检索响应时，服务器返回此代码。</li>
+<li>304（未修改）：自从上次请求后，请求的网页未修改过。 服务器返回此响应时，不会返回网页内容。</li>
+<li>305（使用代理）：请求者只能使用代理访问请求的网页。 如果服务器返回此响应，还表示请求者应使用代理。</li>
+<li>307（临时重定向）：服务器目前从不同位置的网页响应请求，但请求者应继续使用原有位置来进行以后的请求。</li>
 </ul>
-<h2 id="三次握手"><a href="#三次握手" class="headerlink" title="三次握手"></a>三次握手</h2><h3 id="三次握手-1"><a href="#三次握手-1" class="headerlink" title="三次握手"></a>三次握手</h3><ul>
-<li>A：在吗？</li>
-<li>B：我在的，怎么了？</li>
-<li>A：我给你发个文件，你帮我看看。</li>
-<li>A：（发送数据..）</li>
+<blockquote>
+<p>4xx：</p>
+<p>表示请求错误。代表了客户端看起来可能发生了错误，妨碍了服务器的处理。常见有：401、404状态码。</p>
+</blockquote>
+<ul>
+<li>400（错误请求）：服务器不理解请求的语法。</li>
+<li>401（未授权）：请求要求身份验证。 对于需要登录的网页，服务器可能返回此响应。</li>
+<li>403（禁止）：服务器拒绝请求。</li>
+<li>404（未找到）：服务器找不到请求的网页。</li>
+<li>405（方法禁用）：禁用请求中指定的方法。</li>
+<li>406（不接受）：无法使用请求的内容特性响应请求的网页。</li>
+<li>407（需要代理授权）：此状态代码与 401（未授权）类似，但指定请求者应当授权使用代理。</li>
+<li>408（请求超时）：服务器等候请求时发生超时。</li>
+<li>409（冲突）：服务器在完成请求时发生冲突。 服务器必须在响应中包含有关冲突的信息。</li>
+<li>410（已删除）：如果请求的资源已永久删除，服务器就会返回此响应。</li>
+<li>411（需要有效长度）：服务器不接受不含有效内容长度标头字段的请求。</li>
+<li>412（未满足前提条件）：服务器未满足请求者在请求中设置的其中一个前提条件。</li>
+<li>413（请求实体过大）：服务器无法处理请求，因为请求实体过大，超出服务器的处理能力。</li>
+<li>414（请求的 URI 过长）：请求的 URI（通常为网址）过长，服务器无法处理。</li>
+<li>415（不支持的媒体类型）：请求的格式不受请求页面的支持。</li>
+<li>416（请求范围不符合要求）：如果页面无法提供请求的范围，则服务器会返回此状态代码。</li>
+<li>417 （未满足期望值）：服务器未满足”期望”请求标头字段的要求。</li>
 </ul>
-<p>前三次即为三次握手。主要目的是用来建立连接。</p>
-<p>第一次：A发消息用来确定对方B是否在线。</p>
-<p>第二次：B回复A的消息，表示自己在线。并确定A是否还在线。</p>
-<p>第三次：A回复B消息，表示自己还在线。然后接着发送信息（数据）。</p>
 <blockquote>
-<p>三次握手的目的：确保数据一定能收到。</p>
+<p>5xx：</p>
+<p>代表了服务器在处理请求的过程中有错误或者异常状态发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理。常见有500、503状态码。</p>
 </blockquote>
-<h2 id="InetAddress类"><a href="#InetAddress类" class="headerlink" title="InetAddress类"></a>InetAddress类</h2><h3 id="获取本机InetAddress对象"><a href="#获取本机InetAddress对象" class="headerlink" title="获取本机InetAddress对象"></a>获取本机InetAddress对象</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">InetAddress inetAddress = InetAddress.getLocalHost();<br>System.out.println(inetAddress); <span class="hljs-comment">//dragononedeMBP/192.168.43.252</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-<h3 id="根据主机名-域名获取IP地址对象"><a href="#根据主机名-域名获取IP地址对象" class="headerlink" title="根据主机名/域名获取IP地址对象"></a>根据主机名/域名获取IP地址对象</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">InetAddress dragononedeMBP = InetAddress.getByName(<span class="hljs-string">&quot;dragononedeMBP&quot;</span>);<br>System.out.println(dragononedeMBP); <span class="hljs-comment">//dragononedeMBP/192.168.43.252</span><br><br>InetAddress byName = InetAddress.getByName(<span class="hljs-string">&quot;www.baidu.com&quot;</span>);<br>System.out.println(byName); <span class="hljs-comment">//www.baidu.com/110.242.68.4</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-<h3 id="获取InetAddress对象的主机名"><a href="#获取InetAddress对象的主机名" class="headerlink" title="获取InetAddress对象的主机名"></a>获取InetAddress对象的主机名</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">InetAddress byName = InetAddress.getByName(<span class="hljs-string">&quot;www.baidu.com&quot;</span>);<br>String hostName = byName.getHostName();<br>System.out.println(hostName); <span class="hljs-comment">//www.baidu.com</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-<h3 id="获取InetAddress对象的地址"><a href="#获取InetAddress对象的地址" class="headerlink" title="获取InetAddress对象的地址"></a>获取InetAddress对象的地址</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">InetAddress byName = InetAddress.getByName(<span class="hljs-string">&quot;www.baidu.com&quot;</span>);<br>String hostAddress = byName.getHostAddress();<br>System.out.println(hostAddress); <span class="hljs-comment">//110.242.68.4</span><br></code></pre></div></td></tr></table></figure>
-
-
-
-
-
-<h2 id="套接字（Socket）"><a href="#套接字（Socket）" class="headerlink" title="套接字（Socket）"></a>套接字（Socket）</h2><p>Socket开发网络应用程序被广泛使用。通信的两端都要有Socket，是两台机器间通信的端点。网络通信其实就是Socket间的通信。Socket运行程序把网络连接当成一个流，数据在两个Socket间通过IO传输。一般主动发起通信的应用程序属客户端，等待通信请求的为服务端。</p>
-<h3 id="简单实现"><a href="#简单实现" class="headerlink" title="简单实现"></a>简单实现</h3><blockquote>
-<p>客户端</p>
+<ul>
+<li>500（服务器内部错误）：服务器遇到错误，无法完成请求。</li>
+<li>501（尚未实施）：服务器不具备完成请求的功能。 例如，服务器无法识别请求方法时可能会返回此代码。</li>
+<li>502（错误网关）：服务器作为网关或代理，从上游服务器收到无效响应。</li>
+<li>503（服务不可用）：服务器目前无法使用（由于超载或停机维护）。 通常，这只是暂时状态。</li>
+<li>504（网关超时）：服务器作为网关或代理，但是没有及时从上游服务器收到请求。</li>
+<li>505（HTTP 版本不受支持）：服务器不支持请求中所用的 HTTP 协议版本。</li>
+</ul>
+<h2 id="HashMap的实现原理"><a href="#HashMap的实现原理" class="headerlink" title="HashMap的实现原理"></a>HashMap的实现原理</h2><blockquote>
+<p>数组、链表、红黑树。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.networkTest;<br><br><span class="hljs-keyword">import</span> java.io.OutputStream;<br><span class="hljs-keyword">import</span> java.net.InetAddress;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><span class="hljs-keyword">import</span> java.net.UnknownHostException;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/22 10:52</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SocketClient</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        Socket socket = <span class="hljs-keyword">new</span> Socket(InetAddress.getLocalHost(), <span class="hljs-number">9999</span>); <span class="hljs-comment">//或ip地址加端口</span><br>        System.out.println(<span class="hljs-string">&quot;客户端的socket：&quot;</span>+socket.getClass());<br><br>        OutputStream outputStream = socket.getOutputStream();<br>        outputStream.write(<span class="hljs-string">&quot;我是客户端&quot;</span>.getBytes());<br><br>        outputStream.close();<br>        socket.close();<br>        System.out.println(<span class="hljs-string">&quot;客户端退出...&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<ul>
+<li><p>在JDK8中，HashMap底层是采用“数组+链表+红黑树”来实现的。HashMap是基于哈希算法来确定元素的位置（槽）的，当我们向集合中存入数据时，它会计算传入的Key的哈希值，并利用哈希值取余来确定槽的位置。如果元素发生碰撞，也就是这个槽已经存在其他的元素了，则HashMap会通过链表将这些元素组织起来。如果碰撞进一步加剧，某个链表的长度达到了8，则HashMap会创建红黑树来代替这个链表，从而提高对这个槽中数据的查找的速度（O(log<sup>n</sup>)）。如果在红黑树状态下，链表的长度小于等于6了，则会退化为数组+链表。</p>
+</li>
+<li><p>HashMap中，数组的默认初始容量为16，这个容量会以2的指数进行扩容。具体来说，当数组中的元素达到一定比例的时候HashMap就会扩容，这个比例叫做负载因子，默认为0.75。自动扩容机制，是为了保证HashMap初始时不必占据太大的内存，而在使用期间又可以实时保证有足够大的空间。采用2的指数（即两倍扩容）进行扩容，是为了利用位运算，提高扩容运算的效率。</p>
+</li>
+<li><p>HashMap是非线程安全的，所以在多线程环境下，各线程同时触发HashMap的改变时，都有可能会发生冲突。所以，在多线程环境下不建议使用HashMap，可以考虑使用Collections将HashMap转为线程安全的HashMap，更为推荐的方式则是使用ConcurrentHashMap。</p>
+</li>
+</ul>
+<p>源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 数组</span><br><span class="hljs-keyword">transient</span> Node&lt;K,V&gt;[] table;<br> <br><span class="hljs-comment">// 链表</span><br><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>    ...<br>    Node&lt;K,V&gt; next;<br>&#125;<br><br><span class="hljs-comment">// 红黑树</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkedHashMap</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>    TreeNode&lt;K,V&gt; parent;  <span class="hljs-comment">// red-black tree links</span><br>    TreeNode&lt;K,V&gt; left;<br>    TreeNode&lt;K,V&gt; right;<br>    TreeNode&lt;K,V&gt; prev;    <span class="hljs-comment">// needed to unlink next upon deletion</span><br>    <span class="hljs-keyword">boolean</span> red;<br>&#125;<br><br><br><span class="hljs-comment">// 默认初始容量</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>; <span class="hljs-comment">// 16</span><br><br><span class="hljs-comment">// 最大容量（2^30）</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAXIMUM_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>;<br><br><span class="hljs-comment">// 默认负载因子</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="hljs-number">0.75f</span>;<br><br><span class="hljs-comment">// 转为树的临界点</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TREEIFY_THRESHOLD = <span class="hljs-number">8</span>;<br><br><span class="hljs-comment">// 转链表的临界点</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNTREEIFY_THRESHOLD = <span class="hljs-number">6</span>;<br><br><span class="hljs-comment">// 支持树结构的最小容量</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="hljs-number">64</span>;<br></code></pre></div></td></tr></table></figure>
 
-<blockquote>
-<p>服务端</p>
+
+
+<h3 id="拓展-1"><a href="#拓展-1" class="headerlink" title="拓展"></a>拓展</h3><blockquote>
+<p>说说HashMap的put方法。</p>
 </blockquote>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.networkTest;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><span class="hljs-keyword">import</span> java.net.ServerSocket;<br><span class="hljs-keyword">import</span> java.net.Socket;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/22 10:52</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SocketServer</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        ServerSocket serverSocket = <span class="hljs-keyword">new</span> ServerSocket(<span class="hljs-number">9999</span>);<br>        Socket accept = serverSocket.accept();<br>        InputStream inputStream = accept.getInputStream();<br>        System.out.println(<span class="hljs-string">&quot;服务端的Socket为：&quot;</span>+accept.getClass());<br>        <span class="hljs-keyword">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-keyword">int</span> rlen = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">while</span>((rlen=inputStream.read(bytes))!=-<span class="hljs-number">1</span>)&#123;<br>            System.out.println(<span class="hljs-keyword">new</span> String(bytes,<span class="hljs-number">0</span>,rlen));<br>        &#125;<br><br><br>        inputStream.close();<br>        accept.close();<br>        serverSocket.close();<br>        System.out.println(<span class="hljs-string">&quot;服务端退出...&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-
-
-
-
-
-
-
+<ol>
+<li><p>根据key通过哈希算法与与运算得出数组下标。</p>
+</li>
+<li><p>如果数组下标元素为空，则将key和value封装为Entry对象（JDK1.7是Entry对象，JDK1.8是Node对象）并放入该位置。</p>
+</li>
+<li><p>如果数组下标位置元素不为空，则要分情况</p>
+</li>
+</ol>
+<ul>
+<li><p>如果是在JDK1.7，则<strong>首先会判断是否需要扩容</strong>，如果要扩容就进行扩容，如果不需要扩容就生成Entry对象，并使用<strong>头插法</strong>添加到当前链表中。</p>
+</li>
+<li><p>如果是在JDK1.8中，则会先判断当前位置上的TreeNode类型，看是红黑树还是链表Node。</p>
+</li>
+</ul>
+<p>如果是红黑树TreeNode，则将key和value封装为一个红黑树节点并添加到红黑树中去，在这个过程中会判断红黑树中是否存在当前key，如果存在则更新value。</p>
+<p>如果此位置上的Node对象是链表节点，则将key和value封装为一个Node并通过尾插法插入到链表的最后位置去，因为是尾插法，所以需要遍历链表，在遍历过程中会判断是否存在当前key，如果存在则更新其value，当遍历完链表后，将新的Node插入到链表中，插入到链表后，会看当前链表的节点个数，如果大于8，则会将链表转为红黑树</p>
+<p>将key和value封装为Node插入到链表或红黑树后，在判断是否需要扩容，如果需要扩容，就结束put方法。</p>
+<h2 id="分代回收机制"><a href="#分代回收机制" class="headerlink" title="分代回收机制"></a>分代回收机制</h2><h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>分代的垃圾回收策略，是基于这样一个事实：不同的对象的生命周期是不一样的。因此，不同生命周期的对象可以采取不同的收集方式，以便提高回收效率。</p>
+<p>在Java程序运行的过程中，会产生大量的对象，其中有些对象是与业务信息相关，比如Http请求中的Session对象、线程、Socket连接，这类对象跟业务直接挂钩，因此生命周期比较长。但是还有一些对象，主要是程序运行过程中生成的临时变量，这些对象生命周期会比较短，比如：String对象，由于其不变类的特性，系统会产生大量的这些对象，有些对象甚至只用一次即可回收。</p>
+<p>如果在不进行对象存活时间区分的情况下，每次垃圾回收都是对整个堆空间进行回收，花费时间相对会长，同时，因为每次回收都需要遍历所有存活对象，但实际上，对于生命周期长的对象而言，这种遍历是没有效果的，因为可能进行了很多次遍历，但是他们依旧存在。因此，分代垃圾回收采用分治的思想，进行代的划分，把不同生命周期的对象放在不同代上，不同代上采用最适合它的垃圾回收方式进行回收。</p>
+<h3 id="主菜"><a href="#主菜" class="headerlink" title="主菜"></a>主菜</h3><p>虚拟机中的共划分为三个代：年轻代（Young Generation）、年老点（Old Generation）和持久代（Permanent Generation）。而新生代中又分为幸存者区（Suevivor）和伊甸园区（Eden）,而在幸存者区又划分出了to和from两个区域。</p>
+<p>其中持久代主要存放的是Java类的类信息，与垃圾收集要收集的Java对象关系不大。年轻代和年老代的划分是对垃圾收集影响比较大的。</p>
+<p>新生代：朝生夕灭的对象（例如：方法的局部变量等）。</p>
+<p>老年代：存活得比较久，但还是要死的对象（例如：缓存对象、单例对象等）。</p>
+<p>永久代：对象生成后几乎不灭的对象（例如：加载过的类信息）。</p>
+<h3 id="分代回收"><a href="#分代回收" class="headerlink" title="分代回收"></a>分代回收</h3><ul>
+<li><p>新生代回收（Minor GC/Young GC）：指只是进行新生代的回收。</p>
+</li>
+<li><p>老年代回收（Major GC/Old GC）：指只是进行老年代的回收。目前只有 CMS 垃圾回收器会有这个单独的回收老年代的行为。（Major GC 定义是比较混乱，有说指是老年代，有的说是做整个堆的收集，这个需要你根据别人的场景来定，没有固定的说法）</p>
+</li>
+<li><p>整堆回收（Full GC）：收集整个 Java 堆和方法区(注意包含方法区)</p>
+</li>
+</ul>
 
             </div>
             <hr>
@@ -394,7 +453,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">JAVA网络编程</a>
+                      <a class="hover-with-bg" href="/categories/%E6%B0%B4%E6%BB%B4%E7%9F%B3%E7%A9%BF/">水滴石穿</a>
                     
                   </div>
                 
@@ -404,7 +463,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                     
                       <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
                     
-                      <a class="hover-with-bg" href="/tags/JAVA%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">JAVA网络编程</a>
+                      <a class="hover-with-bg" href="/tags/JAVA%E9%9D%A2%E8%AF%95%E7%9F%A5%E8%AF%86%E7%82%B9/">JAVA面试知识点</a>
                     
                   </div>
                 
@@ -418,7 +477,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/430c9c1e.html">https://tothefor.com/DragonOne/430c9c1e.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/6255a055.html">https://tothefor.com/DragonOne/6255a055.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -427,18 +486,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/6255a055.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">JAVA面试知识点-知识点总结（一）</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/e571b455.html">
-                        <span class="hidden-mobile">水滴石穿-JDK8中Stream类的常用用法</span>
+                      <a href="/DragonOne/430c9c1e.html">
+                        <span class="hidden-mobile">JAVA网络编程-初始网络编程</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
