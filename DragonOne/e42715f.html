@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-9Ovxk6LCbY" />
   
-  <title>JAVA集合源码-Collection之Map - 墨水记忆</title>
+  <title>微信小程序-（二十一）uni-app使用Vuex - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -228,7 +228,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="JAVA集合源码-Collection之Map">
+            <span class="h2" id="subtitle" title="微信小程序-（二十一）uni-app使用Vuex">
               
             </span>
 
@@ -243,8 +243,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-24 20:43" pubdate>
-        April 24, 2022 pm
+      <time datetime="2022-04-25 14:40" pubdate>
+        April 25, 2022 pm
       </time>
     </span>
   
@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      371 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      5
        分钟
     </span>
   
@@ -308,70 +308,37 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">JAVA集合源码-Collection之Map</h1>
+            <h1 style="display: none">微信小程序-（二十一）uni-app使用Vuex</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 24, 2022 pm
+                  本文最后更新于：April 25, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://img-blog.csdnimg.cn/72e09cb3c3e24b49b6dc2cf94d29f0f1.png" srcset="/img/loading.gif"></p>
-<p><code>Set</code>用于存储不重复的元素集合。</p>
-<ul>
-<li><code>HashSet</code>是无序的，因为它实现了<code>Set</code>接口，并没有实现<code>SortedSet</code>接口；</li>
-<li><code>TreeSet</code>是有序的，因为它实现了<code>SortedSet</code>接口。</li>
-</ul>
-<h2 id="HashMap源码分析"><a href="#HashMap源码分析" class="headerlink" title="HashMap源码分析"></a>HashMap源码分析</h2><p>非线程安全的。<code>HashMap</code> 可以存储 null 的 key 和 value，但 null 作为键只能有一个，null 作为值可以有多个。（存储结构理解成邻接表）</p>
-<ul>
-<li><p>在JDK8中，HashMap底层是采用“数组+链表+红黑树”来实现的。HashMap是基于哈希算法来确定元素的位置的，当我们向集合中存入数据时，它会计算传入的Key的哈希值，并利用哈希值取余（对当前数组的长度进行取余）来确定数组的位置。如果这个数组已经存在其他的元素了，则HashMap会通过链表将这些元素组织起来。遍历链表查看是否存在相同的（通过equals进行比较），如果存在相同则进行覆盖，否则添加进去。如果有链表长度大于8但数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树；如果链表长度大于8且数组长度大于64则才会将链表转化为红黑树，从而提高对这个槽中数据的查找的速度（O(log<sup>n</sup>)）。若链表的长度小于等于6时，红黑树会退化为数组+链表。</p>
-</li>
-<li><p>HashMap中，数组的默认初始容量为16，这个容量会以2的指数（即两倍扩容）进行扩容。具体来说，当数组中的元素达到一定比例的时候HashMap就会扩容，这个比例叫做负载因子，默认为0.75。自动扩容机制，是为了保证HashMap初始时不必占据太大的内存，而在使用期间又可以实时保证有足够大的空间。采用2的指数（即两倍扩容）进行扩容，是为了利用位运算，提高扩容运算的效率。</p>
-<blockquote>
-<p>创建时如果给定了容量初始值， <code>HashMap</code> 会将其扩充为 <code>2的幂次方</code>大小（<code>HashMap</code> 中的<code>tableSizeFor()</code>方法保证，可见下方源码）。</p>
-</blockquote>
-</li>
-<li><p>HashMap是非线程安全的，所以在多线程环境下，各线程同时触发HashMap的改变时，都有可能会发生冲突。所以，在多线程环境下不建议使用HashMap，可以考虑使用Collections将HashMap转为线程安全的HashMap，更为推荐的方式则是使用ConcurrentHashMap。</p>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 数组</span><br><span class="hljs-keyword">transient</span> Node&lt;K,V&gt;[] table;<br> <br><span class="hljs-comment">// 链表</span><br><span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">Map</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>    ...<br>    Node&lt;K,V&gt; next;<br>&#125;<br><br><span class="hljs-comment">// 红黑树</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TreeNode</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">LinkedHashMap</span>.<span class="hljs-title">Entry</span>&lt;<span class="hljs-title">K</span>,<span class="hljs-title">V</span>&gt; </span>&#123;<br>    TreeNode&lt;K,V&gt; parent;  <span class="hljs-comment">// red-black tree links</span><br>    TreeNode&lt;K,V&gt; left;<br>    TreeNode&lt;K,V&gt; right;<br>    TreeNode&lt;K,V&gt; prev;    <span class="hljs-comment">// needed to unlink next upon deletion</span><br>    <span class="hljs-keyword">boolean</span> red;<br>&#125;<br><br><br><span class="hljs-comment">// 默认初始容量</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">4</span>; <span class="hljs-comment">// 16</span><br><br><span class="hljs-comment">// 最大容量（2^30）</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAXIMUM_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>;<br><br><span class="hljs-comment">// 默认负载因子</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">float</span> DEFAULT_LOAD_FACTOR = <span class="hljs-number">0.75f</span>;<br><br><span class="hljs-comment">// 转为树的临界点</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> TREEIFY_THRESHOLD = <span class="hljs-number">8</span>;<br><br><span class="hljs-comment">// 转链表的临界点</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> UNTREEIFY_THRESHOLD = <span class="hljs-number">6</span>;<br><br><span class="hljs-comment">// 支持树结构的最小容量</span><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_TREEIFY_CAPACITY = <span class="hljs-number">64</span>;<br></code></pre></div></td></tr></table></figure>
-
-<p>指定大小创建，保证了 HashMap 总是使用2的幂作为哈希表的大小。：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAXIMUM_CAPACITY = <span class="hljs-number">1</span> &lt;&lt; <span class="hljs-number">30</span>;<br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> <span class="hljs-title">tableSizeFor</span><span class="hljs-params">(<span class="hljs-keyword">int</span> cap)</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> n = cap - <span class="hljs-number">1</span>;<br>  n |= n &gt;&gt;&gt; <span class="hljs-number">1</span>;<br>  n |= n &gt;&gt;&gt; <span class="hljs-number">2</span>;<br>  n |= n &gt;&gt;&gt; <span class="hljs-number">4</span>;<br>  n |= n &gt;&gt;&gt; <span class="hljs-number">8</span>;<br>  n |= n &gt;&gt;&gt; <span class="hljs-number">16</span>;<br>  <span class="hljs-keyword">return</span> (n &lt; <span class="hljs-number">0</span>) ? <span class="hljs-number">1</span> : (n &gt;= MAXIMUM_CAPACITY) ? MAXIMUM_CAPACITY : n + <span class="hljs-number">1</span>;<br>&#125;<br><br>System.out.println(tableSizeFor(<span class="hljs-number">7</span>)); <span class="hljs-comment">//8</span><br>System.out.println(tableSizeFor(<span class="hljs-number">10</span>)); <span class="hljs-comment">//16</span><br></code></pre></div></td></tr></table></figure>
+              <p>微信小程序，小程序的一种，英文名Wechat Mini Program，是一种不需要下载安装即可使用的应用，它实现了应用“触手可及”的梦想，用户扫一扫或搜一下即可打开应用。也体现了“用完即走”的理念，用户不用关心是否安装太多应用的问题。应用将无处不在，随时可用，但又无需安装卸载。对于开发者而言，微信小程序开发门槛相对较低，难度不及APP，能够满足简单的基础应用，适合生活服务类线下商铺以及非刚需低频应用的转换。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>在manifest.json中的基础设置将Vue版本为2。个人尝试Vue3时，会报错。。。所以使用了Vue2。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">npm install vuex --save<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h3 id="put方法"><a href="#put方法" class="headerlink" title="put方法"></a>put方法</h3><ol>
-<li>根据key通过哈希算法与与运算得出数组下标。</li>
-<li>如果数组下标元素为空，则将key和value封装为Entry对象（JDK1.7是Entry对象，JDK1.8是Node对象）并放入该位置。</li>
-<li>如果数组下标位置元素不为空，则要分情况：</li>
-</ol>
-<ul>
-<li>如果是在JDK1.7，则<strong>首先会判断是否需要扩容</strong>，如果要扩容就进行扩容，如果不需要扩容就生成Entry对象，并使用<strong>头插法</strong>添加到当前链表中。</li>
-<li>如果是在JDK1.8中，则会先判断当前位置上的TreeNode类型，看是红黑树还是链表Node。</li>
-</ul>
-<p>如果是红黑树TreeNode，则将key和value封装为一个红黑树节点并添加到红黑树中去，在这个过程中会判断红黑树中是否存在当前key，如果存在则更新value。</p>
-<p>如果此位置上的Node对象是链表节点，则将key和value封装为一个Node并通过尾插法插入到链表的最后位置去，因为是尾插法，所以需要遍历链表，在遍历过程中会判断是否存在当前key，如果存在则更新其value，当遍历完链表后，将新的Node插入到链表中，插入到链表后，会看当前链表的节点个数，如果大于8，则会将链表转为红黑树</p>
-<p>将key和value封装为Node插入到链表或红黑树后，在判断是否需要扩容，如果需要扩容，就结束put方法。</p>
-<h2 id="Hashtable源码分析"><a href="#Hashtable源码分析" class="headerlink" title="Hashtable源码分析"></a>Hashtable源码分析</h2><p>线程安全的。HashTable 不允许有 null 键和 null 值，否则会抛出 <code>NullPointerException</code>。但，<code>HashTable</code> 基本被淘汰，不要在代码中使用它。</p>
-<ul>
-<li>创建时如果不指定容量初始值，<code>Hashtable</code> 默认的初始大小为 11，之后每次扩充，容量变为原来的 2n+1。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Hashtable</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>(<span class="hljs-number">11</span>, <span class="hljs-number">0.75f</span>); <span class="hljs-comment">//默认11</span><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-
-<ul>
-<li>创建时如果给定了容量初始值，那么 Hashtable 会直接使用给定的大小。</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Hashtable</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity)</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>(initialCapacity, <span class="hljs-number">0.75f</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="创建store"><a href="#创建store" class="headerlink" title="创建store"></a>创建store</h2><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">//store/store.js</span><br><br><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vuex&#x27;</span><br>Vue.use(Vuex)<br><br><span class="hljs-comment">//实例store对象</span><br><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;<br>	state: &#123;<br>		imgSrc: <span class="hljs-string">&#x27;https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png&#x27;</span>,<br>		titleName: <span class="hljs-string">&#x27;墨水记忆&#x27;</span>,<br>	&#125;,<br>	mutations: &#123;<br>		<br>	&#125;<br>&#125;)<br><br><span class="hljs-comment">//导出store对象</span><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store<br></code></pre></div></td></tr></table></figure>
 
 
 
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><h3 id="单组件使用"><a href="#单组件使用" class="headerlink" title="单组件使用"></a>单组件使用</h3><figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;../../store/store.js&#x27;</span><br><br><span class="hljs-comment">//使用</span><br><span class="hljs-built_in">console</span>.log(store.state.titleName)<br></code></pre></div></td></tr></table></figure>
 
 
-<h2 id="ConcurrentHashMap源码分析"><a href="#ConcurrentHashMap源码分析" class="headerlink" title="ConcurrentHashMap源码分析"></a>ConcurrentHashMap源码分析</h2><p>线程安全。</p>
-<p>采用 CAS 和 <code>synchronized</code> 来保证并发安全。数据结构跟 HashMap1.8 的结构类似，数组+链表/红黑二叉树。</p>
+
+<h3 id="全局设置"><a href="#全局设置" class="headerlink" title="全局设置"></a>全局设置</h3><p>在main.js中进行设置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App&#x27;</span><br><br><span class="hljs-comment">// #ifndef VUE3</span><br><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/store/store.js&#x27;</span><br>Vue.config.productionTip = <span class="hljs-literal">false</span><br>App.mpType = <span class="hljs-string">&#x27;app&#x27;</span><br><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue(&#123;<br>    ...App,<br>	store<br>&#125;)<br>app.$mount()<br><span class="hljs-comment">// #endif</span><br><br><span class="hljs-comment">// #ifdef VUE3</span><br><span class="hljs-keyword">import</span> &#123; createSSRApp &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createApp</span>(<span class="hljs-params"></span>) </span>&#123;<br>  <span class="hljs-keyword">const</span> app = createSSRApp(App)<br>  <span class="hljs-keyword">return</span> &#123;<br>    app,<br>	store<br>  &#125;<br>&#125;<br><span class="hljs-comment">// #endif</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">this</span>.$store.state.titleName)<br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -381,7 +348,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/JAVA%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">JAVA集合源码</a>
+                      <a class="hover-with-bg" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
                     
                   </div>
                 
@@ -389,11 +356,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
-                    
-                      <a class="hover-with-bg" href="/tags/JAVA%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">JAVA集合源码</a>
+                      <a class="hover-with-bg" href="/tags/uni-app/">uni-app</a>
                     
                   </div>
                 
@@ -407,7 +372,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/63cadd49.html">https://tothefor.com/DragonOne/63cadd49.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/e42715f.html">https://tothefor.com/DragonOne/e42715f.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -416,18 +381,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/e42715f.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">微信小程序-（二十一）uni-app使用Vuex</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/6255a055.html">
-                        <span class="hidden-mobile">JAVA面试知识点-知识点总结（一）</span>
+                      <a href="/DragonOne/63cadd49.html">
+                        <span class="hidden-mobile">JAVA集合源码-Collection之Map</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
