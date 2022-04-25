@@ -312,7 +312,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：April 11, 2022 pm
+                  本文最后更新于：April 25, 2022 pm
                 
               </p>
             
@@ -333,6 +333,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>到了 JDK8，这个工作终于完成了，彻底废弃了 PermGen，Metaspace 取而代之。</p>
 <p>本文的内容主要来自 Thomas Stüfe 的 <a target="_blank" rel="noopener" href="https://stuefe.de/posts/metaspace/what-is-metaspace/">Metaspace 系列文章</a>，他是 OpenJDK Committer/Reviewer. JVM developer at SAP，一看 Title 就很靠谱，因为他是 JVM 开发者，当然主要是内容也写得非常棒。</p>
 <p>原文第五篇是介绍使用 jcmd 工具观察 Metaspace 的空间使用情况，这一节没有介绍，所以没有加进来。</p>
+<p><a target="_blank" rel="noopener" href="https://javadoop.com/">转载于</a> </p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1、什么是-Metaspace"><a href="#1、什么是-Metaspace" class="headerlink" title="1、什么是 Metaspace"></a>1、什么是 Metaspace</h2><p>Metaspace 区域位于堆外，所以它的最大内存大小取决于系统内存，而不是堆大小，我们可以指定 MaxMetaspaceSize 参数来限定它的最大内存。</p>
 <p>Metaspace 是用来存放 class metadata 的，class metadata 用于记录一个 Java 类在 JVM 中的信息，包括但不限于 <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html">JVM class file format</a> 的运行时数据： </p>
 <p>1、Klass 结构，这个非常重要，把它理解为一个 Java 类在虚拟机内部的表示吧；</p>
