@@ -312,7 +312,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：April 26, 2022 pm
                 
               </p>
             
@@ -320,7 +320,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>今天碰到一题，让求一个数的二进制中1的个数。这个很明显的要用位运算。<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/er-jin-zhi-zhong-1de-ge-shu-lcof/">题目链接</a></p>
 <p>然后看了一下之前写的博客，也有博客是整理了一些这方面的技巧。但是没有专门的一篇用来写位运算的，然后这一篇博客就打算专为位运算技巧而写。</p>
-<p>有些内容在《ACM-拓展知识点 》中，这里就没写了。</p>
+<p>有些内容在<a href="https://tothefor.com/DragonOne/166314578.html">《ACM-拓展知识点 》</a> 中，这里就没写了。</p>
 <h2 id="0-位运算预知识"><a href="#0-位运算预知识" class="headerlink" title="0. 位运算预知识"></a>0. 位运算预知识</h2><p>优先级别由高到低依次为：按位取反( ~ )，按位与( &amp; )，按位异或( ^ )，按位或( | )。<br>一些特殊的重要知识点，记着，怕忘了。</p>
 <ul>
 <li>任何数与 0 异或等于它本身，即 n ^ 0 = n。</li>
@@ -350,7 +350,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>无符号右移(&gt;&gt;&gt;)</p>
 </blockquote>
-<p>详解见《星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别》。这里不写了。</p>
+<p>详解见<a href="https://tothefor.com/DragonOne/101422168.html">《星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别》</a> 。这里不写了。</p>
 <div style="text-align:center;font-size:23px">位运算技巧</div>
 
 
@@ -404,7 +404,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>以一个简单示例为了演示过程：<br>a=2; （0010）<br>b=6; （0110）</p>
 <p>a&amp;b：0010。结果为2。<br>a^b：0100。<br>(a^b)&gt;&gt;1：0010。结果为2。</p>
 <p>最后结果为0100，即为4。</p>
-<h2 id="7-位运算实现加减乘除"><a href="#7-位运算实现加减乘除" class="headerlink" title="7. 位运算实现加减乘除"></a>7. 位运算实现加减乘除</h2><p>详见《星星之火-位运算实现加减乘除 》</p>
+<h2 id="7-位运算实现加减乘除"><a href="#7-位运算实现加减乘除" class="headerlink" title="7. 位运算实现加减乘除"></a>7. 位运算实现加减乘除</h2><p>详见<a href="https://tothefor.com/DragonOne/1145769336.html">《星星之火-位运算实现加减乘除 》</a> </p>
 <h2 id="8-两个相同数异或"><a href="#8-两个相同数异或" class="headerlink" title="8. 两个相同数异或"></a>8. 两个相同数异或</h2><p>利用异或的这个特性来消除重复的数, 例如找出一个数组中落单的数(数量为奇数的某个数), 相反我们也可以利用这个特性来找出数组中唯一成对的数。结合：任何数与 0 异或等于它本身，即 n ^ 0 = n。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">1</span>^<span class="hljs-number">1</span>  ==&gt; <span class="hljs-number">0</span><br><span class="hljs-number">2</span>^<span class="hljs-number">2</span>  ==&gt; <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
 
@@ -419,7 +419,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h2 id="9-判断一个数是否为2的整数次幂"><a href="#9-判断一个数是否为2的整数次幂" class="headerlink" title="9. 判断一个数是否为2的整数次幂"></a>9. 判断一个数是否为2的整数次幂</h2><p><strong>注意：如果是负数和0需要特判。</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n=<span class="hljs-number">1024</span>,m=<span class="hljs-number">1023</span>;<br>        <span class="hljs-keyword">if</span>((n&amp;(n-<span class="hljs-number">1</span>))==<span class="hljs-number">0</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;YES&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;NO&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span>((m&amp;(m-<span class="hljs-number">1</span>))==<span class="hljs-number">0</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;YES&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;NO&quot;</span>);<br>        &#125;<br><br><span class="hljs-comment">//输出</span><br>YES<br>NO<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="9-1-方法二"><a href="#9-1-方法二" class="headerlink" title="9.1 方法二"></a>9.1 方法二</h3><p>如果 n 是正整数并且 n &amp; (-n) = n，那么 n 就是 2 的幂。自行验证。<br>此方法具体原理见《星星之火-判断一个数是否是2的幂 》</p>
+<h3 id="9-1-方法二"><a href="#9-1-方法二" class="headerlink" title="9.1 方法二"></a>9.1 方法二</h3><p>如果 n 是正整数并且 n &amp; (-n) = n，那么 n 就是 2 的幂。自行验证。<br>此方法具体原理见<a href="https://tothefor.com/DragonOne/3958614188.html">《星星之火-判断一个数是否是2的幂 》</a> </p>
 <h2 id="10-英文字符大小写转换"><a href="#10-英文字符大小写转换" class="headerlink" title="10. 英文字符大小写转换"></a>10. 英文字符大小写转换</h2><p>以下操作能够产生奇特效果的原因在于 ASCII 编码。字符其实就是数字，恰巧这些字符对应的数字通过位运算就能得到正确的结果，有兴趣的读者可以查 ASCII 码表自己算算，本文就不展开讲了。</p>
 <h3 id="10-1-利用或操作-和空格将英文字符转换为小写"><a href="#10-1-利用或操作-和空格将英文字符转换为小写" class="headerlink" title="10.1 利用或操作 | 和空格将英文字符转换为小写"></a>10.1 利用或操作 | 和空格将英文字符转换为小写</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">(<span class="hljs-string">&#x27;a&#x27;</span> | <span class="hljs-string">&#x27; &#x27;</span>) = <span class="hljs-string">&#x27;a&#x27;</span><br>(<span class="hljs-string">&#x27;A&#x27;</span> | <span class="hljs-string">&#x27; &#x27;</span>) = <span class="hljs-string">&#x27;a&#x27;</span><br></code></pre></div></td></tr></table></figure>
 <p>示例：</p>
