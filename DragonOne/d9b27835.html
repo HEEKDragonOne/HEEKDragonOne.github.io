@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      302 字
+      407 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      5
        分钟
     </span>
   
@@ -312,7 +312,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：February 12, 2022 pm
+                  本文最后更新于：April 28, 2022 pm
                 
               </p>
             
@@ -334,6 +334,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;, timezone = &quot;GMT+8&quot;)</span><br><span class="hljs-meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd HH:mm:ss&quot;)</span><br><span class="hljs-keyword">private</span> Date item_time; <span class="hljs-comment">//物品真正加入时间</span><br></code></pre></div></td></tr></table></figure>
 
 
+
+<h2 id="注意（2022-4-28）"><a href="#注意（2022-4-28）" class="headerlink" title="注意（2022.4.28）"></a>注意（2022.4.28）</h2><p>需要注意：ElementUI和Element-Plus格式化的时候，大小写是不一样的。前者年份小写，而后者要大写。所以上面的用法可能是不行的。具体可见官网 <a target="_blank" rel="noopener" href="https://element.eleme.io/#/zh-CN/component/date-picker#ri-qi-ge-shi">ElementUI</a>  <a target="_blank" rel="noopener" href="https://day.js.org/docs/en/display/format">Element-Plus</a> </p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&lt;el-date-picker<br>  v-model=<span class="hljs-string">&quot;form.fromEndTime&quot;</span><br>  type=<span class="hljs-string">&quot;datetime&quot;</span><br>  placeholder=<span class="hljs-string">&quot;选择结束时间&quot;</span><br>  format=<span class="hljs-string">&quot;YYYY-MM-DD hh:mm:ss&quot;</span><br>  value-format=<span class="hljs-string">&quot;YYYY-MM-DD hh:mm:ss a&quot;</span><br>  /&gt;<br></code></pre></div></td></tr></table></figure>
+
+
             </div>
             <hr>
             <div>
@@ -350,7 +355,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
                       <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
+                    
+                      <a class="hover-with-bg" href="/tags/ElementUI/">ElementUI</a>
                     
                   </div>
                 
