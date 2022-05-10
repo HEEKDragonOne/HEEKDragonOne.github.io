@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-9Ovxk6LCbY" />
   
-  <title>Shell-（三）Shell条件判断 - 墨水记忆</title>
+  <title>Shell-（四）Shell流程控制 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -228,7 +228,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Shell-（三）Shell条件判断">
+            <span class="h2" id="subtitle" title="Shell-（四）Shell流程控制">
               
             </span>
 
@@ -243,7 +243,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-10 19:10" pubdate>
+      <time datetime="2022-05-10 20:10" pubdate>
         May 10, 2022 pm
       </time>
     </span>
@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      517 字
+      695 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      10
        分钟
     </span>
   
@@ -308,7 +308,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Shell-（三）Shell条件判断</h1>
+            <h1 style="display: none">Shell-（四）Shell流程控制</h1>
             
               <p class="note note-info">
                 
@@ -318,57 +318,103 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>Shell 是一个用 C 语言编写的程序，它是用户使用 Linux 的桥梁。Shell 既是一种命令语言，又是一种程序设计语言。Shell 是指一种应用程序，这个应用程序提供了一个界面，用户通过这个界面访问操作系统内核的服务。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
-<p>基本语法： <code>test condition</code> 或者 <code>[ condition ]</code>(注意括号前后有空格)</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="if判断"><a href="#if判断" class="headerlink" title="if判断"></a>if判断</h2><h3 id="单分支"><a href="#单分支" class="headerlink" title="单分支"></a>单分支</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ 条件判断式 ];<span class="hljs-keyword">then</span><br>  程序<br><span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ 条件判断式 ]<br><span class="hljs-keyword">then</span><br>   程序<br><span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~<span class="hljs-comment"># a=23</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># if [ $a -gt 18 ];then echo OK;fi #如a大于18</span><br>OK<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># a=23</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># if [ $a -gt 15 ] &amp;&amp; [ $a -lt 25 ];then echo ok;fi</span><br>ok<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># a=23</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># if [ $a -gt 15 -a $a -lt 25 ];then echo ok;fi # 若a大于15，小于25，-a表示&amp;&amp; -o表示||</span><br>ok<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h3 id="多分支"><a href="#多分支" class="headerlink" title="多分支"></a>多分支</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> [ 条件判断式 ]<br><span class="hljs-keyword">then</span><br>   程序<br><span class="hljs-keyword">elif</span> [ 条件判断式 ]<br><span class="hljs-keyword">then</span><br>   程序<br><span class="hljs-keyword">else</span><br>   程序<br><span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>双分支示例：</p>
+<blockquote>
+<p>脚本 parameter.sh </p>
 </blockquote>
-<p><strong>条件非空即为true，[ aa ]返回true，[  ]返回false。</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$n======&#x27;</span><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$1</span> -lt 18 ]<br><span class="hljs-keyword">then</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;未成年&quot;</span><br><span class="hljs-keyword">else</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;成年人&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 15</span><br>======<span class="hljs-variable">$n</span>======<br>未成年<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 23</span><br>======<span class="hljs-variable">$n</span>======<br>成年人<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>多分支示例：</p>
+<blockquote>
+<p>脚本 parameter.sh </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$n======&#x27;</span><br><span class="hljs-keyword">if</span> [ <span class="hljs-variable">$1</span> -lt 18 ]<br><span class="hljs-keyword">then</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;未成年&quot;</span><br><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$1</span> -lt 30 ]<br><span class="hljs-keyword">then</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;青年人&quot;</span><br><span class="hljs-keyword">elif</span> [ <span class="hljs-variable">$1</span> -lt 50 ]<br><span class="hljs-keyword">then</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;中年人&quot;</span><br><span class="hljs-keyword">else</span> <br>	<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;老年人&quot;</span><br><span class="hljs-keyword">fi</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 15</span><br>======<span class="hljs-variable">$n</span>======<br>未成年<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 25</span><br>======<span class="hljs-variable">$n</span>======<br>青年人<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 45</span><br>======<span class="hljs-variable">$n</span>======<br>中年人<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 55</span><br>======<span class="hljs-variable">$n</span>======<br>老年人<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="for循环"><a href="#for循环" class="headerlink" title="for循环"></a>for循环</h2><h3 id="基本语法1"><a href="#基本语法1" class="headerlink" title="基本语法1"></a>基本语法1</h3><blockquote>
+<p>用法</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> (( 初始值;循环控制条件;变量变化 ))<br><span class="hljs-keyword">do</span><br>  程序<br><span class="hljs-keyword">done</span><br></code></pre></div></td></tr></table></figure>
+
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~<span class="hljs-comment"># a=long</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># test $a = loong # 注意要用空格隔开</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $? # 0表示执行正确，非0表示执行出错</span><br>1<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># test $a = long</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ $a = loong ] # 注意要用空格隔开</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>1<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ $a = long ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>0<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>脚本 parameter.sh </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$n======&#x27;</span><br><span class="hljs-keyword">for</span> (( i=1;i &lt;= <span class="hljs-variable">$1</span>; ++i )) <span class="hljs-comment"># 在双括号中就可以直接使用数学上的符号</span><br><span class="hljs-keyword">do</span><br>	sum=$[ <span class="hljs-variable">$sum</span> + <span class="hljs-variable">$i</span> ]<br><span class="hljs-keyword">done</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$sum</span><br></code></pre></div></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 10</span><br>======<span class="hljs-variable">$n</span>======<br>55<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="常用判断条件"><a href="#常用判断条件" class="headerlink" title="常用判断条件"></a>常用判断条件</h2><h3 id="整数比较"><a href="#整数比较" class="headerlink" title="整数比较"></a>整数比较</h3><ul>
-<li>-eq：等于</li>
-<li>-ne：不等于</li>
-<li>-lt：小于</li>
-<li>-le：小于等于</li>
-<li>-gt：大于</li>
-<li>-ge：大于等于</li>
-</ul>
-<p><strong>如果是字符串之间的比较，用等号（=）判断相等，用（!=）判断不等。</strong></p>
+<h3 id="基本语法2"><a href="#基本语法2" class="headerlink" title="基本语法2"></a>基本语法2</h3><blockquote>
+<p>用法</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">for</span> 变量 <span class="hljs-keyword">in</span> 值1 值2 值3 ....<br><span class="hljs-keyword">do</span><br>  程序<br><span class="hljs-keyword">done</span><br></code></pre></div></td></tr></table></figure>
+
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ 3 -eq 3 ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ 3 -ne 3 ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>1<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ 3 -lt 3 ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>1<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ 3 -le 3 ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ 3 -gt 3 ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>1<br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># [ 3 -ge 3 ]</span><br>root@VM-12-8-ubuntu:~<span class="hljs-comment"># echo $?</span><br>0<br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># for it in a b c d e;do echo $it; done</span><br>a<br>b<br>c<br>d<br>e<br><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># for it in &#123;1..100&#125;;do sum=$[$sum+$it];done;echo $sum</span><br>5050<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h3 id="文件权限判断"><a href="#文件权限判断" class="headerlink" title="文件权限判断"></a>文件权限判断</h3><ul>
-<li>-r：有读的权限。</li>
-<li>-w：有写的权限。</li>
-<li>-x：有执行的权限。</li>
-</ul>
+<h3 id="for整合-和"><a href="#for整合-和" class="headerlink" title="for整合$*和$@"></a>for整合$*和$@</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$*======&#x27;</span><br><span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;$*&quot;</span> <span class="hljs-comment">#注意要用引号引起来，下同</span><br><span class="hljs-keyword">do</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-variable">$it</span><br><span class="hljs-keyword">done</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$@======&#x27;</span><br><span class="hljs-keyword">for</span> it <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span><br><span class="hljs-keyword">do</span><br>	<span class="hljs-built_in">echo</span> <span class="hljs-variable">$it</span><br><span class="hljs-keyword">done</span><br></code></pre></div></td></tr></table></figure>
+
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh a b c d e f g</span><br>======$*======<br>a b c d e f g<br>======<span class="hljs-variable">$@</span>======<br>a<br>b<br>c<br>d<br>e<br>f<br>g<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h2><blockquote>
+<p>用法</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-keyword">while</span> [ 条件判断式 ]<br><span class="hljs-keyword">do</span><br>   程序<br><span class="hljs-keyword">done</span><br></code></pre></div></td></tr></table></figure>
+
+
+
 <p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">touch filetest <span class="hljs-comment"># 创建一个文件</span><br><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># [ -r filetest ]</span><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># [ -w filetest ]</span><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># [ -x filetest ]</span><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># echo $?</span><br>1<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>脚本 parameter.sh </p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$0======&#x27;</span><br>a=1<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$a</span> -le <span class="hljs-variable">$1</span> ]<br><span class="hljs-keyword">do</span><br>	sum=$[ <span class="hljs-variable">$sum</span> + <span class="hljs-variable">$a</span> ]<br>	a=$[ <span class="hljs-variable">$a</span> + 1 ]<br><span class="hljs-keyword">done</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$sum</span><br></code></pre></div></td></tr></table></figure>
 
+<p>执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># ./parameter.sh 10</span><br>======<span class="hljs-variable">$0</span>======<br>55<br></code></pre></div></td></tr></table></figure>
 
+<p>其中，脚本中也可以这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-meta">#!/bin/bash</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;======$0======&#x27;</span><br>a=1<br><span class="hljs-keyword">while</span> [ <span class="hljs-variable">$a</span> -le <span class="hljs-variable">$1</span> ]<br><span class="hljs-keyword">do</span><br>	<span class="hljs-built_in">let</span> sum+=a<br>	<span class="hljs-built_in">let</span> a++<br><span class="hljs-keyword">done</span><br><span class="hljs-built_in">echo</span> <span class="hljs-variable">$sum</span><br></code></pre></div></td></tr></table></figure>
 
-<h3 id="文件类型判断"><a href="#文件类型判断" class="headerlink" title="文件类型判断"></a>文件类型判断</h3><ul>
-<li>-e：文件存在。</li>
-<li>-f：文件存在且是一个常规的文件。</li>
-<li>-d：文件存在且是一个目录。</li>
-</ul>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># [ -e filetest ]</span><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># [ -f filetest ]</span><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># echo $?</span><br>0<br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># [ -d filetest ]</span><br>root@VM-12-8-ubuntu:~/myscript<span class="hljs-comment"># echo $?</span><br>1<br></code></pre></div></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
+<p>使用是一样的使用方法。</p>
 
             </div>
             <hr>
@@ -400,7 +446,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水的记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/b429be7.html">https://tothefor.com/DragonOne/b429be7.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/b8fa9e76.html">https://tothefor.com/DragonOne/b8fa9e76.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -409,9 +455,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/b8fa9e76.html">
+                      <a href="/DragonOne/a95b419.html">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Shell-（四）Shell流程控制</span>
+                        <span class="hidden-mobile">Shell-（五）Shell读取控制台输入和函数</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -419,8 +465,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/ac66a49c.html">
-                        <span class="hidden-mobile">Shell-（二）Shell变量与运算符</span>
+                      <a href="/DragonOne/b429be7.html">
+                        <span class="hidden-mobile">Shell-（三）Shell条件判断</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
