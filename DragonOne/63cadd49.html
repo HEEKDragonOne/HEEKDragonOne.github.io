@@ -312,7 +312,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 1, 2022 am
+                  本文最后更新于：May 10, 2022 am
                 
               </p>
             
@@ -355,7 +355,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>如果是红黑树TreeNode，则将key和value封装为一个红黑树节点并添加到红黑树中去，在这个过程中会判断红黑树中是否存在当前key，如果存在则更新value。</p>
 <p>如果此位置上的Node对象是链表节点，则将key和value封装为一个Node并通过尾插法插入到链表的最后位置去，因为是尾插法，所以需要遍历链表，在遍历过程中会判断是否存在当前key，如果存在则更新其value，当遍历完链表后，将新的Node插入到链表中，插入到链表后，会看当前链表的节点个数，如果大于8，则会将链表转为红黑树</p>
 <p>将key和value封装为Node插入到链表或红黑树后，在判断是否需要扩容，如果需要扩容，就结束put方法。</p>
-<h2 id="Hashtable源码分析"><a href="#Hashtable源码分析" class="headerlink" title="Hashtable源码分析"></a>Hashtable源码分析</h2><p>线程安全的。HashTable 不允许有 null 键和 null 值，否则会抛出 <code>NullPointerException</code>。但，<code>HashTable</code> 基本被淘汰，不要在代码中使用它。</p>
+<h2 id="Hashtable源码分析"><a href="#Hashtable源码分析" class="headerlink" title="Hashtable源码分析"></a>Hashtable源码分析</h2><p>线程安全的。HashTable 不允许有 null 键和 null 值，否则会抛出 <code>NullPointerException</code>。但，<code>Hashtable</code> 基本被淘汰，不要在代码中使用它。<a href="https://tothefor.com/DragonOne/c5d7a0af.html">具体原因</a> </p>
 <ul>
 <li>创建时如果不指定容量初始值，<code>Hashtable</code> 默认的初始大小为 11，之后每次扩充，容量变为原来的 2n+1。</li>
 </ul>
