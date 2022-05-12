@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.2k 字
+      3.4k 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      40
+      43
        分钟
     </span>
   
@@ -439,6 +439,10 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <h3 id="示例五"><a href="#示例五" class="headerlink" title="示例五"></a>示例五</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String str1 = <span class="hljs-string">&quot;abcd&quot;</span>; <span class="hljs-comment">// 常量池创建&quot;abcd&quot;</span><br>String str2 = <span class="hljs-string">&quot;abcd&quot;</span>; <span class="hljs-comment">// str2还是上一步的&quot;abcd&quot;</span><br>String str3 = <span class="hljs-string">&quot;ab&quot;</span> + <span class="hljs-string">&quot;cd&quot;</span>; <span class="hljs-comment">// 常量池创建&quot;ab&quot;和&quot;cd&quot;，连接过程编译器直接优化成&quot;abcd&quot;，而常量池已经有了&quot;abcd&quot;，所以str3和str1都指向&quot;abcd&quot;</span><br>String str4 = <span class="hljs-string">&quot;ab&quot;</span>; <span class="hljs-comment">// 常量池已经有了&quot;ab&quot;</span><br>str4 += <span class="hljs-string">&quot;cd&quot;</span>; <span class="hljs-comment">// str4+&quot;cd&quot;连接的字符串编译器不能优化，所以此时str4指向堆中的&quot;abcd&quot;</span><br><span class="hljs-comment">// 因为&quot;ab&quot;是str4引用的，如果是两个变量s1=&quot;ab&quot;, s2=&quot;cd&quot;,s1+s2连接，那么只有用final修饰的指向&quot;ab&quot;的s1和final修饰的指向&quot;cd&quot;的s2相连接才能优化成&quot;abcd&quot;</span><br><span class="hljs-comment">// 如果只有一个变量s1和常量池的常量连接s1+&quot;cd&quot;，这个变量s1也需要final修饰才会优化成&quot;abcd&quot;</span><br>System.out.println(str1 == str2); <span class="hljs-comment">// true</span><br>System.out.println(str1 == str3); <span class="hljs-comment">// true</span><br>System.out.println(str1 == str4); <span class="hljs-comment">// false</span><br>System.out.println(<span class="hljs-string">&quot;================&quot;</span>);<br>String s1 = <span class="hljs-string">&quot;a&quot;</span>;<br>String s2 = <span class="hljs-string">&quot;b&quot;</span>;<br>String s3 = <span class="hljs-string">&quot;ab&quot;</span>;<br><span class="hljs-keyword">final</span> String ss1 = <span class="hljs-string">&quot;a&quot;</span>;<br><span class="hljs-keyword">final</span> String ss2 = <span class="hljs-string">&quot;b&quot;</span>;<br>System.out.println(s1 + s2 == s3); <span class="hljs-comment">// false, 有变量引用的字符串是不能优化的，除非变量是final修饰或者直接&quot;a&quot;+&quot;b&quot;的常量形式，这一行就是s1+s2生成堆里的&quot;ab&quot;和常量池的&quot;ab&quot;在比较</span><br>System.out.println(ss1 + ss2 == s3); <span class="hljs-comment">// true，原因见上一行，原理和下一行相同，都是常量连接</span><br>System.out.println(<span class="hljs-string">&quot;a&quot;</span> + <span class="hljs-string">&quot;b&quot;</span> == s3); <span class="hljs-comment">// true,常量池的&quot;a&quot;和&quot;b&quot;连接，根据Copy On Write机制, 副本连接生成&quot;ab&quot;，发现已存在，直接指向&quot;ab&quot;，所以和s3相等</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s = <span class="hljs-string">&quot;ab&quot;</span>;    <span class="hljs-comment">// 常量池创建&quot;ab&quot;</span><br>String s1 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;ab&quot;</span>); <span class="hljs-comment">// 堆里面创建&quot;ab&quot;，因为常量池已有&quot;ab&quot;，不会在常量池再缓存一次</span><br>String str3 = <span class="hljs-string">&quot;ab&quot;</span> + <span class="hljs-string">&quot;cd&quot;</span>; <span class="hljs-comment">// 连接之后常量池是否还有&quot;ab&quot;??在常量池连接成&quot;abcd&quot;后&quot;ab&quot;和&quot;cd&quot;是否还存在？</span><br>String s2 = s1.intern(); <span class="hljs-comment">// 如果常量池还有&quot;ab&quot;，s2指向常量池&quot;ab&quot;，如果没有，则放入s1地址，s2就指向s1，即s2指向堆里的&quot;ab&quot;</span><br>System.out.println(s2 == s1); <span class="hljs-comment">// 如果是true，则s2是堆里的&quot;ab&quot;.说明&quot;ab&quot;+&quot;cd&quot;连接后，常量池只有&quot;abcd&quot;,&quot;ab&quot;和&quot;cd&quot;被回收了</span><br><span class="hljs-comment">// 但结果运行出来是false，说明&quot;ab&quot;+&quot;cd&quot;连接之后，不仅存在&quot;ab&quot;,&quot;cd&quot;, 还存在&quot;abcd&quot;</span><br></code></pre></div></td></tr></table></figure>
 
 
             </div>
