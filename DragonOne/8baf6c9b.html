@@ -255,7 +255,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.4k 字
+      3.5k 字
     </span>
   
 
@@ -265,7 +265,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      43
+      45
        分钟
     </span>
   
@@ -312,7 +312,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 12, 2022 pm
+                  本文最后更新于：May 15, 2022 pm
                 
               </p>
             
@@ -380,6 +380,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">final</span> String str1=<span class="hljs-string">&quot;ab&quot;</span>;<br><span class="hljs-keyword">final</span> String str2=<span class="hljs-string">&quot;cd&quot;</span>;<br>String str = <span class="hljs-string">&quot;abcd&quot;</span>;<br>String str3=str1+str2;<br>System.out.println(str==str3); <span class="hljs-comment">//true</span><br></code></pre></div></td></tr></table></figure>
 
 <p>在编译时，直接将String str3=str1+str2;替换成了String str3=”ab”+”cd”;接下来就是和上面说的一样处理了。</p>
+<blockquote>
+<p>2022年5月15日 补充</p>
+</blockquote>
+<p>被 <code>final</code> 关键字修改之后的 <code>String</code> 会被编译器当做常量来处理，编译器在程序编译期就可以确定它的值，其效果就相当于访问常量。但如果编译器在运行时才能知道其确切值的话，就无法对其优化。如下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>  <span class="hljs-keyword">final</span> String str1 = <span class="hljs-string">&quot;str&quot;</span>;<br>  <span class="hljs-keyword">final</span> String str2 = getStr();<br>  String c = <span class="hljs-string">&quot;str&quot;</span> + <span class="hljs-string">&quot;ing&quot;</span>;<span class="hljs-comment">// 常量池中的对象</span><br>  String d = str1 + str2; <span class="hljs-comment">// 在堆上创建的新的对象</span><br>  System.out.println(c == d);<span class="hljs-comment">// false</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">getStr</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;ing&quot;</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
 <h3 id="通过new"><a href="#通过new" class="headerlink" title="通过new"></a>通过new</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String str2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;str&quot;</span>) + <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;01&quot;</span>);<br></code></pre></div></td></tr></table></figure>
 
 <p>这和直接赋值的有一些的区别。new String(“str”) + new String(“01”); 会先在堆中进行创建两个对象”str”和”01”，然后再去看常量池中是否有，没有则创建。处理完了后再进行连接得到字符串”str01”，然后就只会在<code>堆</code>中进行创建。所以，单独这一句代码执行完毕后，堆和常量池中的情况为：常量池中有:”str”,”01”，堆中有”str”,”01”,”str01”。</p>
