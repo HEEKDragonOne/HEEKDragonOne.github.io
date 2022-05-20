@@ -1,0 +1,1567 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>数学建模-Matlab学习笔记（四） - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数学建模-Matlab学习笔记（四）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-29 19:57" pubdate>
+        May 29, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      94
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数学建模-Matlab学习笔记（四）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>MATLAB（矩阵实验室）是第四代高层次的编程语言和交互式环境数值计算，可视化和编程。由美国MathWorks公司开发的一种编程语言。用于算法开发、数据可视化、数据分析以及数值计算的高级技术计算语言和交互式环境，主要包括MATLAB和Simulink两大部分。拥有众多的内置命令和数学函数，可以帮助您在数学计算，绘图和执行数值计算方法。 </p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-MATLAT-的M文件"><a href="#1-MATLAT-的M文件" class="headerlink" title="1.MATLAT 的M文件"></a>1.MATLAT 的M文件</h2><p>MATLAB允许写两个程序文件：一是脚本、二是函数。</p>
+<ul>
+<li><p>脚本： 脚本文件 .m 扩展程序文件。在这些文件中写的一系列命令，想一起执行。脚本不接受输入和不返回任何输出。他们在工作区中的数据操作。</p>
+</li>
+<li><p>函数：函数文件 .m 扩展程序文件。函数可以接受输入和返回输出。内部变量是本地的函数。</p>
+</li>
+</ul>
+<p>.m 文件不一定要使用 MATLAB 编辑器创建，其他任何的文本编辑器也是可以的。MATLAB 命令和函数调用的脚本文件包含多个连续的行。可以运行一个脚本，在命令行中键入其名称。</p>
+<h3 id="1-1-脚本"><a href="#1-1-脚本" class="headerlink" title="1.1 脚本"></a>1.1 脚本</h3><h4 id="1-1-1-创建并运行脚本文件"><a href="#1-1-1-创建并运行脚本文件" class="headerlink" title="1.1.1 创建并运行脚本文件"></a>1.1.1 创建并运行脚本文件</h4><p>创建脚本文件，需要使用文本编辑器。MATLAB 编辑器，可使用两个方法：使用命令提示符、使用IDE。如果是在命令提示符下使用，键入编辑。这将打开编辑器。可以直接键入编辑，然后再文件名（ .m 扩展程序文件名）。</p>
+<h5 id="1-1-1-1-命令提示符"><a href="#1-1-1-1-命令提示符" class="headerlink" title="1.1.1.1 命令提示符"></a>1.1.1.1 命令提示符</h5><figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">edit <br>Or<br>edit &lt;filename&gt;<br></code></pre></div></td></tr></table></figure>
+<p>这将在默认情况下，MATLAB 目录中创建文件。如果想存储在一个特定的文件夹中的所有程序文件，则一定要提供整个路径。</p>
+<p>示例：创建一个文件夹名为 progs。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">mkdir progs    <span class="hljs-comment">% 在默认目录下创建目录 progs</span><br>chdir progs    <span class="hljs-comment">% 将当前目录更改为 progs</span><br>edit  prog1.m  <span class="hljs-comment">% 创建一个名为 prog1.m 的 m 文件 </span><br></code></pre></div></td></tr></table></figure>
+<p>如果首次创建的文件，MATLAB 会提示您进行确认。单击“Yes”。</p>
+<h5 id="1-1-1-2-IDE"><a href="#1-1-1-2-IDE" class="headerlink" title="1.1.1.2 IDE"></a>1.1.1.2 IDE</h5><p>选择 NEW -&gt; Script。这也打开编辑器，并创建一个文件名为命名。输入代码后可以命名并保存文件。创建和保存文件后，可以运行在两个方面：编辑器窗口中单击“Run”按钮、只要在命令提示符下键入文件名（不含扩展名）即可，如：&gt;&gt; prog1。</p>
+<h2 id="2-MATLAB-数据类型"><a href="#2-MATLAB-数据类型" class="headerlink" title="2.MATLAB 数据类型"></a>2.MATLAB 数据类型</h2><p>默认情况下，MATLAB 存储所有数值变量为双精度浮点值。其他数据类型存储文本，整数或单精度值或单个变量中相关数据的组合。MATLAB不需要任何类型声明或维度语句。当MATLAB遇到新的变量名称时，它将创建变量并分配适当的内存空间。如果变量已经存在，则MATLAB将使用新内容替换原始内容，并在必要时分配新的存储空间。</p>
+<p>MATLAB提供15种基本数据类型，分别是8种整型数据、单精度浮点型、双精度浮点型、逻辑型、字符串型、单元数组、结构体类型和函数句柄。每种数据类型存储矩阵或数组形式的数据。矩阵或数组的最小值是0到0，并且是可以到任何大小的矩阵或数组。如表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>int8</code></td>
+<td align="center"><code>8</code>位有符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>uint8</code></td>
+<td align="center"><code>8</code>位无符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>int16</code></td>
+<td align="center"><code>16</code>位有符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>uint16</code></td>
+<td align="center"><code>16</code>位无符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>int32</code></td>
+<td align="center"><code>32</code>位有符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>uint32</code></td>
+<td align="center"><code>32</code>位无符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>int64</code></td>
+<td align="center"><code>64</code>位有符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>uint64</code></td>
+<td align="center"><code>64</code>位无符号整数</td>
+</tr>
+<tr>
+<td align="center"><code>single</code></td>
+<td align="center">单精度数值数据</td>
+</tr>
+<tr>
+<td align="center"><code>double</code></td>
+<td align="center">双精度数值数据</td>
+</tr>
+<tr>
+<td align="center"><code>logical</code></td>
+<td align="center">逻辑值为<code>1</code>或<code>0</code>，分别代表<code>true</code>和<code>false</code></td>
+</tr>
+<tr>
+<td align="center"><code>char</code></td>
+<td align="center">字符数据(字符串作为字符向量存储)</td>
+</tr>
+<tr>
+<td align="center">单元格阵列</td>
+<td align="center">索引单元阵列，每个都能够存储不同维数和数据类型的数组</td>
+</tr>
+<tr>
+<td align="center">结构体</td>
+<td align="center">C型结构，每个结构具有能够存储不同维数和数据类型的数组的命名字段</td>
+</tr>
+<tr>
+<td align="center">函数处理</td>
+<td align="center">指向一个函数的指针</td>
+</tr>
+<tr>
+<td align="center">用户类</td>
+<td align="center">用户定义的类构造的对象</td>
+</tr>
+<tr>
+<td align="center">Java类</td>
+<td align="center">从Java类构造的对象</td>
+</tr>
+</tbody></table>
+<p>示例：创建脚本文件(datatype1.m)</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">str = <span class="hljs-string">&#x27;Hello World!&#x27;</span><br>n = <span class="hljs-number">2345</span><br>d = double(n)<br>un = uint32(<span class="hljs-number">789.50</span>)<br>rn = <span class="hljs-number">5678.92347</span><br>c = int32(rn)<br></code></pre></div></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">Trial&gt;&gt; datatype1<br><br>str =<br><br>    <span class="hljs-string">&#x27;Hello World!&#x27;</span><br><br><br>n =<br><br>        <span class="hljs-number">2345</span><br><br><br>d =<br><br>        <span class="hljs-number">2345</span><br><br><br>un =<br><br>  uint32<br><br>   <span class="hljs-number">790</span><br><br><br>rn =<br><br>   <span class="hljs-number">5.6789e+03</span><br><br><br>c =<br><br>  int32<br><br>   <span class="hljs-number">5679</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-1-整数类型"><a href="#2-1-整数类型" class="headerlink" title="2.1 整数类型"></a>2.1 整数类型</h3><p>MATLAB 中有 8 种类型的整数，其中包括 4 种有符号整数和 4 种无符号整数：有符号整数能够表示负整数和正整数，而无符号整数类型只能表示正整数和 0。MATLAB 支持 1、2、4 和 8 字节的有符号整数和无符号整数。<br>八种数据类型的名称、表示方法和类型转换函数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型</th>
+<th align="center">取值范围</th>
+<th align="center">转换函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">有符号<code>8</code>位整数</td>
+<td align="center">-2<sup>7</sup> ~ -2<sup>7</sup> - 1</td>
+<td align="center"><code>int8()</code></td>
+</tr>
+<tr>
+<td align="center">有符号 <code>16</code> 位整数</td>
+<td align="center">-2<sup>15</sup> ~ -2<sup>15</sup> - 1</td>
+<td align="center"><code>int16()</code></td>
+</tr>
+<tr>
+<td align="center">有符号 <code>32</code> 位整数</td>
+<td align="center">-2<sup>31</sup> ~ -2<sup>31</sup> - 1</td>
+<td align="center"><code>int32()</code></td>
+</tr>
+<tr>
+<td align="center">有符号 <code>64</code> 位整数</td>
+<td align="center">-2<sup>63</sup> ~ -2<sup>63</sup> - 1</td>
+<td align="center"><code>int64()</code></td>
+</tr>
+<tr>
+<td align="center">无符号 <code>8</code> 位整数</td>
+<td align="center">0 ~ 2<sup>8</sup> - 1</td>
+<td align="center"><code>uint8()</code></td>
+</tr>
+<tr>
+<td align="center">无符号 <code>16</code> 位整数</td>
+<td align="center">0 ~ 2<sup>16</sup> - 1</td>
+<td align="center"><code>uint16()</code></td>
+</tr>
+<tr>
+<td align="center">无符号 <code>32</code> 位整数</td>
+<td align="center">0 ~ 2<sup>32</sup> - 1</td>
+<td align="center"><code>uint32()</code></td>
+</tr>
+<tr>
+<td align="center">无符号 <code>64</code> 位整数</td>
+<td align="center">0 ~ 2<sup>64</sup> - 1</td>
+<td align="center"><code>uint64()</code></td>
+</tr>
+</tbody></table>
+<p>应用时要尽可能用字节数少的数据类型表示数据，这样可以节约存储空间和提高运算速度。</p>
+<h4 id="2-1-1-创建整数类型"><a href="#2-1-1-创建整数类型" class="headerlink" title="2.1.1 创建整数类型"></a>2.1.1 创建整数类型</h4><p>MATLAB 存储数值数据的默认类型是双精度浮点数，要存储为整数类型的数据，必须使用上表中的转换函数。</p>
+<blockquote>
+<ol>
+<li>创建一个有符号的 16 位整数。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">x = int16(<span class="hljs-number">32501</span>);<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>转换函数将其他数据类型转换为整型。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">str = <span class="hljs-string">&#x27;Hello!&#x27;</span><br>int8(str)<br></code></pre></div></td></tr></table></figure>
+<p>结果将把 str 字符串里面的每一个字符（包括中间的空格）转换为其 ASCII 码。<br>输出结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-built_in">ans</span> = <br>    <span class="hljs-number">1</span> x <span class="hljs-number">6</span> int8 行矢量<br>    <span class="hljs-number">72</span> <span class="hljs-number">101</span> <span class="hljs-number">108</span> <span class="hljs-number">108</span> <span class="hljs-number">111</span> <span class="hljs-number">33</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="3">
+<li>使用 whos() 函数可显示由一个变量表示的数组的维数、字节计数和数据类型。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">whos x<br><span class="hljs-comment">%输出结果</span><br>Name Size Bytes Class Attributes<br>x <span class="hljs-number">1</span>x1 <span class="hljs-number">2</span> int16<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="4">
+<li>使用 class() 函数可以知道数据类型并且指定输出</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">xType = class(x)<br><span class="hljs-comment">%输出结果</span><br>xType = <br>    int16<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="5">
+<li>使用 isinteger() 函数可以验证变量是否为整数</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">isinteger(x)<br><span class="hljs-comment">%输出结果</span><br><span class="hljs-built_in">ans</span> = <br>    logical<br>    <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>示例：基于相同整数数据类型之间的数学运算。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; k=int8(<span class="hljs-number">1</span>:<span class="hljs-number">7</span>)  <span class="hljs-comment">%创建一组整数</span><br>k =<br>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>   <span class="hljs-number">6</span>   <span class="hljs-number">7</span><br><br>&gt;&gt; m=int8(randperm(<span class="hljs-number">7</span>))  <span class="hljs-comment">%创建一组随机的整数</span><br>m =<br>   <span class="hljs-number">6</span>   <span class="hljs-number">3</span>   <span class="hljs-number">7</span>   <span class="hljs-number">5</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">4</span><br><br>&gt;&gt; k+m  <span class="hljs-comment">%加法</span><br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">7</span>    <span class="hljs-number">5</span>   <span class="hljs-number">10</span>    <span class="hljs-number">9</span>    <span class="hljs-number">6</span>    <span class="hljs-number">8</span>   <span class="hljs-number">11</span><br><br>&gt;&gt; k-m  <span class="hljs-comment">%减法</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">-5</span>   <span class="hljs-number">-1</span>   <span class="hljs-number">-4</span>   <span class="hljs-number">-1</span>    <span class="hljs-number">4</span>    <span class="hljs-number">4</span>    <span class="hljs-number">3</span><br><br>&gt;&gt; k.*m  <span class="hljs-comment">%元素与元素相乘</span><br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">6</span>    <span class="hljs-number">6</span>   <span class="hljs-number">21</span>   <span class="hljs-number">20</span>    <span class="hljs-number">5</span>   <span class="hljs-number">12</span>   <span class="hljs-number">28</span><br><br>&gt;&gt; k./m  <span class="hljs-comment">%元素与元素相除</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">5</span>   <span class="hljs-number">3</span>   <span class="hljs-number">2</span><br><br>&gt;&gt; k  <span class="hljs-comment">%重新输出</span><br>k =<br>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span>   <span class="hljs-number">5</span>   <span class="hljs-number">6</span>   <span class="hljs-number">7</span><br><br>&gt;&gt; k/k(<span class="hljs-number">2</span>)<br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">1</span>   <span class="hljs-number">1</span>   <span class="hljs-number">2</span>   <span class="hljs-number">2</span>   <span class="hljs-number">3</span>   <span class="hljs-number">3</span>   <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>多数情况下，整数的除法并不一定得到整数结果。</strong></p>
+<h4 id="2-1-2-整数溢出"><a href="#2-1-2-整数溢出" class="headerlink" title="2.1.2 整数溢出"></a>2.1.2 整数溢出</h4><p>由于每种整数数据类型都有相应的取值范围，因此数学运算有可能产生结果溢出。MATLAB 利用饱和处理此类问题，即当运算结果超出了由 intmin 和 intmax 指定的上下限时，就将该结果设置为 intmin 或 intmax 的返回值，到底是哪一个，主要看溢出的方向。</p>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; k=cast(<span class="hljs-string">&#x27;hellothere&#x27;</span>, <span class="hljs-string">&#x27;uint8&#x27;</span>)  <span class="hljs-comment">%将字符串转换为uint8类型</span><br>k =<br>   <span class="hljs-number">104</span>   <span class="hljs-number">101</span>   <span class="hljs-number">108</span>   <span class="hljs-number">108</span>   <span class="hljs-number">111</span>   <span class="hljs-number">116</span>   <span class="hljs-number">104</span>   <span class="hljs-number">101</span>   <span class="hljs-number">114</span>   <span class="hljs-number">101</span><br><br>&gt;&gt; double(k)+<span class="hljs-number">150</span>  <span class="hljs-comment">%double类型的加法</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">258</span>   <span class="hljs-number">258</span>   <span class="hljs-number">261</span>   <span class="hljs-number">266</span>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">264</span>   <span class="hljs-number">251</span><br><br>&gt;&gt; k+<span class="hljs-number">150</span>  <span class="hljs-comment">%uint8类型的加法，向上溢出</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">255</span>   <span class="hljs-number">255</span>   <span class="hljs-number">255</span>   <span class="hljs-number">255</span>   <span class="hljs-number">254</span>   <span class="hljs-number">251</span>   <span class="hljs-number">255</span>   <span class="hljs-number">251</span><br><br>&gt;&gt; k<span class="hljs-number">-110</span>  <span class="hljs-comment">%uint8类型的减法，向下溢出</span><br><span class="hljs-built_in">ans</span> =<br>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">6</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">4</span>   <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+
+<p>混合数据类型的运算仅限于在一个双精度标量和一个整数数据类型数组之间进行。整数数据类型中不存在双精度数据类型中常见的 inf 和 NaN。除 64 位整数数据类型外，其他整数数据类型都具有比双精度类型更高的存储效率。基于同一整数数据类型的数学运算将产生相同数据类型的结果。</p>
+<h3 id="2-2-浮点类型"><a href="#2-2-浮点类型" class="headerlink" title="2.2 浮点类型"></a>2.2 浮点类型</h3><p>MATLAB 用双精度或单精度格式表示浮点数，默认格式是双精度，但可以用转换函数转换为单精度。如果某个数据没有被指定数据类型，那么 MATLAB 会用双精度浮点数来存储它。为了得到其他类型的数值类型，可以使用类型转换函数。MATLAB 中的双精度浮点数和单精度浮点数均采用 IEEE 754 中规定的格式来定义。</p>
+<table>
+<thead>
+<tr>
+<th align="center">数据类型名称</th>
+<th align="center">存储大小</th>
+<th align="center">表示范围</th>
+<th>类型转换函数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>双精度</code>浮点数</td>
+<td align="center">4 字节</td>
+<td align="center">-1.79769 × 10<sup>308</sup> ~+ 1.79769 ×10<sup>308</sup></td>
+<td><code>double()</code></td>
+</tr>
+<tr>
+<td align="center"><code>单精度</code>浮点数</td>
+<td align="center">8 字节</td>
+<td align="center">-3.40282 × 10<sup>38</sup> ~+ 3.40282 × 10<sup>38</sup></td>
+<td><code>single()</code></td>
+</tr>
+</tbody></table>
+<h4 id="2-2-1-双精度浮点数"><a href="#2-2-1-双精度浮点数" class="headerlink" title="2.2.1 双精度浮点数"></a>2.2.1 双精度浮点数</h4><p>MATLAB 按照 IEEE 754 标准构造双精度型数据。作为双精度存储的任何数据，都需要 64 位。</p>
+<table>
+<thead>
+<tr>
+<th align="center">位</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">63</td>
+<td align="center">符号，0 = 正，1 = 负</td>
+</tr>
+<tr>
+<td align="center">62~52</td>
+<td align="center">指数，偏差值为 1023</td>
+</tr>
+<tr>
+<td align="center">51~0</td>
+<td align="center">数 1.f 的小数 f</td>
+</tr>
+</tbody></table>
+<h5 id="2-2-1-1-建立双精度数"><a href="#2-2-1-1-建立双精度数" class="headerlink" title="2.2.1.1 建立双精度数"></a>2.2.1.1 建立双精度数</h5><p>因为 MATLAB 默认数值型数据是双精度类型，所以能够用最简单的赋值语句建立双精度数。<br>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x = <span class="hljs-number">5.73</span> * <span class="hljs-number">10</span> ^ <span class="hljs-number">300</span><br>x = <br>    <span class="hljs-number">5.7300e+300</span><br></code></pre></div></td></tr></table></figure>
+<p>可以用 isfloat() 函数用来验证X是一个双精度的浮点数。</p>
+<h5 id="2-2-1-2-转换到双精度数"><a href="#2-2-1-2-转换到双精度数" class="headerlink" title="2.2.1.2 转换到双精度数"></a>2.2.1.2 转换到双精度数</h5><p>使用 double() 函数，可以把其他数值型数据、字符、字符串等转换成双精度。<br>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; y = int64(<span class="hljs-number">-589324077574</span>);<br>&gt;&gt; x = double(y)<br>x = <br>    <span class="hljs-number">-5.8932e+11</span><br></code></pre></div></td></tr></table></figure>
+<h5 id="2-2-1-3-最大和最小的双精度值"><a href="#2-2-1-3-最大和最小的双精度值" class="headerlink" title="2.2.1.3 最大和最小的双精度值"></a>2.2.1.3 最大和最小的双精度值</h5><p>MATLAB 的 realmax() 和 realmin() 函数返回能够表示的最大和最小双精度值。<br>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; str = <span class="hljs-string">&#x27;The range for double is : \n\t%g to %g&#x27;</span>;<br>&gt;&gt; sprintf(str, <span class="hljs-built_in">realmin</span>, <span class="hljs-built_in">realmax</span>)<br><span class="hljs-built_in">ans</span> = <br>    The range <span class="hljs-keyword">for</span> double is:<br>        <span class="hljs-number">2.22507e-308</span> to <span class="hljs-number">1.79769e+308</span><br></code></pre></div></td></tr></table></figure>
+<p>str 字符串的后半部分\n\t%g to %g用于规定输出格式，称其为格式字串（format string），这与 C语言基本相同。其中 \n 和 \t 是转义字符（Escape Character）；转义字符是一种特殊的字符常量，它们以反斜杠\开头，后面跟一个或几个字符。它们具有特定的含义，不同于字符原有的意义，故称“转义”字符。其他转义字符如表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">转义字符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">\n</td>
+<td align="center">换行，将当前位置移到下一行开头</td>
+</tr>
+<tr>
+<td align="center">\t</td>
+<td align="center">水平制表（跳到下一个 TAB 位置）</td>
+</tr>
+<tr>
+<td align="center">\b</td>
+<td align="center">退格，将当前位置移到本行的开头</td>
+</tr>
+<tr>
+<td align="center">\r</td>
+<td align="center">回车，将当前位置移到本行开头</td>
+</tr>
+<tr>
+<td align="center">\f</td>
+<td align="center">换页，将当前位置移到本行开头</td>
+</tr>
+<tr>
+<td align="center">\\</td>
+<td align="center">代表一个反斜杠字符“\”</td>
+</tr>
+<tr>
+<td align="center">\‘</td>
+<td align="center">代表一个单引号（撇号）字符</td>
+</tr>
+<tr>
+<td align="center">\“</td>
+<td align="center">代表一个双引号字符</td>
+</tr>
+<tr>
+<td align="center">\ddd</td>
+<td align="center">1 到 3 位八进制数所代表的 ASCII 字符</td>
+</tr>
+<tr>
+<td align="center">\xhh</td>
+<td align="center">1 到 2 位十六进制数所代表的的 ASCII 字符</td>
+</tr>
+</tbody></table>
+<p>sprintf() 函数的作用是将规定输出格式的数值写入到字符串的 str 中，成为字符串 str 的一部分。其中 %g 是用于规定输出格式的字符串，称为格式转换字符（Conversion Character），其位置将被后面的 realmin() 和 realmax() 的值所取代。%g 规定输出格式是“紧凑指数形式”。常用的格式转换字符如表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">格式转换字符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">%c</td>
+<td align="center">单字符</td>
+</tr>
+<tr>
+<td align="center">%d</td>
+<td align="center">有符号的十进制数</td>
+</tr>
+<tr>
+<td align="center">%e</td>
+<td align="center">e 指数形式，欧拉数用小写（e）</td>
+</tr>
+<tr>
+<td align="center">%E</td>
+<td align="center">e 指数形式，欧拉数用大写（E）</td>
+</tr>
+<tr>
+<td align="center">%f</td>
+<td align="center">定点数形式</td>
+</tr>
+<tr>
+<td align="center">%g</td>
+<td align="center">%e 或 %f 的紧凑格式，不显示多余的零</td>
+</tr>
+<tr>
+<td align="center">%G</td>
+<td align="center">与 %g 相同，但用大写 E</td>
+</tr>
+<tr>
+<td align="center">%o</td>
+<td align="center">八进制（octal）数形式</td>
+</tr>
+<tr>
+<td align="center">%s</td>
+<td align="center">字符串</td>
+</tr>
+<tr>
+<td align="center">%u</td>
+<td align="center">十进制（decimal）数形式</td>
+</tr>
+<tr>
+<td align="center">%x</td>
+<td align="center">十六进制数形式，用小写字母 a~f</td>
+</tr>
+<tr>
+<td align="center">%X</td>
+<td align="center">十六进制数形式，用大写字母 A~F</td>
+</tr>
+</tbody></table>
+<h4 id="2-2-2-单精度浮点数"><a href="#2-2-2-单精度浮点数" class="headerlink" title="2.2.2 单精度浮点数"></a>2.2.2 单精度浮点数</h4><p>MATLAB 按照 IEEE 754 标准构造单精度型数据。作为单精度存储的任何数据，都需要 32 位。</p>
+<table>
+<thead>
+<tr>
+<th align="center">位</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">31</td>
+<td align="center">符号，0 = 正，1 = 负</td>
+</tr>
+<tr>
+<td align="center">30 ~ 23</td>
+<td align="center">指数，偏差值为 127</td>
+</tr>
+<tr>
+<td align="center">22 ~ 0</td>
+<td align="center">数 1.f 的小数 f</td>
+</tr>
+</tbody></table>
+<p>单精度值依然使用 realmax() 和 realmin() 函数返回单精度能够表示的最大值和最小值，只是调用时要有参数single。</p>
+<blockquote>
+<ol>
+<li>建立单精度数必须使用 single() 函数建立单精度数。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x = single(<span class="hljs-number">25.783</span>);<br>&gt;&gt; whos x<br>    Name    Size    Bytes  Class      Attributes<br>    x       <span class="hljs-number">1</span>x1         <span class="hljs-number">4</span>  single<br></code></pre></div></td></tr></table></figure>
+<p>同样，用 single 函数能将其他数字、字符、字串和逻辑等类型的数转换成单精度数。<br>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; a=<span class="hljs-built_in">zeros</span>(<span class="hljs-number">1</span>,<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;single&#x27;</span>)  <span class="hljs-comment">%指定数据类型作为最后一个参数</span><br>a =<br>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span><br><br>&gt;&gt; b=<span class="hljs-built_in">eye</span>(<span class="hljs-number">3</span>,<span class="hljs-string">&#x27;single&#x27;</span>)  <span class="hljs-comment">%指定数据类型作为最后一个参数</span><br>b =<br>    <span class="hljs-number">1</span>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span><br>   <span class="hljs-number">0</span>    <span class="hljs-number">1</span>    <span class="hljs-number">0</span><br>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span>    <span class="hljs-number">1</span><br><br>&gt;&gt; c=single(<span class="hljs-number">1</span>:<span class="hljs-number">7</span>)  <span class="hljs-comment">%将默认双精度转换为单精度</span><br>c =<br>    <span class="hljs-number">1</span>    <span class="hljs-number">2</span>    <span class="hljs-number">3</span>    <span class="hljs-number">4</span>    <span class="hljs-number">5</span>    <span class="hljs-number">6</span>    <span class="hljs-number">7</span><br><br>&gt;&gt; d=cast(<span class="hljs-number">6</span>:<span class="hljs-number">-1</span>:<span class="hljs-number">0</span>,<span class="hljs-string">&#x27;single&#x27;</span>)  <span class="hljs-comment">%使用更通用的cast函数</span><br>d =<br>    <span class="hljs-number">6</span>    <span class="hljs-number">5</span>    <span class="hljs-number">4</span>    <span class="hljs-number">3</span>    <span class="hljs-number">2</span>    <span class="hljs-number">1</span>    <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+<p>单精度数据之间或单精度与双精度数据之间的数学运算结果将为单精度数。(接上面代码)</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; c.^d<br><span class="hljs-built_in">ans</span> =<br>     <span class="hljs-number">1</span>    <span class="hljs-number">32</span>    <span class="hljs-number">81</span>    <span class="hljs-number">64</span>    <span class="hljs-number">25</span>     <span class="hljs-number">6</span>     <span class="hljs-number">1</span><br><br>&gt;&gt; c*<span class="hljs-built_in">pi</span><br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">3.1416</span>    <span class="hljs-number">6.2832</span>    <span class="hljs-number">9.4248</span>   <span class="hljs-number">12.5664</span>   <span class="hljs-number">15.7080</span>   <span class="hljs-number">18.8496</span>   <span class="hljs-number">21.9911</span><br><br>&gt;&gt; d.*<span class="hljs-built_in">rand</span>(<span class="hljs-built_in">size</span>(d))<br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">5.0443</span>    <span class="hljs-number">1.2714</span>    <span class="hljs-number">3.2571</span>    <span class="hljs-number">0.7306</span>    <span class="hljs-number">1.8585</span>    <span class="hljs-number">0.3500</span>    <span class="hljs-number">0</span><br><br>&gt;&gt; class(<span class="hljs-built_in">ans</span>)<br><span class="hljs-built_in">ans</span> =<br>    single<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>单精度数据类型中包含双精度数据类型中常见的特殊浮点值 inf 和 NaN。</li>
+</ol>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; c =<br>     <span class="hljs-number">0</span>     <span class="hljs-number">2</span>     <span class="hljs-number">0</span>     <span class="hljs-number">4</span>     <span class="hljs-number">0</span>     <span class="hljs-number">6</span>     <span class="hljs-number">0</span><br><br>&gt;&gt; c./c<br><span class="hljs-built_in">ans</span> =<br>    NaN     <span class="hljs-number">1</span>   NaN     <span class="hljs-number">1</span>   NaN     <span class="hljs-number">1</span>   NaN<br><br>&gt;&gt; <span class="hljs-number">1.</span>/c<br><span class="hljs-built_in">ans</span> =<br>    Inf    <span class="hljs-number">0.5000</span>    Inf    <span class="hljs-number">0.2500</span>    Inf    <span class="hljs-number">0.1667</span>    Inf<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-3-NAN"><a href="#2-3-NAN" class="headerlink" title="2.3 NAN"></a>2.3 NAN</h3><p>NaN 是 Not a Number 的缩写，意思是“不是一个有效的数字”。MATLAB NaN 表示一个没有意义的数字，这种数字在数学上是无法定义的。NaN 一般是在没有意义的数学计算中得到的，比如 0/0，Inf/Inf，Inf-Inf，Inf*0。在处理不完整的数据时，这些数据也会被当做 NaN，比如在读取数字时，遇到的字符不是数字，就会被当做 NaN。</p>
+<p>对 NaN 进行运算的结果仍然是 NaN。<br>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; a=[<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-built_in">nan</span> <span class="hljs-built_in">inf</span> <span class="hljs-built_in">nan</span>]<br>a =<br>    <span class="hljs-number">1</span>    <span class="hljs-number">2</span>   NaN   Inf   NaN<br><br>&gt;&gt; b=<span class="hljs-number">2</span>*a<br>b =<br>    <span class="hljs-number">2</span>    <span class="hljs-number">4</span>   NaN   Inf   NaN<br><br>&gt;&gt; c=<span class="hljs-built_in">sqrt</span>(a)<br>c =<br>    <span class="hljs-number">1.0000</span>    <span class="hljs-number">1.4142</span>    NaN    Inf    NaN<br><br>&gt;&gt; d=(a==<span class="hljs-built_in">nan</span>)<br>d =<br>    <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">0</span><br><br>&gt;&gt; f=(a~=<span class="hljs-built_in">nan</span>)<br>f =<br>    <span class="hljs-number">1</span>    <span class="hljs-number">1</span>    <span class="hljs-number">1</span>    <span class="hljs-number">1</span>    <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>第一条语句生成了一个含有 NaN 的向量 a，第二和第三条语句分别对 a 进行乘法和开方运算，从运算结果可以看到，对 NaN 进行数学运算的结果仍然是 NaN。第四条和第五条语句的结果或许有些出乎意料：a==nan 得到的结果全部都是 0（false），而 a～=nan 却得到了全部是 1（true）的结果。这一结果表明，在 MATLAB 中，不同的 NaN 之间是不相等的。鉴于 NaN 的这种特性，我们在进行关系运算时，就必须确定数组中是否含有 NaN。</p>
+<h4 id="2-3-1-isnan-函数"><a href="#2-3-1-isnan-函数" class="headerlink" title="2.3.1 isnan() 函数"></a>2.3.1 isnan() 函数</h4><p>MATLAB 为我们提供了一个内置函数 isnan()，专门用来寻找数组中是否含有 NaN。<br>示例：利用 isnan() 函数寻找 a 中的 NaN。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; g=<span class="hljs-built_in">isnan</span>(a)<br>g =<br>    <span class="hljs-number">0</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span>   <span class="hljs-number">0</span>   <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>isnan() 函数在数组中 NaN 的位置返回 1（true）。</p>
+<p>将 isnan() 和 find() 函数联合使用可以寻找数组中 NaN 的位置索引。<br>示例：找到数组 a 中 NaN 的位置，然后在这些位置上用 0 替代 NaN。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; <span class="hljs-built_in">i</span>=<span class="hljs-built_in">find</span>(<span class="hljs-built_in">isnan</span>(a))  <span class="hljs-comment">%查找NaN的索引位置</span><br><span class="hljs-built_in">i</span> =<br>     <span class="hljs-number">3</span>     <span class="hljs-number">5</span><br><br>&gt;&gt; a(<span class="hljs-built_in">i</span>)=<span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(<span class="hljs-built_in">i</span>))  <span class="hljs-comment">%将NaN更改为zeros</span><br>a =<br>    <span class="hljs-number">1</span>    <span class="hljs-number">2</span>    <span class="hljs-number">0</span>    Inf    <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-4-空数组"><a href="#2-4-空数组" class="headerlink" title="2.4 空数组"></a>2.4 空数组</h3><p>MATLAB 空数组是开发人员定义的一个数据类型（这一点与 MATLAB NaN 不同，因为 NaN 是由 IEEE 标准定义的），它指有一维或多维的长度为 0 的数组变量。空数组的表达方式也很多，最简单的一种是直接用两个方括号表示的数组，即 [ ] 数组。</p>
+<p>示例：几种空数组的创建方式，并用 size 或 length 查看了它们的维数或长度。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; <span class="hljs-built_in">size</span>([])  <span class="hljs-comment">%最简单的空数组</span><br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">0</span>    <span class="hljs-number">0</span><br><br>&gt;&gt; c=<span class="hljs-built_in">zeros</span>(<span class="hljs-number">0</span>,<span class="hljs-number">5</span>)  <span class="hljs-comment">%一个多列的空数组</span><br>c =<br>  空的 <span class="hljs-number">0</span>×<span class="hljs-number">5</span> double 矩阵<br><br>&gt;&gt; <span class="hljs-built_in">size</span>(c)<br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">0</span>    <span class="hljs-number">5</span><br><br>&gt;&gt; d=<span class="hljs-built_in">ones</span>(<span class="hljs-number">4</span>,<span class="hljs-number">0</span>)  <span class="hljs-comment">%一个多行的空数组</span><br>d =<br>  空的 <span class="hljs-number">4</span>×<span class="hljs-number">0</span> double 矩阵<br><br>&gt;&gt; <span class="hljs-built_in">size</span>(d)<br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">4</span>    <span class="hljs-number">0</span><br><br>&gt;&gt; <span class="hljs-built_in">length</span>(d)  <span class="hljs-comment">%即使它有4行,但是它的长度还是为零，</span><br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+<p>使一个数组的维数为 0 也许会感到困惑，但这在许多运算中是非常有用的。空数组有时也出现在一些函数的返回参数中。在 MATLAB 中，很多函数在无法返回适当结果时，往往会返回空数组。</p>
+<p>示例：使用  find() 函数 。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x=<span class="hljs-number">-2</span>:<span class="hljs-number">2</span><br>x =<br>    <span class="hljs-number">-2</span>    <span class="hljs-number">-1</span>     <span class="hljs-number">0</span>     <span class="hljs-number">1</span>     <span class="hljs-number">2</span><br><br>&gt;&gt; y=<span class="hljs-built_in">find</span>(x&gt;<span class="hljs-number">2</span>)<br>y =<br>    空的 <span class="hljs-number">1</span>×<span class="hljs-number">0</span> double 行矢量<br></code></pre></div></td></tr></table></figure>
+<p>数组 x 中不存在大于 2 的值，因此找不到正确的索引值，于是 find 就返回一个空数组。</p>
+<blockquote>
+<ul>
+<li>使用 isempty() 函数测试一个返回值是否是空数组。</li>
+</ul>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; <span class="hljs-built_in">isempty</span>(y)<br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+<p>由于空数组也存在维数（如前面创建的 c 为 0×5 的数组），在 MATLAB 中，不同维数的空数组之间是不能进行比较的，因此，验证一个数组是否是空数组时，最好不要使用关系运算，建议使用 isempty() 函数。</p>
+<p>示例：验证前面创建的 c 是否是空数组，只能采用 isempty() 函数。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; c==[]  <span class="hljs-comment">%用一个 0×5 的数组和一个 0×0 的数组比较会出错</span><br>错误使用  ==<br>矩阵维度必须一致。<br><br>&gt;&gt; <span class="hljs-built_in">isempty</span>(c)  <span class="hljs-comment">%isempty()返回所需的结果</span><br><span class="hljs-built_in">ans</span> =<br>    <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>当用户确认空数组是最简单的空数组 [ ] 时，关系运算也成立，只不过运算结果仍是空数组。</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; a=[];  <span class="hljs-comment">%创建空数组</span><br>&gt;&gt; a==[]  <span class="hljs-comment">%比较大小相等的空数组仍然会得到一个空数组</span><br><span class="hljs-built_in">ans</span> =<br>    []<br></code></pre></div></td></tr></table></figure>
+
+<p>将一个非空数组与一个空数组进行比较，结果返回一个空数组。<br>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; b=<span class="hljs-number">1</span>;  <span class="hljs-comment">%创建非空变量</span><br>&gt;&gt; b==[]  <span class="hljs-comment">%将非空变量与空变量进行比较会产生空结果</span><br><span class="hljs-built_in">ans</span> =<br>    []<br><br>&gt;&gt; b~=[]  <span class="hljs-comment">%即使不相等的比较也会产生空结果</span><br><span class="hljs-built_in">ans</span> =<br>    []<br></code></pre></div></td></tr></table></figure>
+
+<p>对空数组执行关系运算时，要么返回一个错误信息（如在两个不同维数的空数组之间进行比较时），要么返回一个空数组（如前面的两个例子），这通常都不是我们想要的结果，因此，当有空数组出现时，建议用户使用 isempty() 函数，尽量不要使用关系运算。</p>
+<h3 id="2-5-复数类型"><a href="#2-5-复数类型" class="headerlink" title="2.5 复数类型"></a>2.5 复数类型</h3><p>复数是指既包含实部又包含虚部的数，虚部的单位是 -1 的开平方根，在 MATLAB 中用字母 i 或 j 中的一个表示，i 和 j 的作用是完全一样的。即：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-number">2</span>+<span class="hljs-number">3</span><span class="hljs-built_in">i</span><br><span class="hljs-number">2</span>+<span class="hljs-number">3</span><span class="hljs-built_in">j</span><br><span class="hljs-comment">% 两者的结果是一样的</span><br></code></pre></div></td></tr></table></figure>
+
+
+<p>复数的一般形式：C = a + bi（其中 C 为复数，a 和 b 均为实数，i 代表 -1 的开平方根。a、b 分别为 C 的实部和虚部。）</p>
+<p>由于复数有两个部分，所以它能在平面内标出。这个平面的横轴是实轴，纵轴是虚轴，所以复数在这个平面内为一个点，横轴为 a，纵轴为 b。用上面的方式表示一个复数，称为直角坐标表示，坐标的横轴与纵轴分别代表复数的实部与虚部。</p>
+<p>若复数在一个平面内，则有另一种表达方式，即极坐标表示：c = a + bi = z∠θ（其中 z 代表向量的模，θ 代表辐角。）</p>
+<p>直角坐标中的 a、b 和极坐标 z、θ 之间的关系为：<br>a = z cosθ<br>b = z sinθ<br>z = (a<sup>2</sup>+b<sup>2</sup>)<sup>1/2</sup><br>θ = tan<sup>-1</sup> (b/a)</p>
+<h4 id="2-5-1-创建复数"><a href="#2-5-1-创建复数" class="headerlink" title="2.5.1 创建复数"></a>2.5.1 创建复数</h4><p>在 MATLAB 中创建复数有两种方法：直接生成或者使用 complex() 函数生成。</p>
+<h5 id="2-5-1-1-直接生成法"><a href="#2-5-1-1-直接生成法" class="headerlink" title="2.5.1.1 直接生成法"></a>2.5.1.1 直接生成法</h5><figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x = <span class="hljs-number">2</span> + <span class="hljs-number">3</span><span class="hljs-built_in">i</span><br>x = <br>    <span class="hljs-number">2.0000</span> + <span class="hljs-number">3.0000</span><span class="hljs-built_in">i</span><br></code></pre></div></td></tr></table></figure>
+<p>所谓直接生成，也就是将复数直接写出来。</p>
+<h5 id="2-5-1-2-使用-complex-函数生成"><a href="#2-5-1-2-使用-complex-函数生成" class="headerlink" title="2.5.1.2 使用 complex() 函数生成"></a>2.5.1.2 使用 complex() 函数生成</h5><figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x=<span class="hljs-number">2</span><br>&gt;&gt; y=<span class="hljs-number">4</span><br>&gt;&gt; z=<span class="hljs-built_in">complex</span>(x, y)<br><br>z =<br>    <span class="hljs-number">2.0000</span> + <span class="hljs-number">4.0000</span><span class="hljs-built_in">i</span><br></code></pre></div></td></tr></table></figure>
+<p>其中 x、y 为实数，得到的 z 是以 x 为实部，y 为虚部的复数。<br>也可以这样使用 complex()  函数：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x=<span class="hljs-number">2</span><br>&gt;&gt; z=<span class="hljs-built_in">complex</span>(x)<br><br>z =<br>    <span class="hljs-number">2.0000</span> + <span class="hljs-number">0.0000</span><span class="hljs-built_in">i</span><br></code></pre></div></td></tr></table></figure>
+<p>其中 x 为实数，得到的 z 是以 x 为实部，以 0 为虚部的复数。</p>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; x = <span class="hljs-built_in">rand</span>(<span class="hljs-number">3</span>) * <span class="hljs-number">5</span>;<br>&gt;&gt; y= <span class="hljs-built_in">rand</span>(<span class="hljs-number">3</span>) * <span class="hljs-number">-8</span>;<br>&gt;&gt; z = <span class="hljs-built_in">complex</span>(x,y)<br>z = <br>    <span class="hljs-number">4.0736</span> - <span class="hljs-number">7.7191</span><span class="hljs-built_in">i</span>  <span class="hljs-number">4.5669</span> - <span class="hljs-number">7.6573</span><span class="hljs-built_in">i</span>  <span class="hljs-number">1.3925</span> - <span class="hljs-number">1.1351</span><span class="hljs-built_in">i</span><br>    <span class="hljs-number">4.5290</span> - <span class="hljs-number">1.2609</span><span class="hljs-built_in">i</span>  <span class="hljs-number">3.1618</span> - <span class="hljs-number">3.8830</span><span class="hljs-built_in">i</span>  <span class="hljs-number">2.7344</span> - <span class="hljs-number">3.3741</span><span class="hljs-built_in">i</span><br>    <span class="hljs-number">0.6349</span> - <span class="hljs-number">7.7647</span><span class="hljs-built_in">i</span>  <span class="hljs-number">0.4877</span> - <span class="hljs-number">6.4022</span><span class="hljs-built_in">i</span>  <span class="hljs-number">4.7875</span> - <span class="hljs-number">7.3259</span><span class="hljs-built_in">i</span><br></code></pre></div></td></tr></table></figure>
+<p>应用 rand(3) 函数生成 3×3 的随机数矩阵。通过 real() 和 imag() 函数可以把复数分为实数和虚数部分。<br>常见的支持复数运算的 MATLAB 函数。如表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>conj(c)</code></td>
+<td align="center">计算 c 的共轭复数，如果 c=a+bi，那么 conj(c)=a-bi</td>
+</tr>
+<tr>
+<td align="center"><code>real(c)</code></td>
+<td align="center">返回复数 c 的实部</td>
+</tr>
+<tr>
+<td align="center"><code>imag(c)</code></td>
+<td align="center">返回复数 c 的虚部</td>
+</tr>
+<tr>
+<td align="center"><code>isreal(c)</code></td>
+<td align="center">如果数组 c 中没有一个元素有虚部，函数 isreal(c) 将返回 1；所以如果一个数组 c 是 复数组成，那么 isreal(c) 将返回 0</td>
+</tr>
+<tr>
+<td align="center"><code>abs(c)</code></td>
+<td align="center">返回复数 c 的模</td>
+</tr>
+<tr>
+<td align="center"><code>angle(c)</code></td>
+<td align="center">返回复数 c 的幅角</td>
+</tr>
+</tbody></table>
+<h4 id="2-5-2-数据类型函数"><a href="#2-5-2-数据类型函数" class="headerlink" title="2.5.2 数据类型函数"></a>2.5.2 数据类型函数</h4><table>
+<thead>
+<tr>
+<th align="center">函数名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>double</code></td>
+<td align="center">创建或转化为双精度数据类型</td>
+</tr>
+<tr>
+<td align="center"><code>single</code></td>
+<td align="center">创建或转化为单精度数据类型</td>
+</tr>
+<tr>
+<td align="center"><code>int8</code>，<code>int16</code>，<code>int32</code>，<code>int64</code></td>
+<td align="center">创建或转化为有符号整数数据类型</td>
+</tr>
+<tr>
+<td align="center"><code>uint8</code>，<code>uint16</code>，<code>uint32</code>，<code>uint64</code></td>
+<td align="center">创建或转化为无符号整数数据类型</td>
+</tr>
+<tr>
+<td align="center"><code>isnumeric</code></td>
+<td align="center">若是整数或浮点数据类型，返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>isinteger</code></td>
+<td align="center">若是整数数据类型，返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>isfloat</code></td>
+<td align="center">若是单精度或双精度数据类型，返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>isa(x,&#39;type&#39;)</code></td>
+<td align="center">type 包括 numeric、integer 和 float，当 x 类型为 type 时，返回 true</td>
+</tr>
+<tr>
+<td align="center"><code>case(x,&#39;type&#39;)</code></td>
+<td align="center">将 x 类型置为 type</td>
+</tr>
+<tr>
+<td align="center"><code>intmax(&#39;type&#39;)</code></td>
+<td align="center">type 数据类型的最大整数值</td>
+</tr>
+<tr>
+<td align="center"><code>intmin(&#39;type&#39;)</code></td>
+<td align="center">type 数据类型的最小整数值</td>
+</tr>
+<tr>
+<td align="center"><code>realmax(&#39;type&#39;)</code></td>
+<td align="center">type 数据类型的最大浮点实数值</td>
+</tr>
+<tr>
+<td align="center"><code>realmin(&#39;type&#39;)</code></td>
+<td align="center">type 数据类型的最小浮点实数值</td>
+</tr>
+<tr>
+<td align="center"><code>eps(&#39;type&#39;)</code></td>
+<td align="center">type 数据类型的 eps 值（浮点值）</td>
+</tr>
+<tr>
+<td align="center"><code>eps(x)</code></td>
+<td align="center">x 的 eps 值，即 x 与 MATLAB 能表示的和其相邻的同数据类型的那个数之间的距离</td>
+</tr>
+<tr>
+<td align="center"><code>zeros(...,&#39;type&#39;)</code></td>
+<td align="center">创建数据类型为 type 的全 0 阵列</td>
+</tr>
+<tr>
+<td align="center"><code>ones(...,&#39;type&#39;)</code></td>
+<td align="center">创建数据类型为 type 的全 1 阵列</td>
+</tr>
+<tr>
+<td align="center"><code>eye(...,&#39;type&#39;)</code></td>
+<td align="center">创建数据类型为 type 的单位阵列</td>
+</tr>
+</tbody></table>
+<h3 id="2-6-标点符号"><a href="#2-6-标点符号" class="headerlink" title="2.6 标点符号"></a>2.6 标点符号</h3><p>MATLAB 中分号、冒号、逗号等常用标点符号的作用如表。</p>
+<table>
+<thead>
+<tr>
+<th align="center">名称</th>
+<th align="center">符号</th>
+<th align="center">功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">空格</td>
+<td align="center"></td>
+<td align="center">用于输入变量之间的分隔符以及数组行元素之间的分隔符</td>
+</tr>
+<tr>
+<td align="center">逗号</td>
+<td align="center"><code>,</code></td>
+<td align="center">用于要显示计算结果的命令之间的分隔符；用于输入变量之间的分隔符；用于数组行元素之间的分隔符</td>
+</tr>
+<tr>
+<td align="center">点号</td>
+<td align="center"><code>.</code></td>
+<td align="center">用于数值中的小数点</td>
+</tr>
+<tr>
+<td align="center">分号</td>
+<td align="center"><code>;</code></td>
+<td align="center">用于不显示命令行的结尾；用于不显示结果直接的分隔符；用户数组行元素之间的分隔</td>
+</tr>
+<tr>
+<td align="center">冒号</td>
+<td align="center"><code>:</code></td>
+<td align="center">用于生成一维数值数组，表示一维数值的全部元素或多维数组某一维的全部元素</td>
+</tr>
+<tr>
+<td align="center">百分号</td>
+<td align="center"><code>%</code></td>
+<td align="center">用于注释的前面，在它后面的命令不需要执行</td>
+</tr>
+<tr>
+<td align="center">单引号</td>
+<td align="center"><code>&#39;</code></td>
+<td align="center">用于括住字符串</td>
+</tr>
+<tr>
+<td align="center">圆括号</td>
+<td align="center"><code>()</code></td>
+<td align="center">用于引用数组元素；用于函数输入变量列表；用于确定算术运算的先后次序</td>
+</tr>
+<tr>
+<td align="center">方括号</td>
+<td align="center"><code>[]</code></td>
+<td align="center">用于构成向量和矩阵；用于函数输出列表</td>
+</tr>
+<tr>
+<td align="center">花括号</td>
+<td align="center"><code>&#123;&#125;</code></td>
+<td align="center">用于构成元胞数组</td>
+</tr>
+<tr>
+<td align="center">下划线</td>
+<td align="center"><code>_</code></td>
+<td align="center">用于一个变量、函数或文件名的连字符</td>
+</tr>
+<tr>
+<td align="center">续行号</td>
+<td align="center"><code>...</code></td>
+<td align="center">用于把后面的行与该行连接以构成一个较长的命令</td>
+</tr>
+<tr>
+<td align="center">“@”号</td>
+<td align="center"><code>@</code></td>
+<td align="center">用于放在函数名前形成函数句柄；用于放在目录名前形成用户对象类目录</td>
+</tr>
+</tbody></table>
+<h4 id="2-6-1-冒号（-）的常用方法"><a href="#2-6-1-冒号（-）的常用方法" class="headerlink" title="2.6.1 冒号（:）的常用方法"></a>2.6.1 冒号（:）的常用方法</h4><blockquote>
+<ol>
+<li>a:b表示 [a,a+1,…,b]。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; A = <span class="hljs-number">1</span>:<span class="hljs-number">6</span><br>A = <br>    <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>如果 b 和 a 不是整数，则向量的最后一位数是 n+a，且 n=fix(b-a)。(a&lt;b)</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; A = <span class="hljs-number">1.2</span>:<span class="hljs-number">5.2</span><br>A = <br>    <span class="hljs-number">1.2000</span> <span class="hljs-number">2.2000</span> <span class="hljs-number">3.2000</span> <span class="hljs-number">4.2000</span> <span class="hljs-number">5.2000</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="3">
+<li>上面的前提是 a&lt;b，如果 a&gt;b 则会出现空值。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; A = <span class="hljs-number">6</span>:<span class="hljs-number">1</span><br>A = <br>    空的 <span class="hljs-number">1</span>x0 double 行矢量<br></code></pre></div></td></tr></table></figure>
+<p>此时， A 是空矩阵，从工作区也可以看到 A。</p>
+<blockquote>
+<ol start="4">
+<li>a : b : c表示 [a,a+c,…,a+n*c]，其中 n=fix((b-a)/c)。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; A = <span class="hljs-number">1</span>:<span class="hljs-number">3</span>:<span class="hljs-number">11</span><br>A = <br>    <span class="hljs-number">1</span> <span class="hljs-number">4</span> <span class="hljs-number">7</span> <span class="hljs-number">10</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="5">
+<li>A(:)表示以一列的方式显示 A 中的所有元素。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; A = [<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>;<span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span>]<br>A = <br>    <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span><br>    <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span><br>&gt;&gt; A(:)<br><span class="hljs-built_in">ans</span> = <br>    <span class="hljs-number">1</span><br>    <span class="hljs-number">4</span><br>    <span class="hljs-number">2</span><br>    <span class="hljs-number">5</span><br>    <span class="hljs-number">3</span><br>    <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="6">
+<li>b=A(i,:)表示把矩阵 A 的第 i 行存入 b。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; b = A(<span class="hljs-number">1</span>,:)<br>b = <br>    <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="7">
+<li>b=A(:,j)表示把矩阵 A 的第 j 列存入 b。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; b = A(;,<span class="hljs-number">1</span>)<br>b = <br>    <span class="hljs-number">1</span><br>    <span class="hljs-number">4</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="8">
+<li>b=A(J:K)表示把矩阵 A 中 [A(J), A(J+1),…,A(K)] 这些元素存入 b 中。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; b = A(<span class="hljs-number">3</span>:<span class="hljs-number">5</span>)<br>b = <br>    <span class="hljs-number">2</span> <span class="hljs-number">5</span> <span class="hljs-number">3</span><br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="9">
+<li>b=A(:,c.d)表示把矩阵 A 的第 c 列到第 d 列存入 b 中，当然 c、d 大于 A 的列数则出错（b=A(c:d,:) 表示取行）。</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; A = [<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>;<span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span>;<span class="hljs-number">7</span> <span class="hljs-number">8</span> <span class="hljs-number">9</span>]<br>A = <br>    <span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span><br>    <span class="hljs-number">4</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span><br>    <span class="hljs-number">7</span> <span class="hljs-number">8</span> <span class="hljs-number">9</span><br>&gt;&gt; b=A(:,<span class="hljs-number">2</span>:<span class="hljs-number">3</span>)<br>b = <br>    <span class="hljs-number">2</span> <span class="hljs-number">3</span> <br>    <span class="hljs-number">5</span> <span class="hljs-number">6</span><br>    <span class="hljs-number">8</span> <span class="hljs-number">9</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="2-7-数据类型转换"><a href="#2-7-数据类型转换" class="headerlink" title="2.7 数据类型转换"></a>2.7 数据类型转换</h3><p>将一种数据类型转换为另一种数据类型的函数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>char</code></td>
+<td align="center">转换为字符数组(字符串)</td>
+</tr>
+<tr>
+<td align="center"><code>int2str</code></td>
+<td align="center">将整数数据转换为字符串</td>
+</tr>
+<tr>
+<td align="center"><code>mat2str</code></td>
+<td align="center">将矩阵转换为字符串</td>
+</tr>
+<tr>
+<td align="center"><code>num2str</code></td>
+<td align="center">将数字转换为字符串</td>
+</tr>
+<tr>
+<td align="center"><code>str2double</code></td>
+<td align="center">将字符串转换为双精度值</td>
+</tr>
+<tr>
+<td align="center"><code>str2num</code></td>
+<td align="center">将字符串转换为数字</td>
+</tr>
+<tr>
+<td align="center"><code>native2unicode</code></td>
+<td align="center">将数字字节转换为Unicode字符</td>
+</tr>
+<tr>
+<td align="center"><code>unicode2native</code></td>
+<td align="center">将Unicode字符转换为数字字节</td>
+</tr>
+<tr>
+<td align="center"><code>base2dec</code></td>
+<td align="center">将基数N字符串转换为十进制数</td>
+</tr>
+<tr>
+<td align="center"><code>bin2dec</code></td>
+<td align="center">将二进制数字串转换为十进制数</td>
+</tr>
+<tr>
+<td align="center"><code>dec2base</code></td>
+<td align="center">将十进制转换为字符串中的N数字</td>
+</tr>
+<tr>
+<td align="center"><code>dec2bin</code></td>
+<td align="center">将十进制转换为字符串中的二进制数</td>
+</tr>
+<tr>
+<td align="center"><code>dec2hex</code></td>
+<td align="center">将十进制转换为十六进制数字</td>
+</tr>
+<tr>
+<td align="center"><code>hex2dec</code></td>
+<td align="center">将十六进制数字字符串转换为十进制数</td>
+</tr>
+<tr>
+<td align="center"><code>hex2num</code></td>
+<td align="center">将十六进制数字字符串转换为双精度数字</td>
+</tr>
+<tr>
+<td align="center"><code>num2hex</code></td>
+<td align="center">将单数转换为IEEE十六进制字符串</td>
+</tr>
+<tr>
+<td align="center"><code>cell2mat</code></td>
+<td align="center">将单元格数组转换为数组</td>
+</tr>
+<tr>
+<td align="center"><code>cell2struct</code></td>
+<td align="center">将单元格数组转换为结构数组</td>
+</tr>
+<tr>
+<td align="center"><code>cellstr</code></td>
+<td align="center">从字符数组创建字符串数组</td>
+</tr>
+<tr>
+<td align="center"><code>mat2cell</code></td>
+<td align="center">将数组转换为具有潜在不同大小的单元格的单元阵列</td>
+</tr>
+<tr>
+<td align="center"><code>num2cell</code></td>
+<td align="center">将数组转换为具有一致大小的单元格的单元阵列</td>
+</tr>
+<tr>
+<td align="center"><code>struct2cell</code></td>
+<td align="center">将结构转换为单元格数组</td>
+</tr>
+</tbody></table>
+<h3 id="2-8-数据类型确定"><a href="#2-8-数据类型确定" class="headerlink" title="2.8 数据类型确定"></a>2.8 数据类型确定</h3><p>用于识别变量数据类型的各种函数。</p>
+<table>
+<thead>
+<tr>
+<th align="center">函数</th>
+<th align="center">描述说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>is</code></td>
+<td align="center">检测状态</td>
+</tr>
+<tr>
+<td align="center"><code>isa</code></td>
+<td align="center">确定输入是否是指定类的对象</td>
+</tr>
+<tr>
+<td align="center"><code>iscell</code></td>
+<td align="center">确定输入是单元格数组</td>
+</tr>
+<tr>
+<td align="center"><code>iscellstr</code></td>
+<td align="center">确定输入是字符串的单元格数组</td>
+</tr>
+<tr>
+<td align="center"><code>ischar</code></td>
+<td align="center">确定项目是否是字符数组</td>
+</tr>
+<tr>
+<td align="center"><code>isfield</code></td>
+<td align="center">确定输入是否是结构数组字段</td>
+</tr>
+<tr>
+<td align="center"><code>isfloat</code></td>
+<td align="center">确定输入是否为浮点数组</td>
+</tr>
+<tr>
+<td align="center"><code>ishghandle</code></td>
+<td align="center">确定是否用于处理图形对象句柄</td>
+</tr>
+<tr>
+<td align="center"><code>isinteger</code></td>
+<td align="center">确定输入是否为整数数组</td>
+</tr>
+<tr>
+<td align="center"><code>isjava</code></td>
+<td align="center">确定输入是否为Java对象</td>
+</tr>
+<tr>
+<td align="center"><code>islogical</code></td>
+<td align="center">确定输入是否为逻辑数组</td>
+</tr>
+<tr>
+<td align="center"><code>isnumeric</code></td>
+<td align="center">确定输入是否是数字数组</td>
+</tr>
+<tr>
+<td align="center"><code>isobject</code></td>
+<td align="center">确定输入是否为MATLAB对象</td>
+</tr>
+<tr>
+<td align="center"><code>isreal</code></td>
+<td align="center">检查输入是否为实数数组</td>
+</tr>
+<tr>
+<td align="center"><code>isscalar</code></td>
+<td align="center">确定输入是否为标量</td>
+</tr>
+<tr>
+<td align="center"><code>isstr</code></td>
+<td align="center">确定输入是否是字符数组</td>
+</tr>
+<tr>
+<td align="center"><code>isstruct</code></td>
+<td align="center">确定输入是否是结构数组</td>
+</tr>
+<tr>
+<td align="center"><code>isvector</code></td>
+<td align="center">确定输入是否为向量</td>
+</tr>
+<tr>
+<td align="center"><code>class</code></td>
+<td align="center">确定对象的类</td>
+</tr>
+<tr>
+<td align="center"><code>validateattributes</code></td>
+<td align="center">检查数组的有效性</td>
+</tr>
+<tr>
+<td align="center"><code>whos</code></td>
+<td align="center">在工作区中列出变量，其大小和类型</td>
+</tr>
+</tbody></table>
+<p>示例：创建脚本文件</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">x = <span class="hljs-number">3</span><br>isinteger(x)<br>isfloat(x)<br><span class="hljs-built_in">isvector</span>(x)<br><span class="hljs-built_in">isscalar</span>(x)<br>isnumeric(x)<br><br>x = <span class="hljs-number">23.54</span><br>isinteger(x)<br>isfloat(x)<br><span class="hljs-built_in">isvector</span>(x)<br><span class="hljs-built_in">isscalar</span>(x)<br>isnumeric(x)<br><br>x = [<span class="hljs-number">1</span> <span class="hljs-number">2</span> <span class="hljs-number">3</span>]<br>isinteger(x)<br>isfloat(x)<br><span class="hljs-built_in">isvector</span>(x)<br><span class="hljs-built_in">isscalar</span>(x)<br><br>x = <span class="hljs-string">&#x27;Hello&#x27;</span><br>isinteger(x)<br>isfloat(x)<br><span class="hljs-built_in">isvector</span>(x)<br><span class="hljs-built_in">isscalar</span>(x)<br>isnumeric(x)<br></code></pre></div></td></tr></table></figure>
+<p>输出结果：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">x = <span class="hljs-number">3</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br>x = <span class="hljs-number">1177</span>/<span class="hljs-number">50</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br>x =<br><br>          <span class="hljs-number">1</span>          <span class="hljs-number">2</span>          <span class="hljs-number">3</span><br><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br>x = Hello<br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">1</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br><span class="hljs-built_in">ans</span> = <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="3-函数"><a href="#3-函数" class="headerlink" title="3.函数"></a>3.函数</h2><h3 id="3-1-函数基本结构"><a href="#3-1-函数基本结构" class="headerlink" title="3.1 函数基本结构"></a>3.1 函数基本结构</h3><figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> 输出形参表 = 函数名<span class="hljs-params">(输入形参表)</span></span><br>注释说明部分<br>函数体语句<br></code></pre></div></td></tr></table></figure>
+<p>当有多个形参时，形参之间用逗号分隔，组成形参表。当输出形参多余一个时，应该用方括号括起来，构成一个输出矩阵。</p>
+<ul>
+<li><p>函数文件名：通常由函数名再加上扩展名 .m 组成，函数文件名与函数名也可以不相同。但一般情况这两个名字都相同。</p>
+</li>
+<li><p>return 语句表示结束函数的执行。</p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">[s,p]</span> = <span class="hljs-title">fc</span><span class="hljs-params">(r)</span></span><br>s=<span class="hljs-built_in">pi</span>*r*r;<br>p=<span class="hljs-number">2</span>*<span class="hljs-built_in">pi</span>*r; <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-2-函数调用"><a href="#3-2-函数调用" class="headerlink" title="3.2 函数调用"></a>3.2 函数调用</h3><figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">[输出实参表] = 函数名(输入实参表)<br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">[s,p]=fc(<span class="hljs-number">10</span>)<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-3-匿名函数"><a href="#3-3-匿名函数" class="headerlink" title="3.3 匿名函数"></a>3.3 匿名函数</h3><figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">函数句柄变量 = @(匿名函数输入参数) 匿名函数表达式 <span class="hljs-comment">% @是函数句柄的运算符；函数句柄变量也相当于是函数的别名，见下面第一条。</span><br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; f=@(x,y) x*<span class="hljs-number">2</span>+y*<span class="hljs-number">3</span><br><br>f =<br><br>    @(x,y)x*<span class="hljs-number">2</span>+y*<span class="hljs-number">3</span><br><br>&gt;&gt; f(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>)<br><br><span class="hljs-built_in">ans</span> =<br><br>    <span class="hljs-number">13</span><br></code></pre></div></td></tr></table></figure>
+<p><strong>类似于带参宏定义！</strong></p>
+<blockquote>
+<ol>
+<li>给已经存在的函数定义函数句柄</li>
+</ol>
+</blockquote>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">函数句柄变量 = @函数名 <span class="hljs-comment">% 这里已经存在的函数包括内部函数或自定义函数；函数句柄变量相当于函数的别名。</span><br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight matlab"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs matlab">&gt;&gt; h=@<span class="hljs-built_in">sin</span><br><br>h =<br><br>    @<span class="hljs-built_in">sin</span><br><br>&gt;&gt; h(<span class="hljs-built_in">pi</span>/<span class="hljs-number">2</span>)<br><br><span class="hljs-built_in">ans</span> =<br><br>     <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%95%B0%E5%AD%A6%E5%BB%BA%E6%A8%A1/">数学建模</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3768803371.html">https://tothefor.com/DragonOne/3768803371.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/1062393623.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">静态博客网站生成工具</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/1468954958.html">
+                        <span class="hidden-mobile">数学建模-Matlab学习笔记（三）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

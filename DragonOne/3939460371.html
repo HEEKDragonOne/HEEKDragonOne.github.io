@@ -1,0 +1,840 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>WEB前端-HTML5基础知识复习（三） - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WEB前端-HTML5基础知识复习（三）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-12 15:26" pubdate>
+        May 12, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      58
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WEB前端-HTML5基础知识复习（三）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>HTML5规范于2014年10月29日由万维网联盟正式宣布，HTML是万维网最核心的超文本标记语言。万维网不等同于互联网，但它是依靠互联网运行的服务之一，万维网又简写为www，它可以实现在互联网的帮助下，访问由许多互相链接的超文本组成的系统。现代的浏览器都支持 HTML5。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-视频（video）"><a href="#1-视频（video）" class="headerlink" title="1.视频（video）"></a>1.视频（video）</h2><h3 id="1-1-使用方法"><a href="#1-1-使用方法" class="headerlink" title="1.1 使用方法"></a>1.1 使用方法</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">video</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;320&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;240&quot;</span> <span class="hljs-attr">controls</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;movie.mp4&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;video/mp4&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;movie.ogg&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;video/ogg&quot;</span>&gt;</span><br>您的浏览器不支持Video标签。<br><span class="hljs-tag">&lt;/<span class="hljs-name">video</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>&lt;video&gt; 元素提供了播放、暂停和音量控件来控制视频。</p>
+<p>同时 &lt;video&gt; 元素也提供了 width 和 height 属性控制视频的尺寸.如果设置的高度和宽度，所需的视频空间会在页面加载时保留。。如果没有设置这些属性，浏览器不知道大小的视频，浏览器就不能再加载时保留特定的空间，页面就会根据原始视频的大小而改变。</p>
+<p>&lt;video&gt; 与 &lt;/video&gt; 标签之间插入的内容是提供给不支持 video 元素的浏览器显示的。</p>
+<p>&lt;video&gt; 元素支持多个 &lt;video&gt;  元素. 元素可以链接不同的视频文件。浏览器将使用第一个可识别的格式。</p>
+<h3 id="1-2-使用DOM控制"><a href="#1-2-使用DOM控制" class="headerlink" title="1.2 使用DOM控制"></a>1.2 使用DOM控制</h3><p>HTML5 &lt;video&gt; 和 &lt;audio&gt; 元素同样拥有方法、属性和事件。</p>
+<p>&lt;video&gt; 和 &lt;audio&gt; 元素的方法、属性和事件可以使用JavaScript进行控制.</p>
+<p>其中的方法有用于播放、暂停以及加载等。其中的属性（比如时长、音量等）可以被读取或设置。其中的 DOM 事件能够通知您，比方说，&lt;video&gt; 元素开始播放、已暂停，已停止，等等。</p>
+<h3 id="1-3-video标签"><a href="#1-3-video标签" class="headerlink" title="1.3 video标签"></a>1.3 video标签</h3><table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&amp;lt:video&gt;</td>
+<td align="center">定义一个视频</td>
+</tr>
+<tr>
+<td align="center">&lt;source&gt;</td>
+<td align="center">定义多种媒体资源,比如&lt;video&gt; 和&lt;audio&gt;</td>
+</tr>
+<tr>
+<td align="center">&lt;track&gt;</td>
+<td align="center">定义在媒体播放器文本轨迹</td>
+</tr>
+</tbody></table>
+<h2 id="2-音频（Audio）"><a href="#2-音频（Audio）" class="headerlink" title="2.音频（Audio）"></a>2.音频（Audio）</h2><p>通过使用HTML5中的audio功能，可以实现与flash相同的功能，即回放、跳转、缓冲等。</p>
+<h3 id="2-1-使用方法"><a href="#2-1-使用方法" class="headerlink" title="2.1 使用方法"></a>2.1 使用方法</h3><figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">audio</span> <span class="hljs-attr">controls</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;horse.ogg&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;audio/ogg&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">source</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;horse.mp3&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;audio/mpeg&quot;</span>&gt;</span><br>您的浏览器不支持 audio 元素。<br><span class="hljs-tag">&lt;/<span class="hljs-name">audio</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>control 属性供添加播放、暂停和音量控件。<br>在&lt;audio&gt; 与 &lt;/audio&gt; 之间你需要插入浏览器不支持的&lt;audio&gt;元素的提示文本 。<br>&lt;audio&gt; 元素允许使用多个 &lt;source&gt; 元素. &lt;source&gt; 元素可以链接不同的音频文件，浏览器将使用第一个支持的音频文件。</p>
+<h3 id="2-2-audio标签"><a href="#2-2-audio标签" class="headerlink" title="2.2 audio标签"></a>2.2 audio标签</h3><table>
+<thead>
+<tr>
+<th align="center">标签</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&lt;audio&gt;</td>
+<td align="center">定义了声音内容</td>
+</tr>
+<tr>
+<td align="center">&lt;source&gt;</td>
+<td align="center">规定了多媒体资源，可以是多个，在&lt;video&gt;与&lt;audio&gt;标签中使用</td>
+</tr>
+</tbody></table>
+<h2 id="3-Input（类型）"><a href="#3-Input（类型）" class="headerlink" title="3. Input（类型）"></a>3. Input（类型）</h2><p><strong>注意：</strong>并不是所有的主流浏览器都支持新的input类型，不过已经可以在所有主流的浏览器中使用它们了。即使不被支持，仍然可以显示为常规的文本域。</p>
+<h3 id="3-1-color"><a href="#3-1-color" class="headerlink" title="3.1 color"></a>3.1 color</h3><p>color 类型用在input字段主要用于用户选取颜色。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">选择你喜欢的颜色: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;color&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;favcolor&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-2-date"><a href="#3-2-date" class="headerlink" title="3.2 date"></a>3.2 date</h3><p>date 类型允许用户从一个日期选择器选择一个日期。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">生日: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;date&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bday&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-3-datetime"><a href="#3-3-datetime" class="headerlink" title="3.3 datetime"></a>3.3 datetime</h3><p>datetime 类型允许用户选择一个日期（UTC 时间）。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">生日 (日期和时间): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;datetime&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bdaytime&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-4-datetime-local"><a href="#3-4-datetime-local" class="headerlink" title="3.4 datetime-local"></a>3.4 datetime-local</h3><p>datetime-local 类型允许用户选择一个日期和时间 (无时区)。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">生日 (日期和时间): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;datetime-local&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bdaytime&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-5-email"><a href="#3-5-email" class="headerlink" title="3.5 email"></a>3.5 email</h3><p>email 类型用于应该包含 e-mail 地址的输入域。在提交表单时，会自动验证 email 域的值是否合法有效。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">E-mail: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;email&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-6-month"><a href="#3-6-month" class="headerlink" title="3.6 month"></a>3.6 month</h3><p>month 类型允许用户选择一个月份。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">生日 (月和年): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;month&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bdaymonth&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-7-number"><a href="#3-7-number" class="headerlink" title="3.7 number"></a>3.7 number</h3><p>number 类型用于应该包含数值的输入域。用户还能够设定对所接受的数字的限定。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">数量 ( 1 到 5 之间 ): <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;quantity&quot;</span> <span class="hljs-attr">min</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">max</span>=<span class="hljs-string">&quot;5&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>使用属性来规定对数字类型的限定：</p>
+<ul>
+<li>max- 规定允许的最大值</li>
+<li>min - 规定允许的最小值</li>
+<li>step - 规定合法的数字间隔（如果 step=”3”，则合法的数是 -3,0,3,6 等）</li>
+<li>value - 规定默认值</li>
+</ul>
+<h3 id="3-8-range"><a href="#3-8-range" class="headerlink" title="3.8 range"></a>3.8 range</h3><p>range 类型用于应该包含一定范围内数字值的输入域。range 类型显示为滑动条。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;range&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;points&quot;</span> <span class="hljs-attr">min</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">max</span>=<span class="hljs-string">&quot;10&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>使用属性来规定对数字类型的限定：</p>
+<ul>
+<li>max - 规定允许的最大值</li>
+<li>min - 规定允许的最小值</li>
+<li>step - 规定合法的数字间隔</li>
+<li>value - 规定默认值</li>
+</ul>
+<h3 id="3-9-search"><a href="#3-9-search" class="headerlink" title="3.9 search"></a>3.9 search</h3><p>search 类型用于搜索域，比如站点搜索或 Google 搜索。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">Search Google: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;search&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;googlesearch&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-10-tel"><a href="#3-10-tel" class="headerlink" title="3.10 tel"></a>3.10 tel</h3><p>定义输入电话号码字段。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">电话号码: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;tel&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;usrtel&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-11-time"><a href="#3-11-time" class="headerlink" title="3.11 time"></a>3.11 time</h3><p>time 类型允许你选择一个时间。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">选择时间: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;time&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;usr_time&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-12-url"><a href="#3-12-url" class="headerlink" title="3.12 url"></a>3.12 url</h3><p>url 类型用于应该包含 URL 地址的输入域。在提交表单时，会自动验证 url 域的值。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">添加您的URL: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;homepage&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="3-13-week"><a href="#3-13-week" class="headerlink" title="3.13 week"></a>3.13 week</h3><p>week 类型允许你选择周和年。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">选择周: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;week&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;week_year&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="4-新表单元素"><a href="#4-新表单元素" class="headerlink" title="4.新表单元素"></a>4.新表单元素</h2><p><strong>注意：</strong>不是所有的浏览器都支持HTML5 新的表单元素。</p>
+<h3 id="4-1-datalist"><a href="#4-1-datalist" class="headerlink" title="4.1 datalist"></a>4.1 datalist</h3><p>&lt;datalist&gt; 元素规定输入域的选项列表。<br>&lt;datalist&gt; 属性规定 form 或 input 域应该拥有自动完成功能。当用户在自动完成域中开始输入时，浏览器应该在该域中显示填写的选项。<br>使用 &lt;input&gt; 元素的列表属性与 &lt;datalist&gt; 元素绑定。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">list</span>=<span class="hljs-string">&quot;browsers&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">datalist</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;browsers&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Internet Explorer&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Firefox&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Chrome&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Opera&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Safari&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">datalist</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="4-2-keygen"><a href="#4-2-keygen" class="headerlink" title="4.2 keygen"></a>4.2 keygen</h3><p>&lt;keygen&gt; 元素的作用是提供一种验证用户的可靠方法。<br>&lt;keygen&gt;标签规定用于表单的密钥对生成器字段。<br>当提交表单时，会生成两个键，一个是私钥，一个公钥。</p>
+<p>私钥（private key）存储于客户端，公钥（public key）则被发送到服务器。公钥可用于之后验证用户的客户端证书（client certificate）。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo_keygen.asp&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;get&quot;</span>&gt;</span><br>用户名: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;usr_name&quot;</span>&gt;</span><br>加密: <span class="hljs-tag">&lt;<span class="hljs-name">keygen</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;security&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="4-3-output"><a href="#4-3-output" class="headerlink" title="4.3 output"></a>4.3 output</h3><p>&lt;output&gt; 元素用于不同类型的输出，比如计算或脚本输出。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">oninput</span>=<span class="hljs-string">&quot;x.value=parseInt(a.value)+parseInt(b.value)&quot;</span>&gt;</span>0<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;range&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;a&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>&gt;</span>100 +<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;b&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;50&quot;</span>&gt;</span>=<br><span class="hljs-tag">&lt;<span class="hljs-name">output</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;x&quot;</span> <span class="hljs-attr">for</span>=<span class="hljs-string">&quot;a b&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">output</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="5-新表单属性"><a href="#5-新表单属性" class="headerlink" title="5.新表单属性"></a>5.新表单属性</h2><h3 id="5-1-lt-form-gt-新属性"><a href="#5-1-lt-form-gt-新属性" class="headerlink" title="5.1 &lt;form&gt;新属性"></a>5.1 &lt;form&gt;新属性</h3><ul>
+<li>autocomplete</li>
+<li>novalidate</li>
+</ul>
+<h3 id="5-2-lt-input-gt-新属性"><a href="#5-2-lt-input-gt-新属性" class="headerlink" title="5.2 &lt;input&gt;新属性"></a>5.2 &lt;input&gt;新属性</h3><ul>
+<li>autocomplete</li>
+<li>autofocus</li>
+<li>form</li>
+<li>formaction</li>
+<li>formenctype</li>
+<li>formmethod</li>
+<li>formnovalidate</li>
+<li>formtarget</li>
+<li>height and width</li>
+<li>list</li>
+<li>min and max</li>
+<li>multiple</li>
+<li>pattern (regexp)</li>
+<li>placeholder</li>
+<li>required</li>
+<li>step</li>
+</ul>
+<h3 id="5-3-autocomplete-属性（-lt-form-gt-lt-input-gt-）"><a href="#5-3-autocomplete-属性（-lt-form-gt-lt-input-gt-）" class="headerlink" title="5.3 autocomplete 属性（&lt;form&gt; / &lt;input&gt;）"></a>5.3 autocomplete 属性（&lt;form&gt; / &lt;input&gt;）</h3><p>autocomplete 属性规定 form 或 input 域应该拥有自动完成功能。当用户在自动完成域中开始输入时，浏览器应该在该域中显示填写的选项。</p>
+<p>autocomplete 适用于 &lt;form&gt; 标签，以及以下类型的 &lt;input&gt; 标签：text, search, url, telephone, email, password, datepickers, range 以及 color。</p>
+<p><strong>提示：</strong>autocomplete 属性有可能在 form元素中是开启的，而在input元素中是关闭的。</p>
+<p>使用实例：HTML form 中开启 autocomplete (一个 input 字段关闭 autocomplete ).</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string">&quot;on&quot;</span>&gt;</span><br> First name:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> Last name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> E-mail: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">autocomplete</span>=<span class="hljs-string">&quot;off&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span> <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-4-novalidate-属性（-lt-form-gt-）"><a href="#5-4-novalidate-属性（-lt-form-gt-）" class="headerlink" title="5.4 novalidate 属性（&lt;form&gt;）"></a>5.4 novalidate 属性（&lt;form&gt;）</h3><p>novalidate 属性的一个boolean 属性。novalidate 属性规定在提交表单时不应该验证 form 或 input 域。</p>
+<p>使用实例：无需验证提交的表单数据</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span> <span class="hljs-attr">novalidate</span>&gt;</span><br> E-mail: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;user_email&quot;</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-5-autofocus-属性（-lt-input-gt-）"><a href="#5-5-autofocus-属性（-lt-input-gt-）" class="headerlink" title="5.5 autofocus 属性（&lt;input&gt;）"></a>5.5 autofocus 属性（&lt;input&gt;）</h3><p>autofocus 属性是一个 boolean 属性。autofocus 属性规定在页面加载时，域自动地获得焦点。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">First name:<span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span> <span class="hljs-attr">autofocus</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-6-form-属性（-lt-input-gt-）"><a href="#5-6-form-属性（-lt-input-gt-）" class="headerlink" title="5.6 form 属性（&lt;input&gt;）"></a>5.6 form 属性（&lt;input&gt;）</h3><p>form 属性规定输入域所属的一个或多个表单。如需引用一个以上的表单，需要使用空格分隔的列表。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;form1&quot;</span>&gt;</span><br> First name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br><br>Last name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lname&quot;</span> <span class="hljs-attr">form</span>=<span class="hljs-string">&quot;form1&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<p>“Last name” 字段没有在form表单之内，但它也是form表单的一部分。</p>
+<h3 id="5-7-formaction-属性（-lt-input-gt-）"><a href="#5-7-formaction-属性（-lt-input-gt-）" class="headerlink" title="5.7 formaction 属性（&lt;input&gt;）"></a>5.7 formaction 属性（&lt;input&gt;）</h3><p>formaction 属性用于描述表单提交的URL地址。<br>formaction 属性会覆盖&lt;form&gt; 元素中的action属性。formaction 属性用于 type=”submit” 和 type=”image”。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span>&gt;</span><br> First name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> Last name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">formaction</span>=<span class="hljs-string">&quot;demo-admin.php&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit as admin&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-8-formenctype-属性（-lt-input-gt-）"><a href="#5-8-formenctype-属性（-lt-input-gt-）" class="headerlink" title="5.8 formenctype 属性（&lt;input&gt;）"></a>5.8 formenctype 属性（&lt;input&gt;）</h3><p>formenctype 属性描述了表单提交到服务器的数据编码 (只对form表单中 method=”post” 表单)。该属性与 type=”submit” 和 type=”image” 配合使用。formenctype 属性覆盖 form 元素的 enctype 属性。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-post_enctype.php&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;post&quot;</span>&gt;</span><br> First name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit&quot;</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">formenctype</span>=<span class="hljs-string">&quot;multipart/form-data&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit as Multipart/form-data&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-9-formmethod-属性（-lt-input-gt-）"><a href="#5-9-formmethod-属性（-lt-input-gt-）" class="headerlink" title="5.9 formmethod 属性（&lt;input&gt;）"></a>5.9 formmethod 属性（&lt;input&gt;）</h3><p>formmethod 属性定义了表单提交的方式。该属性可以与 type=”submit” 和 type=”image” 配合使用。<br>formmethod 属性覆盖了 &lt;form&gt; 元素的的method 属性。</p>
+<p>使用实例：重新定义表单提交方式实例</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span> <span class="hljs-attr">method</span>=<span class="hljs-string">&quot;get&quot;</span>&gt;</span><br> First name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> Last name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit&quot;</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">formmethod</span>=<span class="hljs-string">&quot;post&quot;</span> <span class="hljs-attr">formaction</span>=<span class="hljs-string">&quot;demo-post.php&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit using POST&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-10-formnovalidate-属性（-lt-input-gt-）"><a href="#5-10-formnovalidate-属性（-lt-input-gt-）" class="headerlink" title="5.10 formnovalidate 属性（&lt;input&gt;）"></a>5.10 formnovalidate 属性（&lt;input&gt;）</h3><p>novalidate 属性是一个 boolean 属性。novalidate属性描述了 &lt;input&gt; 元素在表单提交时无需被验证。formnovalidate 属性会覆盖 &lt;form&gt; 元素的novalidate属性。formnovalidate 属性与type=”submit”一起使用。</p>
+<p>使用实例：两个提交按钮的表单(使用与不适用验证 )</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span>&gt;</span><br> E-mail: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;email&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;userid&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">formnovalidate</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit without validation&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>  <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-11-formtarget-属性（-lt-input-gt-）"><a href="#5-11-formtarget-属性（-lt-input-gt-）" class="headerlink" title="5.11 formtarget 属性（&lt;input&gt;）"></a>5.11 formtarget 属性（&lt;input&gt;）</h3><p>formtarget 属性指定一个名称或一个关键字来指明表单提交数据接收后的展示。formtarget 属性覆盖 &lt;form&gt;元素的target属性。formtarget 属性与type=”submit” 和 type=”image”配合使用。</p>
+<p>使用实例：两个提交按钮的表单, 在不同窗口中显示</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">&quot;demo-form.php&quot;</span>&gt;</span><br> First name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> Last name: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;lname&quot;</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span><br> <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit as normal&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;submit&quot;</span> <span class="hljs-attr">formtarget</span>=<span class="hljs-string">&quot;_blank&quot;</span></span><br><span class="hljs-tag">  <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Submit to a new window&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-12-height-和-width-属性（-lt-input-gt-）"><a href="#5-12-height-和-width-属性（-lt-input-gt-）" class="headerlink" title="5.12 height 和 width 属性（&lt;input&gt;）"></a>5.12 height 和 width 属性（&lt;input&gt;）</h3><p>height 和 width 属性规定用于 image 类型的 &lt;input&gt; 标签的图像高度和宽度。height 和 width 属性只适用于 image 类型的&lt;input&gt; 标签。</p>
+<p>图像通常会同时指定高度和宽度属性。如果图像设置高度和宽度，图像所需的空间 在加载页时会被保留。如果没有这些属性， 浏览器不知道图像的大小，并不能预留 适当的空间。图片在加载过程中会使页面布局效果改变 （尽管图片已加载）。</p>
+<p>使用实例：定义了一个图像提交按钮, 使用了 height 和 width 属性</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;image&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;img_submit.gif&quot;</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">&quot;Submit&quot;</span> <span class="hljs-attr">width</span>=<span class="hljs-string">&quot;48&quot;</span> <span class="hljs-attr">height</span>=<span class="hljs-string">&quot;48&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-13-list-属性（-lt-input-gt-）"><a href="#5-13-list-属性（-lt-input-gt-）" class="headerlink" title="5.13 list 属性（&lt;input&gt;）"></a>5.13 list 属性（&lt;input&gt;）</h3><p>list 属性规定输入域的 datalist。datalist 是输入域的选项列表。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">list</span>=<span class="hljs-string">&quot;browsers&quot;</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">datalist</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;browsers&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Internet Explorer&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Firefox&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Chrome&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Opera&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">option</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;Safari&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">datalist</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-14-min-和-max-属性（-lt-input-gt-）"><a href="#5-14-min-和-max-属性（-lt-input-gt-）" class="headerlink" title="5.14 min 和 max 属性（&lt;input&gt;）"></a>5.14 min 和 max 属性（&lt;input&gt;）</h3><p>min、max 和 step 属性用于为包含数字或日期的 input 类型规定限定（约束）。</p>
+<p>min、max 和 step 属性适用于以下类型的 &lt;input&gt; 标签：date pickers、number 以及 range。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">Enter a date before 1980-01-01:<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;date&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bday&quot;</span> <span class="hljs-attr">max</span>=<span class="hljs-string">&quot;1979-12-31&quot;</span>&gt;</span><br><br>Enter a date after 2000-01-01:<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;date&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bday&quot;</span> <span class="hljs-attr">min</span>=<span class="hljs-string">&quot;2000-01-02&quot;</span>&gt;</span><br><br>Quantity (between 1 and 5):<br><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;quantity&quot;</span> <span class="hljs-attr">min</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">max</span>=<span class="hljs-string">&quot;5&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-15-multiple-属性（-lt-input-gt-）"><a href="#5-15-multiple-属性（-lt-input-gt-）" class="headerlink" title="5.15 multiple 属性（&lt;input&gt;）"></a>5.15 multiple 属性（&lt;input&gt;）</h3><p>multiple 属性是一个 boolean 属性。multiple 属性规定&lt;input&gt; 元素中可选择多个值。<br>multiple 属性适用于以下类型的&lt;input&gt; 标签：email 和 file。: email, and file.</p>
+<p>使用实例：上传多个文件</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">Select images: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;file&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;img&quot;</span> <span class="hljs-attr">multiple</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="5-16-pattern-属性（-lt-input-gt-）"><a href="#5-16-pattern-属性（-lt-input-gt-）" class="headerlink" title="5.16 pattern 属性（&lt;input&gt;）"></a>5.16 pattern 属性（&lt;input&gt;）</h3><p>pattern 属性描述了一个正则表达式用于验证&lt;input&gt; 元素的值。<br>pattern 属性适用于以下类型的&lt;input&gt; 标签: text, search, url, tel, email, 和 password.<br>是用来全局 title 属性描述了模式.</p>
+<p>使用实例：显示一个只能包含三个字母的文本域（不含数字及特殊字符）</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">Country code: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;country_code&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;[A-Za-z]&#123;3&#125;&quot;</span> <span class="hljs-attr">title</span>=<span class="hljs-string">&quot;Three letter country code&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-17-placeholder-属性（-lt-input-gt-）"><a href="#5-17-placeholder-属性（-lt-input-gt-）" class="headerlink" title="5.17 placeholder 属性（&lt;input&gt;）"></a>5.17 placeholder 属性（&lt;input&gt;）</h3><p>placeholder 属性提供一种提示（hint），描述输入域所期待的值。简短的提示在用户输入值前会显示在输入域上。</p>
+<p>placeholder 属性适用于以下类型的&lt;input&gt; 标签：text, search, url, telephone, email 以及 password。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;fname&quot;</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">&quot;First name&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-18-required-属性（-lt-input-gt-）"><a href="#5-18-required-属性（-lt-input-gt-）" class="headerlink" title="5.18  required 属性（&lt;input&gt;）"></a>5.18  required 属性（&lt;input&gt;）</h3><p>required 属性是一个 boolean 属性。required 属性规定必须在提交之前填写输入域（不能为空）。</p>
+<p>required 属性适用于以下类型的&lt;input&gt; 标签：text, search, url, telephone, email, password, date pickers, number, checkbox, radio 以及 file。</p>
+<p>使用实例：不能为空的input字段</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html">Username: <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;text&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;usrname&quot;</span> <span class="hljs-attr">required</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-19-step-属性（-lt-input-gt-）"><a href="#5-19-step-属性（-lt-input-gt-）" class="headerlink" title="5.19 step 属性（&lt;input&gt;）"></a>5.19 step 属性（&lt;input&gt;）</h3><p>step 属性为输入域规定合法的数字间隔。如果 step=”3”，则合法的数是 -3,0,3,6 等。step 属性可以与 max 和 min 属性创建一个区域值。</p>
+<p>step 属性与以下type类型一起使用: number, range, date, datetime, datetime-local, month, time 和 week。</p>
+<p>使用实例：</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;points&quot;</span> <span class="hljs-attr">step</span>=<span class="hljs-string">&quot;3&quot;</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/WEB%E5%89%8D%E7%AB%AF/">WEB前端</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3939460371.html">https://tothefor.com/DragonOne/3939460371.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/1575124086.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WEB前端-HTML5基础知识复习（四）</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/2815542849.html">
+                        <span class="hidden-mobile">WEB前端-HTML5基础知识复习（二）</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

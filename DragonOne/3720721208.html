@@ -1,0 +1,769 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>Spring-AspectJ使用介绍 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Spring-AspectJ使用介绍">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-17 10:44" pubdate>
+        October 17, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring-AspectJ使用介绍</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>说过 Spring  AOP 的各种用法，包括随着 Spring 的演进而发展出来的几种配置方式。</p>
+<p>但是我们始终没有使用到 AspectJ，即使是在基于注解的 @AspectJ 的配置方式中，Spring 也仅仅是使用了 AspectJ 包中的一些注解而已，并没有依赖于 AspectJ 实现具体的功能。</p>
+<p>本文将介绍使用 AspectJ，介绍它的 3 种织入方式。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="AspectJ-使用介绍"><a href="#AspectJ-使用介绍" class="headerlink" title="AspectJ 使用介绍"></a>AspectJ 使用介绍</h2><p><a target="_blank" rel="noopener" href="https://www.eclipse.org/aspectj/">AspectJ</a> 作为 AOP 编程的完全解决方案，提供了三种织入时机，分别为</p>
+<ol>
+<li>compile-time：编译期织入，在编译的时候一步到位，直接编译出包含织入代码的 .class 文件</li>
+<li>post-compile：编译后织入，增强已经编译出来的类，如我们要增强依赖的 jar 包中的某个类的某个方法</li>
+<li>load-time：在 JVM 进行类加载的时候进行织入</li>
+</ol>
+<p>首先，先把下面两个依赖加进来：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.aspectj<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aspectjrt<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.8.13<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.aspectj<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aspectjweaver<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.8.13<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>我们后面需要用到下面这个类，假设账户初始有 20 块钱，之后会调 <code>account.pay(amount)</code> 进行付款：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span> </span>&#123;<br><br>    <span class="hljs-keyword">int</span> balance = <span class="hljs-number">20</span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">pay</span><span class="hljs-params">(<span class="hljs-keyword">int</span> amount)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (balance &lt; amount) &#123;<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        balance -= amount;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>下面，我们定义两个 Aspect 来进行演示：</p>
+<ul>
+<li>AccountAspect：用 AspectJ 的语法来写，对交易进行拦截，如此次交易超过余额，直接拒绝。</li>
+<li>ProfilingAspect：用 Java 来写，用于记录方法的执行时间</li>
+</ul>
+<p>AccountAspect 需要以 .aj 结尾，如我们在 com.javadoop.aspectjlearning.aspectj 的 package 下新建文件 <strong>AccountAspect.aj</strong>，内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.javadoop.aspectjlearning.aspect;<br><br><span class="hljs-keyword">import</span> com.javadoop.aspectjlearning.model.Account;<br><br><span class="hljs-keyword">public</span> aspect AccountAspect &#123;<br><br>    <span class="hljs-function">pointcut <span class="hljs-title">callPay</span><span class="hljs-params">(<span class="hljs-keyword">int</span> amount, Account account)</span>:</span><br><span class="hljs-function">            <span class="hljs-title">call</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> com.javadoop.aspectjlearning.model.Account.pay(<span class="hljs-keyword">int</span>)</span>) &amp;&amp; <span class="hljs-title">args</span><span class="hljs-params">(amount)</span> &amp;&amp; <span class="hljs-title">target</span><span class="hljs-params">(account)</span></span>;<br><br>    before(<span class="hljs-keyword">int</span> amount, Account account): callPay(amount, account) &#123;<br>        System.out.println(<span class="hljs-string">&quot;[AccountAspect]付款前总金额: &quot;</span> + account.balance);<br>        System.out.println(<span class="hljs-string">&quot;[AccountAspect]需要付款: &quot;</span> + amount);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">around</span><span class="hljs-params">(<span class="hljs-keyword">int</span> amount, Account account)</span>: <span class="hljs-title">callPay</span><span class="hljs-params">(amount, account)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (account.balance &lt; amount) &#123;<br>            System.out.println(<span class="hljs-string">&quot;[AccountAspect]拒绝付款!&quot;</span>);<br>            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> proceed(amount, account);<br>    &#125;<br><br>    after(<span class="hljs-keyword">int</span> amount, Account balance): callPay(amount, balance) &#123;<br>        System.out.println(<span class="hljs-string">&quot;[AccountAspect]付款后，剩余：&quot;</span> + balance.balance);<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>上面 .aj 的语法我们可能不熟悉，但是看上去还是简单的，分别处理了 before、around 和 after 的场景。</p>
+</blockquote>
+<p>我们再来看用 Java 写的 <strong>ProfilingAspect.java</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.javadoop.aspectjlearning.aspect;<br><br><span class="hljs-keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;<br><span class="hljs-keyword">import</span> org.aspectj.lang.annotation.Around;<br><span class="hljs-keyword">import</span> org.aspectj.lang.annotation.Aspect;<br><span class="hljs-keyword">import</span> org.aspectj.lang.annotation.Pointcut;<br><br><span class="hljs-meta">@Aspect</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ProfilingAspect</span> </span>&#123;<br><br>    <span class="hljs-meta">@Pointcut(&quot;execution(* com.javadoop.aspectjlearning.model.*.*(..))&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">modelLayer</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br><br>    <span class="hljs-meta">@Around(&quot;modelLayer()&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">logProfile</span><span class="hljs-params">(ProceedingJoinPoint joinPoint)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>        <span class="hljs-keyword">long</span> start = System.currentTimeMillis();<br>        Object result = joinPoint.proceed();<br>        System.out.println(<span class="hljs-string">&quot;[ProfilingAspect]方法: 【&quot;</span> + joinPoint.getSignature() + <span class="hljs-string">&quot;】结束，用时: &quot;</span> + (System.currentTimeMillis() - start));<br><br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>接下来，我们讨论怎么样将定义好的两个 Aspects 织入到我们的 Account 的付款方法 pay(amount) 中，也就是三种织入时机分别是怎么实现的。</p>
+<h2 id="Compile-Time-Weaving"><a href="#Compile-Time-Weaving" class="headerlink" title="Compile-Time Weaving"></a>Compile-Time Weaving</h2><p>这是最简单的使用方式，在编译期的时候进行织入，这样编译出来的 .class 文件已经织入了我们的代码，在 JVM 运行的时候其实就是加载了一个普通的被织入了代码的类。</p>
+<p>如果你是采用 maven 进行管理，可以在 <code>&lt;build&gt;</code> 中加入以下的插件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 编译期织入 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.codehaus.mojo<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aspectj-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.7<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">complianceLevel</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">complianceLevel</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">source</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">source</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">target</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">showWeaveInfo</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">showWeaveInfo</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">verbose</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">verbose</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">Xlint</span>&gt;</span>ignore<span class="hljs-tag">&lt;/<span class="hljs-name">Xlint</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">encoding</span>&gt;</span>UTF-8<span class="hljs-tag">&lt;/<span class="hljs-name">encoding</span>&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br>	<span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span><br>		<span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span><br>			<span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span><br>				<span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>test-compile<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span><br>			<span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span><br>		<span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span><br>	<span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>AccountAspect.aj 文件 javac 是没法编译的，所以上面这个插件其实充当了编译的功能。</p>
+</blockquote>
+<p>然后，我们就可以运行了：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        testCompileTime();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testCompileTime</span><span class="hljs-params">()</span> </span>&#123;<br>        Account account = <span class="hljs-keyword">new</span> Account();<br>        System.out.println(<span class="hljs-string">&quot;==================&quot;</span>);<br>        account.pay(<span class="hljs-number">10</span>);<br>        account.pay(<span class="hljs-number">50</span>);<br>        System.out.println(<span class="hljs-string">&quot;==================&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">==================<br><span class="hljs-string">[AccountAspect]</span>付款前总金额: <span class="hljs-number">20</span><br><span class="hljs-string">[AccountAspect]</span>需要付款: <span class="hljs-number">10</span><br><span class="hljs-string">[ProfilingAspect]</span>方法: 【<span class="hljs-built_in">bool</span>ean com.javadoop.aspectjlearning.model.Account.pay(<span class="hljs-built_in">int</span>)】结束，用时: <span class="hljs-number">1</span><br><span class="hljs-string">[AccountAspect]</span>付款后，剩余：<span class="hljs-number">10</span><br><span class="hljs-string">[AccountAspect]</span>付款前总金额: <span class="hljs-number">10</span><br><span class="hljs-string">[AccountAspect]</span>需要付款: <span class="hljs-number">50</span><br><span class="hljs-string">[AccountAspect]</span>拒绝付款!<br><span class="hljs-string">[AccountAspect]</span>付款后，剩余：<span class="hljs-number">10</span><br>==================<br></code></pre></div></td></tr></table></figure>
+
+<p>结果看上去就很神奇（我们知道是 aop 搞的鬼当然会觉得不神奇），其实奥秘就在于 main 函数中的代码被改变了，不再是上面几行简单的代码了，而是进行了织入：</p>
+<p><img src="https://img-blog.csdnimg.cn/98a1615e498c48b7bb6be523581a6666.png" srcset="/img/loading.gif" alt="1"></p>
+<p>我们的 Account 类也不再像原来定义的那样了：</p>
+<p><img src="https://img-blog.csdnimg.cn/5443d6a75aeb4250a2b4c5c79dab5e7b.png" srcset="/img/loading.gif" alt="1"></p>
+<p>编译期织入理解起来应该还是比较简单，就是在编译的时候先修改了代码再进行编译。</p>
+<h2 id="Post-Compile-Weaving"><a href="#Post-Compile-Weaving" class="headerlink" title="Post-Compile Weaving"></a>Post-Compile Weaving</h2><p>Post-Compile Weaving 和 Compile-Time Weaving 非常类似，我们也是直接用场景来说。</p>
+<p>我们假设上面的 Account 类在 aspectj-learning-share.jar 包中，我们的工程 aspectj-learning 依赖了这个 jar 包。</p>
+<p>由于 Account 这个类已经被编译出来了，我们要对它的方法进行织入，就需要用到编译后织入。</p>
+<p>为了方便大家测试，尽量让前面的用例也能跑起来。我们定义一个新的类 <strong>User</strong>，代码和 Account 一样，但是<strong>在 aspectj-learning-share.jar</strong> 包中，这个包就这一个类。</p>
+<p>同时也复制 AccountAspect 一份出来，命名为 <strong>UserAspect</strong>，稍微修改修改就可以用来处理 User 类了。</p>
+<p>首先，我们注释掉之前编译期织入使用的插件配置，增加以下插件配置（其实还是同一个插件）：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!--编译后织入--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.codehaus.mojo<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aspectj-maven-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">complianceLevel</span>&gt;</span>1.8<span class="hljs-tag">&lt;/<span class="hljs-name">complianceLevel</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">weaveDependencies</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">weaveDependency</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.javadoop<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aspectj-learning-share<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">weaveDependency</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">weaveDependencies</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">executions</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">execution</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">goals</span>&gt;</span><br>                <span class="hljs-tag">&lt;<span class="hljs-name">goal</span>&gt;</span>compile<span class="hljs-tag">&lt;/<span class="hljs-name">goal</span>&gt;</span><br>            <span class="hljs-tag">&lt;/<span class="hljs-name">goals</span>&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">execution</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">executions</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意配置中的 <code>&lt;weaveDependency&gt;</code>，我们在 <code>&lt;dependencies&gt;</code> 中要配置好依赖，然后在这里进行配置。这样就可以对其进行织入了。</p>
+</blockquote>
+<p>接下来，大家可以<strong>手动</strong>用 <code>mvn clean package</code> 编译一下，然后就会看到以下结果：</p>
+<p><img src="https://img-blog.csdnimg.cn/8135107974204b45993d322bc3efdb7a.png" srcset="/img/loading.gif" alt="3"></p>
+<p>从上图我们可以看到，上面的配置会把相应的 jar 包中的类加到当前工程的编译结果中（User 类原本是在 aspectj-learning-share.jar 中的）。</p>
+<p>运行一下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">java -jar target/aspectj-learning-1.0-jar-with-dependencies.jar<br></code></pre></div></td></tr></table></figure>
+
+<p>运行结果也会如预期的一样，UserAspect 对 User 进行了织入，这里就不赘述了。感兴趣的读者自己去跑一下，注意一定要用 mvn 命令，不要用 IDE，不然很多时候发现不了问题。</p>
+<blockquote>
+<p>Intellij 在 build 的时候会自己处理 AspectJ，而不是用我们配置的 maven 插件。</p>
+</blockquote>
+<h2 id="Load-Time-Weaving"><a href="#Load-Time-Weaving" class="headerlink" title="Load-Time Weaving"></a>Load-Time Weaving</h2><p>最后，我们要介绍的是 LTW 织入，正如 Load-Time 的名字所示，它是在 JVM 加载类的时候做的织入。AspectJ 允许我们在启动的时候指定 <strong>agent</strong> 来实现这个功能。</p>
+<p>首先，我们先<strong>注释掉之前在 pom.xml 中用于编译期和编译后织入使用的插件</strong>，免得影响我们的测试。</p>
+<blockquote>
+<p>我们要知道，一旦我们去掉了 aspectj 的编译插件，那么 .aj 的文件是不会被编译的。</p>
+</blockquote>
+<p>然后，我们需要在 JVM 的启动参数中加上以下 agent（或在 IDE 中配置 VM options），如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">-javaagent:/Users/hongjie/.m2/repository/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar<br></code></pre></div></td></tr></table></figure>
+
+<p>之后，我们需要在 resources 中配置 <strong>aop.xml</strong> 文件，放置在 META-INF 目录中（<strong>resource/META-INF/aop.xml</strong>）：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">aspectj</span> <span class="hljs-meta-keyword">PUBLIC</span> <span class="hljs-meta-string">&quot;-//AspectJ//DTD//EN&quot;</span> <span class="hljs-meta-string">&quot;http://www.eclipse.org/aspectj/dtd/aspectj.dtd&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">aspectj</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">aspects</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">aspect</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.javadoop.aspectjlearning.aspect.ProfilingAspect&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">weaver</span> <span class="hljs-attr">options</span>=<span class="hljs-string">&quot;-verbose -showWeaveInfo&quot;</span>&gt;</span><br>            <span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">within</span>=<span class="hljs-string">&quot;com.javadoop.aspectjlearning..*&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;/<span class="hljs-name">weaver</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">aspects</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">aspectj</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>aop.xml 文件中的配置非常容易理解，只需要配置 Aspects 和需要被织入的类即可。</p>
+</blockquote>
+<p>我们用以下程序进行测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Application</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        testLoadTime();<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testLoadTime</span><span class="hljs-params">()</span> </span>&#123;<br>        Account account = <span class="hljs-keyword">new</span> Account();<br>        System.out.println(<span class="hljs-string">&quot;==================&quot;</span>);<br>        account.pay(<span class="hljs-number">10</span>);<br>        account.pay(<span class="hljs-number">50</span>);<br>        System.out.println(<span class="hljs-string">&quot;==================&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>万事具备了，我们可以开始跑起来了。</p>
+<p><strong>第一步，编译</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mvn clean package<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>第二步，检查编译结果</strong></p>
+<p>我们通过 IDE 查看编译出来的代码（IDE反编译），可以看到，Application 类并未进行织入，Account 类也并未进行织入。</p>
+<p><strong>第三步，运行</strong></p>
+<p>从第二步我们可以看到，在运行之前，AspectJ 没有做任何的事情。</p>
+<p>那么可以肯定的就是，AspectJ 会在运行期利用 aop.xml 中的配置进行织入处理。</p>
+<p>在命令行中执行以下语句：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">java -jar target/aspectj-learning-1.0-jar-with-dependencies.jar<br></code></pre></div></td></tr></table></figure>
+
+<p>输出为：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs markdown">==================<br>==================<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看到没有任何织入处理，然后执行以下语句再试试：</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">java -javaagent:/Users/hongjie/.m2/repository/org/aspectj/aspectjweaver/1.8.13/aspectjweaver-1.8.13.jar -jar target/aspectj-learning-1.0-jar-with-dependencies.jar<br></code></pre></div></td></tr></table></figure>
+
+<p>启动的时候指定了 <code>-javaagent:/.../aspectjweaver-1.8.13.jar</code>，然后再看输出结果：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs asciidoc">==================<br>[ProfilingAspect]方法: 【boolean com.javadoop.aspectjlearning.model.Account.pay(int)】结束，用时: 1<br>[ProfilingAspect]方法: 【boolean com.javadoop.aspectjlearning.model.Account.pay(int)】结束，用时: 0<br>==================<br></code></pre></div></td></tr></table></figure>
+
+<p>我们可以看到 ProfilingAspect 已经进行了织入处理，这就是 Load-time Weaving。</p>
+<p>到这里，就要结束这一小节了，这里顺便再介绍下如果用 maven 跑测试的话怎么搞。</p>
+<p>首先，我们往 surefire 插件中加上 javaagent：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">plugin</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.maven.plugins<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>maven-surefire-plugin<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">argLine</span>&gt;</span><br>            -javaagent:/xxx/aspectjweaver-1.8.13.jar<br>        <span class="hljs-tag">&lt;/<span class="hljs-name">argLine</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">useSystemClassLoader</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">useSystemClassLoader</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">forkMode</span>&gt;</span>always<span class="hljs-tag">&lt;/<span class="hljs-name">forkMode</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">plugin</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后，我们就可以用 <code>mvn test</code> 看到织入效果了。还是那句话，不要用 IDE 进行测试，因为 IDE 太“智能”了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>AspectJ 的三种织入方式中，个人觉得前面的两种会比较实用一些，因为第三种需要修改启动脚本，对于大型公司来说会比较不友好，需要专门找运维人员配置。在实际生产中，我们用得最多的还是纯 Spring AOP。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Spring/">Spring</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3720721208.html">https://tothefor.com/DragonOne/3720721208.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/3668315189.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一行一行源码分析AbstractQueuedSynchronizer(一)</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/3711499947.html">
+                        <span class="hidden-mobile">Spring-Spring+AOP源码解析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
