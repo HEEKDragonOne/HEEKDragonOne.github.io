@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>LCY算法培训-进阶班-第1讲（STL在竞赛中的应用） - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LCY算法培训-进阶班-第1讲（STL在竞赛中的应用）">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-31 10:32" pubdate>
+        March 31, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LCY算法培训-进阶班-第1讲（STL在竞赛中的应用）</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>2021杭电ACM-LCY算法培训进阶班知识总结。STL在竞赛中的应用PPT内容整理。、、</p>
+<hr>
+<h2 id="知识目录"><a href="#知识目录" class="headerlink" title="知识目录"></a>知识目录</h2><hr>
+<h3 id="相关头文件"><a href="#相关头文件" class="headerlink" title="相关头文件"></a>相关头文件</h3><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;//万能头文件</span></span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3><hr>
+<h3 id="1-队列-queue"><a href="#1-队列-queue" class="headerlink" title="1.队列(queue)"></a>1.队列(queue)</h3><h6 id="1）特点"><a href="#1）特点" class="headerlink" title="1）特点"></a>1）特点</h6><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">1.先进先出(FIFO)<br>2.从队头删除元素<br>3.在队尾加入元素<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）常见操作"><a href="#2）常见操作" class="headerlink" title="2）常见操作"></a>2）常见操作</h6><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">创建队列对象<br>queue&lt;元素类型&gt; 队列名;<br>queue&lt;int&gt; qq;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">1.判断队列是否为空<br>队列名.empty();<br>qq.empty();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">2.查询队列大小<br>队列名.size();<br>qq.size();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">3.访问队首元素<br>队列名.front();<br>qq.front();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">4.访问队尾元素<br>队列名.back();<br>qq.back();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">5.加入元素(在队尾加入)<br>队列名.push(元素名);<br>qq.push();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">6.删除元素(在队首删除)<br>队列名.pop();<br>qq.pop();<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="3）实例"><a href="#3）实例" class="headerlink" title="3）实例"></a>3）实例</h6><figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-keyword">int</span> a,b,c,d;<br><span class="hljs-built_in">queue</span>&lt;<span class="hljs-keyword">int</span>&gt; qq;<br>qq.push(<span class="hljs-number">1</span>);<br>qq.push(<span class="hljs-number">3</span>);<br>qq.push(<span class="hljs-number">4</span>);<br>qq.pop();<br>a=qq.front();<span class="hljs-comment">//a=1</span><br>b=qq.back();<span class="hljs-comment">//b=3</span><br>c=qq.size();<span class="hljs-comment">//c=2</span><br>d=qq.empty();<span class="hljs-comment">//d=0</span><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="2-优先队列-priority-queue"><a href="#2-优先队列-priority-queue" class="headerlink" title="2.优先队列(priority_queue)"></a>2.优先队列(priority_queue)</h3><h6 id="1）特点-1"><a href="#1）特点-1" class="headerlink" title="1）特点"></a>1）特点</h6><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">1.在队尾加入元素<br>2.从队头删除元素<br>3.每次取出的是具有最高优先权的元素(不一定先进先出)<br>4.内部的本质是用堆实现的<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）常见操作-1"><a href="#2）常见操作-1" class="headerlink" title="2）常见操作"></a>2）常见操作</h6><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">创建队列对象<br>priority_queue&lt;元素类型&gt; 队列名;<br>priority_queue&lt;int&gt; qq;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">1.判断队列是否为空<br>队列名.empty();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">2.查询队列大小<br>队列名.size();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">3.返回优先权最高的元素<br>队列名.push();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">4.加入元素<br>队列名.push();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">5.删除元素(删除第一个元素)<br>队列名.pop();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">6.访问最优元素<br>队列名.top();<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="3）实例-1"><a href="#3）实例-1" class="headerlink" title="3）实例"></a>3）实例</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-built_in">priority_queue</span>&lt;<span class="hljs-keyword">int</span>&gt; q;<br>    <span class="hljs-keyword">int</span> t,a=<span class="hljs-number">2</span>,b=<span class="hljs-number">5</span>,c=<span class="hljs-number">3</span>;<br>    q.push(a); q.push(b); q.push(c);<br>    <span class="hljs-keyword">while</span>(!q.empty())&#123;<br>        t=q.top();<br>        q.pop();<br>        <span class="hljs-built_in">cout</span>&lt;&lt;t&lt;&lt;<span class="hljs-built_in">endl</span>;<span class="hljs-comment">//printf(&quot;%d\n&quot;,t);</span><br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><span class="hljs-comment">//结果</span><br><span class="hljs-number">5</span><br><span class="hljs-number">3</span><br><span class="hljs-number">2</span>    <br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="3-栈-stack"><a href="#3-栈-stack" class="headerlink" title="3.栈(stack)"></a>3.栈(stack)</h3><h6 id="1）特点-2"><a href="#1）特点-2" class="headerlink" title="1）特点"></a>1）特点</h6><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">1.先进后出(FILO)<br>2.从栈顶删除元素<br>3.从栈顶加入元素<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）常见操作-2"><a href="#2）常见操作-2" class="headerlink" title="2）常见操作"></a>2）常见操作</h6><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs b">创建栈对象<br>stack&lt;元素类型&gt; 栈名;<br>stack&lt;int&gt; st;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">1.判断栈是否为空<br>栈名.empty();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">2.查询栈大小<br>栈名.size();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">3.</span>访问栈顶元素 <span class="hljs-comment">//要先确保栈非空</span><br>栈名.top();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">4.栈顶加入元素<br>栈名.push(元素名);<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">5.删除栈顶元素<br>栈名.pop();<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h4><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">栈和队列一样，没有clear之类的函数，如果想要清空一个栈，需要循环调用出栈函数<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="3）实例-2"><a href="#3）实例-2" class="headerlink" title="3）实例"></a>3）实例</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; s;<br>s.push(<span class="hljs-number">1</span>);<br>s.push(<span class="hljs-number">2</span>);<br>s.push(<span class="hljs-number">3</span>);<br>s.pop();<br><span class="hljs-built_in">cout</span>&lt;&lt;s.top()&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//2</span><br>s.top()+=<span class="hljs-number">3</span>;<br><span class="hljs-built_in">cout</span>&lt;&lt;s.top()&lt;&lt;<span class="hljs-built_in">endl</span>; <span class="hljs-comment">//5</span><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="4-向量，动态数组-vector"><a href="#4-向量，动态数组-vector" class="headerlink" title="4.向量，动态数组(vector)"></a>4.向量，动态数组(vector)</h3><h6 id="1-向量的定义"><a href="#1-向量的定义" class="headerlink" title="1)向量的定义"></a>1)向量的定义</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">vector</span>&lt;元素类型&gt; 向量名;<br><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; a;<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）向量初始化"><a href="#2）向量初始化" class="headerlink" title="2）向量初始化"></a>2）向量初始化</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; abc;<span class="hljs-comment">//初始化一个size为0的vector，也是最常用的</span><br><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">abc</span><span class="hljs-params">(<span class="hljs-number">10</span>)</span></span>;<span class="hljs-comment">//初始化了10个默认值为0的元素</span><br><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">abc</span><span class="hljs-params">(<span class="hljs-number">10</span>,<span class="hljs-number">1</span>)</span></span>;<span class="hljs-comment">//初始化了10个值为1的元素</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="3）向量的常见操作"><a href="#3）向量的常见操作" class="headerlink" title="3）向量的常见操作"></a>3）向量的常见操作</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span>取向量首元素的迭代器<br>向量名.begin();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">2.</span>取向量尾元素下一地址<br>向量名.end();<span class="hljs-comment">//不是最后一个元素，而是最后一个元素的下一个位置。begin和end可以理解成区间中的前闭后开，即[a.begin,a.end),这个区间包括了向量a中的全部元素</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">3.</span>取向量首元素的值<br>向量名.front();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">4.</span>取向量尾元素的值<br>向量名.back();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">5.</span>下标形式访问<br><span class="hljs-keyword">int</span> a=向量名[t];<span class="hljs-comment">//类似普通数组的访问操作，其中t可以为任何数，但不能超出向量中实际的个数</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">6.</span>往尾部添加一个元素<br>向量名.push_back(值);<span class="hljs-comment">//最常见操作</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">7.</span>删除尾部第一个元素<br>向量名.pop_back();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">8.</span>判断向量是否为空<br>向量名.empty();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">9.</span>求向量中元素的个数<br>向量名.size();<span class="hljs-comment">//实际元素的个数，不是容量</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">10.</span>翻转向量<br>reverse(a.begin() , a.end());<span class="hljs-comment">//a为向量名</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="4）向量的经典应用"><a href="#4）向量的经典应用" class="headerlink" title="4）向量的经典应用"></a>4）向量的经典应用</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span>邻接表<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">edge</span>&#123;</span><span class="hljs-keyword">int</span> from,to,value;&#125;<br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn=<span class="hljs-number">1e5</span>;<br><span class="hljs-built_in">vector</span>&lt;edge&gt; Map[maxn];<span class="hljs-comment">//一维向量相当于二维数组</span><br>若用普通二维数组存邻接表，会造成极大浪费(超内存)<br><span class="hljs-comment">//初始化，clear函数是清空向量，不是变成0</span><br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;maxn;++i) Map[i].clear();<br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="5-集合-set"><a href="#5-集合-set" class="headerlink" title="5.集合(set)"></a>5.集合(set)</h3><h6 id="数学上的集合的三个特征"><a href="#数学上的集合的三个特征" class="headerlink" title="数学上的集合的三个特征"></a>数学上的集合的三个特征</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span>确定性(任一元素必须是确定属于或不属于某个集合)<br><span class="hljs-number">2.</span>互异性(集合中的元素互不相同)<br><span class="hljs-number">3.</span>无序性(集合中的元素没有先后之分)<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="1）特点-3"><a href="#1）特点-3" class="headerlink" title="1）特点"></a>1）特点</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">set</span>的含义就是集合，是一个有序的，没有相同元素的容器，且里面的元素都是排序好的，支持插入，删除，查找等操作，所有的操作都是严格在logn时间内完成，效率非常高<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）常见操作-3"><a href="#2）常见操作-3" class="headerlink" title="2）常见操作"></a>2）常见操作</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span><span class="hljs-built_in">set</span>的声明<br><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; s;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">2.</span><span class="hljs-built_in">set</span>的清空<br>s.clear();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">3.</span>插入一个元素x<br>s.insert(x);<span class="hljs-comment">//如果集合中之前没有此元素，则成功插入并自动排序，否则不插入</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">4.</span>查询有否元素x<br><span class="hljs-keyword">int</span> hav = s.count(x); <span class="hljs-comment">//有则返回1，无则返回0</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">5.</span>查找x并返回迭代器<br><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = s.find(x);<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">6.</span>判断是否为空集<br><span class="hljs-keyword">bool</span> isempty = s.empty();<span class="hljs-comment">//若为空集则返回真，否则返回假</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">7.</span>求集合元素个数<br><span class="hljs-keyword">int</span> n = s.size();<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">8.</span>删除元素x<br>s.erase(x);<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="3）用法注意"><a href="#3）用法注意" class="headerlink" title="3）用法注意"></a>3）用法注意</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span><span class="hljs-built_in">set</span>最主要用途：自动去重并按升序排序<br><span class="hljs-number">2.</span>如若对<span class="hljs-built_in">set</span>中的元素降序排序，则<br><span class="hljs-built_in">set</span>声明<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>,greater&lt;<span class="hljs-keyword">int</span>&gt; &gt; st;<br>迭代器也随之改变<br>    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>,greater&lt;<span class="hljs-keyword">int</span>&gt; &gt;::iterator it;<br>如若<span class="hljs-keyword">int</span>类型改为结构体时，排序就在结构体中加载小于符号<br><span class="hljs-number">3.</span><span class="hljs-built_in">set</span>只能通过迭代器(iterator)访问<br><span class="hljs-number">4.</span><span class="hljs-built_in">set</span>不支持 it &lt; st.end() 的写法，可写成 it != st.end() <br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="6-string类"><a href="#6-string类" class="headerlink" title="6.string类"></a>6.string类</h3><h6 id="1）string对象的声明"><a href="#1）string对象的声明" class="headerlink" title="1）string对象的声明"></a>1）string对象的声明</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span><span class="hljs-built_in">string</span> str;<br><span class="hljs-number">2.</span><span class="hljs-built_in">string</span> strl=<span class="hljs-string">&quot;qwertyuui&quot;</span>;<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）求string对象的长度"><a href="#2）求string对象的长度" class="headerlink" title="2）求string对象的长度"></a>2）求string对象的长度</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">string</span> strTest=<span class="hljs-string">&quot;test&quot;</span>;<br><span class="hljs-number">1.</span> strTest.length(); <span class="hljs-comment">//结果为4</span><br><span class="hljs-number">2.</span> strTest.size(); <span class="hljs-comment">//结果为4</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="3）string对象的连接"><a href="#3）string对象的连接" class="headerlink" title="3）string对象的连接"></a>3）string对象的连接</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">可以使用+和+=运算符对<span class="hljs-built_in">string</span>对象执行字符串的连接操作(还有append成员函数实现字符串连接，忽略之)<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="4）string对象的比较"><a href="#4）string对象的比较" class="headerlink" title="4）string对象的比较"></a>4）string对象的比较</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">可以用 &lt;、&lt;=、==、!=、&gt;=、&gt; 运算符比较<span class="hljs-built_in">string</span>对象(还有compare成员函数用于比较字符串，忽略之)<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="5）求string对象的字串"><a href="#5）求string对象的字串" class="headerlink" title="5）求string对象的字串"></a>5）求string对象的字串</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">substr 成员函数可以用于求字串(n,m)<br>调用时，如果省略m或者m超过了字符串的长度，则求出来的字串就是从下标n开始一直到字符串结束的部分<br><span class="hljs-built_in">string</span> s1=<span class="hljs-string">&quot;this is ok&quot;</span>;<br><span class="hljs-number">1.</span><span class="hljs-built_in">string</span> s2=s1.substr(<span class="hljs-number">2</span>,<span class="hljs-number">4</span>); <span class="hljs-comment">//s2=&quot;is i&quot;</span><br><span class="hljs-number">2.</span>s2=s1.substr(<span class="hljs-number">2</span>);<span class="hljs-comment">// s2=&quot;is is ok&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="6）插入字符串"><a href="#6）插入字符串" class="headerlink" title="6）插入字符串"></a>6）插入字符串</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">insert 成员函数可以在<span class="hljs-built_in">string</span>对象中插入另一个字符串，返回值为对象自身的引用<br>string s1(&quot;Limitless&quot;), s2(&quot;00&quot;);<br><span class="hljs-number">1.</span> s1.insert(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;123&quot;</span>); <span class="hljs-comment">//&quot;Li123mitless&quot;</span><br><span class="hljs-number">2.</span> s1.insert(<span class="hljs-number">3</span>,s2); <span class="hljs-comment">//s1=&quot;Li10023mitless&quot;</span><br><span class="hljs-number">3.</span> s1.insert(<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;x&#x27;</span>);<span class="hljs-comment">//s1=&quot;Li1xxxxx0023mitless&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="7）删除字串"><a href="#7）删除字串" class="headerlink" title="7）删除字串"></a>7）删除字串</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">erase 成员函数可以删除<span class="hljs-built_in">string</span>对象中的字串，返回值为对象自身的引用<br><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s1</span><span class="hljs-params">(<span class="hljs-string">&quot;Real Steel&quot;</span>)</span></span>;<br><span class="hljs-number">1.</span> s1.erase(<span class="hljs-number">1</span>,<span class="hljs-number">3</span>);<span class="hljs-comment">//s1=&quot;R Steel&quot;</span><br><span class="hljs-number">2.</span> s1.erase(<span class="hljs-number">5</span>);<span class="hljs-comment">//s1=&quot;R Ste&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="8）交换两个string对象的内容"><a href="#8）交换两个string对象的内容" class="headerlink" title="8）交换两个string对象的内容"></a>8）交换两个string对象的内容</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">swap成员函数可以交换两个<span class="hljs-built_in">string</span>对象的内容<br>string s1(&quot;West&quot;),s2(&quot;East&quot;);<br>s1.swap(s2);<span class="hljs-comment">//s1=&quot;East&quot;,s2=&quot;West&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<h6 id="9）字符串的查找操作"><a href="#9）字符串的查找操作" class="headerlink" title="9）字符串的查找操作"></a>9）字符串的查找操作</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">string</span> str=<span class="hljs-string">&quot;The apple thinks apple is delicious&quot;</span>; <span class="hljs-comment">//长度34</span><br><span class="hljs-built_in">string</span> key=<span class="hljs-string">&quot;apple&quot;</span>;<br><span class="hljs-number">1.</span> <span class="hljs-keyword">int</span> pos1=str.find(key);<span class="hljs-comment">//4</span><br>    s.find(str),查找字符串str在当前字符串s中第一次出现的位置<br><span class="hljs-number">2.</span> <span class="hljs-keyword">int</span> pos2=str.find(key,<span class="hljs-number">10</span>);<span class="hljs-comment">//17</span><br>    s.find(str,pos),查找字符串str在当前字符串s的[pos,end]中第一次出现的位置，即从pos开始到字符串的最后，str第一次出现的位置<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="10）用STL算法操作string对象"><a href="#10）用STL算法操作string对象" class="headerlink" title="10）用STL算法操作string对象"></a>10）用STL算法操作string对象</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-built_in">string</span> <span class="hljs-title">s</span><span class="hljs-params">(<span class="hljs-string">&quot;afgcbed&quot;</span>)</span></span>;<br>sort(s.begin(),s,end());<br><span class="hljs-built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="hljs-built_in">endl</span>;<span class="hljs-comment">//输出abcdefg</span><br>next_permutation(s.begin(),s,end());<br><span class="hljs-built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="hljs-built_in">endl</span>;<span class="hljs-comment">//输出abcdegf</span><br>reverse(s.begin(),s,end());<br><span class="hljs-built_in">cout</span>&lt;&lt;s&lt;&lt;<span class="hljs-built_in">endl</span>;<span class="hljs-comment">//fgedcba</span><br></code></pre></div></td></tr></table></figure>
+<h6 id="11）String其他有用函数"><a href="#11）String其他有用函数" class="headerlink" title="11）String其他有用函数"></a>11）String其他有用函数</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span> 截取子串<br>       s.substr(pos, n)    截取s中从pos开始（包括<span class="hljs-number">0</span>）的n个字符的子串，并返回<br>       s.substr(pos)        截取s中从从pos开始（包括<span class="hljs-number">0</span>）到末尾的所有字符的子串，并返回<br><span class="hljs-number">2.</span> 替换子串<br>       s.replace(pos, n, s1)    用s1替换s中从pos开始（包括<span class="hljs-number">0</span>）的n个字符的子串<br><span class="hljs-number">3.</span> 查找子串<br>       s.find(s1)         查找s中第一次出现s1的位置，并返回（包括<span class="hljs-number">0</span>）<br>       s.rfind(s1)        查找s中最后次出现s1的位置，并返回（包括<span class="hljs-number">0</span>）<br>       s.find_first_of(s1)       查找在s1中任意一个字符在s中第一次出现的位置，并返回（包括<span class="hljs-number">0</span>）<br>       s.find_last_of(s1)       查找在s1中任意一个字符在s中最后一次出现的位置，并返回（包括<span class="hljs-number">0</span>）<br>       s.fin_first_not_of(s1)         查找s中第一个不属于s1中的字符的位置，并返回（包括<span class="hljs-number">0</span>）<br>       s.fin_last_not_of(s1)         查找s中最后一个不属于s1中的字符的位置，并返回（包括<span class="hljs-number">0</span>）<br>       <br><span class="hljs-number">4.</span><span class="hljs-built_in">string</span>转换成<span class="hljs-keyword">char</span>*字符串<br><span class="hljs-number">1</span>) .data();<br>如：<br><span class="hljs-built_in">string</span> str=<span class="hljs-string">&quot;abc&quot;</span>;<br><span class="hljs-keyword">char</span>*p=(<span class="hljs-keyword">char</span>*)str.data();<br><br><span class="hljs-number">2</span>) .c_str();<br>如：<br><span class="hljs-built_in">string</span> str=<span class="hljs-string">&quot;adcd&quot;</span>;<br><span class="hljs-keyword">char</span> *p=(<span class="hljs-keyword">char</span>*)str.c_str();<br><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="7-映射-map"><a href="#7-映射-map" class="headerlink" title="7.映射(map)"></a>7.映射(map)</h3><h6 id="1）特点-4"><a href="#1）特点-4" class="headerlink" title="1）特点"></a>1）特点</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-built_in">map</span>是一个键值对(key/value)容器，对于迭代器来说，可以修改value，而不能修改key。Map会根据key自动排序<br><span class="hljs-built_in">map</span>类型通常可理解为关联数组：可使用键作为下标来获取一个值。关联的本质在于：元素的值与某个特定的键相关联，而并非通过元素在数组中的位置来获取<br></code></pre></div></td></tr></table></figure>
+
+<h6 id="2）常见操作-4"><a href="#2）常见操作-4" class="headerlink" title="2）常见操作"></a>2）常见操作</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">1.</span><span class="hljs-built_in">map</span>的定义<br><span class="hljs-built_in">map</span>&lt;<span class="hljs-keyword">int</span>,<span class="hljs-built_in">string</span>&gt; m;<span class="hljs-comment">//定义一个空map m;</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">2.</span>返回m中键值等于k的元素的个数(<span class="hljs-number">1</span>或<span class="hljs-number">0</span>)<br>m.count(k);<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">3.</span>查找元素<br>m.find(k);<span class="hljs-comment">//存在则返回指向该元素的迭代器，否则返回结束地址end()</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">4.</span>删除元素<br>m.erase(k);<span class="hljs-comment">//删除m中键为k的元素，返回删除元素的个数(1或0)</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">5.</span>删除迭代器指向的元素<br>m.erase(p);<span class="hljs-comment">//从m中删除迭代器p所指向的元素</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">6.</span>插入元素<br>m.insert(e);<span class="hljs-comment">//e是一个用在m上的value_type类型的值(一个pair)。如果键e.first不在m中，则插入一个值为e.second的新元素；如果该键在m中已存在，那么不进行任何操作</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++"><span class="hljs-number">7.</span>清空元素<br>m.clear();<span class="hljs-comment">//清空m</span><br></code></pre></div></td></tr></table></figure>
+
+<hr>
+<h3 id="8-STL中的算法"><a href="#8-STL中的算法" class="headerlink" title="8.STL中的算法"></a>8.STL中的算法</h3><h6 id="1）全排序-next-permutation"><a href="#1）全排序-next-permutation" class="headerlink" title="1）全排序(next_permutation)"></a>1）全排序(next_permutation)</h6><figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">通常用于生成序列的全排列<br><span class="hljs-keyword">int</span> a[]=&#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>&#125;;<br><span class="hljs-keyword">do</span>&#123;<br>    <span class="hljs-built_in">cout</span>&lt;&lt;a[<span class="hljs-number">0</span>]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;a[<span class="hljs-number">1</span>]&lt;&lt;<span class="hljs-string">&quot; &quot;</span>&lt;&lt;a[<span class="hljs-number">2</span>]&lt;&lt;<span class="hljs-built_in">endl</span>;<br>&#125;<span class="hljs-keyword">while</span>(next_permutation(a,a+<span class="hljs-number">3</span>))<br><span class="hljs-number">1.</span>若当前调用排序已经达到最大字典序，比如<span class="hljs-number">321</span>，则函数返回<span class="hljs-literal">false</span>;<br><span class="hljs-number">2.</span>修改函数的参数，比如(a,a+<span class="hljs-number">2</span>),则可以只对部分长度全排列<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c++">next_permutation是如何生成序列的全排列？<br><span class="hljs-number">1.</span>从最右边开始，两两比较相邻的元素，直至找到右边比左边大的一对，左边那个就是将要被替换的，再从最右边开始找比这个元素大的第一个，交换他们两个.<br><span class="hljs-number">2.</span>交换之后，翻转交换元素的后面的所有元素<br><span class="hljs-number">3.</span>比如：<span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">4</span> <span class="hljs-number">6</span> <span class="hljs-number">5</span> <span class="hljs-number">2</span> =&gt; <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">6</span> <span class="hljs-number">4</span> <span class="hljs-number">2</span> =&gt; <span class="hljs-number">1</span> <span class="hljs-number">3</span> <span class="hljs-number">5</span> <span class="hljs-number">2</span> <span class="hljs-number">4</span> <span class="hljs-number">6</span><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/2021%E6%9D%AD%E7%94%B5ACM-LCY%E7%AE%97%E6%B3%95%E5%9F%B9%E8%AE%AD%E8%BF%9B%E9%98%B6%E7%8F%AD/">2021杭电ACM-LCY算法培训进阶班</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3325278709.html">https://tothefor.com/DragonOne/3325278709.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/166314578.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ACM-拓展知识点</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/1604321693.html">
+                        <span class="hidden-mobile">实现批量生成文本/文件等</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

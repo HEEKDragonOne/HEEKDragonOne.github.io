@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>蓝桥杯JAVA-5.位运算技巧和原理 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="蓝桥杯JAVA-5.位运算技巧和原理">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-07 07:03" pubdate>
+        December 7, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      47
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">蓝桥杯JAVA-5.位运算技巧和原理</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 14, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="0-位运算预知识"><a href="#0-位运算预知识" class="headerlink" title="0. 位运算预知识"></a>0. 位运算预知识</h2><p>优先级别由高到低依次为：按位取反( ~ )，按位与( &amp; )，按位异或( ^ )，按位或( | )。<br>一些特殊的重要知识点，记着，怕忘了。</p>
+<ul>
+<li>任何数与 0 异或等于它本身，即 n ^ 0 = n。</li>
+</ul>
+<p>理论简单说一下。</p>
+<h3 id="0-1-按位取反（-）"><a href="#0-1-按位取反（-）" class="headerlink" title="0.1 按位取反（~）"></a>0.1 按位取反（~）</h3><p>这是最简单的，将0变1，1变0。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">~<span class="hljs-number">15</span> ===&gt; ~<span class="hljs-number">0b0000_1111</span> ===&gt;<span class="hljs-number">1111</span> <span class="hljs-number">0000</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="0-2-按位与（-amp-）"><a href="#0-2-按位与（-amp-）" class="headerlink" title="0.2 按位与（&amp;）"></a>0.2 按位与（&amp;）</h3><p>总结：同时为1结果才为1，否则结果为0。<br>0 &amp; 0 = 0     0 &amp; 1 = 0     1 &amp; 0 = 0   1 &amp; 1 =1</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">0000</span> <span class="hljs-number">1111</span><br><span class="hljs-number">1111</span> <span class="hljs-number">1111</span><br>--------------------<br><span class="hljs-number">0000</span> <span class="hljs-number">1111</span>  即<span class="hljs-number">15</span>&amp;<span class="hljs-number">255</span> = <span class="hljs-number">1111</span> <br></code></pre></div></td></tr></table></figure>
+
+<h3 id="0-3-按位异或（-）"><a href="#0-3-按位异或（-）" class="headerlink" title="0.3 按位异或（^）"></a>0.3 按位异或（^）</h3><p>总结：不同为1，相同为0。<br>0 ^ 0 = 0      0 ^ 1 = 1      1 ^ 0 = 1       1 ^ 1 = 0</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">0000</span> <span class="hljs-number">1111</span><br><span class="hljs-number">1111</span> <span class="hljs-number">1111</span><br>---------------------<br><span class="hljs-number">1111</span> <span class="hljs-number">0000</span>  即<span class="hljs-number">15</span>^<span class="hljs-number">255</span> = <span class="hljs-number">1111</span> <span class="hljs-number">0000</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>在博弈论中的尼姆博弈中会用到 。任何数与 0 异或等于它本身，即 n ^ 0 = n。</p>
+<h3 id="0-4-按位或（-）"><a href="#0-4-按位或（-）" class="headerlink" title="0.4 按位或（|）"></a>0.4 按位或（|）</h3><p>总结：只要有1结果就为1，否则为0。<br>0  | 0 = 0      0 | 1 = 1      1 | 0 = 1       1 | 1 = 1</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">0000</span> <span class="hljs-number">1111</span><br><span class="hljs-number">1111</span> <span class="hljs-number">1111</span><br>---------------------<br><span class="hljs-number">1111</span> <span class="hljs-number">1111</span>   即<span class="hljs-number">15</span>|<span class="hljs-number">255</span> = <span class="hljs-number">11111111</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="0-5-原码、补码"><a href="#0-5-原码、补码" class="headerlink" title="0.5 原码、补码"></a>0.5 原码、补码</h3><p>在计算机中,整数是按原码(二进制)存的, 负数是按补码存的, 整数的补码和原码相同, 负数的补码等于原码取反后再加一。如：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">3</span>(正数的补码和原码相同)<br>原码:<span class="hljs-number">0000</span> <span class="hljs-number">0011</span><br>补码:<span class="hljs-number">0000</span> <span class="hljs-number">0011</span><br>-<span class="hljs-number">3</span>(负数的补码等于原码取反后再加<span class="hljs-number">1</span>,符号位不反！)<br>原码:<span class="hljs-number">1000</span> <span class="hljs-number">0011</span><br>反码:<span class="hljs-number">1111</span> <span class="hljs-number">1100</span><br>补码:<span class="hljs-number">1111</span> <span class="hljs-number">1101</span> 即<span class="hljs-keyword">int</span>型的-<span class="hljs-number">3</span>可以表示为<span class="hljs-number">0b11111111_11111111_11111111_11111101</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="0-6-移位"><a href="#0-6-移位" class="headerlink" title="0.6 移位"></a>0.6 移位</h3><blockquote>
+<p>左移(&lt;&lt;)：</p>
+</blockquote>
+<blockquote>
+<p>右移(&gt;&gt;)：</p>
+</blockquote>
+<blockquote>
+<p>无符号右移(&gt;&gt;&gt;)</p>
+</blockquote>
+<p>详解见《星星之火-JAVA中的&gt;&gt;&gt;与&gt;&gt;区别》。这里不写了。</p>
+<div style="text-align:center;font-size:23px">位运算技巧</div>
+
+
+
+<h2 id="1-判断奇数"><a href="#1-判断奇数" class="headerlink" title="1. 判断奇数"></a>1. 判断奇数</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>)&#123;<br>    <span class="hljs-comment">// n 是个奇数。</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-1-解释"><a href="#1-1-解释" class="headerlink" title="1.1 解释"></a>1.1 解释</h3><p>待补充。记住即可。</p>
+<h2 id="2-交换两数"><a href="#2-交换两数" class="headerlink" title="2. 交换两数"></a>2. 交换两数</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> a=<span class="hljs-number">23</span>;<span class="hljs-keyword">int</span> b=<span class="hljs-number">7</span>;<br>a=a^b; <span class="hljs-comment">//（1）</span><br>b=a^b; <span class="hljs-comment">//（2）</span><br>a=a^b; <span class="hljs-comment">//（3）</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-1-解释"><a href="#2-1-解释" class="headerlink" title="2.1 解释"></a>2.1 解释</h3><p>两个相同的数异或之后结果会等于0，即 n ^ n = 0。并且任何数与 0 异或等于它本身，即 n ^ 0 = n。<br>所以，把（1）中的 x 带入 （2）中的 x，有：<br>y = x^y = (x^y)^y = x^(y^y) = x^0 = x。 x 的值成功赋给了 y。<br>对于（3）,同理推导如下：<br>x = x^y = (x^y)^x = (x^x)^y = 0^y = y。</p>
+<p><strong>异或运算支持运算的交换律和结合律哦。</strong></p>
+<h2 id="3-找出没有重复的数-落单的数"><a href="#3-找出没有重复的数-落单的数" class="headerlink" title="3. 找出没有重复的数(落单的数)"></a>3. 找出没有重复的数(落单的数)</h2><p>给你一组整型数据，这些数据中，其中有一个数只出现了一次，其他的数都出现了两次，让你找出这个数来 。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] arr)</span></span>&#123;<br>    <span class="hljs-keyword">int</span> tmp = arr[<span class="hljs-number">0</span>];<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>;i &lt; arr.length; i++)&#123;<br>        tmp = tmp ^ arr[i];<br>    &#125;<br>    <span class="hljs-keyword">return</span> tmp;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-1-解释"><a href="#3-1-解释" class="headerlink" title="3.1 解释"></a>3.1 解释</h3><p>因为两个相同的数异或的结果是 0，一个数和 0 异或的结果是它本身，所以我们把这一组整型全部异或一下，例如这组数据是：1， 2， 3， 4， 5， 1， 2， 3， 4。其中 5 只出现了一次，其他都出现了两次，把他们全部异或一下，结果如下（由于异或支持交换律和结合律）：<br>1^2^3^4^5^1^2^3^4 = （1^1)^(2^2)^(3^3)^(4^4)^5= 0^0^0^0^5 = 5。<br>也就是说，那些出现了两次的数异或之后会变成0，那个出现一次的数，和 0 异或之后就等于它本身。</p>
+<h2 id="4-求一个数的n次方"><a href="#4-求一个数的n次方" class="headerlink" title="4. 求一个数的n次方"></a>4. 求一个数的n次方</h2><p>这里以3的n次方为例。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">pow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>        <span class="hljs-keyword">int</span> sum = <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">3</span>; <span class="hljs-comment">//3的n次方，也可以改为其他数</span><br>        <span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>)&#123;<br>            <span class="hljs-keyword">if</span>(n&amp;<span class="hljs-number">1</span>)&#123; <br>                sum *= tmp;<br>            &#125;<br>            tmp *= tmp;<br>            n = n &gt;&gt; <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-keyword">return</span> sum;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+<p>有很多人看到这，可能觉得这不是快速幂嘛，对，就是快速幂的思想。其实自己只要明白原理，怎么理解都行。</p>
+<h3 id="4-1-解释"><a href="#4-1-解释" class="headerlink" title="4.1 解释"></a>4.1 解释</h3><p>例如 n = 13，则 n 的二进制表示为 1101, 那么 3 的 13 次方可以拆解为:<br>3^1101 = 3^0001 * 3^0100 * 3^1000。<br>即：3^13 = 3^1 * 3^4 * 3^8 。<br>我们可以通过 &amp; 1和 &gt;&gt;1 来逐位读取 1101，为1时将该位代表的乘数累乘到最终结果。</p>
+<h2 id="5-找出不大于N的最大的2的幂指数"><a href="#5-找出不大于N的最大的2的幂指数" class="headerlink" title="5. 找出不大于N的最大的2的幂指数"></a>5. 找出不大于N的最大的2的幂指数</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findN</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>&#123;<br>        n |= n &gt;&gt; <span class="hljs-number">1</span>;<br>        n |= n &gt;&gt; <span class="hljs-number">2</span>;<br>        n |= n &gt;&gt; <span class="hljs-number">4</span>;<br>        n |= n &gt;&gt; <span class="hljs-number">8</span>;<span class="hljs-comment">// 整型一般是 32 位，这里是假设 8 位。</span><br>        <span class="hljs-keyword">return</span> (n + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>; <span class="hljs-comment">//加1右移</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-1-解释"><a href="#5-1-解释" class="headerlink" title="5.1 解释"></a>5.1 解释</h3><p>例如 N = 19，那么转换成二进制就是 00010011（这里为了方便，我采用8位的二进制来表示）。那么我们要找的数就是，把二进制中最左边的 1 保留，后面的 1 全部变为 0。即我们的目标数是 00010000。这个数也就是不大于N多最大的2的幂指数。那么如何获得这个数呢？解法如下：</p>
+<ol>
+<li><p>找到最左边的 1，然后把它右边的所有 0 变成 1（注意，这里没有写错！不是上面说的将1变0，而是将0变1，具体往后看。）。</p>
+</li>
+<li><p>把得到的数值加 1，即 00011111 + 1 = 00100000。可以得到 00100000。这里是不是就和我们要求的数差不多了，就只是差一个位置而已。</p>
+</li>
+<li><p>把 得到的 00100000 向右移动一位，即 00100000 &gt;&gt; 1 = 00010000。即可得到 00010000。</p>
+</li>
+</ol>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">n |= n &gt;&gt; <span class="hljs-number">1</span>;<br>n |= n &gt;&gt; <span class="hljs-number">2</span>;<br>n |= n &gt;&gt; <span class="hljs-number">4</span>;<br></code></pre></div></td></tr></table></figure>
+<p>就是通过把 n 右移并且做或运算即可得到。代码解释：</p>
+<blockquote>
+<p>假设最左边的 1 处于二进制位中的第 k 位(从左往右数),那么把 n 右移一位之后，那么得到的结果中第 k+1 位也必定为 1,然后把 n 与右移后的结果做或运算，那么得到的结果中第 k 和 第 k + 1 位必定是 1;同样的道理，再次把 n 右移两位，那么得到的结果中第 k+2和第 k+3 位必定是 1,然后再次做或运算，那么就能得到第 k, k+1, k+2, k+3 都是 1，如此往复下去….</p>
+</blockquote>
+<p>这里以一个简单例子为例演示过程：<br>假如现在的这个数n的二进制为：<br><strong>00010000（n）</strong><br>然后将n右移一位：<br><strong>00001000（n&gt;&gt;1）</strong><br>再把右移后的与n进行或运算（有1则为1）：<br><strong>00011000</strong>（新n。这时，n就是这个新数了，不再是上面的原数了。）<br>上述过程对应的代码就是：n |= n &gt;&gt; 1;</p>
+<p>现在演示右移2位：<br><strong>00011000（n）</strong><br>右移：<br><strong>00000110（n&gt;&gt;2）</strong><br>再把右移后的与n进行或运算（有1则为1）：<br><strong>00011110</strong>（新n）<br>上述过程对应的代码就是：n |= n &gt;&gt; 2;</p>
+<p>其他的同理可得。</p>
+<p>然后上面的过程就把最左边的1的右边全部都变成了1，然后再在其基础上加1右移即可得到最后的答案。<br>即：(n + 1) &gt;&gt; 1。</p>
+<p><strong>是不是很简单！！！</strong></p>
+<h2 id="6-求两个数的平均值"><a href="#6-求两个数的平均值" class="headerlink" title="6. 求两个数的平均值"></a>6. 求两个数的平均值</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> a=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">int</span> b=<span class="hljs-number">422</span>;<br>out.println((a&amp;b) + ((a^b) &gt;&gt; <span class="hljs-number">1</span>));<br><br><span class="hljs-comment">//正常求两个数的平均数为相加除以2，但如果是两个很大的数呢？以至于相加的结果超出了所有整数类型的范围？相加的结果超出了数据的最大范围值时。这时为防止这样的两个很大的数相加的结果超出数据类型的最大值。采用新的求法。</span><br><span class="hljs-keyword">int</span> a=<span class="hljs-number">100</span>,b=<span class="hljs-number">62</span>;<br><span class="hljs-keyword">int</span> mid2=(b-a)/<span class="hljs-number">2</span>+a; <span class="hljs-comment">//技巧算法，防止爆int</span><br><span class="hljs-keyword">int</span> mid3=((b-a)&gt;&gt;<span class="hljs-number">1</span>)+a; <span class="hljs-comment">//等价于上面</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="6-1-解释"><a href="#6-1-解释" class="headerlink" title="6.1 解释"></a>6.1 解释</h3><blockquote>
+<p>a&amp;b：a和b按照位整齐排序。正常情况下，当a和b对应为上全为1的时候相加，那么这个位置为0（满2进1），会向前进一位。但是现在不这样做，当出现对应位全为1的时候，直接在此位保留一个1，就相当两个对应位求平均值了。这就相当，两个相同数字求平均值一样，两个相同数的平均值就是本身。2和2的平均值就是2，对应位相同为0或者为1，平均值都是本身。</p>
+</blockquote>
+<blockquote>
+<p>a^b：这种就是和上边相反的情况。对应位相反的情况，分为a的某一个位为1，对应的b的那个位为0，或者倒过来。这个时候就要把他们异或的结果除以2，即异或的结果右移1位，这又好比两个不同的数求平均值，需要加起来除2。其中异或结果就是两个数不带进位加起来的结果。</p>
+</blockquote>
+<p>最后，把两种结果加起来就行了。</p>
+<p>以一个简单示例为了演示过程：<br>a=2; （0010）<br>b=6; （0110）</p>
+<p>a&amp;b：0010。结果为2。<br>a^b：0100。<br>(a^b)&gt;&gt;1：0010。结果为2。</p>
+<p>最后结果为0100，即为4。</p>
+<h2 id="7-位运算实现加减乘除"><a href="#7-位运算实现加减乘除" class="headerlink" title="7. 位运算实现加减乘除"></a>7. 位运算实现加减乘除</h2><p>详见《星星之火-位运算实现加减乘除 》</p>
+<h2 id="8-两个相同数异或"><a href="#8-两个相同数异或" class="headerlink" title="8. 两个相同数异或"></a>8. 两个相同数异或</h2><p>利用异或的这个特性来消除重复的数, 例如找出一个数组中落单的数(数量为奇数的某个数), 相反我们也可以利用这个特性来找出数组中唯一成对的数。结合：任何数与 0 异或等于它本身，即 n ^ 0 = n。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">1</span>^<span class="hljs-number">1</span>  ==&gt; <span class="hljs-number">0</span><br><span class="hljs-number">2</span>^<span class="hljs-number">2</span>  ==&gt; <span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+
+<p>从数组中找出落单的数示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>           <span class="hljs-keyword">int</span>[] arr = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>&#125;;<br>           <span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>;<span class="hljs-comment">//空二进制,此处可以理解为0000 0000, 任何数与0异或结果都是其本身</span><br>           <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i : arr) &#123;<span class="hljs-comment">//与数组中的每一个元素异或-&gt;两个相同的数异或消除-&gt;最后只保留剩下的数</span><br>                x = x ^ i;<br>           &#125;<br>           System.out.println(x);<br>     &#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+<p>从数组中找出成对的数示例：<br><strong>注意：此种方法有一个特殊的点，就是给的数组必须是1-n连续的数，并且只有唯一一个数重复，且这个重复的数还要在最后一个位置。</strong><br>思想为是首先把数组中1~n-1的数与0异或一遍,然后再用这个数与数组异或。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br><br>        <span class="hljs-keyword">int</span>[] arr = &#123;<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-number">7</span>&#125;; <span class="hljs-comment">//特殊点</span><br>        <span class="hljs-keyword">int</span> flag = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">int</span> len = arr.length;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            flag = flag ^ i;<br>        &#125;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; len; i++) &#123;<br>            flag = flag ^ arr[i];<br>        &#125;<br>        System.out.println(flag);<br>    &#125;<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">7</span><br></code></pre></div></td></tr></table></figure>
+
+<p>解释：（网上找的）<br>这里使用的原理是连续的数字异或可以消除重复，A ^ A=0,( A ^ A ) ^ B ^ ( C ^ C ) =B,但是有两个元素重复，假如使用一次异或那么这个重复的元素就会被消掉了。所以这里有一个小技巧，就是使用两次异或，先对不包含重复值数组进行异或，在对包含重复值的数组进行异或，这样下来，就相当于除了重复值每个值都异或了两次，而重复的值异或了三次，这样异或下来，就只剩一个重复的值了，就成功找出来了。这里有一个特殊的点，就是这里给出了数组是1-n连续的数并且只有唯一一个元素值重复，所以才能构造进行异或两次的解法。</p>
+<h2 id="9-判断一个数是否为2的整数次幂"><a href="#9-判断一个数是否为2的整数次幂" class="headerlink" title="9. 判断一个数是否为2的整数次幂"></a>9. 判断一个数是否为2的整数次幂</h2><p><strong>注意：如果是负数和0需要特判。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n=<span class="hljs-number">1024</span>,m=<span class="hljs-number">1023</span>;<br>        <span class="hljs-keyword">if</span>((n&amp;(n-<span class="hljs-number">1</span>))==<span class="hljs-number">0</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;YES&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;NO&quot;</span>);<br>        &#125;<br>        <span class="hljs-keyword">if</span>((m&amp;(m-<span class="hljs-number">1</span>))==<span class="hljs-number">0</span>)&#123;<br>            System.out.println(<span class="hljs-string">&quot;YES&quot;</span>);<br>        &#125;<span class="hljs-keyword">else</span> &#123;<br>            System.out.println(<span class="hljs-string">&quot;NO&quot;</span>);<br>        &#125;<br><br><span class="hljs-comment">//输出</span><br>YES<br>NO<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="9-1-方法二"><a href="#9-1-方法二" class="headerlink" title="9.1 方法二"></a>9.1 方法二</h3><p>如果 n 是正整数并且 n &amp; (-n) = n，那么 n 就是 2 的幂。自行验证。<br>此方法具体原理见《星星之火-判断一个数是否是2的幂 》</p>
+<h2 id="10-英文字符大小写转换"><a href="#10-英文字符大小写转换" class="headerlink" title="10. 英文字符大小写转换"></a>10. 英文字符大小写转换</h2><p>以下操作能够产生奇特效果的原因在于 ASCII 编码。字符其实就是数字，恰巧这些字符对应的数字通过位运算就能得到正确的结果，有兴趣的读者可以查 ASCII 码表自己算算，本文就不展开讲了。</p>
+<h3 id="10-1-利用或操作-和空格将英文字符转换为小写"><a href="#10-1-利用或操作-和空格将英文字符转换为小写" class="headerlink" title="10.1 利用或操作 | 和空格将英文字符转换为小写"></a>10.1 利用或操作 | 和空格将英文字符转换为小写</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">(<span class="hljs-string">&#x27;a&#x27;</span> | <span class="hljs-string">&#x27; &#x27;</span>) = <span class="hljs-string">&#x27;a&#x27;</span><br>(<span class="hljs-string">&#x27;A&#x27;</span> | <span class="hljs-string">&#x27; &#x27;</span>) = <span class="hljs-string">&#x27;a&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">char</span> ch = <span class="hljs-string">&#x27;T&#x27;</span>;<br><span class="hljs-keyword">char</span> ch1 = <span class="hljs-string">&#x27;t&#x27;</span>;<br><span class="hljs-keyword">char</span> tch = (<span class="hljs-keyword">char</span>) (ch | <span class="hljs-string">&#x27; &#x27;</span>);<br><span class="hljs-keyword">char</span> tch1 = (<span class="hljs-keyword">char</span>) (ch1 | <span class="hljs-string">&#x27; &#x27;</span>);<br>System.out.println(tch);<br>System.out.println(tch1);<br><br><span class="hljs-comment">//输出</span><br>t<br>t<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="10-2-利用与操作-amp-和下划线将英文字符转换为大写"><a href="#10-2-利用与操作-amp-和下划线将英文字符转换为大写" class="headerlink" title="10.2 利用与操作 &amp; 和下划线将英文字符转换为大写"></a>10.2 利用与操作 &amp; 和下划线将英文字符转换为大写</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">(<span class="hljs-string">&#x27;b&#x27;</span> &amp; <span class="hljs-string">&#x27;_&#x27;</span>) = <span class="hljs-string">&#x27;B&#x27;</span><br>(<span class="hljs-string">&#x27;B&#x27;</span> &amp; <span class="hljs-string">&#x27;_&#x27;</span>) = <span class="hljs-string">&#x27;B&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">char</span> ch = <span class="hljs-string">&#x27;T&#x27;</span>;<br>        <span class="hljs-keyword">char</span> ch1 = <span class="hljs-string">&#x27;t&#x27;</span>;<br>        <span class="hljs-keyword">char</span> tch = (<span class="hljs-keyword">char</span>) (ch &amp; <span class="hljs-string">&#x27;_&#x27;</span>);<br>        <span class="hljs-keyword">char</span> tch1 = (<span class="hljs-keyword">char</span>) (ch1 &amp; <span class="hljs-string">&#x27;_&#x27;</span>);<br>        System.out.println(tch);<br>        System.out.println(tch1);<br><br><span class="hljs-comment">//输出</span><br>T<br>T<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="10-3-利用异或操作-和空格进行英文字符大小写互换"><a href="#10-3-利用异或操作-和空格进行英文字符大小写互换" class="headerlink" title="10.3 利用异或操作 ^ 和空格进行英文字符大小写互换"></a>10.3 利用异或操作 ^ 和空格进行英文字符大小写互换</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">(<span class="hljs-string">&#x27;d&#x27;</span> ^ <span class="hljs-string">&#x27; &#x27;</span>) = <span class="hljs-string">&#x27;D&#x27;</span><br>(<span class="hljs-string">&#x27;D&#x27;</span> ^ <span class="hljs-string">&#x27; &#x27;</span>) = <span class="hljs-string">&#x27;d&#x27;</span><br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">char</span> ch = <span class="hljs-string">&#x27;T&#x27;</span>;<br>        <span class="hljs-keyword">char</span> ch1 = <span class="hljs-string">&#x27;t&#x27;</span>;<br>        <span class="hljs-keyword">char</span> tch = (<span class="hljs-keyword">char</span>) (ch ^ <span class="hljs-string">&#x27; &#x27;</span>);<br>        <span class="hljs-keyword">char</span> tch1 = (<span class="hljs-keyword">char</span>) (ch1 ^ <span class="hljs-string">&#x27; &#x27;</span>);<br>        System.out.println(tch);<br>        System.out.println(tch1);<br><br><span class="hljs-comment">//输出</span><br>t<br>T<br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="11-判断两个数是否异号"><a href="#11-判断两个数是否异号" class="headerlink" title="11. 判断两个数是否异号"></a>11. 判断两个数是否异号</h2><p>利用的是补码编码的符号位。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> x = -<span class="hljs-number">1</span>, y = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">boolean</span> f = ((x ^ y) &lt; <span class="hljs-number">0</span>); <span class="hljs-comment">// true</span><br><br><span class="hljs-keyword">int</span> x1 = <span class="hljs-number">3</span>, y1 = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">boolean</span> f1 = ((x1 ^ y1) &lt; <span class="hljs-number">0</span>); <span class="hljs-comment">// false</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="12-实现加1和减1、绝对值"><a href="#12-实现加1和减1、绝对值" class="headerlink" title="12. 实现加1和减1、绝对值"></a>12. 实现加1和减1、绝对值</h2><h3 id="12-1-加1"><a href="#12-1-加1" class="headerlink" title="12.1 加1"></a>12.1 加1</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = <span class="hljs-number">8</span>;<br>n = -~n;<br>System.out.println(n); <span class="hljs-comment">//9</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="12-2-减1"><a href="#12-2-减1" class="headerlink" title="12.2 减1"></a>12.2 减1</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = <span class="hljs-number">12</span>;<br>n = ~-n;<br>System.out.println(n); <span class="hljs-comment">//11</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="12-3-绝对值"><a href="#12-3-绝对值" class="headerlink" title="12.3 绝对值"></a>12.3 绝对值</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = -<span class="hljs-number">13</span>;<br>System.out.println(~n+<span class="hljs-number">1</span>); <span class="hljs-comment">//13</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="13-消除二进制中的最后一个1"><a href="#13-消除二进制中的最后一个1" class="headerlink" title="13. 消除二进制中的最后一个1"></a>13. 消除二进制中的最后一个1</h2><p>即最右边的1。<br>使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">n&amp;(n-<span class="hljs-number">1</span>)<br></code></pre></div></td></tr></table></figure>
+<p>解释如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">n:      <span class="hljs-number">1001101100</span><br>n-<span class="hljs-number">1</span>:    <span class="hljs-number">1001101011</span><br>n&amp;(n-<span class="hljs-number">1</span>):<span class="hljs-number">1001101000</span><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="14-从低位到高位，取n的第m位"><a href="#14-从低位到高位，取n的第m位" class="headerlink" title="14. 从低位到高位，取n的第m位"></a>14. 从低位到高位，取n的第m位</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = <span class="hljs-number">13</span>;<br><span class="hljs-keyword">int</span> m = <span class="hljs-number">2</span>;<br>System.out.println(Integer.toBinaryString(n));<br><span class="hljs-keyword">int</span> q = (n &gt;&gt; (m-<span class="hljs-number">1</span>)) &amp; <span class="hljs-number">1</span>;<br>System.out.println(q);<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">1101</span><br><span class="hljs-number">0</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="15-从低位到高位，将n的第m位变为1"><a href="#15-从低位到高位，将n的第m位变为1" class="headerlink" title="15. 从低位到高位，将n的第m位变为1"></a>15. 从低位到高位，将n的第m位变为1</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = <span class="hljs-number">13</span>;<br><span class="hljs-keyword">int</span> m = <span class="hljs-number">2</span>;<br>System.out.println(Integer.toBinaryString(n));<br><span class="hljs-keyword">int</span> q = n | (<span class="hljs-number">1</span> &lt;&lt; (m-<span class="hljs-number">1</span>));<br>System.out.println(Integer.toBinaryString(q));<br>System.out.println(q);<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">1101</span><br><span class="hljs-number">1111</span><br><span class="hljs-number">15</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="16-从低位到高位，将n的第m为变为0"><a href="#16-从低位到高位，将n的第m为变为0" class="headerlink" title="16. 从低位到高位，将n的第m为变为0"></a>16. 从低位到高位，将n的第m为变为0</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> n = <span class="hljs-number">15</span>;<br><span class="hljs-keyword">int</span> m = <span class="hljs-number">2</span>;<br>System.out.println(Integer.toBinaryString(n));<br><span class="hljs-keyword">int</span> q = n &amp; ~(<span class="hljs-number">1</span> &lt;&lt; (m-<span class="hljs-number">1</span>));<br>System.out.println(Integer.toBinaryString(q));<br>System.out.println(q);<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">1111</span><br><span class="hljs-number">1101</span><br><span class="hljs-number">13</span><br></code></pre></div></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/">蓝桥杯</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/e1490b96.html">https://tothefor.com/DragonOne/e1490b96.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/495c29c0.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">蓝桥杯JAVA-6.大数（整数、小数）处理</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/a9c73287.html">
+                        <span class="hidden-mobile">蓝桥杯JAVA-4.常用数据类型</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

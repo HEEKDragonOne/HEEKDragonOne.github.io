@@ -1,0 +1,964 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>微信小程序-（五）WXML模板语法-页面渲染 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="微信小程序-（五）WXML模板语法-页面渲染">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-27 14:51" pubdate>
+        March 27, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">微信小程序-（五）WXML模板语法-页面渲染</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：March 27, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>微信小程序，小程序的一种，英文名Wechat Mini Program，是一种不需要下载安装即可使用的应用，它实现了应用“触手可及”的梦想，用户扫一扫或搜一下即可打开应用。也体现了“用完即走”的理念，用户不用关心是否安装太多应用的问题。应用将无处不在，随时可用，但又无需安装卸载。对于开发者而言，微信小程序开发门槛相对较低，难度不及APP，能够满足简单的基础应用，适合生活服务类线下商铺以及非刚需低频应用的转换。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h2><h3 id="wx-if"><a href="#wx-if" class="headerlink" title="wx:if"></a>wx:if</h3><p>使用 <code>wx:if=&quot;&#123;&#123;true|false&#125;&#125;&quot;</code> 来判断是否需要渲染该代码块。</p>
+<p>这里为方便就直接写的true或者false。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;true&#125;&#125;&quot;</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>还可以添加 wx:else 和 wx:elif 来判断。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;false&#125;&#125;&quot;</span>&gt;</span>true<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:elif</span>=<span class="hljs-string">&quot;&#123;&#123;1===2&#125;&#125;&quot;</span>&gt;</span>111<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:else</span>&gt;</span>false<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="结合block使用"><a href="#结合block使用" class="headerlink" title="结合block使用"></a>结合block使用</h4><p>如果想要一次性控制多个组件的展示和隐藏，可以使用一个 <code>&lt;block&gt;&lt;/block&gt;</code> 标签将多个组件包装起来，并在 <code>block</code> 标签上使用 <code>wx:if</code> 控制属性。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">block</span> <span class="hljs-attr">wx:if</span>=<span class="hljs-string">&quot;&#123;&#123;false&#125;&#125;&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>a<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>b<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">view</span>&gt;</span>c<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">block</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意：block并不是一个组件，它只是一个包裹性质的容器，不会在页面中做任何渲染。</strong></p>
+<h3 id="hidden"><a href="#hidden" class="headerlink" title="hidden"></a>hidden</h3><p>在小程序中，直接使用 <code>hidden=&quot;&#123;&#123;true|false&#125;&#125;&quot;</code> 也能进行控制元素的显示与隐藏。 </p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">hidden</span>=<span class="hljs-string">&quot;&#123;&#123;true&#125;&#125;&quot;</span>&gt;</span>墨水记忆<span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h4 id="wx-if和hidden的对比"><a href="#wx-if和hidden的对比" class="headerlink" title="wx:if和hidden的对比"></a>wx:if和hidden的对比</h4><blockquote>
+<ol>
+<li>运行方式的不同</li>
+</ol>
+</blockquote>
+<ul>
+<li><p>wx:if：以动态创建和移除元素的方式，控制元素的展示和隐藏。</p>
+</li>
+<li><p>hidden：以切换样式的方式（display：none/block ），控制元素的显示和隐藏。</p>
+</li>
+<li><p>总结：效果一样。唯一区别在于隐藏的时候，hidden还是存在只是不显示，wx:if则直接不存在（没有创建）。</p>
+</li>
+</ul>
+<blockquote>
+<ol start="2">
+<li>使用建议</li>
+</ol>
+</blockquote>
+<ul>
+<li>在频繁切换时，使用 hidden；</li>
+<li>当控制条件复杂时，使用wx;if等条件。</li>
+</ul>
+<h2 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h2><h3 id="wx-for"><a href="#wx-for" class="headerlink" title="wx:for"></a>wx:for</h3><p>通过 wx:for 可以根据指定的数组，循环渲染重复的组件结构。默认情况下，循环项的索引用 index 表示，当前的循环项用 item 表示。这里的的索引同数组下标，循环项同数组的值。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-comment">&lt;!--pages/list/list.wxml--&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">&quot;&#123;&#123;msgList&#125;&#125;&quot;</span>&gt;</span>  <span class="hljs-comment">&lt;!--此处的item是一个Object，所以需要点属性--&gt;</span><br>  索引：&#123;&#123;index&#125;&#125; 值为：【姓名： &#123;&#123;item.name&#125;&#125; 】 +【年龄： &#123;&#123;item.age&#125;&#125; 】<br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/list/list.js</span><br>Page(&#123;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 页面的初始数据</span><br><span class="hljs-comment">   */</span><br>  data: &#123;<br>    msgList:[&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;long&#x27;</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">18</span>&#125;,&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;l&#x27;</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">13</span>&#125;,&#123;<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;we&#x27;</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">17</span>&#125;],<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="手动指定索引名称和值的名称"><a href="#手动指定索引名称和值的名称" class="headerlink" title="手动指定索引名称和值的名称"></a>手动指定索引名称和值的名称</h4><ul>
+<li>使用 wx:for-index=”” 更改索引名称</li>
+<li>使用 wx:for-item=”” 更改循环项名称</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 指定索引改为ind，循环项名称改为im --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">&quot;&#123;&#123;msgList&#125;&#125;&quot;</span> <span class="hljs-attr">wx:for-index</span>=<span class="hljs-string">&quot;ind&quot;</span> <span class="hljs-attr">wx:for-item</span>=<span class="hljs-string">&quot;im&quot;</span>&gt;</span><br>  索引：&#123;&#123;ind&#125;&#125; 值为：【姓名： &#123;&#123;im.name&#125;&#125; 】 +【年龄： &#123;&#123;im.age&#125;&#125; 】<br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="wx-key"><a href="#wx-key" class="headerlink" title="wx:key"></a>wx:key</h3><p>类似于Vue列表渲染时的 :key ，小程序中也建议为渲染出来的列表项指定唯一的 key 值，从而提高渲染效率。如果不写 <code>wx:key</code> ，则在控制台上会弹出警告。这里是用数据中的id作为key，也可以使用索引作为key。</p>
+<figure class="highlight html"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">view</span> <span class="hljs-attr">wx:for</span>=<span class="hljs-string">&quot;&#123;&#123;msgList&#125;&#125;&quot;</span> <span class="hljs-attr">wx:for-index</span>=<span class="hljs-string">&quot;ind&quot;</span> <span class="hljs-attr">wx:for-item</span>=<span class="hljs-string">&quot;im&quot;</span> <span class="hljs-attr">wx:key</span>=<span class="hljs-string">&quot;id&quot;</span>&gt;</span><br>  id为：&#123;&#123;im.id&#125;&#125; 索引：&#123;&#123;ind&#125;&#125; 值为：【姓名： &#123;&#123;im.name&#125;&#125; 】 +【年龄： &#123;&#123;im.age&#125;&#125; 】<br><span class="hljs-tag">&lt;/<span class="hljs-name">view</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意：wx:key 的id是直接写id，而不是写im.id。</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript"><span class="hljs-comment">// pages/list/list.js</span><br>Page(&#123;<br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">   * 页面的初始数据</span><br><span class="hljs-comment">   */</span><br>  data: &#123;<br>    msgList:[&#123;<span class="hljs-attr">id</span>:<span class="hljs-number">1</span>,<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;long&#x27;</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">18</span>&#125;,&#123;<span class="hljs-attr">id</span>:<span class="hljs-number">2</span>,<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;l&#x27;</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">13</span>&#125;,&#123;<span class="hljs-attr">id</span>:<span class="hljs-number">3</span>,<span class="hljs-attr">name</span>:<span class="hljs-string">&#x27;we&#x27;</span>,<span class="hljs-attr">age</span>:<span class="hljs-number">17</span>&#125;],<br>  &#125;<br>&#125;)<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="WXSS模板样式"><a href="#WXSS模板样式" class="headerlink" title="WXSS模板样式"></a>WXSS模板样式</h2><p>WXSS具有CSS大部分特性。但是CSS中rem在WXSS是不能使用的。</p>
+<h3 id="rpx尺寸单位"><a href="#rpx尺寸单位" class="headerlink" title="rpx尺寸单位"></a>rpx尺寸单位</h3><p>rpx（responsive pixel）是微信小程序独有的，用来解决屏适配的尺寸单位。实现原理也简单：对于不同大小的设备屏幕，rpx为了实现自动适配，把所有设备的屏幕在宽度上等分为750份（即：当前屏幕的总宽度为750rpx）。类似于栅格。所以：</p>
+<ul>
+<li>在较小的设备上，1rpx表示的宽度较小。</li>
+<li>在较大的设备上，1rpx表示的宽度较大。</li>
+</ul>
+<p>在不同设备上运行的时候，会自动把rpx的样式单位换算成对应的像素单位来渲染，从而实现屏幕的适配。</p>
+<h3 id="样式导入"><a href="#样式导入" class="headerlink" title="样式导入"></a>样式导入</h3><p>使用WXSS提供的 <code>@import</code> 语法，可以导入外联的样式表。</p>
+<h4 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h4><blockquote>
+<p>@import “abc.wxss”; 其中，abc.wxss是需要导入的外联样式表的相对路径</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-comment">/* pages/list/list.wxss */</span><br><span class="hljs-keyword">@import</span> <span class="hljs-string">&quot;/pages/index/index.wxss&quot;</span>; <span class="hljs-comment">/* 导入外联样式 */</span><br>image &#123;<br>  <span class="hljs-attribute">border</span>: <span class="hljs-number">1px</span> solid red;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="全局配置"><a href="#全局配置" class="headerlink" title="全局配置"></a>全局配置</h2><p>在根目录下的 app.json 文件是小程序的全局配置文件，常见配置项：</p>
+<ul>
+<li>pages：记录当前小程序所有页面的存放路径。</li>
+<li>window：全局设置小程序窗口的外观。</li>
+<li>tabBar：设置小程序底部的 tabBar 效果。</li>
+<li>style：是否启用新版的组件样式。</li>
+</ul>
+<h3 id="window常用配置项"><a href="#window常用配置项" class="headerlink" title="window常用配置项"></a>window常用配置项</h3><table>
+<thead>
+<tr>
+<th align="center">属性名</th>
+<th align="center">类型</th>
+<th align="center">默认值</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">navigationBarTitleText</td>
+<td align="center">String</td>
+<td align="center">字符串</td>
+<td align="center">导航栏标题文字内容</td>
+</tr>
+<tr>
+<td align="center">navigationBarBackgroundColor</td>
+<td align="center">HexColor</td>
+<td align="center">#000000</td>
+<td align="center">导航栏背景颜色，如 #000000</td>
+</tr>
+<tr>
+<td align="center">navigationBarTextStyle</td>
+<td align="center">String</td>
+<td align="center">white</td>
+<td align="center">导航栏标题颜色，仅支持 black/white</td>
+</tr>
+<tr>
+<td align="center">backgroundColor</td>
+<td align="center">HexColor</td>
+<td align="center">#ffffff</td>
+<td align="center">窗口的背景色（下拉刷新时看见的颜色）</td>
+</tr>
+<tr>
+<td align="center">backgroundTextStyle</td>
+<td align="center">String</td>
+<td align="center">dark</td>
+<td align="center">下拉loading的样式，仅支持 dark/light</td>
+</tr>
+<tr>
+<td align="center">enablePullDownRefresh</td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td align="center">是否全局开启下拉刷新</td>
+</tr>
+<tr>
+<td align="center">onReachBottomDistance</td>
+<td align="center">Number</td>
+<td align="center">50</td>
+<td align="center">页面上拉触底事件触发时距页面底部距离，单位px</td>
+</tr>
+</tbody></table>
+<h3 id="tabBar配置"><a href="#tabBar配置" class="headerlink" title="tabBar配置"></a>tabBar配置</h3><h4 id="tabBar的组成"><a href="#tabBar的组成" class="headerlink" title="tabBar的组成"></a>tabBar的组成</h4><p>tabBar简单说就是导航栏，它的六个组成部分：</p>
+<p><img src="https://img-blog.csdnimg.cn/3221aa3366fa4753a3bad7d931e93a95.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>backgroundColor：tabBar的背景色</li>
+<li>selectedIconPath：选中时的图片路径</li>
+<li>borderStyle：tabBar上边框的颜色</li>
+<li>iconPath：未选中时的图片路径</li>
+<li>selectedColor：tab上的文字选中时的颜色</li>
+<li>color：tab上文字的默认（未选中）颜色</li>
+</ul>
+<h4 id="tabBar节点的配置"><a href="#tabBar节点的配置" class="headerlink" title="tabBar节点的配置"></a>tabBar节点的配置</h4><table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">类型</th>
+<th align="center">必填</th>
+<th align="center">默认值</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>position</code></td>
+<td align="center">String</td>
+<td align="center">否</td>
+<td align="center">bottom</td>
+<td align="center">tabBar的位置，仅支持 bottom/top</td>
+</tr>
+<tr>
+<td align="center"><code>borderStyle</code></td>
+<td align="center">String</td>
+<td align="center">否</td>
+<td align="center">black</td>
+<td align="center">tabBar上边框的颜色，仅支持 black/white</td>
+</tr>
+<tr>
+<td align="center"><code>color</code></td>
+<td align="center">HexColor</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">tab上文字的默认（未选中）颜色</td>
+</tr>
+<tr>
+<td align="center"><code>selectedColor</code></td>
+<td align="center">HexColor</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">tab上的文字选中时的颜色</td>
+</tr>
+<tr>
+<td align="center"><code>backgroundColor</code></td>
+<td align="center">HexColor</td>
+<td align="center">否</td>
+<td align="center"></td>
+<td align="center">tabBar的背景色</td>
+</tr>
+<tr>
+<td align="center"><code>list</code></td>
+<td align="center">Array</td>
+<td align="center">是</td>
+<td align="center"></td>
+<td align="center">tab页签的列表（最少2个，最多5个）</td>
+</tr>
+</tbody></table>
+<p>其中 <code>list</code> 为必填项，其每个tab项的配置有：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">类型</th>
+<th align="center">必填</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>pagePath</code></td>
+<td align="center">String</td>
+<td align="center">是</td>
+<td align="center">页面路径，页面必须在pages中预先定义</td>
+</tr>
+<tr>
+<td align="center"><code>text</code></td>
+<td align="center">String</td>
+<td align="center">是</td>
+<td align="center">tab 上显示的文字</td>
+</tr>
+<tr>
+<td align="center"><code>iconPath</code></td>
+<td align="center">String</td>
+<td align="center">否</td>
+<td align="center">未选中时的图标路径；当position为top时，不显示icon</td>
+</tr>
+<tr>
+<td align="center"><code>selectedIconPath</code></td>
+<td align="center">String</td>
+<td align="center">否</td>
+<td align="center">选中时的图标路径；当position为top时，不显示icon</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;pages&quot;</span>: [<br>    <span class="hljs-string">&quot;pages/list/list&quot;</span>,<br>    <span class="hljs-string">&quot;pages/index/index&quot;</span>,<br>    <span class="hljs-string">&quot;pages/logs/logs&quot;</span><br>  ],<br>  <span class="hljs-attr">&quot;window&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;backgroundTextStyle&quot;</span>: <span class="hljs-string">&quot;dark&quot;</span>,<br>    <span class="hljs-attr">&quot;navigationBarBackgroundColor&quot;</span>: <span class="hljs-string">&quot;#fff&quot;</span>,<br>    <span class="hljs-attr">&quot;navigationBarTitleText&quot;</span>: <span class="hljs-string">&quot;墨水记忆&quot;</span>,<br>    <span class="hljs-attr">&quot;navigationBarTextStyle&quot;</span>: <span class="hljs-string">&quot;black&quot;</span>,<br>    <span class="hljs-attr">&quot;enablePullDownRefresh&quot;</span>: <span class="hljs-literal">true</span>,<br>    <span class="hljs-attr">&quot;backgroundColor&quot;</span>: <span class="hljs-string">&quot;#efefef&quot;</span><br>  &#125;,<br>  <span class="hljs-attr">&quot;tabBar&quot;</span>: &#123;<br>    <span class="hljs-attr">&quot;position&quot;</span>: <span class="hljs-string">&quot;top&quot;</span>,<br>    <span class="hljs-attr">&quot;list&quot;</span>: [<br>      &#123;<br>        <span class="hljs-attr">&quot;pagePath&quot;</span>: <span class="hljs-string">&quot;pages/index/index&quot;</span>,<br>        <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;首页&quot;</span><br>      &#125;,<br>      &#123;<br>        <span class="hljs-attr">&quot;pagePath&quot;</span>: <span class="hljs-string">&quot;pages/list/list&quot;</span>,<br>        <span class="hljs-attr">&quot;text&quot;</span>: <span class="hljs-string">&quot;表格&quot;</span><br>      &#125;<br>    ]<br>  &#125;,<br>  <span class="hljs-attr">&quot;style&quot;</span>: <span class="hljs-string">&quot;v2&quot;</span>,<br>  <span class="hljs-attr">&quot;sitemapLocation&quot;</span>: <span class="hljs-string">&quot;sitemap.json&quot;</span>,<br>  <span class="hljs-attr">&quot;lazyCodeLoading&quot;</span>: <span class="hljs-string">&quot;requiredComponents&quot;</span><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>tabBar的路径必须放在最前面（首页后）。</li>
+<li>tabBar中必须包含首页。</li>
+</ul>
+<h2 id="页面配置"><a href="#页面配置" class="headerlink" title="页面配置"></a>页面配置</h2><p>某些页面需要特殊的效果。则在对应的 <code>json</code> 文件中添加配置。页面配置中常用的配置项有：</p>
+<table>
+<thead>
+<tr>
+<th align="center">属性</th>
+<th align="center">类型</th>
+<th align="center">默认值</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>navigationBarBackgroundColor</code></td>
+<td align="center">HexColor</td>
+<td align="center">#000000</td>
+<td align="center">当前页面导航栏背景颜色，如 #000000</td>
+</tr>
+<tr>
+<td align="center"><code>navigationBarTextStyle</code></td>
+<td align="center">String</td>
+<td align="center">white</td>
+<td align="center">当前页面导航栏标题颜色，仅支持 black/white</td>
+</tr>
+<tr>
+<td align="center"><code>navigationBarTitleText</code></td>
+<td align="center">String</td>
+<td align="center"></td>
+<td align="center">当前页面导航栏标题文字内容</td>
+</tr>
+<tr>
+<td align="center"><code>backgroundColor</code></td>
+<td align="center">HexColor</td>
+<td align="center">#ffffff</td>
+<td align="center">当前页面窗口的背景色</td>
+</tr>
+<tr>
+<td align="center"><code>backgroundTextStyle</code></td>
+<td align="center">String</td>
+<td align="center">dark</td>
+<td align="center">当前页面下拉loading的样式，仅支持 dark/light</td>
+</tr>
+<tr>
+<td align="center"><code>enablePullDownRefresh</code></td>
+<td align="center">Boolean</td>
+<td align="center">false</td>
+<td align="center">是否为当前页面开启下拉刷新的效果</td>
+</tr>
+<tr>
+<td align="center"><code>onReachBottomDistance</code></td>
+<td align="center">Number</td>
+<td align="center">50</td>
+<td align="center">页面上拉触底事件触发时距页面底部距离，单位px</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<figure class="highlight json"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs json">&#123;<br>  <span class="hljs-attr">&quot;usingComponents&quot;</span>: &#123;&#125;,<br>  <span class="hljs-attr">&quot;navigationBarBackgroundColor&quot;</span>:<span class="hljs-string">&quot;#2b4b6b&quot;</span>,<br>  <span class="hljs-attr">&quot;navigationBarTextStyle&quot;</span>: <span class="hljs-string">&quot;white&quot;</span>,<br>  <span class="hljs-attr">&quot;navigationBarTitleText&quot;</span>: <span class="hljs-string">&quot;列表管理&quot;</span>,<br>  <span class="hljs-attr">&quot;backgroundColor&quot;</span>: <span class="hljs-string">&quot;#3f5d4e&quot;</span>,<br>  <span class="hljs-attr">&quot;backgroundTextStyle&quot;</span>: <span class="hljs-string">&quot;dark&quot;</span>,<br>  <span class="hljs-attr">&quot;enablePullDownRefresh&quot;</span>: <span class="hljs-literal">true</span>,<br>  <span class="hljs-attr">&quot;onReachBottomDistance&quot;</span>: <span class="hljs-number">50</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F/">微信小程序</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/9aa7cc52.html">https://tothefor.com/DragonOne/9aa7cc52.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/b6646856.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微信小程序-（六）发起数据请求</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/6dd6a6b1.html">
+                        <span class="hidden-mobile">微信小程序-（四）WXML模板语法-事件绑定</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
