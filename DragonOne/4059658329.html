@@ -1,0 +1,1538 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>算法学习-算法大纲 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="算法学习-算法大纲">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-25 08:21" pubdate>
+        July 25, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">算法学习-算法大纲</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：January 27, 2022 am
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>纸上得来终觉浅，绝知此事要躬行。路漫漫其修远兮，吾将上下而求索！知识是经过历史的巨人沉淀下来的，别总想着自己能够快速学会，多花点时间去看看，也许会发现些不同的东西。你能快速学会的、觉得简单的东西，对于别人来说也是一样的。人外有人，天外有天。</p>
+<p>（2021-07-25 记）</p>
+<hr>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
+<p><strong>最近更新时间：2021-11-7 15:03:09 完成《前缀和与差分详解》</strong></p>
+</blockquote>
+<h2 id="算法大纲"><a href="#算法大纲" class="headerlink" title="算法大纲"></a>算法大纲</h2><style>
+    tr{
+        text-align: center;
+        font-size: 18px;
+    }
+</style>
+<table border="1" style="border-collapse: collapse;">
+    <tr>
+        <th>编号</th>
+        <th colspan="2">名称</th>
+        <th>支持</th>
+    </tr>
+    <tr>
+        <td rowspan="10">1</td>
+        <td rowspan="10"><a target="_blank" rel="noopener" href="https://www.tothefor.com" style="text-decoration: none">排序</a></td>
+        <td>冒泡排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>选择排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>插入排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>快速排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>归并排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>希尔排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>计数排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>基数排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>桶排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>堆排序</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td colspan="">二分查找</td>
+        <td>三分查找</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td colspan="2">贪心算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>4</td>
+        <td colspan="2">枚举算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>5</td>
+        <td colspan="1">分治算法</td>
+        <td>CDQ分治</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>6</td>
+        <td colspan="2">倍增算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>7</td>
+        <td colspan="2">离散化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>8</td>
+        <td colspan="2">模拟算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>9</td>
+        <td colspan="2">MeetInTheMiddle算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td colspan="2">分块</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>11</td>
+        <td colspan="2">随机化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>12</td>
+        <td colspan="1">前缀和</td>
+        <td>二维前缀和</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>13</td>
+        <td colspan="2">高精度算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>14</td>
+        <td colspan="1">递归算法</td>
+        <td>矩阵加速递推</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="16">15</td>
+        <td rowspan="16">搜索算法</td>
+        <td>深度优先搜索（DFS）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>广度优先搜索（BFS）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>双向广度优先搜索</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>启发式搜索（A*算法）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>迭代加深的A*算法（IDA*算法）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>X算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>DLX(用双向十字链表优化X算法)</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>记忆化搜索</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>剪枝</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>可行性剪枝</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最优性剪枝</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>玄学剪枝</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>模拟退火</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>遗传算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>爬山算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>随机化搜索</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="2">16</td>
+        <td rowspan="2">莫队</td>
+        <td>树上莫队</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>带修改的莫队</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>17</td>
+        <td>打表</td>
+        <td>分段打表</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>18</td>
+        <td colspan="2">卡常</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="2">19</td>
+        <td rowspan="2">快速幂</td>
+        <td>矩阵快速幂</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>龟(慢)速乘</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="20">20</td>
+        <td rowspan="20">动态规划</td>
+        <td>LCS（最长公共子序列）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>01背包</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>完全背包</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>多重背包</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>多维背包</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>区间DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>状压DP-普通状压</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>状压DP-枚举子集DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>状压DP-斯坦纳树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>状压DP-插头DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>数位DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树形DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>基环树DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>环形DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>环+外向树上的DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>期望DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>记忆化DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>DAG上的DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>多维动态规划</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>DP套DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="6">21</td>
+        <td rowspan="6">DP的优化</td>
+        <td>斜率优化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>四边形不等式优化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>改变状态优化DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>寻址优化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>单调队列优化DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>线段树优化DP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td colspan="4">数论</td>
+    </tr>
+    <tr>
+        <td rowspan="10">22</td>
+        <td rowspan="10">数论</td>
+        <td>积性函数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Euclid算法（欧几里得、辗转相除法）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>素数-暴力判素数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Miller-Rabbin素数检测</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>埃拉托色尼筛求素数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>线性筛（欧拉筛）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>分解质因数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>求单个值的欧拉函数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>线性筛欧拉函数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>欧拉定理</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="2">23</td>
+        <td rowspan="2">中国剩余定理(CRT)</td>
+        <td>互质版</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>不互质版</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>24</td>
+        <td colspan="2">莫比乌斯函数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>25</td>
+        <td colspan="2">迪利克雷卷积</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="2">26</td>
+        <td rowspan="2">容斥原理</td>
+        <td>抽屉原理（鸽巢原理）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Ramsey定理</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>27</td>
+        <td colspan="2">费马小定理</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="3">28</td>
+        <td rowspan="3">逆元</td>
+        <td>线性求逆元</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>exgcd求逆元</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>费马小定理求逆元</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>29</td>
+        <td colspan="2">高斯消元</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="10">30</td>
+        <td rowspan="10">计算几何</td>
+        <td>基础知识</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>向量（点积、叉积）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>凸包</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>旋转卡壳</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>半平面交</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>随机增量</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Pick定理</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>梯形剖分&三角剖分</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>扫描线</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>凸包问题</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="18">31</td>
+        <td rowspan="18">字符串</td>
+        <td>KMP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>exKMP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Manacher</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>字符串Hash</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>AC自动机</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>fail树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>后缀数组</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>倍增</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>DC3</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>后缀自动机</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>后缀树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>后缀平衡树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>后缀仙人掌</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Trie树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>可持久化Trie树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Trie图</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>回文自动机</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最小表示法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td colspan="4">图论</td>
+    </tr>
+    <tr>
+        <td rowspan="38">32</td>
+        <td rowspan="38">图论</td>
+        <td>Bron-Kerbosch算法（最大团，最大独立集）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>图的遍历</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>DFS</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>BFS</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>DBFS（双向广搜）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>SPFA</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>SLF优化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>LLL优化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Dijkstra</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>堆优化Dijkstra</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>线段树优化Dijkstra</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Floyd</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>倍增Floyd</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>K短路</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最长路</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>差分约束</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Tarjan</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>2-Sat</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>拓扑排序-Kahn算法</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>二分图最大匹配（匈牙利）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>二分图最大权分配（KM）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>网络流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最大流/最小割</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Dinic</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>ISAP</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>循环流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最小费用最大流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>SPFA费用流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>ZKW费用流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>有上下界的网络流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>数据结构优化网络流</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>分数规划</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>欧拉图</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>区间图与弦图</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>平面图与对偶图</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最小树形图（朱刘算法）</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>仙人掌</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>动态仙人掌</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td rowspan="8">33</td>
+        <td rowspan="8">博弈论</td>
+        <td>BashGame</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>WythoffGame</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>NimmGame</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>SG函数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>A-Beta剪枝</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>博弈树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>极大极小搜索</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树形图博弈</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td colspan="4">树论</td>
+    </tr>
+    <tr>
+        <td rowspan="26">34</td>
+        <td rowspan="26">树论</td>
+        <td>分数树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Kruskal</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Prim及其堆优化</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>次小生成树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最大生成树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最优比率生成树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>最小瓶颈生成树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>生成树计数</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>暴力统计</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Matrix-Tree定理</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树剖</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树链剖分</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>虚树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>基环树</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>rufer序列</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>括号序列</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树上倍增</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树的直径</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树的重心</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树分治</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树分治-点分治</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树分治-边分治</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树分治-动态树分治</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>Link-Cut-Tree</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>树分块</td>
+        <td>C++/JAVA</td>
+    </tr>
+    <tr>
+        <td>解答树</td>
+        <td>C++/JAVA</td>
+    </tr>
+</table>
+
+
+
+<div style="font-size:23px;text-align:center;color:green">后行补充</div>
+
+
+
+<style>
+    tr{
+        text-align: center;
+        font-size: 18px;
+    }
+</style>
+<table border="1" style="border-collapse: collapse;">
+    <tr>
+        <th>编号</th>
+        <th colspan="">名称</th>
+        <th>支持</th>
+    </tr>
+    <tr>
+        <td>35</td>
+        <td>差分</td>
+        <td>C++/JAVA</td>
+    </tr>
+
+
+
+</table>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/">算法学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ACM/">ACM</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/4059658329.html">https://tothefor.com/DragonOne/4059658329.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/450935385.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据结构-数据结构大纲</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/951854255.html">
+                        <span class="hidden-mobile">Windows登录密码破解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

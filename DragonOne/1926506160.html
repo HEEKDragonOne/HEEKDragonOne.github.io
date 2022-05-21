@@ -1,0 +1,739 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>Vue基础知识-（临时记录）组件与路由的快速使用以及格式报错问题 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vue基础知识-（临时记录）组件与路由的快速使用以及格式报错问题">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-24 08:17" pubdate>
+        November 24, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue基础知识-（临时记录）组件与路由的快速使用以及格式报错问题</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Vue(读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。与其它框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h2><p>分为两步：</p>
+<blockquote>
+<ol>
+<li>导入组件。</li>
+<li>注册组件。又分为全局注册和局部注册。</li>
+</ol>
+</blockquote>
+<p>自定义组件 myFirst.vue</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!--自定义组件--&gt;<br>&lt;template&gt;<br>  &lt;div&gt;<br>    &lt;h2&gt;LoongOne&lt;&#x2F;h2&gt; <br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt; <br>&lt;&#x2F;script&gt;<br><br>&lt;style&gt;<br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="1-导入"><a href="#1-导入" class="headerlink" title="1.导入"></a>1.导入</h3><p>APP.vue</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div id&#x3D;&quot;app&quot;&gt;<br>    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;<br>    &lt;router-view&#x2F;&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>&#x2F;&#x2F;导入<br>import mfirst from &#39;.&#x2F;components&#x2F;myFirst.vue&#39;<br>&lt;&#x2F;script&gt;<br><br>&lt;style&gt;<br>&lt;&#x2F;style&gt;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-注册"><a href="#2-注册" class="headerlink" title="2.注册"></a>2.注册</h3><h4 id="2-1-全局注册"><a href="#2-1-全局注册" class="headerlink" title="2.1 全局注册"></a>2.1 全局注册</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div id&#x3D;&quot;app&quot;&gt;<br>    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;<br>    &lt;router-view&#x2F;&gt;<br>    &lt;first&gt;&lt;&#x2F;first&gt;  &lt;!--自定义组件使用位置--&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import mfirst from &#39;.&#x2F;components&#x2F;myFirst.vue&#39; &#x2F;&#x2F;导入组件<br>&#x2F;&#x2F; 全局注册<br>import Vue from &#39;vue&#39;<br>Vue.component(&#39;first&#39;,mfirst) &#x2F;&#x2F;注意使用名称和导入名称的位置<br><br>export default &#123;<br>  name: &#39;App&#39;,<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-局部注册"><a href="#2-2-局部注册" class="headerlink" title="2.2 局部注册"></a>2.2 局部注册</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div id&#x3D;&quot;app&quot;&gt;<br>    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;<br>    &lt;router-view&#x2F;&gt;<br>    &lt;first&gt;&lt;&#x2F;first&gt; &lt;!--自定义组件使用位置--&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>import mfirst from &#39;.&#x2F;components&#x2F;myFirst.vue&#39; &#x2F;&#x2F;导入组件<br>&#x2F;&#x2F;局部注册<br>export default &#123;<br>  name: &#39;App&#39;,<br>  components:&#123;<br>    first: mfirst &#x2F;&#x2F;注意名称的位置;key-value形式，当两者相同时，可写为一个<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br>&lt;style&gt;<br><br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><h3 id="1-步骤"><a href="#1-步骤" class="headerlink" title="1.步骤"></a>1.步骤</h3><blockquote>
+<ol>
+<li>在main.js中导入注册路由</li>
+</ol>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-comment">// The Vue build version to load with the `import` command</span><br><span class="hljs-comment">// (runtime-only or standalone) has been set in webpack.base.conf with an alias.</span><br><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App&#x27;</span><br><span class="hljs-keyword">import</span> router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./router&#x27;</span> <span class="hljs-comment">//导入</span><br><br>Vue.config.productionTip = <span class="hljs-literal">false</span><br><br><span class="hljs-comment">/* eslint-disable no-new */</span><br><span class="hljs-keyword">new</span> Vue(&#123;<br>  el: <span class="hljs-string">&#x27;#app&#x27;</span>,<br>  router, <span class="hljs-comment">//注册</span><br>  components: &#123; App &#125;,<br>  template: <span class="hljs-string">&#x27;&lt;App/&gt;&#x27;</span><br>&#125;)<br><br></code></pre></div></td></tr></table></figure>
+
+
+<blockquote>
+<ol start="2">
+<li>写组件 Myrouter.vue</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;h3&gt;router&lt;&#x2F;h3&gt;<br>&lt;&#x2F;template&gt;<br><br>&lt;script&gt;<br>&lt;&#x2F;script&gt;<br><br>&lt;style&gt;<br>&lt;&#x2F;style&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="3">
+<li>在router文件夹下的index.js中</li>
+</ol>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> Router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-keyword">import</span> HelloWorld <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/HelloWorld&#x27;</span><br><span class="hljs-keyword">import</span> Myrouter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Myrouter&#x27;</span><br><br>Vue.use(Router)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-comment">//路径</span><br>      name: <span class="hljs-string">&#x27;HelloWorld&#x27;</span>,<br>      component: HelloWorld <span class="hljs-comment">//组件名</span><br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/Myrouter&#x27;</span>, <span class="hljs-comment">//路径</span><br>      name: <span class="hljs-string">&#x27;Myrouter&#x27;</span>,<br>      component: Myrouter <span class="hljs-comment">//组件名</span><br>    &#125;<br>  ]<br>&#125;)<br><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="4">
+<li>在App.vue中使用</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;template&gt;<br>  &lt;div id&#x3D;&quot;app&quot;&gt;<br>    &lt;img src&#x3D;&quot;.&#x2F;assets&#x2F;logo.png&quot;&gt;<br>    &lt;router-view&#x2F;&gt;  &lt;!--路由使用--&gt;<br>    &lt;first&gt;&lt;&#x2F;first&gt;<br>  &lt;&#x2F;div&gt;<br>&lt;&#x2F;template&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h3 id="2-重定向"><a href="#2-重定向" class="headerlink" title="2.重定向"></a>2.重定向</h3><p>可以指定进入的默认页面和在访问没有定义的页面链接时跳转到的页面。</p>
+<h4 id="2-1-进入的默认页面设置"><a href="#2-1-进入的默认页面设置" class="headerlink" title="2.1 进入的默认页面设置"></a>2.1 进入的默认页面设置</h4><p>router/index.js：</p>
+<figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> Router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-keyword">import</span> HelloWorld <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/HelloWorld&#x27;</span><br><span class="hljs-keyword">import</span> Myrouter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Myrouter&#x27;</span><br><br>Vue.use(Router)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>, <span class="hljs-comment">//刚进入的路径</span><br>      name: <span class="hljs-string">&#x27;HelloWorld&#x27;</span>,<br>      component: HelloWorld<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/Myrouter&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;Myrouter&#x27;</span>,<br>      component: Myrouter<br>    &#125;<br>  ]<br>&#125;)<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-非法路径访问页面设置（不建议）"><a href="#2-2-非法路径访问页面设置（不建议）" class="headerlink" title="2.2 非法路径访问页面设置（不建议）"></a>2.2 非法路径访问页面设置（不建议）</h4><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> Router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-keyword">import</span> HelloWorld <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/HelloWorld&#x27;</span><br><span class="hljs-keyword">import</span> Myrouter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Myrouter&#x27;</span><br><br>Vue.use(Router)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;HelloWorld&#x27;</span>,<br>      component: HelloWorld<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/Myrouter&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;Myrouter&#x27;</span>,<br>      component: Myrouter<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;*&#x27;</span>, <span class="hljs-comment">//当前面所有的都不匹配时执行</span><br>      name: <span class="hljs-string">&#x27;HelloWorld2&#x27;</span>,<br>      component: Myrouter <span class="hljs-comment">//自定义更改组件</span><br>    &#125;<br>  ]<br>&#125;)<br><br></code></pre></div></td></tr></table></figure>
+<p>我也不知道，上面的这种方法在具体实际开发中能不能用，反正我现在自己学习的时候是可以实现效果的。和下面的重定向效果一样（也可能不一样，我也不知道。反正就自己试。）。</p>
+<h4 id="2-3-重定向"><a href="#2-3-重定向" class="headerlink" title="2.3 重定向"></a>2.3 重定向</h4><figure class="highlight js"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs js"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span><br><span class="hljs-keyword">import</span> Router <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue-router&#x27;</span><br><span class="hljs-keyword">import</span> HelloWorld <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/HelloWorld&#x27;</span><br><span class="hljs-keyword">import</span> Myrouter <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/components/Myrouter&#x27;</span><br><br>Vue.use(Router)<br><br><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Router(&#123;<br>  routes: [<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;HelloWorld&#x27;</span>,<br>      component: HelloWorld<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;/Myrouter&#x27;</span>,<br>      name: <span class="hljs-string">&#x27;Myrouter&#x27;</span>,<br>      component: Myrouter<br>    &#125;,<br>    &#123;<br>      path: <span class="hljs-string">&#x27;*&#x27;</span>,<br>      redirect: <span class="hljs-string">&#x27;/Myrouter&#x27;</span> <span class="hljs-comment">//当不满足前面的要求时，重定向到其他的</span><br>    &#125;<br>  ]<br>&#125;)<br><br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="格式报错问题"><a href="#格式报错问题" class="headerlink" title="格式报错问题"></a>格式报错问题</h2><p>在写博文的时候，发现一个问题。项目能跑起来，但每次都报一个错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Errors:<br>  1  http://eslint.org/docs/rules/spaced-comment<br><br>You may use special comments to <span class="hljs-built_in">disable</span> some warnings.<br>Use // eslint-disable-next-line to ignore the next line.<br>Use /* eslint-disable */ to ignore all warnings <span class="hljs-keyword">in</span> a file.<br></code></pre></div></td></tr></table></figure>
+
+<p>然后就慢慢调，结果发现，这是因为格式不规范的问题。。。比如下面的这几种。</p>
+<h3 id="1-空格问题"><a href="#1-空格问题" class="headerlink" title="1.空格问题"></a>1.空格问题</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">//全局注册 <span class="hljs-comment"># 报错</span><br>// 全局注册 <span class="hljs-comment"># 不报错</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!--报错--&gt;<br>&lt;script&gt;<br>import mfirst from &#39;.&#x2F;components&#x2F;myFirst.vue&#39;<br><br>export default &#123;<br>  name: &#39;App&#39;,<br>  components:&#123; &#x2F;&#x2F;空格问题，name属性同理<br>    first: mfirst<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br><br><br>&lt;!--不报错--&gt;<br>&lt;script&gt;<br>import mfirst from &#39;.&#x2F;components&#x2F;myFirst.vue&#39;<br><br>export default &#123;<br>  name: &#39;App&#39;,<br>  components: &#123;  &#x2F;&#x2F;空格问题，name属性同理<br>    first: mfirst<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="2-空行问题"><a href="#2-空行问题" class="headerlink" title="2.空行问题"></a>2.空行问题</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 报错</span><br>&lt;script&gt;<br>import mfirst from <span class="hljs-string">&#x27;./components/myFirst.vue&#x27;</span><br><span class="hljs-comment"># 第1行</span><br><span class="hljs-comment"># 第2行</span><br><span class="hljs-built_in">export</span> default &#123;<br>  name: <span class="hljs-string">&#x27;App&#x27;</span>,<br>  components: &#123;<br>    first: mfirst<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br><br><br><br><span class="hljs-comment"># 不报错</span><br>&lt;script&gt;<br>import mfirst from <span class="hljs-string">&#x27;./components/myFirst.vue&#x27;</span><br><span class="hljs-comment"># 第1行</span><br><span class="hljs-built_in">export</span> default &#123;<br>  name: <span class="hljs-string">&#x27;App&#x27;</span>,<br>  components: &#123;<br>    first: mfirst<br>  &#125;<br>&#125;<br>&lt;/script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>也就是说，只能空一行，不能空多的。。。</p>
+<h3 id="3-解决办法"><a href="#3-解决办法" class="headerlink" title="3.解决办法"></a>3.解决办法</h3><p>加上：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&#x2F;* eslint-disable *&#x2F;<br></code></pre></div></td></tr></table></figure>
+<p>加上后，不再报错。还有一点需要注意的是，这句代码放的位置，是放在第一次有报错情况的语句前面。如果放在报错情况语句的后面，则前面的报错情况不能解决。使用如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;script&gt;<br>&#x2F;* eslint-disable *&#x2F;<br>import mfirst from &#39;.&#x2F;components&#x2F;myFirst.vue&#39;<br><br> &#x2F;&#x2F;问题1之处<br>&#x2F;&#x2F;全局注册 &#x2F;&#x2F;问题2之处<br>&#x2F;&#x2F; import Vue from &#39;vue&#39;<br>&#x2F;&#x2F; Vue.component(&#39;first&#39;,mfirst)<br><br>export default &#123;<br>  name: &#39;App&#39;,<br>  components:&#123; &#x2F;&#x2F;问题3之处<br>    first: mfirst<br>  &#125;<br>&#125;<br>&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Vue/">Vue</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/1926506160.html">https://tothefor.com/DragonOne/1926506160.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/3601999586.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Hexo-Fluid主题-代码块实现Mac版效果</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/2246675075.html">
+                        <span class="hidden-mobile">Spark-IDEA环境搭建并测试</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

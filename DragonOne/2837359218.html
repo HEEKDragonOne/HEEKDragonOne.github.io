@@ -1,0 +1,994 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>Git学习笔记 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Git学习笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-03 12:58" pubdate>
+        June 3, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      49
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Git学习笔记</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 16, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Git （分布式版本控制系统）。是一个开源的分布式版本控制系统，可以有效、高速地处理从很小到非常大的项目版本管理。Git 是用于 Linux内核开发的版本控制工具。与常用的版本控制工具 CVS, Subversion 等不同，它采用了分布式版本库的方式。</p>
+<hr>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-Git安装"><a href="#1-Git安装" class="headerlink" title="1.Git安装"></a>1.Git安装</h2><p>可以去官网下载：<a target="_blank" rel="noopener" href="https://git-scm.com/">https://git-scm.com/</a> ，但下载速度较慢。<br>也可以在淘宝镜像下载：<a target="_blank" rel="noopener" href="http://npm.taobao.org/mirrors/git-for-windows/">http://npm.taobao.org/mirrors/git-for-windows/</a></p>
+<p>除了安装目录可以自己换成自己的，其他的默认即可。安装成功后，在开始菜单中会有三个 Git 项，或者桌面或任意文件夹下右键可以看到对应的程序。其中，<br>Git Bash ：Unix 与 Linux 风格的命令行，使用最多的。<br>Git CMD ：Windows 风格的命令行。<br>Git GUI ：图像界面的 Git，不建议初学者使用。</p>
+<p>在桌面或任意文件夹下打开 Git Bash ，可以按住 Ctrl + 鼠标滑轮 进行调整字体大小。</p>
+<h2 id="2-基本的Linux命令"><a href="#2-基本的Linux命令" class="headerlink" title="2.基本的Linux命令"></a>2.基本的Linux命令</h2><blockquote>
+<ol>
+<li>cd</li>
+</ol>
+</blockquote>
+<ul>
+<li>改变目录。</li>
+</ul>
+<blockquote>
+<ol start="2">
+<li>cd ..</li>
+</ol>
+</blockquote>
+<ul>
+<li>回退到上一个目录。</li>
+</ul>
+<blockquote>
+<ol start="3">
+<li>pwd</li>
+</ol>
+</blockquote>
+<ul>
+<li>显示当前所在的目录路径。</li>
+</ul>
+<blockquote>
+<ol start="4">
+<li>ls 或者 ll</li>
+</ol>
+</blockquote>
+<ul>
+<li>都是列出当前目录中的所有文件，只不过后者列出的内容更加详细。</li>
+</ul>
+<blockquote>
+<ol start="5">
+<li>touch</li>
+</ol>
+</blockquote>
+<ul>
+<li>新建一个文件。如 touch index.js ，会在当前目录下新建一个 index.js 的文件。</li>
+</ul>
+<blockquote>
+<ol start="6">
+<li>rm</li>
+</ol>
+</blockquote>
+<ul>
+<li>删除一个文件。如 rm index.js ，会把 index.js 文件删除。</li>
+</ul>
+<blockquote>
+<ol start="7">
+<li>mkdir</li>
+</ol>
+</blockquote>
+<ul>
+<li>新建一个目录（文件夹）。</li>
+</ul>
+<blockquote>
+<ol start="8">
+<li>rm -r</li>
+</ol>
+</blockquote>
+<ul>
+<li>删除一个文件夹，rm -r src 就是删除 src 目录。</li>
+</ul>
+<blockquote>
+<ol start="9">
+<li>mv</li>
+</ol>
+</blockquote>
+<ul>
+<li>移动文件，mv index.html src ，把 index.html 文件移到 src 目标文件夹下。但需要注意的是，必须要保证文件和目标文件夹在同一目录下。</li>
+</ul>
+<blockquote>
+<ol start="10">
+<li>reset</li>
+</ol>
+</blockquote>
+<ul>
+<li>重新初始化终端（清屏）。</li>
+</ul>
+<blockquote>
+<ol start="11">
+<li>clear</li>
+</ol>
+</blockquote>
+<ul>
+<li>清屏。</li>
+</ul>
+<blockquote>
+<ol start="12">
+<li>history </li>
+</ol>
+</blockquote>
+<ul>
+<li>查看命令历史。</li>
+</ul>
+<blockquote>
+<ol start="13">
+<li>help </li>
+</ol>
+</blockquote>
+<ul>
+<li>帮助。</li>
+</ul>
+<blockquote>
+<ol start="14">
+<li>exit</li>
+</ol>
+</blockquote>
+<ul>
+<li>退出。</li>
+</ul>
+<h2 id="3-Git配置"><a href="#3-Git配置" class="headerlink" title="3.Git配置"></a>3.Git配置</h2><p>所有的配置文件都保存在本地。即在自己电脑上是可以找到的。</p>
+<h3 id="3-1-查看配置"><a href="#3-1-查看配置" class="headerlink" title="3.1 查看配置"></a>3.1 查看配置</h3><blockquote>
+<ol>
+<li>git config -l</li>
+</ol>
+</blockquote>
+<p>一般是本地配置，新的电脑上会没有自己配置的东西。</p>
+<blockquote>
+<ol start="2">
+<li>git config –system –list</li>
+</ol>
+</blockquote>
+<p>系统配置的。与本地配置的对比一下即可发现有不同之处（前提是之前自己有配置过）。</p>
+<blockquote>
+<ol start="3">
+<li>git config –global –list</li>
+</ol>
+</blockquote>
+<p>本地用户自己配置的。这就是本地配置与系统配置的不同之处。而且这个是必须配置的。</p>
+<h3 id="3-2-Git-相关的配置文件"><a href="#3-2-Git-相关的配置文件" class="headerlink" title="3.2 Git 相关的配置文件"></a>3.2 Git 相关的配置文件</h3><blockquote>
+<ol>
+<li>git config –system –list   系统级的</li>
+</ol>
+</blockquote>
+<p>在 Git 的安装目录下的 etc 文件夹下的 gitconfig 文件中。</p>
+<blockquote>
+<ol start="2">
+<li>git config –global –list  当前登录用户的配置</li>
+</ol>
+</blockquote>
+<p>在 C盘下的用户(user)文件夹下的 Administrator（这里是你自己电脑上的用户的名称，如：Loong）下的 .gitconfig 文件中。C:\user\Administrator\.gitconfig</p>
+<h3 id="3-3-设置用户名与邮箱"><a href="#3-3-设置用户名与邮箱" class="headerlink" title="3.3 设置用户名与邮箱"></a>3.3 设置用户名与邮箱</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;loong&quot;</span> <span class="hljs-comment">#名称</span><br>git config --global user.email 123456789@qq.com <span class="hljs-comment">#邮箱</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="4-Git基本理论"><a href="#4-Git基本理论" class="headerlink" title="4.Git基本理论"></a>4.Git基本理论</h2><p>Git 本地有三个工作区域：工作目录（Working Directory）、暂存区（Stage/index）、资源库(本地仓库)（Repository 或 Git Directory）。如果再加上远程的 git 创库（Remote Directory）就可以分为四个工作区域。它们之间的转换关系为：</p>
+<p><img src="https://img-blog.csdnimg.cn/20210601090432316.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>工作区：平时存放项目代码的地方。</li>
+<li>暂存区：用于临时存放改动，事实上它只是一个文件，保存即将提交到文件列表信息。</li>
+<li>仓库区（本地仓库）：安全存放数据的位置，这里面有提交到所有版本的数据。其中 HEAD 指向最新放入仓库的版本。</li>
+<li>远程仓库：托管代码的服务器，可以简单的认为是项目组中的一台电脑用于远程数据交换。</li>
+</ul>
+<h2 id="5-Git项目搭建"><a href="#5-Git项目搭建" class="headerlink" title="5.Git项目搭建"></a>5.Git项目搭建</h2><p>工作目录（WorkSpace）一般就是希望 Git 帮助管理的文件夹，可以是项目的目录，也可以是一个空目录，不要有中文。</p>
+<p><img src="https://img-blog.csdnimg.cn/2021060109103561.png" srcset="/img/loading.gif"></p>
+<h3 id="5-1-本地仓库搭建"><a href="#5-1-本地仓库搭建" class="headerlink" title="5.1 本地仓库搭建"></a>5.1 本地仓库搭建</h3><p>创建本地仓库有两种方法：一种是创建全新的仓库，另一种是克隆远程仓库。</p>
+<blockquote>
+<ol>
+<li>创建全新的仓库</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 在当前目录新建一个Git代码库</span><br>git init<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<ol start="2">
+<li>克隆远程仓库</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 克隆远程目录，是将远程服务器上的仓库完全镜像一份至本地。</span><br>git <span class="hljs-built_in">clone</span> url<br></code></pre></div></td></tr></table></figure>
+
+<h2 id="6-Git文件操作"><a href="#6-Git文件操作" class="headerlink" title="6.Git文件操作"></a>6.Git文件操作</h2><p>文件有4种状态。版本控制就是对文件的版本控制，要对文件进行修改、提交等操作，首先要知道文件当前在什么状态，不然可能会提交了现在还不想提交的文件，或者要提交的文件没提交上。</p>
+<blockquote>
+<ol>
+<li>文件状态 </li>
+</ol>
+</blockquote>
+<ul>
+<li>Untracked：未跟踪。此文件在文件夹中，但并没有加入到 git 库，不参与版本控制。通过 git add 状态变为 Staged 。</li>
+<li>Unmodify：文件已经入库，未修改，即版本库中的文件快照内容与文件夹中完全一致。这种类型的文件有两种去处，如果它被修改，而变为 Modified。如果使用 git rm 移出版本库，则成为 Untracked 文件。</li>
+<li>Modified：文件已修改，仅仅是修改，并没有进行其他的操作。这个文件也有两个去处，通过 git add 可进入暂存 Staged 状态；使用 git checkout 则丢弃修改过，返回到 Unmodify 状态，这个 git checkout 即从库中取出文件，覆盖当前修改！</li>
+<li>Staged：暂存状态。执行 git commit 则将修改同步到库中，这时库中的文件和本地文件又变为一致，文件为 Unmodify 状态。执行 git reset HEAD filename 取消暂存，文件状态为 Modified。</li>
+</ul>
+<blockquote>
+<ol start="2">
+<li>查看文件状态</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 查看指定文件状态</span><br>git status filename<br><span class="hljs-comment"># 查看所有文件状态</span><br>git status<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="3">
+<li>忽略文件</li>
+</ol>
+</blockquote>
+<p>如果不想把某些文件纳入版本控制中，如：数据库文件、临时文件、设计文件等。<br>在主目录下建立 “.gitignore” 文件，此文件有如下规则：</p>
+<ol>
+<li>忽略文件中的空行或以井号（#）开始的行将会被忽略。</li>
+<li>可以使用 Linux 通配符。例如：星号（*）代表任意多个字符，问号（？）代表一个字符，方括号（[abc]）代表可选字符范围，大括号（{string1，string2……}）代表可选的字符串等。</li>
+<li>如果名称的最前面有一个感叹号（！），表示例外规则，将不被忽略。</li>
+<li>如果名称的最前面是一个路径分隔符（/），表示要忽略的文件在此目录下，而子目录中的文件不忽略。即忽略此目录前面的文件。</li>
+<li>如果名称的最后面是一个路径分隔符（/），表示要忽略的是此目录下该名称的子目录，而非文件（默认文件或目录都忽略）。即忽略此目录后面的文件。</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#为注释</span><br>*.txt	<span class="hljs-comment">#忽略所有 .txt结尾的文件,上传时不会被选中</span><br>!lib.txt	<span class="hljs-comment">#但lib.txt除外</span><br>/temp	<span class="hljs-comment">#仅忽略项目根目录下的TODO文件，不包括其他目录temp</span><br>build/	<span class="hljs-comment">#忽略build/目录下的所有文件</span><br>doc/*.txt	<span class="hljs-comment">#会忽略 doc/notes.txt 但不包括 doc/server/arch.txt</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="7-配置SSH公钥"><a href="#7-配置SSH公钥" class="headerlink" title="7.配置SSH公钥"></a>7.配置SSH公钥</h2><h3 id="7-1-生成公钥"><a href="#7-1-生成公钥" class="headerlink" title="7.1 生成公钥"></a>7.1 生成公钥</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ssh-keygen -t rsa <span class="hljs-comment"># -t rsa 为加密方式</span><br>ssh-keygen -t rsa -C <span class="hljs-string">&quot;你的邮箱&quot;</span><br></code></pre></div></td></tr></table></figure>
+<p>这时，在C盘中的 用户（user）中的 Adminstr（以自己的名称为准）中，有一个 .ssh 的文件夹，其中的 .pub 就是公钥。还没有生成过的没有这个文件。需要先生成公钥才能看见。</p>
+<h3 id="7-2-验证是否成功"><a href="#7-2-验证是否成功" class="headerlink" title="7.2 验证是否成功"></a>7.2 验证是否成功</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">//GitHub<br>ssh -T git@github.com<br>//Gitee<br>ssh -T git@gitee.com<br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="8-Git操作命令"><a href="#8-Git操作命令" class="headerlink" title="8.Git操作命令"></a>8.Git操作命令</h2><h3 id="1-查看仓库当前的状态"><a href="#1-查看仓库当前的状态" class="headerlink" title="1. 查看仓库当前的状态"></a>1. 查看仓库当前的状态</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git status<br></code></pre></div></td></tr></table></figure>
+<h3 id="2-查看修改内容"><a href="#2-查看修改内容" class="headerlink" title="2. 查看修改内容"></a>2. 查看修改内容</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git diff<br></code></pre></div></td></tr></table></figure>
+<p>加上 文件名，如 git diff 文件 ，可以查看某个文件的修改内容。</p>
+<h3 id="3-显示从最近到最远的提交日志"><a href="#3-显示从最近到最远的提交日志" class="headerlink" title="3. 显示从最近到最远的提交日志"></a>3. 显示从最近到最远的提交日志</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">log</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="4-命令历史"><a href="#4-命令历史" class="headerlink" title="4. 命令历史"></a>4. 命令历史</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reflog<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="5-版本回退"><a href="#5-版本回退" class="headerlink" title="5. 版本回退"></a>5. 版本回退</h3><p>用 HEAD 表示当前版本，也就是最新的提交，上一个版本就是 HEAD^ ，上上个版本就是 HEAD^^ ，也可以写成 HEAD~n ，表示往上 n 个版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reset --hard HEAD^<br></code></pre></div></td></tr></table></figure>
+<p>也可以指定回到未来的某个版本，就需要写未来的版本号，只需前几位就可以，Git 会自动去找。但也不能只写一两位，因为可能存在多个版本号。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reset --hard 版本号前几位<br></code></pre></div></td></tr></table></figure>
+<h3 id="6-查看工作区和版本库里最新版本的区别"><a href="#6-查看工作区和版本库里最新版本的区别" class="headerlink" title="6. 查看工作区和版本库里最新版本的区别"></a>6. 查看工作区和版本库里最新版本的区别</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git diff HEAD -- readme.txt<br></code></pre></div></td></tr></table></figure>
+<h3 id="7-撤销修改"><a href="#7-撤销修改" class="headerlink" title="7. 撤销修改"></a>7. 撤销修改</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git checkout -- readme.txt<br></code></pre></div></td></tr></table></figure>
+<p>把 readme.txt 文件在工作区的修改全部撤销，但这里有两种情况：</p>
+<ol>
+<li>readme.txt 自修改后还没有被放到暂存区，现在撤销修改就回到和版本库一模一样的状态。</li>
+<li>readme.txt 已经添加到暂存区后，又作了修改，现在撤销修改就回到添加到暂存区后的状态。</li>
+</ol>
+<p>总之就是回到最近一次的 git commit 或者 git add 时的状态。</p>
+<p>用命令git reset HEAD &lt;file&gt;可以把暂存区的修改撤销掉（unstage），重新放回工作区：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git reset HEAD readme.txt<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="8-删除文件"><a href="#8-删除文件" class="headerlink" title="8. 删除文件"></a>8. 删除文件</h3><p>工作区删除：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">rm test.txt<br></code></pre></div></td></tr></table></figure>
+<p>当工作区删除了文件后，工作区和版本库就不一致了，就有两种情况：如果你确定要从版本库中删除文件，使用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git rm test.txt<br></code></pre></div></td></tr></table></figure>
+<p>如果是误删，则需要恢复，则用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git checkout -- test.txt<br></code></pre></div></td></tr></table></figure>
+<p>这个其实就是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以”还原“。需要注意的是，如果是从来没有被添加到版本库，而在工作区就被删除的文件，是无法恢复的！</p>
+<h2 id="9-GitHub联系"><a href="#9-GitHub联系" class="headerlink" title="9.GitHub联系"></a>9.GitHub联系</h2><h3 id="9-1-添加远程仓库"><a href="#9-1-添加远程仓库" class="headerlink" title="9.1 添加远程仓库"></a>9.1 添加远程仓库</h3><p>需要先在 GitHub 上建一个远程仓库。这里以 learngit 远程仓库为例，根据 GitHub 的提示，在本地的仓库下运行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git remote add origin git@github.com:loong/learngit.git<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：</strong>需要把上面的 loong 替换成你自己的GitHub账户名，否则，你在本地关联的就是我的远程库，关联没有问题，但是你以后推送是推不上去的，因为你的SSH Key公钥不在我的账户列表中。</p>
+<p>添加后，远程库的名字就是 origin，这是Git默认的叫法，也可以改成别的。下一步，就可以把本地库的所有内容推送到远程库上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git push -u origin master<br></code></pre></div></td></tr></table></figure>
+<p>把本地库的内容推送到远程，用 git push 命令，实际上是把当前分支master推送到远程。由于远程库是空的，我们第一次推送 master 分支时，加上了 -u 参数，Git不但会把本地的 master 分支内容推送的远程新的 master 分支，还会把本地的 master 分支和远程的 master 分支关联起来，在以后的推送或者拉取时就可以简化命令。推送成功后，可以看到在 GitHub 页面中看到远程库的内容已经和本地一模一样。</p>
+<p>以后只要在本地作了提交，就可以通过命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git push origin master<br></code></pre></div></td></tr></table></figure>
+<p>把本地 master 分支的最新修改推送至GitHub。</p>
+<p>当第一次使用Git的clone或者push命令连接GitHub时，会得到一个警告：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">The authenticity of host <span class="hljs-string">&#x27;github.com (xx.xx.xx.xx)&#x27;</span> can<span class="hljs-string">&#x27;t be established.</span><br><span class="hljs-string">RSA key fingerprint is xx.xx.xx.xx.xx.</span><br><span class="hljs-string">Are you sure you want to continue connecting (yes/no)?</span><br></code></pre></div></td></tr></table></figure>
+<p>这是因为Git使用SSH连接，而SSH连接在第一次验证GitHub服务器的Key时，需要你确认GitHub的Key的指纹信息是否真的来自GitHub的服务器，输入yes回车即可。</p>
+<p>Git会输出一个警告，告诉你已经把GitHub的Key添加到本机的一个信任列表里了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Warning: Permanently added <span class="hljs-string">&#x27;github.com&#x27;</span> (RSA) to the list of known hosts.<br></code></pre></div></td></tr></table></figure>
+<p>这个警告只会出现一次，后面的操作就不会有任何警告了。</p>
+<h3 id="9-2-删除远程库"><a href="#9-2-删除远程库" class="headerlink" title="9.2 删除远程库"></a>9.2 删除远程库</h3><p>如果添加的时候地址写错了，或者就是想删除远程库，可以用 git remote rm &lt;name&gt; 命令。使用前，建议先用 git remote -v 查看远程库信息。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git remote -v<br></code></pre></div></td></tr></table></figure>
+<p>然后，根据名字删除，比如删除 origin：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git remote rm origin<br></code></pre></div></td></tr></table></figure>
+<p>此处的“删除”其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。远程库本身并没有任何改动。要真正删除远程库，需要登录到GitHub，在后台页面找到删除按钮再删除。</p>
+<h3 id="9-3-克隆远程仓库"><a href="#9-3-克隆远程仓库" class="headerlink" title="9.3 克隆远程仓库"></a>9.3 克隆远程仓库</h3><p>找一个远程仓库，用 git clone 命令在本地克隆一个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git <span class="hljs-built_in">clone</span> URL<br></code></pre></div></td></tr></table></figure>
+<p>其中 URL 是远程仓库的地址，例如：<a target="_blank" rel="noopener" href="https://github.com/loong/dragon.git">https://github.com/loong/dragon.git</a> 这种形式的链接地址。注意：不是网址！！！</p>
+<h2 id="10-Git分支"><a href="#10-Git分支" class="headerlink" title="10.Git分支"></a>10.Git分支</h2><p>每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。截止到目前，只有一条时间线，在Git里，这个分支叫主分支，即 master 分支。HEAD 严格来说不是指向提交，而是指向 master，master 才是指向提交的，所以，HEAD 指向的就是当前分支。</p>
+<blockquote>
+<p>一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点：</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210602091951658.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>每次提交，master 分支都会向前移动一步，这样，随着你不断提交，master 分支的线也越来越长。<br>当我们创建新的分支，例如 dev 时，Git 新建了一个指针叫 dev，指向 master 相同的提交，再把 HEAD 指向dev，就表示当前分支在 dev 上：</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210602092008679.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>Git 创建一个分支很快，因为除了增加一个dev指针，改改 HEAD 的指向，工作区的文件都没有任何变化！不过，从现在开始，对工作区的修改和提交就是针对 dev 分支了，比如新提交一次后，dev 指针往前移动一步，而 master 指针不变：</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210602092026712.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>假如我们在 dev 上的工作完成了，就可以把 dev 合并到 master 上。Git 怎么合并呢？最简单的方法，就是直接把 master 指向 dev 的当前提交，就完成了合并：</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210602092042303.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>所以Git合并分支也很快！就改改指针，工作区内容也不变！<br>合并完分支后，甚至可以删除 dev 分支。删除 dev 分支就是把 dev 指针给删掉，删掉后，我们就剩下了一条 master 分支：</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210602092057598.png" srcset="/img/loading.gif"></p>
+<h3 id="10-1-创建分支"><a href="#10-1-创建分支" class="headerlink" title="10.1 创建分支"></a>10.1 创建分支</h3><blockquote>
+<ol>
+<li>创建并切换分支，如：创建 dev 分支</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git checkout -b dev<br></code></pre></div></td></tr></table></figure>
+<p>git checkout 命令加上 -b 参数表示创建并切换，相当于以下两条命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git branch dev<br>git checkout dev <span class="hljs-comment"># 表示切换分支</span><br></code></pre></div></td></tr></table></figure>
+<h3 id="10-2-查看分支"><a href="#10-2-查看分支" class="headerlink" title="10.2 查看分支"></a>10.2 查看分支</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git branch<br></code></pre></div></td></tr></table></figure>
+<p>git branch 命令会列出所有分支，当前分支前面会标一个星号（*）。然后，就可以在当前分支上正常操作了。</p>
+<h3 id="10-3-切换分支"><a href="#10-3-切换分支" class="headerlink" title="10.3 切换分支"></a>10.3 切换分支</h3><p>切换回 master 分支。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git checkout master<br></code></pre></div></td></tr></table></figure>
+<h3 id="10-4-合并分支"><a href="#10-4-合并分支" class="headerlink" title="10.4 合并分支"></a>10.4 合并分支</h3><p>现在在 master 分支，把dev分支的工作成果合并到master分支上：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git merge dev<br></code></pre></div></td></tr></table></figure>
+<p>git merge 命令用于合并指定分支到当前分支。</p>
+<h3 id="10-5-删除分支"><a href="#10-5-删除分支" class="headerlink" title="10.5 删除分支"></a>10.5 删除分支</h3><p>删除分支 dev 。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git branch -d dev<br></code></pre></div></td></tr></table></figure>
+
+<p>所以在使用分支完成某个任务，合并后再删掉分支，这和直接在 master 分支上工作效果是一样的，但过程更安全。</p>
+<h3 id="10-6-Switch"><a href="#10-6-Switch" class="headerlink" title="10.6 Switch"></a>10.6 Switch</h3><p>切换分支时使用到了 git checkout &lt;branch&gt;，而撤销修改则是 git checkout – &lt;file&gt;，同一个命令，有两种作用，有点令人迷惑。因此，最新版本的Git提供了新的 git switch 命令来切换分支。<br>创建并切换到新的 dev 分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git switch -c dev<br></code></pre></div></td></tr></table></figure>
+<p>直接切换到已有的 master 分支：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git switch master<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="11-报错处理"><a href="#11-报错处理" class="headerlink" title="11.报错处理"></a>11.报错处理</h3><h4 id="11-1-文件大小问题"><a href="#11-1-文件大小问题" class="headerlink" title="11.1 文件大小问题"></a>11.1 文件大小问题</h4><p>我在上传一个压缩包时，报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  CodeTool git:(main) git push -u origin main<br>Enumerating objects: 25, <span class="hljs-keyword">done</span>.<br>Counting objects: 100% (25/25), <span class="hljs-keyword">done</span>.<br>Delta compression using up to 12 threads<br>Compressing objects: 100% (22/22), <span class="hljs-keyword">done</span>.<br>error: RPC failed; curl 92 HTTP/2 stream 0 was not closed cleanly: CANCEL (err 8)<br>fatal: the remote end hung up unexpectedly<br>Writing objects: 100% (23/23), 30.37 MiB | 1.03 MiB/s, <span class="hljs-keyword">done</span>.<br>Total 23 (delta 7), reused 0 (delta 0)<br>fatal: the remote end hung up unexpectedly<br>Everything up-to-date<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>原因是因为自己的git库上面有一些数据导致整个git库比较大，而curl的postBuffer 默认值较小,所以出现了这个错误。</strong>简单说，就是上传的文件中有的超过了默认文件限制大小，需要更改限制才行。</p>
+<p>默认 Git 设置 http post 的缓存为 1MB，使用命令将git的缓存设为500M，重新配置一下postBuffer值。</p>
+<blockquote>
+<ol>
+<li>命令行输入：git config –global http.postBuffer 524288000</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>在配置文件中添加参数。</li>
+</ol>
+</blockquote>
+<ul>
+<li><strong>windows：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">[http]<br>postBuffer = 524288000<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><strong>linux：</strong></li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config http.postBuffer 524288000<br></code></pre></div></td></tr></table></figure>
+
+<p>而我自己的报错原因，就是单纯的是因为压缩文件过大，所以解压之后再上传就可以了。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%B7%A5%E5%85%B7%E4%BD%BF%E7%94%A8/">工具使用</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Git/">Git</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/2837359218.html">https://tothefor.com/DragonOne/2837359218.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/1919511521.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">MySQL-数据库管理工具Navicat Premium v15.0.22 中文安装及破解</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/1062393623.html">
+                        <span class="hidden-mobile">静态博客网站生成工具</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

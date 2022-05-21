@@ -1,0 +1,802 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JAVA集合源码-Collection之List - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JAVA集合源码-Collection之List">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-16 14:23" pubdate>
+        April 16, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JAVA集合源码-Collection之List</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：April 16, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://img-blog.csdnimg.cn/72e09cb3c3e24b49b6dc2cf94d29f0f1.png" srcset="/img/loading.gif"></p>
+<p>Java标准库自带的java.util包提供了集合类：Collection，它是除Map外所有其他集合类的根接口。常用有：</p>
+<ul>
+<li>List：一种有序列表的集合。</li>
+<li>Set：一种保证没有重复元素的集合。</li>
+</ul>
+<h2 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h2><p><img src="https://img-blog.csdnimg.cn/652c4546aabc44a3b4e2c29e8ff8d6e9.png" srcset="/img/loading.gif"></p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="ArrayList源码分析"><a href="#ArrayList源码分析" class="headerlink" title="ArrayList源码分析"></a>ArrayList源码分析</h3><h4 id="底层结构"><a href="#底层结构" class="headerlink" title="底层结构"></a>底层结构</h4><p>一个Object类型的数组elementData。</p>
+<h4 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h4><blockquote>
+<ol>
+<li>ArrayList中维护了一个Object类型的数组elementData。</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">ArrayList al = <span class="hljs-keyword">new</span> ArrayList(); <span class="hljs-comment">//点进去</span><br><br><span class="hljs-comment">//源码</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">//无参构造方法</span><br>  <span class="hljs-keyword">this</span>.elementData = DEFAULTCAPACITY_EMPTY_ELEMENTDATA;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>this.elementData表示：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * The array buffer into which the elements of the ArrayList are stored.</span><br><span class="hljs-comment"> * The capacity of the ArrayList is the length of this array buffer. Any</span><br><span class="hljs-comment"> * empty ArrayList with elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA</span><br><span class="hljs-comment"> * will be expanded to DEFAULT_CAPACITY when the first element is added.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">transient</span> Object[] elementData; <span class="hljs-comment">// non-private to simplify nested class access</span><br></code></pre></div></td></tr></table></figure>
+
+<p>transient表示不会被序列化。</p>
+<p>DEFAULTCAPACITY_EMPTY_ELEMENTDATA表示：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Shared empty array instance used for default sized empty instances. We</span><br><span class="hljs-comment"> * distinguish this from EMPTY_ELEMENTDATA to know how much to inflate when</span><br><span class="hljs-comment"> * first element is added.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Object[] DEFAULTCAPACITY_EMPTY_ELEMENTDATA = &#123;&#125;;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<ol start="2">
+<li>当创建ArrayList对象时，如果使用的是无参构造器，则初始elementData容量为0。可见上面的源码。</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>第一次添加时，则扩容elementData为10。</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">ArrayList al = <span class="hljs-keyword">new</span> ArrayList();<br>al.add(<span class="hljs-string">&quot;abc&quot;</span>); <span class="hljs-comment">//点进去</span><br><br><span class="hljs-comment">//源码</span><br><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * The size of the ArrayList (the number of elements it contains).</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@serial</span></span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> size;<br><br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">calculateCapacity</span><span class="hljs-params">(Object[] elementData, <span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (elementData == DEFAULTCAPACITY_EMPTY_ELEMENTDATA) &#123;<br>    <span class="hljs-keyword">return</span> Math.max(DEFAULT_CAPACITY, minCapacity);<br>  &#125;<br>  <span class="hljs-keyword">return</span> minCapacity;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见，当第一次添加元素时，size为默认值0，会计算出一个最小容量<code>minCapacity</code>，如果是无参构造创建的，则会取默认的容量10。因为<code>DEFAULT_CAPACITY</code>为10。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Default initial capacity.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_CAPACITY = <span class="hljs-number">10</span>;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<ol start="4">
+<li>如果需再次扩容，则扩容elementData为1.5倍。</li>
+</ol>
+</blockquote>
+<p>如果计算出的最小容量大于原容量minCapacity - elementData.length &gt; 0，则会进行扩容。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ensureExplicitCapacity</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>  modCount++;<br><br>  <span class="hljs-comment">// overflow-conscious code</span><br>  <span class="hljs-keyword">if</span> (minCapacity - elementData.length &gt; <span class="hljs-number">0</span>)<br>    grow(minCapacity);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">grow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>  <span class="hljs-comment">// overflow-conscious code</span><br>  <span class="hljs-keyword">int</span> oldCapacity = elementData.length;<br>  <span class="hljs-keyword">int</span> newCapacity = oldCapacity + (oldCapacity &gt;&gt; <span class="hljs-number">1</span>); <span class="hljs-comment">//原来的长度再加上一倍</span><br>  <span class="hljs-keyword">if</span> (newCapacity - minCapacity &lt; <span class="hljs-number">0</span>)<br>    newCapacity = minCapacity;<br>  <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)<br>    newCapacity = hugeCapacity(minCapacity);<br>  <span class="hljs-comment">// minCapacity is usually close to size, so this is a win:</span><br>  elementData = Arrays.copyOf(elementData, newCapacity);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hugeCapacity</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>  <span class="hljs-keyword">if</span> (minCapacity &lt; <span class="hljs-number">0</span>) <span class="hljs-comment">// overflow</span><br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> OutOfMemoryError();<br>  <span class="hljs-keyword">return</span> (minCapacity &gt; MAX_ARRAY_SIZE) ?<br>    Integer.MAX_VALUE :<br>  MAX_ARRAY_SIZE;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<ol start="5">
+<li>若是使用指定大小的构造器，则初始elementData容量为指定的大小（大于0）。如果还需扩容，则扩容1.5倍。</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">ArrayList al = <span class="hljs-keyword">new</span> ArrayList(<span class="hljs-number">20</span>); <span class="hljs-comment">//点进去</span><br><br><span class="hljs-comment">//源码</span><br><br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * Constructs an empty list with the specified initial capacity.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span>  initialCapacity  the initial capacity of the list</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@throws</span> IllegalArgumentException if the specified initial capacity</span><br><span class="hljs-comment">     *         is negative</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ArrayList</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (initialCapacity &gt; <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">this</span>.elementData = <span class="hljs-keyword">new</span> Object[initialCapacity];<br>        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (initialCapacity == <span class="hljs-number">0</span>) &#123;<br>            <span class="hljs-keyword">this</span>.elementData = EMPTY_ELEMENTDATA;<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException(<span class="hljs-string">&quot;Illegal Capacity: &quot;</span>+<br>                                               initialCapacity);<br>        &#125;<br>    &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>和Vector的区别在于扩容的倍数，Vector是扩容2倍。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">grow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> minCapacity)</span> </span>&#123;<br>  <span class="hljs-comment">// overflow-conscious code</span><br>  <span class="hljs-keyword">int</span> oldCapacity = elementData.length;<br>  <span class="hljs-keyword">int</span> newCapacity = oldCapacity + ((capacityIncrement &gt; <span class="hljs-number">0</span>) ?<br>                                   capacityIncrement : oldCapacity); <span class="hljs-comment">//原长度再加上原长度</span><br>  <span class="hljs-keyword">if</span> (newCapacity - minCapacity &lt; <span class="hljs-number">0</span>)<br>    newCapacity = minCapacity;<br>  <span class="hljs-keyword">if</span> (newCapacity - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>)<br>    newCapacity = hugeCapacity(minCapacity);<br>  elementData = Arrays.copyOf(elementData, newCapacity);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="LinkedList源码分析"><a href="#LinkedList源码分析" class="headerlink" title="LinkedList源码分析"></a>LinkedList源码分析</h3><h4 id="底层结构-1"><a href="#底层结构-1" class="headerlink" title="底层结构"></a>底层结构</h4><p>底层为双向链表。维护了两个属性first和last，分别指向首节点和尾结点。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size = <span class="hljs-number">0</span>;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Pointer to first node.</span><br><span class="hljs-comment"> * Invariant: (first == null &amp;&amp; last == null) ||</span><br><span class="hljs-comment"> *            (first.prev == null &amp;&amp; first.item != null)</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">transient</span> Node&lt;E&gt; first;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Pointer to last node.</span><br><span class="hljs-comment"> * Invariant: (first == null &amp;&amp; last == null) ||</span><br><span class="hljs-comment"> *            (last.next == null &amp;&amp; last.item != null)</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">transient</span> Node&lt;E&gt; last;<br></code></pre></div></td></tr></table></figure>
+
+<p>Node中又有三个属性：item、next、prev，分别表示存储的数据、后一个节点、前一个节点。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span>&lt;<span class="hljs-title">E</span>&gt; </span>&#123;<br>  E item;<br>  Node&lt;E&gt; next;<br>  Node&lt;E&gt; prev;<br><br>  Node(Node&lt;E&gt; prev, E element, Node&lt;E&gt; next) &#123;<br>    <span class="hljs-keyword">this</span>.item = element;<br>    <span class="hljs-keyword">this</span>.next = next;<br>    <span class="hljs-keyword">this</span>.prev = prev;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h4><p>尾部添加元素：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">add</span><span class="hljs-params">(E e)</span> </span>&#123;<br>  linkLast(e);<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Links e as last element.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">linkLast</span><span class="hljs-params">(E e)</span> </span>&#123;<br>  <span class="hljs-keyword">final</span> Node&lt;E&gt; l = last;<br>  <span class="hljs-keyword">final</span> Node&lt;E&gt; newNode = <span class="hljs-keyword">new</span> Node&lt;&gt;(l, e, <span class="hljs-keyword">null</span>);<br>  last = newNode;<br>  <span class="hljs-keyword">if</span> (l == <span class="hljs-keyword">null</span>)<br>    first = newNode;<br>  <span class="hljs-keyword">else</span><br>    l.next = newNode;<br>  size++;<br>  modCount++;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">JAVA集合源码</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%9B%86%E5%90%88/">集合</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA%E9%9B%86%E5%90%88%E6%BA%90%E7%A0%81/">JAVA集合源码</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/178b0c5f.html">https://tothefor.com/DragonOne/178b0c5f.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/aec23344.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">水滴石穿-JDK8中的新日期时间类</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/d7f931cd.html">
+                        <span class="hidden-mobile">星星之火-Git报错token问题的解决方法</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
