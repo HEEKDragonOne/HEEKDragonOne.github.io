@@ -1,0 +1,835 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>解读java并发队列BlockingQueue - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="解读java并发队列BlockingQueue">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-17 12:22" pubdate>
+        October 17, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      102
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">解读java并发队列BlockingQueue</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：April 11, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>最近得空，想写篇文章好好说说 java 线程池问题，我相信很多人都一知半解的，包括我自己在仔仔细细看源码之前，也有许多的不解，甚至有些地方我一直都没有理解到位。</p>
+<p>说到线程池实现，那么就不得不涉及到各种 BlockingQueue 的实现，那么我想就 BlockingQueue 的问题和大家分享分享我了解的一些知识。</p>
+<p>本文没有像之前分析 AQS 那样一行一行源码分析了，不过还是把其中最重要和最难理解的代码说了一遍，所以不免篇幅略长。本文涉及到比较多的 Doug Lea 对 BlockingQueue 的设计思想，希望有心的读者真的可以有一些收获，我觉得自己还是写了一些干货的。</p>
+<p>本文直接参考 Doug Lea 写的 Java doc 和注释，这也是我们在学习 java 并发包时最好的材料了。希望大家能有所思、有所悟，学习 Doug Lea 的代码风格，并将其优雅、严谨的作风应用到我们写的每一行代码中。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h2><blockquote>
+<p>开篇先介绍下 BlockingQueue 这个接口的规则，后面再看其实现。</p>
+</blockquote>
+<p>首先，最基本的来说， BlockingQueue 是一个<strong>先进先出</strong>的队列（Queue），为什么说是阻塞（Blocking）的呢？是因为 BlockingQueue 支持当获取队列元素但是队列为空时，会阻塞等待队列中有元素再返回；也支持添加元素时，如果队列已满，那么等到队列可以放入新元素时再放入。</p>
+<p>BlockingQueue 是一个接口，继承自 Queue，所以其实现类也可以作为 Queue 的实现来使用，而 Queue 又继承自 Collection 接口。</p>
+<p>BlockingQueue 对插入操作、移除操作、获取元素操作提供了四种不同的方法用于不同的场景中使用：1、抛出异常；2、返回特殊值（null 或 true/false，取决于具体的操作）；3、阻塞等待此操作，直到这个操作成功；4、阻塞等待此操作，直到成功或者超时指定时间。总结如下：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><em>Throws exception</em></th>
+<th><em>Special value</em></th>
+<th><em>Blocks</em></th>
+<th><em>Times out</em></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Insert</strong></td>
+<td>add(e)</td>
+<td>offer(e)</td>
+<td><strong>put(e)</strong></td>
+<td>offer(e, time, unit)</td>
+</tr>
+<tr>
+<td><strong>Remove</strong></td>
+<td>remove()</td>
+<td>poll()</td>
+<td><strong>take()</strong></td>
+<td>poll(time, unit)</td>
+</tr>
+<tr>
+<td><strong>Examine</strong></td>
+<td>element()</td>
+<td>peek()</td>
+<td><em>not applicable</em></td>
+<td><em>not applicable</em></td>
+</tr>
+</tbody></table>
+<p>BlockingQueue 的各个实现都遵循了这些规则，当然我们也不用死记这个表格，知道有这么回事，然后写代码的时候根据自己的需要去看方法的注释来选取合适的方法即可。</p>
+<blockquote>
+<p>对于 BlockingQueue，我们的关注点应该在 put(e) 和 take() 这两个方法，因为这两个方法是带阻塞的。</p>
+</blockquote>
+<p>BlockingQueue 不接受 null 值的插入，相应的方法在碰到 null 的插入时会抛出 NullPointerException 异常。null 值在这里通常用于作为特殊值返回（表格中的第三列），代表 poll 失败。所以，如果允许插入 null 值的话，那获取的时候，就不能很好地用 null 来判断到底是代表失败，还是获取的值就是 null 值。</p>
+<p>一个 BlockingQueue 可能是有界的，如果在插入的时候，发现队列满了，那么 put 操作将会阻塞。通常，在这里我们说的无界队列也不是说真正的无界，而是它的容量是 Integer.MAX_VALUE（21亿多）。</p>
+<p>BlockingQueue 是设计用来实现生产者-消费者队列的，当然，你也可以将它当做普通的 Collection 来用，前面说了，它实现了 java.util.Collection 接口。例如，我们可以用 remove(x) 来删除任意一个元素，但是，这类操作通常并不高效，所以尽量只在少数的场合使用，比如一条消息已经入队，但是需要做取消操作的时候。</p>
+<p>BlockingQueue 的实现都是线程安全的，但是批量的集合操作如 <code>addAll</code>, <code>containsAll</code>, <code>retainAll</code> 和 <code>removeAll</code>  不一定是原子操作。如 addAll(c) 有可能在添加了一些元素后中途抛出异常，此时 BlockingQueue 中已经添加了部分元素，这个是允许的，取决于具体的实现。</p>
+<p>BlockingQueue 不支持 close 或 shutdown 等<strong>关闭</strong>操作，因为开发者可能希望不会有新的元素添加进去，此特性取决于具体的实现，不做强制约束。</p>
+<p>最后，BlockingQueue 在生产者-消费者的场景中，是支持多消费者和多生产者的，说的其实就是线程安全问题。</p>
+<p>相信上面说的每一句都很清楚了，BlockingQueue 是一个比较简单的线程安全容器，下面我会分析其具体的在 JDK 中的实现，这里又到了 Doug Lea 表演时间了。</p>
+<h2 id="BlockingQueue-实现之-ArrayBlockingQueue"><a href="#BlockingQueue-实现之-ArrayBlockingQueue" class="headerlink" title="BlockingQueue 实现之 ArrayBlockingQueue"></a>BlockingQueue 实现之 ArrayBlockingQueue</h2><p>ArrayBlockingQueue 是 BlockingQueue 接口的有界队列实现类，底层采用数组来实现。</p>
+<p>其并发控制采用可重入锁来控制，不管是插入操作还是读取操作，都需要获取到锁才能进行操作。</p>
+<p>如果读者看过我之前写的《一行一行源码分析清楚 AbstractQueuedSynchronizer（二）》 的关于 Condition 的文章的话，那么你一定能很容易看懂 ArrayBlockingQueue  的源码，它采用一个 ReentrantLock 和相应的两个 Condition 来实现。</p>
+<p>ArrayBlockingQueue 共有以下几个属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 用于存放元素的数组</span><br><span class="hljs-keyword">final</span> Object[] items;<br><span class="hljs-comment">// 下一次读取操作的位置</span><br><span class="hljs-keyword">int</span> takeIndex;<br><span class="hljs-comment">// 下一次写入操作的位置</span><br><span class="hljs-keyword">int</span> putIndex;<br><span class="hljs-comment">// 队列中的元素数量</span><br><span class="hljs-keyword">int</span> count;<br><br><span class="hljs-comment">// 以下几个就是控制并发用的同步器</span><br><span class="hljs-keyword">final</span> ReentrantLock lock;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Condition notEmpty;<br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Condition notFull;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们用个示意图来描述其同步机制：</p>
+<p><img src="https://img-blog.csdnimg.cn/f793b040fbcc47db8e95ed69cc8540a0.png" srcset="/img/loading.gif" alt="array-blocking-queue"></p>
+<p>ArrayBlockingQueue 实现并发同步的原理就是，读操作和写操作都需要获取到 AQS 独占锁才能进行操作。如果队列为空，这个时候读操作的线程进入到<strong>读线程队列</strong>排队，等待写线程写入新的元素，然后唤醒读线程队列的第一个等待线程。如果队列已满，这个时候写操作的线程进入到<strong>写线程队列</strong>排队，等待读线程将队列元素移除腾出空间，然后唤醒写线程队列的第一个等待线程。</p>
+<p>对于 ArrayBlockingQueue，我们可以在构造的时候指定以下三个参数：</p>
+<ol>
+<li>队列容量，其限制了队列中最多允许的元素个数；</li>
+<li>指定独占锁是公平锁还是非公平锁。非公平锁的吞吐量比较高，公平锁可以保证每次都是等待最久的线程获取到锁；</li>
+<li>可以指定用一个集合来初始化，将此集合中的元素在构造方法期间就先添加到队列中。</li>
+</ol>
+<p>更具体的源码我就不进行分析了，因为它就是 AbstractQueuedSynchronizer 中 Condition 的使用，感兴趣的读者请看我写的《一行一行源码分析清楚 AbstractQueuedSynchronizer（二）》，因为只要看懂了那篇文章，ArrayBlockingQueue 的代码就没有分析的必要了，当然，如果你完全不懂 Condition，那么基本上也就可以说看不懂 ArrayBlockingQueue 的源码了。</p>
+<h2 id="BlockingQueue-实现之-LinkedBlockingQueue"><a href="#BlockingQueue-实现之-LinkedBlockingQueue" class="headerlink" title="BlockingQueue 实现之 LinkedBlockingQueue"></a>BlockingQueue 实现之 LinkedBlockingQueue</h2><p>底层基于单向链表实现的阻塞队列，可以当做无界队列也可以当做有界队列来使用。看构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 传说中的无界队列</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedBlockingQueue</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>(Integer.MAX_VALUE);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 传说中的有界队列</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedBlockingQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (capacity &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();<br>    <span class="hljs-keyword">this</span>.capacity = capacity;<br>    last = head = <span class="hljs-keyword">new</span> Node&lt;E&gt;(<span class="hljs-keyword">null</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们看看这个类有哪些属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 队列容量</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> capacity;<br><br><span class="hljs-comment">// 队列中的元素数量</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> AtomicInteger count = <span class="hljs-keyword">new</span> AtomicInteger(<span class="hljs-number">0</span>);<br><br><span class="hljs-comment">// 队头</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> Node&lt;E&gt; head;<br><br><span class="hljs-comment">// 队尾</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> Node&lt;E&gt; last;<br><br><span class="hljs-comment">// take, poll, peek 等读操作的方法需要获取到这个锁</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ReentrantLock takeLock = <span class="hljs-keyword">new</span> ReentrantLock();<br><br><span class="hljs-comment">// 如果读操作的时候队列是空的，那么等待 notEmpty 条件</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Condition notEmpty = takeLock.newCondition();<br><br><span class="hljs-comment">// put, offer 等写操作的方法需要获取到这个锁</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ReentrantLock putLock = <span class="hljs-keyword">new</span> ReentrantLock();<br><br><span class="hljs-comment">// 如果写操作的时候队列是满的，那么等待 notFull 条件</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Condition notFull = putLock.newCondition();<br></code></pre></div></td></tr></table></figure>
+
+<p>这里用了两个锁，两个 Condition，简单介绍如下：</p>
+<p><strong>takeLock 和 notEmpty 怎么搭配：</strong>如果要获取（take）一个元素，需要获取 takeLock 锁，但是获取了锁还不够，如果队列此时为空，还需要队列不为空（notEmpty）这个条件（Condition）。</p>
+<p><strong>putLock 需要和 notFull 搭配：</strong>如果要插入（put）一个元素，需要获取 putLock 锁，但是获取了锁还不够，如果队列此时已满，还需要队列不是满的（notFull）这个条件（Condition）。</p>
+<p>首先，这里用一个示意图来看看 LinkedBlockingQueue 的并发读写控制，然后再开始分析源码：</p>
+<p><img src="https://img-blog.csdnimg.cn/827ac65d4e344db1b0e3c7e2c330222b.png" srcset="/img/loading.gif" alt="linked-blocking-queue"></p>
+<p>看懂这个示意图，源码也就简单了，读操作是排好队的，写操作也是排好队的，唯一的并发问题在于一个写操作和一个读操作同时进行，只要控制好这个就可以了。</p>
+<p>先上构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">LinkedBlockingQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> capacity)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (capacity &lt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();<br>    <span class="hljs-keyword">this</span>.capacity = capacity;<br>    last = head = <span class="hljs-keyword">new</span> Node&lt;E&gt;(<span class="hljs-keyword">null</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>注意，这里会初始化一个空的头结点，那么第一个元素入队的时候，队列中就会有两个元素。读取元素时，也总是获取头节点后面的一个节点。count 的计数值不包括这个头节点。</p>
+<p>我们来看下 put 方法是怎么将元素插入到队尾的：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(E e)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>    <span class="hljs-keyword">if</span> (e == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>    <span class="hljs-comment">// 如果你纠结这里为什么是 -1，可以看看 offer 方法。这就是个标识成功、失败的标志而已。</span><br>    <span class="hljs-keyword">int</span> c = -<span class="hljs-number">1</span>;<br>    Node&lt;E&gt; node = <span class="hljs-keyword">new</span> Node(e);<br>    <span class="hljs-keyword">final</span> ReentrantLock putLock = <span class="hljs-keyword">this</span>.putLock;<br>    <span class="hljs-keyword">final</span> AtomicInteger count = <span class="hljs-keyword">this</span>.count;<br>    <span class="hljs-comment">// 必须要获取到 putLock 才可以进行插入操作</span><br>    putLock.lockInterruptibly();<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// 如果队列满，等待 notFull 的条件满足。</span><br>        <span class="hljs-keyword">while</span> (count.get() == capacity) &#123;<br>            notFull.await();<br>        &#125;<br>        <span class="hljs-comment">// 入队</span><br>        enqueue(node);<br>        <span class="hljs-comment">// count 原子加 1，c 还是加 1 前的值</span><br>        c = count.getAndIncrement();<br>        <span class="hljs-comment">// 如果这个元素入队后，还有至少一个槽可以使用，调用 notFull.signal() 唤醒等待线程。</span><br>        <span class="hljs-comment">// 哪些线程会等待在 notFull 这个 Condition 上呢？</span><br>        <span class="hljs-keyword">if</span> (c + <span class="hljs-number">1</span> &lt; capacity)<br>            notFull.signal();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-comment">// 入队后，释放掉 putLock</span><br>        putLock.unlock();<br>    &#125;<br>    <span class="hljs-comment">// 如果 c == 0，那么代表队列在这个元素入队前是空的（不包括head空节点），</span><br>    <span class="hljs-comment">// 那么所有的读线程都在等待 notEmpty 这个条件，等待唤醒，这里做一次唤醒操作</span><br>    <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>)<br>        signalNotEmpty();<br>&#125;<br><br><span class="hljs-comment">// 入队的代码非常简单，就是将 last 属性指向这个新元素，并且让原队尾的 next 指向这个元素</span><br><span class="hljs-comment">// 这里入队没有并发问题，因为只有获取到 putLock 独占锁以后，才可以进行此操作</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">enqueue</span><span class="hljs-params">(Node&lt;E&gt; node)</span> </span>&#123;<br>    <span class="hljs-comment">// assert putLock.isHeldByCurrentThread();</span><br>    <span class="hljs-comment">// assert last.next == null;</span><br>    last = last.next = node;<br>&#125;<br><br><span class="hljs-comment">// 元素入队后，如果需要，调用这个方法唤醒读线程来读</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">signalNotEmpty</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">final</span> ReentrantLock takeLock = <span class="hljs-keyword">this</span>.takeLock;<br>    takeLock.lock();<br>    <span class="hljs-keyword">try</span> &#123;<br>        notEmpty.signal();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        takeLock.unlock();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们再看看 take 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> E <span class="hljs-title">take</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>    E x;<br>    <span class="hljs-keyword">int</span> c = -<span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">final</span> AtomicInteger count = <span class="hljs-keyword">this</span>.count;<br>    <span class="hljs-keyword">final</span> ReentrantLock takeLock = <span class="hljs-keyword">this</span>.takeLock;<br>    <span class="hljs-comment">// 首先，需要获取到 takeLock 才能进行出队操作</span><br>    takeLock.lockInterruptibly();<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// 如果队列为空，等待 notEmpty 这个条件满足再继续执行</span><br>        <span class="hljs-keyword">while</span> (count.get() == <span class="hljs-number">0</span>) &#123;<br>            notEmpty.await();<br>        &#125;<br>        <span class="hljs-comment">// 出队</span><br>        x = dequeue();<br>        <span class="hljs-comment">// count 进行原子减 1</span><br>        c = count.getAndDecrement();<br>        <span class="hljs-comment">// 如果这次出队后，队列中至少还有一个元素，那么调用 notEmpty.signal() 唤醒其他的读线程</span><br>        <span class="hljs-keyword">if</span> (c &gt; <span class="hljs-number">1</span>)<br>            notEmpty.signal();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-comment">// 出队后释放掉 takeLock</span><br>        takeLock.unlock();<br>    &#125;<br>    <span class="hljs-comment">// 如果 c == capacity，那么说明在这个 take 方法发生的时候，队列是满的</span><br>    <span class="hljs-comment">// 既然出队了一个，那么意味着队列不满了，唤醒写线程去写</span><br>    <span class="hljs-keyword">if</span> (c == capacity)<br>        signalNotFull();<br>    <span class="hljs-keyword">return</span> x;<br>&#125;<br><span class="hljs-comment">// 取队头，出队</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> E <span class="hljs-title">dequeue</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// assert takeLock.isHeldByCurrentThread();</span><br>    <span class="hljs-comment">// assert head.item == null;</span><br>    <span class="hljs-comment">// 之前说了，头结点是空的</span><br>    Node&lt;E&gt; h = head;<br>    Node&lt;E&gt; first = h.next;<br>    h.next = h; <span class="hljs-comment">// help GC</span><br>    <span class="hljs-comment">// 设置这个为新的头结点</span><br>    head = first;<br>    E x = first.item;<br>    first.item = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">return</span> x;<br>&#125;<br><span class="hljs-comment">// 元素出队后，如果需要，调用这个方法唤醒写线程来写</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">signalNotFull</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">final</span> ReentrantLock putLock = <span class="hljs-keyword">this</span>.putLock;<br>    putLock.lock();<br>    <span class="hljs-keyword">try</span> &#123;<br>        notFull.signal();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        putLock.unlock();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>源码分析就到这里结束了吧，毕竟还是比较简单的源码，基本上只要读者认真点都看得懂。</p>
+<h2 id="BlockingQueue-实现之-SynchronousQueue"><a href="#BlockingQueue-实现之-SynchronousQueue" class="headerlink" title="BlockingQueue 实现之 SynchronousQueue"></a>BlockingQueue 实现之 SynchronousQueue</h2><p>它是一个特殊的队列，它的名字其实就蕴含了它的特征 - - 同步的队列。为什么说是同步的呢？这里说的并不是多线程的并发问题，而是因为当一个线程往队列中写入一个元素时，写入操作不会立即返回，需要等待另一个线程来将这个元素拿走；同理，当一个读线程做读操作的时候，同样需要一个相匹配的写线程的写操作。这里的 Synchronous 指的就是读线程和写线程需要同步，一个读线程匹配一个写线程。</p>
+<p>我们比较少使用到 SynchronousQueue 这个类，不过它在线程池的实现类 ThreadPoolExecutor 中得到了应用，感兴趣的读者可以在看完这个后去看看相应的使用。</p>
+<p>虽然上面我说了队列，但是 SynchronousQueue 的队列其实是虚的，其不提供任何空间（一个都没有）来存储元素。数据必须从某个写线程交给某个读线程，而不是写到某个队列中等待被消费。</p>
+<p>你不能在 SynchronousQueue 中使用 peek 方法（在这里这个方法直接返回 null），peek 方法的语义是只读取不移除，显然，这个方法的语义是不符合 SynchronousQueue 的特征的。SynchronousQueue 也不能被迭代，因为根本就没有元素可以拿来迭代的。虽然 SynchronousQueue 间接地实现了 Collection 接口，但是如果你将其当做 Collection 来用的话，那么集合是空的。当然，这个类也是不允许传递 null 值的（并发包中的容器类好像都不支持插入 null 值，因为 null 值往往用作其他用途，比如用于方法的返回值代表操作失败）。</p>
+<p>接下来，我们来看看具体的源码实现吧，它的源码不是很简单的那种，我们需要先搞清楚它的设计思想。</p>
+<p>源码加注释大概有 1200 行，我们先看大框架：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 构造时，我们可以指定公平模式还是非公平模式，区别之后再说</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SynchronousQueue</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> fair)</span> </span>&#123;<br>    transferer = fair ? <span class="hljs-keyword">new</span> TransferQueue() : <span class="hljs-keyword">new</span> TransferStack();<br>&#125;<br><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Transferer</span> </span>&#123;<br>    <span class="hljs-comment">// 从方法名上大概就知道，这个方法用于转移元素，从生产者手上转到消费者手上</span><br>    <span class="hljs-comment">// 也可以被动地，消费者调用这个方法来从生产者手上取元素</span><br>    <span class="hljs-comment">// 第一个参数 e 如果不是 null，代表场景为：将元素从生产者转移给消费者</span><br>    <span class="hljs-comment">// 如果是 null，代表消费者等待生产者提供元素，然后返回值就是相应的生产者提供的元素</span><br>    <span class="hljs-comment">// 第二个参数代表是否设置超时，如果设置超时，超时时间是第三个参数的值</span><br>    <span class="hljs-comment">// 返回值如果是 null，代表超时，或者中断。具体是哪个，可以通过检测中断状态得到。</span><br>    <span class="hljs-function"><span class="hljs-keyword">abstract</span> Object <span class="hljs-title">transfer</span><span class="hljs-params">(Object e, <span class="hljs-keyword">boolean</span> timed, <span class="hljs-keyword">long</span> nanos)</span></span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>Transferer 有两个内部实现类，是因为构造 SynchronousQueue 的时候，我们可以指定公平策略。公平模式意味着，所有的读写线程都遵守先来后到，FIFO 嘛，对应 TransferQueue。而非公平模式则对应 TransferStack。</p>
+<p><img src="https://img-blog.csdnimg.cn/32363a5f5ffd4c1183848af5798a3ea0.png" srcset="/img/loading.gif" alt="synchronous-queue"></p>
+<p>我们先采用公平模式分析源码，然后再说说公平模式和非公平模式的区别。</p>
+<p>接下来，我们看看 put 方法和 take 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 写入值</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(E o)</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>    <span class="hljs-keyword">if</span> (o == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>    <span class="hljs-keyword">if</span> (transferer.transfer(o, <span class="hljs-keyword">false</span>, <span class="hljs-number">0</span>) == <span class="hljs-keyword">null</span>) &#123; <span class="hljs-comment">// 1</span><br>        Thread.interrupted();<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InterruptedException();<br>    &#125;<br>&#125;<br><span class="hljs-comment">// 读取值并移除</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> E <span class="hljs-title">take</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>    Object e = transferer.transfer(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>, <span class="hljs-number">0</span>); <span class="hljs-comment">// 2</span><br>    <span class="hljs-keyword">if</span> (e != <span class="hljs-keyword">null</span>)<br>        <span class="hljs-keyword">return</span> (E)e;<br>    Thread.interrupted();<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> InterruptedException();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们看到，写操作 put(E o) 和读操作 take() 都是调用 Transferer.transfer(…) 方法，区别在于第一个参数是否为 null 值。</p>
+<p>我们来看看 transfer 的设计思路，其基本算法如下：</p>
+<ol>
+<li>当调用这个方法时，如果队列是空的，或者队列中的节点和当前的线程操作类型一致（如当前操作是 put 操作，而队列中的元素也都是写线程）。这种情况下，将当前线程加入到等待队列即可。</li>
+<li>如果队列中有等待节点，而且与当前操作可以匹配（如队列中都是读操作线程，当前线程是写操作线程，反之亦然）。这种情况下，匹配等待队列的队头，出队，返回相应数据。</li>
+</ol>
+<p>其实这里有个隐含的条件被满足了，队列如果不为空，肯定都是同种类型的节点，要么都是读操作，要么都是写操作。这个就要看到底是读线程积压了，还是写线程积压了。</p>
+<p>我们可以假设出一个男女配对的场景：一个男的过来，如果一个人都没有，那么他需要等待；如果发现有一堆男的在等待，那么他需要排到队列后面；如果发现是一堆女的在排队，那么他直接牵走队头的那个女的。</p>
+<p>既然这里说到了等待队列，我们先看看其实现，也就是 QNode:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">QNode</span> </span>&#123;<br>    <span class="hljs-keyword">volatile</span> QNode next;          <span class="hljs-comment">// 可以看出来，等待队列是单向链表</span><br>    <span class="hljs-keyword">volatile</span> Object item;         <span class="hljs-comment">// CAS&#x27;ed to or from null</span><br>    <span class="hljs-keyword">volatile</span> Thread waiter;       <span class="hljs-comment">// 将线程对象保存在这里，用于挂起和唤醒</span><br>    <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isData;         <span class="hljs-comment">// 用于判断是写线程节点(isData == true)，还是读线程节点</span><br><br>    QNode(Object item, <span class="hljs-keyword">boolean</span> isData) &#123;<br>        <span class="hljs-keyword">this</span>.item = item;<br>        <span class="hljs-keyword">this</span>.isData = isData;<br>    &#125;<br>  ......<br></code></pre></div></td></tr></table></figure>
+
+<p>相信说了这么多以后，我们再来看 transfer 方法的代码就轻松多了。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Puts or takes an item.</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function">Object <span class="hljs-title">transfer</span><span class="hljs-params">(Object e, <span class="hljs-keyword">boolean</span> timed, <span class="hljs-keyword">long</span> nanos)</span> </span>&#123;<br><br>    QNode s = <span class="hljs-keyword">null</span>; <span class="hljs-comment">// constructed/reused as needed</span><br>    <span class="hljs-keyword">boolean</span> isData = (e != <span class="hljs-keyword">null</span>);<br><br>    <span class="hljs-keyword">for</span> (;;) &#123;<br>        QNode t = tail;<br>        QNode h = head;<br>        <span class="hljs-keyword">if</span> (t == <span class="hljs-keyword">null</span> || h == <span class="hljs-keyword">null</span>)         <span class="hljs-comment">// saw uninitialized value</span><br>            <span class="hljs-keyword">continue</span>;                       <span class="hljs-comment">// spin</span><br><br>        <span class="hljs-comment">// 队列空，或队列中节点类型和当前节点一致，</span><br>        <span class="hljs-comment">// 即我们说的第一种情况，将节点入队即可。读者要想着这块 if 里面方法其实就是入队</span><br>        <span class="hljs-keyword">if</span> (h == t || t.isData == isData) &#123; <span class="hljs-comment">// empty or same-mode</span><br>            QNode tn = t.next;<br>            <span class="hljs-comment">// t != tail 说明刚刚有节点入队，continue 即可</span><br>            <span class="hljs-keyword">if</span> (t != tail)                  <span class="hljs-comment">// inconsistent read</span><br>                <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-comment">// 有其他节点入队，但是 tail 还是指向原来的，此时设置 tail 即可</span><br>            <span class="hljs-keyword">if</span> (tn != <span class="hljs-keyword">null</span>) &#123;               <span class="hljs-comment">// lagging tail</span><br>                <span class="hljs-comment">// 这个方法就是：如果 tail 此时为 t 的话，设置为 tn</span><br>                advanceTail(t, tn);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>            <span class="hljs-comment">// </span><br>            <span class="hljs-keyword">if</span> (timed &amp;&amp; nanos &lt;= <span class="hljs-number">0</span>)        <span class="hljs-comment">// can&#x27;t wait</span><br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>            <span class="hljs-keyword">if</span> (s == <span class="hljs-keyword">null</span>)<br>                s = <span class="hljs-keyword">new</span> QNode(e, isData);<br>            <span class="hljs-comment">// 将当前节点，插入到 tail 的后面</span><br>            <span class="hljs-keyword">if</span> (!t.casNext(<span class="hljs-keyword">null</span>, s))        <span class="hljs-comment">// failed to link in</span><br>                <span class="hljs-keyword">continue</span>;<br><br>            <span class="hljs-comment">// 将当前节点设置为新的 tail</span><br>            advanceTail(t, s);              <span class="hljs-comment">// swing tail and wait</span><br>            <span class="hljs-comment">// 看到这里，请读者先往下滑到这个方法，看完了以后再回来这里，思路也就不会断了</span><br>            Object x = awaitFulfill(s, e, timed, nanos);<br>            <span class="hljs-comment">// 到这里，说明之前入队的线程被唤醒了，准备往下执行</span><br>            <span class="hljs-keyword">if</span> (x == s) &#123;                   <span class="hljs-comment">// wait was cancelled</span><br>                clean(t, s);<br>                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>            &#125;<br><br>            <span class="hljs-keyword">if</span> (!s.isOffList()) &#123;           <span class="hljs-comment">// not already unlinked</span><br>                advanceHead(t, s);          <span class="hljs-comment">// unlink if head</span><br>                <span class="hljs-keyword">if</span> (x != <span class="hljs-keyword">null</span>)              <span class="hljs-comment">// and forget fields</span><br>                    s.item = s;<br>                s.waiter = <span class="hljs-keyword">null</span>;<br>            &#125;<br>            <span class="hljs-keyword">return</span> (x != <span class="hljs-keyword">null</span>) ? x : e;<br><br>        <span class="hljs-comment">// 这里的 else 分支就是上面说的第二种情况，有相应的读或写相匹配的情况</span><br>        &#125; <span class="hljs-keyword">else</span> &#123;                            <span class="hljs-comment">// complementary-mode</span><br>            QNode m = h.next;               <span class="hljs-comment">// node to fulfill</span><br>            <span class="hljs-keyword">if</span> (t != tail || m == <span class="hljs-keyword">null</span> || h != head)<br>                <span class="hljs-keyword">continue</span>;                   <span class="hljs-comment">// inconsistent read</span><br><br>            Object x = m.item;<br>            <span class="hljs-keyword">if</span> (isData == (x != <span class="hljs-keyword">null</span>) ||    <span class="hljs-comment">// m already fulfilled</span><br>                x == m ||                   <span class="hljs-comment">// m cancelled</span><br>                !m.casItem(x, e)) &#123;         <span class="hljs-comment">// lost CAS</span><br>                advanceHead(h, m);          <span class="hljs-comment">// dequeue and retry</span><br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br><br>            advanceHead(h, m);              <span class="hljs-comment">// successfully fulfilled</span><br>            LockSupport.unpark(m.waiter);<br>            <span class="hljs-keyword">return</span> (x != <span class="hljs-keyword">null</span>) ? x : e;<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">advanceTail</span><span class="hljs-params">(QNode t, QNode nt)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (tail == t)<br>        UNSAFE.compareAndSwapObject(<span class="hljs-keyword">this</span>, tailOffset, t, nt);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 自旋或阻塞，直到满足条件，这个方法返回</span><br><span class="hljs-function">Object <span class="hljs-title">awaitFulfill</span><span class="hljs-params">(QNode s, Object e, <span class="hljs-keyword">boolean</span> timed, <span class="hljs-keyword">long</span> nanos)</span> </span>&#123;<br><br>    <span class="hljs-keyword">long</span> lastTime = timed ? System.nanoTime() : <span class="hljs-number">0</span>;<br>    Thread w = Thread.currentThread();<br>    <span class="hljs-comment">// 判断需要自旋的次数，</span><br>    <span class="hljs-keyword">int</span> spins = ((head.next == s) ?<br>                 (timed ? maxTimedSpins : maxUntimedSpins) : <span class="hljs-number">0</span>);<br>    <span class="hljs-keyword">for</span> (;;) &#123;<br>        <span class="hljs-comment">// 如果被中断了，那么取消这个节点</span><br>        <span class="hljs-keyword">if</span> (w.isInterrupted())<br>            <span class="hljs-comment">// 就是将当前节点 s 中的 item 属性设置为 this</span><br>            s.tryCancel(e);<br>        Object x = s.item;<br>        <span class="hljs-comment">// 这里是这个方法的唯一的出口</span><br>        <span class="hljs-keyword">if</span> (x != e)<br>            <span class="hljs-keyword">return</span> x;<br>        <span class="hljs-comment">// 如果需要，检测是否超时</span><br>        <span class="hljs-keyword">if</span> (timed) &#123;<br>            <span class="hljs-keyword">long</span> now = System.nanoTime();<br>            nanos -= now - lastTime;<br>            lastTime = now;<br>            <span class="hljs-keyword">if</span> (nanos &lt;= <span class="hljs-number">0</span>) &#123;<br>                s.tryCancel(e);<br>                <span class="hljs-keyword">continue</span>;<br>            &#125;<br>        &#125;<br>        <span class="hljs-keyword">if</span> (spins &gt; <span class="hljs-number">0</span>)<br>            --spins;<br>        <span class="hljs-comment">// 如果自旋达到了最大的次数，那么检测</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (s.waiter == <span class="hljs-keyword">null</span>)<br>            s.waiter = w;<br>        <span class="hljs-comment">// 如果自旋到了最大的次数，那么线程挂起，等待唤醒</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!timed)<br>            LockSupport.park(<span class="hljs-keyword">this</span>);<br>        <span class="hljs-comment">// spinForTimeoutThreshold 这个之前讲 AQS 的时候其实也说过，剩余时间小于这个阈值的时候，就</span><br>        <span class="hljs-comment">// 不要进行挂起了，自旋的性能会比较好</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (nanos &gt; spinForTimeoutThreshold)<br>            LockSupport.parkNanos(<span class="hljs-keyword">this</span>, nanos);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>Doug Lea 的巧妙之处在于，将各个代码凑在了一起，使得代码非常简洁，当然也同时增加了我们的阅读负担，看代码的时候，还是得仔细想想各种可能的情况。</p>
+<p>下面，再说说前面说的公平模式和非公平模式的区别。</p>
+<p>相信大家心里面已经有了公平模式的工作流程的概念了，我就简单说说 TransferStack 的算法，就不分析源码了。</p>
+<ol>
+<li>当调用这个方法时，如果队列是空的，或者队列中的节点和当前的线程操作类型一致（如当前操作是 put 操作，而栈中的元素也都是写线程）。这种情况下，将当前线程加入到等待栈中，等待配对。然后返回相应的元素，或者如果被取消了的话，返回 null。</li>
+<li>如果栈中有等待节点，而且与当前操作可以匹配（如栈里面都是读操作线程，当前线程是写操作线程，反之亦然）。将当前节点压入栈顶，和栈中的节点进行匹配，然后将这两个节点出栈。配对和出栈的动作其实也不是必须的，因为下面的一条会执行同样的事情。</li>
+<li>如果栈顶是进行匹配而入栈的节点，帮助其进行匹配并出栈，然后再继续操作。</li>
+</ol>
+<p>应该说，TransferStack 的源码要比 TransferQueue 的复杂一些，如果读者感兴趣，请自行进行源码阅读。</p>
+<h2 id="BlockingQueue-实现之-PriorityBlockingQueue"><a href="#BlockingQueue-实现之-PriorityBlockingQueue" class="headerlink" title="BlockingQueue 实现之 PriorityBlockingQueue"></a>BlockingQueue 实现之 PriorityBlockingQueue</h2><p>带排序的 BlockingQueue 实现，其并发控制采用的是 ReentrantLock，队列为无界队列（ArrayBlockingQueue 是有界队列，LinkedBlockingQueue 也可以通过在构造函数中传入 capacity 指定队列最大的容量，但是 PriorityBlockingQueue 只能指定初始的队列大小，后面插入元素的时候，如果空间不够的话会自动扩容）。</p>
+<p>简单地说，它就是 PriorityQueue 的线程安全版本。不可以插入 null 值，同时，插入队列的对象必须是可比较大小的（comparable），否则报 ClassCastException 异常。它的插入操作 put 方法不会 block，因为它是无界队列（take 方法在队列为空的时候会阻塞）。</p>
+<p>它的源码相对比较简单，本节将介绍其核心源码部分。</p>
+<p>我们来看看它有哪些属性：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 构造方法中，如果不指定大小的话，默认大小为 11</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> DEFAULT_INITIAL_CAPACITY = <span class="hljs-number">11</span>;<br><span class="hljs-comment">// 数组的最大容量</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_ARRAY_SIZE = Integer.MAX_VALUE - <span class="hljs-number">8</span>;<br><br><span class="hljs-comment">// 这个就是存放数据的数组</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> Object[] queue;<br><br><span class="hljs-comment">// 队列当前大小</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> <span class="hljs-keyword">int</span> size;<br><br><span class="hljs-comment">// 大小比较器，如果按照自然序排序，那么此属性可设置为 null</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> Comparator&lt;? <span class="hljs-keyword">super</span> E&gt; comparator;<br><br><span class="hljs-comment">// 并发控制所用的锁，所有的 public 且涉及到线程安全的方法，都必须先获取到这个锁</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ReentrantLock lock;<br><br><span class="hljs-comment">// 这个很好理解，其实例由上面的 lock 属性创建</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Condition notEmpty;<br><br><span class="hljs-comment">// 这个也是用于锁，用于数组扩容的时候，需要先获取到这个锁，才能进行扩容操作</span><br><span class="hljs-comment">// 其使用 CAS 操作</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">transient</span> <span class="hljs-keyword">volatile</span> <span class="hljs-keyword">int</span> allocationSpinLock;<br><br><span class="hljs-comment">// 用于序列化和反序列化的时候用，对于 PriorityBlockingQueue 我们应该比较少使用到序列化</span><br><span class="hljs-keyword">private</span> PriorityQueue q;<br></code></pre></div></td></tr></table></figure>
+
+<p>此类实现了 Collection 和 Iterator 接口中的所有接口方法，对其对象进行迭代并遍历时，不能保证有序性。如果你想要实现有序遍历，建议采用 Arrays.sort(queue.toArray()) 进行处理。PriorityBlockingQueue 提供了 drainTo 方法用于将部分或全部元素有序地填充（准确说是转移，会删除原队列中的元素）到另一个集合中。还有一个需要说明的是，如果两个对象的优先级相同（compare 方法返回 0），此队列并不保证它们之间的顺序。</p>
+<p>PriorityBlockingQueue 使用了基于数组的<strong>二叉堆</strong>来存放元素，所有的 public 方法采用同一个 lock 进行并发控制。</p>
+<p>二叉堆：一颗完全二叉树，它非常适合用数组进行存储，对于数组中的元素 <code>a[i]</code>，其左子节点为 <code>a[2*i+1]</code>，其右子节点为 <code>a[2*i + 2]</code>，其父节点为 <code>a[(i-1)/2]</code>，其堆序性质为，每个节点的值都小于其左右子节点的值。二叉堆中最小的值就是根节点，但是删除根节点是比较麻烦的，因为需要调整树。</p>
+<p>简单用个图解释一下二叉堆，我就不说太多专业的严谨的术语了，这种数据结构的优点是一目了然的，最小的元素一定是根元素，它是一棵满的树，除了最后一层，最后一层的节点从左到右紧密排列。</p>
+<p><img src="https://img-blog.csdnimg.cn/628557b51cce4436a47edf8d0b460c75.png" srcset="/img/loading.gif" alt="priority-blocking-queue-1"></p>
+<p>下面开始 PriorityBlockingQueue 的源码分析，首先我们来看看构造方法:</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 默认构造方法，采用默认值(11)来进行初始化</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PriorityBlockingQueue</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>(DEFAULT_INITIAL_CAPACITY, <span class="hljs-keyword">null</span>);<br>&#125;<br><span class="hljs-comment">// 指定数组的初始大小</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PriorityBlockingQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>(initialCapacity, <span class="hljs-keyword">null</span>);<br>&#125;<br><span class="hljs-comment">// 指定比较器</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PriorityBlockingQueue</span><span class="hljs-params">(<span class="hljs-keyword">int</span> initialCapacity,</span></span><br><span class="hljs-function"><span class="hljs-params">                             Comparator&lt;? <span class="hljs-keyword">super</span> E&gt; comparator)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (initialCapacity &lt; <span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalArgumentException();<br>    <span class="hljs-keyword">this</span>.lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>    <span class="hljs-keyword">this</span>.notEmpty = lock.newCondition();<br>    <span class="hljs-keyword">this</span>.comparator = comparator;<br>    <span class="hljs-keyword">this</span>.queue = <span class="hljs-keyword">new</span> Object[initialCapacity];<br>&#125;<br><span class="hljs-comment">// 在构造方法中就先填充指定的集合中的元素</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">PriorityBlockingQueue</span><span class="hljs-params">(Collection&lt;? extends E&gt; c)</span> </span>&#123;<br>    <span class="hljs-keyword">this</span>.lock = <span class="hljs-keyword">new</span> ReentrantLock();<br>    <span class="hljs-keyword">this</span>.notEmpty = lock.newCondition();<br>    <span class="hljs-comment">// </span><br>    <span class="hljs-keyword">boolean</span> heapify = <span class="hljs-keyword">true</span>; <span class="hljs-comment">// true if not known to be in heap order</span><br>    <span class="hljs-keyword">boolean</span> screen = <span class="hljs-keyword">true</span>;  <span class="hljs-comment">// true if must screen for nulls</span><br>    <span class="hljs-keyword">if</span> (c <span class="hljs-keyword">instanceof</span> SortedSet&lt;?&gt;) &#123;<br>        SortedSet&lt;? extends E&gt; ss = (SortedSet&lt;? extends E&gt;) c;<br>        <span class="hljs-keyword">this</span>.comparator = (Comparator&lt;? <span class="hljs-keyword">super</span> E&gt;) ss.comparator();<br>        heapify = <span class="hljs-keyword">false</span>;<br>    &#125;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (c <span class="hljs-keyword">instanceof</span> PriorityBlockingQueue&lt;?&gt;) &#123;<br>        PriorityBlockingQueue&lt;? extends E&gt; pq =<br>            (PriorityBlockingQueue&lt;? extends E&gt;) c;<br>        <span class="hljs-keyword">this</span>.comparator = (Comparator&lt;? <span class="hljs-keyword">super</span> E&gt;) pq.comparator();<br>        screen = <span class="hljs-keyword">false</span>;<br>        <span class="hljs-keyword">if</span> (pq.getClass() == PriorityBlockingQueue.class) <span class="hljs-comment">// exact match</span><br>            heapify = <span class="hljs-keyword">false</span>;<br>    &#125;<br>    Object[] a = c.toArray();<br>    <span class="hljs-keyword">int</span> n = a.length;<br>    <span class="hljs-comment">// If c.toArray incorrectly doesn&#x27;t return Object[], copy it.</span><br>    <span class="hljs-keyword">if</span> (a.getClass() != Object[].class)<br>        a = Arrays.copyOf(a, n, Object[].class);<br>    <span class="hljs-keyword">if</span> (screen &amp;&amp; (n == <span class="hljs-number">1</span> || <span class="hljs-keyword">this</span>.comparator != <span class="hljs-keyword">null</span>)) &#123;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)<br>            <span class="hljs-keyword">if</span> (a[i] == <span class="hljs-keyword">null</span>)<br>                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>    &#125;<br>    <span class="hljs-keyword">this</span>.queue = a;<br>    <span class="hljs-keyword">this</span>.size = n;<br>    <span class="hljs-keyword">if</span> (heapify)<br>        heapify();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<p>接下来，我们来看看其内部的自动扩容实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tryGrow</span><span class="hljs-params">(Object[] array, <span class="hljs-keyword">int</span> oldCap)</span> </span>&#123;<br>    <span class="hljs-comment">// 这边做了释放锁的操作</span><br>    lock.unlock(); <span class="hljs-comment">// must release and then re-acquire main lock</span><br>    Object[] newArray = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-comment">// 用 CAS 操作将 allocationSpinLock 由 0 变为 1，也算是获取锁</span><br>    <span class="hljs-keyword">if</span> (allocationSpinLock == <span class="hljs-number">0</span> &amp;&amp;<br>        UNSAFE.compareAndSwapInt(<span class="hljs-keyword">this</span>, allocationSpinLockOffset,<br>                                 <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)) &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">// 如果节点个数小于 64，那么增加的 oldCap + 2 的容量</span><br>            <span class="hljs-comment">// 如果节点数大于等于 64，那么增加 oldCap 的一半</span><br>            <span class="hljs-comment">// 所以节点数较小时，增长得快一些</span><br>            <span class="hljs-keyword">int</span> newCap = oldCap + ((oldCap &lt; <span class="hljs-number">64</span>) ?<br>                                   (oldCap + <span class="hljs-number">2</span>) :<br>                                   (oldCap &gt;&gt; <span class="hljs-number">1</span>));<br>            <span class="hljs-comment">// 这里有可能溢出</span><br>            <span class="hljs-keyword">if</span> (newCap - MAX_ARRAY_SIZE &gt; <span class="hljs-number">0</span>) &#123;    <span class="hljs-comment">// possible overflow</span><br>                <span class="hljs-keyword">int</span> minCap = oldCap + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">if</span> (minCap &lt; <span class="hljs-number">0</span> || minCap &gt; MAX_ARRAY_SIZE)<br>                    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> OutOfMemoryError();<br>                newCap = MAX_ARRAY_SIZE;<br>            &#125;<br>            <span class="hljs-comment">// 如果 queue != array，那么说明有其他线程给 queue 分配了其他的空间</span><br>            <span class="hljs-keyword">if</span> (newCap &gt; oldCap &amp;&amp; queue == array)<br>                <span class="hljs-comment">// 分配一个新的大数组</span><br>                newArray = <span class="hljs-keyword">new</span> Object[newCap];<br>        &#125; <span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-comment">// 重置，也就是释放锁</span><br>            allocationSpinLock = <span class="hljs-number">0</span>;<br>        &#125;<br>    &#125;<br>    <span class="hljs-comment">// 如果有其他的线程也在做扩容的操作</span><br>    <span class="hljs-keyword">if</span> (newArray == <span class="hljs-keyword">null</span>) <span class="hljs-comment">// back off if another thread is allocating</span><br>        Thread.yield();<br>    <span class="hljs-comment">// 重新获取锁</span><br>    lock.lock();<br>    <span class="hljs-comment">// 将原来数组中的元素复制到新分配的大数组中</span><br>    <span class="hljs-keyword">if</span> (newArray != <span class="hljs-keyword">null</span> &amp;&amp; queue == array) &#123;<br>        queue = newArray;<br>        System.arraycopy(array, <span class="hljs-number">0</span>, newArray, <span class="hljs-number">0</span>, oldCap);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>扩容方法对并发的控制也非常的巧妙，释放了原来的独占锁 lock，这样的话，扩容操作和读操作可以同时进行，提高吞吐量。</p>
+<p>下面，我们来分析下写操作 put 方法和读操作 take 方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">put</span><span class="hljs-params">(E e)</span> </span>&#123;<br>    <span class="hljs-comment">// 直接调用 offer 方法，因为前面我们也说了，在这里，put 方法不会阻塞</span><br>    offer(e); <br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">offer</span><span class="hljs-params">(E e)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (e == <span class="hljs-keyword">null</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> NullPointerException();<br>    <span class="hljs-keyword">final</span> ReentrantLock lock = <span class="hljs-keyword">this</span>.lock;<br>    <span class="hljs-comment">// 首先获取到独占锁</span><br>    lock.lock();<br>    <span class="hljs-keyword">int</span> n, cap;<br>    Object[] array;<br>    <span class="hljs-comment">// 如果当前队列中的元素个数 &gt;= 数组的大小，那么需要扩容了</span><br>    <span class="hljs-keyword">while</span> ((n = size) &gt;= (cap = (array = queue).length))<br>        tryGrow(array, cap);<br>    <span class="hljs-keyword">try</span> &#123;<br>        Comparator&lt;? <span class="hljs-keyword">super</span> E&gt; cmp = comparator;<br>        <span class="hljs-comment">// 节点添加到二叉堆中</span><br>        <span class="hljs-keyword">if</span> (cmp == <span class="hljs-keyword">null</span>)<br>            siftUpComparable(n, e, array);<br>        <span class="hljs-keyword">else</span><br>            siftUpUsingComparator(n, e, array, cmp);<br>        <span class="hljs-comment">// 更新 size</span><br>        size = n + <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">// 唤醒等待的读线程</span><br>        notEmpty.signal();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        lock.unlock();<br>    &#125;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>对于二叉堆而言，插入一个节点是简单的，插入的节点如果比父节点小，交换它们，然后继续和父节点比较。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 这个方法就是将数据 x 插入到数组 array 的位置 k 处，然后再调整树</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">siftUpComparable</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k, T x, Object[] array)</span> </span>&#123;<br>    Comparable&lt;? <span class="hljs-keyword">super</span> T&gt; key = (Comparable&lt;? <span class="hljs-keyword">super</span> T&gt;) x;<br>    <span class="hljs-keyword">while</span> (k &gt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-comment">// 二叉堆中 a[k] 节点的父节点位置</span><br>        <span class="hljs-keyword">int</span> parent = (k - <span class="hljs-number">1</span>) &gt;&gt;&gt; <span class="hljs-number">1</span>;<br>        Object e = array[parent];<br>        <span class="hljs-keyword">if</span> (key.compareTo((T) e) &gt;= <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">break</span>;<br>        array[k] = e;<br>        k = parent;<br>    &#125;<br>    array[k] = key;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>我们用图来示意一下，我们接下来要将 <strong>11</strong> 插入到队列中，看看 siftUp 是怎么操作的。</p>
+<p><img src="https://img-blog.csdnimg.cn/26c45c6fecd04d76bb44a48771985c1c.png" srcset="/img/loading.gif" alt="priority-blocking-queue-2"></p>
+<p>我们再看看 take 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> E <span class="hljs-title">take</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> InterruptedException </span>&#123;<br>    <span class="hljs-keyword">final</span> ReentrantLock lock = <span class="hljs-keyword">this</span>.lock;<br>    <span class="hljs-comment">// 独占锁</span><br>    lock.lockInterruptibly();<br>    E result;<br>    <span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">// dequeue 出队</span><br>        <span class="hljs-keyword">while</span> ( (result = dequeue()) == <span class="hljs-keyword">null</span>)<br>            notEmpty.await();<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        lock.unlock();<br>    &#125;<br>    <span class="hljs-keyword">return</span> result;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> E <span class="hljs-title">dequeue</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">int</span> n = size - <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">if</span> (n &lt; <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">else</span> &#123;<br>        Object[] array = queue;<br>        <span class="hljs-comment">// 队头，用于返回</span><br>        E result = (E) array[<span class="hljs-number">0</span>];<br>        <span class="hljs-comment">// 队尾元素先取出</span><br>        E x = (E) array[n];<br>        <span class="hljs-comment">// 队尾置空</span><br>        array[n] = <span class="hljs-keyword">null</span>;<br>        Comparator&lt;? <span class="hljs-keyword">super</span> E&gt; cmp = comparator;<br>        <span class="hljs-keyword">if</span> (cmp == <span class="hljs-keyword">null</span>)<br>            siftDownComparable(<span class="hljs-number">0</span>, x, array, n);<br>        <span class="hljs-keyword">else</span><br>            siftDownUsingComparator(<span class="hljs-number">0</span>, x, array, n, cmp);<br>        size = n;<br>        <span class="hljs-keyword">return</span> result;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>dequeue 方法返回队头，并调整二叉堆的树，调用这个方法必须先获取独占锁。</p>
+<p>废话不多说，出队是非常简单的，因为队头就是最小的元素，对应的是数组的第一个元素。难点是队头出队后，需要调整树。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">siftDownComparable</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k, T x, Object[] array,</span></span><br><span class="hljs-function"><span class="hljs-params">                                           <span class="hljs-keyword">int</span> n)</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (n &gt; <span class="hljs-number">0</span>) &#123;<br>        Comparable&lt;? <span class="hljs-keyword">super</span> T&gt; key = (Comparable&lt;? <span class="hljs-keyword">super</span> T&gt;)x;<br>        <span class="hljs-comment">// 这里得到的 half 肯定是非叶节点</span><br>        <span class="hljs-comment">// a[n] 是最后一个元素，其父节点是 a[(n-1)/2]。所以 n &gt;&gt;&gt; 1 代表的节点肯定不是叶子节点</span><br>        <span class="hljs-comment">// 下面，我们结合图来一行行分析，这样比较直观简单</span><br>        <span class="hljs-comment">// 此时 k 为 0, x 为 17，n 为 9</span><br>        <span class="hljs-keyword">int</span> half = n &gt;&gt;&gt; <span class="hljs-number">1</span>; <span class="hljs-comment">// 得到 half = 4</span><br>        <span class="hljs-keyword">while</span> (k &lt; half) &#123;<br>            <span class="hljs-comment">// 先取左子节点</span><br>            <span class="hljs-keyword">int</span> child = (k &lt;&lt; <span class="hljs-number">1</span>) + <span class="hljs-number">1</span>; <span class="hljs-comment">// 得到 child = 1</span><br>            Object c = array[child];  <span class="hljs-comment">// c = 12</span><br>            <span class="hljs-keyword">int</span> right = child + <span class="hljs-number">1</span>;  <span class="hljs-comment">// right = 2</span><br>            <span class="hljs-comment">// 如果右子节点存在，而且比左子节点小</span><br>            <span class="hljs-comment">// 此时 array[right] = 20，所以条件不满足</span><br>            <span class="hljs-keyword">if</span> (right &lt; n &amp;&amp;<br>                ((Comparable&lt;? <span class="hljs-keyword">super</span> T&gt;) c).compareTo((T) array[right]) &gt; <span class="hljs-number">0</span>)<br>                c = array[child = right];<br>            <span class="hljs-comment">// key = 17, c = 12，所以条件不满足</span><br>            <span class="hljs-keyword">if</span> (key.compareTo((T) c) &lt;= <span class="hljs-number">0</span>)<br>                <span class="hljs-keyword">break</span>;<br>            <span class="hljs-comment">// 把 12 填充到根节点</span><br>            array[k] = c;<br>            <span class="hljs-comment">// k 赋值后为 1</span><br>            k = child;<br>            <span class="hljs-comment">// 一轮过后，我们发现，12 左边的子树和刚刚的差不多，都是缺少根节点，接下来处理就简单了</span><br>        &#125;<br>        array[k] = key;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/efffadcde9a0425fbe360d697de19f78.png" srcset="/img/loading.gif" alt="priority-blocking-queue-3"></p>
+<p>记住二叉堆是一棵完全二叉树，那么根节点 10 拿掉后，最后面的元素 17 必须找到合适的地方放置。首先，17 和 10 不能直接交换，那么先将根节点 10 的左右子节点中较小的节点往上滑，即 12 往上滑，然后原来 12 留下了一个空节点，然后再把这个空节点的较小的子节点往上滑，即 13 往上滑，最后，留出了位子，17 补上即可。</p>
+<p>我稍微调整下这个树，以便读者能更明白：</p>
+<p><img src="https://img-blog.csdnimg.cn/d8c6026f7dbd4c01b3e06a7fd3f3563a.png" srcset="/img/loading.gif" alt="priority-blocking-queue-4"></p>
+<p>好了， PriorityBlockingQueue 我们也说完了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ArrayBlockingQueue 底层是数组，有界队列，如果我们要使用生产者-消费者模式，这是非常好的选择。</p>
+<p>LinkedBlockingQueue 底层是链表，可以当做无界和有界队列来使用，所以大家不要以为它就是无界队列。</p>
+<p>SynchronousQueue 本身不带有空间来存储任何元素，使用上可以选择公平模式和非公平模式。</p>
+<p>PriorityBlockingQueue 是无界队列，基于数组，数据结构为二叉堆，数组第一个也是树的根节点总是最小值。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA%E6%BA%90%E7%A0%81/">JAVA源码</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA%E6%BA%90%E7%A0%81/">JAVA源码</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E8%BD%AC%E8%BD%BD/">转载</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/4064134444.html">https://tothefor.com/DragonOne/4064134444.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/966391975.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">深入分析java8编程语言规范：Threads and Locks</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/191149948.html">
+                        <span class="hidden-mobile">一行一行源码分析AbstractQueuedSynchronizer(三)</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

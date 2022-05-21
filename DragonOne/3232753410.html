@@ -1,0 +1,908 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>Spring-Spring+AOP使用介绍 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.5.1/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Spring-Spring+AOP使用介绍">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-10-17 10:11" pubdate>
+        October 17, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      72
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Spring-Spring+AOP使用介绍</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>前面写过 Spring IOC 的源码分析，本文不介绍源码分析，而是介绍 Spring AOP 中的一些概念，以及它的各种配置方法，涵盖了 Spring AOP 发展到现在出现的全部 3 种配置方式。</p>
+<p>由于 Spring 强大的向后兼容性，实际代码中往往会出现很多配置混杂的情况，而且居然还能工作，本文希望帮助大家理清楚这些知识。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="AOP-AspectJ-Spring-AOP"><a href="#AOP-AspectJ-Spring-AOP" class="headerlink" title="AOP, AspectJ, Spring AOP"></a>AOP, AspectJ, Spring AOP</h2><p>我们先来把它们的概念和关系说说清楚。</p>
+<p>AOP 要实现的是在我们原来写的代码的基础上，进行一定的包装，如在方法执行前、方法返回后、方法抛出异常后等地方进行一定的拦截处理或者叫增强处理。</p>
+<p>AOP 的实现并不是因为 Java 提供了什么神奇的钩子，可以把方法的几个生命周期告诉我们，而是我们要实现一个代理，实际运行的实例其实是生成的代理类的实例。</p>
+<p>作为 Java 开发者，我们都很熟悉 <strong>AspectJ</strong> 这个词，甚至于我们提到 AOP 的时候，想到的往往就是 AspectJ，即使你可能不太懂它是怎么工作的。这里，我们把 AspectJ 和 Spring AOP 做个简单的对比：</p>
+<p><strong>Spring AOP：</strong></p>
+<ul>
+<li><p>它基于动态代理来实现。默认地，如果使用接口的，用 JDK 提供的动态代理实现，如果没有接口，使用 CGLIB 实现。大家一定要明白背后的意思，包括什么时候会不用 JDK 提供的动态代理，而用 CGLIB 实现。</p>
+</li>
+<li><p>Spring 3.2 以后，spring-core 直接就把 CGLIB 和 ASM 的源码包括进来了，这也是为什么我们不需要显式引入这两个依赖</p>
+</li>
+<li><p>Spring 的 IOC 容器和 AOP 都很重要，Spring AOP 需要依赖于 IOC 容器来管理。</p>
+</li>
+<li><p>如果你是 web 开发者，有些时候，你可能需要的是一个 Filter 或一个 Interceptor，而不一定是 AOP。</p>
+</li>
+<li><p>Spring AOP 只能作用于 Spring 容器中的 Bean，它是使用纯粹的 Java 代码实现的，只能作用于 bean 的方法。</p>
+</li>
+<li><p>Spring 提供了 AspectJ 的支持，后面我们会单独介绍怎么使用，一般来说我们用<strong>纯的</strong> Spring AOP 就够了。</p>
+</li>
+<li><p>很多人会对比 Spring AOP 和 AspectJ 的性能，Spring AOP 是基于代理实现的，在容器启动的时候需要生成代理实例，在方法调用上也会增加栈的深度，使得 Spring AOP 的性能不如 AspectJ 那么好。</p>
+</li>
+</ul>
+<p><strong>AspectJ：</strong></p>
+<ul>
+<li>AspectJ 出身也是名门，来自于 Eclipse 基金会，link：<a target="_blank" rel="noopener" href="https://www.eclipse.org/aspectj">https://www.eclipse.org/aspectj</a></li>
+</ul>
+<ul>
+<li>属于静态织入，它是通过修改代码来实现的，它的织入时机可以是：<ul>
+<li>Compile-time weaving：编译期织入，如类 A 使用 AspectJ 添加了一个属性，类 B 引用了它，这个场景就需要编译期的时候就进行织入，否则没法编译类 B。</li>
+<li>Post-compile weaving：也就是已经生成了 .class 文件，或已经打成 jar 包了，这种情况我们需要增强处理的话，就要用到编译后织入。</li>
+<li><strong>Load-time weaving</strong>：指的是在加载类的时候进行织入，要实现这个时期的织入，有几种常见的方法。1、自定义类加载器来干这个，这个应该是最容易想到的办法，在被织入类加载到 JVM 前去对它进行加载，这样就可以在加载的时候定义行为了。2、在 JVM 启动的时候指定 AspectJ 提供的 agent：<code>-javaagent:xxx/xxx/aspectjweaver.jar</code>。</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>AspectJ 能干很多 Spring AOP 干不了的事情，它是 <strong>AOP 编程的完全解决方案</strong>。Spring AOP 致力于解决的是企业级开发中最普遍的 AOP 需求（方法织入），而不是力求成为一个像 AspectJ 一样的 AOP 编程完全解决方案。</p>
+</li>
+<li><p>因为 AspectJ 在实际代码运行前完成了织入，所以大家会说它生成的类是没有额外运行时开销的。</p>
+</li>
+<li><p>关于介绍 AspectJ 的使用，以及怎么在 Spring 应用中使用 AspectJ。见另一篇博文。</p>
+</li>
+</ul>
+<h2 id="AOP-术语解释"><a href="#AOP-术语解释" class="headerlink" title="AOP 术语解释"></a>AOP 术语解释</h2><p>在这里，不准备解释那么多 AOP 编程中的术语了，我们碰到一个说一个吧。</p>
+<p>Advice、Advisor、Pointcut、Aspect、Joinpoint 等等。</p>
+<h2 id="Spring-AOP"><a href="#Spring-AOP" class="headerlink" title="Spring AOP"></a>Spring AOP</h2><p>首先要说明的是，这里介绍的 Spring AOP 是纯的 Spring 代码，和 AspectJ 没什么关系，但是 Spring 延用了 AspectJ 中的概念，包括使用了 AspectJ 提供的 jar 包中的注解，但是不依赖于其实现功能。</p>
+<blockquote>
+<p>后面介绍的如 @Aspect、@Pointcut、@Before、@After 等注解都是来自于 AspectJ，但是功能的实现是纯 Spring AOP 自己实现的。</p>
+</blockquote>
+<p>下面我们来介绍 Spring AOP 的使用方法，先从最简单的配置方式开始说起，这样读者想看源码也会比较容易。</p>
+<p>目前 Spring AOP 一共有三种配置方式，Spring 做到了很好地向下兼容，所以大家可以放心使用。</p>
+<ul>
+<li>Spring 1.2 <strong>基于接口的配置</strong>：最早的 Spring AOP 是完全基于几个接口的，想看源码的同学可以从这里起步。</li>
+<li>Spring 2.0 <strong>schema-based 配置</strong>：Spring 2.0 以后使用 XML 的方式来配置，使用 命名空间 <code>&lt;aop /&gt;</code></li>
+<li>Spring 2.0 <strong>@AspectJ 配置</strong>：使用注解的方式来配置，这种方式感觉是最方便的，还有，这里虽然叫做 <code>@AspectJ</code>，但是这个和 AspectJ 其实没啥关系。</li>
+</ul>
+<h3 id="Spring-1-2-中的配置"><a href="#Spring-1-2-中的配置" class="headerlink" title="Spring 1.2 中的配置"></a>Spring 1.2 中的配置</h3><p>这节我们将介绍 Spring 1.2 中的配置，这是最古老的配置，但是由于 Spring 提供了很好的向后兼容，以及很多人根本不知道什么配置是什么版本的，以及是否有更新更好的配置方法替代，所以还是会有很多代码是采用这种古老的配置方式的，这里说的古老并没有贬义的意思。</p>
+<p>下面用一个简单的例子来演示怎么使用 Spring 1.2 的配置方式。</p>
+<p>首先，我们先定义两个接口 <code>UserService</code> 和 <code>OrderService</code>，以及它们的实现类 <code>UserServiceImpl</code> 和 <code>OrderServiceImpl</code>：</p>
+<p><img src="https://img-blog.csdnimg.cn/13120dc5499b4e87a4db7bc75279e379.png" srcset="/img/loading.gif" alt="3"></p>
+<p><img src="https://img-blog.csdnimg.cn/4b5f97a64e63432e881a2af485aa7ca6.png" srcset="/img/loading.gif" alt="3"></p>
+<p>接下来，我们定义两个 <strong>advice</strong>，分别用于拦截<strong>方法执行前</strong>和<strong>方法返回后</strong>：</p>
+<blockquote>
+<p>advice 是我们接触的第一个概念，记住它是干什么用的。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/a89ec9c37f4345ccb7d06b89ef9fdaf8.png" srcset="/img/loading.gif" alt="4"></p>
+<p>上面的两个 Advice 分别用于方法调用前输出参数和方法调用后输出结果。</p>
+<p>现在可以开始配置了，我们配置一个名为 <strong>spring_1_2.xml</strong> 的文件：</p>
+<p><img src="https://img-blog.csdnimg.cn/7ca02c1e08c34bfd841b08e2d6321f51.png" srcset="/img/loading.gif" alt="5"></p>
+<p>接下来，我们跑起来看看：</p>
+<p><img src="https://img-blog.csdnimg.cn/325f068e6bf14e6094910a4ce72457ea.png" srcset="/img/loading.gif" alt="6"></p>
+<p>查看输出结果：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">准备执行方法: createUser, 参数列表：[Tom, Cruise, 55]<br>方法返回：User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br>准备执行方法: queryUser, 参数列表：[]<br>方法返回：User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>从结果可以看到，对 UserService 中的两个方法都做了前、后拦截。这个例子理解起来应该非常简单，就是一个代理实现。</p>
+<blockquote>
+<p>代理模式需要一个接口、一个具体实现类，然后就是定义一个代理类，用来包装实现类，添加自定义逻辑，在使用的时候，需要用代理类来生成实例。</p>
+</blockquote>
+<p>此中方法有个致命的问题，如果我们需要拦截 OrderService 中的方法，那么我们还需要定义一个 OrderService 的代理。如果还要拦截 PostService，得定义一个 PostService 的代理……</p>
+<p>而且，我们看到，我们的拦截器的粒度只控制到了类级别，类中所有的方法都进行了拦截。接下来，我们看看怎么样<strong>只拦截特定的方法</strong>。</p>
+<p>在上面的配置中，配置拦截器的时候，interceptorNames 除了指定为 Advice，是还可以指定为 Interceptor 和 Advisor 的。</p>
+<p>这里我们来理解 <strong>Advisor</strong> 的概念，它也比较简单，<strong>它内部需要指定一个 Advice</strong>，Advisor 决定该拦截哪些方法，拦截后需要完成的工作还是内部的 Advice 来做。</p>
+<p>它有好几个实现类，这里我们使用实现类 <strong>NameMatchMethodPointcutAdvisor</strong> 来演示，从名字上就可以看出来，它需要我们给它提供方法名字，这样符合该配置的方法才会做拦截。</p>
+<p><img src="https://img-blog.csdnimg.cn/18a2db718a8347aa9d83f69de9594854.png" srcset="/img/loading.gif" alt="1"></p>
+<blockquote>
+<p>我们可以看到，userServiceProxy 这个 bean 配置了一个 advisor，advisor 内部有一个 advice。advisor 负责匹配方法，内部的 advice 负责实现方法包装。</p>
+<p>注意，这里的 mappedNames 配置是可以指定多个的，用逗号分隔，可以是不同类中的方法。相比直接指定 advice，advisor 实现了更细粒度的控制，因为在这里配置 advice 的话，所有方法都会被拦截。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/f64449e126ff4d4eb9059f81a5301e5f.png" srcset="/img/loading.gif" alt="2"></p>
+<p>输出结果如下，只有 createUser 方法被拦截：</p>
+<figure class="highlight inform7"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs inform7">准备执行方法: createUser, 参数列表：<span class="hljs-comment">[Tom, Cruise, 55]</span><br></code></pre></div></td></tr></table></figure>
+
+<p>到这里，我们已经了解了 <strong>Advice</strong> 和 <strong>Advisor</strong> 了，前面也说了还可以配置 <strong>Interceptor</strong>。</p>
+<p>对于 Java 开发者来说，对 Interceptor 这个概念肯定都很熟悉了，这里就不做演示了，贴一下实现代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DebugInterceptor</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">MethodInterceptor</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">invoke</span><span class="hljs-params">(MethodInvocation invocation)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Before: invocation=[&quot;</span> + invocation + <span class="hljs-string">&quot;]&quot;</span>);<br>        <span class="hljs-comment">// 执行 真实实现类 的方法</span><br>        Object rval = invocation.proceed();<br>        System.out.println(<span class="hljs-string">&quot;Invocation returned&quot;</span>);<br>        <span class="hljs-keyword">return</span> rval;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>上面，我们介绍完了 <strong>Advice、Advisor、Interceptor</strong> 三个概念，相信大家应该很容易就看懂它们了。</p>
+<p>它们有个共同的问题，那就是我们得为每个 bean 都配置一个代理，之后获取 bean 的时候需要获取这个代理类的 bean 实例（如 <code>(UserService) context.getBean(&quot;userServiceProxy&quot;)</code>），这显然非常不方便，不利于我们之后要使用的自动根据类型注入。下面介绍 autoproxy 的解决方案。</p>
+<p><strong>autoproxy</strong>：从名字我们也可以看出来，它是实现自动代理，也就是说当 Spring 发现一个 bean 需要被切面织入的时候，Spring 会自动生成这个 bean 的一个代理来拦截方法的执行，确保定义的切面能被执行。</p>
+<p>这里强调<strong>自动</strong>，也就是说 Spring 会自动做这件事，而不用像前面介绍的，我们需要显式地指定代理类的 bean。</p>
+<p>我们去掉原来的 <strong>ProxyFactoryBean</strong> 的配置，改为使用 <strong>BeanNameAutoProxyCreator</strong> 来配置：</p>
+<p><img src="https://img-blog.csdnimg.cn/9aedce1178054eaa82d0ab8fac078767.png" srcset="/img/loading.gif" alt="9"></p>
+<p>配置很简单，beanNames 中可以使用正则来匹配 bean 的名字。这样配置出来以后，userServiceBeforeAdvice 和 userServiceAfterAdvice 这两个拦截器就不仅仅可以作用于 UserServiceImpl 了，也可以作用于 OrderServiceImpl、PostServiceImpl、ArticleServiceImpl……等等，也就是说不再是配置某个 bean 的代理了。</p>
+<blockquote>
+<p>注意，这里的 InterceptorNames 和前面一样，也是可以配置成 Advisor 和 Interceptor 的。</p>
+</blockquote>
+<p>然后我们修改下使用的地方：</p>
+<p><img src="https://img-blog.csdnimg.cn/513fad64e9f24636b39fd95d037aab1a.png" srcset="/img/loading.gif" alt="10"></p>
+<p>发现没有，<strong>我们在使用的时候，完全不需要关心代理了</strong>，直接使用原来的类型就可以了，这是非常方便的。</p>
+<p>输出结果就是 OrderService 和 UserService 中的每个方法都得到了拦截：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">准备执行方法: createUser, 参数列表：[Tom, Cruise, 55]<br>方法返回：User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br>准备执行方法: queryUser, 参数列表：[]<br>方法返回：User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br>准备执行方法: createOrder, 参数列表：[Leo, 随便买点什么]<br>方法返回：Order&#123;<span class="hljs-attribute">username</span>=<span class="hljs-string">&#x27;Leo&#x27;</span>, <span class="hljs-attribute">product</span>=<span class="hljs-string">&#x27;随便买点什么&#x27;</span>&#125;<br>准备执行方法: queryOrder, 参数列表：[Leo]<br>方法返回：Order&#123;<span class="hljs-attribute">username</span>=<span class="hljs-string">&#x27;Leo&#x27;</span>, <span class="hljs-attribute">product</span>=<span class="hljs-string">&#x27;随便买点什么&#x27;</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>到这里，是不是发现 BeanNameAutoProxyCreator 非常好用，它需要指定被拦截类名的模式(如 *ServiceImpl)，它可以配置多次，这样就可以用来匹配不同模式的类了。</p>
+<p>另外，在 BeanNameAutoProxyCreator 同一个包中，还有一个非常有用的类 <strong>DefaultAdvisorAutoProxyCreator</strong>，比上面的 BeanNameAutoProxyCreator 还要方便。</p>
+<p>之前我们说过，advisor 内部包装了 advice，advisor 负责决定拦截哪些方法，内部 advice 定义拦截后的逻辑。所以，仔细想想其实就是只要让我们的 advisor 全局生效就能实现我们需要的自定义拦截功能、拦截后的逻辑处理。</p>
+<blockquote>
+<p>BeanNameAutoProxyCreator 是自己匹配方法，然后交由内部配置 advice 来拦截处理；</p>
+<p>而 DefaultAdvisorAutoProxyCreator 是让 ioc 容器中的所有 advisor 来匹配方法，advisor 内部都是有 advice 的，让它们内部的 advice 来执行拦截处理。</p>
+</blockquote>
+<p>1、我们需要再回头看下 Advisor 的配置，上面我们用了 NameMatchMethodPointcutAdvisor 这个类：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;logCreateAdvisor&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.springframework.aop.support.NameMatchMethodPointcutAdvisor&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;advice&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;logArgsAdvice&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;mappedNames&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;createUser,createOrder&quot;</span> /&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>其实 Advisor 还有一个更加灵活的实现类 <strong>RegexpMethodPointcutAdvisor</strong>，它能实现正则匹配，如：</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&lt;bean id=<span class="hljs-string">&quot;logArgsAdvisor&quot;</span> <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;org.springframework.aop.support.RegexpMethodPointcutAdvisor&quot;</span>&gt;<br>    &lt;property name=<span class="hljs-string">&quot;advice&quot;</span> ref=<span class="hljs-string">&quot;logArgsAdvice&quot;</span> /&gt;<br>    &lt;property name=<span class="hljs-string">&quot;pattern&quot;</span> value=<span class="hljs-string">&quot;com.javadoop.*.service.*.create.*&quot;</span> /&gt;<br>&lt;/bean&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>也就是说，我们能通过配置 Advisor，精确定位到需要被拦截的方法，然后使用内部的 Advice 执行逻辑处理。</p>
+<p>2、之后，我们需要配置 DefaultAdvisorAutoProxyCreator，它的配置非常简单，直接使用下面这段配置就可以了，它就会使得<strong>所有的 Advisor 自动生效</strong>，无须其他配置。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&lt;bean <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">&quot;org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator&quot;</span> /&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/4cf0e5d55fc944779f9a125bd553d6c7.png" srcset="/img/loading.gif" alt="11"></p>
+<p>然后我们运行一下：</p>
+<p><img src="https://img-blog.csdnimg.cn/e4415318291c473f9248c6d661369adf.png" srcset="/img/loading.gif" alt="12"></p>
+<p>输出：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">准备执行方法: createUser, 参数列表：[Tom, Cruise, 55]<br>方法返回：User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br>准备执行方法: createOrder, 参数列表：[Leo, 随便买点什么]<br>方法返回：Order&#123;<span class="hljs-attribute">username</span>=<span class="hljs-string">&#x27;Leo&#x27;</span>, <span class="hljs-attribute">product</span>=<span class="hljs-string">&#x27;随便买点什么&#x27;</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>从结果可以看出，create* 方法使用了 logArgsAdvisor 进行传参输出，query* 方法使用了 logResultAdvisor 进行了返回结果输出。</p>
+<p>到这里，Spring 1.2 的配置就要介绍完了。本文不会介绍得面面俱到，主要是关注最核心的配置，如果读者感兴趣，要学会自己去摸索，比如这里的 Advisor 就不只有我这里介绍的 NameMatchMethodPointcutAdvisor 和 RegexpMethodPointcutAdvisor，AutoProxyCreator 也不仅仅是 BeanNameAutoProxyCreator 和 DefaultAdvisorAutoProxyCreator。</p>
+<blockquote>
+<p>读到这里，我想对于很多人来说，就知道怎么去阅读 Spring AOP 源码了。</p>
+</blockquote>
+<h3 id="Spring-2-0-AspectJ-配置"><a href="#Spring-2-0-AspectJ-配置" class="headerlink" title="Spring 2.0 @AspectJ 配置"></a>Spring 2.0 @AspectJ 配置</h3><p>Spring 2.0 以后，引入了 @AspectJ 和 Schema-based 的两种配置方式，我们先来介绍 @AspectJ 的配置方式，之后我们再来看使用 xml 的配置方式。</p>
+<p>注意了，**@AspectJ 和 AspectJ 没多大关系**，并不是说基于 AspectJ 实现的，而仅仅是使用了 AspectJ 中的概念，包括使用的注解也是直接来自于 AspectJ 的包。</p>
+<p>首先，我们需要依赖 <code>aspectjweaver.jar</code> 这个包，这个包来自于 AspectJ：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.aspectj<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>aspectjweaver<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.8.11<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>如果是使用 Spring Boot 的话，添加以下依赖即可：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>在 @AspectJ 的配置方式中，之所以要引入 aspectjweaver 并不是因为我们需要使用 AspectJ 的处理功能，而是因为 Spring 使用了 AspectJ 提供的一些注解，实际上<strong>还是纯的 Spring AOP 代码</strong>。</p>
+<p>说了这么多，明确一点，@AspectJ 采用注解的方式来配置使用 Spring AOP。</p>
+<p>首先，我们需要<strong>开启</strong> @AspectJ 的注解配置方式，有两种方式：</p>
+<p>1、在 xml 中配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:aspectj-autoproxy</span>/&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<ol start="2">
+<li>使用 @EnableAspectJAutoProxy </li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Configuration</span><br><span class="hljs-meta">@EnableAspectJAutoProxy</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AppConfig</span> </span>&#123;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>一旦开启了上面的配置，那么所有使用 @Aspect 注解的 <strong>bean</strong> 都会被 Spring 当做<strong>用来实现 AOP 的配置类</strong>，我们称之为一个 <strong>Aspect</strong>。</p>
+<blockquote>
+<p>注意了，@Aspect 注解要作用在 bean 上面，不管是使用 @Component 等注解方式，还是在 xml 中配置 bean，首先它需要是一个 bean。</p>
+</blockquote>
+<p>比如下面这个 bean，它的类名上使用了 @Aspect，它就会被当做 Spring AOP 的配置。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myAspect&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;org.xyz.NotVeryUsefulAspect&quot;</span>&gt;</span><br>    <span class="hljs-comment">&lt;!-- configure properties of aspect here as normal --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> org.xyz;<br><span class="hljs-keyword">import</span> org.aspectj.lang.annotation.Aspect;<br><br><span class="hljs-meta">@Aspect</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotVeryUsefulAspect</span> </span>&#123;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>接下来，我们需要关心的是 @Aspect 注解的 bean 中，我们需要配置哪些内容。</p>
+<p><strong>首先，我们需要配置 Pointcut，</strong>Pointcut 在大部分地方被翻译成切点，用于定义哪些方法需要被增强或者说需要被拦截，有点类似于之前介绍的 <strong>Advisor</strong> 的方法匹配。</p>
+<p>Spring AOP 只支持 bean 中的方法（不像 AspectJ 那么强大），所以我们可以认为 <strong>Pointcut</strong> 就是用来匹配 Spring 容器中的所有 bean 的方法的。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Pointcut(&quot;execution(* transfer(..))&quot;)</span><span class="hljs-comment">// the pointcut expression</span><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">anyOldTransfer</span><span class="hljs-params">()</span> </span>&#123;&#125;<span class="hljs-comment">// the pointcut signature</span><br></code></pre></div></td></tr></table></figure>
+
+<p>我们看到，@Pointcut 中使用了 <strong>execution</strong> 来正则匹配方法签名，这也是最常用的，除了 execution，我们再看看其他的几个比较常用的匹配方式：</p>
+<ul>
+<li><p>within：指定所在类或所在包下面的方法（Spring AOP 独有）</p>
+<blockquote>
+<p>如 @Pointcut(“within(com.javadoop.springaoplearning.service..*)”)</p>
+</blockquote>
+</li>
+<li><p>@annotation：方法上具有特定的注解，如 @Subscribe 用于订阅特定的事件。</p>
+<blockquote>
+<p>如 @Pointcut(“execution(* <em>.</em>(..)) &amp;&amp; @annotation(com.javadoop.annotation.Subscribe)”)</p>
+</blockquote>
+</li>
+<li><p>bean(idOrNameOfBean)：匹配 bean 的名字（Spring AOP 独有）</p>
+<blockquote>
+<p>如 @Pointcut(“bean(*Service)”)</p>
+</blockquote>
+</li>
+</ul>
+<p>Tips：上面匹配中，通常 “.” 代表一个包名，”..” 代表包及其子包，方法参数任意匹配使用两个点 “..”。</p>
+<p>对于 web 开发者，Spring 有个很好的建议，就是定义一个 <strong>SystemArchitecture</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Aspect</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SystemArchitecture</span> </span>&#123;<br><br>    <span class="hljs-comment">// web 层</span><br>    <span class="hljs-meta">@Pointcut(&quot;within(com.javadoop.web..*)&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inWebLayer</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><br>    <span class="hljs-comment">// service 层</span><br>    <span class="hljs-meta">@Pointcut(&quot;within(com.javadoop.service..*)&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inServiceLayer</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><br>    <span class="hljs-comment">// dao 层</span><br>    <span class="hljs-meta">@Pointcut(&quot;within(com.javadoop.dao..*)&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">inDataAccessLayer</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><br>    <span class="hljs-comment">// service 实现，注意这里指的是方法实现，其实通常也可以使用 bean(*ServiceImpl)</span><br>    <span class="hljs-meta">@Pointcut(&quot;execution(* com.javadoop..service.*.*(..))&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">businessService</span><span class="hljs-params">()</span> </span>&#123;&#125;<br><br>    <span class="hljs-comment">// dao 实现</span><br>    <span class="hljs-meta">@Pointcut(&quot;execution(* com.javadoop.dao.*.*(..))&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dataAccessOperation</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>上面这个 SystemArchitecture 很好理解，该 Aspect 定义了一堆的 Pointcut，随后在任何需要 Pointcut 的地方都可以直接引用（如 xml 中的 pointcut-ref=””）。</p>
+<p>配置 pointcut 就是配置我们需要拦截哪些方法，接下来，我们要配置需要对这些被拦截的方法做什么，也就是前面介绍的 Advice。</p>
+<p><strong>接下来，我们要配置 Advice。</strong></p>
+<p>下面这块代码示例了各种常用的情况：</p>
+<blockquote>
+<p>注意，实际写代码的时候，不要把所有的切面都揉在一个 class 中。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Aspect</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AdviceExample</span> </span>&#123;<br>    <br>    <span class="hljs-comment">// 这里会用到我们前面说的 SystemArchitecture</span><br>    <span class="hljs-comment">// 下面方法就是写拦截 &quot;dao层实现&quot;</span><br>    <span class="hljs-meta">@Before(&quot;com.javadoop.aop.SystemArchitecture.dataAccessOperation()&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAccessCheck</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ... 实现代码</span><br>    &#125;<br>    <br>    <span class="hljs-comment">// 当然，我们也可以直接&quot;内联&quot;Pointcut，直接在这里定义 Pointcut</span><br>    <span class="hljs-comment">// 把 Advice 和 Pointcut 合在一起了，但是这两个概念我们还是要区分清楚的</span><br>    <span class="hljs-meta">@Before(&quot;execution(* com.javadoop.dao.*.*(..))&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAccessCheck</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ... 实现代码</span><br>    &#125;<br>    <br>    <span class="hljs-meta">@AfterReturning(&quot;com.javadoop.aop.SystemArchitecture.dataAccessOperation()&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAccessCheck</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ...</span><br>    &#125;<br><br>    <span class="hljs-meta">@AfterReturning(</span><br><span class="hljs-meta">        pointcut=&quot;com.javadoop.aop.SystemArchitecture.dataAccessOperation()&quot;,</span><br><span class="hljs-meta">        returning=&quot;retVal&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doAccessCheck</span><span class="hljs-params">(Object retVal)</span> </span>&#123;<br>        <span class="hljs-comment">// 这样，进来这个方法的处理时候，retVal 就是相应方法的返回值，是不是非常方便</span><br>        <span class="hljs-comment">//  ... 实现代码</span><br>    &#125;<br><br>    <span class="hljs-comment">// 异常返回</span><br>    <span class="hljs-meta">@AfterThrowing(&quot;com.javadoop.aop.SystemArchitecture.dataAccessOperation()&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doRecoveryActions</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// ... 实现代码</span><br>    &#125;<br>    <br>    <span class="hljs-meta">@AfterThrowing(</span><br><span class="hljs-meta">        pointcut=&quot;com.javadoop.aop.SystemArchitecture.dataAccessOperation()&quot;,</span><br><span class="hljs-meta">        throwing=&quot;ex&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doRecoveryActions</span><span class="hljs-params">(DataAccessException ex)</span> </span>&#123;<br>        <span class="hljs-comment">// ... 实现代码</span><br>    &#125;<br>    <br>    <span class="hljs-comment">// 注意理解它和 @AfterReturning 之间的区别，这里会拦截正常返回和异常的情况</span><br>    <span class="hljs-meta">@After(&quot;com.javadoop.aop.SystemArchitecture.dataAccessOperation()&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doReleaseLock</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-comment">// 通常就像 finally 块一样使用，用来释放资源。</span><br>        <span class="hljs-comment">// 无论正常返回还是异常退出，都会被拦截到</span><br>    &#125;<br>    <br>    <span class="hljs-comment">// 感觉这个很有用吧，既能做 @Before 的事情，也可以做 @AfterReturning 的事情</span><br>    <span class="hljs-meta">@Around(&quot;com.javadoop.aop.SystemArchitecture.businessService()&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">doBasicProfiling</span><span class="hljs-params">(ProceedingJoinPoint pjp)</span> <span class="hljs-keyword">throws</span> Throwable </span>&#123;<br>        <span class="hljs-comment">// start stopwatch</span><br>        Object retVal = pjp.proceed();<br>        <span class="hljs-comment">// stop stopwatch</span><br>        <span class="hljs-keyword">return</span> retVal;<br>    &#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>细心的读者可能发现了有些 Advice 缺少方法传参，如在 @Before 场景中参数往往是非常有用的，比如我们要用日志记录下来被拦截方法的入参情况。</p>
+<p>Spring 提供了非常简单的获取入参的方法，使用 org.aspectj.lang.JoinPoint 作为 Advice 的第一个参数即可，如：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Before(&quot;com.javadoop.springaoplearning.aop_spring_2_aspectj.SystemArchitecture.businessService()&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">logArgs</span><span class="hljs-params">(JoinPoint joinPoint)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;方法执行前，打印入参：&quot;</span> + Arrays.toString(joinPoint.getArgs()));<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>注意：第一，必须放置在第一个参数上；第二，如果是 @Around，我们通常会使用其子类 ProceedingJoinPoint，因为它有 procceed()/procceed(args[]) 方法。</p>
+</blockquote>
+<p>到这里，我们介绍完了 @AspectJ 配置方式中的 <strong>Pointcut</strong> 和 <strong>Advice</strong> 的配置。对于开发者来说，其实最重要的就是这两个了，定义 Pointcut 和使用合适的 Advice 在各个 Pointcut 上。</p>
+<p>下面，我们用这一节介绍的 @AspectJ 来实现上一节实现的<strong>记录方法传参</strong>和<strong>记录方法返回值</strong>。</p>
+<p><img src="https://img-blog.csdnimg.cn/d92042307eee403b8125f821f989e150.png" srcset="/img/loading.gif" alt="13"></p>
+<p>xml 的配置非常简单：</p>
+<p><img src="https://img-blog.csdnimg.cn/509baae3c0c44aa390302a9d8e9486c3.png" srcset="/img/loading.gif" alt="14"></p>
+<blockquote>
+<p>这里是示例，所以 bean 的配置还是使用了 xml 的配置方式。</p>
+</blockquote>
+<p>测试一下：</p>
+<p><img src="https://img-blog.csdnimg.cn/53c422b3440b435b90d741eb59974797.png" srcset="/img/loading.gif" alt="15"></p>
+<p>输出结果：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs routeros">方法执行前，打印入参：[Tom, Cruise, 55]<br>User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br>方法执行前，打印入参：[]<br>User&#123;<span class="hljs-attribute">firstName</span>=<span class="hljs-string">&#x27;Tom&#x27;</span>, <span class="hljs-attribute">lastName</span>=<span class="hljs-string">&#x27;Cruise&#x27;</span>, <span class="hljs-attribute">age</span>=55, <span class="hljs-attribute">address</span>=<span class="hljs-string">&#x27;null&#x27;</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>JoinPoint 除了 getArgs() 外还有一些有用的方法，大家可以进去稍微看一眼。</p>
+<p>最后提一点，@Aspect 中的配置不会作用于使用 @Aspect 注解的 bean。</p>
+<h3 id="Spring-2-0-schema-based-配置"><a href="#Spring-2-0-schema-based-配置" class="headerlink" title="Spring 2.0 schema-based 配置"></a>Spring 2.0 schema-based 配置</h3><p>本节将介绍的是 Spring 2.0 以后提供的基于 <code>&lt;aop /&gt;</code> 命名空间的 XML 配置。这里说的 schema-based 就是指基于 <code>aop</code>  这个 schema。</p>
+<blockquote>
+<p>介绍 IOC 的时候也介绍过 Spring 是怎么解析各个命名空间的（各种 *NamespaceHandler），解析 <code>&lt;aop /&gt;</code> 的源码在 org.springframework.aop.config.AopNamespaceHandler 中。</p>
+</blockquote>
+<p>有了前面的 @AspectJ 的配置方式的知识，理解 xml 方式的配置非常简单，所以我们就可以废话少一点了。</p>
+<p>这里先介绍<strong>配置 Aspect</strong>，便于后续理解：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;myAspect&quot;</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;aBean&quot;</span>&gt;</span><br>        ...<br>    <span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;aBean&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;...&quot;</span>&gt;</span><br>    ...<br><span class="hljs-tag">&lt;/<span class="hljs-name">bean</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>所有的配置都在 <code>&lt;aop:config&gt;</code> 下面。</p>
+<p><code>&lt;aop:aspect &gt;</code> 中需要指定一个 bean，和前面介绍的 LogArgsAspect  和 LogResultAspect 一样，我们知道该 bean 中我们需要写处理代码。</p>
+<p>然后，我们写好 Aspect 代码后，将其“织入”到合适的 Pointcut 中，这就是面向切面。</p>
+</blockquote>
+<p>然后，我们需要<strong>配置 Pointcut</strong>，非常简单，如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span><br><br>    <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;businessService&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;execution(* com.javadoop.springaoplearning.service.*.*(..))&quot;</span>/&gt;</span><br><br>    <span class="hljs-comment">&lt;!--也可以像下面这样--&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;businessService2&quot;</span></span><br><span class="hljs-tag">        <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;com.javadoop.SystemArchitecture.businessService()&quot;</span>/&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>将 <code>&lt;aop:pointcut&gt;</code> 作为 <code>&lt;aop:config&gt;</code> 的直接子元素，将作为全局 Pointcut。</p>
+</blockquote>
+<p>我们也可以在 <code>&lt;aop:aspect /&gt;</code>内部配置 Pointcut，这样该 Pointcut 仅用于该 Aspect：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">aop:aspect</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;logArgsAspect&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;internalPointcut&quot;</span></span><br><span class="hljs-tag">                <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;com.javadoop.SystemArchitecture.businessService()&quot;</span> /&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">aop:aspect</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>接下来，我们应该配置 <strong>Advice</strong> 了，为了避免废话过多，我们直接上实例吧，非常好理解，将上一节用 @AspectJ 方式配置的搬过来：</p>
+<p><img src="https://img-blog.csdnimg.cn/cf91820189f043de81e0a47392690f50.png" srcset="/img/loading.gif" alt="16"></p>
+<p>上面的例子中，我们配置了两个 LogArgsAspect 和一个 LogResultAspect。</p>
+<p>其实基于 XML 的配置也是非常灵活的，这里没办法给大家演示各种搭配，大家抓住基本的 Pointcut、Advice 和 Aspect 这几个概念，就很容易配置了。</p>
+<h2 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h2><p>到这里，本文介绍了 Spring AOP 的三种配置方式，我们要知道的是，到目前为止，我们使用的都是 Spring AOP，和 AspectJ 没什么关系。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Spring/">Spring</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3232753410.html">https://tothefor.com/DragonOne/3232753410.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/3711499947.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Spring-Spring+AOP源码解析</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/2288416285.html">
+                        <span class="hidden-mobile">Spring-Spring+IOC+容器源码分析</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
