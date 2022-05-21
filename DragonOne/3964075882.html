@@ -1,0 +1,827 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JAVA基础知识复习（十二）- JDBC - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JAVA基础知识复习（十二）- JDBC">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-21 19:00" pubdate>
+        May 21, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JAVA基础知识复习（十二）- JDBC</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>JAVA基础知识复习（十二）- JDBC（Java DataBase Connectivity）使用。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="0-前提工作"><a href="#0-前提工作" class="headerlink" title="0.前提工作"></a>0.前提工作</h2><p>先从官网下载对应的驱动 jar 包。</p>
+<h3 id="0-1-文本编辑器配置驱动jar包"><a href="#0-1-文本编辑器配置驱动jar包" class="headerlink" title="0.1 文本编辑器配置驱动jar包"></a>0.1 文本编辑器配置驱动jar包</h3><p>如果是使用的文本编辑器实现的，则需要手动配置环境变量。</p>
+<blockquote>
+<ol>
+<li>在 系统变量 中，找到 classpath ，如果没有就新建一个名为 classpath 的。如图。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210521135019447.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<ol start="2">
+<li>在变量值中加上你下载的驱动 jar 包的位置。这里是以 E 盘为例。</li>
+</ol>
+</blockquote>
+<p><strong>注意：点号(.)和分号(;)一定不能忘了！！！且要是英文状态的。否则配置好之后仍然不能实现。</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20210521135423625.png" srcset="/img/loading.gif"></p>
+<h3 id="0-2-IDEA配置驱动jar包"><a href="#0-2-IDEA配置驱动jar包" class="headerlink" title="0.2 IDEA配置驱动jar包"></a>0.2 IDEA配置驱动jar包</h3><blockquote>
+<ol>
+<li>在建好的项目中，选中 src 再右键，选择 Open Module Settings 点击。 如图。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210521144014951.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<ol start="2">
+<li>在弹出的窗口中 ，选择 Libraries ，再点击加号（+）并选择 java ，再去选择找到驱动 jar 包即可。如图。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210521144034606.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<ol start="3">
+<li>选择完毕后，一步步点击 ok 即可。如图。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210521144136128.png" srcset="/img/loading.gif"></p>
+<p><img src="https://img-blog.csdnimg.cn/20210521144153101.png" srcset="/img/loading.gif"></p>
+<p><img src="https://img-blog.csdnimg.cn/2021052114421076.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<ol start="4">
+<li>最后，可以在目录处看见已经加进来的驱动 jar 包。</li>
+</ol>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20210521144229215.png" srcset="/img/loading.gif"></p>
+<h2 id="1-JDBC编程（六步）"><a href="#1-JDBC编程（六步）" class="headerlink" title="1.JDBC编程（六步）"></a>1.JDBC编程（六步）</h2><p><strong>实际具体需要几步，需要根据第四步来确认。</strong></p>
+<p>可以先把包导进去，后面过程中不再说导包问题。<br>可能用到的包：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.sql.DriverManager;<br><span class="hljs-keyword">import</span> java.sql.SQLException;<br><span class="hljs-keyword">import</span> java.sql.Driver;<br><span class="hljs-keyword">import</span> java.sql.Connection;<br><span class="hljs-keyword">import</span> java.sql.Statement;<br></code></pre></div></td></tr></table></figure>
+<p>也可以一键导入所有与之相关的包：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.sql.*;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-1-注册驱动"><a href="#1-1-注册驱动" class="headerlink" title="1.1 注册驱动"></a>1.1 注册驱动</h3><p>让 java 程序知道即将要连接的是哪个类型的数据库。</p>
+<blockquote>
+<p>写法一：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">DriverManager.registerDriver(<span class="hljs-keyword">new</span> com.mysql.jdbc.Driver());<br></code></pre></div></td></tr></table></figure>
+<blockquote>
+<p>写法二：</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Driver dr = <span class="hljs-keyword">new</span> com.mysql.jdbc.Driver(); <span class="hljs-comment">/*这里的 Driver 是 java.sql.Driver ,这里简写了*/</span><br>DriverManager.registerDriver(dr);<br></code></pre></div></td></tr></table></figure>
+<p>以上两种方式实现效果一样。<br>但是，会出现 Unhandled exception: java.sql.SQLException 的错误情况。<br>这是因为异常的缘故。将代码放在try catch 即可。<br>完整代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>       DriverManager.registerDriver(<span class="hljs-keyword">new</span> com.mysql.jdbc.Driver());<br>      <span class="hljs-comment">/*</span><br><span class="hljs-comment">       Driver dr = new com.mysql.jdbc.Driver(); //多态，父类型引用指向子类型对象。</span><br><span class="hljs-comment">       DriverManager.registerDriver(dr);</span><br><span class="hljs-comment">       */</span><br>   &#125; <span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>   	e.printStackTrace();<br>   &#125;<br></code></pre></div></td></tr></table></figure>
+<p><strong>小知识：</strong>在 DriverManager.registerDriver(new com.mysql.jdbc.Driver()); 代码中为什么是 com.mysql.jdbc.Driver() ？</p>
+<blockquote>
+<p>原因（方便理解）：自行将下载的驱动 jar 包进行解压后可以发现，其中有两个文件夹（com、META-INF）；打开 com 文件夹；再打开 mysql 文件夹；再打开 jdbc 文件夹；发现有一个 Driver.class 的文件。 而代码中出现的顺序刚好是打开文件夹的顺序。</p>
+</blockquote>
+<h4 id="1-1-1-驱动加载常用写法"><a href="#1-1-1-驱动加载常用写法" class="headerlink" title="1.1.1 驱动加载常用写法"></a>1.1.1 驱动加载常用写法</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver()&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+<p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            <span class="hljs-comment">/*</span><br><span class="hljs-comment">            * 这种方法的好处是：参数是一个字符串，而字符串可以写到xxxx.properties文件中。</span><br><span class="hljs-comment">            * 并且这种方法不需要接收返回值，因为只需要用到它的类加载动作。</span><br><span class="hljs-comment">            *</span><br><span class="hljs-comment">            * */</span><br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver()&quot;</span>);<br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            Connection conn = DriverManager.getConnection(url,user,password);<br>        &#125; <span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">catch</span> (ClassNotFoundException e)&#123;<br>            e.printStackTrace();<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="1-2-获取连接"><a href="#1-2-获取连接" class="headerlink" title="1.2 获取连接"></a>1.2 获取连接</h3><p>表示 JVM 的进程和数据库进程之间的通道打开了，属于进程之间的通信，重量级的，使用完之后一定要关闭通道。</p>
+<p>代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String url = <span class="hljs-string">&quot;jdbc:mysql://localhost:3306&quot;</span>;<br>String user = <span class="hljs-string">&quot;root&quot;</span>;<br>String password = <span class="hljs-string">&quot;loong&quot;</span>;<br>Connection conn = DriverManager.getConnection(url,user,password);<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：代码仍然需要放在try catch 中，否则会报错。</strong></p>
+<p>实现代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>        <span class="hljs-comment">//第一步</span><br>            DriverManager.registerDriver(<span class="hljs-keyword">new</span> com.mysql.jdbc.Driver());<br>           <span class="hljs-comment">/*</span><br><span class="hljs-comment">            Driver dr = new com.mysql.jdbc.Driver(); //多态，父类型引用指向子类型对象。</span><br><span class="hljs-comment">            DriverManager.registerDriver(dr);</span><br><span class="hljs-comment">            */</span><br>        <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">/*数据库用户名*/</span><br>            String password = <span class="hljs-string">&quot;&quot;</span>; <span class="hljs-comment">/*数据库密码*/</span><br>            Connection conn = DriverManager.getConnection(url,user,password);<br>        &#125; <span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>            e.printStackTrace();<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+<p>其中，url是统一资源定位符（网络中某个资源的绝对路径）。它包括了：协议、IP、port（端口）、资源名。<br>例如，以百度为例。<br>访问：<a target="_blank" rel="noopener" href="http://110.242.68.4/index.html">http://110.242.68.4:80/index.html</a> 和访问：<a target="_blank" rel="noopener" href="http://www.baidu.com/">www.baidu.com</a> 的效果是一样的。其中，</p>
+<blockquote>
+<p>http:// ： 是通信协议；</p>
+</blockquote>
+<blockquote>
+<p>111.110.242.68.4 ：服务器IP地址；</p>
+</blockquote>
+<blockquote>
+<p>80 ：服务器上软件的端口；</p>
+</blockquote>
+<blockquote>
+<p>index.html ：服务器上某个资源名（这里是百度的首页）</p>
+</blockquote>
+<p>其中url：jdbc:mysql://127.0.0.1:3306/dr；</p>
+<blockquote>
+<p>jdbc:mysql:// ：协议；</p>
+</blockquote>
+<blockquote>
+<p>128.127.0.0.1 ：IP地址 （使用 localhost 效果一样）；</p>
+</blockquote>
+<blockquote>
+<p>3306 ：mysql数据库端口号；</p>
+</blockquote>
+<blockquote>
+<p>dr ：具体的数据库实例名</p>
+</blockquote>
+<h3 id="1-3-获取数据库操作对象"><a href="#1-3-获取数据库操作对象" class="headerlink" title="1.3 获取数据库操作对象"></a>1.3 获取数据库操作对象</h3><p>专门执行 SQL 语句的对象。<br><strong>注意：代码仍然需要放在try catch 中，否则会报错。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            DriverManager.registerDriver(<span class="hljs-keyword">new</span> com.mysql.jdbc.Driver());<br>           <span class="hljs-comment">/*</span><br><span class="hljs-comment">            Driver dr = new com.mysql.jdbc.Driver(); //多态，父类型引用指向子类型对象。</span><br><span class="hljs-comment">            DriverManager.registerDriver(dr);</span><br><span class="hljs-comment">            */</span><br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            Connection conn = DriverManager.getConnection(url,user,password);<br>           <span class="hljs-comment">//第三步</span><br>            Statement stmt = conn.createStatement();<br>        &#125; <span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>            e.printStackTrace();<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="1-4-执行SQL语句"><a href="#1-4-执行SQL语句" class="headerlink" title="1.4 执行SQL语句"></a>1.4 执行SQL语句</h3><p>主要执行 DQL（数据查询语言）、DML（数据操纵语言）。还有 DDL（数据定义语言）、DCL（数据控制语言）。<br>DML语句包括：插入（insert）、删除（delete）、修改（update）。</p>
+<h4 id="1-4-1-不使用-select"><a href="#1-4-1-不使用-select" class="headerlink" title="1.4.1 不使用 select"></a>1.4.1 不使用 select</h4><p>实例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            DriverManager.registerDriver(<span class="hljs-keyword">new</span> com.mysql.jdbc.Driver());<br>           <span class="hljs-comment">/*</span><br><span class="hljs-comment">            Driver dr = new com.mysql.jdbc.Driver(); //多态，父类型引用指向子类型对象。</span><br><span class="hljs-comment">            DriverManager.registerDriver(dr);</span><br><span class="hljs-comment">            */</span><br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            Connection conn = DriverManager.getConnection(url,user,password);<br>           <span class="hljs-comment">//第三步</span><br>            Statement stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot;&quot;</span>;<span class="hljs-comment">/*这里没有写SQL语句，可自行添加，JDBC的SQL语句不需要提供分号结尾*/</span><br>            <span class="hljs-keyword">int</span> count = stmt.executeUpdate(sql);<br>            <span class="hljs-comment">/*返回值是：影响数据库中的记录条数*/</span><br>        &#125; <span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>            e.printStackTrace();<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+<p>不使用 select 语句，则第五步就没有了。</p>
+<h4 id="1-4-2-使用-select"><a href="#1-4-2-使用-select" class="headerlink" title="1.4.2 使用 select"></a>1.4.2 使用 select</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.*;<br><span class="hljs-keyword">import</span> java.sql.*;<br><br>Connection conn = <span class="hljs-keyword">null</span>;<br>        Statement stmt = <span class="hljs-keyword">null</span>;<br>        ResultSet rs = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver()&quot;</span>);<br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            conn = DriverManager.getConnection(url,user,password);<br>            <span class="hljs-comment">//第三步</span><br>            stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot; &quot;</span>;<br>            rs = stmt.executeQuery(sql);<br>        &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>其中，在得到数据的时候不一定都用 getString 去接收；如果本身是 int 型的，则也可以用 getInt 的方式去得到，double 型的也可以用 getDouble 方式得到。</p>
+<p>并且 rs.getString(1); 中的数字1可以换成列名。如：rs.getString(“username”); 但需要注意的是，列名称不是表中的列名称，而是查询结果集中的列名称。</p>
+<h3 id="1-5-处理查询结果集"><a href="#1-5-处理查询结果集" class="headerlink" title="1.5 处理查询结果集"></a>1.5 处理查询结果集</h3><p>只有当第四步执行的是 select 语句的时候，才有这一步。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.*;<br><span class="hljs-keyword">import</span> java.sql.*;<br><br>Connection conn = <span class="hljs-keyword">null</span>;<br>        Statement stmt = <span class="hljs-keyword">null</span>;<br>        ResultSet rs = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver()&quot;</span>);<br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            conn = DriverManager.getConnection(url,user,password);<br>            <span class="hljs-comment">//第三步</span><br>            stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot; &quot;</span>;<br>            rs = stmt.executeQuery(sql);<br>            <span class="hljs-comment">//第五步</span><br>            <span class="hljs-keyword">while</span>(rs.next())&#123;<br>                String em = rs.getString(<span class="hljs-number">1</span>);<span class="hljs-comment">//这里下标表示列并且从1开始，并不是从0开始</span><br>                String name = rs.getString(<span class="hljs-number">2</span>);<br>                String sal = rs.getString(<span class="hljs-number">3</span>);<br>                System.out.println(em+<span class="hljs-string">&quot;,&quot;</span>+name+<span class="hljs-string">&quot;,&quot;</span>+sal);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="1-6-释放资源"><a href="#1-6-释放资源" class="headerlink" title="1.6 释放资源"></a>1.6 释放资源</h3><p>使用完资源之后一定要关闭资源。java 和数据库属于进程间的通信，开启之后一定要关闭。通常写在 finally 中，因为为了保证资源一定释放。并且遵循从小到大依次关闭。分别对其try catch。</p>
+<h4 id="1-6-1-不使用-select"><a href="#1-6-1-不使用-select" class="headerlink" title="1.6.1 不使用 select"></a>1.6.1 不使用 select</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Connection conn = <span class="hljs-keyword">null</span>;<br>       Statement stmt = <span class="hljs-keyword">null</span>; <span class="hljs-comment">/*这里之所以提到外面声明，是因为在 finally 中还要使用*/</span><br>       <span class="hljs-keyword">try</span> &#123;<br>           <span class="hljs-comment">//第一步</span><br>           DriverManager.registerDriver(<span class="hljs-keyword">new</span> com.mysql.jdbc.Driver());<br>          <span class="hljs-comment">/*</span><br><span class="hljs-comment">           Driver dr = new com.mysql.jdbc.Driver(); //多态，父类型引用指向子类型对象。</span><br><span class="hljs-comment">           DriverManager.registerDriver(dr);</span><br><span class="hljs-comment">           */</span><br>           <span class="hljs-comment">//第二步</span><br>           String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>           String user = <span class="hljs-string">&quot;&quot;</span>;<br>           String password = <span class="hljs-string">&quot;&quot;</span>;<br>           conn = DriverManager.getConnection(url,user,password);<br>          <span class="hljs-comment">//第三步</span><br>           stmt = conn.createStatement();<br>           <span class="hljs-comment">//第四步</span><br>           String sql = <span class="hljs-string">&quot;&quot;</span>;<br>           <span class="hljs-keyword">int</span> count = stmt.executeUpdate(sql);<br>       &#125; <span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>           e.printStackTrace();<br>       &#125;<span class="hljs-keyword">finally</span> &#123;<br>           <span class="hljs-comment">//第六步</span><br>           <span class="hljs-keyword">try</span> &#123;<br>               <span class="hljs-keyword">if</span> (stmt != <span class="hljs-keyword">null</span>) &#123;<br>                   stmt.close();<br>               &#125;<br>           &#125;<span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>                   e.printStackTrace();<br>               &#125;<br><br>           <span class="hljs-keyword">try</span> &#123;<br>               <span class="hljs-keyword">if</span> (conn != <span class="hljs-keyword">null</span>) &#123;<br>                   conn.close();<br>               &#125;<br>           &#125;<span class="hljs-keyword">catch</span>(SQLException e)&#123;<br>                   e.printStackTrace();<br>               &#125;<br>           &#125;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="1-6-2-使用-select"><a href="#1-6-2-使用-select" class="headerlink" title="1.6.2 使用 select"></a>1.6.2 使用 select</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.*;<br><span class="hljs-keyword">import</span> java.sql.*;<br><br>        Connection conn = <span class="hljs-keyword">null</span>;<br>        Statement stmt = <span class="hljs-keyword">null</span>;<br>        ResultSet rs = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            Class.forName(<span class="hljs-string">&quot;com.mysql.jdbc.Driver()&quot;</span>);<br>            <span class="hljs-comment">//第二步</span><br>            String url = <span class="hljs-string">&quot;jdbc:mysql://127.0.0.1:3306/dr&quot;</span>;<br>            String user = <span class="hljs-string">&quot;&quot;</span>;<br>            String password = <span class="hljs-string">&quot;&quot;</span>;<br>            conn = DriverManager.getConnection(url,user,password);<br>            <span class="hljs-comment">//第三步</span><br>            stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot; &quot;</span>;<br>            rs = stmt.executeQuery(sql);<br>            <span class="hljs-comment">//第五步</span><br>            <span class="hljs-keyword">while</span>(rs.next())&#123;<br>                String em = rs.getString(<span class="hljs-number">1</span>);<span class="hljs-comment">//这里下标表示列并且从1开始，并不是从0开始</span><br>                String name = rs.getString(<span class="hljs-number">2</span>);<br>                String sal = rs.getString(<span class="hljs-number">3</span>);<br>                System.out.println(em+<span class="hljs-string">&quot;,&quot;</span>+name+<span class="hljs-string">&quot;,&quot;</span>+sal);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">if</span>(rs != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    rs.close();<br>                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(stmt != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    stmt.close();<br>                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(conn != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    conn.close();<br>                &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="报错解决（2021-06-12）："><a href="#报错解决（2021-06-12）：" class="headerlink" title="报错解决（2021/06/12）："></a>报错解决（2021/06/12）：</h2><blockquote>
+<ol>
+<li>Loading class <code>com.mysql.jdbc.Driver&#39;. This is deprecated. The new driver class is </code>com.mysql.cj.jdbc.Driver’. The driver is automatically registered via the SPI and manual loading of the driver class is generally unnecessary.</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">根据官网最新更改，需要将原来的<br>com.mysql.jdbc.Driver <br>改为如下<br>com.mysql.cj.jdbc.Driver<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>Exception in thread “main” java.sql.SQLException: The server time zone value ‘�й���׼ʱ��’ is unrecognized or represents more than one time zone. You must configure either the server or JDBC driver (via the ‘serverTimezone’ configuration property) to use a more specific time zone value if you want to utilize time zone support.</li>
+</ol>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">需要在原来的<br>jdbc:mysql:<span class="hljs-comment">//localhost:3306/teamc</span><br>添加 ?serverTimezone=GMT%2B8，如下<br>jdbc:mysql:<span class="hljs-comment">//localhost:3306/teamc?serverTimezone=GMT%2B8</span><br></code></pre></div></td></tr></table></figure>
+
+<h2 id="2-从属性资源文件（配置文件）中读取连接数据库数据"><a href="#2-从属性资源文件（配置文件）中读取连接数据库数据" class="headerlink" title="2.从属性资源文件（配置文件）中读取连接数据库数据"></a>2.从属性资源文件（配置文件）中读取连接数据库数据</h2><blockquote>
+<ol>
+<li>首先，新建一个 jdbc.properties 文件，里面写上以下内容。注意文件位置需要放到同一目录下。</li>
+</ol>
+</blockquote>
+<p>配置文件内容：jdbc.properties</p>
+<figure class="highlight ini"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs ini"><span class="hljs-attr">driver</span>=com.mysql.jdbc.Driver<br><span class="hljs-attr">url</span>=jdbc:mysql://localhost:<span class="hljs-number">3306</span>/dr<br><span class="hljs-attr">user</span>=root<br><span class="hljs-attr">password</span>=<span class="hljs-number">333</span><br></code></pre></div></td></tr></table></figure>
+<p>java 代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">import</span> java.lang.*;<br><span class="hljs-keyword">import</span> java.sql.*;<br><span class="hljs-keyword">import</span> java.util.*;<br><br>ResourceBundle bundle = ResourceBundle.getBundle(jdbc);<br>        String driver = bundle.getString(<span class="hljs-string">&quot;driver&quot;</span>);<br>        String url = bundle.getString(<span class="hljs-string">&quot;url&quot;</span>);<br>        String user = bundle.getString(<span class="hljs-string">&quot;user&quot;</span>);<br>        String password = bundle.getString(<span class="hljs-string">&quot;password&quot;</span>);<br><br>        Connection conn = <span class="hljs-keyword">null</span>;<br>        Statement stmt = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-comment">//第一步</span><br>            Class.forName(driver);<br>            <span class="hljs-comment">//第二步</span><br>            conn = DriverManager.getConnection(url,user,password);<br>            <span class="hljs-comment">//第三步</span><br>            stmt = conn.createStatement();<br>            <span class="hljs-comment">//第四步</span><br>            String sql = <span class="hljs-string">&quot; &quot;</span>; <span class="hljs-comment">/*根据情况而定*/</span><br>            <span class="hljs-keyword">int</span> count = stmt.executeUpdate(sql);<br>        &#125; <span class="hljs-keyword">catch</span>(Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<span class="hljs-keyword">finally</span> &#123;<br>            <span class="hljs-keyword">if</span>(stmt != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    stmt.close();<br>                &#125;<span class="hljs-keyword">catch</span> (SQLException e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>            <span class="hljs-keyword">if</span>(conn != <span class="hljs-keyword">null</span>)&#123;<br>                <span class="hljs-keyword">try</span>&#123;<br>                    conn.close();<br>                &#125;<span class="hljs-keyword">catch</span> (SQLException e)&#123;<br>                    e.printStackTrace();<br>                &#125;<br>            &#125;<br>        &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+<h2 id="3-PreparedStatement的应用"><a href="#3-PreparedStatement的应用" class="headerlink" title="3.PreparedStatement的应用"></a>3.PreparedStatement的应用</h2><blockquote>
+<p>作用：</p>
+</blockquote>
+<ul>
+<li><p>预编译SQL语句，效率高。</p>
+</li>
+<li><p>避免SQL注入。</p>
+</li>
+<li><p>可以动态填充数据，执行多个同构的SQL语句。</p>
+</li>
+</ul>
+<h3 id="3-1-参数标记"><a href="#3-1-参数标记" class="headerlink" title="3.1 参数标记"></a>3.1 参数标记</h3><figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql">PreparedStatement pstmt <span class="hljs-operator">=</span> conn.prepareStatement(<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> username <span class="hljs-operator">=</span> ? <span class="hljs-keyword">and</span> password <span class="hljs-operator">=</span> ?);<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>JDBC中所有参数都是由 ？ 符号占位，称为参数标记，在执行SQL语句前，必须要为每一个参数提供值。</li>
+</ul>
+<h3 id="3-2-动态参数绑定"><a href="#3-2-动态参数绑定" class="headerlink" title="3.2 动态参数绑定"></a>3.2 动态参数绑定</h3><blockquote>
+<p>方法：pstmt.setXxxx(下标，值) //参数下标从1开始，为指定参数下标绑定值</p>
+</blockquote>
+<figure class="highlight sql"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sql"><span class="hljs-number">1.</span>预编译 <span class="hljs-keyword">SQL</span> 语句<br>PreparedStatement pstmt <span class="hljs-operator">=</span> conn.prepareStatement(<span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> <span class="hljs-keyword">user</span> <span class="hljs-keyword">where</span> username <span class="hljs-operator">=</span> ? <span class="hljs-keyword">and</span> password <span class="hljs-operator">=</span> ?);<br><br><span class="hljs-number">2.</span>为参数下标赋值<br>pstmt.setString(<span class="hljs-number">1</span>,username); # 不是所有地方都是String<br>pstmt.setString(<span class="hljs-number">2</span>,password);<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="3-3-数据操作"><a href="#3-3-数据操作" class="headerlink" title="3.3 数据操作"></a>3.3 数据操作</h3><p>使用PreparedStatement时，还需要执行的操作。</p>
+<ul>
+<li><p>增删改：int cnt = <code>ps.executeUpdate();</code></p>
+</li>
+<li><p>查：ResultSet  rs =<code> ps.executeQuery();</code></p>
+</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 增删改，这里以插入数据为例</span><br>String url = <span class="hljs-string">&quot;jdbc:mysql://localhost:3306/WeekDay?serverTimezone=GMT%2B8&quot;</span>;<br>        String user = <span class="hljs-string">&quot;root&quot;</span>;<br>        String password = <span class="hljs-string">&quot;loong461&quot;</span>;<br>        Class.forName(<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>);<br>        Connection connection = DriverManager.getConnection(url, user, password);<br>        <br>        String sql = <span class="hljs-string">&quot;insert into Te(id,name,money) values (?,&#x27;qqewr&#x27;,34)&quot;</span>;<br>        PreparedStatement ps = connection.prepareStatement(sql);<br>        ps.setInt(<span class="hljs-number">1</span>,<span class="hljs-number">908</span>);<br><br>        <span class="hljs-keyword">int</span> cnt = ps.executeUpdate(); <span class="hljs-comment">//重点</span><br><br>        ps.close();<br>        connection.close();<br><br><br><span class="hljs-comment">//查</span><br>只需要将<br><span class="hljs-keyword">int</span> cnt = ps.executeUpdate();<br>改为<br>ResultSet rs = ps.executeQuery();<br>即可。<br></code></pre></div></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA/">JAVA</a>
+                    
+                  </div>
+                
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3964075882.html">https://tothefor.com/DragonOne/3964075882.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/101319405.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">IDEA换自定义主题并设置字体大小</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/1628167943.html">
+                        <span class="hidden-mobile">IDEA快捷键</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
