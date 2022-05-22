@@ -1,0 +1,787 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>Vue基础知识-（三）事件 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Vue基础知识-（三）事件">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-09 08:17" pubdate>
+        November 9, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      69
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Vue基础知识-（三）事件</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：January 3, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Vue(读音 /vjuː/，类似于 view) 是一套用于构建用户界面的渐进式JavaScript框架。与其它框架不同的是，Vue被设计为可以自底向上逐层应用。Vue的核心库只关注视图层，方便与第三方库或既有项目整合。另一方面，Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。Vue.js 的目标是通过尽可能简单的 API 实现响应的数据绑定和组合的视图组件。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-事件处理"><a href="#1-事件处理" class="headerlink" title="1.事件处理"></a>1.事件处理</h2><p>使用指令：<code>v-on:</code>，可以简写为<code>@</code>。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;button type&#x3D;&quot;button&quot; v-on:click&#x3D;&quot;showInfo()&quot;&gt;点击触发&lt;&#x2F;button&gt;<br>		&#x2F;&#x2F;简写<br>		&lt;button type&#x3D;&quot;button&quot; @click&#x3D;&quot;showInfo()&quot;&gt;点击触发&lt;&#x2F;button&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo()&#123;<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>也可以在showInfo()方法中，获取发送事件的目标。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;button type&#x3D;&quot;button&quot; v-on:click&#x3D;&quot;showInfo&quot;&gt;点击触发&lt;&#x2F;button&gt; &lt;br&gt;<br>		&lt;button type&#x3D;&quot;button&quot; @click&#x3D;&quot;showInfo&quot;&gt;点击触发&lt;&#x2F;button&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo(event)&#123;<br>					console.log(event.target)<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><strong>📢注意：方法调用处和方法处是有区别的！</strong></p>
+</blockquote>
+<p>也可以进而获取元素内容。</p>
+<blockquote>
+<p>带参方法：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;button type&#x3D;&quot;button&quot; v-on:click&#x3D;&quot;showInfo1&quot;&gt;点击触发1111&lt;&#x2F;button&gt; &lt;br&gt;<br>		&lt;button type&#x3D;&quot;button&quot; @click&#x3D;&quot;showInfo2($event,66)&quot;&gt;点击触发22222&lt;&#x2F;button&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo1(event)&#123;<br>					console.log(event.target)<br>					alert(&#39;奥利给！&#39;)<br>				&#125;,<br>				showInfo2(a,num)&#123;<br>					console.log(a.target)<br>					console.log(a,num)	<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p><strong><code>$event</code>是占用符，用来接收<code>event</code>。</strong></p>
+<h2 id="2-事件修饰符"><a href="#2-事件修饰符" class="headerlink" title="2.事件修饰符"></a>2.事件修饰符</h2><h3 id="2-1-默认行为（prevent）"><a href="#2-1-默认行为（prevent）" class="headerlink" title="2.1 默认行为（prevent）"></a>2.1 默认行为（prevent）</h3><p>阻止默认行为。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot; @click&#x3D;&quot;showInfo&quot;&gt;点击跳转&lt;&#x2F;a&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo()&#123;<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>这样在点击后，会先弹窗，再跳转。因为跳转是a标签的默认行为。阻止默认行为有两种方式：</p>
+<p>其他相同部分就不再写，只写有变化的部分。</p>
+<blockquote>
+<p>方式一：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo(e)&#123;<br>					e.preventDefault() &#x2F;&#x2F;阻止默认行为<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>方式二：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;a href&#x3D;&quot;https:&#x2F;&#x2F;www.baidu.com&quot; @click.prevent&#x3D;&quot;showInfo&quot;&gt;点击跳转&lt;&#x2F;a&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>两种实现效果一样。</p>
+<h3 id="2-2-事件冒泡（stop）"><a href="#2-2-事件冒泡（stop）" class="headerlink" title="2.2 事件冒泡（stop）"></a>2.2 事件冒泡（stop）</h3><p>阻止事件冒泡。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;	<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;div class&#x3D;&quot;demo2&quot; @click&#x3D;&quot;showInfo&quot;&gt;<br>			&lt;button type&#x3D;&quot;button&quot; @click&#x3D;&quot;showInfo&quot;&gt;点击跳转&lt;&#x2F;button&gt;<br>		&lt;&#x2F;div&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo(e)&#123;<br>					&#x2F;&#x2F; e.preventDefault()<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>在点击按钮后，会出现两次弹窗。这就是事件冒泡。点的是按钮，但最后冒到了外面一层。解决办法也是有两种：</p>
+<p>其他相同部分就不再写，只写有变化的部分。</p>
+<blockquote>
+<p>方式一</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo(e)&#123;<br>					e.stopPropagation() &#x2F;&#x2F;阻止事件冒泡<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>方式二</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;div class&#x3D;&quot;demo2&quot; @click&#x3D;&quot;showInfo&quot;&gt;<br>			&lt;button type&#x3D;&quot;button&quot; @click.stop&#x3D;&quot;showInfo&quot;&gt;点击跳转&lt;&#x2F;button&gt;<br>		&lt;&#x2F;div&gt;<br></code></pre></div></td></tr></table></figure>
+<p><strong>📢注意：stop是加在了里面的按钮上，而不是外面的div。如果div外还有一层，则在div上还要再加！</strong></p>
+<h3 id="2-3-只触发一次（once）"><a href="#2-3-只触发一次（once）" class="headerlink" title="2.3 只触发一次（once）"></a>2.3 只触发一次（once）</h3><p>默认情况下一个按钮弹窗，点一次会弹一次。如果只希望在第一次点了之后就不能再点了，就可以使用<code>once</code>实现。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;	<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>			&lt;button type&#x3D;&quot;button&quot; @click.once&#x3D;&quot;showInfo&quot;&gt;点击跳转&lt;&#x2F;button&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showInfo(e)&#123;<br>					&#x2F;&#x2F; e.stopPropagation()<br>					alert(&#39;奥利给！&#39;)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="2-4-捕获模式（capture）"><a href="#2-4-捕获模式（capture）" class="headerlink" title="2.4 捕获模式（capture）"></a>2.4 捕获模式（capture）</h3><p>默认情况下是先捕获，后冒泡执行。现在就是让Vue在捕获阶段就执行。（捕获是从外到内，冒泡是从内到外 。即从点的(触发点)的地方开始向外执行，而此模式就是在捕获阶段就执行。因为捕获是先从外到内进行捕获，执行的时候再从内到外执行。）</p>
+<p>默认情况下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;<br>		.box1&#123;<br>			padding: 5px;<br>			background-color: #87CEEB;<br>		&#125;<br>		.box2&#123;<br>			padding: 5px;<br>			background-color: orange;<br>		&#125;<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;div class&#x3D;&quot;box1&quot; @click&#x3D;&quot;showM(1)&quot;&gt;box1<br>			&lt;div class&#x3D;&quot;box2&quot; @click&#x3D;&quot;showM(2)&quot;&gt;box2&lt;&#x2F;div&gt;<br>		&lt;&#x2F;div&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showM(m)&#123;<br>					alert(m)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>使用capture</p>
+</blockquote>
+<p>将capture放在外面层的div上，表示从外层开始在捕获阶段就执行，不用等到冒泡时才执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;div class&#x3D;&quot;box1&quot; @click.capture&#x3D;&quot;showM(1)&quot;&gt;box1<br>			&lt;div class&#x3D;&quot;box2&quot; @click&#x3D;&quot;showM(2)&quot;&gt;box2&lt;&#x2F;div&gt;<br>		&lt;&#x2F;div&gt;<br>	&lt;&#x2F;div&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+<h3 id="2-5-目标为当前操作元素才触发（self）"><a href="#2-5-目标为当前操作元素才触发（self）" class="headerlink" title="2.5 目标为当前操作元素才触发（self）"></a>2.5 目标为当前操作元素才触发（self）</h3><p>只有event.target是当前操作的元素时才触发时间。白话就是：如果一个div中套了一个button，并且两个都有触发时间，当你点了button时，只有button才会执行，div不会执行。类似于阻止冒泡的。</p>
+<p>未使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;<br>		.box1&#123;<br>			padding: 5px;<br>			background-color: #87CEEB;<br>		&#125;<br>		.box2&#123;<br>			padding: 5px;<br>			background-color: orange;<br>		&#125;<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;div class&#x3D;&quot;demo2&quot; @click&#x3D;&quot;showM&quot;&gt;box1<br>			&lt;button type&#x3D;&quot;button&quot; @click&#x3D;&quot;showM&quot;&gt;点击&lt;&#x2F;button&gt;<br>		&lt;&#x2F;div&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showM(m)&#123;<br>					console.log(m.target)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>使用修饰符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;div class&#x3D;&quot;demo2&quot; @click.self&#x3D;&quot;showM&quot;&gt;box1<br>			&lt;button type&#x3D;&quot;button&quot; @click&#x3D;&quot;showM&quot;&gt;点击&lt;&#x2F;button&gt;<br>		&lt;&#x2F;div&gt;<br>	&lt;&#x2F;div&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>用在需要判定当前的被修饰的元素是否是触发源。在上面例子中，button是触发源。</p>
+<h2 id="3-键盘事件"><a href="#3-键盘事件" class="headerlink" title="3.键盘事件"></a>3.键盘事件</h2><p>常用的两个：一个是<code>@keyup</code>（按下抬起触发），一个是<code>@keydown</code>（按下触发）。</p>
+<h3 id="3-1-字符编码"><a href="#3-1-字符编码" class="headerlink" title="3.1 字符编码"></a>3.1 字符编码</h3><p>查看一些键的编码为多少。在输入框中输入，控制台上可以看见此字符的编码为多少。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;<br>		.box1&#123;<br>			padding: 5px;<br>			background-color: #87CEEB;<br>		&#125;<br>		.box2&#123;<br>			padding: 5px;<br>			background-color: orange;<br>		&#125;<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;input type&#x3D;&quot;text&quot; @keyup&#x3D;&quot;showM&quot; &#x2F;&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showM(m)&#123;<br>					console.log(m.keyCode)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>但是，通过此用例也可以看见，我们并没有按回车就输出了。一般来说加一个判断即可。如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">showM(m)&#123;<br>					if(m.keyCode !&#x3D;&#x3D; 13) return <br>					console.log(m.keyCode)<br>					console.log(m.target.value)<br>				&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>但是，用vue比较方便，即：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;<br>		.box1&#123;<br>			padding: 5px;<br>			background-color: #87CEEB;<br>		&#125;<br>		.box2&#123;<br>			padding: 5px;<br>			background-color: orange;<br>		&#125;<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;input type&#x3D;&quot;text&quot; @keyup.enter&#x3D;&quot;showM&quot; &#x2F;&gt; &#x2F;&#x2F;区别<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showM(m)&#123;<br>					console.log(m.keyCode)<br>					console.log(m.target.value)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="3-2-字符别名"><a href="#3-2-字符别名" class="headerlink" title="3.2 字符别名"></a>3.2 字符别名</h3><p>其中，使用的enter是其对应编码的别名，还有一些其他的别名，如下：</p>
+<ol>
+<li>回车 =&gt; enter，回车真正的名字：Enter，用此名字也可以。</li>
+<li>删除 =&gt; delete（删除、退格键）</li>
+<li>退出 =&gt; esc</li>
+<li>空格 =&gt; space</li>
+<li>换行 =&gt; tab（特殊，使用keydown检验）</li>
+<li>上 =&gt; up</li>
+<li>下 =&gt; down</li>
+<li>左 =&gt; left</li>
+<li>右 =&gt; right</li>
+</ol>
+<p>可自行尝试。</p>
+<p>Vue未提供别名的按键，可以使用按键原始的key值去绑定，但需要注意的是要转为kebab-case（短横线命名），如CapsLock =&gt; caps-lock</p>
+<blockquote>
+<p>获取按键的名字和keyCode</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;!DOCTYPE html&gt;<br>&lt;html&gt;<br>	&lt;head&gt;<br>		&lt;meta charset&#x3D;&quot;utf-8&quot;&gt;<br>		&lt;title&gt;&lt;&#x2F;title&gt;<br>		&lt;script src&#x3D;&quot;.&#x2F;js&#x2F;vue.js&quot;&gt;&lt;&#x2F;script&gt;<br>		&lt;style type&#x3D;&quot;text&#x2F;css&quot;&gt;<br>		*&#123;<br>			margin-top:20px;<br>		&#125;<br>		.demo2&#123;<br>			height: 50px;<br>			background-color: skyblue;<br>		&#125;<br>		.box1&#123;<br>			padding: 5px;<br>			background-color: #87CEEB;<br>		&#125;<br>		.box2&#123;<br>			padding: 5px;<br>			background-color: orange;<br>		&#125;<br>		&lt;&#x2F;style&gt;<br>	&lt;&#x2F;head&gt;<br>	&lt;body&gt;<br>	&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;input type&#x3D;&quot;text&quot; @keyup&#x3D;&quot;showM&quot; &#x2F;&gt;<br>	&lt;&#x2F;div&gt;<br>	<br>	&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showM(m)&#123;<br>					console.log(m.key,m.keyCode)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br>	&lt;&#x2F;body&gt;<br>&lt;&#x2F;html&gt;<br><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意：有一些按键是不能绑定的。</strong></p>
+<h3 id="3-3-特殊按键"><a href="#3-3-特殊按键" class="headerlink" title="3.3 特殊按键"></a>3.3 特殊按键</h3><blockquote>
+<p>系统修饰键：ctrl、alt、shift、meta。</p>
+</blockquote>
+<ol>
+<li>配合keyup使用：按下修饰键的同时，再按其他键（任意），在释放其他键后事件才被触发。</li>
+<li>配合keydown使用：正常触发。</li>
+</ol>
+<h3 id="3-4-自定义别名"><a href="#3-4-自定义别名" class="headerlink" title="3.4 自定义别名"></a>3.4 自定义别名</h3><blockquote>
+<p>Vue.config.keyCodes.别名 = 简码</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;div id&#x3D;&quot;root&quot;&gt;<br>		&lt;h1&gt;hello,&#123;&#123;name&#125;&#125;&lt;&#x2F;h1&gt;<br>		&lt;h2&gt;年龄：&#123;&#123;age&#125;&#125;&lt;&#x2F;h2&gt;<br>		&lt;input type&#x3D;&quot;text&quot; @keyup.huiche&#x3D;&quot;showM&quot; &#x2F;&gt;<br>	&lt;&#x2F;div&gt;<br>&lt;script type&#x3D;&quot;text&#x2F;javascript&quot;&gt;<br>		Vue.config.productionTip &#x3D; false<br>		Vue.config.keyCodes.huiche &#x3D; 13 &#x2F;&#x2F;为回车键定义别名<br>		&#x2F;&#x2F;创建vue示例<br>		const x &#x3D; new Vue(&#123;<br>			el:&#39;#root&#39;,<br>			data:&#123;<br>				name:&#39;loong&#39;,<br>				age:23<br>			&#125;,<br>			methods:&#123;<br>				showM(m)&#123;<br>					console.log(m.key,m.keyCode)<br>				&#125;<br>			&#125;<br>		&#125;)<br>		<br>	&lt;&#x2F;script&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4.总结"></a>4.总结</h2><ol>
+<li><p>修饰符可以连着写（谁先写谁先执行）。如</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;div class&#x3D;&quot;demo1&quot; @click&#x3D;&quot;showM&quot;&gt;<br>			&lt;a href&#x3D;&quot;http:&#x2F;&#x2F;www.baidu.com&quot; @lick.stop.prevent&#x3D;&quot;showM&quot;&gt;&lt;&#x2F;a&gt;<br>&lt;&#x2F;div&gt;<br></code></pre></div></td></tr></table></figure></li>
+<li><p>指定按键触发。如：按键ctrl+y触发 ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs vue">&lt;input type&#x3D;&quot;text&quot; @keyup.ctrl.y&#x3D;&quot;showM&quot; &#x2F;&gt;<br></code></pre></div></td></tr></table></figure></li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Vue/">Vue</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Vue/">Vue</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3169105123.html">https://tothefor.com/DragonOne/3169105123.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/3318299030.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ACM-JAVA中char类型的输入和char数组的输出问题</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/1936213498.html">
+                        <span class="hidden-mobile">算法学习-前缀和与差分详解</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

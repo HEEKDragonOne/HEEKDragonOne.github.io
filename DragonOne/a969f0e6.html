@@ -1,0 +1,708 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>ElasticSearch-（四）Java使用ElasticSearch - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="ElasticSearch-（四）Java使用ElasticSearch">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-26 14:07" pubdate>
+        February 26, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      30
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">ElasticSearch-（四）Java使用ElasticSearch</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：February 26, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Elasticsearch 是一个分布式、RESTful 风格的搜索和数据分析引擎。Elasticsearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java语言开发的，并作为Apache许可条款下的开放源码发布，是一种流行的企业级搜索引擎。Elasticsearch用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>创建一个maven项目。并导入依赖</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">&lt;dependency&gt;</span><br>    <span class="hljs-string">&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br>    <span class="hljs-string">&lt;artifactId&gt;spring-boot-starter-data-elasticsearch&lt;/artifactId&gt;</span><br><span class="hljs-string">&lt;/dependency&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="索引（数据库）"><a href="#索引（数据库）" class="headerlink" title="索引（数据库）"></a>索引（数据库）</h2><h3 id="创建索引"><a href="#创建索引" class="headerlink" title="创建索引"></a>创建索引</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.CreateIndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.CreateIndexResponse;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//创建索引</span><br>        CreateIndexRequest request = <span class="hljs-keyword">new</span> CreateIndexRequest(<span class="hljs-string">&quot;loong&quot;</span>); <span class="hljs-comment">//索引</span><br>        <span class="hljs-comment">//获取创建的response</span><br>        CreateIndexResponse createIndexResponse = esClient.indices().create(request, RequestOptions.DEFAULT);<br>        <span class="hljs-comment">//获取响应状态，是否创建成功</span><br>        <span class="hljs-keyword">boolean</span> acknowledged = createIndexResponse.isAcknowledged();<br>        System.out.println(<span class="hljs-string">&quot;添加状态&quot;</span> + acknowledged); <span class="hljs-comment">//true</span><br><br>        esClient.close();<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="查询索引"><a href="#查询索引" class="headerlink" title="查询索引"></a>查询索引</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.CreateIndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.CreateIndexResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.GetIndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.GetIndexResponse;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        GetIndexRequest request = <span class="hljs-keyword">new</span> GetIndexRequest(<span class="hljs-string">&quot;loong&quot;</span>); <span class="hljs-comment">//指定索引</span><br>        GetIndexResponse getIndexResponse = esClient.indices().get(request, RequestOptions.DEFAULT);<br>        <span class="hljs-comment">//响应状态</span><br>        System.out.println(getIndexResponse);<br>        System.out.println(getIndexResponse.getMappings());<br>        System.out.println(getIndexResponse.getSettings());<br>        System.out.println(getIndexResponse.getAliases());<br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="删除索引"><a href="#删除索引" class="headerlink" title="删除索引"></a>删除索引</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Delete;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.support.master.AcknowledgedResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.CreateIndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.CreateIndexResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.GetIndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.indices.GetIndexResponse;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        DeleteIndexRequest request = <span class="hljs-keyword">new</span> DeleteIndexRequest(<span class="hljs-string">&quot;loong&quot;</span>);<br>        AcknowledgedResponse response = esClient.indices().delete(request, RequestOptions.DEFAULT);<br>        <span class="hljs-comment">//响应状态</span><br>        System.out.println(response.isAcknowledged()); <span class="hljs-comment">//true</span><br><br>        esClient.close();<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="文档（数据）"><a href="#文档（数据）" class="headerlink" title="文档（数据）"></a>文档（数据）</h2><h3 id="添加文档"><a href="#添加文档" class="headerlink" title="添加文档"></a>添加文档</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;<br><span class="hljs-keyword">import</span> com.tothefor.pojo.dto.ESUser;<br><span class="hljs-keyword">import</span> com.tothefor.pojo.entity.User;<br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.index.IndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.index.IndexResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.common.xcontent.XContentType;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//插入数据</span><br>        IndexRequest request = <span class="hljs-keyword">new</span> IndexRequest();<br>        request.index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;1007&quot;</span>); <span class="hljs-comment">//指定索引，并指定文档的id</span><br>        <br>        <span class="hljs-comment">//这种也可以</span><br><span class="hljs-comment">//        IndexRequest request = new IndexRequest(&quot;loong&quot;);//指定索引</span><br><span class="hljs-comment">//        request.id(&quot;1008&quot;); //指定文档的id</span><br><br>        <span class="hljs-comment">//自定义类</span><br>        ESUser user = <span class="hljs-keyword">new</span> ESUser();<br>        user.setName(<span class="hljs-string">&quot;墨水记忆7777&quot;</span>);<br>        user.setAge(<span class="hljs-number">23</span>);<br>        user.setPhone(<span class="hljs-string">&quot;165632536&quot;</span>);<br><br>        <span class="hljs-comment">//数据转Json,好像在ElasticSearch8.x中不再需要转json了</span><br>        ObjectMapper mapper = <span class="hljs-keyword">new</span> ObjectMapper();<br>        String userJson = mapper.writeValueAsString(user);<br><br>        <span class="hljs-comment">//发送数据</span><br>        request.source(userJson, XContentType.JSON);<br><br>        <span class="hljs-comment">//响应状态</span><br>        IndexResponse response = esClient.index(request, RequestOptions.DEFAULT);<br><br>        System.out.println(response.getResult()); <span class="hljs-comment">//CREATED</span><br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>注意：在用PostMan测试时发现，如果是密码属性（即自定义类中有密码password属性，在查询时不会显示出来），则不会显示。</strong></p>
+<h3 id="修改文档"><a href="#修改文档" class="headerlink" title="修改文档"></a>修改文档</h3><p>这里是局部修改。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> com.fasterxml.jackson.databind.ObjectMapper;<br><span class="hljs-keyword">import</span> com.tothefor.pojo.dto.ESUser;<br><span class="hljs-keyword">import</span> com.tothefor.pojo.entity.User;<br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.index.IndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.index.IndexResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.update.UpdateRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.update.UpdateResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.common.xcontent.XContentType;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//修改数据</span><br>        UpdateRequest request = <span class="hljs-keyword">new</span> UpdateRequest();<br>        request.index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;1008&quot;</span>); <span class="hljs-comment">//指定索引，并指定文档的id。这里就必须使用这种方式了，不能像添加时可以有两种方式</span><br>        <br>        request.doc(XContentType.JSON,<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-number">13</span>);<br><br>        UpdateResponse response = esClient.update(request, RequestOptions.DEFAULT);<br><br>        System.out.println(response.getResult()); <span class="hljs-comment">//UPDATED</span><br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//查询数据</span><br>        GetRequest request = <span class="hljs-keyword">new</span> GetRequest();<br>        request.index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;1008&quot;</span>); <span class="hljs-comment">//指定索引和文档id</span><br>        <br>        <span class="hljs-comment">//也可以使用以下方式</span><br><span class="hljs-comment">//        GetRequest request = new GetRequest(&quot;loong&quot;); //指定索引</span><br><span class="hljs-comment">//        request.id(&quot;1008&quot;);  //指定文档id      </span><br><br>        GetResponse response = esClient.get(request, RequestOptions.DEFAULT);<br><br>        System.out.println(response.getSourceAsString()); <span class="hljs-comment">//更多方法可自行测试</span><br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="删除文档"><a href="#删除文档" class="headerlink" title="删除文档"></a>删除文档</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.delete.DeleteRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.delete.DeleteResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//删除数据</span><br>        DeleteRequest request = <span class="hljs-keyword">new</span> DeleteRequest();<br>        request.index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;1001&quot;</span>); <span class="hljs-comment">//指定索引和文档id</span><br>        <br>        <span class="hljs-comment">//也可以使用以下方式</span><br><span class="hljs-comment">//        DeleteRequest request = new DeleteRequest(&quot;loong&quot;);//指定索引</span><br><span class="hljs-comment">//        request.id(&quot;1002&quot;);//指定文档id</span><br><br>        DeleteResponse response = esClient.delete(request, RequestOptions.DEFAULT);<br><br>        System.out.println(response.toString());<br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h3><h4 id="批量添加"><a href="#批量添加" class="headerlink" title="批量添加"></a>批量添加</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.bulk.BulkRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.bulk.BulkResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.delete.DeleteRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.delete.DeleteResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.index.IndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.common.xcontent.XContentType;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//批量添加数据</span><br>        BulkRequest request = <span class="hljs-keyword">new</span> BulkRequest();<br><br>        request.add(<span class="hljs-keyword">new</span> IndexRequest().index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;11&quot;</span>).source(XContentType.JSON,<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong11&quot;</span>));<br>        request.add(<span class="hljs-keyword">new</span> IndexRequest().index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;12&quot;</span>).source(XContentType.JSON,<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong12&quot;</span>));<br>        request.add(<span class="hljs-keyword">new</span> IndexRequest().index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;13&quot;</span>).source(XContentType.JSON,<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;loong13&quot;</span>));<br><br>        BulkResponse response = esClient.bulk(request, RequestOptions.DEFAULT);<br><br>        System.out.println(response.getTook());<br>        System.out.println(response.getItems());<br><br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h4 id="批量删除"><a href="#批量删除" class="headerlink" title="批量删除"></a>批量删除</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.ES;<br><br><span class="hljs-keyword">import</span> org.apache.http.HttpHost;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.bulk.BulkRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.bulk.BulkResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.delete.DeleteRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.delete.DeleteResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.get.GetResponse;<br><span class="hljs-keyword">import</span> org.elasticsearch.action.index.IndexRequest;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RequestOptions;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.client.RestHighLevelClient;<br><span class="hljs-keyword">import</span> org.elasticsearch.common.xcontent.XContentType;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EsTest_client</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>        RestHighLevelClient esClient = <span class="hljs-keyword">new</span> RestHighLevelClient(<br>            RestClient.builder(<span class="hljs-keyword">new</span> HttpHost(<span class="hljs-string">&quot;localhost&quot;</span>,<span class="hljs-number">9200</span>,<span class="hljs-string">&quot;http&quot;</span>)) <span class="hljs-comment">//ip,端口,请求方式</span><br>        );<br><br>        <span class="hljs-comment">//批量删除数据</span><br>        BulkRequest request = <span class="hljs-keyword">new</span> BulkRequest();<br><br>        request.add(<span class="hljs-keyword">new</span> DeleteRequest().index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;11&quot;</span>));<br>        request.add(<span class="hljs-keyword">new</span> DeleteRequest().index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;12&quot;</span>));<br>        request.add(<span class="hljs-keyword">new</span> DeleteRequest().index(<span class="hljs-string">&quot;loong&quot;</span>).id(<span class="hljs-string">&quot;13&quot;</span>));<br><br>        BulkResponse response = esClient.bulk(request, RequestOptions.DEFAULT);<br><br>        System.out.println(response.getTook());<br>        System.out.println(response.getItems());<br><br><br>        esClient.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/ElasticSearch/">ElasticSearch</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/ElasticSearch/">ElasticSearch</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/a969f0e6.html">https://tothefor.com/DragonOne/a969f0e6.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/7f8b399e.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">ElasticSearch-（五）Java使用ElasticSearch高级查询</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/af13f13d.html">
+                        <span class="hidden-mobile">ElasticSearch-（三）ElasticSearch高级查询等操作</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

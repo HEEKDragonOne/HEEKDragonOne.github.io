@@ -1,0 +1,992 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>Redis学习笔记（二）入门基础 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redis学习笔记（二）入门基础">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-26 16:43" pubdate>
+        August 26, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      39
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redis学习笔记（二）入门基础</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 3, 2021 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Redis 是当前互联网世界最为流行的 NoSQL（Not Only SQL）数据库。Redis 是一个开源的使用 ANSI C 语言编写、遵守 BSD 协议、支持网络、可基于内存、分布式、可选持久性的键值对(Key-Value)存储数据库，并提供多种语言的 API。Redis 具备一定持久层的功能，也可以作为一种缓存工具。对于 NoSQL 数据库而言，作为持久层，它存储的数据是半结构化的，这就意味着计算机在读入内存中有更少的规则，读入速度更快。Redis 通常被称为数据结构服务器，因为值（value）可以是字符串(String)、哈希(Hash)、列表(list)、集合(sets)和有序集合(sorted sets)等类型。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="1-基础命令"><a href="#1-基础命令" class="headerlink" title="1.基础命令"></a>1.基础命令</h2><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs linux">ps -ef|grep redis<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-1-切换数据库（select）"><a href="#1-1-切换数据库（select）" class="headerlink" title="1.1 切换数据库（select）"></a>1.1 切换数据库（select）</h3><p>Redis 默认有16个数据库（可在redis.conf文件中进行查看），并且默认使用的是第0个数据库。使用 <code>select index</code> 进行切换数据库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">select 1 &#x2F;&#x2F;切换为第1个数据库<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-2-查看数据库大小（dbsize）"><a href="#1-2-查看数据库大小（dbsize）" class="headerlink" title="1.2 查看数据库大小（dbsize）"></a>1.2 查看数据库大小（dbsize）</h3><p>使用 <code>dbsize</code> 进行查看当前数据库的大小。大小指的是数据库中数据的条数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">dbsize<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-3-插入键值对（set）"><a href="#1-3-插入键值对（set）" class="headerlink" title="1.3 插入键值对（set）"></a>1.3 插入键值对（set）</h3><p>使用 <code>set key value</code> 进行插入数据。使用 <code>get key</code> 获取数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">set name loong<br>get name<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-4-查看所有键（key）"><a href="#1-4-查看所有键（key）" class="headerlink" title="1.4 查看所有键（key）"></a>1.4 查看所有键（key）</h3><p>使用 <code>keys *</code> 可以查看当前数据库中的所有键。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">keys *<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-5-删除（del）"><a href="#1-5-删除（del）" class="headerlink" title="1.5 删除（del）"></a>1.5 删除（del）</h3><p>使用 <code>del key</code> 删除<code>已存在</code>的key。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">del key<br>del key1 key2 key3 ....<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-6-清除数据库"><a href="#1-6-清除数据库" class="headerlink" title="1.6 清除数据库"></a>1.6 清除数据库</h3><h4 id="1-6-1-清空所有数据库数据（flushall）"><a href="#1-6-1-清空所有数据库数据（flushall）" class="headerlink" title="1.6.1 清空所有数据库数据（flushall）"></a>1.6.1 清空所有数据库数据（flushall）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">flushall<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="1-6-2-清空当前数据库数据（flushdb）"><a href="#1-6-2-清空当前数据库数据（flushdb）" class="headerlink" title="1.6.2 清空当前数据库数据（flushdb）"></a>1.6.2 清空当前数据库数据（flushdb）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">flushdb<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-7-判断是否存在（exists）"><a href="#1-7-判断是否存在（exists）" class="headerlink" title="1.7 判断是否存在（exists）"></a>1.7 判断是否存在（exists）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">exists name<br></code></pre></div></td></tr></table></figure>
+<p>判断 <code>key</code> 为 <code>name</code> 的是否存在，如果不存在 <code>(integer) 0</code>，存在 <code>(integer) 1</code>。</p>
+<h3 id="1-8-移除数据（move）"><a href="#1-8-移除数据（move）" class="headerlink" title="1.8 移除数据（move）"></a>1.8 移除数据（move）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">move name 1<br></code></pre></div></td></tr></table></figure>
+<p>移除当前数据库中的 <code>key</code> 为 <code>name</code> 的数据。其中的 <code>1</code> 表示当前数据库。</p>
+<h3 id="1-9-设置过期时间（expire）"><a href="#1-9-设置过期时间（expire）" class="headerlink" title="1.9 设置过期时间（expire）"></a>1.9 设置过期时间（expire）</h3><p>给数据设置过期时间。过了过期时间就会被删除。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">expire key sconds<br></code></pre></div></td></tr></table></figure>
+<p>给指定的 key 设置过期时间（秒）。</p>
+<h4 id="1-9-1-查看剩余时间（ttl）"><a href="#1-9-1-查看剩余时间（ttl）" class="headerlink" title="1.9.1 查看剩余时间（ttl）"></a>1.9.1 查看剩余时间（ttl）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">ttl key<br></code></pre></div></td></tr></table></figure>
+<p>查看 key 的过期剩余时间。</p>
+<h4 id="1-9-2-创建并设置过期时间（setex、setnx）"><a href="#1-9-2-创建并设置过期时间（setex、setnx）" class="headerlink" title="1.9.2 创建并设置过期时间（setex、setnx）"></a>1.9.2 创建并设置过期时间（setex、setnx）</h4><blockquote>
+<ol>
+<li>创建并设置过期时间。</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">setex key seconds &quot;abc&quot;<br>setex name 10 &quot;abc&quot;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>如果不存在key，就创建。存在就不做任何事。</li>
+</ol>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">setnx key value<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="1-10-查看类型（type）"><a href="#1-10-查看类型（type）" class="headerlink" title="1.10 查看类型（type）"></a>1.10 查看类型（type）</h3><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">type key<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="2-五大数据类型"><a href="#2-五大数据类型" class="headerlink" title="2.五大数据类型"></a>2.五大数据类型</h2><h3 id="2-1-String"><a href="#2-1-String" class="headerlink" title="2.1 String"></a>2.1 String</h3><h4 id="2-1-1-追加（append）"><a href="#2-1-1-追加（append）" class="headerlink" title="2.1.1 追加（append）"></a>2.1.1 追加（append）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">set name lo<br>append name &quot;oong&quot; &#x2F;&#x2F;双引号可要可不要，推荐加上<br></code></pre></div></td></tr></table></figure>
+<p>如果 <code>key</code> 不存在，则会自动创建。</p>
+<h4 id="2-1-2-获取长度（strlen）"><a href="#2-1-2-获取长度（strlen）" class="headerlink" title="2.1.2 获取长度（strlen）"></a>2.1.2 获取长度（strlen）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">strlen key<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-1-3-加减值"><a href="#2-1-3-加减值" class="headerlink" title="2.1.3 加减值"></a>2.1.3 加减值</h4><h5 id="2-1-3-1-加值1（incr）"><a href="#2-1-3-1-加值1（incr）" class="headerlink" title="2.1.3.1 加值1（incr）"></a>2.1.3.1 加值1（incr）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">set age 0<br>incr age &#x2F;&#x2F;加1<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-1-3-2-减值1（decr）"><a href="#2-1-3-2-减值1（decr）" class="headerlink" title="2.1.3.2 减值1（decr）"></a>2.1.3.2 减值1（decr）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">decr age &#x2F;&#x2F;减1<br></code></pre></div></td></tr></table></figure>
+<h5 id="2-1-3-3-加特定值（incrby）"><a href="#2-1-3-3-加特定值（incrby）" class="headerlink" title="2.1.3.3 加特定值（incrby）"></a>2.1.3.3 加特定值（incrby）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">incrby age 23 &#x2F;&#x2F;加23<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-1-3-4-减特定值（decrby）"><a href="#2-1-3-4-减特定值（decrby）" class="headerlink" title="2.1.3.4 减特定值（decrby）"></a>2.1.3.4 减特定值（decrby）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">decrby age 19 &#x2F;&#x2F;减13<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-1-3-5-截取子串（getrange）"><a href="#2-1-3-5-截取子串（getrange）" class="headerlink" title="2.1.3.5 截取子串（getrange）"></a>2.1.3.5 截取子串（getrange）</h5><p><strong>注意：区间是闭区间的！！！，而不是左闭右开。下标也是从0开始的。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">getrange key start end  &#x2F;&#x2F; 获取子串[start,end]<br>getrange key start -1  &#x2F;&#x2F; 获取全部字符，等效于get命令<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-1-3-6-替换子串（setrange）"><a href="#2-1-3-6-替换子串（setrange）" class="headerlink" title="2.1.3.6 替换子串（setrange）"></a>2.1.3.6 替换子串（setrange）</h5><p>替换指定位置开始的子字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">setrange key offset value<br><br>set key &quot;abcdef&quot;<br>setrange key 1 xx &#x2F;&#x2F;axxdef<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-1-4-批量操作"><a href="#2-1-4-批量操作" class="headerlink" title="2.1.4 批量操作"></a>2.1.4 批量操作</h4><h5 id="2-1-4-1-批量创建（mset）"><a href="#2-1-4-1-批量创建（mset）" class="headerlink" title="2.1.4.1 批量创建（mset）"></a>2.1.4.1 批量创建（mset）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">mset key1 value1 [key2 value2 .....]<br></code></pre></div></td></tr></table></figure>
+
+<p>如果不存在，就创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">msetnx key1 value1 [key2 value2]<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：这种属于原子性操作，要么都成功，要么都失败。即：要求key都满足不存在或存在，如果既有存在的key，又有不存在的key，则整个命令都执行失败！！！</strong></p>
+<h5 id="2-1-4-2-批量获取（mget）"><a href="#2-1-4-2-批量获取（mget）" class="headerlink" title="2.1.4.2 批量获取（mget）"></a>2.1.4.2 批量获取（mget）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">mget key1 [key2 key3 ....]<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-1-5-组合命令（getset）"><a href="#2-1-5-组合命令（getset）" class="headerlink" title="2.1.5 组合命令（getset）"></a>2.1.5 组合命令（getset）</h4><blockquote>
+<p>getset key value<br>先 <code>get</code> 操作然后再 <code>set</code> 操作。可自行理解以下代码的结果：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">getset ttf tothefor &#x2F;&#x2F;(nil)<br>getset ttf www  &#x2F;&#x2F;&quot;tothefor&quot;<br>getset ttf com  &#x2F;&#x2F;&quot;www&quot;<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：没有 <code>setget</code> 组合命令！！！</strong></p>
+<h3 id="2-2-List"><a href="#2-2-List" class="headerlink" title="2.2 List"></a>2.2 List</h3><p>可以理解成是一个链表。其中的值可以是重复。并且所有的 <code>list</code> 命令 <code>一般</code> 都是以 <code>l</code> 开头的。</p>
+<h4 id="2-2-1-添加数据"><a href="#2-2-1-添加数据" class="headerlink" title="2.2.1 添加数据"></a>2.2.1 添加数据</h4><h5 id="2-2-1-1-头部进行添加（lpush）"><a href="#2-2-1-1-头部进行添加（lpush）" class="headerlink" title="2.2.1.1 头部进行添加（lpush）"></a>2.2.1.1 头部进行添加（lpush）</h5><p>是在 <code>list</code> 的 <code>头部</code> 进行添加。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lpush key value1 [value2 ...]<br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lpush list one two three &#x2F;&#x2F;three two one<br></code></pre></div></td></tr></table></figure>
+<p>也可以理解成是在左边进行添加。因为是从左到右读数据。</p>
+<h5 id="2-2-1-1-尾部进行添加（rpush）"><a href="#2-2-1-1-尾部进行添加（rpush）" class="headerlink" title="2.2.1.1 尾部进行添加（rpush）"></a>2.2.1.1 尾部进行添加（rpush）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">rpush list one two three &#x2F;&#x2F;one two three<br></code></pre></div></td></tr></table></figure>
+<p>也可以理解成是在右边进行添加。因为是从左到右读数据。</p>
+<h4 id="2-2-2-获取数据"><a href="#2-2-2-获取数据" class="headerlink" title="2.2.2 获取数据"></a>2.2.2 获取数据</h4><h5 id="2-2-2-1-范围数据（lrange）"><a href="#2-2-2-1-范围数据（lrange）" class="headerlink" title="2.2.2.1 范围数据（lrange）"></a>2.2.2.1 范围数据（lrange）</h5><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lrange key start end<br></code></pre></div></td></tr></table></figure>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lrange list 0 -1 &#x2F;&#x2F;获取全部<br>lrange list 0 1 &#x2F;&#x2F;获取[0,1]范围内的数据<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-2-2-2-获取指定数据（lindex）"><a href="#2-2-2-2-获取指定数据（lindex）" class="headerlink" title="2.2.2.2 获取指定数据（lindex）"></a>2.2.2.2 获取指定数据（lindex）</h5><p><strong>注意：没有rindex命令。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lindex key index<br>lindex list 1 &#x2F;&#x2F;下标从0开始<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-3-获取列表的长度（llen）"><a href="#2-2-3-获取列表的长度（llen）" class="headerlink" title="2.2.3 获取列表的长度（llen）"></a>2.2.3 获取列表的长度（llen）</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">llen key<br>llen list<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-4-移除特定值（lrem）"><a href="#2-2-4-移除特定值（lrem）" class="headerlink" title="2.2.4 移除特定值（lrem）"></a>2.2.4 移除特定值（lrem）</h4><blockquote>
+<p>lrem key count value</p>
+</blockquote>
+<p>移除指定的value，其中的count指定的是移除的个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lrem list 1 one<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-5-截取数据（ltrim）"><a href="#2-2-5-截取数据（ltrim）" class="headerlink" title="2.2.5 截取数据（ltrim）"></a>2.2.5 截取数据（ltrim）</h4><p>用来截取保留一部分数据。</p>
+<blockquote>
+<p>ltrim key start end</p>
+</blockquote>
+<p>只保留[start，end]中的数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">ltrim list 1 3<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-6-移动数据（rpoplpush）"><a href="#2-2-6-移动数据（rpoplpush）" class="headerlink" title="2.2.6 移动数据（rpoplpush）"></a>2.2.6 移动数据（rpoplpush）</h4><p>将一个list中的最后一个数据删除，并将该删除数据移到另外一个list中。</p>
+<blockquote>
+<p>rpoplpush source destination</p>
+</blockquote>
+<p>将 source 中的数据删除，并将其添加至 destionation 中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">rpoplpush list mylist<br></code></pre></div></td></tr></table></figure>
+
+
+<h4 id="2-2-7-删除数据"><a href="#2-2-7-删除数据" class="headerlink" title="2.2.7 删除数据"></a>2.2.7 删除数据</h4><h5 id="2-2-7-1-头部删除（lpop）"><a href="#2-2-7-1-头部删除（lpop）" class="headerlink" title="2.2.7.1 头部删除（lpop）"></a>2.2.7.1 头部删除（lpop）</h5><p>同样，也可以理解成是在左边进行删除。</p>
+<h5 id="2-2-7-1-尾部删除（rpop）"><a href="#2-2-7-1-尾部删除（rpop）" class="headerlink" title="2.2.7.1 尾部删除（rpop）"></a>2.2.7.1 尾部删除（rpop）</h5><p>同样，也可以理解成是在右边进行删除。</p>
+<p>示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">rpush list one two three &#x2F;&#x2F;one two three<br><br>lpop list &#x2F;&#x2F;two three<br>rpop list &#x2F;&#x2F;two<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-8-更新数据（lset）"><a href="#2-2-8-更新数据（lset）" class="headerlink" title="2.2.8 更新数据（lset）"></a>2.2.8 更新数据（lset）</h4><p>没有 <code>rset！！！</code><br>用此命令前需要判断key是否存在，如果不存在就进行此命令，则会报错。<br>判断key是否存在：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">exists key<br></code></pre></div></td></tr></table></figure>
+<p>当key存在时，就可以进行更新操作。</p>
+<blockquote>
+<p>lset key index value</p>
+</blockquote>
+<p>index 表示被更新位置的下标，value 为新值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">lset list 1 tototo<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-2-9-插入数据（linsert）"><a href="#2-2-9-插入数据（linsert）" class="headerlink" title="2.2.9 插入数据（linsert）"></a>2.2.9 插入数据（linsert）</h4><p>将一个新值插入到已有的值的前面或后面。</p>
+<blockquote>
+<p>linsert key before|after pivot value</p>
+</blockquote>
+<p>在pivot之前或之后插入value。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">linsert list before &quot;two&quot; &quot;dou&quot; &#x2F;&#x2F;在two前面插入dou<br>linsert list after &quot;two&quot; &quot;dou&quot; &#x2F;&#x2F;在two后面插入dou<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：没有 <code>rinsert</code> 命令。</strong></p>
+<h3 id="2-4-Set"><a href="#2-4-Set" class="headerlink" title="2.4 Set"></a>2.4 Set</h3><p>set中的值是无序无重复值的。并且所有的 <code>set</code> 命令 <code>一般</code> 都是以 <code>s</code> 开头的。</p>
+<h4 id="2-4-1-插入数据（sadd）"><a href="#2-4-1-插入数据（sadd）" class="headerlink" title="2.4.1 插入数据（sadd）"></a>2.4.1 插入数据（sadd）</h4><blockquote>
+<p>sadd key member1 [member2 ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">sadd set &quot;one&quot; &quot;two&quot; &quot;three&quot;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-2-查询数据（smembers）"><a href="#2-4-2-查询数据（smembers）" class="headerlink" title="2.4.2 查询数据（smembers）"></a>2.4.2 查询数据（smembers）</h4><blockquote>
+<p>smembers key</p>
+</blockquote>
+<p>查询key下的所有数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">smembers set<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-3-判断是否包含特点数据（sismember）"><a href="#2-4-3-判断是否包含特点数据（sismember）" class="headerlink" title="2.4.3 判断是否包含特点数据（sismember）"></a>2.4.3 判断是否包含特点数据（sismember）</h4><blockquote>
+<p>sismember key member</p>
+</blockquote>
+<p>查询key中是否包含member。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">sismember set &quot;one&quot;<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-4-查询个数（scard）"><a href="#2-4-4-查询个数（scard）" class="headerlink" title="2.4.4 查询个数（scard）"></a>2.4.4 查询个数（scard）</h4><blockquote>
+<p>scard key</p>
+</blockquote>
+<p>查询key中的总数据个数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">scard set<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-5-移除指定数据（srem）"><a href="#2-4-5-移除指定数据（srem）" class="headerlink" title="2.4.5 移除指定数据（srem）"></a>2.4.5 移除指定数据（srem）</h4><blockquote>
+<p>srem key member1 [member2 ….]</p>
+</blockquote>
+<p>在key中移除数据member1。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">srem set two three<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-6-随机移除数据（spop）"><a href="#2-4-6-随机移除数据（spop）" class="headerlink" title="2.4.6 随机移除数据（spop）"></a>2.4.6 随机移除数据（spop）</h4><blockquote>
+<p>spop key [count]</p>
+</blockquote>
+<p>在key中随机移除1个（默认）或count个数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">spop set 1<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-7-随机取值（srandmember）"><a href="#2-4-7-随机取值（srandmember）" class="headerlink" title="2.4.7 随机取值（srandmember）"></a>2.4.7 随机取值（srandmember）</h4><blockquote>
+<p>srandmember key [count]</p>
+</blockquote>
+<p>从key中随机取出1个（默认）或count个数据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">srandmember set 1<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-4-8-移动数据（smove）"><a href="#2-4-8-移动数据（smove）" class="headerlink" title="2.4.8 移动数据（smove）"></a>2.4.8 移动数据（smove）</h4><p>将一个set中指定的值移到另外一个set中。</p>
+<blockquote>
+<p>smove source destination member</p>
+</blockquote>
+<p>将source集合中的member数据移动到destination中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">smove set1 set2 two<br></code></pre></div></td></tr></table></figure>
+
+
+<h4 id="2-4-9-数学中集合操作"><a href="#2-4-9-数学中集合操作" class="headerlink" title="2.4.9 数学中集合操作"></a>2.4.9 数学中集合操作</h4><h5 id="2-4-9-1-差集（sdiff）"><a href="#2-4-9-1-差集（sdiff）" class="headerlink" title="2.4.9.1 差集（sdiff）"></a>2.4.9.1 差集（sdiff）</h5><blockquote>
+<p>sdiff key [key1 ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">sdiff key1 key2<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-4-9-2-交集（sinter）"><a href="#2-4-9-2-交集（sinter）" class="headerlink" title="2.4.9.2 交集（sinter）"></a>2.4.9.2 交集（sinter）</h5><blockquote>
+<p>sinter key [key1 ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">sinter key1 key2<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-4-9-3-并集（sunion）"><a href="#2-4-9-3-并集（sunion）" class="headerlink" title="2.4.9.3 并集（sunion）"></a>2.4.9.3 并集（sunion）</h5><blockquote>
+<p>sunion key [key1 ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">sunion key1 key2<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+<h3 id="2-5-Hash"><a href="#2-5-Hash" class="headerlink" title="2.5 Hash"></a>2.5 Hash</h3><p>可以理解成一个Map集合。即存储形式是 <code>key-map</code> ，而其中的map又是 key-value 形式的，所以存储的数据是map形式的。和之前的key-value形式一样，这里只不过是将value变成了key-value。并且所有的 <code>hash</code> 命令 <code>一般</code> 都是以 <code>h</code> 开头的。</p>
+<h4 id="2-5-1-存储数据（hset）"><a href="#2-5-1-存储数据（hset）" class="headerlink" title="2.5.1 存储数据（hset）"></a>2.5.1 存储数据（hset）</h4><blockquote>
+<p>hset key field value</p>
+</blockquote>
+<p>其中的field为字段名。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hset myhash field1 loong<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-2-提取数据（hget）"><a href="#2-5-2-提取数据（hget）" class="headerlink" title="2.5.2 提取数据（hget）"></a>2.5.2 提取数据（hget）</h4><blockquote>
+<p>hget key field</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hget myhash field1<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-3-批量存储数据（hmset）"><a href="#2-5-3-批量存储数据（hmset）" class="headerlink" title="2.5.3 批量存储数据（hmset）"></a>2.5.3 批量存储数据（hmset）</h4><blockquote>
+<p>hmset key field value [field value ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hmset myhash field1 lee field2 loong<br></code></pre></div></td></tr></table></figure>
+<p><strong>注意：如果key和field已经存在了，则将会用新value替换旧value。</strong></p>
+<h4 id="2-5-4-批量提取数据（hmget）"><a href="#2-5-4-批量提取数据（hmget）" class="headerlink" title="2.5.4 批量提取数据（hmget）"></a>2.5.4 批量提取数据（hmget）</h4><blockquote>
+<p>hmget key field [field ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hmget myhash field1 field2<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-5-获取全部键值对（hgetall）"><a href="#2-5-5-获取全部键值对（hgetall）" class="headerlink" title="2.5.5 获取全部键值对（hgetall）"></a>2.5.5 获取全部键值对（hgetall）</h4><blockquote>
+<p>hgetall key</p>
+</blockquote>
+<p>获取的是所有的键值对数据，是所有的键和所有的值，即map&lt;key,value&gt;。所以，显示的数据是一行field，一行value。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hgetall myhash<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-6-删除数据（hdel）"><a href="#2-5-6-删除数据（hdel）" class="headerlink" title="2.5.6 删除数据（hdel）"></a>2.5.6 删除数据（hdel）</h4><blockquote>
+<p>hdel key field [field ….]</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hdel myhash field1<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-7-获取总键值对数（hlen）"><a href="#2-5-7-获取总键值对数（hlen）" class="headerlink" title="2.5.7 获取总键值对数（hlen）"></a>2.5.7 获取总键值对数（hlen）</h4><blockquote>
+<p>hlen key</p>
+</blockquote>
+<p>获取的是键值对形式的总数量，即字段总数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hlen myhash<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-8-判断字段是否存在（hexists）"><a href="#2-5-8-判断字段是否存在（hexists）" class="headerlink" title="2.5.8 判断字段是否存在（hexists）"></a>2.5.8 判断字段是否存在（hexists）</h4><blockquote>
+<p>hexists key field</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hexists myhash field1<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-9-获取所有的key（hkeys）"><a href="#2-5-9-获取所有的key（hkeys）" class="headerlink" title="2.5.9 获取所有的key（hkeys）"></a>2.5.9 获取所有的key（hkeys）</h4><blockquote>
+<p>hkeys key</p>
+</blockquote>
+<p>获取的只是所有的字段中的key，也就是map中的key。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hkeys myhash<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-10-获取所有的value（hvals）"><a href="#2-5-10-获取所有的value（hvals）" class="headerlink" title="2.5.10 获取所有的value（hvals）"></a>2.5.10 获取所有的value（hvals）</h4><blockquote>
+<p>hvals key</p>
+</blockquote>
+<p>获取所有的value。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hvals myhash<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-11-增减值（hincrby）"><a href="#2-5-11-增减值（hincrby）" class="headerlink" title="2.5.11 增减值（hincrby）"></a>2.5.11 增减值（hincrby）</h4><blockquote>
+<p>hincrby key field increment</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hincrby myhash field1 1 &#x2F;&#x2F;给field1加1<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-5-12-不存在则创建（hsetnx）"><a href="#2-5-12-不存在则创建（hsetnx）" class="headerlink" title="2.5.12 不存在则创建（hsetnx）"></a>2.5.12 不存在则创建（hsetnx）</h4><blockquote>
+<p>hsetnx key field value</p>
+</blockquote>
+<p>如果key不存在，则创建。存在则创建失败。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs redis">hsetnx myhash field3 to<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+<h3 id="2-6-有序集合（sorted-set）"><a href="#2-6-有序集合（sorted-set）" class="headerlink" title="2.6 有序集合（sorted set）"></a>2.6 有序集合（sorted set）</h3><p>有序集合和集合一样也是 string 类型元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个 double 类型的分数。正是通过分数来为集合中的成员进行的排序。有序集合的成员是唯一的，但分数(score)却可以重复。（理解上也可以把set中的map中的key，当成这里的score。只是理解上！）</p>
+<h4 id="2-6-1-插入数据（zadd）"><a href="#2-6-1-插入数据（zadd）" class="headerlink" title="2.6.1 插入数据（zadd）"></a>2.6.1 插入数据（zadd）</h4><blockquote>
+<p>zadd key [nx|xx] [ch] [incr] score member [score member ….]</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zadd zset 20 loong 1 lee 5 dra  //默认情况下会按照score进行升序排序<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-6-2-获取数据（zrange）"><a href="#2-6-2-获取数据（zrange）" class="headerlink" title="2.6.2 获取数据（zrange）"></a>2.6.2 获取数据（zrange）</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zrange zset 0 -1 //获取全部的member，不包含score<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-6-3-排序"><a href="#2-6-3-排序" class="headerlink" title="2.6.3 排序"></a>2.6.3 排序</h4><h5 id="2-6-3-1-升序排序（zrangebuscore、zrange）"><a href="#2-6-3-1-升序排序（zrangebuscore、zrange）" class="headerlink" title="2.6.3.1 升序排序（zrangebuscore、zrange）"></a>2.6.3.1 升序排序（zrangebuscore、zrange）</h5><p>返回有序集合中指定分数区间的成员列表。</p>
+<blockquote>
+<ol>
+<li>zrangebyscore key min max [withscores] [limit offset count]</li>
+</ol>
+</blockquote>
+<p>其中，min和max表示范围。withscores 表示显示 score （默认情况下是不显示的）。具有相同分数值的成员按字典序来排列(该属性是有序集提供的，不需要额外的计算)。<br>默认情况下，区间的取值使用闭区间 (小于等于或大于等于)，也可以通过给参数前增加 <code>(</code> 符号来使用可选的开区间 (小于或大于)。如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ZRANGEBYSCORE zset (1 5  <span class="hljs-comment"># 1 &lt; score &lt;= 5，即 (1，5]</span><br>ZRANGEBYSCORE zset (5 (10   <span class="hljs-comment">#  5 &lt; score &lt; 10 ，即 (5,10)</span><br></code></pre></div></td></tr></table></figure>
+
+<p>可查看以下代码运行的结果的差别。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zrangebyscore zset -inf +inf  <span class="hljs-comment"># 显示整个有序集且只显示member</span><br>zrangebyscore zset -inf +inf withscores  <span class="hljs-comment">#显示score和member</span><br><br>zrangebyscore zset -inf 5  <span class="hljs-comment">#只排序显示-inf到score等于5的范围，即 [-inf,5]</span><br>zrangebyscore zset 1 (5  <span class="hljs-comment"># [1,5)</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<ol start="2">
+<li>zrange key start end [withscore]</li>
+</ol>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zrange zset 0 -1 withscores  <span class="hljs-comment"># 显示全部</span><br>zrange zset 1 2 withscores  <span class="hljs-comment"># 显示下标区间1至2的</span><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="2-6-3-2-降序排序（zrevrange）"><a href="#2-6-3-2-降序排序（zrevrange）" class="headerlink" title="2.6.3.2 降序排序（zrevrange）"></a>2.6.3.2 降序排序（zrevrange）</h5><blockquote>
+<p>zrevrange key start stop [withscore]</p>
+</blockquote>
+<p>成员的位置按分数值递减(从大到小)来排列。具有相同分数值的成员按字典序的逆序(reverse lexicographical order)排列。此命令的使用同 <code>arange</code> 一样。</p>
+<p>对比示例：可查看效果进行对比。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zrange zset 0 -1 withscores<br>zrevrange zset 0 -1 withscores<br>zrangebyscore zset -inf +inf withscores<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-6-4-移除指定数据（zrem）"><a href="#2-6-4-移除指定数据（zrem）" class="headerlink" title="2.6.4 移除指定数据（zrem）"></a>2.6.4 移除指定数据（zrem）</h4><blockquote>
+<p>zrem key member [member ….]</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zrem zset loong<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-6-5-获取数据个数（zcard）"><a href="#2-6-5-获取数据个数（zcard）" class="headerlink" title="2.6.5 获取数据个数（zcard）"></a>2.6.5 获取数据个数（zcard）</h4><blockquote>
+<p>zcard key</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zcard key<br></code></pre></div></td></tr></table></figure>
+
+<h4 id="2-6-6-获取指定区间分数的成员数（zcount）"><a href="#2-6-6-获取指定区间分数的成员数（zcount）" class="headerlink" title="2.6.6 获取指定区间分数的成员数（zcount）"></a>2.6.6 获取指定区间分数的成员数（zcount）</h4><blockquote>
+<p>zcount key min max</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">zcount zset 0 10<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Redis%E5%AD%A6%E4%B9%A0/">Redis学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/2527281855.html">https://tothefor.com/DragonOne/2527281855.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/345839637.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Redis学习笔记（三）三大特殊数据类型</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/3521745947.html">
+                        <span class="hidden-mobile">Redis学习笔记（一）环境配置</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.16/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
