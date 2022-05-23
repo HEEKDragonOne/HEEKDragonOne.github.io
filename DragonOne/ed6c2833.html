@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>水滴石穿-深海骚知识TAT - 墨水记忆</title>
+  <title>水滴石穿-int和Integer的比较 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="水滴石穿-深海骚知识TAT">
+            <span class="h2" id="subtitle" title="水滴石穿-int和Integer的比较">
               
             </span>
 
@@ -244,8 +244,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-21 17:03" pubdate>
-        May 21, 2022 pm
+      <time datetime="2022-05-23 11:03" pubdate>
+        May 23, 2022 am
       </time>
     </span>
   
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      308 字
+      1.1k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      14
        分钟
     </span>
   
@@ -309,40 +309,60 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">水滴石穿-深海骚知识TAT</h1>
+            <h1 style="display: none">水滴石穿-int和Integer的比较</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 21, 2022 pm
+                  本文最后更新于：May 23, 2022 am
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="自加处理"><a href="#自加处理" class="headerlink" title="自加处理"></a>自加处理</h2><blockquote>
-<p>2022年5月21日</p>
-</blockquote>
-<p>首先看一段代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;++i)&#123;<br>  cnt=cnt++;<br>&#125;<br>System.out.println(cnt);<br></code></pre></div></td></tr></table></figure>
-
-<p>正确答案：0。（第一眼是不是很神奇、很离谱）</p>
-<blockquote>
-<p>解析</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>预知知识：基本类型和包装类、装箱和拆箱。</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><blockquote>
+<p>int 和 Integer 有什么区别?</p>
 </blockquote>
 <ul>
-<li>对于JVM来说，对于自增运算的处理是：先定义一个临时变量来接受cnt的值，然后再将cnt进行自增运算，最后又将临时变量赋给了自增后的cnt，所以会进行覆盖。如下代码：</li>
+<li>Integer是int的包装类；int是基本数据类型；</li>
+<li>Integer变量必须实例化后才能使用；int变量不需要；</li>
+<li>Integer实际是对象的引用，指向此new的Integer对象；int是直接存储数据值 ；</li>
+<li>Integer的默认值是null；int的默认值是0。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> cnt=<span class="hljs-number">0</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;++i)&#123;<br>  <span class="hljs-keyword">int</span> t = cnt;<br>  cnt++;<br>  cnt = t;<br>&#125;<br></code></pre></div></td></tr></table></figure>
-
-<p>同理，对于自减一样的道理：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> cnt = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;++i)&#123;<br>  cnt=cnt--;<br>&#125;<br>System.out.println(cnt); <span class="hljs-comment">//1</span><br><br><span class="hljs-keyword">int</span> sum=<span class="hljs-number">1</span>;<br><span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">10</span>;++i)&#123;<br>  <span class="hljs-keyword">int</span> t = sum;<br>  sum--;<br>  sum = t;<br>&#125;<br>System.out.println(sum); <span class="hljs-comment">//1</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="Integer变量和int变量的对比"><a href="#Integer变量和int变量的对比" class="headerlink" title="Integer变量和int变量的对比"></a>Integer变量和int变量的对比</h2><p>Integer变量和int变量比较时，只要两个变量的值是相等的，则结果为true（因为包装类Integer和基本数据类型int比较时，java会自动拆箱为int，然后进行比较，实际上就变为两个int变量的比较）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">int</span> a = <span class="hljs-number">10000</span>;<br>Integer b = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">10000</span>);<br>Integer c=<span class="hljs-number">10000</span>;<br>System.out.println(a == b); <span class="hljs-comment">// true</span><br>System.out.println(a == c); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
 
 
 
+<h2 id="两个new的Integer变量比较"><a href="#两个new的Integer变量比较" class="headerlink" title="两个new的Integer变量比较"></a>两个new的Integer变量比较</h2><p>由于Integer变量实际上是对一个Integer对象的引用，所以两个通过new生成的Integer变量永远是不相等的（因为new生成的是两个对象，其内存地址不同）。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer i = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">10000</span>);<br>Integer j = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">10000</span>);<br>System.out.print(i == j); <span class="hljs-comment">//false</span><br></code></pre></div></td></tr></table></figure>
 
 
 
+<h2 id="非new的Integer变量和new的变量的比较"><a href="#非new的Integer变量和new的变量的比较" class="headerlink" title="非new的Integer变量和new的变量的比较"></a>非new的Integer变量和new的变量的比较</h2><p>非new生成的Integer变量和new Integer()生成的变量比较时，结果为false。（因为非new生成的Integer变量指向的是java常量池中的对象，而new Integer()生成的变量指向堆中新建的对象，两者在内存中的地址不同）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer b = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">10000</span>);<br>Integer c=<span class="hljs-number">10000</span>;<br>System.out.println(b == c); <span class="hljs-comment">// false</span><br></code></pre></div></td></tr></table></figure>
 
+
+
+<h2 id="两个非new生成的Integer对象的对比"><a href="#两个非new生成的Integer对象的对比" class="headerlink" title="两个非new生成的Integer对象的对比"></a>两个非new生成的Integer对象的对比</h2><p>对于两个非new生成的Integer对象，进行比较时，如果两个变量的值在区间<code>-128到127之间</code>，则比较结果为true，如果两个变量的值不在此区间，则比较结果为false。主要原因在于<code>包装类型的缓存机制</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer i = <span class="hljs-number">100</span>;<br>Integer j = <span class="hljs-number">100</span>;<br>System.out.print(i == j); <span class="hljs-comment">//true</span><br><br>Integer i = <span class="hljs-number">128</span>;<br>Integer j = <span class="hljs-number">128</span>;<br>System.out.print(i == j); <span class="hljs-comment">//false</span><br></code></pre></div></td></tr></table></figure>
+
+<p>当值在 <code>-128 ~ 127</code>之间时，java会进行自动装箱，然后会对值进行缓存，如果下次再有相同的值，会直接在缓存中取出使用。缓存是通过Integer的内部类IntegerCache来完成的。当值超出此范围，会在堆中new出一个对象来存储。</p>
+<p>IntegerCache是Integer的内部类，源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">      * 缓存支持自动装箱的对象标识语义 -128和127（含）。</span><br><span class="hljs-comment">      * 缓存在第一次使用时初始化。 缓存的大小可以由-XX：AutoBoxCacheMax = &lt;size&gt;选项控制。</span><br><span class="hljs-comment">      * 在VM初始化期间，java.lang.Integer.IntegerCache.high属性可以设置并保存在私有系统属性中</span><br><span class="hljs-comment">     */</span><br><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IntegerCache</span> </span>&#123;<br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> low = -<span class="hljs-number">128</span>;<br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> high;<br>  <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Integer cache[];<br><br>  <span class="hljs-keyword">static</span> &#123;<br>    <span class="hljs-comment">// high value may be configured by property</span><br>    <span class="hljs-keyword">int</span> h = <span class="hljs-number">127</span>;<br>    String integerCacheHighPropValue =<br>      sun.misc.VM.getSavedProperty(<span class="hljs-string">&quot;java.lang.Integer.IntegerCache.high&quot;</span>);<br>    <span class="hljs-keyword">if</span> (integerCacheHighPropValue != <span class="hljs-keyword">null</span>) &#123;<br>      <span class="hljs-keyword">int</span> i = parseInt(integerCacheHighPropValue);<br>      i = Math.max(i, <span class="hljs-number">127</span>);<br>      <span class="hljs-comment">// Maximum array size is Integer.MAX_VALUE</span><br>      h = Math.min(i, Integer.MAX_VALUE - (-low) -<span class="hljs-number">1</span>);<br>    &#125;<br>    high = h;<br><br>    cache = <span class="hljs-keyword">new</span> Integer[(high - low) + <span class="hljs-number">1</span>];<br>    <span class="hljs-keyword">int</span> j = low;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; cache.length; k++) &#123;<br>      cache[k] = <span class="hljs-keyword">new</span> Integer(j++); <span class="hljs-comment">// 创建一个对象</span><br>    &#125;<br>  &#125;<br><br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">IntegerCache</span><span class="hljs-params">()</span> </span>&#123;&#125;<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="int类型赋给Integer类型"><a href="#int类型赋给Integer类型" class="headerlink" title="int类型赋给Integer类型"></a>int类型赋给Integer类型</h2><p>给一个Integer对象赋一个int值的时候，会调用Integer类的静态方法valueOf，源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Integer <span class="hljs-title">valueOf</span><span class="hljs-params">(String s, <span class="hljs-keyword">int</span> radix)</span> <span class="hljs-keyword">throws</span> NumberFormatException </span>&#123;<br>  <span class="hljs-keyword">return</span> Integer.valueOf(parseInt(s,radix));<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * （1）在-128~127之内：静态常量池中cache数组是static final类型，cache数组对象会被存储于静态常量池中。</span><br><span class="hljs-comment"> * cache数组里面的元素却不是static final类型，而是cache[k] = new Integer(j++)，</span><br><span class="hljs-comment"> * 那么这些元素是存储于堆中，只是cache数组对象存储的是指向了堆中的Integer对象（引用地址）</span><br><span class="hljs-comment"> * </span><br><span class="hljs-comment"> * （2）在-128~127 之外：新建一个 Integer对象，并返回。</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> Integer <span class="hljs-title">valueOf</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i)</span> </span>&#123;<br>  <span class="hljs-keyword">assert</span> IntegerCache.high &gt;= <span class="hljs-number">127</span>;<br>  <span class="hljs-keyword">if</span> (i &gt;= IntegerCache.low &amp;&amp; i &lt;= IntegerCache.high) &#123;<br>    <span class="hljs-keyword">return</span> IntegerCache.cache[i + (-IntegerCache.low)];<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Integer(i);<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="个人总结"><a href="#个人总结" class="headerlink" title="个人总结"></a>个人总结</h2><p>一定等：Integer和int值相等时，两个一定等。</p>
+<p>一定不等：只要是和new的比较，则就一定不等。</p>
+<p>非new的两个Integer，看是否在<code>-128~127</code>之间，在，则相等；否则不等。</p>
 
             </div>
             <hr>
@@ -376,7 +396,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/b78a5ea0.html">https://tothefor.com/DragonOne/b78a5ea0.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/ed6c2833.html">https://tothefor.com/DragonOne/ed6c2833.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -385,18 +405,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/ed6c2833.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">水滴石穿-int和Integer的比较</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/c5cfc3d5.html">
-                        <span class="hidden-mobile">水滴石穿-Iterator和ListIterator的基本使用</span>
+                      <a href="/DragonOne/b78a5ea0.html">
+                        <span class="hidden-mobile">水滴石穿-深海骚知识TAT</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
