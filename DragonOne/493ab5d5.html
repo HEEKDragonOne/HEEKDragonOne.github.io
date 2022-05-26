@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      730 字
+      861 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      10
        分钟
     </span>
   
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 1, 2022 am
+                  本文最后更新于：May 26, 2022 pm
                 
               </p>
             
@@ -353,6 +353,14 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>0000 0000 1111（n-1）</p>
 <p>0000 0000 0111（这就是(n - 1) &amp; hash，即 hash%n ）</p>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>因为 n 为2的幂次方，所以n的二进制表示中只有一个1；然后n-1的二进制表示中是除去有效最高位外，右边部分全是1。那么全与其他数进行按位与时，最大即为n-1，否则比n-1小。</p>
+<blockquote>
+<p>2022年5月26日</p>
+</blockquote>
+<p>HashMap在扩容上的优化。</p>
+<p>采用2的幂次方作为长度的另外一个原因在于扩容时，key的hash值计算。</p>
+<p>在同一个桶中的key，在扩容后，HashMap容量翻倍，再去取模，实际上是需要高一位来参与计算的（即新增的最高位）。</p>
+<p>当高位是0时，newBucketIndex = oldBucketIndex，此时元素还是存放在原来的桶中；</p>
+<p> 当高位是1时，newBucketIndex = oldBucketIndex + oldTable.length，这时元素需要移动到扩容产生的桶中。</p>
 
             </div>
             <hr>
