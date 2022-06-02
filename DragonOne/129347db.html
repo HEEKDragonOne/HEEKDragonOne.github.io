@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      617 字
+      969 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      14
        分钟
     </span>
   
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：January 24, 2022 pm
+                  本文最后更新于：June 2, 2022 pm
                 
               </p>
             
@@ -343,6 +343,33 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
+<h3 id="加载mapper的方式"><a href="#加载mapper的方式" class="headerlink" title="加载mapper的方式"></a>加载mapper的方式</h3><blockquote>
+<p><code>&lt;mapper resource=&quot;&quot; /&gt;</code></p>
+</blockquote>
+<p>加载普通的xml文件，传入xml的相对路径(相对于类路径)。如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;StudentMapper.xml&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p><code>&lt;mapper class=&quot;&quot; /&gt;</code></p>
+</blockquote>
+<p>使用mapper接口的全限定名来加载，若mapper接口采用注解方式，则不需要xml;若mapper接口没有采用注解方式，则mapper接口和xml文件的名称要相同，且在同一个目录。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 在mapper接口中使用注解 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.yogurt.mapper.PureStudentMapper&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p><code>&lt;package name=&quot;&quot; /&gt;</code></p>
+</blockquote>
+<p>扫描指定包下的所有mapper，若mapper接口采用注解方式，则不需要xml;若mapper接口没有采用注解方式，则mapper接口和xml文件的名称要相同，且在同一目录。</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">package</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;com.yogurt.mapper&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p><strong>📢注意：</strong> 用后两种方式加载mapper接口和mapper.xml映射文件时，可能会报错。</p>
+<p>那么，仔细检查一下，mapper接口文件和xml映射文件是否放在了同一个目录下，而且文件名是否一致，xml映射文件的namespace也和mapper接口的全限定名是否对的上。</p>
+<p>如果上述均没有问题，那么最大的问题就是maven打包时并没有将xml文件进行打包。即在target中缺少文件。<a href="https://tothefor.com/DragonOne/855302084.html">解决办法见最后</a></p>
 <h2 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.utils;<br><br><span class="hljs-keyword">import</span> org.apache.ibatis.io.Resources;<br><span class="hljs-keyword">import</span> org.apache.ibatis.session.SqlSession;<br><span class="hljs-keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;<br><span class="hljs-keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;<br><br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.io.InputStream;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/1/20 23:07</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyBatisUtils</span> </span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> SqlSessionFactory sqlSessionFactory = <span class="hljs-keyword">null</span>;<br>    <span class="hljs-keyword">static</span> &#123;<br>        String resource = <span class="hljs-string">&quot;myBatis.xml&quot;</span>;<br>        <span class="hljs-keyword">try</span> &#123;<br>            InputStream inputStream = Resources.getResourceAsStream(resource);<br>            sqlSessionFactory = <span class="hljs-keyword">new</span> SqlSessionFactoryBuilder().build(inputStream);<br>        &#125; <span class="hljs-keyword">catch</span> (IOException e) &#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> SqlSession <span class="hljs-title">getSqlSession</span><span class="hljs-params">()</span></span>&#123;<br>        SqlSession session = <span class="hljs-keyword">null</span>;<br>        <span class="hljs-keyword">if</span>(sqlSessionFactory!=<span class="hljs-keyword">null</span>)&#123;<br>            session = sqlSessionFactory.openSession(); <span class="hljs-comment">//加入true则为自动提交事务，不写或为false则为手动提交事务</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> session;<br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
             </div>
