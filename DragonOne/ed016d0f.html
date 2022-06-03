@@ -361,7 +361,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">aop:config</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">aop:pointcut</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;pointcut&quot;</span> <span class="hljs-attr">expression</span>=<span class="hljs-string">&quot;execution(* com.tothefor.aopTest.UserServiceImpl.*(..))&quot;</span>/&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">aop:config</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
-<p>execution(访问权限 方法返回值 方法声明(参数) 异常类型)</p>
+<p>execution(访问权限 方法返回值 方法声明(参数) 异常类型) 可以简化为：execution(方法返回值 方法声明(参数))</p>
 </blockquote>
 <p>上面这表示切入点是：<code>com.tothefor.aopTest.UserServiceImpl.*(..)</code>。UserServiceImpl类中的所有方法。后面的<code>（..）</code>表示方法的参数，这里写的是两个点（<code>..</code>），表示任意参数。前面的星号<code>（*）</code>表示所有的方法，这里的星号也可以改成固定的方法名。最前面的一个星号表示修饰符任意。</p>
 <p><strong>可以配置多个切入点。</strong></p>
