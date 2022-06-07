@@ -1,0 +1,789 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JVM-（三）运行时数据区-堆中相关参数 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM-（三）运行时数据区-堆中相关参数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-07 16:23" pubdate>
+        June 7, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM-（三）运行时数据区-堆中相关参数</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 7, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>一个Java程序对应一个进程，一个进程对应一个JVM实例，一个JVM实例中只有一个运行时数据区，一个运行时数据区只有一个方法区和堆，一个进程中的多个线程共享同一个方法区和堆，每一个线程拥有独立的程序计数器、本地方法栈、虚拟机栈。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li><p>一个JVM实例只存在一个堆内存，堆也是Java内存管理的核心区域。Java堆区在JVM启动的时候即被创建，其空间大小也就确定了（但堆内存的大小是可以调节的）。堆是JVM管理的最大的一块内存空间。</p>
+</li>
+<li><p>在《Java虚拟机规范》中规定，堆可以处于物理上不连续的内存空间中，但在逻辑上它应该被视为连续的。</p>
+</li>
+<li><p>所有的线程共享Java堆，其中堆还可以划分线程私有的缓冲区（TLAB，Thread Local Allocation Buffer）。具体可见<a href="https://tothefor.com/DragonOne/46d0d953.html">《JAVA知识点-Java对象的分配详解 》</a> </p>
+</li>
+</ul>
+<blockquote>
+<p>实时可视化 Hotspot JVM 垃圾回收监控工具：安装插件 visual GC</p>
+</blockquote>
+<h2 id="堆内存结构"><a href="#堆内存结构" class="headerlink" title="堆内存结构"></a>堆内存结构</h2><p><img src="https://img-blog.csdnimg.cn/7a5ca501e96643c597503567d7f71de1.png" srcset="/img/loading.gif"></p>
+<h2 id="堆空间大小设置和查看"><a href="#堆空间大小设置和查看" class="headerlink" title="堆空间大小设置和查看"></a>堆空间大小设置和查看</h2><blockquote>
+<p>堆空间大小设置方式</p>
+</blockquote>
+<p>Java堆的大小在JVM启动时就已经设定好了，但可以通过选项 “<code>-Xmx</code>“和”<code>-Xms</code>“来进行设置。</p>
+<ul>
+<li><code>-Xms</code>：表示堆的<code>起始内存大小</code>，等价于 <code>-XX:InitialHeapSize</code>。</li>
+<li><code>-Xmx</code>：表示堆的<code>最大内存</code>，等价于 <code>-XX:MaxHeapSize</code>。</li>
+</ul>
+<p>-X是JVM的运行参数，ms表示memory start。</p>
+<p>一旦堆区中的内存大小超过了”-Xmx”所指定的最大内存时，将会抛出OutOfMemoryError异常。</p>
+<ul>
+<li>通常会将”-Xms”和”-Xmx”两个参数配置相同的值，目的是：为了能够在Java垃圾回收机制清理完堆区后不需要重新分隔计算堆区的大小，从而提高性能。</li>
+</ul>
+<blockquote>
+<p>默认大小</p>
+</blockquote>
+<ul>
+<li>初始内存大小：物理电脑内存大小 / 64。（64分之一）</li>
+<li>最大内存大小：物理电脑内存大小 / 4。（4分之一）</li>
+</ul>
+<p>查看本机内存情况：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.FactoryBean;<br><span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/5 21:12</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLink</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">long</span> initM = Runtime.getRuntime().totalMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br>    <span class="hljs-keyword">long</span> MaxM = Runtime.getRuntime().maxMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br><br>    System.out.println(<span class="hljs-string">&quot;-Xms: &quot;</span>+initM+<span class="hljs-string">&quot;M&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;-Xmx: &quot;</span>+MaxM+<span class="hljs-string">&quot;M&quot;</span>);<br><br>    System.out.println(<span class="hljs-string">&quot;系统内存: &quot;</span>+initM*<span class="hljs-number">64.0</span>/<span class="hljs-number">1024</span>+<span class="hljs-string">&quot;G&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;系统内存: &quot;</span>+MaxM*<span class="hljs-number">4.0</span>/<span class="hljs-number">1024</span>+<span class="hljs-string">&quot;G&quot;</span>);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>手动设置</p>
+</blockquote>
+<p>设置方式可以见<a href="https://tothefor.com/DragonOne/f7ecf2c5.html">《JVM-（二）运行时数据区-线程共享 》</a> </p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms600m -Xmx600m<br></code></pre></div></td></tr></table></figure>
+
+<p>然后再次跑上面的代码查看内存情况，可以发现前两个已经发生了改变。后两个是电脑的内存，所以不变。但是输出的数字并不是设置的数字，为什么呢？往后看。（我显示的是575M）</p>
+<blockquote>
+<p>开发中建议将初始堆内存和最大的堆内存设置成相同的值</p>
+</blockquote>
+<ul>
+<li>原因：在初始设置后，如果空间不够时将会进行扩容（没有超过最大内存），当空间有空闲了则又会进行空间的释放。当频繁的进行扩容和释放时，就会造成系统过大的压力。而设置成相同的，就避免了进行空间的大小调整。</li>
+</ul>
+<h3 id="数据显示和设置不同"><a href="#数据显示和设置不同" class="headerlink" title="数据显示和设置不同"></a>数据显示和设置不同</h3><p>主要是计算的问题。因为幸存区有两个区，但是计算的时候只算了一个区。下面就这两种情况的计算过程进行演示说明：</p>
+<blockquote>
+<p>空间大小设置说明：-Xms600m -Xmx600m，最后输出575M</p>
+</blockquote>
+<p>然后跑以下代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.FactoryBean;<br><span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/5 21:12</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLink</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> initM = Runtime.getRuntime().totalMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br>        <span class="hljs-keyword">long</span> MaxM = Runtime.getRuntime().maxMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br><br>        System.out.println(<span class="hljs-string">&quot;-Xms: &quot;</span>+initM+<span class="hljs-string">&quot;M&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;-Xmx: &quot;</span>+MaxM+<span class="hljs-string">&quot;M&quot;</span>);<br>        <span class="hljs-keyword">try</span> &#123;<br>            Thread.sleep(<span class="hljs-number">1000000</span>); <span class="hljs-comment">//主要目的是让程序一直处于运行状态</span><br>        &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>            e.printStackTrace();<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>然后再打开cmd窗口（我是Mac系统但命令都一样），输入：（前提是配置好了Java环境）</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jps<br><br><span class="hljs-comment"># 显示</span><br>4202 Jps<br>3916 <br>3950 RemoteMavenServer36<br>4158 Launcher<br>4159 TestLink <span class="hljs-comment"># 这个就是我们刚才跑的代码的类名，记住这个进程id，下面需要用</span><br></code></pre></div></td></tr></table></figure>
+
+<p>再次输入：jstat -gc xxx(上面的进程id)</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jstat -gc 4159<br><br><span class="hljs-comment"># 显示</span><br>    S0C         S1C         S0U         S1U          EC           EU           OC           OU          MC         MU       CCSC      CCSU     YGC     YGCT     FGC    FGCT     CGC    CGCT       GCT   <br>    25600.0     25600.0         0.0         0.0     153600.0      15360.5     409600.0          0.0     4480.0      781.7     384.0      76.6      0     0.000     0     0.000     -         -     0.000<br></code></pre></div></td></tr></table></figure>
+
+<p>因为输出的结果很多，所以比较长。这里我自己画了一个图：</p>
+<p><img src="https://img-blog.csdnimg.cn/87bb159f8a314061b94623a87a670938.png" srcset="/img/loading.gif"></p>
+<p>我们只看左边（新生代），不看右边。其中以C结尾的表示总大小，以U结尾的表示已使用的大小。</p>
+<p>S0C 、 S1C 表示幸存区S0和S1两个区域的大小，EC表示伊甸区总大小，OC表示老年代的总大小。</p>
+<p>三者相加为：（25600+25600+153600+409600）/ 1024 = 600</p>
+<p>但是真正计算的时候幸存区的两个区域只需要计算一个：</p>
+<p>（25600+153600+409600）/ 1024 = 575</p>
+<p>所以，这就是计算的过程。</p>
+<h3 id="查看方式二"><a href="#查看方式二" class="headerlink" title="查看方式二"></a>查看方式二</h3><p>通过设置参数：<code>-XX:+PrintGCDetails</code> 。打印GC过程的细节。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms600m -Xmx600m -XX:+PrintGCDetails<br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.FactoryBean;<br><span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/5 21:12</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLink</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-keyword">long</span> initM = Runtime.getRuntime().totalMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br>        <span class="hljs-keyword">long</span> MaxM = Runtime.getRuntime().maxMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br><br>        System.out.println(<span class="hljs-string">&quot;-Xms: &quot;</span>+initM+<span class="hljs-string">&quot;M&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;-Xmx: &quot;</span>+MaxM+<span class="hljs-string">&quot;M&quot;</span>);<br>    &#125;<br>&#125;<br><br><br><span class="hljs-comment">//输出</span><br>-Xms: 575M<br>-Xmx: 575M<br>Heap<br> PSYoungGen      total 179200K, used 9216K [<span class="hljs-number">0x00000007b3800000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 153600K, <span class="hljs-number">6</span>% used [<span class="hljs-number">0x00000007b3800000</span>,<span class="hljs-number">0x00000007b41001a0</span>,<span class="hljs-number">0x00000007bce00000</span>)<br>  from space 25600K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007be700000</span>,<span class="hljs-number">0x00000007be700000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 25600K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bce00000</span>,<span class="hljs-number">0x00000007bce00000</span>,<span class="hljs-number">0x00000007be700000</span>)<br> ParOldGen       total 409600K, used 0K [<span class="hljs-number">0x000000079a800000</span>, <span class="hljs-number">0x00000007b3800000</span>, <span class="hljs-number">0x00000007b3800000</span>)<br>  object space 409600K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x000000079a800000</span>,<span class="hljs-number">0x000000079a800000</span>,<span class="hljs-number">0x00000007b3800000</span>)<br> Metaspace       used 3134K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 337<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class"></span><br></code></pre></div></td></tr></table></figure>
+
+<p>其中的from和to就是幸存区的S0和S1。这里的数据和上面通过命令的方式获取到的数据是一样的。</p>
+<p><strong>注意：PSYoungGen的值是eden +（from或者to）。</strong></p>
+<h2 id="新生代和老年代相关参数设置"><a href="#新生代和老年代相关参数设置" class="headerlink" title="新生代和老年代相关参数设置"></a>新生代和老年代相关参数设置</h2><p>新生代又分为Eden区，Survivor0区、Survivor1区（又称为from区和to区）。新生代和老年代的比例为1：2；新生代中，Eden:Survivor0:Survivor1为 8：1：1。</p>
+<blockquote>
+<p>默认新生代和老年代在堆结构的占比</p>
+</blockquote>
+<ul>
+<li>默认 <code>-XX:NewRatio</code>=2，表示新生代占1，老年代占2。新生代占堆的1/3。</li>
+<li>修改为 <code>-XX:NewRatio</code>=4，表示新生代占1，老年代占4。新生代占堆的1/5。</li>
+</ul>
+<h3 id="查看新生代和老年代默认占比"><a href="#查看新生代和老年代默认占比" class="headerlink" title="查看新生代和老年代默认占比"></a>查看新生代和老年代默认占比</h3><p>配置参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms600m -Xmx600m<br></code></pre></div></td></tr></table></figure>
+
+<p>运行代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/5 21:12</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLink</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">long</span> initM = Runtime.getRuntime().totalMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br>    <span class="hljs-keyword">long</span> MaxM = Runtime.getRuntime().maxMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br><br>    System.out.println(<span class="hljs-string">&quot;-Xms: &quot;</span>+initM+<span class="hljs-string">&quot;M&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;-Xmx: &quot;</span>+MaxM+<span class="hljs-string">&quot;M&quot;</span>);<br>    <span class="hljs-keyword">try</span> &#123;<br>      Thread.sleep(<span class="hljs-number">1000000000</span>);<br>    &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>      e.printStackTrace();<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>然后看插件监控情况：</p>
+<p><img src="https://img-blog.csdnimg.cn/b45d44e1fff943c689faf3237f796bdc.png" srcset="/img/loading.gif"></p>
+<p>可以看见150+25+25 ：400 就是1：2。</p>
+<blockquote>
+<p>默认情况下不会修改这个比例，但是，如果已经知道了存活期长的比较多，那么就可以将老年代比例设大。</p>
+</blockquote>
+<h3 id="新生代分布占比"><a href="#新生代分布占比" class="headerlink" title="新生代分布占比"></a>新生代分布占比</h3><p>Eden区和幸存区的两个区域所占比例为8：1：1。可以通过 <code>-XX:SurvivorRatio</code> 调整比例。默认值为8。可以通过命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jinfo -flag SurvivorRatio 4995 <span class="hljs-comment"># 4995为进程id，通过jps命令查看所有</span><br><br><span class="hljs-comment"># -XX:SurvivorRatio=8</span><br></code></pre></div></td></tr></table></figure>
+
+<p>但是根据上面插件的监测情况看，实际比例为125：25：25。这是为什么呢？显示为8，但实际不一样？</p>
+<p>这主要是和自适用机制有关。默认情况下有一个自适应比例。可以通过设置参数来关闭自适应比例。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-XX:-UseAdaptiveSizePolicy <span class="hljs-comment">#:后面的-号表示关闭，使用则为+号</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>📢这样配置后，是没有效果的。</strong></p>
+<p>要想真正的实现效果，必须是显示指定 <code>-XX:SurvivorRatio=8</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms600m -Xmx600m -XX:+PrintGCDetails -XX:SurvivorRatio=8<br></code></pre></div></td></tr></table></figure>
+
+<p>这样配置后再次查看，就会发现Eden变成了160M，而幸存区中都是20M了，这样就符合8:1:1的比例了。（因为参数设置的总大小600，新生代:老年代为1:2；所以新生代中总大小为200M）如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/ca9d6ba3d1ae4b3e92df1f0eaa2e4f91.png" srcset="/img/loading.gif"></p>
+<h2 id="参数总结"><a href="#参数总结" class="headerlink" title="参数总结"></a>参数总结</h2><blockquote>
+<p>堆空间大小参数</p>
+</blockquote>
+<ul>
+<li><code>-Xms</code>：表示堆的<code>起始内存大小</code>，等价于 <code>-XX:InitialHeapSize</code>。</li>
+<li><code>-Xmx</code>：表示堆的<code>最大内存</code>，等价于 <code>-XX:MaxHeapSize</code>。</li>
+</ul>
+<p>通过设置参数：<code>-XX:+PrintGCDetails</code> 。打印GC过程的细节。</p>
+<blockquote>
+<p>新生代和老年代在堆结构的占比</p>
+</blockquote>
+<ul>
+<li>默认 <code>-XX:NewRatio</code>=2，表示新生代占1，老年代占2。新生代占堆的1/3。</li>
+</ul>
+<blockquote>
+<p>新生代分布占比</p>
+</blockquote>
+<ul>
+<li>通过 <code>-XX:SurvivorRatio</code> 调整比例，默认为8。但需要注意自适应机制带来的变化。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JVM/">JVM</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/4a58ac71.html">https://tothefor.com/DragonOne/4a58ac71.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/5a67c037.html">
+                        <span class="hidden-mobile">SpringBoot-（十八）SpringBoot读取配置文件和参数校验</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
