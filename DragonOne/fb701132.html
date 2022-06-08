@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      3k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36
+      42
        分钟
     </span>
   
@@ -451,8 +451,39 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
+<h2 id="AOP中常见的名词"><a href="#AOP中常见的名词" class="headerlink" title="AOP中常见的名词"></a>AOP中常见的名词</h2><ul>
+<li>切面（Aspect）：在AOP中切面指的是”切面类”，切面类中管理着增强的公共行为代码（通知）和切入方式（切点）。</li>
+<li>连接点（Join point）：一个连接点总是代表一个方法的执行，即被增强的业务方法。</li>
+<li>通知（Advice）：即需要增加到业务方法中的公共代码，通知有很多种类型，分别可以在需要增加的业务方法的不同位置进行执行。如：前置通知、后置通知、异常通知、返回通知、环绕通知（自定义控制位置）。</li>
+<li>切点（Pointcut）：决定哪些方法需要增强、哪些不需要增强，结合切点表达式进行实现。</li>
+<li>目标对象（Target Object）：指将要被增强的对象。即包含主业务逻辑的类的对象。</li>
+<li>织入（Weaving）：AspectJ里面的。</li>
+</ul>
+<h2 id="通知有哪些类型"><a href="#通知有哪些类型" class="headerlink" title="通知有哪些类型"></a>通知有哪些类型</h2><ul>
+<li>前置通知（Before）：在目标方法被调用之前调用通知功能。</li>
+<li>后置通知（After）：在目标方法完成之后调用通知，此时不会关心方法的输出是什么。</li>
+<li>返回通知（After-Returning）：在目标方法成功执行之后调用通知。</li>
+<li>异常通知（After-Throwing）：在目标方法抛出异常后调用通知。</li>
+<li>环绕通知（Around）：通知包裹了被通知的方法，在被通知的方法调用之前和调用之后执行自定义的行为。</li>
+</ul>
+<blockquote>
+<p>执行顺序</p>
+</blockquote>
+<ul>
+<li>正常运行：前置、目标方法、后置、返回。</li>
+<li>异常运行：前置、目标方法、后置、异常。</li>
+</ul>
+<p><strong>📢注意：Spring在5.2.7之后就改变了Advice的执行顺序。</strong></p>
+<ul>
+<li>正常执行：@Before、目标方法、@AfterReturning、@After。</li>
+<li>异常执行：@Before、目标方法、@AfterThrowing、@After。</li>
+</ul>
+<h2 id="JavaConfig方式开启AOP以及强制使用CGlib"><a href="#JavaConfig方式开启AOP以及强制使用CGlib" class="headerlink" title="JavaConfig方式开启AOP以及强制使用CGlib"></a>JavaConfig方式开启AOP以及强制使用CGlib</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@EnableAspectJAutoProxy</span> <span class="hljs-comment">//开启AOP</span><br><span class="hljs-meta">@EnableAspectJAutoProxy(proxyTargetClass = true)</span> <span class="hljs-comment">//开启AOP并强制使用CGLIb</span><br></code></pre></div></td></tr></table></figure>
 
 
+
+<h2 id="AOP的实现方式"><a href="#AOP的实现方式" class="headerlink" title="AOP的实现方式"></a>AOP的实现方式</h2><p>有三种方式实现：使用原生Spring API接口、自定义切面类、注解方式。</p>
+<p>详情可见<a href="https://tothefor.com/DragonOne/ed016d0f.html">《Spring-（八）AOP的实现 》</a></p>
 <h2 id="Autowired注解自动装配的过程"><a href="#Autowired注解自动装配的过程" class="headerlink" title="Autowired注解自动装配的过程"></a>Autowired注解自动装配的过程</h2><p>Autowired通过Bean的后置处理器进行解析的。待补充。</p>
 <h2 id="Configuration的作用及解析原理"><a href="#Configuration的作用及解析原理" class="headerlink" title="Configuration的作用及解析原理"></a>Configuration的作用及解析原理</h2><p>待补充。</p>
 <h2 id="Spring中Bean的生命周期"><a href="#Spring中Bean的生命周期" class="headerlink" title="Spring中Bean的生命周期"></a>Spring中Bean的生命周期</h2><p>生命周期，指Bean从创建到销毁的整个过程，分为4步：</p>
