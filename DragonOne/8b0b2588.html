@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>刷题笔记-（LeetCode）-相交链表 - 墨水记忆</title>
+  <title>Spring注解-（二）@Bean的多种用法详解 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="刷题笔记-（LeetCode）-相交链表">
+            <span class="h2" id="subtitle" title="Spring注解-（二）@Bean的多种用法详解">
               
             </span>
 
@@ -244,8 +244,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-12 16:13" pubdate>
-        June 12, 2022 pm
+      <time datetime="2022-06-13 09:47" pubdate>
+        June 13, 2022 am
       </time>
     </span>
   
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      517 字
+      1.1k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      15
        分钟
     </span>
   
@@ -309,50 +309,56 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">刷题笔记-（LeetCode）-相交链表</h1>
+            <h1 style="display: none">Spring注解-（二）@Bean的多种用法详解</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 12, 2022 pm
+                  本文最后更新于：June 13, 2022 am
                 
               </p>
             
             <div class="markdown-body">
-              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/">题目链接</a></p>
-<p><strong>思路很重要！！！</strong></p>
-<blockquote>
-<p>AC代码</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Definition for singly-linked list.</span><br><span class="hljs-comment"> * public class ListNode &#123;</span><br><span class="hljs-comment"> *     int val;</span><br><span class="hljs-comment"> *     ListNode next;</span><br><span class="hljs-comment"> *     ListNode(int x) &#123;</span><br><span class="hljs-comment"> *         val = x;</span><br><span class="hljs-comment"> *         next = null;</span><br><span class="hljs-comment"> *     &#125;</span><br><span class="hljs-comment"> * &#125;</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> ListNode <span class="hljs-title">getIntersectionNode</span><span class="hljs-params">(ListNode headA, ListNode headB)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span>(headA==<span class="hljs-keyword">null</span> || headB == <span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;<br>        ListNode lookA = headA;<br>        ListNode lookB = headB;<br>        <span class="hljs-keyword">while</span>(lookA!=lookB)&#123;<br>            lookA = lookA==<span class="hljs-keyword">null</span>? headB:lookA.next;<br>            lookB = lookB==<span class="hljs-keyword">null</span>? headA:lookB.next;<br>        &#125;<br>        <span class="hljs-keyword">return</span> lookA;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+              <p>Spring 是目前主流的 Java Web 开发框架，是 Java 世界最为成功的框架。Spring框架是由于软件开发的复杂性而创建的。Spring使用的是基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅仅限于服务器端的开发。从简单性、可测试性和松耦合性角度而言，绝大部分Java应用都可以从Spring中受益。该框架是一个轻量级的开源框架，具有很高的凝聚力和吸引力。Spring 框架不局限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何 Java 应用都可以从 Spring 中受益。Spring 框架还是一个超级粘合平台，除了自己提供功能外，还提供粘合其他技术和框架的能力。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="autowire属性"><a href="#autowire属性" class="headerlink" title="autowire属性"></a>autowire属性</h2><p>已经被启用。加上了此属性后，在使用对应Bean的时候就无需再使用注解@Autowire进行注入，而是自动进行注入。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Bean(autowire = Autowire.BY_NAME)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> OrderS <span class="hljs-title">orderS</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OrderS();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>再使用时，只需要直接使用即可：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> OrderS orderS;<br></code></pre></div></td></tr></table></figure>
+
+<p>而不使用此属性原本的用法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> OrderS orderS;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><blockquote>
-<p>场景：现有两条路A和B，有交叉重叠部分C，一个人M1在A的起点，一个人M2在B的起点。两个人有相同的移动速度，那么，他们有可能相遇吗？</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/73fc9cffe5ec405193cc2701f2af40ed.png" srcset="/img/loading.gif"></p>
+<p><strong>📢注意：此属性已经被弃用！！！</strong></p>
+<h2 id="autowireCandidate属性"><a href="#autowireCandidate属性" class="headerlink" title="autowireCandidate属性"></a>autowireCandidate属性</h2><p>默认值为true，自动装备的候选者。现在先来看一个示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation;<br><br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.OrderS;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.ComponentScan;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.PropertySource;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 11:16</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@ComponentScan(&quot;com.SpringTestAnnotation&quot;)</span><br><span class="hljs-meta">@PropertySource(&quot;classpath:application.properties&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestConfig</span> </span>&#123;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> OrderS <span class="hljs-title">orderS</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OrderS();<br>    &#125;<br><br>    <span class="hljs-meta">@Bean</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> OrderS <span class="hljs-title">orderS1</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OrderS();<br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>现在这里同时注册了两个相同类型的Bean，然后我们再使用注解进行自动注入：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation.TestValue;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 11:16</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component(&quot;per&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Per</span> </span>&#123;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> OrderS orderS111;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;Per show &quot;</span>+orderS111);<br>    &#125;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>然后再测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation;<br><br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.Per;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 11:16</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestAnnotation</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        AnnotationConfigApplicationContext applicationContext = <span class="hljs-keyword">new</span> AnnotationConfigApplicationContext(TestConfig.class);<br>        Per per = applicationContext.getBean(<span class="hljs-string">&quot;per&quot;</span>, Per.class);<br>        per.show();<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>当跑了上面的代码后，我们会发现报错了。我们可以看一下报错的信息：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">警告: Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name <span class="hljs-string">&#x27;per&#x27;</span>: Unsatisfied dependency expressed through field <span class="hljs-string">&#x27;orderS111&#x27;</span>; nested exception is org.springframework.beans.factory.NoUniqueBeanDefinitionException: No qualifying bean of type <span class="hljs-string">&#x27;com.SpringTestAnnotation.TestValue.OrderS&#x27;</span> available: expected single matching bean but found <span class="hljs-number">2</span>: orderS,orderS1<br></code></pre></div></td></tr></table></figure>
+
+<p>大致意思就是说，现在通过类型找到了两个，然后再根据属性的名称<code>orderS111</code>再去找，但是发现找到的两个中并没有名称为<code>orderS111</code>的，所以也就是没有找到。</p>
 <blockquote>
-<p>题目思路</p>
+<p>如果业务又需要上面<code>TestConfig</code>中的两个方法，现在怎么解决呢？</p>
 </blockquote>
-<p><strong>本思路参考力扣题解，图也摘抄题解。</strong> <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/intersection-of-two-linked-lists/solution/tu-jie-xiang-jiao-lian-biao-by-user7208t/">题解</a></p>
-<p>两个链表从同距离末尾同等距离的位置开始遍历。这个位置只能是较短链表的头结点位置。为此，我们必须消除两个链表的长度差：</p>
-<ul>
-<li><p>指针 pA 指向 A 链表，指针 pB 指向 B 链表，依次往后遍历。</p>
-</li>
-<li><p>如果 pA 到了末尾，则 pA = headB 继续遍历。</p>
-</li>
-<li><p>如果 pB 到了末尾，则 pB = headA 继续遍历。</p>
-</li>
-<li><p>比较长的链表指针指向较短链表head时，长度差就消除了。</p>
-</li>
-</ul>
-<p>如此，只需要将最短链表遍历两次即可找到位置</p>
-<p><img src="https://img-blog.csdnimg.cn/92f584bdea1945f6a021a181a79bbcb4.png" srcset="/img/loading.gif"></p>
-<blockquote>
-<p>个人理解</p>
-</blockquote>
-<p>简单理解就是：两条相同的长度的路，两个人用相同的速度，那么在相同的时间内他们走的长度一定是相同的，无非就是走的路不是同一条而已。你走了你自己的又走了我的，我走了我自己的又走了你的，那么最后一定是一样的。</p>
+<p>那么就需要对某一个方法的<code>@Bean</code>中加入一个属性：<code>autowireCandidate</code>，并对其赋值为<code>false</code>，因为默认为<code>true</code>。它表示：能不能进行依赖注入的一个候选者。即表示这个Bean不能注入给其他Bean，也就是不能进行依赖注入。（个人简单理解：被标记为false后就表示不能进行注入了，也就相当于这个Bean没有一样）</p>
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>@Bean除了上面的使用方法外，也可以写在某一个自定义注解上面。例如，原本需要使用以下方式注入一个Bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@Scope(&quot;prototype&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> OrderS <span class="hljs-title">orderS</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OrderS();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>但是，如果有很多Bean都是这样写的，而且在后续中还有可能会发生改变，那么这种写法肯定是比较麻烦的。所以，可以通过自定义注解的方式完成这个任务，就和@Value中的自定义注解一样。</p>
+<p>自定义注解：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation.TestValue;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Scope;<br><br><span class="hljs-keyword">import</span> java.lang.annotation.ElementType;<br><span class="hljs-keyword">import</span> java.lang.annotation.Retention;<br><span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;<br><span class="hljs-keyword">import</span> java.lang.annotation.Target;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/12 08:08</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Target(&#123;ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.ANNOTATION_TYPE&#125;)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Bean</span><br><span class="hljs-meta">@Scope(&quot;prototype&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> OurAnno &#123;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>然后使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@OurAnno</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> OrderS <span class="hljs-title">orderS</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> OrderS();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这样以来，如果我们需要修改<code>@Scope</code>的值，那么只需要在自定义注解中进行修改即可，实现动一发而牵动全局。</p>
 
             </div>
             <hr>
@@ -362,7 +368,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">刷题笔记</a>
+                      <a class="hover-with-bg" href="/categories/Spring%E6%B3%A8%E8%A7%A3/">Spring注解</a>
                     
                   </div>
                 
@@ -370,7 +376,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/">刷题笔记</a>
+                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Spring%E6%B3%A8%E8%A7%A3/">Spring注解</a>
                     
                   </div>
                 
@@ -384,7 +392,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/b7a00fa7.html">https://tothefor.com/DragonOne/b7a00fa7.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/8b0b2588.html">https://tothefor.com/DragonOne/8b0b2588.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -393,18 +401,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/8b0b2588.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring注解-（二）@Bean的多种用法详解</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/8263d509.html">
-                        <span class="hidden-mobile">Spring注解-（一）@Value的多种用法详解</span>
+                      <a href="/DragonOne/b7a00fa7.html">
+                        <span class="hidden-mobile">刷题笔记-（LeetCode）-相交链表</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
