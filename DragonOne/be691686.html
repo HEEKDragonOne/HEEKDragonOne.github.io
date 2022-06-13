@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>Spring注解-（四）@ComponentScan的使用详解 - 墨水记忆</title>
+  <title>Spring注解-（五）@Conditional的作用 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Spring注解-（四）@ComponentScan的使用详解">
+            <span class="h2" id="subtitle" title="Spring注解-（五）@Conditional的作用">
               
             </span>
 
@@ -244,7 +244,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-06-13 10:47" pubdate>
+      <time datetime="2022-06-13 11:17" pubdate>
         June 13, 2022 am
       </time>
     </span>
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      925 字
+      574 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      7
        分钟
     </span>
   
@@ -309,7 +309,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Spring注解-（四）@ComponentScan的使用详解</h1>
+            <h1 style="display: none">Spring注解-（五）@Conditional的作用</h1>
             
               <p class="note note-info">
                 
@@ -319,49 +319,27 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>Spring 是目前主流的 Java Web 开发框架，是 Java 世界最为成功的框架。Spring框架是由于软件开发的复杂性而创建的。Spring使用的是基本的JavaBean来完成以前只可能由EJB完成的事情。然而，Spring的用途不仅仅限于服务器端的开发。从简单性、可测试性和松耦合性角度而言，绝大部分Java应用都可以从Spring中受益。该框架是一个轻量级的开源框架，具有很高的凝聚力和吸引力。Spring 框架不局限于服务器端的开发。从简单性、可测试性和松耦合的角度而言，任何 Java 应用都可以从 Spring 中受益。Spring 框架还是一个超级粘合平台，除了自己提供功能外，还提供粘合其他技术和框架的能力。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
-<p>作用：会去扫描指定路径下面的@Component注解。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://img-blog.csdnimg.cn/56e2375b5a6f41f6b18050e27c3ee999.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>表示某一些条件。可以放在类上和方法上。</p>
 </blockquote>
-<p>除了扫描路径之外，它还有两个重要的参数：includeFilters、excludeFilters。</p>
-<h2 id="includeFilters属性"><a href="#includeFilters属性" class="headerlink" title="includeFilters属性"></a>includeFilters属性</h2><p>首先来看一个示例：</p>
-<p>自定义注解代替@Component：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation.TestValue;<br><br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Scope;<br><br><span class="hljs-keyword">import</span> java.lang.annotation.ElementType;<br><span class="hljs-keyword">import</span> java.lang.annotation.Retention;<br><span class="hljs-keyword">import</span> java.lang.annotation.RetentionPolicy;<br><span class="hljs-keyword">import</span> java.lang.annotation.Target;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/12 08:08</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Target(&#123;ElementType.TYPE&#125;)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> OurAnno &#123;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs javascript">package com.SpringTestAnnotation.TestValue;<br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Conditional;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author <span class="hljs-variable">DragonOne</span></span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date </span>2022/6/10 21:56</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br>@Component<br>@Conditional(value = &#123;OurCondi.class&#125;)<br>public <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OrderS</span> </span>&#123;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
-<p>注解上面的两个直接Copy的是@Component中的。</p>
-<p>然后使用自定义注解从而代替原本的@Component注解：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation.TestValue;<br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 21:56</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@OurAnno</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OrderS</span> </span>&#123;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-
-<p>配置类：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation;<br><br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.OrderS;<br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.OurAnno;<br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.Per;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowire;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.*;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 11:16</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@ComponentScan(&quot;com.SpringTestAnnotation&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestConfig</span> </span>&#123;<br>    <br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+<p>表示：用@Component表示OrderS会成为一个Bean，但是有一个前提条件：@Conditional(value = {OurCondi.class})，具体的前提条件就是写在OurCondi实现类中。此类需要实现Condition接口（切记不要导出包），重新匹配方法matches。</p>
+<p>匹配规则：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation.TestValue;<br><br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Condition;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.ConditionContext;<br><span class="hljs-keyword">import</span> org.springframework.core.type.AnnotatedTypeMetadata;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/13 10:52</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OurCondi</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Condition</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">matches</span><span class="hljs-params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> </span>&#123;<br>      <span class="hljs-comment">//自定义规则，必须返回true才行，如果返回false则表示不满足条件，也就不会放到容器中</span><br>      <span class="hljs-comment">// ....</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
 
 
-
-
-<p>然后测试：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation;<br><br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.Per;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 11:16</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestAnnotation</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        AnnotationConfigApplicationContext applicationContext = <span class="hljs-keyword">new</span> AnnotationConfigApplicationContext(TestConfig.class);<br>        System.out.println(applicationContext.getBean(<span class="hljs-string">&quot;orderS&quot;</span>));<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-
-<p>结果出现报错：表示找不到Bean。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">No bean named <span class="hljs-string">&#x27;orderS&#x27;</span> available<br></code></pre></div></td></tr></table></figure>
-
-<p>我们再修改配置类中的@ComponentScan注解：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation;<br><br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.OrderS;<br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.OurAnno;<br><span class="hljs-keyword">import</span> com.SpringTestAnnotation.TestValue.Per;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowire;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.*;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/10 11:16</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@ComponentScan(value = &quot;com.SpringTestAnnotation&quot;,includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,value = OurAnno.class))</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestConfig</span> </span>&#123;<br><br>&#125;<br><br></code></pre></div></td></tr></table></figure>
-
-<p>然后再跑上面的测试代码。可以发现这时是可以成功运行的。</p>
-<h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>通过添加此属性，从而指定符合某种条件下的类就可以是我们的Bean。（个人理解：就是修改了成为Bean的条件）</p>
-<p>下面代码的作用：通过添加的包含过滤器（includeFilters），只要类上有OurAnno这个注解，就会把这个类当成是一个Bean（type = FilterType.ANNOTATION,value = OurAnno.class）。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@ComponentScan(value = &quot;com.SpringTestAnnotation&quot;,includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION,value = OurAnno.class))</span><br></code></pre></div></td></tr></table></figure>
-
-<p>其中，<code>type</code>有很多类型：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">FilterType</span> </span>&#123;<br>    ANNOTATION,<br>    ASSIGNABLE_TYPE,<br>    ASPECTJ,<br>    REGEX,<br>    CUSTOM;<br><br>    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">FilterType</span><span class="hljs-params">()</span> </span>&#123;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="ConditionContext"><a href="#ConditionContext" class="headerlink" title="ConditionContext"></a>ConditionContext</h2><p>可以拿到Spring容器层面里的东西，如BeanFactory等。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.SpringTestAnnotation.TestValue;<br><br><br><span class="hljs-keyword">import</span> org.springframework.context.annotation.Condition;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.ConditionContext;<br><span class="hljs-keyword">import</span> org.springframework.core.type.AnnotatedTypeMetadata;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/13 10:52</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OurCondi</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Condition</span> </span>&#123;<br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">matches</span><span class="hljs-params">(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata)</span> </span>&#123;<br>    System.out.println(conditionContext.getBeanFactory());<br>    System.out.println(conditionContext.getClassLoader());<br>    System.out.println(conditionContext.getClass());<br>    System.out.println(conditionContext.getEnvironment());<br>    System.out.println(conditionContext.getRegistry());<br>    System.out.println(conditionContext.getResourceLoader());<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="excludeFilters"><a href="#excludeFilters" class="headerlink" title="excludeFilters"></a>excludeFilters</h2><blockquote>
-<p>作用</p>
-</blockquote>
-<p>通过上面的属性可以类比这个属性，上面的包含，而这个属性就是排除。即作用和上面的<code>includeFilters</code>属性作用相反。也就是说：只要类上有OurAnno这个注解，那么这个类就<code>不能</code>成为一个Bean（type = FilterType.ANNOTATION,value = OurAnno.class）。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>ComponentScan中还有一种方式，叫作：扫描索引。即在文件进行设置。这种方式这里就不再记录了，可自行搜索。</p>
+
+
+<h2 id="AnnotatedTypeMetadata"><a href="#AnnotatedTypeMetadata" class="headerlink" title="AnnotatedTypeMetadata"></a>AnnotatedTypeMetadata</h2><p>可以获取此条件是写在了哪一个类上面，以及类的一些信息。</p>
 
             </div>
             <hr>
@@ -395,7 +373,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/4f49ad7d.html">https://tothefor.com/DragonOne/4f49ad7d.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/be691686.html">https://tothefor.com/DragonOne/be691686.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -404,18 +382,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/be691686.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring注解-（五）@Conditional的作用</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/35473bb2.html">
-                        <span class="hidden-mobile">Spring注解-（三）@Configuration的作用</span>
+                      <a href="/DragonOne/4f49ad7d.html">
+                        <span class="hidden-mobile">Spring注解-（四）@ComponentScan的使用详解</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
