@@ -1,0 +1,836 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JVM-（六）运行时数据区-方法区 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM-（六）运行时数据区-方法区">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-09 20:43" pubdate>
+        June 9, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM-（六）运行时数据区-方法区</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 15, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
+<p>栈、堆、方法区的交互关系图</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/c6129e1a328c477ba70a50f6debbe463.png" srcset="/img/loading.gif"></p>
+<h2 id="方法区的基本理解"><a href="#方法区的基本理解" class="headerlink" title="方法区的基本理解"></a>方法区的基本理解</h2><ul>
+<li>方法区与Java堆一样，是各个线程共享的内存区域。</li>
+<li>方法区在JVM启动的时候被创建，并且它的实际的物理内存空间中和Java堆区一样都可以是不连续的。</li>
+<li>方法区的大小跟堆空间一样，可以选择固定大小或者可扩展。</li>
+<li>方法区的大小决定了系统可以报错多少个类，如果系统定义了太多的类，导致方法区溢出，虚拟机同样会抛出内存溢出错误。</li>
+<li>关闭JVM会释放方法区的内存。</li>
+</ul>
+<blockquote>
+<p>变化</p>
+</blockquote>
+<ul>
+<li>在JDK及其以前，把方法区称为永久代。从JDK8开始，使用元空间取代了永久代。类似于接口和其实现类之间的关系，方法区为接口，永久代和元空间为其实现类。</li>
+<li>元空间的本质和永久代类似，都是对JVM规范中方法区的实现。不过元空间与永久代最大的区别在于：元空间不在虚拟机设置的内存中，而是使用本地内存。</li>
+<li>永久代、元空间二者不只是名字变了，内部结构也调整了。（如字符串常量池、静态变量等从方法区中移到了堆空间中）</li>
+</ul>
+<h2 id="设置大小"><a href="#设置大小" class="headerlink" title="设置大小"></a>设置大小</h2><p>方法区的大小不一定是固定的，JVM可以根据应用的需要动态调整。</p>
+<blockquote>
+<p>JDK7及以前：永久代</p>
+</blockquote>
+<ul>
+<li>通过 <code>-XX:PermSize</code>来设置永久代初始分配空间。默认值是20.75M。</li>
+<li><code>-XX:MaxPermSize</code>来设定永久代最大可分配空间。32位机器默认是64M，64位机器默认是82M。</li>
+<li>当JVM加载的类信息容量超过了方法区的大小，会报OOM。</li>
+</ul>
+<p>查看默认大小，命令窗口中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jps<br>jinfo -flag PermSize xxxID<br>jinfo -flag MaxPermSize xxxID<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>📢注意：在JDK8环境下是无法跑后两个命令！！！</strong></p>
+<blockquote>
+<p>JDK8及以后：元空间</p>
+</blockquote>
+<ul>
+<li>元空间大小可以使用参数 <code>-XX:MetaspaceSize</code>和 <code>-XX:MaxMetaspaceSize</code>指定，代替永久代中的原有参数。</li>
+<li>默认值依赖于平台。在Windows下，-XX:MetaspaceSize是21M（大约值），-XX:MaxMetaspaceSize的值为-1，即没有限制。</li>
+<li>与永久代不同，如果不指定大小，默认情况下，虚拟机会耗尽所有的可用系统内存。如果元数据区发生溢出，虚拟机一样会抛出OOM。</li>
+<li>-XX:MetaspaceSize：设置初始的元空间大小。对于一个64位的服务器JVM来说，其默认的-XX:MetaspaceSize值为21M（大约值）。这是初始的高水位线，一旦触及这个水位线，Full GC将会被触发并卸载没用的类（即这些类对应的类加载器不再存活），然后这个高水位线将会重置。新的高水位线的值取决于GC后释放了多少元空间。如果释放的空间不足，那么在不超过MaxMetaspaceSize时，适当提高该值。如果释放空间过多，则适当降低该值。</li>
+<li>如果初始化的高水位线设置过低，上述高水位线调整情况会发生很多次。通过垃圾回收器的日志可以观察到Full GC多次调用。为了避免频繁的GC，所以-XX:MetaspaceSize的值一般设置为一个较高的值。</li>
+</ul>
+<p>查看默认大小，命令窗口中输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jps <span class="hljs-comment"># 找到运行的程序对应的id</span><br>jinfo -flag PermSize xxxID<br>jinfo -flag MaxPermSize xxxID<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="内存结构"><a href="#内存结构" class="headerlink" title="内存结构"></a>内存结构</h2><blockquote>
+<p>方法区存储内容：用于存储已被虚拟机加载的类型信息、常量、静态变量、即时编译器（JIT）编译后的代码缓存等。</p>
+</blockquote>
+<h3 id="类型信息"><a href="#类型信息" class="headerlink" title="类型信息"></a>类型信息</h3><p>对每个加载的类型（类class、接口interface、枚举enum、注解annotation），JVM必须在方法区中存储以下类型信息：</p>
+<ul>
+<li>类型的完整有效名称（全名=包名.类名）</li>
+<li>类型直接父类的完整有效名（对于interface或者java.lang.object，都没有父类）</li>
+<li>类型的修饰符（public、abstract、final的某个子集）</li>
+<li>类型直接接口的一个有序列表</li>
+</ul>
+<h3 id="域（Field）信息"><a href="#域（Field）信息" class="headerlink" title="域（Field）信息"></a>域（Field）信息</h3><p>即成员变量。</p>
+<ul>
+<li>JVM必须在方法区中保存类型的所有域的相关信息以及域的声明顺序。</li>
+<li>域的相关信息包括：域名称、域类型、域修饰符（publi，private，protected，static，final，volatile，transient的某个子集）</li>
+</ul>
+<h3 id="方法（Method）信息"><a href="#方法（Method）信息" class="headerlink" title="方法（Method）信息"></a>方法（Method）信息</h3><p>JVM必须保存所有方法的以下信息，同域信息一样包括声明顺序：</p>
+<ul>
+<li>方法名称</li>
+<li>方法的返回类型（或void）</li>
+<li>方法参数的数量和类型（按顺序）</li>
+<li>方法的修饰符（public、private、protected、static、final、synchronized、native、abstract的一个子集）</li>
+<li>方法的方法体的字节码（bytecodes）、操作数栈、局部变量表及大小（abstract和native方法除外）</li>
+<li>当方法抛出异常的时候的异常表（abstract和native方法除外）<ul>
+<li>每个异常处理的开始位置、结束位置、代码处理在程序计数器中的偏移地址、被捕获的异常类的常量池索引。</li>
+</ul>
+</li>
+</ul>
+<h3 id="non-final的类变量"><a href="#non-final的类变量" class="headerlink" title="non-final的类变量"></a>non-final的类变量</h3><ul>
+<li>静态变量和类关联在一起，随着类的加载而加载，它们成为类数据在逻辑上的一部分。类变量被类的所有实例共享，即使没有类实例时也可以访问它。如下代码：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com;<br><br><span class="hljs-keyword">import</span> java.text.DecimalFormat;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/25 15:04</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllStu</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        TestFinal testFinal = <span class="hljs-keyword">null</span>;<br>        System.out.println(testFinal.age);<br>        System.out.println(testFinal.name);<br>        testFinal.show();<br><br>    &#125;<br><br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFinal</span></span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> age =<span class="hljs-number">13</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String name = <span class="hljs-string">&quot;tothefor&quot;</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;TestFinal show&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//输出</span><br><span class="hljs-number">13</span><br>tothefor<br>TestFinal show<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="全局常量"><a href="#全局常量" class="headerlink" title="全局常量"></a>全局常量</h3><p>被static修饰的final（或者使用final修饰的static）。</p>
+<ul>
+<li>被声明为final的类变量的处理方法则不同，每个全局常量在编译的时候就会被分配了。</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com;<br><br><br><span class="hljs-keyword">import</span> java.text.DecimalFormat;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/25 15:04</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllStu</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        TestFinal testFinal = <span class="hljs-keyword">null</span>;<br>        System.out.println(testFinal.ttf);<br>    &#125;<br><br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFinal</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> age = <span class="hljs-number">13</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> ttf = <span class="hljs-number">23</span>;<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+<p>然后运行一遍，再在生成的target文件夹对应的位置找到TestFinal.class文件。使用命令进行反编译：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">javap -v -p TestFinal.class<br><span class="hljs-comment"># javap -v -p TestFinal.class &gt; test.txt #将生成的内容输入到test.txt文件中</span><br></code></pre></div></td></tr></table></figure>
+
+<p>得到反编译后的结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Classfile /Users/dragonone/TestProject/facePro/face/target/classes/com/TestFinal.class<br>  Last modified <span class="hljs-number">2022</span>年<span class="hljs-number">6</span>月<span class="hljs-number">14</span>日; size <span class="hljs-number">383</span> bytes<br>  SHA-<span class="hljs-number">256</span> checksum 307be92a7d24c3f321162c59a75d5939ff04855ec4c74e27f9bbd9aa8ce2a8a9<br>  Compiled from <span class="hljs-string">&quot;AllStu.java&quot;</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">com</span>.<span class="hljs-title">TestFinal</span></span><br>  minor version: 0<br>  major version: <span class="hljs-number">52</span><br>  flags: (<span class="hljs-number">0x0020</span>) ACC_SUPER<br>  this_class: #3                          // com/TestFinal<br>  super_class: #4                         // java/lang/Object<br>  interfaces: <span class="hljs-number">0</span>, fields: <span class="hljs-number">2</span>, methods: <span class="hljs-number">2</span>, attributes: <span class="hljs-number">1</span><br>Constant pool:<br>   #1 = Methodref          #4.#20         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V<br>   #2 = Fieldref           #3.#21         // com/TestFinal.age:I<br>   #3 = Class              #22            // com/TestFinal<br>   #4 = Class              #23            // java/lang/Object<br>   #5 = Utf8               age<br>   #6 = Utf8               I<br>   #7 = Utf8               ttf<br>   #8 = Utf8               ConstantValue<br>   #9 = Integer            23<br>  #10 = Utf8               &lt;init&gt;<br>  #11 = Utf8               ()V<br>  #12 = Utf8               Code<br>  #13 = Utf8               LineNumberTable<br>  #14 = Utf8               LocalVariableTable<br>  #15 = Utf8               this<br>  #16 = Utf8               Lcom/TestFinal;<br>  #17 = Utf8               &lt;clinit&gt;<br>  #18 = Utf8               SourceFile<br>  #19 = Utf8               AllStu.java<br>  #20 = NameAndType        #10:#11        // &quot;&lt;init&gt;&quot;:()V<br>  #21 = NameAndType        #5:#6          // age:I<br>  #22 = Utf8               com/TestFinal<br>  #23 = Utf8               java/lang/Object<br>&#123;<br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> age;<br>    descriptor: I<br>    flags: (<span class="hljs-number">0x0009</span>) ACC_PUBLIC, ACC_STATIC<br><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> ttf;<br>    descriptor: I<br>    flags: (<span class="hljs-number">0x0019</span>) ACC_PUBLIC, ACC_STATIC, ACC_FINAL<br>    ConstantValue: <span class="hljs-keyword">int</span> <span class="hljs-number">23</span><br><br>  com.TestFinal();<br>    descriptor: ()V<br>    flags: (<span class="hljs-number">0x0000</span>)<br>    Code:<br>      stack=<span class="hljs-number">1</span>, locals=<span class="hljs-number">1</span>, args_size=<span class="hljs-number">1</span><br>         <span class="hljs-number">0</span>: aload_0<br>         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V<br>         <span class="hljs-number">4</span>: <span class="hljs-keyword">return</span><br>      LineNumberTable:<br>        line <span class="hljs-number">47</span>: <span class="hljs-number">0</span><br>      LocalVariableTable:<br>        Start  Length  Slot  Name   Signature<br>            <span class="hljs-number">0</span>       <span class="hljs-number">5</span>     <span class="hljs-number">0</span>  <span class="hljs-keyword">this</span>   Lcom/TestFinal;<br><br>  <span class="hljs-keyword">static</span> &#123;&#125;;<br>    descriptor: ()V<br>    flags: (<span class="hljs-number">0x0008</span>) ACC_STATIC<br>    Code:<br>      stack=<span class="hljs-number">1</span>, locals=<span class="hljs-number">0</span>, args_size=<span class="hljs-number">0</span><br>         <span class="hljs-number">0</span>: bipush        <span class="hljs-number">13</span><br>         2: putstatic     #2                  // Field age:I<br>         <span class="hljs-number">5</span>: <span class="hljs-keyword">return</span><br>      LineNumberTable:<br>        line <span class="hljs-number">48</span>: <span class="hljs-number">0</span><br>&#125;<br>SourceFile: <span class="hljs-string">&quot;AllStu.java&quot;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>其中第37行到44行：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> age;<br>    descriptor: I<br>    flags: (<span class="hljs-number">0x0009</span>) ACC_PUBLIC, ACC_STATIC<br><br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> ttf;<br>    descriptor: I<br>    flags: (<span class="hljs-number">0x0019</span>) ACC_PUBLIC, ACC_STATIC, ACC_FINAL<br>    ConstantValue: <span class="hljs-keyword">int</span> <span class="hljs-number">23</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这就是两个静态变量在字节码文件中的区别。被final修饰的变量多一个<code>ConstantValue: int 23</code>。而这个值就是Java代码中赋给的值。</p>
+<h3 id="常量池"><a href="#常量池" class="headerlink" title="常量池"></a>常量池</h3><ul>
+<li><p>方法区内部包含了运行时常量池。</p>
+</li>
+<li><p>字节码文件内部包含了常量池。</p>
+</li>
+<li><p>一个有效的字节码文件中除了包含类的版本信息、字段、方法以及接口等描述信息外，还包含一项信息就是常量池表，包括各种字面量和对类型、域和方法的符号引用。</p>
+</li>
+<li><p>运行时常量池：在运行时把字节码文件中的常量池加载到方法区中就是运行时常量池。</p>
+</li>
+</ul>
+<blockquote>
+<p>常量池中存储的数据类型</p>
+</blockquote>
+<ul>
+<li>数量值</li>
+<li>字符串值</li>
+<li>类引用</li>
+<li>字段引用</li>
+<li>方法引用</li>
+</ul>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<p>常量池，可以看成是一张表，虚拟机指令根据这张常量表找到要执行的类名、方法名、参数类型、字面量等类型。</p>
+<h3 id="运行时常量池"><a href="#运行时常量池" class="headerlink" title="运行时常量池"></a>运行时常量池</h3><ul>
+<li><p>运行时常量池是方法区的一部分。</p>
+</li>
+<li><p>常量池表是Class文件的一部分，用于存放编译期生成的各种字面量与符号引用，这部分内容将在类加载后存放到方法区的运行时常量池中。</p>
+</li>
+<li><p>运行时常量池，在加载类和接口到虚拟机后，就会创建对应的运行时常量池。</p>
+</li>
+<li><p>JVM为每个已加载的类型（类或接口）都维护一个常量池。池中的数据项像数组项一样，是通过索引访问的。</p>
+</li>
+<li><p>运行时常量池中包含多种不同的常量，包括编译期就已经明确的数值字面量，也包括到运行期解析后才能够获得的方法或者字段引用。此时不再是常量池中的符号地址了，这里换为真实地址。</p>
+<ul>
+<li>运行时常量池，相对于Class文件常量池的另一重要特征是：具备动态性。（String.intern()）</li>
+</ul>
+</li>
+<li><p>运行时常量池类似于传统编程语言中的符号表，但是它所包含的数据却比符号表更加丰富一些。</p>
+</li>
+<li><p>当创建类或接口的运行时常量池时，如果构造运行时常量池所需要的内存空间超过了方法区所能提供的最大值，则JVM会抛出OOM。</p>
+</li>
+</ul>
+<h2 id="方法区的演变"><a href="#方法区的演变" class="headerlink" title="方法区的演变"></a>方法区的演变</h2><p>首先要明确的是：只有HotSpot才有永久代。对于BEA JRockit、IBM J9来说，是不存在永久代的概念。</p>
+<p>《深入理解 Java 虚拟机》第 3 版 2.2.5:</p>
+<p><img src="https://img-blog.csdnimg.cn/d1b87acca70b4c9fb5bb797155ed8d2f.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>HotSpot中方法区的变化：</p>
+</blockquote>
+<ul>
+<li>JDK6及之前：有永久代，静态变量存放在永久代上。</li>
+<li>JDK7：有永久代，但已经逐步”去永久代”，将字符串常量池、静态变量从永久代移到堆中。</li>
+<li>JDK8及之后：无永久代，取而代之的是元空间。类型信息、字段、方法、常量保存在本地内存的元空间，但字符串常量池、静态变量仍在堆中。</li>
+</ul>
+<p>如图：</p>
+<p>JDK6</p>
+<p><img src="https://img-blog.csdnimg.cn/1ae49b4dd4fb45afb8acce9cb9289e7e.png" srcset="/img/loading.gif" alt="JDK6"></p>
+<p>JDK7：</p>
+<p><img src="https://img-blog.csdnimg.cn/388b8feb340b481ab7a9f055ca09ce8f.png" srcset="/img/loading.gif" alt="JDK7"></p>
+<p>JDK8：方法区（元空间）已经从虚拟机中移到了本地内存。</p>
+<p>![JDK8](/Users/dragonone/Library/Application Support/typora-user-images/image-20220615185015266.png)</p>
+<h3 id="永久代为什么要被元空间替换"><a href="#永久代为什么要被元空间替换" class="headerlink" title="永久代为什么要被元空间替换"></a>永久代为什么要被元空间替换</h3><p>由于类的元数据分配在本地内存中，而元空间的最大可分配空间就是系统可用内存空间。</p>
+<blockquote>
+<p>为永久代设置空间大小是很难确定的。</p>
+</blockquote>
+<ul>
+<li>在某些场景下，如果动态加载类过多，容易产生永久代（Perm区）的OOM。例如，某个实际Web工程中，因为功能点比较多，在运行过程中，要不断动态加载很多类，经常出现致命错误。而元空间和永久代之间最大的区别在于：元空间并不在虚拟机中，而是使用本地内存。因此，默认情况下，元空间的大小仅受本地内存限制。</li>
+</ul>
+<blockquote>
+<p>对永久代进行调优是很困难的</p>
+</blockquote>
+<p>方法区的垃圾收集主要回收两部分内容：常量池中废弃的常量和不再使用的类型。</p>
+<h3 id="字符串常量池为什么要放到堆中"><a href="#字符串常量池为什么要放到堆中" class="headerlink" title="字符串常量池为什么要放到堆中"></a>字符串常量池为什么要放到堆中</h3><ul>
+<li>JDK7中将字符串常量池放到了堆空间中。因为永久代的回收效率很低，在Full GC的时候才会触发。而Full GC是老年代的空间不足、永久代不足时才会触发。所以就会导致字符串常量池回收效率不高。但是，在开发中会有大量的字符串被创建，回收效率低，容易导致永久代内存不足。而放到堆中，能及时回收内存。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JVM/">JVM</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/68841c2d.html">https://tothefor.com/DragonOne/68841c2d.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/1b5b3332.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JVM-（五）运行时数据区-堆内存总结</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/3933e14d.html">
+                        <span class="hidden-mobile">JVM-（四）运行时数据区-堆内存分配</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
