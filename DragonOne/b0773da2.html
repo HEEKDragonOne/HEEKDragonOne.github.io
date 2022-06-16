@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JVM-（十）StringTable字符串常量池 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM-（十）StringTable字符串常量池">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-16 23:43" pubdate>
+        June 16, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM-（十）StringTable字符串常量池</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 16, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="String的基本特性"><a href="#String的基本特性" class="headerlink" title="String的基本特性"></a>String的基本特性</h2><ul>
+<li>String：字符串，使用一对双引号引起来表示。</li>
+<li>String声明为final的，不可被继承。</li>
+<li>String实现了Serializable接口：表示字符串是支持序列化的；实现了Comparable接口：表示String可以比较大小。</li>
+<li>String在JDK8及以前内部定义了fianl char[] value用于存储字符串数据。而在JDK9时改为了byte[]数组加上一个编码标记。</li>
+</ul>
+<blockquote>
+<p>String代表不可变的字符序列，简称：不可变性。</p>
+</blockquote>
+<ul>
+<li>当对字符串重新赋值时，需要重写指定内存区域赋值，不能使用原有的value进行赋值。</li>
+<li>当对现有的字符串进行连接操作时，也需要重新指定内存区域赋值，不能使用原有的value进行赋值。</li>
+<li>当调用String的replac()方法修改指定字符或字符串时，也需要重新指定内存区域赋值，不能使用原有的value进行赋值。</li>
+</ul>
+<blockquote>
+<p>通过字面量的方式（区别于new）给一个字符串赋值，此时的字符串值声明在字符串常量池中。</p>
+</blockquote>
+<ul>
+<li>字符串常量池中是不会存储相同内容的字符串。</li>
+<li>String的String Pool是一个固定大小的Hashtable，默认值大小长度是1009（JDK6，注意不同JDK版本值不一样）。如果放进String Pool的String非常多，就会造成Hash冲突严重，从而导致链表会很长，而链表长了后直接会造成的影响就是当调用String.intern时性能会大幅下降。</li>
+<li>使用 <code>-XX:StringTableSize</code>可以设置StringTable的长度。</li>
+<li>在JDK6中StringTable是固定的，就是1009的长度，所以如果常量池中的字符串过多就会导致效率下降很快。StringTableSize设置没有要求。在JDK7中，StringTable的长度默认值是60013，从JDK8开始1009是可设置的最小值。</li>
+</ul>
+<p>运行代码：（主要目的就是让程序一直处于运行状态即可）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com;<br><br><br><span class="hljs-keyword">import</span> java.text.DecimalFormat;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.HashMap;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/25 15:04</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllStu</span> </span>&#123;<br><br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ThreadTest</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span>&#123;<br><br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>            System.out.println(<span class="hljs-string">&quot;ThreadTest进入线程：&quot;</span>+Thread.currentThread().getName());<br>            <span class="hljs-keyword">try</span> &#123;<br>                Thread.sleep(<span class="hljs-number">300000</span>);<br>            &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>                e.printStackTrace();<br>            &#125;<br>            System.out.println(<span class="hljs-string">&quot;ThreadTest线程结束：&quot;</span>+Thread.currentThread().getName());<br>        &#125;<br>    &#125;<br><br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br><br>        <span class="hljs-keyword">new</span> ThreadTest().start();<br><br>    &#125;<br><br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestFinal</span> </span>&#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> age = <span class="hljs-number">13</span>;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> ttf = <span class="hljs-number">23</span>;<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+<p>打开命令窗口，输入命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  ~ jps <span class="hljs-comment">#查看进程id</span><br>2420 Jps<br>2117 <br>2152 RemoteMavenServer36<br>2377 Launcher<br>2378 AllStu<br>➜  ~ jinfo -flag StringTableSize 2378 <span class="hljs-comment">#替换为跑的项目的对应id</span><br>-XX:StringTableSize=60013<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见默认值为60013（JDK8）。</p>
+<p>然后再通过设置虚拟机参数指定StringTable长度：-XX:StringTableSize=20。然后再跑上面两个命令，发现会报错如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">StringTable size of <span class="hljs-number">20</span> is invalid; must be between <span class="hljs-number">1009</span> and <span class="hljs-number">2305843009213693951</span><br>Error: Could not create the Java Virtual Machine.<br>Error: A fatal exception has occurred. Program will exit.<br></code></pre></div></td></tr></table></figure>
+
+<p>大概意思就说说：我们设置的值不对，必须是在1009到2305843009213693951之间的数。这也是上面提到过的1009是设置的最小值。</p>
+<p>然后将20改为2000再次尝试，发现可以正常查看设置之后的值为2000。</p>
+<blockquote>
+<p><strong>📢注意：当前测试环境为JDK8，如果环境为JDK6，那么可以设置任何值！！！还有就是JDK7中，虽然默认值为60013，但是参数设置时依旧可以设为任意值！！</strong></p>
+</blockquote>
+<ul>
+<li>JDK6：默认值为1009，设置参数-XX:StringTableSize的值可以为任意值。</li>
+<li>JDK7：默认值为60013，设置参数-XX:StringTableSize的值可以为任意值。</li>
+<li>JDK8：默认值为60013，设置参数-XX:StringTableSize的值的最小值为1009。</li>
+</ul>
+<h2 id="String的内存分配"><a href="#String的内存分配" class="headerlink" title="String的内存分配"></a>String的内存分配</h2><p>关于String字符串的创建和内存分配，具体也可见<a href="https://tothefor.com/DragonOne/8baf6c9b.html">《JAVA知识点-深入理解String字符串的创建和比较 》</a> </p>
+<ul>
+<li>在Java语言中有8种基本数据类型和一种比较特殊的类型String。这些类型为了使它们在运行过程中速度更快、更节省内存，都提供了一种常量池的概念。</li>
+<li>常量池就类似一个Java系统级别提供的缓存。8中基本数据类型的常量池都是系统协调的，String类型的常量池比较特殊，主要有两种使用方式：<ul>
+<li>直接使用双引号声明出来的String对象会直接存储在常量池中。如：String str = “tothefor.com”；</li>
+<li>如果不是用双引号声明的String对象，可以使用String提供的intern()方法将其放到常量池中，并返回此串的地址。如果在放入之前常量池中没有此字符串，则将此字符串放入并返回此地址；如果在放入之前常量池中就已经存在了此字符串，那么将返回已经存在的字符串的地址。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>字符串常量池在JVM中的位置</p>
+</blockquote>
+<ul>
+<li>Java 6及以前，字符串常量池存放在永久代。</li>
+<li>Java 7中，字符串常量池的位置调整到了Java堆内。<ul>
+<li>所有的字符串都保存在堆（heap）中，和其他普通对象一样，这样可以让你在进行调优应用时仅需要调整堆大小就可以了。</li>
+<li>字符串常量池概念原本使用得比较多，但是这个改动使得我们有足够的理由让我们重新考虑在Java7中使用String.intern()。</li>
+</ul>
+</li>
+<li>Java 8元空间，字符串常量在堆中。</li>
+</ul>
+<h2 id="intern-的使用"><a href="#intern-的使用" class="headerlink" title="intern()的使用"></a>intern()的使用</h2><p><strong>📢注意：在JDK6和JDK7及其之后的区别。</strong></p>
+<p>具体也可见<a href="https://tothefor.com/DragonOne/8baf6c9b.html">《JAVA知识点-深入理解String字符串的创建和比较 》</a> ，这里就只是补充一点。</p>
+<p>示例1：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>);<br>s.intern();<br>String s2 = <span class="hljs-string">&quot;1&quot;</span>;<br>System.out.println(s == s2);<br><span class="hljs-comment">// jdk6:false   jdk7/8:false</span><br></code></pre></div></td></tr></table></figure>
+
+<p>这个比较简单，因为第一行的s是在堆空间中，而s2是在字符串常量池中。因为在第一行的时候，字符串常量池中就已经有了字符串”1”，所以s.intern();返回的地址就是在字符串常量池中的”1”。所以，这两个就不相等。</p>
+<p>示例2：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s3 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>) + <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>);<br>s3.intern();<br>String s4 = <span class="hljs-string">&quot;11&quot;</span>;<br>System.out.println(s3 == s4);<br><span class="hljs-comment">//jdk6：false    jdk7/8：true</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>JDK6：在执行String.intern()方法时，如果字符串常量池中没有当前字符串，则会创建该字符串的一个对象。</p>
+</blockquote>
+<p>而第一行执行完后，常量池中有：”1”；堆中有：”1”、”1”、”11”。而s3就是堆中的”11”；当执行s3.intern();时，发现常量池中并没有字符串”11”，所以就会创建一个该字符串的<code>对象</code>。执行第三行的时候，发现常量池中已经存在了字符串”11”，所以直接返回已经存在的字符串地址。此时，s3指向的是堆中的”11”，而s4指向的是常量池中的”11”，所以两个不相等。</p>
+<blockquote>
+<p>JDK7：在执行String.intern()方法时，如果字符串常量池中没有当前字符串，则会在常量池中创建一个指向该字符串的引用。即常量池中存储的地址就是堆中该字符串的地址，两个共用一个地址。原因：因为在JDK7及其之后，字符串常量池已经放在了堆中了，所以为了节省空间，常量池中直接引用堆（非字符串常量池）中的地址即可。</p>
+</blockquote>
+<p>而第一行执行完后，常量池中有：”1”；堆中有：”1”、”1”、”11”。而s3就是堆中的”11”；当执行s3.intern();时，发现常量池中并没有字符串”11”，所以就会创建一个指向该字符串的<code>引用</code>。执行第三行的时候，发现常量池中已经存在了字符串”11”，所以直接返回已经存在的字符串地址。此时，s3指向的是堆中的”11”，而s4指向的是常量池中的”11”，但常量池中的”11”的地址其实就是堆中的”11”的地址，所以两个相等。</p>
+<p>示例3：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s3 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>) + <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>);<br>String s4 = <span class="hljs-string">&quot;11&quot;</span>;<br>s3.intern();<br>System.out.println(s3 == s4);<br><span class="hljs-comment">//false</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>JDK8：而第一行执行完后，常量池中有：”1”；堆中有：”1”、”1”、”11”。而s3就是堆中的”11”；</p>
+<p>然后执行第二行代码，因为此时在字符串常量池中还没有字符串”11”，所以此时会在字符串常量池进行创建一个字符串”11”（这里需要注意和之前的区别，这里不再是引用其他的，而是实实在在的一个对象）。</p>
+<p>当执行s3.intern();时，发现常量池中有字符串”11”，则返回已经有的字符串的地址。这里并没有什么用。</p>
+<p>所以，最后s3和s4是不相等的。因为s3是在堆中，而s4是在字符串常量池中。</p>
+</blockquote>
+<p>补充：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String s3 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>) + <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;1&quot;</span>);<br>String s4 = <span class="hljs-string">&quot;11&quot;</span>;<br>String s5 = s3.intern();<br>System.out.println(s3 == s4); <span class="hljs-comment">//false</span><br>System.out.println(s4 == s5); <span class="hljs-comment">//true</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="垃圾回收"><a href="#垃圾回收" class="headerlink" title="垃圾回收"></a>垃圾回收</h2><p>设置虚拟机参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms15m -Xmx15m -XX:+PrintStringTableStatistics -XX:+PrintGCDetails<br></code></pre></div></td></tr></table></figure>
+
+<p>运行代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>  <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">100000</span>;++i)&#123;<br>    String.valueOf(i).intern();<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">[GC (Allocation Failure) [PSYoungGen: 4096K-&gt;496K(4608K)] 4096K-&gt;584K(15872K), <span class="hljs-number">0.0012761</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.00</span>, real=<span class="hljs-number">0.00</span> secs] <br>Heap<br> PSYoungGen      total 4608K, used 3946K [<span class="hljs-number">0x00000007bfb00000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 4096K, <span class="hljs-number">84</span>% used [<span class="hljs-number">0x00000007bfb00000</span>,<span class="hljs-number">0x00000007bfe5eb80</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">96</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff7c010</span>,<span class="hljs-number">0x00000007bff80000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br> ParOldGen       total 11264K, used 88K [<span class="hljs-number">0x00000007bf000000</span>, <span class="hljs-number">0x00000007bfb00000</span>, <span class="hljs-number">0x00000007bfb00000</span>)<br>  object space 11264K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bf000000</span>,<span class="hljs-number">0x00000007bf016000</span>,<span class="hljs-number">0x00000007bfb00000</span>)<br> Metaspace       used 3259K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 357<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br>SymbolTable statistics:<br>Number of buckets       :     <span class="hljs-number">20011</span> =    <span class="hljs-number">160088</span> bytes, avg   <span class="hljs-number">8.000</span><br>Number of entries       :     <span class="hljs-number">12798</span> =    <span class="hljs-number">307152</span> bytes, avg  <span class="hljs-number">24.000</span><br>Number of literals      :     <span class="hljs-number">12798</span> =    <span class="hljs-number">493288</span> bytes, avg  <span class="hljs-number">38.544</span><br>Total footprint         :           =    <span class="hljs-number">960528</span> bytes<br>Average bucket size     :     <span class="hljs-number">0.640</span><br>Variance of bucket size :     <span class="hljs-number">0.641</span><br>Std. dev. of bucket size:     <span class="hljs-number">0.801</span><br>Maximum bucket size     :         <span class="hljs-number">6</span><br>StringTable statistics:<br>Number of buckets       :     <span class="hljs-number">60013</span> =    <span class="hljs-number">480104</span> bytes, avg   <span class="hljs-number">8.000</span><br>Number of entries       :     <span class="hljs-number">61231</span> =   <span class="hljs-number">1469544</span> bytes, avg  <span class="hljs-number">24.000</span><br>Number of literals      :     <span class="hljs-number">61231</span> =   <span class="hljs-number">3438104</span> bytes, avg  <span class="hljs-number">56.150</span><br>Total footprint         :           =   <span class="hljs-number">5387752</span> bytes<br>Average bucket size     :     <span class="hljs-number">1.020</span><br>Variance of bucket size :     <span class="hljs-number">0.797</span><br>Std. dev. of bucket size:     <span class="hljs-number">0.893</span><br>Maximum bucket size     :         <span class="hljs-number">5</span><br></code></pre></div></td></tr></table></figure>
+
+<p>其中，第一行表示进行了垃圾收集，是在年轻代中进行的收集。4096K-&gt;496K表示从原来的4096K到现在的496K。</p>
+<h2 id="G1的String去重操作（了解）"><a href="#G1的String去重操作（了解）" class="headerlink" title="G1的String去重操作（了解）"></a>G1的String去重操作（了解）</h2><blockquote>
+<p>背景：对许多Java应用（有大有小）做的测试得出的结果：</p>
+</blockquote>
+<ul>
+<li>堆存活数据集合里面String对象占了25%。</li>
+<li>堆存活数据集合里面重复的String对象有13.5%。</li>
+<li>String对象的平均长度是45。</li>
+</ul>
+<blockquote>
+<p>许多大规模的Java应用的瓶颈在于内存，测试表明，在这些类型的应用里面，Java堆中存活的数据集合差不多25%是String对象。更进一步，这里面差不多一半String对象是重复的，重复的意思是说：string1.equals(string2)=true。堆上存在重复的String对象必然是一种内存的浪费。这个项目将在G1垃圾收集器中实现自动持续对重复的String对象进行去重，这样就能避免浪费内存。</p>
+</blockquote>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><ul>
+<li>当垃圾收集器工作的时候，会访问堆上存活的对象。对每一个访问的对象都会检查是否是候选的要去重的String对象。</li>
+<li>如果是，把这个对象的一个引用插入到队列中等待后续的处理。一个去重的线程在后台运行，处理这个队列。处理队列的一个元素意味着从队列删除这个元素，然后尝试去重它引用的String对象。</li>
+<li>使用一个hashtable来记录所有的被String对象使用的不重复的char数组。当去重的时候，会查这个hashtable，来看堆上是否已经存在一个一模一样的char数组。</li>
+<li>如果存在，String对象会被调整引用那个数组，释放对原来的数组的引用，最终会被垃圾收集器回收掉。</li>
+<li>如果查找失败，char数组会被插入到hashtable，这样以后的时候就可以共享这个数组了。</li>
+</ul>
+<h3 id="命令行选项"><a href="#命令行选项" class="headerlink" title="命令行选项"></a>命令行选项</h3><ul>
+<li>UseStringDeduplication（bool）：开启String去重，默认是不开启的，需要手动开启。</li>
+<li>PrintStringDeduplicationStatistics（bool）：打印详细的去重统计信息。</li>
+<li>StringDeduplicationAgeThreshold（uintx）：达到这个年龄的String对象被认为是去重的候选对象。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JVM/">JVM</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/b0773da2.html">https://tothefor.com/DragonOne/b0773da2.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/ed1c2e1a.html">
+                        <span class="hidden-mobile">JVM-（九）执行引擎</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
