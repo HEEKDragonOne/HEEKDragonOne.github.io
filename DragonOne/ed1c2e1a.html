@@ -1,0 +1,870 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JVM-（九）执行引擎 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM-（九）执行引擎">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-16 12:43" pubdate>
+        June 16, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM-（九）执行引擎</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 16, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>执行引擎是Java虚拟机核心的组成部分之一。”虚拟机”是一个相对于”物理机”的概念，这两种机器都有代码执行能力，其区别是物理机的执行引擎是直接建立在处理器、缓存、指令集和操作系统层面上的，而虚拟机的执行引擎则是由软件自行实现的，因此可以不受物理条件制约地定制指令集与执行引擎的结构体系，能够执行那些不被硬件直接支持的指令集格式。</p>
+<p>JVM的主要任务负责装载字节码到其内部，但字节码并不能够直接运行在操作系统之上，因为字节码指令并非等价于本地机器指令，它内部包含的仅仅只是一些能够被JVM所识别的字节码指令、符号表，以及其他辅助信息。</p>
+<p>执行引擎的任务就是将字节码指令解释/编译为对应平台上的本地机器指令才可以。简单来说，JVM中的执行引擎充当了将高级语言翻译为机器语言的译者。</p>
+<h2 id="执行引擎的工作过程"><a href="#执行引擎的工作过程" class="headerlink" title="执行引擎的工作过程"></a>执行引擎的工作过程</h2><p>从外观看，所有的Java虚拟机的执行引擎输入、输出都是一致的：输入的是字节码二进制流，处理过程是字节码解析执行的等效过程，输出的是执行结果。</p>
+<h2 id="Java代码编译和执行的过程"><a href="#Java代码编译和执行的过程" class="headerlink" title="Java代码编译和执行的过程"></a>Java代码编译和执行的过程</h2><p><img src="https://img-blog.csdnimg.cn/7422d4c382a7479aa57dfc031afc1d23.png" srcset="/img/loading.gif"></p>
+<p>大部分的程序代码转换成物理机的目标代码或虚拟机能执行的指令集之前，都需要经过上图中的各个步骤。</p>
+<p>其中，绿色路径和蓝色路径为可选路径，分别对应的就解释（Interpreter）和编译（Just In Time Compiler），所以这也是为什么Java语言被称为半编译半解释型语言。</p>
+<p>而很多学Java的人都觉得Java是半编译半解释型语言的原因是因为：将<code>.java</code>文件编译成为<code>.class</code>文件，然后再解释运行，这就是Java是半编译半解释型语言的原因。这样理解是错误的！！！</p>
+<p>Java代码编译是由Java源码编译器来完成的，执行流程如图：</p>
+<p><img src="https://img-blog.csdnimg.cn/69ab0c35c5264700a1b8994a88ecdebd.png" srcset="/img/loading.gif"></p>
+<p>Java字节码的执行是由JVM执行引擎来完成的，执行流程如图：</p>
+<p>![](/Users/dragonone/Library/Application Support/typora-user-images/image-20220616012143366.png)</p>
+<blockquote>
+<p>什么是解释器，什么是JIT编译器？</p>
+</blockquote>
+<ul>
+<li>解释器（Interpreter）：当Java虚拟机启动时会根据预定义的规范对字节码采用逐行解释的方式执行，将每条字节码文件中的内容”翻译”为对应平台的本地机器指令执行。</li>
+<li>JIT（Just In Time Compiler）编译器：就是虚拟机将源代码直接编译成和本地机器平台相关的机器语言。</li>
+</ul>
+<blockquote>
+<p>为什么说Java是半编译半解释型语言？</p>
+</blockquote>
+<p>现在JVM在执行Java代码的时候，通常都会将解释执行（第一张图的绿色路径）与编译执行（第一张图的蓝色路径）二者结合起来进行。</p>
+<p>然后下面这张图可以和第一张图对应着看，也许会更好的理解。</p>
+<p><img src="https://img-blog.csdnimg.cn/f4ae6e00d5b149dfaaf9f43bbbcebf4c.png" srcset="/img/loading.gif"></p>
+<h2 id="理解执行引擎"><a href="#理解执行引擎" class="headerlink" title="理解执行引擎"></a>理解执行引擎</h2><p>以将各国的语言进行翻译执行的一个过程。其中的翻译机，可以理解为第一张图中的绿色路径和蓝色路径。而这也是Java语言是半解释半编译型语言的原因。</p>
+<p><img src="https://img-blog.csdnimg.cn/68c2f897ca8d40ff9da91c68af0fbf5e.png" srcset="/img/loading.gif"></p>
+<h2 id="机器码、指令、汇编语言等（了解）"><a href="#机器码、指令、汇编语言等（了解）" class="headerlink" title="机器码、指令、汇编语言等（了解）"></a>机器码、指令、汇编语言等（了解）</h2><h3 id="机器码"><a href="#机器码" class="headerlink" title="机器码"></a>机器码</h3><ul>
+<li>各种用二进制编码方式表示的指令，叫做机器指令码。这就是机器语言。用它编写的程序一经输入计算机，CPU直接读取运行，因此和其他语言编的程序相比，执行速度最快。</li>
+<li>机器指令与CPU紧密相关，所以不同种类的CPU所对应的机器指令也就不同。</li>
+</ul>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><ul>
+<li>由于机器码是有0有1组成的二进制序列，可读性太差，于是人们发明了指令。</li>
+<li>指令就是把机器码中特定的0和1序列，简化成对应的指令（一般为英文简写，如：mov、inc等），可读性稍好。</li>
+<li>由于不同的硬件平台，执行同一个操作，对应的机器码可能不同，所以不同的硬件平台的同一种指令（如mov），对应的机器码也可能不同。</li>
+</ul>
+<h3 id="指令集"><a href="#指令集" class="headerlink" title="指令集"></a>指令集</h3><ul>
+<li>不同的硬件平台，各自支持的指令是有差别的。因此每个平台所支持的指令，称之为对应平台的指令集。</li>
+<li>常见的指令集：<ul>
+<li>x86指令集，对应的是x86架构的平台。</li>
+<li>ARM指令集，对应的是ARM架构的平台。</li>
+</ul>
+</li>
+</ul>
+<h3 id="汇编语言"><a href="#汇编语言" class="headerlink" title="汇编语言"></a>汇编语言</h3><ul>
+<li>由于指令的可读性还是太差，所以又发明了汇编语言。</li>
+<li>在汇编语言中，用助记符（Mnemonics）代替机器指令的操作码，用地址符号（Symbol）或标号（Label）代替指令或操作数的地址。</li>
+<li>在不同的硬件平台，汇编语言对应着不同的机器语言指令集，通过汇编过程转换成机器指令。<ul>
+<li>由于计算机只认识指令码，所以用汇编语言编写的程序还必须翻译成机器指令码，计算机才能识别和执行。</li>
+</ul>
+</li>
+</ul>
+<h3 id="字节码"><a href="#字节码" class="headerlink" title="字节码"></a>字节码</h3><ul>
+<li>字节码是一种中间状态（中间吗）的二进制代码（文件），它比机器码更抽象，需要直译器转译后才能成为机器码。</li>
+<li>字节码主要为了实现特定软件运行和软件环境、与硬件环境无关。</li>
+<li>字节码的实现方式是通过编译器和虚拟机器。编译器将源码编译成字节码，特定平台上的虚拟机器将字节码转译为可以直接执行的指令。<ul>
+<li>字节码的典型应用为Java bytecode。</li>
+</ul>
+</li>
+</ul>
+<h2 id="解释器"><a href="#解释器" class="headerlink" title="解释器"></a>解释器</h2><p>JVM设计者们的初衷仅仅只是单纯地为了满足Java程序实现跨平台特性，因此避免采用静态编译的方式直接生成本地机器指令，从而诞生了实现解释器在运行时采用逐行解释字节码执行程序的想法。</p>
+<blockquote>
+<p>可能有很多人想过或曾经想过：为什么Java要先生成class文件，而不是直接给虚拟机，不同系统的虚拟机一样的可以实现跨平台。</p>
+</blockquote>
+<ul>
+<li>个人理解：术业有专攻。看下面这张图，从Java源文件到字节码文件需要5个小时，而不同系统的JVM将字节码文件解释为指令集又需要10小时。但是，如果直接让JVM将Java源文件生成指令集，则可能不止需要15个小时。就好比：这一项工作是由两个人完成的，一个人负责前端，另一个人负责后端。但是现在让一个人完成前后端，需要的时间可能远大于两个人需要的时间总和。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/8cb80f924f504d73971b58c0de4abddf.png" srcset="/img/loading.gif"></p>
+<h3 id="解释器分类"><a href="#解释器分类" class="headerlink" title="解释器分类"></a>解释器分类</h3><p>在Java的发展历史里，一共有两套解释执行器，即古老的字节码解释器、现在普遍使用的模板解释器。</p>
+<ul>
+<li>字节码解释器在执行时通过纯软件代码模拟字节码的执行，效率非常低下。</li>
+<li>而模板解释器将每一条字节码和一个模板函数相关联，模板函数中直接产生这条字节码执行时的机器码，从而很多程度上提高了解释器的性能。<ul>
+<li>在HotSpot VM中，解释器主要由Interpreter模块和Code模块构成。<ul>
+<li>Interpreter模块：实现了解释器的核心功能。</li>
+<li>Code模块：用于管理HotSpot VM在运行时生成的本地机器指令。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="JIT编译器"><a href="#JIT编译器" class="headerlink" title="JIT编译器"></a>JIT编译器</h2><p>Java代码的执行分类：</p>
+<ul>
+<li>第一种是将源代码编译成字节码文件，然后在运行时通过解释器将字节码文件转为机器码执行。</li>
+<li>第二种是编译执行（直接编译成机器码）。现代虚拟机为了提高执行效率，会使用即时编译技术（JIT）将方法编译成机器码后再执行。</li>
+</ul>
+<blockquote>
+<p>HotSpot VM是目前市面上高性能虚拟机的代表作之一。它采用解释器与即时编译器并存的架构。在Java虚拟机运行时，解释器和即时编译器能够互相协作，各自取长补短，尽力去选择最合适的方式来权衡编译本地代码的时间和直接解释执行代码的时间。</p>
+</blockquote>
+<blockquote>
+<p>HotSpot JVM的执行方式</p>
+</blockquote>
+<ul>
+<li>当虚拟机启动的时候，解释器可以首先发挥作用，而不必等待即时编译器全部编译完成再执行，这样可以省去许多不必要的编译时间。并且随着程序运行时间的推移，即时编译器逐渐发挥作用，根据<code>热点探测</code>功能，将有价值的字节码编译为本地机器指令，以换取更高的程序执行效率。</li>
+</ul>
+<blockquote>
+<p>既然HotSPot VM中已经内置JIT编译器了，为什么还需要再使用解释器来”拖累”程序的执行性能呢？比如JRockit VM内部就不包含解释器，字节码全部都依赖即时编译器编译后执行。</p>
+</blockquote>
+<ul>
+<li>我们知道的是，当程序启动后，解释器可以马上发挥作用，省去编译的时间，立即执行。编译器要想发挥作用，把代码编译成本地代码，需要一定的执行时间。但编译为本地代码后，执行效率高。</li>
+<li>所以，尽管JRockit VM中程序的执行性能会非常高效，但程序在启动时必然需要花费更长的时间来进行编译。对于服务端应用来说，启动时间并非是关注重点，但对于那些看中启动时间的应用场景而言，或许就需要采用解释器与即时编译器并存的架构来换取一个平衡点。在此模式下，当Java虚拟器启动时，解释器可以首先发挥作用，而不必等待即时编译器全部编译完成后再执行，这样可以省去许多不必要的编译时间。随着时间的推移，编译器发挥作用，把越来越多的代码编译成本地代码，获得更高的执行效率。同时，解释执行在编译器进行激进优化不成立的时候，可以作为编译器的备用方案。</li>
+</ul>
+<h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><ul>
+<li>Java语言的”编译期”其实是一段”不确定”的操作过程，因为它可能是指一个前端编译器（叫”编译器的前端”更准确一些），把 .java文件转变成 .class文件的过程。</li>
+<li>也可能是指虚拟机的后端运行期编译器（JIT编译器），把字节码转变成机器码的过程。</li>
+<li>还可能是指使用静态提前编译器（AOT编译器），直接把 .java文件编译成本地机器代码的过程。</li>
+</ul>
+<blockquote>
+<p>使用</p>
+</blockquote>
+<ul>
+<li>前端编译器：Sun的Javac、Eclipse JDT 中的增量式编译器（ECJ）。</li>
+<li>JIT编译器：HotSpot VM 的c1、c2编译器。</li>
+<li>AOT编译器：GNU Compiler for the Java（GUJ）、Excelsior JET。</li>
+</ul>
+<h3 id="热点代码及探测方式"><a href="#热点代码及探测方式" class="headerlink" title="热点代码及探测方式"></a>热点代码及探测方式</h3><ul>
+<li><p>是否需要启动JIT编译器将字节码直接编译为对应平台的本地机器指令，则需要根据代码被调用执行的频率而定。关于那些需要被编译为本地代码的字节码，也被称之为”<code>热点代码</code>“，JIT编译器在运行时会针对那些频繁被调用的”热点代码”做出<code>深度优化</code>，将其直接编译为对应平台的本地机器指令，以此提升Java程序的执行性能。</p>
+</li>
+<li><p>热点代码：一个被<code>多次</code>调用的方法，或者是一个方法体内部循环次数比较多的循环体都可以被称之为热点代码。因此都可以通过JIT编译器编译为本地机器指令。由于这种编译方式发生在方法的执行过程中，因此也被称之为<code>栈上替换</code>，或简称为<code>OSR（On Stack Replacement）编译</code>。</p>
+</li>
+<li><p>至于一个方法究竟要被调用多少次，或者一个循环体究竟要执行多少次循环才可以达到这个标准。必然需要一个明确的阈值，JIT编译器才会将这些热点代码编译为本地机器指令执行。这里主要依靠<code>热点探测功能</code>实现。目前HotSpot VM所采用的热点探测方式是基于计数器的热点探测。</p>
+</li>
+<li><p>采用基于计数器的热点探测，HotSpot VM将会为每一个方法都建立2个不同类型的计数器，分别为<code>方法调用计数器</code>（Invocation Counter）和<code>回边计数器</code>（Back Edge Counter）。</p>
+<ul>
+<li>方法调用计数器用于统计方法的调用次数。</li>
+<li>回边计数器则用于统计循环体执行的循环次数。</li>
+</ul>
+</li>
+</ul>
+<h4 id="方法调用计数器"><a href="#方法调用计数器" class="headerlink" title="方法调用计数器"></a>方法调用计数器</h4><ul>
+<li>这个计数器用于统计方法被调用的次数，默认阈值在<code>Client模式下是1500次</code>，在<code>Server模式下是10000次</code>。超过这个阈值，就会触发JIT编译。</li>
+<li>阈值的大小可以通过虚拟机参数 <code>-XX:CompileThreshold</code>来设置。</li>
+<li>当一个方法被调用时，会先检查该方法是否存在被JIT编译过的版本，如果存在，则优先使用编译后的本地代码来执行。如果不存在已被编译过的版本，则将此方法的调用计数器值加1，然后判断方法调用次数与回边计数器值之和是否超过方法调用计数器的阈值。如果超过阈值，那么将会向即时编译器提交一个该方法的代码编译请求。具体流程如下图所示：</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/c99cd5568a784bde933d933da2bc3e0b.png" srcset="/img/loading.gif"></p>
+<h5 id="热度衰减"><a href="#热度衰减" class="headerlink" title="热度衰减"></a>热度衰减</h5><ul>
+<li>如果不做任何设置，方法调用计数器统计的并不是方法被调用的绝对次数，而是一个相对的执行频率，即一段时间之内方法被调用的次数。当超过一定的时间限度，如果方法的调用次数仍然不足以让它提交给即时编译器编译，那么这个方法的调用计数器就会被减少一半，这个过程称为方法调用计数器热度的衰减（Counter Decay），而这段时间就称为此方法统计的半衰周期（Counter Half Life Time）。</li>
+<li>进行热度衰减的动作是在虚拟机进行垃圾收集时顺便进行的，可以使用虚拟机参数 <code>-XX:-UseCounterDecay </code>来关闭热度衰减，让方法计数器统计方法调用的绝对次数，这样，只要系统运行时间足够长，绝大部分方法都会被编译成本地代码。</li>
+<li>可以通过使用 <code>-XX:CounterHalfLifeTime</code> 参数设置半衰周期的时间，单位是秒。</li>
+</ul>
+<h5 id="回边计数器"><a href="#回边计数器" class="headerlink" title="回边计数器"></a>回边计数器</h5><p>用于统计一个方法中循环体代码执行的次数，在字节码中遇到控制流向后跳转的指令称为”回边（Back Edge）”。显然，建立回边计数器统计的目的就是为了触发OSR编译。</p>
+<p>执行流程如图所示：</p>
+<p><img src="https://img-blog.csdnimg.cn/dfd34997af4c492aae483dd7157dd8a5.png" srcset="/img/loading.gif"></p>
+<h3 id="设置程序执行方式"><a href="#设置程序执行方式" class="headerlink" title="设置程序执行方式"></a>设置程序执行方式</h3><p>缺省情况下HotSpot VM是采用解释器与即时编译器并存的架构，当然开发人员可以根据具体的应用场景，通过命令显示地位Java 虚拟机指定在运行时到底是完全采用解释器执行，还是完全采用即时编译器执行。如下所示：</p>
+<ul>
+<li>-Xint：完全采用解释器模式执行程序。</li>
+<li>-Xcomp：完全采用即时编译器模式执行程序。如果即时编译出现问题，解释器会介入执行。</li>
+<li>-Xmixed：采用解释器+即时编译器的混合模式共同执行程序。</li>
+</ul>
+<p>使用示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">java -Xint -version<br></code></pre></div></td></tr></table></figure>
+
+<p>或者是给虚拟机设置参数。</p>
+<h3 id="JIT分类"><a href="#JIT分类" class="headerlink" title="JIT分类"></a>JIT分类</h3><p>在HotSpot VM中内嵌有两个JIT编译器，分别为Client Compiler和Server Compiler，但大多数情况下我们简称为C1编译器和C2编译器。开发人员可以通过命令显式指定Java虚拟机在运行时到底使用哪一种即时编译器，如下：</p>
+<ul>
+<li>-client：指定Java虚拟机运行在Client模式下，并使用C1编译器；<ul>
+<li>C1编译器会对字节码进行简单和可靠的优化，耗时短。以达到更快的编译速度。</li>
+</ul>
+</li>
+<li>-server：指定Java虚拟机运行在Server模式下，并使用C2编译器。<ul>
+<li>C2进行耗时比较长的优化，以及激进优化。但优化的代码执行效率更高。</li>
+</ul>
+</li>
+</ul>
+<h4 id="C1和C2编译器不同的优化策略"><a href="#C1和C2编译器不同的优化策略" class="headerlink" title="C1和C2编译器不同的优化策略"></a>C1和C2编译器不同的优化策略</h4><blockquote>
+<p>在不同的编译器上有不同的优化策略，C1编译器上主要有方法内联，去虚拟化、冗余消除。</p>
+</blockquote>
+<ul>
+<li>方法内联：将引用的函数代码编译到引用点处，这样可以减少栈帧的生生成，减少参数传递以及跳转过程。</li>
+<li>去虚拟化：对唯一的实现类进行内联。</li>
+<li>冗余消除：在运行期间把一些不会执行的代码折叠掉。</li>
+</ul>
+<blockquote>
+<p>C2的优化主要是在全局层面，逃逸分析是优化的基础。基于逃逸分析在C2上有如下几种优化：</p>
+</blockquote>
+<ul>
+<li>标量替换：用标量值代替聚合对象的属性值。</li>
+<li>栈上分配：对于未逃逸的对象分配对象在栈而不是堆。</li>
+<li>同步消除：清除同步操作，通常指synchronized。</li>
+</ul>
+<blockquote>
+<p>分层编译（Tiered Compilation）策略：程序解释执行（不开启性能监控）可以触发C1编译，将字节码编译成机器码，可以进行简单优化，也可以加上性能监控，C2编译会根据性能监控信息进行激进优化。但在JDK7之后，一旦开发人员在程序中显式指定命令 “-server”时，默认将会开启分层编译策略，由C1编译器和C2编译器相互协作共同来执行编译任务。</p>
+</blockquote>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li>一般来讲，JIT编译出来的机器码性能比解释器高。</li>
+<li>C2编译器启动时长比C1编译器慢，系统稳定执行以后，C2编译器执行速度远远快于C1编译器。</li>
+</ul>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><blockquote>
+<p>自JDK10起，HotSpot又加入一个全新的即时编译器：Graal编译器。</p>
+</blockquote>
+<ul>
+<li>编译效果短短几年时间就追平C2编译器。</li>
+<li>但目前带着”实验状态”标签，需要使用开关参数<code>-XX:+UnlockExperimentalVMOptions</code>、<code>-XX:+UseJVMCICompiler</code>去激活开启后才能使用。</li>
+</ul>
+<blockquote>
+<p>关于AOT编译器</p>
+</blockquote>
+<ul>
+<li><p>JDK9引入了AOT编译器（静态提前编译器，Ahead Of Time Compiler）。</p>
+</li>
+<li><p>Java 9 引入了实验性AOT编译工具jaotc。它借助了Graal编译器，将所输入的Java类文件转换为机器码，并存放至生成的动态共享库之中。</p>
+</li>
+<li><p>所谓AOT编译，是与即时编译相对立的一个概念。我们知道，即时编译指的是在程序的运行过程中，将字节码转换为可在硬件上直接运行的机器码，并部署至托管环境中的过程。而AOT编译指的则是，在程序运行之前，便将字节码转换为机器码的过程。</p>
+</li>
+<li><p>最大好处：Java虚拟机加载已经预编译成二进制库，可以直接执行。不必等待即时编译器的预热，减少Java应用给人带来”第一次运行慢”的不良体验。</p>
+</li>
+<li><p>缺点：</p>
+<ul>
+<li>破坏了Java的”一次编译，到处运行”，必须为每个不同硬件、OS编译对应的发行包。</li>
+<li>降低了Java链接过程的动态性，加载的代码在编译器就必须全部已知。</li>
+<li>还在需要继续优化中，最初只支持Linux x64 java base。</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JVM/">JVM</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/ed1c2e1a.html">https://tothefor.com/DragonOne/ed1c2e1a.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/13e54c4e.html">
+                        <span class="hidden-mobile">JVM-（八）直接内存</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
