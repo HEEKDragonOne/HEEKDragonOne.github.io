@@ -1,0 +1,955 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JVM-（十三）垃圾回收器 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM-（十三）垃圾回收器">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-22 13:03" pubdate>
+        June 22, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      62
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM-（十三）垃圾回收器</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 22, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="垃圾回收器的分类"><a href="#垃圾回收器的分类" class="headerlink" title="垃圾回收器的分类"></a>垃圾回收器的分类</h2><p>垃圾收集器没有在规范中进行过多的规定，可以由不同的厂商、不同版本的JVM来实现。从不同角度分析垃圾收集器，可以将GC分为不同的类型。</p>
+<blockquote>
+<p>按线程数（垃圾回收的线程数）分：可以分为串行垃圾回收器和并行垃圾回收器。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/5f3bde36eb934690b7c464ea3e7b45f2.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>串行回收指的是在同一时间段内只允许有一个CPU用于执行垃圾回收操作，此时工作线程被暂停，直至垃圾收集工作结束。如果是在单CPU上使用并行的，则串行回收器的性能表现可以超过并行回收器和并发回收器，因为存在切换会消耗时间。所以，串行回收默认被应用在客户端的Client模式下的JVM中。只有在并发能力比较强的CPU上，并行回收器产生停顿时间要短于串行回收器。</li>
+<li>和串行回收相反，并行收集可以运用多个CPU同时执行垃圾回收，因此提升了应用的吞吐量，不过并行回收仍然与串行回收一样，采用独占式，使用了”STW”机制。</li>
+</ul>
+<blockquote>
+<p>按照工作模式分：可以分为并发式垃圾回收器和独占式垃圾回收器。</p>
+</blockquote>
+<ul>
+<li>并发式垃圾回收器与应用程序线程交替工作，以尽可能减少应用程序的停顿时间。</li>
+<li>独占式垃圾回收器一旦运行，就停止应用程序中的所有用户线程，直到垃圾回收过程完全结束。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/b3bc5183c0644f15a1f7afbfecea61e1.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>按碎片处理方式分：可分为压缩式垃圾回收器和非压缩式垃圾回收器。</p>
+</blockquote>
+<ul>
+<li>压缩式垃圾回收器会在回收完成后，对存活对象进行压缩整理，消除回收后的碎片。当再进行分配对象空间使用时，采用指针碰撞的方式进行分配。</li>
+<li>非压缩式的垃圾回收器不进行整理这步操作。当再进行分配对象空间使用时，采用空闲列表的方式进行分配。</li>
+</ul>
+<blockquote>
+<p>按工作的内存区间分：分为年轻代垃圾回收器和老年代垃圾回收器。</p>
+</blockquote>
+<h2 id="评估GC的性能指标"><a href="#评估GC的性能指标" class="headerlink" title="评估GC的性能指标"></a>评估GC的性能指标</h2><ul>
+<li><code>吞吐量</code>：运行用户代码的时间占总运行时间的比例。总运行时间：程序的运行时间+内存回收的时间。</li>
+<li>垃圾收集开销：吞吐量的补数，垃圾收集所用时间与总运行时间的比例。</li>
+<li><code>暂停时间</code>：执行垃圾收集时，程序的工作线程被暂停的时间。</li>
+<li>收集频率：相对于应用程序的执行，收集操作发生的频率。</li>
+<li><code>内存占用</code>：Java堆区所占的内存大小。</li>
+<li>快速：一个对象从诞生到被回收所经历的时间。</li>
+</ul>
+<p>其中重点标记的三个共同构成一个”不可能三角”，即不可能同时满足。三者总体的表现会随着技术进步越来越好。一款优秀的收集器通常最多同时满足其中的两项。</p>
+<p>在这三项中，暂停时间的重要性日益凸显。随着硬件的发展，内存占用多些越来越能容忍，硬件性能的提升也有助于降低收集器运行时对应用程序的影响，即提高了吞吐量。而内存的扩大，对延迟反而带来负面效果。<code>所以，简单来说，主要看两点：吞吐量、暂停时间。</code></p>
+<h3 id="吞吐量（throughput）"><a href="#吞吐量（throughput）" class="headerlink" title="吞吐量（throughput）"></a>吞吐量（throughput）</h3><blockquote>
+<p>吞吐量就是CPU用于运行用户代码的时间与CPU总消耗时间的比值，即吞吐量=运行用户代码时间 / （运行用户代码时间 + 垃圾收集时间）。</p>
+</blockquote>
+<p>比如：虚拟机总共运行了100分钟，其中垃圾收集花掉了1分钟，那吞吐量就是99%。</p>
+<p>这种情况下，应用程序能容忍较高的暂停时间，因此，高吞吐量的应用程序有更长的时间基准，快速响应是不必考虑的。</p>
+<blockquote>
+<p>吞吐量优先，意味着在单位时间内，STW的时间最短：0.2 + 0.2 = 0.4，吞吐量 = （6 - 0.4 ）/ 6 。见下图。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/f1589d69f7b545eb86116c168c37a551.png" srcset="/img/loading.gif"></p>
+<h3 id="暂停时间（pause-time）"><a href="#暂停时间（pause-time）" class="headerlink" title="暂停时间（pause time）"></a>暂停时间（pause time）</h3><p>“暂停时间”是指一个时间段内应用程序线程暂停，让GC线程执行的状态。例如：GC期间100毫秒的暂停时间意味着在这100毫秒期间内没有应用程序线程是活动的。</p>
+<blockquote>
+<p>暂停时间优先，意味着尽可能让单次STW的时间最短：0.1+0.1+0.1+0.1+0.1=0.5。见下图。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/f19b1d00ceae40c58bccdf36eced79e2.png" srcset="/img/loading.gif"></p>
+<h3 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h3><ul>
+<li>高吞吐量较好因为这会让应用程序的最终用户感觉只有应用程序线程在做”生产性”工作。直觉上，吞吐量越高程序运行越快。</li>
+<li>低暂停时间（低延迟）较好因为从最终用户的角度来看不管是GC还是其他原因导致一个应用被挂起始终是不好的。这取决于应用程序的类型，有时候甚至短暂的200毫秒暂停都可能打断终端用户体验。所以，具有低的暂停时间是非常重要的，特别是对于一个交互式应用程序。</li>
+</ul>
+<blockquote>
+<p>但是，”高吞吐量”和”低暂停时间”是一对互相竞争的目标，是相互茅盾的。</p>
+</blockquote>
+<ul>
+<li>因为如果选择以吞吐量优先，那么必然需要降低内存回收的执行频率，但是这样会导致GC需要更长的暂停时间来执行内存回收。见下图。</li>
+<li>相反的，如果选择以低延迟优先为原则，那么为了降低每次执行内存回收的暂停时间，也只能频繁地执行内存回收，但这又引起了年轻代内存的缩减和导致程序吞吐量的下降。</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/75cb4d6749e34053a27d9918de7f4441.png" srcset="/img/loading.gif"></p>
+<p>所以，在设计（或使用）GC算法时，必须确定我们的目标：专注于较大吞吐量或最小暂停时间，或尝试找到一个二者的折中。</p>
+<blockquote>
+<p>现在的标准：在最大吞吐量优先的情况下，降低停顿时间。</p>
+</blockquote>
+<h2 id="垃圾收集器"><a href="#垃圾收集器" class="headerlink" title="垃圾收集器"></a>垃圾收集器</h2><blockquote>
+<p>七款经典的垃圾收集器：</p>
+</blockquote>
+<ul>
+<li>串行收集器：Serial、Serial Old</li>
+<li>并行收集器：ParNew、Parallel Scavenge、Parallel Old</li>
+<li>并发收集器：CMS、G1</li>
+</ul>
+<blockquote>
+<p>七款经典收集器与垃圾分代之间的关系</p>
+</blockquote>
+<ul>
+<li>新生代收集器：Serial、ParNew、Parallel Scavenge</li>
+<li>老年代收集器：Serial Old、Parallel Old、CMS</li>
+<li>整堆收集器：G1</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/7e1e297511e345dd83d903e7825d5626.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>垃圾收集器的组合关系</p>
+</blockquote>
+<p>这张图可以和上面的图对应着看，因为上面的图已经对应了。</p>
+<p><img src="https://img-blog.csdnimg.cn/9e984ef8f32b45f3a34dc30272909ff2.png" srcset="/img/loading.gif" alt="截止JDK14"></p>
+<ul>
+<li><p>其中，在老年代中，CMS和Serial Old有一条线表示后备方案，Serial Old是CMS失败后的备用方案。</p>
+</li>
+<li><p>红线表示在<code>JDK8</code>中的组合关系，但是已经弃用了。在<code>JDK9</code>中彻底移除了。</p>
+</li>
+<li><p>绿色表示在<code>JDK14</code>中，弃用了。</p>
+</li>
+<li><p>青色表示在<code>JDK14</code>中，删除了CMS垃圾收集器。</p>
+</li>
+</ul>
+<blockquote>
+<p>在JDK7/8中默认使用的Parallel Scavenge+Parallel Old组合。JDK9中默认使用的G1。</p>
+</blockquote>
+<blockquote>
+<p>扩充：ParNew和Parallel Scavenge都是并行收集器，但为什么CMS只能和ParNew搭配，不能和Parallel Scavenge搭配呢？</p>
+</blockquote>
+<ul>
+<li>原因：Parallel Scavenge底层使用的GC框架和其他的不一样。</li>
+</ul>
+<h3 id="查看默认垃圾收集器"><a href="#查看默认垃圾收集器" class="headerlink" title="查看默认垃圾收集器"></a>查看默认垃圾收集器</h3><p>通过命令查看当前JDK默认的垃圾收集器。有两种方式。</p>
+<blockquote>
+<p>设置JVM参数：<code>-XX:+PrintCommandLineFlags</code></p>
+</blockquote>
+<p>运行任何一个代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/25 15:04</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllStu</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>输出如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">-XX:InitialHeapSize=<span class="hljs-number">268435456</span> -XX:MaxHeapSize=<span class="hljs-number">4294967296</span> -XX:+PrintCommandLineFlags -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseParallelGC <br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见（最后一个）默认使用的垃圾收集器：ParallelGC 。这是新生代中，而老年代中则自动触发对应的Parallel OldGC。</p>
+<blockquote>
+<p>通过命令行查看：<code>jinfo -flag 相关垃圾回收器参数 进程ID</code></p>
+</blockquote>
+<p>此方式需要程序持续运行中。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/25 15:04</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllStu</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        <span class="hljs-keyword">while</span> (<span class="hljs-keyword">true</span>)&#123;<br>            <br>        &#125;<br><br>    &#125;<br>&#125;<br><br><br><br></code></pre></div></td></tr></table></figure>
+
+<p>在命令窗口中依次输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  ~ jps<br>2162 Launcher<br>2163 AllStu<br>2121 RemoteMavenServer36<br>2089 <br>2219 Jps<br>➜  ~ jinfo -flag UseParallelGC 2163<br>-XX:+UseParallelGC<br></code></pre></div></td></tr></table></figure>
+
+<p>然后还可以查看老年代中的默认使用情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  ~ jinfo -flag UseParallelOldGC 2163<br>-XX:+UseParallelOldGC<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>前面的加号（+）就表示在使用，如果是减号（-）则表示没有使用。注意不是最前面的！</strong></p>
+<p>例如查看没有使用的情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  ~ jinfo -flag UseG1GC 2163         <br>-XX:-UseG1GC<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="Serial回收器"><a href="#Serial回收器" class="headerlink" title="Serial回收器"></a>Serial回收器</h3><p>串行回收。Serial（串行）收集器是最基本、历史最悠久的垃圾收集器了。在JDK1.3之前回收新生代唯一的选择。<strong>新生代采用标记-复制算法，老年代采用标记-整理算法。</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/b54f82dd65a940b9b4388347abc9a4ef.png" srcset="/img/loading.gif"></p>
+<p>它的 <strong>“单线程”</strong> 的意义不仅仅意味着它只会使用一条垃圾收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ <strong>“Stop The World”</strong> ），直到它收集结束。</p>
+<p>除了年轻代之外，Serial收集器还提供用于执行老年代垃圾收集的Serial Old收集器。Serial Old收集器同样也采用了串行回收和”STW”机制，只不过内存回收算法使用的是标记-压缩算法。</p>
+<blockquote>
+<p>Serial收集器作为HotSpot中Client模式下的默认新生代垃圾收集器。</p>
+</blockquote>
+<blockquote>
+<p>Serial Old是运行在Client模式下默认的老年代的垃圾回收器。在Serve模式下主要有两个用途：①与新生代的Parallel Scavenge配合使用 ②作为老年代CMS收集器的后备垃圾收集方案。</p>
+</blockquote>
+<blockquote>
+<p>优势：<strong>简单而高效（与其他收集器的单线程相比）</strong>。Serial 收集器由于没有线程交互的开销，自然可以获得很高的单线程收集效率。Serial 收集器对于运行在 Client 模式下的虚拟机来说是个不错的选择。</p>
+</blockquote>
+<blockquote>
+<p>在HotSpot虚拟机中，使用 <code>-XX:+UseSerialGC</code> 参数可以指定年轻代和老年代都使用串行收集器。等价于：新生代使用Serial GC，且老年代使用Serial Old GC。使用之后可以按照开始写的方法自行查看。</p>
+</blockquote>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>这种垃圾收集器现在已经不使用。而且在限定单核CPU才可以用，现在都不是单核的了。</p>
+<h3 id="ParNew回收器"><a href="#ParNew回收器" class="headerlink" title="ParNew回收器"></a>ParNew回收器</h3><p>并行回收。ParNew收集器是Serial收集器的多线程版本。ParNew收集器除了采用并行回收的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。ParNew收集器在年轻代中同样也是采用复制算法、STW机制。</p>
+<p>ParNew是很多JVM运行在Server模式下新生代的默认垃圾收集器。</p>
+<p><img src="https://img-blog.csdnimg.cn/22597dcbd94b400ab0f79f6c53750ff2.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>对于新生代：回收次数频繁，使用并行方式高效。</li>
+<li>对于老年代：回收次数少，使用串行方式节省资源。CPU并行需要切换线程，串行可以省去切换线程的资源。</li>
+</ul>
+<blockquote>
+<p>由于ParNew收集器是基于并行回收，那么是否可以断定ParNew收集器的回收效率在任何场景下都会比Serial收集器更高效？</p>
+</blockquote>
+<ul>
+<li>ParNew收集器运行在多CPU的环境下，由于可以充分利用多CPU、多核心等物理硬件资源优势，可以更快地完成垃圾收集，提升程序的吞吐量。</li>
+<li>但是在单个CPU的环境下，ParNew收集器不比Serial收集器更高效。虽然Serial收集器是基于串行回收，但是由于CPU不需要频繁地做任务切换，因此可以有效避免多线程交互过程中产生的一些额外开销。</li>
+</ul>
+<blockquote>
+<p>除Serial外，目前只有ParNew能与CMS收集器配合工作。</p>
+</blockquote>
+<blockquote>
+<p>在程序中，开发人员可以通过选项”<code>-XX:+UseParNewGC</code>“手动指定使用ParNew收集器执行内存回收任务。它表示年轻代使用并行收集器，不影响老年代。</p>
+</blockquote>
+<blockquote>
+<p><code>-XX:ParallelGCThreads</code>限制线程数量，默认开启和CPU数据相同的线程数。</p>
+</blockquote>
+<h3 id="Parallel回收器"><a href="#Parallel回收器" class="headerlink" title="Parallel回收器"></a>Parallel回收器</h3><p>吞吐量优先。HotSpot的年轻代中除了拥有ParNew收集器是基于并行回收的以外，Parallel Scavenge收集器同样也采用了复制算法、并行回收和”STW”机制。</p>
+<blockquote>
+<p>Parallel收集器的出现是否多此一举？</p>
+</blockquote>
+<ul>
+<li><p>和ParNew收集器不同，Parallel Scavenge收集器的目标则是达到一个可控制的吞吐量，它也被称为吞吐量优先的垃圾收集器。</p>
+</li>
+<li><p>自适应调节策略也是Parallel Scavenge与ParNew一个重要区别。</p>
+</li>
+<li><p>高吞吐量则可以高效率地利用CPU时间，尽快完成程序的运算任务，主要适合在后台运算而不需要太多交互的任务。因此，常见在服务器环境中使用。如：执行批量处理、订单处理、工资支付、科学计算的应用程序。</p>
+</li>
+<li><p>Parallel 收集器在JDK1.6时提供了用于执行老年代垃圾收集的Parallel Old收集器，用来代替老年代的Serial Old收集器。</p>
+</li>
+<li><p>Parallel Old收集器采用了标记-压缩算法，但同样也是基于并行回收和”STW”机制。</p>
+</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/edc281c8accf477ab935d875126b4a50.png" srcset="/img/loading.gif"></p>
+<ul>
+<li>在程序吞吐量优先的应用场景中，Parallel 收集器和Parallel Old收集器的组合，在Server模式下的内存回收性能很不错。在Java8中，默认是此垃圾收集器。</li>
+</ul>
+<h4 id="参数设置"><a href="#参数设置" class="headerlink" title="参数设置"></a>参数设置</h4><blockquote>
+<p><code>-XX:+UseParallelGC </code>：手动指定年轻代使用Parallel并行收集器执行内存回收任务。</p>
+</blockquote>
+<blockquote>
+<p><code>-XX:+UseParallelOldGC</code>：手动指定老年代都是使用并行回收收集器。</p>
+</blockquote>
+<ul>
+<li>分别适用于新生代和老年代。默认JDK8是开启的。</li>
+<li>上面两个参数，默认开启一个，另一个也会被开启。（互相激活）</li>
+</ul>
+<blockquote>
+<p>-XX:ParallelGCThreads：设置年轻代并行收集器的线程数。一般地，最好与CPU数量相等，以避免过多的线程数影响垃圾收集性能。</p>
+</blockquote>
+<ul>
+<li>默认情况下，当CPU数量小于8个，ParallelGCThreads的值等于CPU数量。</li>
+<li>当CPU数量大于8个，ParallelGCThreads的值等于<code>3+【5*CPU_Count】/ 8 </code>。</li>
+</ul>
+<h3 id="CMS回收器"><a href="#CMS回收器" class="headerlink" title="CMS回收器"></a>CMS回收器</h3><p>低延迟。CMS（Concurrent-Mark-Sweep）收集器，这款收集器是HotSpot虚拟机中第一款真正意义上的并发收集器，它第一次实现了<strong>让垃圾收集线程与用户线程（基本上）同时工作。</strong></p>
+<p>CMS收集器的关注点是尽可能缩短垃圾收集时用户线程的停顿时间。停顿时间越短（低延迟）就越适合与用户交互的程序，良好的响应速度能提升用户体验。</p>
+<blockquote>
+<p>CMS的垃圾收集算法采用<code>标记-清除</code>算法，并且也会”STW”。CMS作为老年代的收集器，却无法与JDK1.4.0 中已经存在的新生代收集器Parallel Scavenge配合工作，所以在JDK1.5中使用CMS来收集老年代的时候，新生代只能选择ParNew或者Serial收集器中的一个。</p>
+</blockquote>
+<h4 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h4><p>CMS整个过程比之前的收集器要复杂，整个过程分为4个主要阶段，即：初始标记阶段、并发标记阶段、重新标记阶段和并发清除阶段。</p>
+<p><img src="https://img-blog.csdnimg.cn/7b95044c35fa40f8b91c0b0b4b0d857e.png" srcset="/img/loading.gif" alt="CMS工作原理图"></p>
+<ul>
+<li>初始标记（Initial Mark）阶段：程序中所有的工作线程都将会因为”STW”机制而出现短暂的暂停，这个阶段的主要任务<code>仅仅只是标记出GC Roots能直接关联到的对象</code>。一旦标记完成之后就会恢复之前被暂停的所有应用线程。由于直接关联对象比较小，所以这里的速度非常快。</li>
+<li>并发标记（Concurrent Mark）阶段：从GC Roots的直接关联对象开始遍历整个对象图的过程，标记所有可达的对象，这个过程耗时较长，但是不需要停顿用户线程，可以与垃圾收集线程一起并发运行。</li>
+<li>重新标记（Remark）阶段：由于在并发标记阶段中，程序的工作线程会和垃圾收集线程同时运行或者交叉运行，因此为了修正并发标记期间，因用户程序继续运作而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间通常会比初始标记阶段稍长一些，但远比并发标记阶段的时间短。</li>
+<li>并发清除（Concurrent Sweep）阶段：此阶段清理删除掉标记阶段判断的已经死亡的对象，释放内存空间，但是会产生碎片问题。由于不需要移动存活对象，所以这个阶段也是可以与用户线程同时并发的。</li>
+</ul>
+<blockquote>
+<p>注意点</p>
+</blockquote>
+<ul>
+<li>尽管CMS收集器采用的是并发回收（非独占式），但是在其初始化标记和再次标记这两个阶段中仍然需要执行”STW”机制暂停程序中的工作线程，不过暂停时间并不会太长，因此可以说明目前所有的垃圾收集器都做不到完全不需要”STW”，只是尽可能地缩短暂停时间。</li>
+<li>由于最耗费时间的并发标记与并发清除阶段都不需要暂停工作，所以整体的回收是低停顿的。</li>
+<li>由于在垃圾收集阶段用户线程没有中断，所以在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，而是当堆内存使用率达到某一阈值时，便开始进行回收，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。要是CMS运行期间预留的内存无法满足程序需要，就会出现一次”Concurrent Mode Failure”失败，这时虚拟机将启动后备预案：临时启用Serial Old收集器来重新进入老年代的垃圾收集，这样停顿时间就很长了。</li>
+<li>CMS收集器的垃圾收集算法采用的是标记-清除算法，这意味着每次执行完内存回收后，由于被执行内存回收的无用对象所占用的内存空间极有可能是不连续的一些内存块，不可避免地将会产生一些内存碎片。那么在为新对象分配内存空间时，将无法使用指针碰撞技术，而只能选择空闲列表执行内存分配。</li>
+</ul>
+<blockquote>
+<p>既然Mark Sweep会造成内存碎片，那么为什么不把算法换成Mark Compact呢？</p>
+</blockquote>
+<ul>
+<li>因为当并发清除的时候，还有用户线程在执行。如果用Compact整理内存的话，会对内存进行整理，存活的对象地址会发生改变，那么原来的用户线程使用的内存就找不到之前的地址，就无法使用。所以，要保证用户线程能继续执行，前提是它运行的资源不受影响。Mark Compact更适合”STW”场景下使用。</li>
+<li>如果非要使用Compact，那么就必须STW暂停所有用户线程的执行。等清理完成后用户线程再执行。</li>
+</ul>
+<h4 id="参数设置-1"><a href="#参数设置-1" class="headerlink" title="参数设置"></a>参数设置</h4><blockquote>
+<p><code>-XX:+UseConcMarkSweepGC</code> 手动指定使用CMS收集器执行内存回收任务。</p>
+</blockquote>
+<ul>
+<li>开启该参数后会自动将<code>-XX:+UseParNewGC</code>打开。即：<code>ParNew(Young区用)+CMS(Old区用)+Serial Old</code>的组合。</li>
+</ul>
+<p>设置参数：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">-XX:+PrintCommandLineFlags -XX:+UseConcMarkSweepGC<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">-XX:InitialHeapSize=<span class="hljs-number">268435456</span> -XX:MaxHeapSize=<span class="hljs-number">4294967296</span> -XX:MaxNewSize=<span class="hljs-number">872415232</span> -XX:MaxTenuringThreshold=<span class="hljs-number">6</span> -XX:OldPLABSize=<span class="hljs-number">16</span> -XX:+PrintCommandLineFlags -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseConcMarkSweepGC -XX:+UseParNewGC <br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p><code>-XX:CMSInitiatingOccupanyFraction</code> 设置堆内存使用率的阈值，一旦达到该阈值，便开始进行回收。</p>
+</blockquote>
+<ul>
+<li>JDK5及以前版本的默认值为68，即当老年代的空间使用率达到68%时，会执行一次CMS回收，JDK6及以上版本默认值为92%。</li>
+<li>如果内存增长缓慢，则可以设置一个稍大的值，大的阈值可以有效降低CMS的触发频率，减少老年代回收的次数可以较为明显地改善应用程序性能。反之，如果应用程序内存使用率增长很快，则应该降低这个阈值，以避免频繁触发老年代串行收集器。因此通过该选项便可以有效降低Full GC的执行次数。</li>
+</ul>
+<blockquote>
+<p><code>-XX:+UseCMSCompactAtFullCollection</code> 用于指定在执行完Full GC后对内存空间进行压缩整理，以此避免内存碎片的产生。不过由于内存压缩整理过程无法并发执行，所带来的问题就是停顿时间变得更长了。</p>
+</blockquote>
+<blockquote>
+<p><code>-XX:CMSFullGCsBeforeCompaction</code> 设置在执行多少次Full GC后对内存空间进行压缩整理。</p>
+</blockquote>
+<blockquote>
+<p><code>-XX:ParallelCMSThreads</code> 设置CMS的线程数量。</p>
+</blockquote>
+<ul>
+<li>CMS默认启动的线程数是 （ParallelGCThreads(并行的线程数，默认情况下为CPU的个数) + 3）/ 4 。</li>
+<li>ParallelGCThreads 是年轻代并行收集器的线程数。当CPU资源比较紧张时，受到CMS收集器线程的影响，应用程序的性能在垃圾回收阶段可能会非常糟糕。</li>
+</ul>
+<h4 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h4><blockquote>
+<p>优点</p>
+</blockquote>
+<ul>
+<li>并发收集：第二、第四阶段。</li>
+<li>低延迟</li>
+</ul>
+<blockquote>
+<p>弊端</p>
+</blockquote>
+<ul>
+<li>会产生内存碎片，导致并发清除后，用户线程可用的空间不足。在无法分配大对象的情况下，不得不提前触发Full GC。</li>
+<li>CMS收集器对CPU资源非常敏感。在并发阶段，它虽然不会导致用户停顿，但是会因为占用了一部分线程而导致应用程序变慢，总吞吐量会降低。</li>
+<li>CMS收集器无法处理浮动垃圾。可能出现”Concurrent Mode Failure”失败而导致另一次Full GC的产生。在并发标记阶段由于程序的工作线程和垃圾收集线程是同时运行或者交叉运行的，那么在并发标记阶段如果产生新的垃圾对象，CMS将无法对这些垃圾对象进行标记，最终会导致这些新产生的垃圾对象没有被及时回收，从而只能在下一次执行GC时释放这些之前未被回收的内存空间。</li>
+</ul>
+<blockquote>
+<p>HotSpot中，Serial GC、Parallel GC、Concurrent Mark Sweep GC三个GC的使用区别：</p>
+</blockquote>
+<ul>
+<li>如果想要最小化地使用内存和并行开销：<code>Serial GC（新生代）</code>、Serial Old（老年代）</li>
+<li>如果想要最大化应用程序的吞吐量：<code>Parallel GC（新生代）</code>、Parallel Old（老年代）</li>
+<li>如果想要最小化GC的中断或停顿时间：<code>CMS GC（老年代）</code>、ParNew（新生代）</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JVM/">JVM</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/9b1d42cc.html">https://tothefor.com/DragonOne/9b1d42cc.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/95b9ad22.html">
+                        <span class="hidden-mobile">JVM-（十二）垃圾回收其他相关概念</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
