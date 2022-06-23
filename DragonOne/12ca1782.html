@@ -1,0 +1,744 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JVM-（十五）GC日志 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JVM-（十五）GC日志">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-06-23 16:53" pubdate>
+        June 23, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      34
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JVM-（十五）GC日志</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：June 23, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="GC日志分析"><a href="#GC日志分析" class="headerlink" title="GC日志分析"></a>GC日志分析</h2><blockquote>
+<p>内存分配与垃圾回收的参数列表：</p>
+</blockquote>
+<p>运行代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com;<br><br><br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/4/25 15:04</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AllStu</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>    List&lt;<span class="hljs-keyword">byte</span>[]&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=<span class="hljs-number">100</span>;++i)&#123;<br>      list.add(<span class="hljs-keyword">new</span> <span class="hljs-keyword">byte</span>[<span class="hljs-number">1024</span>*<span class="hljs-number">100</span>]);<br>    &#125;<br><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>-XX:+PrintGC</code>：输出GC日志。类似：-verbose:gc</li>
+</ul>
+<p>JVM参数配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms20m -Xmx20m -XX:+PrintGC<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">[GC (Allocation Failure)  5614K-&gt;4296K(19968K), <span class="hljs-number">0.0033189</span> secs]<br>[GC (Allocation Failure)  9876K-&gt;9793K(19968K), <span class="hljs-number">0.0040851</span> secs]<br>[<span class="hljs-function">Full <span class="hljs-title">GC</span> <span class="hljs-params">(Ergonomics)</span>  9793K-&gt;9591<span class="hljs-title">K</span><span class="hljs-params">(19968K)</span>, 0.0060989 secs]</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><code>-XX:+PrintGCDetails</code>：输出GC的详细日志。</li>
+</ul>
+<p>JVM参数配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms20m -Xmx20m -XX:+PrintGCDetails<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">[GC (Allocation Failure) [PSYoungGen: 5601K-&gt;504K(6144K)] 5601K-&gt;4396K(19968K), <span class="hljs-number">0.0037385</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.01</span>, real=<span class="hljs-number">0.01</span> secs] <br>[GC (Allocation Failure) [PSYoungGen: 6071K-&gt;504K(6144K)] 9964K-&gt;9905K(19968K), <span class="hljs-number">0.0026925</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.02</span>, real=<span class="hljs-number">0.00</span> secs] <br>[<span class="hljs-function">Full <span class="hljs-title">GC</span> <span class="hljs-params">(Ergonomics)</span> [PSYoungGen: 504K-&gt;0<span class="hljs-title">K</span><span class="hljs-params">(6144K)</span>] [ParOldGen: 9401K-&gt;9782<span class="hljs-title">K</span><span class="hljs-params">(13824K)</span>] 9905K-&gt;9782<span class="hljs-title">K</span><span class="hljs-params">(19968K)</span>, [Metaspace: 3156K-&gt;3156<span class="hljs-title">K</span><span class="hljs-params">(1056768K)</span>], 0.0104482 secs] [Times: user</span>=<span class="hljs-number">0.06</span> sys=<span class="hljs-number">0.00</span>, real=<span class="hljs-number">0.01</span> secs] <br>Heap<br> PSYoungGen      total 6144K, used 766K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">13</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bfa3fa30</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9782K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">70</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf58db78</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3163K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 340<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class"></span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>-XX:+PrintGCTimeStamps</code>：输出GC的时间戳（以基准时间的形式）。</li>
+</ul>
+<p>JVM参数配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms20m -Xmx20m -XX:+PrintGCDetails -XX:+PrintGCTimeStamps<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">0.196</span>: [GC (Allocation Failure) [PSYoungGen: 5614K-&gt;504K(6144K)] 5614K-&gt;4341K(19968K), <span class="hljs-number">0.0015160</span> secs] [Times: user=<span class="hljs-number">0.00</span> sys=<span class="hljs-number">0.01</span>, real=<span class="hljs-number">0.00</span> secs] <br><span class="hljs-number">0.198</span>: [GC (Allocation Failure) [PSYoungGen: 6071K-&gt;484K(6144K)] 9908K-&gt;9930K(19968K), <span class="hljs-number">0.0022234</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.01</span>, real=<span class="hljs-number">0.00</span> secs] <br><span class="hljs-number">0.200</span>: [<span class="hljs-function">Full <span class="hljs-title">GC</span> <span class="hljs-params">(Ergonomics)</span> [PSYoungGen: 484K-&gt;0<span class="hljs-title">K</span><span class="hljs-params">(6144K)</span>] [ParOldGen: 9445K-&gt;9687<span class="hljs-title">K</span><span class="hljs-params">(13824K)</span>] 9930K-&gt;9687<span class="hljs-title">K</span><span class="hljs-params">(19968K)</span>, [Metaspace: 3180K-&gt;3180<span class="hljs-title">K</span><span class="hljs-params">(1056768K)</span>], 0.0052203 secs] [Times: user</span>=<span class="hljs-number">0.03</span> sys=<span class="hljs-number">0.00</span>, real=<span class="hljs-number">0.01</span> secs] <br>Heap<br> PSYoungGen      total 6144K, used 903K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">16</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bfa61d78</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9687K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">70</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf575de0</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3191K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 347<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class"></span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>主要区别是前面几行的前面显示的数字。下同。</strong></p>
+<ul>
+<li><code>-XX:+PrintGCDateStamps</code>：输出GC的时间戳（以日期的形式，包含日期和时间）。</li>
+</ul>
+<p>JVM参数配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms20m -Xmx20m -XX:+PrintGCDetails -XX:+PrintGCDateStamps<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-number">2022</span>-<span class="hljs-number">06</span>-23T14:<span class="hljs-number">19</span>:<span class="hljs-number">14.031</span>+0800: [GC (Allocation Failure) [PSYoungGen: 5614K-&gt;504K(6144K)] 5614K-&gt;4281K(19968K), <span class="hljs-number">0.0029828</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.01</span>, real=<span class="hljs-number">0.00</span> secs] <br><span class="hljs-number">2022</span>-<span class="hljs-number">06</span>-23T14:<span class="hljs-number">19</span>:<span class="hljs-number">14.035</span>+0800: [GC (Allocation Failure) [PSYoungGen: 6071K-&gt;484K(6144K)] 9848K-&gt;9878K(19968K), <span class="hljs-number">0.0036393</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.01</span>, real=<span class="hljs-number">0.00</span> secs] <br><span class="hljs-number">2022</span>-<span class="hljs-number">06</span>-23T14:<span class="hljs-number">19</span>:<span class="hljs-number">14.039</span>+0800: [<span class="hljs-function">Full <span class="hljs-title">GC</span> <span class="hljs-params">(Ergonomics)</span> [PSYoungGen: 484K-&gt;0<span class="hljs-title">K</span><span class="hljs-params">(6144K)</span>] [ParOldGen: 9393K-&gt;9684<span class="hljs-title">K</span><span class="hljs-params">(13824K)</span>] 9878K-&gt;9684<span class="hljs-title">K</span><span class="hljs-params">(19968K)</span>, [Metaspace: 3161K-&gt;3161<span class="hljs-title">K</span><span class="hljs-params">(1056768K)</span>], 0.0059208 secs] [Times: user</span>=<span class="hljs-number">0.02</span> sys=<span class="hljs-number">0.00</span>, real=<span class="hljs-number">0.01</span> secs] <br>Heap<br> PSYoungGen      total 6144K, used 903K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">16</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bfa61d18</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9684K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">70</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf575010</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3186K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 346<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class"></span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>-XX:+PrintHeapAtGC</code>：在进行GC的前后打印出堆的信息。</li>
+</ul>
+<p>JVM参数配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms20m -Xmx20m -XX:+PrintGCDetails -XX:+PrintHeapAtGC<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&#123;Heap before GC invocations=<span class="hljs-number">1</span> (full <span class="hljs-number">0</span>):<br> PSYoungGen      total 6144K, used 5614K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">99</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bfefb988</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 0K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3155K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 339<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br>[GC (Allocation Failure) [PSYoungGen: 5614K-&gt;504K(6144K)] 5614K-&gt;4333K(19968K), 0.0051174 secs] [Times: user=0.01 sys=0.01, real=0.00 secs] <br>Heap after GC invocations=<span class="hljs-number">1</span> (full <span class="hljs-number">0</span>):<br> PSYoungGen      total 6144K, used 504K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">98</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff7e030</span>,<span class="hljs-number">0x00000007bff80000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br> ParOldGen       total 13824K, used 3829K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">27</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007befbd468</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3155K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 339<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class">&#125;</span><br><span class="hljs-class"></span>&#123;Heap before GC invocations=<span class="hljs-number">2</span> (full <span class="hljs-number">0</span>):<br> PSYoungGen      total 6144K, used 6071K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">98</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bfeefe30</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">98</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff7e030</span>,<span class="hljs-number">0x00000007bff80000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br> ParOldGen       total 13824K, used 3829K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">27</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007befbd468</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3155K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 339<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br>[GC (Allocation Failure) [PSYoungGen: 6071K-&gt;452K(6144K)] 9900K-&gt;9881K(19968K), 0.0047050 secs] [Times: user=0.02 sys=0.02, real=0.01 secs] <br>Heap after GC invocations=<span class="hljs-number">2</span> (full <span class="hljs-number">0</span>):<br> PSYoungGen      total 6144K, used 452K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">88</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bfff1010</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9429K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">68</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf5357e8</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3155K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 339<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class">&#125;</span><br><span class="hljs-class"></span>&#123;Heap before GC invocations=<span class="hljs-number">3</span> (full <span class="hljs-number">1</span>):<br> PSYoungGen      total 6144K, used 452K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">88</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bfff1010</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9429K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">68</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf5357e8</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3155K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 339<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br>[Full GC (Ergonomics) [PSYoungGen: 452K-&gt;0K(6144K)] [ParOldGen: 9429K-&gt;9682K(13824K)] 9881K-&gt;9682K(19968K), [Metaspace: 3155K-&gt;3155K(1056768K)], 0.0149688 secs] [Times: user=0.06 sys=0.00, real=0.01 secs] <br>Heap after GC invocations=<span class="hljs-number">3</span> (full <span class="hljs-number">1</span>):<br> PSYoungGen      total 6144K, used 0K [<span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007c0000000</span>, <span class="hljs-number">0x00000007c0000000</span>)<br>  eden space 5632K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9682K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">70</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf574b68</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3155K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 339<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class">&#125;</span><br><span class="hljs-class"><span class="hljs-title">Heap</span></span><br> PSYoungGen      total 6144K, used 903K [0x00000007bf980000, 0x00000007c0000000, 0x00000007c0000000)<br>  eden space 5632K, <span class="hljs-number">16</span>% used [<span class="hljs-number">0x00000007bf980000</span>,<span class="hljs-number">0x00000007bfa61d18</span>,<span class="hljs-number">0x00000007bff00000</span>)<br>  from space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007bff80000</span>,<span class="hljs-number">0x00000007c0000000</span>)<br>  to   space 512K, <span class="hljs-number">0</span>% used [<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff00000</span>,<span class="hljs-number">0x00000007bff80000</span>)<br> ParOldGen       total 13824K, used 9682K [<span class="hljs-number">0x00000007bec00000</span>, <span class="hljs-number">0x00000007bf980000</span>, <span class="hljs-number">0x00000007bf980000</span>)<br>  object space 13824K, <span class="hljs-number">70</span>% used [<span class="hljs-number">0x00000007bec00000</span>,<span class="hljs-number">0x00000007bf574b68</span>,<span class="hljs-number">0x00000007bf980000</span>)<br> Metaspace       used 3170K, capacity 4496K, committed 4864K, reserved 1056768K<br>  <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">space</span>    <span class="hljs-title">used</span> 342<span class="hljs-title">K</span>, <span class="hljs-title">capacity</span> 388<span class="hljs-title">K</span>, <span class="hljs-title">committed</span> 512<span class="hljs-title">K</span>, <span class="hljs-title">reserved</span> 1048576<span class="hljs-title">K</span></span><br><span class="hljs-class"></span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<ul>
+<li><code>-Xloggc:./logs/gc.log</code>：日志文件的输出路径。可以把GC日志保存到文件中。<code>这里的相对位置不是相对当前运行的文件，而是项目的位置，所以创建文件夹logs时需要建立在项目名称的文件夹目录下</code>。</li>
+</ul>
+<p>JVM参数配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms20m -Xmx20m -XX:+PrintGCDetails -Xloggc:./logs/gc.log<br></code></pre></div></td></tr></table></figure>
+
+<p>然后查看文件即可。</p>
+<p><strong>📢注意：必须要先建logs文件夹，并且相对位置是<code>项目</code>，而不是运行的代码文件处！！！</strong></p>
+<h3 id="日志补充说明"><a href="#日志补充说明" class="headerlink" title="日志补充说明"></a>日志补充说明</h3><ul>
+<li>“ [ GC”和” [ Full GC”说明了这次垃圾收集的停顿类型，如果有”Full”则说明GC发生了STW。</li>
+<li>使用Serial收集器在新生代的名字是Default New Generation，因此显示的是” [ DefNew”。</li>
+<li>使用ParNew收集器在新生代的名字会变成” [ ParNew”，意思是”Parallel New Generation”。</li>
+<li>使用Parallel Scavenge收集器在新生代的名字是 “ [ PSYoungGen”。</li>
+<li>老年代的收集器和新生代道理一样，名字也是收集器决定的。</li>
+<li>使用G1收集器的话，会显示为” [ garbage-first heap”。</li>
+<li>Allocation Failure：表明本次引起GC的原因是因为在年轻代中没有足够的空间能够存储新的数据了。</li>
+<li>[ PSYoungGen：5986K -&gt; 696K(8704K) ] 5986K-&gt; 704K(9216K)：中括号：GC回收前年轻代大小，回收后大小，(年轻代总大小)；括号外：GC回收前年轻代和老年代大小，回收后大小，（年轻代和老年代总大小）</li>
+<li>user代表用户态回收耗时，sys内核态回收耗时，rea实际耗时。由于多核的原因，时间总和可能会超过real时间。部分输出：</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">[GC (Allocation Failure) [PSYoungGen: 5614K-&gt;484K(6144K)] 5614K-&gt;4353K(19968K), <span class="hljs-number">0.0019891</span> secs] [Times: user=<span class="hljs-number">0.01</span> sys=<span class="hljs-number">0.01</span>, real=<span class="hljs-number">0.00</span> secs] <br><br>[<span class="hljs-function">Full <span class="hljs-title">GC</span> <span class="hljs-params">(Ergonomics)</span> [PSYoungGen: 500K-&gt;0<span class="hljs-title">K</span><span class="hljs-params">(6144K)</span>] [ParOldGen: 9469K-&gt;9782<span class="hljs-title">K</span><span class="hljs-params">(13824K)</span>] 9970K-&gt;9782<span class="hljs-title">K</span><span class="hljs-params">(19968K)</span>, [Metaspace: 3156K-&gt;3156<span class="hljs-title">K</span><span class="hljs-params">(1056768K)</span>], 0.0071729 secs] [Times: user</span>=<span class="hljs-number">0.03</span> sys=<span class="hljs-number">0.00</span>, real=<span class="hljs-number">0.00</span> secs] <br></code></pre></div></td></tr></table></figure>
+
+<p>GC：</p>
+<p><img src="https://img-blog.csdnimg.cn/b3457329296a494e96a1a6bcf57be202.png" srcset="/img/loading.gif"></p>
+<p>Full GC：</p>
+<p>![](/Users/dragonone/Library/Application Support/typora-user-images/image-20220623160540852.png)</p>
+<h3 id="GC日志分析工具"><a href="#GC日志分析工具" class="headerlink" title="GC日志分析工具"></a>GC日志分析工具</h3><p>在线分析日志文件网站，<a target="_blank" rel="noopener" href="https://gceasy.io/">GCEasy</a> 。在上传文件时，选择上面最后一个参数生成的日志文件即可。使用如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/a8b0b0912ceb45cda3434d6c6c06f233.png" srcset="/img/loading.gif"></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JVM/">JVM</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA/">JAVA</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JVM/">JVM</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/12ca1782.html">https://tothefor.com/DragonOne/12ca1782.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/44640292.html">
+                        <span class="hidden-mobile">JVM-（十四）垃圾回收器-G1回收器</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
