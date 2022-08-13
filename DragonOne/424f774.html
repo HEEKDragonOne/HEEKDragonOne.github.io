@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>MySQL-Ubuntu20.04安装MySQL8.0以及远程连接 - 墨水记忆</title>
+  <title>MySQL高级-简述SQL执行过程 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="MySQL-Ubuntu20.04安装MySQL8.0以及远程连接">
+            <span class="h2" id="subtitle" title="MySQL高级-简述SQL执行过程">
               
             </span>
 
@@ -244,8 +244,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-10 01:02" pubdate>
-        February 10, 2022 am
+      <time datetime="2022-08-13 23:02" pubdate>
+        August 13, 2022 pm
       </time>
     </span>
   
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      616 字
+      1.3k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      14
        分钟
     </span>
   
@@ -309,7 +309,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">MySQL-Ubuntu20.04安装MySQL8.0以及远程连接</h1>
+            <h1 style="display: none">MySQL高级-简述SQL执行过程</h1>
             
               <p class="note note-info">
                 
@@ -319,91 +319,84 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt install mysql-server<br></code></pre></div></td></tr></table></figure>
-
-<h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo mysql_secure_installation<br></code></pre></div></td></tr></table></figure>
-
-<p>设置</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):&lt;–初次运行直接回车<br><br>Set root password? [Y/n] &lt;– 是否设置root用户密码，输入y并回车或直接回车<br><br>New password: &lt;– 设置root用户的密码<br><br>Re-enter new password: &lt;– 再输入一次你设置的密码<br><br>Remove anonymous users? [Y/n] &lt;– 是否删除匿名用户，回车<br><br>Disallow root login remotely? [Y/n] &lt;–是否禁止root远程登录，回车<br><br>Remove <span class="hljs-built_in">test</span> database and access to it? [Y/n] &lt;– 是否删除<span class="hljs-built_in">test</span>数据库，回车<br><br>Reload privilege tables now? [Y/n] &lt;– 是否重新加载权限表，回车<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h2 id="查看数据库状态"><a href="#查看数据库状态" class="headerlink" title="查看数据库状态"></a>查看数据库状态</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl status mysql<br></code></pre></div></td></tr></table></figure>
-
-
-
-<h2 id="进入数据库"><a href="#进入数据库" class="headerlink" title="进入数据库"></a>进入数据库</h2><p>阿里云：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mysql<br></code></pre></div></td></tr></table></figure>
-
-<p>腾讯云：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo mysql<br></code></pre></div></td></tr></table></figure>
-
-
-
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="逻辑结构"><a href="#逻辑结构" class="headerlink" title="逻辑结构"></a>逻辑结构</h2><blockquote>
+<p>服务器处理客户端请求的简图</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/65ff25e25e994e7fa0e43717f98dcd6f.png" srcset="/img/loading.gif"></p>
 <blockquote>
-<p>两个提供商，进入数据库的另外一种方法</p>
+<p>详细图（经典图）。需要注意的是，此图对于MySQL5.7是完美的；但对于MySQL8.0来说，则多了一个查询缓存（Caches &amp; Buffers）</p>
 </blockquote>
-<p>找到MySQL安装位置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">whereis mysql<br></code></pre></div></td></tr></table></figure>
-
-<p>再<code>ll</code>查看所有文件，再进入</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo cat /etc/mysql/debian.cnf<br></code></pre></div></td></tr></table></figure>
-
-<p>里面就有一个数据库账号的信息。包含用户名和密码，可以用他登录。 <code>debian-sys-maint</code> 账号是在安装MySQL自动产生的。可以使用它登录MySQL数据库。</p>
-<p>进入数据库mysql后，</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">select user,host from user; <br></code></pre></div></td></tr></table></figure>
-
-<p>可以看到user为root，host为localhost的话，说明mysql只允许本机连接，那么外网，本地软件客户端就无法连接了。</p>
-<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><blockquote>
-<p>修改host：</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">update user <span class="hljs-built_in">set</span> host=<span class="hljs-string">&#x27;%&#x27;</span> <span class="hljs-built_in">where</span> user=<span class="hljs-string">&#x27;root&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
-
-<p>再<code>执行两次</code> ，如果一次就可以成功，就不需要执行两次了。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Grant all privileges on <span class="hljs-built_in">test</span>.* to <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
-
-
-
-<p>再次查看：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">select user,host from user; <br></code></pre></div></td></tr></table></figure>
-
-
-
+<p><img src="https://img-blog.csdnimg.cn/236e24e269204a008032f0c7da31ca2e.png" srcset="/img/loading.gif"></p>
+<ul>
+<li><p>Connectors：MySQL服务器以外的客户端程序（与具体的语言相关）。</p>
+</li>
+<li><p>Management &amp; Services &amp;  Utilities：基础服务组件。</p>
+</li>
+<li><p>连接层：客户端访问MySQL服务前，需要先建立TCP的连接。经过三次握手建立连接成功后，MySQL服务器对TCP传输过来的账号密码做身份认证、权限获取。</p>
+<ul>
+<li>Connection Pool：连接池。提供了多个用于客户端与服务器端交互的线程。</li>
+</ul>
+</li>
+<li><p>服务层：</p>
+<ul>
+<li><p>SQL Interface：SQL接口。接受SQL指令，以及返回结果。</p>
+</li>
+<li><p>Parser：解析器。词法、语义解析，最后会生成一个语法树便于后续的查询优化。即将SQL进行拆分。如图。</p>
+<p><img src="https://img-blog.csdnimg.cn/9e7a76b9da01437f96fca7807b199123.png" srcset="/img/loading.gif"></p>
+</li>
+<li><p>Optimizer：优化器。核心组件，SQL语句在语法解析后、查询之前会使用查询优化器确定SQL的执行路径，生成一个执行计划。一条查询可以有很多种执行方式，最后都返回相同的结果。优化器的作用就是找到其中最好的执行计划。分为逻辑查询优化和物理查询优化</p>
+</li>
+<li><p>Caches &amp; Buffers：查询缓存（MySQL8.0后被移除）。以key-value对方式进行缓存。SQL语句为key，结果为value。这里需要注意的是，这里的key必须严格的相等（空格的数量也必须一样，不能多不能少。否则将视为两个key）。</p>
+</li>
+</ul>
+</li>
+<li><p>引擎层</p>
+<ul>
+<li>Pluggable Storage Englnes：插件式的存储引擎。与底层的文件系统进行交互。真正的负责了MySQL中数据的存储和提取，对物理服务器级别维护的底层数据执行操作。</li>
+</ul>
+</li>
+<li><p>File System：文件系统。</p>
+</li>
+<li><p>Files &amp; Logs：日志文件。</p>
+</li>
+</ul>
 <blockquote>
-<p>给予root用户所有权限</p>
+<p>以查询为例的执行顺序，见下图。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">GRANT ALL ON *.* TO <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
-
-
-
+<p><img src="https://img-blog.csdnimg.cn/18d8c7fb54d44028ab1571a0370a19c8.png" srcset="/img/loading.gif"></p>
+<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><blockquote>
+<p>在连接层中。一个系统只会和MySQL服务器建立一个连接吗？只能有一个系统和MySQL服务器建立连接吗？</p>
+</blockquote>
+<ul>
+<li>都不是。多个系统都可以和MySQL服务器建立连接，每个系统建立的连接都不止一个。为了解决TCP无限创建与TCP频繁创建销毁带来的资源耗尽、性能下降问题。MySQL服务器里有专门的TCP连接池限制连接数，采用长连接模式复用TCP连接。</li>
+</ul>
+<h2 id="SQL执行流程"><a href="#SQL执行流程" class="headerlink" title="SQL执行流程"></a>SQL执行流程</h2><blockquote>
+<p>SQL语句中MySQL中的流程时：SQL语句 -&gt; 查询缓存 -&gt; 解析器 -&gt; 优化器 -&gt; 执行器。</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/518852c3134b403f943edc139dc8d405.png" srcset="/img/loading.gif"></p>
+<p>更详细一点的图：</p>
+<p><img src="https://img-blog.csdnimg.cn/9c5e9c597d1546989085020c3e9f197d.png" srcset="/img/loading.gif"></p>
 <blockquote>
-<p>修改root用户密码及加密方式。（即需要用密码才能进入（连接）数据库）</p>
+<p>移除查询缓存的原因：命中率太低。</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">ALTER USER <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span> IDENTIFIED WITH mysql_native_password BY <span class="hljs-string">&#x27;你的密码&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
+<ul>
+<li>在MySQL中的查询缓存，不是缓存查询计划，而是查询对应的结果。这样就意味着只有相同的查询操作才会命中查询缓存。而两个查询请求中任何字符上的不同（空格、注释、大小写），都会导致缓存不会命中，所以MySQL的查询缓存命中率不高。</li>
+<li>当调用某些系统函数时，可能同样的函数的两次调用会产生不同的结果。比如当以当前时间为值传入时，不同时间的两次查询也应该得到不同的结果，如果在第一次查询时就缓存了，那第二次查询的时候直接使用第一次查询的结果就是错误的。</li>
+<li>缓存失效。MySQL的缓存系统会监测涉及到的每张表，只要该表的结构或者数据被修改，那使用该表的所有高速缓存查询都将变为无效并从高速缓存中删除。对于更新频繁的数据库来说，查询缓存的命中率会非常低。</li>
+</ul>
+<h2 id="SQL语句的执行分析"><a href="#SQL语句的执行分析" class="headerlink" title="SQL语句的执行分析"></a>SQL语句的执行分析</h2><p>使用命令查看是否开启计划，开启它可以让MySQL收集在SQL执行时所用到的资源情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">select @@profiling; # 选择其一进行查看<br>show variables like &#39;%profiling&#39;;<br></code></pre></div></td></tr></table></figure>
 
+<p>结果为0则表示关闭，现在进行设置为开启状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">set profiling&#x3D;1;<br></code></pre></div></td></tr></table></figure>
 
+<p>执行后再次查看即为开启状态（1）。查看最近使用的命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show profiles;<br></code></pre></div></td></tr></table></figure>
 
-<p>再权限更新。</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">flush privileges;<br></code></pre></div></td></tr></table></figure>
+<p>再使用命令进行查看执行对应SQL语句时的耗时：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show profile for query Query_ID; # Query_ID为上面的命令后的结果中的一列<br></code></pre></div></td></tr></table></figure>
 
-
-
-<blockquote>
-<p>设置配置文件</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf<br></code></pre></div></td></tr></table></figure>
-
-<p>然后</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">修改bind-address = 127.0.0.1<br>为 bind-address = 0.0.0.0<br></code></pre></div></td></tr></table></figure>
-
-<p>或者将 <code>bind-address</code> 注释掉。</p>
-<blockquote>
-<p>重启MySQL服务</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo systemctl restart mysql.service<br></code></pre></div></td></tr></table></figure>
-
-
-
+<p>如果开启了查询缓存，那么在执行两次相同的SQL语句后，使用上面的方式查看耗时时，会发现第一次耗时长且步骤多；第二次相较于第一次而言会少很多。（提示：MySQL8.0中已经移除了，没有办法开启。所以两次效果相近）</p>
 
             </div>
             <hr>
@@ -421,9 +414,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
-                    
                       <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MySQL%E9%AB%98%E7%BA%A7/">MySQL高级</a>
                     
                   </div>
                 
@@ -437,7 +430,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/ff684fdc.html">https://tothefor.com/DragonOne/ff684fdc.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/424f774.html">https://tothefor.com/DragonOne/424f774.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -446,18 +439,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/9d06409a.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">星星之火-解决ElementUI在修改表单数据时，表格数据也在随之改变问题</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/9011653a.html">
-                        <span class="hidden-mobile">Vue基础知识-（十二）Vue实现左侧导航栏折叠与展开</span>
+                      <a href="/DragonOne/678cd8d.html">
+                        <span class="hidden-mobile">SpringBoot-（十九）SpringBoot实现JSON字符串转Java类</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
