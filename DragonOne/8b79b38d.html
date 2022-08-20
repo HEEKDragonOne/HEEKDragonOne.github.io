@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>星星之火-IDEA自动删除无用引用包 - 墨水记忆</title>
+  <title>星星之火-使用BigDecimal时的非整除报错问题 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="星星之火-IDEA自动删除无用引用包">
+            <span class="h2" id="subtitle" title="星星之火-使用BigDecimal时的非整除报错问题">
               
             </span>
 
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      139 字
+      1.1k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      15
        分钟
     </span>
   
@@ -309,22 +309,108 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">星星之火-IDEA自动删除无用引用包</h1>
+            <h1 style="display: none">星星之火-使用BigDecimal时的非整除报错问题</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 14, 2022 pm
+                  本文最后更新于：August 20, 2022 am
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><ul>
-<li>点开setting（Mac为Preferences）</li>
-<li>Editor -&gt; General</li>
-<li>Auto Import。然后再勾选Optimize imports on the fly，如下图。</li>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>今天在使用大数BigDecimal时，出现了一个问题。先附上报错以及原因。</p>
+<ul>
+<li>报错</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/695cedf09fd94986912896dd339d303c.png" srcset="/img/loading.gif"></p>
+<blockquote>
+<p>java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.</p>
+</blockquote>
+<ul>
+<li>原因</li>
+</ul>
+<blockquote>
+<p>在用BigDecimal做除法的时候，遇到了不整除的情况，而且造成的结果是无限循环小数，就会抛出以上异常。</p>
+</blockquote>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ul>
+<li>整除</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">10</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">2</span>);<br>System.out.println(b1.divide(b2)); <span class="hljs-comment">// 5</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>非整除（结果为有限小数）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">10</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">4</span>);<br>System.out.println(b1.divide(b2)); <span class="hljs-comment">// 2.5</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>非整除（结果为无限小数）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">10</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">3</span>);<br>System.out.println(b1.divide(b2)); <br><br><span class="hljs-comment">// 报错</span><br>java.lang.ArithmeticException: Non-terminating decimal expansion; no exact representable decimal result.<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><blockquote>
+<p>只需要在 divide() 方法指定精度和舍入模式就可以解决该问题。</p>
+</blockquote>
+<ul>
+<li>八种舍入模式</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="center">常量名</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ROUND_UP</td>
+<td align="center">远离零方向舍入。向远离0的方向舍入，也就是说，向绝对值最大的方向舍入，只要舍弃位非0即进位。</td>
+</tr>
+<tr>
+<td align="center">ROUND_DOWN</td>
+<td align="center">趋向0方向舍入。向0方向靠拢，也就是说，向绝对值最小的方向输入，注意：所有的位都舍弃，不存在进位情况。</td>
+</tr>
+<tr>
+<td align="center">ROUND_CEILING</td>
+<td align="center">向正无穷方向舍入。向正最大方向靠拢，如果是正数，舍入行为类似于ROUND_UP；如果为负数，则舍入行为类似于ROUND_DOWN.注意：Math.round方法使用的即为此模式。</td>
+</tr>
+<tr>
+<td align="center">ROUND_FLOOR</td>
+<td align="center">向负无穷方向舍入。向负无穷方向靠拢，如果是正数，则舍入行为类似ROUND_DOWN，如果是负数，舍入行为类似以ROUND_UP。</td>
+</tr>
+<tr>
+<td align="center">ROUND_HALF_UP</td>
+<td align="center">最近数字舍入(5舍)，这就是我们经典的四舍五入。</td>
+</tr>
+<tr>
+<td align="center">ROUND_HALF_DOWN</td>
+<td align="center">最近数字舍入(5舍)。在四舍五入中，5是进位的，在HALF_DOWN中却是舍弃不进位。</td>
+</tr>
+<tr>
+<td align="center">ROUND_HALF_EVEN</td>
+<td align="center">银行家算法。四舍六入五考虑，五后非零就进一，五后为零看奇偶，五前为偶应舍去，五前为奇要进一。</td>
+</tr>
+<tr>
+<td align="center">ROUND_UNNECESSARY</td>
+<td align="center">断言请求的操作具有精确的结果，因此不需要舍入。如果对获得精确结果的操作指定此舍入模式，则抛出ArithmeticException。</td>
+</tr>
+</tbody></table>
+<h3 id="舍入模式示例"><a href="#舍入模式示例" class="headerlink" title="舍入模式示例"></a>舍入模式示例</h3><h4 id="示例一"><a href="#示例一" class="headerlink" title="示例一"></a>示例一</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">10</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">3</span>);<br>System.out.println(<span class="hljs-number">10.0</span>/<span class="hljs-number">3.0</span>);<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_CEILING));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_FLOOR));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_EVEN));<br><br><span class="hljs-comment">// 输出</span><br><span class="hljs-number">3.3333333333333335</span><br>ROUND_UP：<span class="hljs-number">3.4</span><br>ROUND_DOWN：<span class="hljs-number">3.3</span><br>ROUND_CEILING：<span class="hljs-number">3.4</span><br>ROUND_FLOOR：<span class="hljs-number">3.3</span><br>ROUND_HALF_UP：<span class="hljs-number">3.3</span><br>ROUND_HALF_DOWN：<span class="hljs-number">3.3</span><br>ROUND_HALF_EVEN：<span class="hljs-number">3.3</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="示例二"><a href="#示例二" class="headerlink" title="示例二"></a>示例二</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">12345</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">1000</span>);<br>System.out.println(<span class="hljs-number">12345.0</span>/<span class="hljs-number">1000.0</span>);<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_CEILING));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_FLOOR));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_EVEN));<br><br><span class="hljs-comment">// 输出</span><br><span class="hljs-number">12.345</span><br>ROUND_UP：<span class="hljs-number">12.4</span><br>ROUND_DOWN：<span class="hljs-number">12.3</span><br>ROUND_CEILING：<span class="hljs-number">12.4</span><br>ROUND_FLOOR：<span class="hljs-number">12.3</span><br>ROUND_HALF_UP：<span class="hljs-number">12.3</span><br>ROUND_HALF_DOWN：<span class="hljs-number">12.3</span><br>ROUND_HALF_EVEN：<span class="hljs-number">12.3</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="示例三"><a href="#示例三" class="headerlink" title="示例三"></a>示例三</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">12456</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">1000</span>);<br>System.out.println(<span class="hljs-number">12456.0</span>/<span class="hljs-number">1000.0</span>);<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_CEILING));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_FLOOR));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_EVEN));<br><br><span class="hljs-comment">// 输出</span><br><span class="hljs-number">12.456</span><br>ROUND_UP：<span class="hljs-number">12.5</span><br>ROUND_DOWN：<span class="hljs-number">12.4</span><br>ROUND_CEILING：<span class="hljs-number">12.5</span><br>ROUND_FLOOR：<span class="hljs-number">12.4</span><br>ROUND_HALF_UP：<span class="hljs-number">12.5</span><br>ROUND_HALF_DOWN：<span class="hljs-number">12.5</span><br>ROUND_HALF_EVEN：<span class="hljs-number">12.5</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h4 id="示例四"><a href="#示例四" class="headerlink" title="示例四"></a>示例四</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">BigDecimal b1 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">12567</span>);<br>BigDecimal b2 = <span class="hljs-keyword">new</span> BigDecimal(<span class="hljs-number">1000</span>);<br>System.out.println(<span class="hljs-number">12567.0</span>/<span class="hljs-number">1000.0</span>);<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_CEILING));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_FLOOR));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_UP));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_DOWN));<br>System.out.println(b1.divide(b2,<span class="hljs-number">1</span>,BigDecimal.ROUND_HALF_EVEN));<br><br><span class="hljs-comment">// 输出</span><br><span class="hljs-number">12.567</span><br>ROUND_UP：<span class="hljs-number">12.6</span><br>ROUND_DOWN：<span class="hljs-number">12.5</span><br>ROUND_CEILING：<span class="hljs-number">12.6</span><br>ROUND_FLOOR：<span class="hljs-number">12.5</span><br>ROUND_HALF_UP：<span class="hljs-number">12.6</span><br>ROUND_HALF_DOWN：<span class="hljs-number">12.6</span><br>ROUND_HALF_EVEN：<span class="hljs-number">12.6</span><br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -356,7 +442,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/7b085271.html">https://tothefor.com/DragonOne/7b085271.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/8b79b38d.html">https://tothefor.com/DragonOne/8b79b38d.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -365,9 +451,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/c4cf21bd.html">
+                      <a href="/DragonOne/7b085271.html">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Spring注解-（九）@Lookup的用法</span>
+                        <span class="hidden-mobile">星星之火-IDEA自动删除无用引用包</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -375,8 +461,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/8b79b38d.html">
-                        <span class="hidden-mobile">星星之火-使用BigDecimal时的非整除报错问题</span>
+                      <a href="/DragonOne/24919e30.html">
+                        <span class="hidden-mobile">Spring注解-（八）@Import的用法</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
