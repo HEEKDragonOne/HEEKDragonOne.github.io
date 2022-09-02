@@ -1,0 +1,847 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JAVA8-Java8的流式编程-高级篇 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JAVA8-Java8的流式编程-高级篇">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-02 17:23" pubdate>
+        September 2, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JAVA8-Java8的流式编程-高级篇</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：September 2, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>JAVA8 是一个有里程碑的一个版本，提供了很多的新特性。Java 8 是oracle公司于<strong>2014</strong>年3月发布，可以看成是自Java 5 以来最具革命性的版本。Java 8为Java语言、编译器、类库、开发工具与JVM带来了大量新特性。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="Comparator"><a href="#Comparator" class="headerlink" title="Comparator"></a>Comparator</h2><h3 id="comparing"><a href="#comparing" class="headerlink" title="comparing"></a>comparing</h3><ul>
+<li><p>提取对象属性，按照指定规则排序。</p>
+</li>
+<li><p><code>comparing</code>是比较器功能接口的静态方法。</p>
+</li>
+<li><p><code>Comparator.comparing</code>接受一个函数，该函数从给定类型中提取一个可比较的排序键，并返回一个通过该排序键进行比较的比较器。</p>
+</li>
+</ul>
+<p>例如：</p>
+<blockquote>
+<p>传递一个函数，它将从一个类型<code>T</code>中提取一个可比较的排序键，并返回一个通过该排序键进行比较的比较器。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Comparator&lt;Student&gt; nameComparator = Comparator.comparing(Student::getName);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>传递一个函数(<code>Function</code>)和一个比较器(<code>Comparator</code>)。该方法将从一个类型<code>T</code>中提取一个排序键，并返回一个比较器，使用指定的比较器对该排序键进行比较。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Comparator&lt;Student&gt; nameComparator = Comparator.comparing(Student::getName, (s1, s2) -&gt; s2.compareTo(s1)); <br></code></pre></div></td></tr></table></figure>
+
+<p><strong>对于<code>int</code>、<code>long</code>和<code>double</code>数据类型的排序键，比较器分别有<code>comparingInt</code>、<code>comparingLong</code>和<code>comparingDouble</code>方法。</strong> </p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><p>实体类：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stu</span></span>&#123;<br>  String name;<br>  <span class="hljs-keyword">int</span> age;<br>  <span class="hljs-keyword">long</span> weight;<br>  <span class="hljs-keyword">double</span> money;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Stu&gt; stus = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stu s1 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;bbbbb&quot;</span>,<span class="hljs-number">12</span>,<span class="hljs-number">24</span>,<span class="hljs-number">23.24</span>);<br>Stu s2 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ddddd&quot;</span>,<span class="hljs-number">1</span>,<span class="hljs-number">124</span>,<span class="hljs-number">133.124</span>);<br>Stu s3 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>,<span class="hljs-number">13</span>,<span class="hljs-number">34</span>,<span class="hljs-number">13.14</span>);<br>Stu s4 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ccccc&quot;</span>,<span class="hljs-number">17</span>,<span class="hljs-number">23</span>,<span class="hljs-number">113.114</span>);<br>Stu s5 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;eeeee&quot;</span>,<span class="hljs-number">123</span>,<span class="hljs-number">341</span>,<span class="hljs-number">135.134</span>);<br>stus.add(s1);<br>stus.add(s2);<br>stus.add(s3);<br>stus.add(s4);<br>stus.add(s5);<br><br>Collections.sort(stus,Comparator.comparing(Stu::getName)); <span class="hljs-comment">// 默认升序</span><br><span class="hljs-keyword">for</span>(Stu it : stus)&#123;<br>  System.out.println(it.getName()+<span class="hljs-string">&quot; &quot;</span>+it.getAge()+<span class="hljs-string">&quot; &quot;</span>+it.getMoney()+<span class="hljs-string">&quot; &quot;</span>+it.getWeight());<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>在上面使用<code>Collections.sort</code>对集合进行排序。也可以使用<code>Stream.sorted</code>、<code>List.sort</code>和<code>Arrays.sort</code>来使用比较器对集合进行排序。</p>
+<h4 id="其他用法示例"><a href="#其他用法示例" class="headerlink" title="其他用法示例"></a>其他用法示例</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Collections.sort(stus,Comparator.comparingInt(Stu::getAge)); <span class="hljs-comment">// 对int类型的age进行升序排序</span><br>Collections.sort(stus,Comparator.comparingLong(Stu::getWeight)); <span class="hljs-comment">// 对long类型的weight</span><br>Collections.sort(stus,Comparator.comparingDouble(Stu::getMoney)); <span class="hljs-comment">// 对double类型的money</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="降序（含多属性比较）"><a href="#降序（含多属性比较）" class="headerlink" title="降序（含多属性比较）"></a>降序（含多属性比较）</h4><p>实现方式多，这里就不做演示了，或者直接看总结。</p>
+<p>实现降序有很多种方法，如下：（推荐先见下面的总结再看以下内容）</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// list表示某集合：List&lt;类&gt; list;</span><br><br><span class="hljs-comment">//返回 对象集合以类属性一升序排序</span><br>list.stream().sorted(Comparator.comparing(类::属性一));<br> <br><span class="hljs-comment">//返回 对象集合以类属性一降序排序 注意两种写法</span><br>  <span class="hljs-comment">// 先以属性一升序,再将升序结果按照属性一进行降序处理；</span><br>list.stream().sorted(Comparator.comparing(类::属性一).reversed());<br>  <span class="hljs-comment">// 以属性一降序（没有了升序的处理步骤，直接进行降序处理）</span><br>list.stream().sorted(Comparator.comparing(类::属性一,Comparator.reverseOrder()));<br><br><span class="hljs-comment">//返回 对象集合以类属性一升序 属性二升序</span><br>list.stream().sorted(Comparator.comparing(类::属性一).thenComparing(类::属性二));<br> <br><span class="hljs-comment">//返回 对象集合以类属性一降序 属性二升序 注意两种写法</span><br>  <span class="hljs-comment">// 先以属性一升序,再将升序结果按照属性一进行降序处理；再进行属性二升序</span><br>list.stream().sorted(Comparator.comparing(类::属性一).reversed().thenComparing(类::属性二));<br>  <span class="hljs-comment">// 先以属性一降序（没有了升序的处理步骤，直接进行降序处理）；再进行属性二升序</span><br>list.stream().sorted(Comparator.comparing(类::属性一,Comparator.reverseOrder()).thenComparing(类::属性二));<br> <br><span class="hljs-comment">//返回 对象集合以类属性一降序 属性二降序 注意两种写法</span><br>  <span class="hljs-comment">// 先以属性一升序,再将升序结果按照属性一进行降序处理；再进行属性二降序</span><br>list.stream().sorted(Comparator.comparing(类::属性一).reversed().thenComparing(类::属性二,Comparator.reverseOrder()));<br>  <span class="hljs-comment">// 先以属性一降序（没有了升序的处理步骤，直接进行降序处理）；再进行属性二降序</span><br>list.stream().sorted(Comparator.comparing(类::属性一,Comparator.reverseOrder()).thenComparing(类::属性二,Comparator.reverseOrder()));<br> <br><span class="hljs-comment">//返回 对象集合以类属性一升序 属性二降序 注意两种写法</span><br>  <span class="hljs-comment">// 先以属性一升序,再将升序结果按照属性一进行降序处理；再进行属性二升序,结果进行属性一降序属性二降序</span><br>list.stream().sorted(Comparator.comparing(类::属性一).reversed().thenComparing(类::属性二).reversed());<br>  <span class="hljs-comment">// 先以属性一升序,再进行属性二降序</span><br>list.stream().sorted(Comparator.comparing(类::属性一).thenComparing(类::属性二,Comparator.reverseOrder()));<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h5><ul>
+<li>Comparator.comparing(类::属性一).reversed()：先将属性一按照升序进行排序，再将结果按照属性一进行降序。</li>
+<li>Comparator.comparing(类::属性一,Comparator.reverseOrder())：直接将属性一进行降序排序。</li>
+</ul>
+<h2 id="Collectors"><a href="#Collectors" class="headerlink" title="Collectors"></a>Collectors</h2><p>类 <code>java.util.stream.Collectors</code> 实现了 <code>java.util.stream.Collector</code> 接口，同时又提供了大量的方法对流 ( <code>stream</code> ) 的元素执行 <code>map</code> <code>and</code> <code>reduce</code> 操作，或者统计操作。</p>
+<p>Collectors的方法如下：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>toList</td>
+<td>将流中的元素放置到一个列表集合中。这个列表默认为ArrayList。</td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>将流中的元素放置到一个无序集set中。默认为HashSet。</td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>将流中的元素全部放置到一个集合中，这里使用Collection，泛指多种集合。</td>
+</tr>
+<tr>
+<td>toMap</td>
+<td>根据给定的键生成器和值生成器生成的键和值保存到一个map中返回，键和值的生成都依赖于元素，可以指定出现重复键时的处理方案和保存结果的map。</td>
+</tr>
+<tr>
+<td>toConcurrentMap</td>
+<td>与toMap基本一致，只是它最后使用的map是并发Map：ConcurrentHashMap</td>
+</tr>
+<tr>
+<td>joining</td>
+<td>将流中的元素全部以字符序列的方式连接到一起，可以指定连接符，甚至是结果的前后缀。内部拼接使用的Java8的新类StringJoiner，可定义连接符和前缀后缀。</td>
+</tr>
+<tr>
+<td>mapping</td>
+<td>先对流中的每个元素进行映射，即类型转换，然后再将新元素以给定的Collector进行归纳。类似Stream.toMap。</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>在归纳动作结束之后，对归纳的结果进行再处理。</td>
+</tr>
+<tr>
+<td>counting</td>
+<td>元素计数</td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>最小值的Optional</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>最大值的Optional</td>
+</tr>
+<tr>
+<td>summingInt</td>
+<td>求和，结果类型为int</td>
+</tr>
+<tr>
+<td>summingLong</td>
+<td>求和，结果类型为long</td>
+</tr>
+<tr>
+<td>summingDouble</td>
+<td>求和，结果类型为double</td>
+</tr>
+<tr>
+<td>averagingInt</td>
+<td>平均值，结果类型int</td>
+</tr>
+<tr>
+<td>averagingLong</td>
+<td>平均值，结果类型long</td>
+</tr>
+<tr>
+<td>averagingDouble</td>
+<td>平均值，结果类型double</td>
+</tr>
+<tr>
+<td>summarizingInt</td>
+<td>汇总，结果包含元素个数、最大值、最小值、求和值、平均值，值类型都为int</td>
+</tr>
+<tr>
+<td>summarizingLong</td>
+<td>汇总，结果包含元素个数、最大值、最小值、求和值、平均值，值类型都为long</td>
+</tr>
+<tr>
+<td>summarizingDouble</td>
+<td>汇总，结果包含元素个数、最大值、最小值、求和值、平均值，值类型都为</td>
+</tr>
+<tr>
+<td>reducing</td>
+<td>统计，reducing方法有三个重载方法，其实是和Stream里的三个reduce方法对应的，二者是可以替换使用的，作用完全一致，也是对流中的元素做统计归纳作用。求和、平均值、最大值、最小值等其实就属于一种特殊的统计</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>分组，得到一个HashMap</td>
+</tr>
+<tr>
+<td>groupingByConcurrent</td>
+<td>分组，得到一个ConcurrentHashMap</td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>将流中的元素按照给定的校验规则的结果分为两个部分，放到一个map中返回，map的键是Boolean类型，值为元素的列表List</td>
+</tr>
+</tbody></table>
+<h3 id="collectingAndThen"><a href="#collectingAndThen" class="headerlink" title="collectingAndThen"></a>collectingAndThen</h3><p><code>Collectors.collectingAndThen()</code>可接受两个参数，第一个参数用于 <code>reduce</code>操作，而第二参数用于 <code>map</code>操作。</p>
+<p>即：先把流中的所有元素传递给第一个参数，然后把生成的集合传递给第二个参数来处理。允许我们对生成的集˚合再做一次操作。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Stu&gt; stus = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stu s1 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;bbbbb&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-number">24</span>, <span class="hljs-number">23.24</span>);<br>Stu s2 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ddddd&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-number">124</span>, <span class="hljs-number">133.124</span>);<br>Stu s3 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>, <span class="hljs-number">43</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>Stu s4 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;eeeee&quot;</span>, <span class="hljs-number">13</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>Stu s5 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ccccc&quot;</span>, <span class="hljs-number">33</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>stus.add(s1);<br>stus.add(s2);<br>stus.add(s3);<br>stus.add(s4);<br>stus.add(s5);<br><br>ArrayList&lt;Stu&gt; collect = stus.stream().filter(it -&gt; it.getAge() &gt; <span class="hljs-number">20</span>).collect(Collectors.collectingAndThen(Collectors.toList(), ArrayList::<span class="hljs-keyword">new</span>));<br>collect.forEach(System.out::println);<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stu&#123;name=<span class="hljs-string">&#x27;bbbbb&#x27;</span>, age=<span class="hljs-number">23</span>, weight=<span class="hljs-number">24</span>, money=<span class="hljs-number">23.24</span>&#125;<br>Stu&#123;name=<span class="hljs-string">&#x27;aaaaa&#x27;</span>, age=<span class="hljs-number">43</span>, weight=<span class="hljs-number">34</span>, money=<span class="hljs-number">13.14</span>&#125;<br>Stu&#123;name=<span class="hljs-string">&#x27;ccccc&#x27;</span>, age=<span class="hljs-number">33</span>, weight=<span class="hljs-number">34</span>, money=<span class="hljs-number">13.14</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA8/">JAVA8</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA8/">JAVA8</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/d2aa5c6d.html">https://tothefor.com/DragonOne/d2aa5c6d.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/ceb3d903.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA8-Java8的流式编程-预知篇</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/4b257d40.html">
+                        <span class="hidden-mobile">SpringBoot-（二十一）高级统一结果的封装和全局异常的处理</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

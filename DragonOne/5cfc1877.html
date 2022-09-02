@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      224 字
+      609 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      9
        分钟
     </span>
   
@@ -313,13 +313,37 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：May 16, 2022 am
+                  本文最后更新于：September 2, 2022 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="复制的项目启动报错"><a href="#复制的项目启动报错" class="headerlink" title="复制的项目启动报错"></a>复制的项目启动报错</h2><blockquote>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="SpringBoot项目启动报错问题"><a href="#SpringBoot项目启动报错问题" class="headerlink" title="SpringBoot项目启动报错问题"></a>SpringBoot项目启动报错问题</h2><blockquote>
+<p>2022年8月23日</p>
+</blockquote>
+<p>在测试springboot项目时出现了以下错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">============================<br>CONDITIONS EVALUATION REPORT<br>============================<br><br><br>Positive matches:<br>-----------------<br><br>   AopAutoConfiguration matched:<br>      - <span class="hljs-meta">@ConditionalOnProperty</span> (spring.aop.auto=<span class="hljs-keyword">true</span>) matched (OnPropertyCondition)<br><br>   AopAutoConfiguration.ClassProxyingConfiguration matched:<br>      - <span class="hljs-meta">@ConditionalOnMissingClass</span> did not find unwanted <span class="hljs-class"><span class="hljs-keyword">class</span> &#x27;<span class="hljs-title">org</span>.<span class="hljs-title">aspectj</span>.<span class="hljs-title">weaver</span>.<span class="hljs-title">Advice</span>&#x27; (<span class="hljs-title">OnClassCondition</span>)</span><br><span class="hljs-class">      - @<span class="hljs-title">ConditionalOnProperty</span> (<span class="hljs-title">spring</span>.<span class="hljs-title">aop</span>.<span class="hljs-title">proxy</span>-<span class="hljs-title">target</span>-<span class="hljs-title">class</span></span>=<span class="hljs-keyword">true</span>) matched (OnPropertyCondition)<br><br>   DataSourceAutoConfiguration matched:<br>      - <span class="hljs-meta">@ConditionalOnClass</span> found required classes <span class="hljs-string">&#x27;javax.sql.DataSource&#x27;</span>, <span class="hljs-string">&#x27;org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType&#x27;</span> (OnClassCondition)<br>      - <span class="hljs-meta">@ConditionalOnMissingBean</span> (types: io.r2dbc.spi.ConnectionFactory; SearchStrategy: all) <span class="hljs-function">did not find any <span class="hljs-title">beans</span> <span class="hljs-params">(OnBeanCondition)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">   DataSourceAutoConfiguration.PooledDataSourceConfiguration matched:</span><br><span class="hljs-function">      - AnyNestedCondition 1 matched 1 did not</span>; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.PooledDataSourceAvailable PooledDataSource found supported DataSource; NestedCondition on DataSourceAutoConfiguration.PooledDataSourceCondition.ExplicitType <span class="hljs-meta">@ConditionalOnProperty</span> (spring.datasource.type) did not find property <span class="hljs-string">&#x27;type&#x27;</span> (DataSourceAutoConfiguration.PooledDataSourceCondition)<br>      - <span class="hljs-meta">@ConditionalOnMissingBean</span> (types: javax.sql.DataSource,javax.sql.XADataSource; SearchStrategy: all) <span class="hljs-function">did not find any <span class="hljs-title">beans</span> <span class="hljs-params">(OnBeanCondition)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">   DataSourceConfiguration.Hikari matched:</span><br><span class="hljs-function">      - @ConditionalOnClass found required class &#x27;com.zaxxer.hikari.HikariDataSource&#x27; <span class="hljs-params">(OnClassCondition)</span></span><br><span class="hljs-function">      - @<span class="hljs-title">ConditionalOnProperty</span> <span class="hljs-params">(spring.datasource.type=com.zaxxer.hikari.HikariDataSource)</span> <span class="hljs-title">matched</span> <span class="hljs-params">(OnPropertyCondition)</span></span><br><span class="hljs-function">      - @<span class="hljs-title">ConditionalOnMissingBean</span> <span class="hljs-params">(types: javax.sql.DataSource; SearchStrategy: all)</span> did not find any <span class="hljs-title">beans</span> <span class="hljs-params">(OnBeanCondition)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">   DataSourceInitializationConfiguration matched:</span><br><span class="hljs-function">      - @ConditionalOnClass found required class &#x27;org.springframework.jdbc.datasource.init.DatabasePopulator&#x27; <span class="hljs-params">(OnClassCondition)</span></span><br><span class="hljs-function">      - @<span class="hljs-title">ConditionalOnSingleCandidate</span> <span class="hljs-params">(types: javax.sql.DataSource; SearchStrategy: all)</span> found a single bean &#x27;dataSource&#x27;</span>; <span class="hljs-meta">@ConditionalOnMissingBean</span> (types: org.springframework.boot.autoconfigure.sql.init.SqlDataSourceScriptDatabaseInitializer,org.springframework.boot.autoconfigure.sql.init.SqlR2dbcScriptDatabaseInitializer; SearchStrategy: all) <span class="hljs-function">did not find any <span class="hljs-title">beans</span> <span class="hljs-params">(OnBeanCondition)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">   DataSourcePoolMetadataProvidersConfiguration.HikariPoolDataSourceMetadataProviderConfiguration matched:</span><br><span class="hljs-function">      - @ConditionalOnClass found required class &#x27;com.zaxxer.hikari.HikariDataSource&#x27; <span class="hljs-params">(OnClassCondition)</span></span><br><span class="hljs-function"></span><br><span class="hljs-function">   DataSourceTransactionManagerAutoConfiguration matched:</span><br><span class="hljs-function">      - @ConditionalOnClass found required classes &#x27;org.springframework.jdbc.core.JdbcTemplate&#x27;, &#x27;org.springframework.transaction.TransactionManager&#x27; <span class="hljs-params">(OnClassCondition)</span></span><br><span class="hljs-function"></span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>原因：数据库层的mapper没有被扫描到。</p>
+</blockquote>
+<blockquote>
+<p>解决办法：要么在mapper接口上加上@Mapper注解，要么在主启动类上加@MapperScan()。见下面。</p>
+</blockquote>
+<h3 id="主启动类加注解"><a href="#主启动类加注解" class="headerlink" title="主启动类加注解"></a>主启动类加注解</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@MapperScan(value = &quot;com.tothefor.dao&quot;)</span><br><span class="hljs-meta">@SpringBootApplication</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TtfRoomApplication</span> </span>&#123;<br><br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>		SpringApplication.run(TtfRoomApplication.class, args);<br>	&#125;<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="接口加注解"><a href="#接口加注解" class="headerlink" title="接口加注解"></a>接口加注解</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.dao;<br><br><span class="hljs-keyword">import</span> org.apache.ibatis.annotations.Mapper;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/8/25 13:51</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Mapper</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">TestTDao</span> </span>&#123;<br>     <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getCount</span><span class="hljs-params">()</span></span>;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="复制的项目启动报错"><a href="#复制的项目启动报错" class="headerlink" title="复制的项目启动报错"></a>复制的项目启动报错</h2><blockquote>
 <p>2022年5月16日 10:57:50</p>
 </blockquote>
 <p>在复制A项目到其他位置时，启动项目时报错如下：</p>

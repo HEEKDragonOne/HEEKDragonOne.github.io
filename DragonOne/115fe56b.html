@@ -1,0 +1,1044 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>JAVA8-Java8的流式编程-初级篇 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="JAVA8-Java8的流式编程-初级篇">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-02 17:52" pubdate>
+        September 2, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      55
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">JAVA8-Java8的流式编程-初级篇</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：September 2, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>JAVA8 是一个有里程碑的一个版本，提供了很多的新特性。Java 8 是oracle公司于<strong>2014</strong>年3月发布，可以看成是自Java 5 以来最具革命性的版本。Java 8为Java语言、编译器、类库、开发工具与JVM带来了大量新特性。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><img src="https://img-blog.csdnimg.cn/72d0bca8667c4dd5aed1484d91c01b7d.png" srcset="/img/loading.gif"></p>
+<h2 id="预知"><a href="#预知" class="headerlink" title="预知"></a>预知</h2><blockquote>
+<p>流的中间操作：如果Stream只有中间操作是不会执行的，当执行终端操作的时候才会执行中间操作，这种方式称为延迟加载或惰性求值。多个中间操作组成一个中间操作链，只有当执行终端操作的时候才会执行一遍中间操作链。</p>
+</blockquote>
+<blockquote>
+<p>状态操作</p>
+</blockquote>
+<ul>
+<li>无状态操作：所谓无状态就是一次操作，不能保存数据，<code>线程安全</code>。如：filter、map、flatMap、peek 、unordered属于无状态操作。这些操作只是从输入流中获取每一个元素，并且在输出流中得到一个结果，元素和元素之间没有依赖关系，不需要存储数据。</li>
+<li>有状态操作：所谓有状态就是有数据存储功能，<code>线程不安全</code>。如：distinct、sorted、limit、skip属于有状态操作。这些操作需要先知道先前的历史数据，而且需要存储一些数据，元素之间有依赖关系。</li>
+</ul>
+<hr>
+<h2 id="创建流"><a href="#创建流" class="headerlink" title="创建流"></a>创建流</h2><p>流有两种形式，单列和双列。</p>
+<h3 id="单列流"><a href="#单列流" class="headerlink" title="单列流"></a>单列流</h3><p>主要是对于集合而言。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Integer&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stream&lt;Integer&gt; stream = list.stream();<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="数组流"><a href="#数组流" class="headerlink" title="数组流"></a>数组流</h3><p>主要是对于数组而言。有两种创建方式。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Integer[] a = &#123;<span class="hljs-number">23</span>,<span class="hljs-number">23</span>,<span class="hljs-number">32</span>,<span class="hljs-number">23</span>,<span class="hljs-number">3</span>,<span class="hljs-number">23</span>&#125;;<br>Stream&lt;Integer&gt; stream = Arrays.stream(a);<br>Stream&lt;Integer&gt; a1 = Stream.of(a);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="双列流"><a href="#双列流" class="headerlink" title="双列流"></a>双列流</h3><p>先转化为单列集合再创建流。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Map&lt;String,Integer&gt; map = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();<br>map.put(<span class="hljs-string">&quot;aaaa&quot;</span>,<span class="hljs-number">13</span>);<br>map.put(<span class="hljs-string">&quot;bbbb&quot;</span>,<span class="hljs-number">23</span>);<br>map.put(<span class="hljs-string">&quot;cccc&quot;</span>,<span class="hljs-number">33</span>);<br>Stream&lt;Map.Entry&lt;String, Integer&gt;&gt; stream = map.entrySet().stream();<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="中间操作"><a href="#中间操作" class="headerlink" title="中间操作"></a>中间操作</h2><h3 id="distinct（去重）"><a href="#distinct（去重）" class="headerlink" title="distinct（去重）"></a>distinct（去重）</h3><p>通过流所生成元素的 hashCode() 和 equals() 去除重复元素的Stream。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Stu&gt; distinct = stus.stream().distinct();<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="filter（过滤）"><a href="#filter（过滤）" class="headerlink" title="filter（过滤）"></a>filter（过滤）</h3><p>对Stream中包含的元素使用给定的过滤函数进行过滤操作，新生成的Stream只包含符合条件的元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Stu&gt; stuStream = stus.stream().filter(it -&gt; it.getAge() &gt; <span class="hljs-number">20</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>括号内为过滤条件。</p>
+<h3 id="sorted（排序）"><a href="#sorted（排序）" class="headerlink" title="sorted（排序）"></a>sorted（排序）</h3><p>通过比较器指定比较规则进行排序。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Stu&gt; sorted = stus.stream().sorted(Comparator.comparing(Stu::getName)); <span class="hljs-comment">//升序</span><br>Stream&lt;Stu&gt; sorted = stus.stream().sorted(Comparator.comparing(Stu::getName, Comparator.reverseOrder())); <span class="hljs-comment">// 降序</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="limit（截断）"><a href="#limit（截断）" class="headerlink" title="limit（截断）"></a>limit（截断）</h3><p>截断流，使其元素不超过给定数量。如果元素的个数小于maxSize，那就获取所有元素。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Stu&gt; limit = stus.stream().limit(<span class="hljs-number">20</span>);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="skip（跳过）"><a href="#skip（跳过）" class="headerlink" title="skip（跳过）"></a>skip（跳过）</h3><p>跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，则返回一个空流。与 limit(n) 互补。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Stu&gt; skip = stus.stream().skip(<span class="hljs-number">3</span>);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="map（转换流）"><a href="#map（转换流）" class="headerlink" title="map（转换流）"></a>map（转换流）</h3><p>转换流，将原Stream转换成一个新的Stream。接收一个Function函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。</p>
+<blockquote>
+<p>map方法有3个扩展方法：</p>
+</blockquote>
+<ul>
+<li>mapToInt：转换成IntStream。</li>
+<li>mapToLong：转换成LongStream。</li>
+<li>mapToDouble：转换成DoubleStream。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Integer&gt; integerStream = stus.stream().map(Stu::getAge);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="flatMap（转换流并合并）"><a href="#flatMap（转换流并合并）" class="headerlink" title="flatMap（转换流并合并）"></a>flatMap（转换流并合并）</h3><p>转换流，将原Stream中的每个元素都转换成另一个Stream，然后把所有Stream连接成一个新的Stream。接收一个Function函数作为参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stu</span></span>&#123;<br>  String name;<br>  List&lt;String&gt; roles = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Stu&gt; lists = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stu a = <span class="hljs-keyword">new</span> Stu();<br>a.setName(<span class="hljs-string">&quot;aaaaaaa&quot;</span>);<br>a.setRoles(Arrays.asList(<span class="hljs-string">&quot;admin&quot;</span>,<span class="hljs-string">&quot;user&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>));<br>Stu b = <span class="hljs-keyword">new</span> Stu();<br>b.setName(<span class="hljs-string">&quot;bbbbbbb&quot;</span>);<br>b.setRoles(Arrays.asList(<span class="hljs-string">&quot;qwer&quot;</span>,<span class="hljs-string">&quot;admin&quot;</span>,<span class="hljs-string">&quot;root&quot;</span>));<br>lists.add(a);<br>lists.add(b);<br><br>List&lt;String&gt; collect = lists.stream().flatMap(it -&gt; it.getRoles().stream()).collect(Collectors.toList());<br>collect.forEach(System.out::println);<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">admin<br>user<br>root<br>qwer<br>admin<br>root<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="peek（打印或修改）"><a href="#peek（打印或修改）" class="headerlink" title="peek（打印或修改）"></a>peek（打印或修改）</h3><p>生成一个包含源stream所有元素的新stream，同时会提供一个消费函数（consumer实例），新stream每个元素被消费的时候都会执行给定的消费函数。</p>
+<blockquote>
+<p>peek主要被用在debug用途。可用于打印某<code>中间操作</code>后得到的元素信息。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Stu</span></span>&#123;<br>  String name;<br>  <span class="hljs-keyword">int</span> age;<br>  <span class="hljs-keyword">long</span> weight;<br>  <span class="hljs-keyword">double</span> money;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Stu&gt; stus = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stu s1 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;bbbbb&quot;</span>,<span class="hljs-number">12</span>,<span class="hljs-number">24</span>,<span class="hljs-number">23.24</span>);<br>Stu s2 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ddddd&quot;</span>,<span class="hljs-number">1</span>,<span class="hljs-number">124</span>,<span class="hljs-number">133.124</span>);<br>Stu s3 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>,<span class="hljs-number">13</span>,<span class="hljs-number">34</span>,<span class="hljs-number">13.14</span>);<br>Stu s4 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ccccc&quot;</span>,<span class="hljs-number">17</span>,<span class="hljs-number">23</span>,<span class="hljs-number">113.114</span>);<br>Stu s5 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;eeeee&quot;</span>,<span class="hljs-number">123</span>,<span class="hljs-number">341</span>,<span class="hljs-number">135.134</span>);<br>stus.add(s1);<br>stus.add(s2);<br>stus.add(s3);<br>stus.add(s4);<br>stus.add(s5);<br><br><br>List&lt;Stu&gt; collect = stus.stream()<br>  .peek(it -&gt; System.out.println(it.getName() + <span class="hljs-string">&quot; 的年龄为：&quot;</span>))<br>  .filter(it -&gt; it.getAge() &gt; <span class="hljs-number">10</span>)<br>  .peek(it -&gt; System.out.println(it.getAge() + <span class="hljs-string">&quot; 大于10 &quot;</span>))<br>  .filter(it -&gt; it.getAge() &gt; <span class="hljs-number">20</span>)<br>  .peek(it -&gt; System.out.println(it.getAge() + <span class="hljs-string">&quot; 大于20 &quot;</span>)).collect(Collectors.toList());<br><br>collect.forEach(System.out::println);<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">bbbbb 的年龄为：<br><span class="hljs-number">12</span> 大于<span class="hljs-number">10</span> <br>ddddd 的年龄为：<br>aaaaa 的年龄为：<br><span class="hljs-number">13</span> 大于<span class="hljs-number">10</span> <br>ccccc 的年龄为：<br><span class="hljs-number">17</span> 大于<span class="hljs-number">10</span> <br>eeeee 的年龄为：<br><span class="hljs-number">123</span> 大于<span class="hljs-number">10</span> <br><span class="hljs-number">123</span> 大于<span class="hljs-number">20</span> <br>Stu&#123;name=<span class="hljs-string">&#x27;eeeee&#x27;</span>, age=<span class="hljs-number">123</span>, weight=<span class="hljs-number">341</span>, money=<span class="hljs-number">135.134</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里可以看出，操作顺序是：每个元素完成所有中间操作后，下一个元素才开始完成所有中间操作。简单来说就是处理元素是一个一个的来的，上个元素完成后，下个元素才继续。</p>
+<h3 id="parallel（并行流）"><a href="#parallel（并行流）" class="headerlink" title="parallel（并行流）"></a>parallel（并行流）</h3><p>将流转化为并行流。</p>
+<p>流的并行操作的线程数默认是机器的CPU个数。默认使用的线程池是ForkJoinPool.commonPool线程池。</p>
+<h3 id="sequential（串行流）"><a href="#sequential（串行流）" class="headerlink" title="sequential（串行流）"></a>sequential（串行流）</h3><p>将流转化为串行流。</p>
+<p>多次调用parallel()和sequential()，以最后一次为准。</p>
+<h2 id="终止操作"><a href="#终止操作" class="headerlink" title="终止操作"></a>终止操作</h2><h3 id="forEach（遍历）"><a href="#forEach（遍历）" class="headerlink" title="forEach（遍历）"></a>forEach（遍历）</h3><p>串行流的forEach会按顺序执行，但并行流的时候，并不会按顺序执行。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">stus.stream().forEach(it-&gt; System.out.println(it));<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="forEachOrdered（顺序遍历）"><a href="#forEachOrdered（顺序遍历）" class="headerlink" title="forEachOrdered（顺序遍历）"></a>forEachOrdered（顺序遍历）</h3><p>确保按照原始流的顺序执行（即使是并行流）。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">stus.stream().parallel().forEachOrdered(it-&gt; System.out.println(it));<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="toArray（转数组）"><a href="#toArray（转数组）" class="headerlink" title="toArray（转数组）"></a>toArray（转数组）</h3><p>转化为数组。</p>
+<ul>
+<li>toArray()：将流转换成适当类型的数组。</li>
+<li>toArray(generator)：用于分配自定义的数组存储。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Object[] objects = stus.stream().toArray(); <br>Stu[] stus1 = stus.stream().toArray(Stu[]::<span class="hljs-keyword">new</span>);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="findFirst（首元素）"><a href="#findFirst（首元素）" class="headerlink" title="findFirst（首元素）"></a>findFirst（首元素）</h3><p>返回一个含有第一个流元素的Optional类型的对象，如果流为空返回 Optional.empty。</p>
+<p>findFirst() 无论流是串行流还是并行流，总是会选择流中的第一个元素（有顺序的）。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Optional&lt;Integer&gt; first = stus.stream().map(it -&gt; it.getAge()).findFirst();<br>Optional&lt;Integer&gt; firstP = stus.stream().parallel().map(it -&gt; it.getAge()).findFirst();<br>System.out.println(first.get());<br>System.out.println(firstP.get());<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="findAny（任意元素）"><a href="#findAny（任意元素）" class="headerlink" title="findAny（任意元素）"></a>findAny（任意元素）</h3><p>返回含有任意一个流元素的Optional类型的对象，如果流为空返回 Optional.empty。</p>
+<p>对于串行流，findAny()和findFirst() 效果相同，选择流中的第一个元素。<br>对于并行流，findAny()也会选择流中的第一个元素（但因为是并行流，从定义上来看是选择任意元素）。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Optional&lt;Integer&gt; firstP = stus.stream().parallel().map(it -&gt; it.getAge()).findAny();<br>Optional&lt;Integer&gt; first = stus.stream().map(it -&gt; it.getAge()).findAny();<br>System.out.println(first.get());<br>System.out.println(firstP.get());<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>⚠️注意：自己在测试时，发现：如果将并行流放在串行流下面，那么两个的结果就是定了的（也许是我的问题，但我跑了很多遍发现都是一样的）。只有是上述代码才能保持每一次的结果都能让并行流的结果不一样。</strong></p>
+<h3 id="allMatch（全部匹配）"><a href="#allMatch（全部匹配）" class="headerlink" title="allMatch（全部匹配）"></a>allMatch（全部匹配）</h3><p>Stream中全部元素符合传入的Predicate，返回 true，只要有一个不满足就返回false。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">boolean</span> b = stus.stream().allMatch(it -&gt; it.getAge() &gt; <span class="hljs-number">0</span>); <span class="hljs-comment">// true</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="anyMatch（任意匹配）"><a href="#anyMatch（任意匹配）" class="headerlink" title="anyMatch（任意匹配）"></a>anyMatch（任意匹配）</h3><p>Stream中只要有一个元素符合传入的 Predicate，返回 true。否则返回false。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">boolean</span> b = stus.stream().anyMatch(it -&gt; it.getAge() &gt; <span class="hljs-number">100</span>); <span class="hljs-comment">//true</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="noneMatch（不匹配）"><a href="#noneMatch（不匹配）" class="headerlink" title="noneMatch（不匹配）"></a>noneMatch（不匹配）</h3><p>Stream中没有一个元素符合传入的 Predicate（即全部不满足条件），返回 true。只要有一个满足就返回false。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">boolean</span> b = stus.stream().noneMatch(it -&gt; it.getAge() &lt; <span class="hljs-number">0</span>); <span class="hljs-comment">//true</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="reduce（组合流元素）"><a href="#reduce（组合流元素）" class="headerlink" title="reduce（组合流元素）"></a>reduce（组合流元素）</h3><p>把Stream 元素组合起来。它提供一个起始值（种子），然后依照运算规则（BinaryOperator），和前面 Stream 的第一个、第二个、第 n 个元素组合。字符串拼接、sum、min、max、average 都是特殊的reduce。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 求和：age 有6个，分别为1、2、3、4、5、6</span><br><br><span class="hljs-comment">// 串行流</span><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).reduce(<span class="hljs-number">0</span>, (a1, a2) -&gt; a1 + a2);<br>System.out.println(reduce); <span class="hljs-comment">// 21</span><br><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).reduce(<span class="hljs-number">1</span>, (a1, a2) -&gt; a1 + a2);<br>System.out.println(reduce); <span class="hljs-comment">// 22</span><br><br><span class="hljs-comment">// 并行流</span><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).parallel().reduce(<span class="hljs-number">0</span>, (a1, a2) -&gt; a1 + a2);<br>System.out.println(reduce);<span class="hljs-comment">// 21</span><br><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).parallel().reduce(<span class="hljs-number">1</span>, (a1, a2) -&gt; a1 + a2);<br>System.out.println(reduce); <span class="hljs-comment">// 27</span><br><br><br><span class="hljs-comment">// 求积：age 有6个，分别为1、2、3</span><br><span class="hljs-comment">// 串行流</span><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).reduce(<span class="hljs-number">0</span>, (a1, a2) -&gt; a1 * a2);<br>System.out.println(reduce); <span class="hljs-comment">// 0</span><br><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).reduce(<span class="hljs-number">1</span>, (a1, a2) -&gt; a1 * a2);<br>System.out.println(reduce); <span class="hljs-comment">// 1</span><br><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).parallel().reduce(<span class="hljs-number">0</span>, (a1, a2) -&gt; a1 * a2);<br>System.out.println(reduce); <span class="hljs-comment">// 0</span><br><br>Integer reduce = stus.stream().map(it -&gt; it.getAge()).parallel().reduce(<span class="hljs-number">1</span>, (a1, a2) -&gt; a1 * a2);<br>System.out.println(reduce); <span class="hljs-comment">// 6</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>总结</p>
+</blockquote>
+<ul>
+<li>串行流对总结果造成影响；并行流对每一个元素造成影响。</li>
+<li>串行流：初始值+值1+值2+值3…；并行流：(初始值+值1)+(初始值+值2)+(初始值+值3)…</li>
+</ul>
+<h3 id="max"><a href="#max" class="headerlink" title="max"></a>max</h3><p>求元素的最大值，如果流为空返回Optional.empty。示例见min示例。⚠️注意和min时的用法区别。</p>
+<h3 id="min"><a href="#min" class="headerlink" title="min"></a>min</h3><p>求元素的最小值，如果流为空返回Optional.empty。⚠️注意和max的使用区别。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Stu&gt; stus = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stu s1 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;bbbbb&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-number">24</span>, <span class="hljs-number">23.24</span>);<br>Stu s2 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ddddd&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-number">124</span>, <span class="hljs-number">133.124</span>);<br>Stu s3 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>, <span class="hljs-number">43</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>Stu s4 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>, <span class="hljs-number">13</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>Stu s5 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>, <span class="hljs-number">33</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>stus.add(s1);<br>stus.add(s2);<br>stus.add(s3);<br>stus.add(s4);<br>stus.add(s5);<br>Optional&lt;Stu&gt; max = stus.stream().max(((o1, o2) -&gt; o1.getAge() - o2.getAge()));<br>System.out.println(max.get());<br>Optional&lt;Stu&gt; min = stus.stream().min(((o1, o2) -&gt; o1.getAge() - o2.getAge()));<br>System.out.println(min.get());<br><br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stu&#123;name=<span class="hljs-string">&#x27;aaaaa&#x27;</span>, age=<span class="hljs-number">43</span>, weight=<span class="hljs-number">34</span>, money=<span class="hljs-number">13.14</span>&#125;<br>Stu&#123;name=<span class="hljs-string">&#x27;ddddd&#x27;</span>, age=<span class="hljs-number">11</span>, weight=<span class="hljs-number">124</span>, money=<span class="hljs-number">133.124</span>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>可以看见，不管对于max和min来说，都是使用了同样的比较器。但是结果求不一样。此比较器在正常的数组或集合中进行排序时，为默认升序排序。而在这里，相对于max来说，默认就是求最大值；相对于min来说，默认就是求最小值。所以，同一比较器对于不同的方法具有不同功能。（至少我自己时这样理解的）</p>
+</blockquote>
+<h3 id="count"><a href="#count" class="headerlink" title="count"></a>count</h3><p>流中的元素个数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">stus.stream().count()<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="sum"><a href="#sum" class="headerlink" title="sum"></a>sum</h3><p>对所有流元素进行求和。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">stus.stream().mapToInt(it -&gt; it.getAge()).sum()<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="average"><a href="#average" class="headerlink" title="average"></a>average</h3><p>求取流元素平均值。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">stus.stream().mapToInt(Stu::getAge).average()<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="collect（收集）"><a href="#collect（收集）" class="headerlink" title="collect（收集）"></a>collect（收集）</h3><p>收集流元素转换成最后需要的结果。使用Collector 收集流元素到结果集中，主要是使用 Collectors（java.util.stream.Collectors）。具体的使用方式见高级篇中。</p>
+<p>Collectors的方法如下：</p>
+<table>
+<thead>
+<tr>
+<th>方法名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>toList</td>
+<td>将流中的元素放置到一个列表集合中。这个列表默认为ArrayList。</td>
+</tr>
+<tr>
+<td>toSet</td>
+<td>将流中的元素放置到一个无序集set中。默认为HashSet。</td>
+</tr>
+<tr>
+<td>toCollection</td>
+<td>将流中的元素全部放置到一个集合中，这里使用Collection，泛指多种集合。</td>
+</tr>
+<tr>
+<td>toMap</td>
+<td>根据给定的键生成器和值生成器生成的键和值保存到一个map中返回，键和值的生成都依赖于元素，可以指定出现重复键时的处理方案和保存结果的map。</td>
+</tr>
+<tr>
+<td>toConcurrentMap</td>
+<td>与toMap基本一致，只是它最后使用的map是并发Map：ConcurrentHashMap</td>
+</tr>
+<tr>
+<td>joining</td>
+<td>将流中的元素全部以字符序列的方式连接到一起，可以指定连接符，甚至是结果的前后缀。内部拼接使用的Java8的新类StringJoiner，可定义连接符和前缀后缀。</td>
+</tr>
+<tr>
+<td>mapping</td>
+<td>先对流中的每个元素进行映射，即类型转换，然后再将新元素以给定的Collector进行归纳。类似Stream.toMap。</td>
+</tr>
+<tr>
+<td>collectingAndThen</td>
+<td>在归纳动作结束之后，对归纳的结果进行再处理。</td>
+</tr>
+<tr>
+<td>counting</td>
+<td>元素计数</td>
+</tr>
+<tr>
+<td>minBy</td>
+<td>最小值的Optional</td>
+</tr>
+<tr>
+<td>maxBy</td>
+<td>最大值的Optional</td>
+</tr>
+<tr>
+<td>summingInt</td>
+<td>求和，结果类型为int</td>
+</tr>
+<tr>
+<td>summingLong</td>
+<td>求和，结果类型为long</td>
+</tr>
+<tr>
+<td>summingDouble</td>
+<td>求和，结果类型为double</td>
+</tr>
+<tr>
+<td>averagingInt</td>
+<td>平均值，结果类型int</td>
+</tr>
+<tr>
+<td>averagingLong</td>
+<td>平均值，结果类型long</td>
+</tr>
+<tr>
+<td>averagingDouble</td>
+<td>平均值，结果类型double</td>
+</tr>
+<tr>
+<td>summarizingInt</td>
+<td>汇总，结果包含元素个数、最大值、最小值、求和值、平均值，值类型都为int</td>
+</tr>
+<tr>
+<td>summarizingLong</td>
+<td>汇总，结果包含元素个数、最大值、最小值、求和值、平均值，值类型都为long</td>
+</tr>
+<tr>
+<td>summarizingDouble</td>
+<td>汇总，结果包含元素个数、最大值、最小值、求和值、平均值，值类型都为</td>
+</tr>
+<tr>
+<td>reducing</td>
+<td>统计，reducing方法有三个重载方法，其实是和Stream里的三个reduce方法对应的，二者是可以替换使用的，作用完全一致，也是对流中的元素做统计归纳作用。求和、平均值、最大值、最小值等其实就属于一种特殊的统计</td>
+</tr>
+<tr>
+<td>groupingBy</td>
+<td>分组，得到一个HashMap</td>
+</tr>
+<tr>
+<td>groupingByConcurrent</td>
+<td>分组，得到一个ConcurrentHashMap</td>
+</tr>
+<tr>
+<td>partitioningBy</td>
+<td>将流中的元素按照给定的校验规则的结果分为两个部分，放到一个map中返回，map的键是Boolean类型，值为元素的列表List</td>
+</tr>
+</tbody></table>
+<p>使用示例：</p>
+<p>数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Stu&gt; stus = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>Stu s1 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;bbbbb&quot;</span>, <span class="hljs-number">23</span>, <span class="hljs-number">24</span>, <span class="hljs-number">23.24</span>);<br>Stu s2 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ddddd&quot;</span>, <span class="hljs-number">11</span>, <span class="hljs-number">124</span>, <span class="hljs-number">133.124</span>);<br>Stu s3 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;aaaaa&quot;</span>, <span class="hljs-number">43</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>Stu s4 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;eeeee&quot;</span>, <span class="hljs-number">13</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>Stu s5 = <span class="hljs-keyword">new</span> Stu(<span class="hljs-string">&quot;ccccc&quot;</span>, <span class="hljs-number">33</span>, <span class="hljs-number">34</span>, <span class="hljs-number">13.14</span>);<br>stus.add(s1);<br>stus.add(s2);<br>stus.add(s3);<br>stus.add(s4);<br>stus.add(s5);<br></code></pre></div></td></tr></table></figure>
+
+<p>测试：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// toList()</span><br>List&lt;Stu&gt; collect = stus.stream().collect(Collectors.toList());<br><span class="hljs-comment">// toSet()</span><br>Set&lt;Stu&gt; collect = stus.stream().collect(Collectors.toSet());<br><span class="hljs-comment">// toCollection()</span><br>LinkedList&lt;Stu&gt; collect = stus.stream().collect(Collectors.toCollection(LinkedList::<span class="hljs-keyword">new</span>));<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="toMap（转换为Map）"><a href="#toMap（转换为Map）" class="headerlink" title="toMap（转换为Map）"></a>toMap（转换为Map）</h4><p>有三种重载函数，两个参数、三个参数、四个参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 两个参数。根据指定的函数映射key和value</span><br>Map&lt;String, Integer&gt; collect = stus.stream().collect(Collectors.toMap(it -&gt; it.getName(), it -&gt; it.getAge()));<br><br><span class="hljs-comment">// 三个参数。第三个参数表示：当key发生冲突时，是保留前者还是保留后者</span><br>Map&lt;String, Integer&gt; collect = stus.stream().collect(Collectors.toMap(it -&gt; it.getName(), it -&gt; it.getAge(),(k1,k2)-&gt;k1));<br><br><span class="hljs-comment">// 四个参数。第四个参数表示：指定返回的map类型</span><br>Map&lt;String, Integer&gt; collect = stus.stream().collect(Collectors.toMap(it -&gt; it.getName(), it -&gt; it.getAge(), (k1, k2) -&gt; k1, TreeMap::<span class="hljs-keyword">new</span>));<br></code></pre></div></td></tr></table></figure>
+
+<p><strong>⚠️提示：上述方法同样适用于 toConcurrentMap，大同小异。</strong></p>
+<h4 id="joining（拼接）"><a href="#joining（拼接）" class="headerlink" title="joining（拼接）"></a>joining（拼接）</h4><p>有三种重载函数，无参、一个参数、三个参数。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">String collect1 = stus.stream().map(Stu::getName).collect(Collectors.joining());<br>String collect2 = stus.stream().map(Stu::getName).collect(Collectors.joining(<span class="hljs-string">&quot;[[&quot;</span>));<br>String collect3 = stus.stream().map(Stu::getName).collect(Collectors.joining(<span class="hljs-string">&quot;\&quot;,\&quot;&quot;</span>, <span class="hljs-string">&quot;[\&quot;&quot;</span>, <span class="hljs-string">&quot;\&quot;]&quot;</span>)); <span class="hljs-comment">// 最开始为[&quot;，中间字符串为&quot;,&quot; ，最后为&quot;]</span><br>System.out.println(collect1);<br>System.out.println(collect2);<br>System.out.println(collect3);<br><br><span class="hljs-comment">// 输出</span><br>bbbbbdddddaaaaaeeeeeccccc<br>bbbbb[[ddddd[[aaaaa[[eeeee[[ccccc<br>[<span class="hljs-string">&quot;bbbbb&quot;</span>,<span class="hljs-string">&quot;ddddd&quot;</span>,<span class="hljs-string">&quot;aaaaa&quot;</span>,<span class="hljs-string">&quot;eeeee&quot;</span>,<span class="hljs-string">&quot;ccccc&quot;</span>]<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>无参：将字符串流直接进行拼接操作。</li>
+<li>一个参数（delimiter）：自定义分隔符。实际上是调用了三个参数的方法，只是后两个参数传入的是null。</li>
+<li>三个参数（delimiter、prefix、suffix）：delimiter表示分隔符，prefix表示第一个字符串前面的前缀，suffix表示最后一个串后的后缀。</li>
+</ul>
+<h4 id="mapping"><a href="#mapping" class="headerlink" title="mapping"></a>mapping</h4><p>将某值映射转换为另外一种形式。如：int -&gt; String；String -&gt; int。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;String&gt; collect1 = stus.stream().map(Stu::getAge).collect(Collectors.mapping(String::valueOf, Collectors.toList()));<br>collect1.forEach(System.out::println);<br>List&lt;Integer&gt; collect = Stream.of(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;6&quot;</span>, <span class="hljs-string">&quot;7&quot;</span>, <span class="hljs-string">&quot;8&quot;</span>, <span class="hljs-string">&quot;9&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>).collect(Collectors.mapping(Integer::valueOf, Collectors.toList()));<br>collect.forEach(System.out::println);<br></code></pre></div></td></tr></table></figure>
+
+<p>在IDEA的提示下有另外一种方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">stus.stream().map(Stu::getAge).map(String::valueOf).collect(Collectors.toList());<br>List&lt;Integer&gt; collect = Stream.of(<span class="hljs-string">&quot;1&quot;</span>, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;6&quot;</span>, <span class="hljs-string">&quot;7&quot;</span>, <span class="hljs-string">&quot;8&quot;</span>, <span class="hljs-string">&quot;9&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>).map(Integer::valueOf).collect(Collectors.toList());<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="其他方法"><a href="#其他方法" class="headerlink" title="其他方法"></a>其他方法</h2><h3 id="concat（合并流）"><a href="#concat（合并流）" class="headerlink" title="concat（合并流）"></a>concat（合并流）</h3><p>合并两个流成一个新的流。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Stream&lt;Stu&gt; concat = Stream.concat(stus.stream(), sss.stream());<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/JAVA8/">JAVA8</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                    
+                      <a class="hover-with-bg" href="/tags/JAVA8/">JAVA8</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/115fe56b.html">https://tothefor.com/DragonOne/115fe56b.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/d7b19672.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">JAVA8-Java8的流式编程-Optional的使用</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/ceb3d903.html">
+                        <span class="hidden-mobile">JAVA8-Java8的流式编程-预知篇</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
