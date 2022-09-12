@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      616 字
+      739 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      9
        分钟
     </span>
   
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：August 13, 2022 pm
+                  本文最后更新于：September 12, 2022 pm
                 
               </p>
             
@@ -326,8 +326,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>设置</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Enter current password <span class="hljs-keyword">for</span> root (enter <span class="hljs-keyword">for</span> none):&lt;–初次运行直接回车<br><br>Set root password? [Y/n] &lt;– 是否设置root用户密码，输入y并回车或直接回车<br><br>New password: &lt;– 设置root用户的密码<br><br>Re-enter new password: &lt;– 再输入一次你设置的密码<br><br>Remove anonymous users? [Y/n] &lt;– 是否删除匿名用户，回车<br><br>Disallow root login remotely? [Y/n] &lt;–是否禁止root远程登录，回车<br><br>Remove <span class="hljs-built_in">test</span> database and access to it? [Y/n] &lt;– 是否删除<span class="hljs-built_in">test</span>数据库，回车<br><br>Reload privilege tables now? [Y/n] &lt;– 是否重新加载权限表，回车<br></code></pre></div></td></tr></table></figure>
 
-
-
+<blockquote>
+<p>📢注意：如果在输入密码时报错： … Failed! Error: SET PASSWORD has no significance for user ‘root’@’localhost’ as the authenticati。则先退出不管，继续往后执行。当执行当修改root用户密码后，再返回回来继续执行初始化命令。</p>
+</blockquote>
 <h2 id="查看数据库状态"><a href="#查看数据库状态" class="headerlink" title="查看数据库状态"></a>查看数据库状态</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">systemctl status mysql<br></code></pre></div></td></tr></table></figure>
 
 
@@ -338,8 +339,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>腾讯云：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo mysql<br></code></pre></div></td></tr></table></figure>
 
-
-
+<blockquote>
+<p>如果出现：ERROR 1045 (28000): Access denied for user ‘root’@’localhost’ (using password: NO)。表示需要使用上面设置的密码进入MySQL（初始化命令成功执行的前提下）。</p>
+</blockquote>
 <blockquote>
 <p>两个提供商，进入数据库的另外一种方法</p>
 </blockquote>
@@ -350,6 +352,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo cat /etc/mysql/debian.cnf<br></code></pre></div></td></tr></table></figure>
 
 <p>里面就有一个数据库账号的信息。包含用户名和密码，可以用他登录。 <code>debian-sys-maint</code> 账号是在安装MySQL自动产生的。可以使用它登录MySQL数据库。</p>
+<blockquote>
+<p>查询root用户的状态</p>
+</blockquote>
 <p>进入数据库mysql后，</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">select user,host from user; <br></code></pre></div></td></tr></table></figure>
 
@@ -359,7 +364,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </blockquote>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">update user <span class="hljs-built_in">set</span> host=<span class="hljs-string">&#x27;%&#x27;</span> <span class="hljs-built_in">where</span> user=<span class="hljs-string">&#x27;root&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
 
-<p>再<code>执行两次</code> ，如果一次就可以成功，就不需要执行两次了。</p>
+<p>再连续<code>执行两次</code>一下命令 ，如果一次就可以成功，就不需要执行两次了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Grant all privileges on <span class="hljs-built_in">test</span>.* to <span class="hljs-string">&#x27;root&#x27;</span>@<span class="hljs-string">&#x27;%&#x27;</span>;<br></code></pre></div></td></tr></table></figure>
 
 
