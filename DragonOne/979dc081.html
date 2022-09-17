@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>SpringCloud-（一）Nacos的安装与启动 - 墨水记忆</title>
+  <title>SpringCloud-（二）常见分布式环境搭建 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SpringCloud-（一）Nacos的安装与启动">
+            <span class="h2" id="subtitle" title="SpringCloud-（二）常见分布式环境搭建">
               
             </span>
 
@@ -244,8 +244,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-09-15 14:42" pubdate>
-        September 15, 2022 pm
+      <time datetime="2022-09-17 14:42" pubdate>
+        September 17, 2022 pm
       </time>
     </span>
   
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      453 字
+      1.6k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      19
        分钟
     </span>
   
@@ -309,7 +309,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SpringCloud-（一）Nacos的安装与启动</h1>
+            <h1 style="display: none">SpringCloud-（二）常见分布式环境搭建</h1>
             
               <p class="note note-info">
                 
@@ -319,25 +319,127 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>项目下载地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases%E3%80%82%E4%B8%8B%E8%BD%BD%E4%B9%8B%E5%90%8E%E7%9B%B4%E6%8E%A5%E5%AF%BC%E5%85%A5IDEA%E5%8D%B3%E5%8F%AF%E3%80%82">https://github.com/alibaba/nacos/releases。下载之后直接导入IDEA即可。</a></p>
-<h2 id="设置单机且前台运行"><a href="#设置单机且前台运行" class="headerlink" title="设置单机且前台运行"></a>设置单机且前台运行</h2><p>nacos默认情况下是后台运行的，即调用startup.sh之后，即使关闭了IDEA依然在运行，必须调用shutdown.sh才能关闭。（window调用.cmd）</p>
-<h2 id="设置前台运行"><a href="#设置前台运行" class="headerlink" title="设置前台运行"></a>设置前台运行</h2><p>修改startup.sh文件内容，只有最后一部分需要修改：</p>
-<blockquote>
-<p>原内容</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># start</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span> <span class="hljs-variable">$JAVA_OPT_EXT_FIX</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span>&quot;</span> &gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><br><span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> == <span class="hljs-string">&quot;&quot;</span> ]]; <span class="hljs-keyword">then</span><br>  nohup <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos &gt;&gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><span class="hljs-keyword">else</span><br>  nohup <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos &gt;&gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nacos is starting，you can check the <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out&quot;</span><br><br></code></pre></div></td></tr></table></figure>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="MySQL主从复制环境搭建"><a href="#MySQL主从复制环境搭建" class="headerlink" title="MySQL主从复制环境搭建"></a>MySQL主从复制环境搭建</h2><p>MySQL的安装：<a href="https://tothefor.com/DragonOne/ff684fdc.html">MySQL-Ubuntu20.04安装MySQL8.0以及远程连接 </a></p>
+<p>安装并开启远程连接。</p>
+<h3 id="主库操作"><a href="#主库操作" class="headerlink" title="主库操作"></a>主库操作</h3><h4 id="创建用户"><a href="#创建用户" class="headerlink" title="创建用户"></a>创建用户</h4><p>用于从库访问主库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">create user 用户名 identified with mysql_native_password by &#39;密码&#39;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="设置主库"><a href="#设置主库" class="headerlink" title="设置主库"></a>设置主库</h4><p>配置主库，为刚才创建的用户分配一个主从复制的权限。</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">grant replication slave on *.* to 用户名;<br>flush privileges;<br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
-<p>修改后</p>
+<p>查看主库状态</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># start</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span> <span class="hljs-variable">$JAVA_OPT_EXT_FIX</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span>&quot;</span> &gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><br><span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> == <span class="hljs-string">&quot;&quot;</span> ]]; <span class="hljs-keyword">then</span><br>  <span class="hljs-comment"># nohup &quot;$JAVA&quot; $&#123;JAVA_OPT&#125; nacos.nacos &gt;&gt; $&#123;BASE_DIR&#125;/logs/start.out 2&gt;&amp;1 &amp;</span><br>  <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos<br><span class="hljs-keyword">else</span><br>  <span class="hljs-comment"># nohup &quot;$JAVA&quot; &quot;$JAVA_OPT_EXT_FIX&quot; $&#123;JAVA_OPT&#125; nacos.nacos &gt;&gt; $&#123;BASE_DIR&#125;/logs/start.out 2&gt;&amp;1 &amp;</span><br>  <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-comment"># echo &quot;nacos is starting，you can check the $&#123;BASE_DIR&#125;/logs/start.out&quot;</span><br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show master status;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="从库操作"><a href="#从库操作" class="headerlink" title="从库操作"></a>从库操作</h3><h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf<br>sudo systemctl restart mysql.service <span class="hljs-comment"># 重启</span><br></code></pre></div></td></tr></table></figure>
+
+<p>找到：server-id；并修改其值，只要保证唯一即可，不要使用默认值。修改完后重启。</p>
+<h4 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h4><p>执行命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">change replication source to<br>SOURCE_HOST&#x3D;&#39;192.168.0.8&#39;,SOURCE_USER&#x3D;&#39;主库创建的用户名称&#39;,SOURCE_PASSWORD&#x3D;&#39;密码&#39;,SOURCE_LOG_FILE&#x3D;&#39;binlog.000006&#39;,SOURCE_LOG_POS&#x3D;829<br></code></pre></div></td></tr></table></figure>
+
+<p>注意：HOST为主库的地址；最后两个参数通过在主库执行命令：show master status; 获取。</p>
+<h4 id="开启主从复制"><a href="#开启主从复制" class="headerlink" title="开启主从复制"></a>开启主从复制</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">start replica; # 开启<br>show replica status\G; # 查看状态<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见我们刚才的一些信息，其中重要的两个必须为YES才可以：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Replica_IO_Running: Yes <span class="hljs-comment"># 负责与主库进行通信，获取二进制日志，暂时放到一个中间表（Realy_Log）中</span><br>Replica_SQL_Running: Yes <span class="hljs-comment"># 将中间表保存的二进制日志信息进行执行，然后插入从库中</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>当主库挂掉后，前者将会变为Connecting。</li>
+</ul>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>完成上述后，在主库中的操作都会同步到从库中。可自行创建库、表进行测试。</p>
+<h3 id="重启主库"><a href="#重启主库" class="headerlink" title="重启主库"></a>重启主库</h3><p>当主库挂掉，需要重启时。需要先将从库停止复制：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">stop replica;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后查看主库的状态：</p>
+<figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">show master status;<br></code></pre></div></td></tr></table></figure>
+
+<p>如果发生改变，则从从库操作中的 ‘修改数据库’ 操作依次执行。</p>
+<h2 id="搭建Nacos集群"><a href="#搭建Nacos集群" class="headerlink" title="搭建Nacos集群"></a>搭建Nacos集群</h2><p>这里以搭建一个两个Nacos的小集群，使用Nginx实现负载均衡。</p>
+<h3 id="环境安装"><a href="#环境安装" class="headerlink" title="环境安装"></a>环境安装</h3><blockquote>
+<p>JDK8安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">apt install openjdk-8-jre-headless <span class="hljs-comment"># 将8可以改成其他数字，来安装其他jdk版本</span><br></code></pre></div></td></tr></table></figure>
+
+<p>还需要进行配置。默认路径：/usr/lib/jvm。可参考：<a href="https://tothefor.com/DragonOne/4a8c4163.html">星星之火-服务器部署Springboot+Vue项目以及配置SSL证书 </a></p>
+<h3 id="下载上传Nacos"><a href="#下载上传Nacos" class="headerlink" title="下载上传Nacos"></a>下载上传Nacos</h3><p>官方地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/nacos/releases">https://github.com/alibaba/nacos/releases</a> 。然后解压执行文件 /conf/ 目录下的nacos.mysql.sql。先进入看一眼是哪一个数据库，然后自行创建数据库，再进行执行。压缩包留着，后面要上传服务器。</p>
+<blockquote>
+<p>可能使用Navicat无法完整执行sql文件，可自行使用IDEA或其他工具进行创建。</p>
+</blockquote>
+<h3 id="创建用户-1"><a href="#创建用户-1" class="headerlink" title="创建用户"></a>创建用户</h3><p>使用工具创建一个用户。</p>
+<p><img src="https://img-blog.csdnimg.cn/b1782e4d444e4c83bc2fc93662e3e5d2.png" srcset="/img/loading.gif"></p>
+<p>设置密码：</p>
+<p><img src="https://img-blog.csdnimg.cn/81b61d1a5adc41c19c4963660994f060.png" srcset="/img/loading.gif"></p>
+<p>设置权限：</p>
+<p><img src="https://img-blog.csdnimg.cn/783ca121cf5a45a7aa2350f94b4754f5.png" srcset="/img/loading.gif"></p>
+<h3 id="上传服务器"><a href="#上传服务器" class="headerlink" title="上传服务器"></a>上传服务器</h3><p>上传到服务器后，进行解压。进入 /conf 目录下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim application.properties<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>将 <strong>spring.datasource.platform</strong>=mysql 的注释去掉。</li>
+<li>将 <strong>db.num</strong>=1 的注释去掉。</li>
+<li>将 <strong>db.url.0</strong> 、<strong>db.user.0</strong> 、<strong>db.password.0</strong> 注释去掉。这里即为数据库的地址，刚才创建的用户名称和密码。如果后面部署完成后，访问外网IP无法成功连接，则在数据库的url后面拼接上：&amp;allowPublicKeyRetrieval=true，再次访问外网IP即可成功。</li>
+</ul>
+<p>然后将 cluster.conf.example 文件复制一份，命名为 cluster.conf：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cp cluster.conf.example cluster.conf <span class="hljs-comment"># 或者使用mv</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后再编辑 cluster.conf 文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim cluster.conf<br></code></pre></div></td></tr></table></figure>
+
+<p>将最下面的一些原有的地址删除，换成自己要搭建的IP和端口。</p>
+<p><strong>📢注意：这里的IP是内网IP。</strong> 如果是多服务器进行部署，则每台服务器只需要部署自己内网的IP和端口即可。因为数据库都是用的同一个。</p>
+<p>如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">192.168.16.101:8847<br>192.168.16.102<br>192.168.16.103<br></code></pre></div></td></tr></table></figure>
+
+<p>修改 /bin 目录下的<strong>startup.sh</strong> ：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim startup.sh<br></code></pre></div></td></tr></table></figure>
+
+<p>找到JVM配置，修改为如下（自行根据实际修改）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 修改这个，修改大小</span><br>JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -server -Xms1g -Xmx1g -Xmn512g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span><br><br><span class="hljs-comment"># JVM Configuration</span><br><span class="hljs-comment">#===========================================================================================</span><br><span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;MODE&#125;</span>&quot;</span> == <span class="hljs-string">&quot;standalone&quot;</span> ]]; <span class="hljs-keyword">then</span><br>    JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -Xms512m -Xmx512m -Xmn256m&quot;</span><br>    JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -Dnacos.standalone=true&quot;</span><br><span class="hljs-keyword">else</span><br>    <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$&#123;EMBEDDED_STORAGE&#125;</span>&quot;</span> == <span class="hljs-string">&quot;embedded&quot;</span> ]]; <span class="hljs-keyword">then</span><br>        JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -DembeddedStorage=true&quot;</span><br>    <span class="hljs-keyword">fi</span><br>    JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -server -Xms1g -Xmx1g -Xmn512g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span><br>    JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/java_heapdump.hprof&quot;</span><br>    JAVA_OPT=<span class="hljs-string">&quot;<span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> -XX:-UseLargePages&quot;</span><br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="IDEA配置启动"><a href="#IDEA配置启动" class="headerlink" title="IDEA配置启动"></a>IDEA配置启动</h2><p>在配置中添加一个 Shell Script 启动项，如下：</p>
-<p><img src="https://img-blog.csdnimg.cn/d427fc36c3704b639698a561d5dcbbb6.png" srcset="/img/loading.gif"></p>
-<p>如果需要关闭：只需要关闭IDEA下面的小窗口即可。</p>
-<h2 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h2><p>默认用户名和密码都为：nacos</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">./startup.sh<br></code></pre></div></td></tr></table></figure>
+
+<p>若提示未安装JDK，可参考：<a href="https://tothefor.com/DragonOne/4a8c4163.html">星星之火-服务器部署Springboot+Vue项目以及配置SSL证书 </a></p>
+<p>若想前台运行（即运行窗口不能关闭，关闭则服务停止），可参考：<a href="https://tothefor.com/DragonOne/16ac382c.html">SpringCloud-（一）Nacos的安装与启动 </a></p>
+<p>显示如下则表示成功启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nacos is starting with cluster<br>nacos is starting，you can check the /root/nacos/logs/start.out<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><blockquote>
+<p>外网IP:端口</p>
+</blockquote>
+<p>登录名称和密码均为：nacos。</p>
+<h3 id="其他可能问题"><a href="#其他可能问题" class="headerlink" title="其他可能问题"></a>其他可能问题</h3><ul>
+<li>nacos2.1.0 端口号不能连续，一个nacos会占用两端口。</li>
+</ul>
+<h3 id="实现负载均衡"><a href="#实现负载均衡" class="headerlink" title="实现负载均衡"></a>实现负载均衡</h3><p>现在已经完成了nacos的集群搭建，但是我们不会用两个IP进行使用，而是要找一个代理。这时候就需要使用到Nginx来实现负载均衡了。</p>
+<blockquote>
+<p>Nginx安装</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt install nginx<br></code></pre></div></td></tr></table></figure>
+
+<p>配置文件地址：/etc/nginx/nginx.conf ，在http中添加如下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 配置需要代理的地址</span><br>upstream nacos-server &#123;<br>        server 10.0.0.12:8801;<br>        server 10.0.0.12:8802;<br>&#125;<br><br><span class="hljs-comment"># 监听的地址</span><br>server &#123;<br>        listen   80;<br>        server_name  1.14.121.107;<br><br>        location /nacos &#123;<br>                proxy_pass http://nacos-server;<br>        &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>只要是访问 1.14.121.107/nacos 的，都会被转发到 upstream。从而实现负载均衡的效果。</li>
+</ul>
+<p>然后再重启Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo systemctl restart nginx<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>测试</p>
+</blockquote>
+<p>访问 1.14.121.107/nacos ，然后进行登录，查看集群管理中节点列表。多次请求 1.14.121.107/nacos 然后看节点IP是否改变。</p>
+<ul>
+<li>注意，是多次请求 1.14.121.107/nacos 这个地址，而不是在那一个页面刷新。</li>
+<li>然后其他模块的nacos注册地址写 1.14.121.107:80 即可。</li>
+</ul>
 
             </div>
             <hr>
@@ -357,7 +459,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                     
                       <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
                     
+                      <a class="hover-with-bg" href="/tags/MySQL/">MySQL</a>
+                    
                       <a class="hover-with-bg" href="/tags/SpringCloud/">SpringCloud</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Nacos/">Nacos</a>
                     
                   </div>
                 
@@ -371,7 +477,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/16ac382c.html">https://tothefor.com/DragonOne/16ac382c.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/979dc081.html">https://tothefor.com/DragonOne/979dc081.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -380,18 +486,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/979dc081.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SpringCloud-（二）常见分布式环境搭建</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/5df9009c.html">
-                        <span class="hidden-mobile">星星之火-MAC实现同时配置使用Gitlab和GitHub</span>
+                      <a href="/DragonOne/16ac382c.html">
+                        <span class="hidden-mobile">SpringCloud-（一）Nacos的安装与启动</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
