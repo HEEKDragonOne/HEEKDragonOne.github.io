@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      460 字
+      453 字
     </span>
   
 
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：September 15, 2022 pm
+                  本文最后更新于：September 17, 2022 pm
                 
               </p>
             
@@ -325,7 +325,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>原内容</p>
 </blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># start</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span> <span class="hljs-variable">$JAVA_OPT_EXT_FIX</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span>&quot;</span> &gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><br><span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> == <span class="hljs-string">&quot;&quot;</span> ]]; <span class="hljs-keyword">then</span><br>  nohup <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos &gt;&gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br>  <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos<br><span class="hljs-keyword">else</span><br>  nohup <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos &gt;&gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nacos is starting，you can check the <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out&quot;</span><br><br></code></pre></div></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># start</span><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span> <span class="hljs-variable">$JAVA_OPT_EXT_FIX</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span>&quot;</span> &gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><br><span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> == <span class="hljs-string">&quot;&quot;</span> ]]; <span class="hljs-keyword">then</span><br>  nohup <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos &gt;&gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><span class="hljs-keyword">else</span><br>  nohup <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> <span class="hljs-variable">$&#123;JAVA_OPT&#125;</span> nacos.nacos &gt;&gt; <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out 2&gt;&amp;1 &amp;<br><span class="hljs-keyword">fi</span><br><br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nacos is starting，you can check the <span class="hljs-variable">$&#123;BASE_DIR&#125;</span>/logs/start.out&quot;</span><br><br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
 <p>修改后</p>
