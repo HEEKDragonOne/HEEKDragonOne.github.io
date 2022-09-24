@@ -1,0 +1,852 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>SpringCloud-（五）Redis分布式环境的搭建 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SpringCloud-（五）Redis分布式环境的搭建">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-09-22 20:12" pubdate>
+        September 22, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      49
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SpringCloud-（五）Redis分布式环境的搭建</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：September 24, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>Spring Cloud是一系列框架的有序集合。它利用Spring Boot的开发便利性巧妙地简化了分布式系统基础设施的开发，如服务发现注册、配置中心、消息总线、负载均衡、断路器、数据监控等，都可以用Spring Boot的开发风格做到一键启动和部署。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>测试以本地搭建为例，服务器上同理。测试版本 7.0.4 。</p>
+<p>下载地址：<a target="_blank" rel="noopener" href="https://github.com/redis/redis/releases">https://github.com/redis/redis/releases</a></p>
+<p>开启多个Redis，直接复制即可。只要把端口号进行更改，然后分别开启即可。本文是以本地测试为例，所以，主要以端口号进行区分。</p>
+<h2 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h2><p>修改<code>redis.conf</code>文件，常见修改参数如下：（根据需求进行修改）</p>
+<ul>
+<li>后台运行：redis默认是前台启动。将<code>daemonize no</code>,修改成<code>yes</code>即可。</li>
+<li>修改端口：port 6379。</li>
+<li>远程连接：将 <code>bind 127.0.0.1 -::1</code> 注释掉，并将 <code>protected-mode yes</code> 修改为 <code>no</code> 即可。</li>
+<li>修改密码：找到requirepass这个参数，修改为自己的密码即可。</li>
+<li>选举权重：找到 replica-priority。越小优先级越高。被推举为主节点的概率越高。</li>
+<li>开启集群模式：找到 cluster-enabled yes，并将注释去掉。</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="启动Redis"><a href="#启动Redis" class="headerlink" title="启动Redis"></a>启动Redis</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-server <span class="hljs-comment"># 默认端口</span><br></code></pre></div></td></tr></table></figure>
+
+<p>启动指定位置的Redis，实现集群效果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-server /Users/master/redis.conf <br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="启动命令窗口"><a href="#启动命令窗口" class="headerlink" title="启动命令窗口"></a>启动命令窗口</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-cli<br></code></pre></div></td></tr></table></figure>
+
+<p>连接远程服务器启动：</p>
+<blockquote>
+<p>redis-cli -h host -p port -a password</p>
+</blockquote>
+<p>如没有设置密码可直接执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-cli -h 127.0.0.1 -p 6001 <span class="hljs-comment"># 启动指定端口的redis，若指定端口没有开启redis则会启动失败</span><br></code></pre></div></td></tr></table></figure>
+
+<p>或者：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-cli -p 6001<br></code></pre></div></td></tr></table></figure>
+
+<p>都可以进入Redis命令窗口。</p>
+<h3 id="关闭Redis"><a href="#关闭Redis" class="headerlink" title="关闭Redis"></a>关闭Redis</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-cli shutdown<br>sudo pkill redis-server <span class="hljs-comment"># 或者这种方式</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="实现主从复制"><a href="#实现主从复制" class="headerlink" title="实现主从复制"></a>实现主从复制</h2><p>开启两个Redis实例，端口分别为：6001、6002。</p>
+<h3 id="查看Redis主从状态"><a href="#查看Redis主从状态" class="headerlink" title="查看Redis主从状态"></a>查看Redis主从状态</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">info replication<br></code></pre></div></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">127.0.0.1:6001&gt; info replication<br><span class="hljs-comment"># Replication</span><br>role:master<br>connected_slaves:0<br>master_failover_state:no-failover<br>master_replid:7fa7bdd9463d3b34dd35229eb0ddebb434770c6a<br>master_replid2:0000000000000000000000000000000000000000<br>master_repl_offset:0<br>second_repl_offset:-1<br>repl_backlog_active:0<br>repl_backlog_size:1048576<br>repl_backlog_first_byte_offset:0<br>repl_backlog_histlen:0<br></code></pre></div></td></tr></table></figure>
+
+<p>其中：</p>
+<ul>
+<li>role：表示当前的Redis是主节点还是从节点。Redis启动默认为主节点（master）。</li>
+<li>connected_slaves：表示从节点个数。只有是主节点（master）时才会有从节点的个数。</li>
+</ul>
+<h3 id="设置主从关系"><a href="#设置主从关系" class="headerlink" title="设置主从关系"></a>设置主从关系</h3><p>在端口号为6002的Redis中执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">REPLICAOF 127.0.0.1 6001<br></code></pre></div></td></tr></table></figure>
+
+<p>成功执行后，端口号为6002的Redis会将端口号为6001的Redis作为主节点。即该命令的作用是：认贼作父。</p>
+<p>然后再次查看主从状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">info replication<br></code></pre></div></td></tr></table></figure>
+
+<p>会发现端口号为6002的Redis的role变成了slave。表示6002现在已经是从节点了，而它的主节点就是6001。并且，如果你在同步前就往6001中存储了数据，那么在同步后，6002中一样也会有。可以获取key进行查看。</p>
+<blockquote>
+<p>⚠️注意：默认情况，从节点只有读的权限，没有写的权限。即使主节点挂了，从节点依然可以进行读取数据。</p>
+</blockquote>
+<h3 id="取消主从关系"><a href="#取消主从关系" class="headerlink" title="取消主从关系"></a>取消主从关系</h3><p>在从节点中执行一下命令，即可解除主从关系：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">replicaof no one<br></code></pre></div></td></tr></table></figure>
+
+<p>然后再次查看主从状态。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">info replication<br></code></pre></div></td></tr></table></figure>
+
+<p>会发现端口号为6002的Redis的role变成了master。并且，之前同步的数据依然存在。</p>
+<h3 id="固定主从"><a href="#固定主从" class="headerlink" title="固定主从"></a>固定主从</h3><p>还可以通过修改配置文件的方式实现主从关系。即，将设置主从关系的命令添加的配置文件 <code>redis.conf</code> 中去。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">REPLICAOF 127.0.0.1 6001<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="扩展"><a href="#扩展" class="headerlink" title="扩展"></a>扩展</h3><ul>
+<li>除了作为master的从节点之外，还可以成为从节点的从节点。</li>
+<li>当主节点挂掉后，从节点将会一直进行尝试重连，直到主节点上线并且和主节点连通。</li>
+</ul>
+<h2 id="设置哨兵"><a href="#设置哨兵" class="headerlink" title="设置哨兵"></a>设置哨兵</h2><p>多增加一个从节点，从而实现：一主二从三哨兵。</p>
+<p>哨兵也是直接将Redis的文件进行复制一份，然后删除配置文件 <code>redis.conf</code> 的全部内容。再添加如下内容：</p>
+<blockquote>
+<p>格式：sentinel monitor 自定义主节点名称 主节点地址 主节点端口 同意的哨兵数</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sentinel monitor ttf 127.0.0.1 6001 2<br>port 20001 <span class="hljs-comment"># 设置哨兵的端口，每个哨兵要不一样</span><br></code></pre></div></td></tr></table></figure>
+
+<p>同样的操作，再重复两次，上述内容一样。实现三哨兵效果。只要三个哨兵中有两个哨兵对某一从节点投票，则该从节点成为主节点。（在主节点挂掉的前提下）</p>
+<h3 id="启动哨兵"><a href="#启动哨兵" class="headerlink" title="启动哨兵"></a>启动哨兵</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-server /Users/sentinel-1/redis.conf --sentinel<br>redis-server /Users/sentinel-2/redis.conf --sentinel<br>redis-server /Users/sentinel-3/redis.conf --sentinel<br></code></pre></div></td></tr></table></figure>
+
+<p>然后再关闭6001服务和redis-cli窗口。可以查看哨兵中切换了主节点。</p>
+<h2 id="Java操作Redis"><a href="#Java操作Redis" class="headerlink" title="Java操作Redis"></a>Java操作Redis</h2><p>在哨兵重新选举新主节点后，在Java中需要感知更新。</p>
+<h3 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/redis.clients/jedis --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>redis.clients<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jedis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.2.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>插入数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testJ</span><span class="hljs-params">()</span></span>&#123;<br>  HashSet&lt;String&gt; objects = <span class="hljs-keyword">new</span> HashSet&lt;&gt;(); <span class="hljs-comment">// 集群哨兵地址和端口</span><br>  objects.add(<span class="hljs-string">&quot;127.0.0.1:20001&quot;</span>);<br>  objects.add(<span class="hljs-string">&quot;127.0.0.1:20002&quot;</span>);<br>  objects.add(<span class="hljs-string">&quot;127.0.0.1:20003&quot;</span>);<br><br>  <span class="hljs-keyword">try</span> (JedisSentinelPool pool = <span class="hljs-keyword">new</span> JedisSentinelPool(<span class="hljs-string">&quot;ttf&quot;</span>, objects)) &#123;<br>    Jedis resource = pool.getResource(); <span class="hljs-comment">// 得到master节点</span><br>    resource.set(<span class="hljs-string">&quot;java&quot;</span>, <span class="hljs-string">&quot;ttf&quot;</span>);<br><br>  &#125; <span class="hljs-keyword">catch</span> (Exception e) &#123;<br>    e.printStackTrace();<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="集群搭建"><a href="#集群搭建" class="headerlink" title="集群搭建"></a>集群搭建</h2><p>单体内存的容量是定的，是没办法进行扩展的。如果还需要进行存储数据，可以让N台Redis来存储数据，每台Redis存储一部分（1/N），这样就实现了容量的横向扩容。同时，每台Redis还可以配一个从节点，这样就可以更好的保证数据的安全性。</p>
+<blockquote>
+<p>但是，用户插入数据时，怎么确定插入到哪一个节点服务器上呢？这就和集群机制有关：</p>
+</blockquote>
+<ul>
+<li>一个Redis集群包含16384个插槽（0-16383），集群中的每个Redis实例负责维护一部分插槽以及插槽所映射的键值数据。即将数据进行分散存储。</li>
+<li>插槽：即键的Hash值。采用CRC16（CRC循环冗余校验），能得到16个bit位的数据，即0-65535之间，再进行取模得到最后的结果。</li>
+<li>计算方式：slot = CRC16（key）%16384。结果即为应该存放到对应维护的Redis下。如：Redis节点1号负责0-25565的插槽。加入插入的数据a=10，a在经过hash后结果为777，那么a就应该存放到Redis节点1号中。</li>
+</ul>
+<p>搭建如图集群：（注意修改配置文件里面的开启集群）</p>
+<p><img src="https://img-blog.csdnimg.cn/a8b5fbdd26a44f5d9ab227c6a7de3524.png" srcset="/img/loading.gif"></p>
+<h3 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h3><p>修改方式见上面的 修改配置 节。</p>
+<ul>
+<li><p>修改并开启集群模式。</p>
+</li>
+<li><p>⚠️重点：要使用以下方式分别启动每一个实例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /Users/master <span class="hljs-comment"># cd进对应的文件夹目录</span><br>redis-server redis.conf  <span class="hljs-comment"># 再启动</span><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<h3 id="搭建"><a href="#搭建" class="headerlink" title="搭建"></a>搭建</h3><p>将下载下来的Redis-7.0.4.zip 进行解压，并复制6分，分别命名为：master-1（6001）、master-2（6002）、master-3（6003）、salve-1（7001）、salve-2（7002）、salve-3（7003）。</p>
+<p>然后分别去启动：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">cd</span> /Users/master <span class="hljs-comment"># cd进对应的文件夹目录</span><br>redis-server redis.conf  <span class="hljs-comment"># 再启动</span><br></code></pre></div></td></tr></table></figure>
+
+<p>再随便进一个实例目录中（不是redis-cli中），执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">redis-cli --cluster create 127.0.0.1:6001 127.0.0.1:6002 127.0.0.1:6003 127.0.0.1:7001 127.0.0.1:7002 127.0.0.1:7003 --cluster-replicas 1<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>–cluster-replicas x：表示为每一个主节点分配多少个从节点。</li>
+</ul>
+<blockquote>
+<p>⚠️注意：再执行完上述命令后，会让你输入 yes 以确定主动分配的方案，但是这里不能只输入y，必须输入完整的yes。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">&gt;&gt;&gt; Performing <span class="hljs-built_in">hash</span> slots allocation on 6 nodes...<br>Master[0] -&gt; Slots 0 - 5460<br>Master[1] -&gt; Slots 5461 - 10922<br>Master[2] -&gt; Slots 10923 - 16383<br>Adding replica 127.0.0.1:7002 to 127.0.0.1:6001<br>Adding replica 127.0.0.1:7003 to 127.0.0.1:6002<br>Adding replica 127.0.0.1:7001 to 127.0.0.1:6003<br><br>&gt;&gt;&gt; Trying to optimize slaves allocation <span class="hljs-keyword">for</span> anti-affinity<br>[WARNING] Some slaves are <span class="hljs-keyword">in</span> the same host as their master<br>M: 3c6742aea06d7c332ea9ab58fe76cf9cb2c2028d 127.0.0.1:6001<br>   slots:[0-5460] (5461 slots) master<br>M: 8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 127.0.0.1:6002<br>   slots:[5461-10922] (5462 slots) master<br>M: 777d4f29a2f7615593849b92dfcfd67501ed9b52 127.0.0.1:6003<br>   slots:[10923-16383] (5461 slots) master<br>   <br>S: 4eab9b4f0aad5a531fbbcfb002497ea3bf771976 127.0.0.1:7001<br>   replicates 3c6742aea06d7c332ea9ab58fe76cf9cb2c2028d<br>S: 1ac3c0186097a207c18d75fed21717d7c1eaa42e 127.0.0.1:7002<br>   replicates 8b29c8b87fa6bf6e0a732b1a98768ae6887f5944<br>S: 31e0e7b208b4996b241fffe5af66cde9bb788534 127.0.0.1:7003<br>   replicates 777d4f29a2f7615593849b92dfcfd67501ed9b52<br>Can I <span class="hljs-built_in">set</span> the above configuration? (<span class="hljs-built_in">type</span> <span class="hljs-string">&#x27;yes&#x27;</span> to accept): yes <span class="hljs-comment"># 输入的是yes，而不是y</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>在输入完命令后，会展示如上。包含了每一个主节点分配的插槽，以及主从之间的关系。</li>
+<li>左侧的M表示主节点（master），S表示从节点（salve）。</li>
+<li>下面的 replicates 即该从节点的主节点是谁。</li>
+</ul>
+<h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><ul>
+<li><p>修改开启 cluster-config-file nodes.conf。nodes替换为唯一名称即可（如对应的端口号）。否则报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Sorry, the cluster configuration file nodes.conf is already used by a different Redis Cluster node. Please make sure that different nodes use different cluster configuration files.<br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<h3 id="测试使用"><a href="#测试使用" class="headerlink" title="测试使用"></a>测试使用</h3><p>随便进入一个redis-cli窗口进行数据的插入。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">☁  savle-3  redis-cli -p 6003<br>127.0.0.1:6003&gt; <span class="hljs-built_in">set</span> z 100<br>(error) MOVED 8157 127.0.0.1:6002<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>（不同的环境同样的值可能会有不一样的效果，可多插入几个值进行测试）</p>
+</blockquote>
+<p>发现并没有插入成功。而是提示我们切换到6002去。这主要是因为z在经过hash和取模后得到的结果为8157，而在上面的分配方案中8157是归属于6002端口维护的，所以需要到6002中去插入。</p>
+<blockquote>
+<p>当然，我们不可能插入数据时还要去算一下Key的结果然后再切换到对应的redis中去插入。所以，启动时我们选择以集群的方式启动即可，如下：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">☁  savle-3  redis-cli -p 6003 -c<br>127.0.0.1:6003&gt; <span class="hljs-built_in">set</span> z 100<br>-&gt; Redirected to slot [8157] located at 127.0.0.1:6002<br>OK<br>127.0.0.1:6002&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以发现，已经插入成功了。是因为自动帮我们进行了重定向，可以看最后一行，已经帮我们主动切换了端口。插入也是同样的道理，会给我们自动进行计算和切换。</p>
+<h3 id="查看集群信息"><a href="#查看集群信息" class="headerlink" title="查看集群信息"></a>查看集群信息</h3><p>在redis-cli中执行命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">cluster nodes<br></code></pre></div></td></tr></table></figure>
+
+<p>结果如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">127.0.0.1:6003&gt; cluster nodes<br><br>4eab9b4f0aad5a531fbbcfb002497ea3bf771976 127.0.0.1:7001@17001 slave 777d4f29a2f7615593849b92dfcfd67501ed9b52 0 1663717264000 3 connected<br>3c6742aea06d7c332ea9ab58fe76cf9cb2c2028d 127.0.0.1:6001@16001 master - 0 1663717262000 1 connected 0-5460<br>8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 127.0.0.1:6002@16002 master - 0 1663717265020 2 connected 5461-10922<br>1ac3c0186097a207c18d75fed21717d7c1eaa42e 127.0.0.1:7002@17002 slave 3c6742aea06d7c332ea9ab58fe76cf9cb2c2028d 0 1663717266026 1 connected<br>777d4f29a2f7615593849b92dfcfd67501ed9b52 127.0.0.1:6003@16003 myself,master - 0 1663717264000 3 connected 10923-16383<br>31e0e7b208b4996b241fffe5af66cde9bb788534 127.0.0.1:7003@17003 slave 8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 0 1663717265000 2 connected<br><br>127.0.0.1:6003&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见谁是主、谁是从节点。现在我们将6001关掉。再次查看集群信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">127.0.0.1:6003&gt; cluster nodes<br><br>4eab9b4f0aad5a531fbbcfb002497ea3bf771976 127.0.0.1:7001@17001 slave 777d4f29a2f7615593849b92dfcfd67501ed9b52 0 1663717615551 3 connected<br>3c6742aea06d7c332ea9ab58fe76cf9cb2c2028d 127.0.0.1:6001@16001 master,fail - 1663717558568 1663717551000 1 disconnected<br>8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 127.0.0.1:6002@16002 master - 0 1663717616561 2 connected 5461-10922<br>1ac3c0186097a207c18d75fed21717d7c1eaa42e 127.0.0.1:7002@17002 master - 0 1663717617580 7 connected 0-5460<br>777d4f29a2f7615593849b92dfcfd67501ed9b52 127.0.0.1:6003@16003 myself,master - 0 1663717616000 3 connected 10923-16383<br>31e0e7b208b4996b241fffe5af66cde9bb788534 127.0.0.1:7003@17003 slave 8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 0 1663717615000 2 connected<br><br>127.0.0.1:6003&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见6001 fail了，而7002成为了master。再次启动6001。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">127.0.0.1:6003&gt; cluster nodes<br><br>4eab9b4f0aad5a531fbbcfb002497ea3bf771976 127.0.0.1:7001@17001 slave 777d4f29a2f7615593849b92dfcfd67501ed9b52 0 1663717856000 3 connected<br>3c6742aea06d7c332ea9ab58fe76cf9cb2c2028d 127.0.0.1:6001@16001 slave 1ac3c0186097a207c18d75fed21717d7c1eaa42e 0 1663717857640 7 connected<br>8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 127.0.0.1:6002@16002 master - 0 1663717856000 2 connected 5461-10922<br>1ac3c0186097a207c18d75fed21717d7c1eaa42e 127.0.0.1:7002@17002 master - 0 1663717856633 7 connected 0-5460<br>777d4f29a2f7615593849b92dfcfd67501ed9b52 127.0.0.1:6003@16003 myself,master - 0 1663717857000 3 connected 10923-16383<br>31e0e7b208b4996b241fffe5af66cde9bb788534 127.0.0.1:7003@17003 slave 8b29c8b87fa6bf6e0a732b1a98768ae6887f5944 0 1663717858646 2 connected<br><br>127.0.0.1:6003&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>可以看见6001已经是从节点了。</p>
+<blockquote>
+<p>当一主一从都挂掉时，则数据将无法进行插入。</p>
+</blockquote>
+<h3 id="Java使用"><a href="#Java使用" class="headerlink" title="Java使用"></a>Java使用</h3><p>依赖和上面之前的一样。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testJp</span><span class="hljs-params">()</span></span>&#123;<br>  <span class="hljs-comment">// 和客户端一样，随便连一个即可，也可以写多个，构造方法有多种</span><br>  <span class="hljs-keyword">try</span>(JedisCluster jedisCluster = <span class="hljs-keyword">new</span> JedisCluster(<span class="hljs-keyword">new</span> HostAndPort(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6001</span>))) &#123;<br>    System.out.println(<span class="hljs-string">&quot;集群数量：&quot;</span>+jedisCluster.getClusterNodes().size());<br>    jedisCluster.set(<span class="hljs-string">&quot;cluster&quot;</span>,<span class="hljs-string">&quot;22222&quot;</span>);<br>    System.out.println(jedisCluster.get(<span class="hljs-string">&quot;cluster&quot;</span>));<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">集群数量：<span class="hljs-number">6</span><br><span class="hljs-number">22222</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><blockquote>
+<p>原开发者实现：当线程加锁成功，开始执行业务时，会在后台另开一个分线程。分线程中开启一个定时任务，每过一段时间就去检查一下主线程所持有的锁在Redis中是否还存在。如果还存在则会重新设置一个过期时间（覆盖。原本设置的5秒，过了2秒检查发现依旧存在，则又重新设置为5秒），定时任务的执行时间间隔不能超过重新设置的时间。为什么这样做了，这样就保证了在业务没有执行完的情况下，锁不会释放，只有业务执行完毕后锁才会被释放。而Redisson就是这种。</p>
+</blockquote>
+<p>Redisson - 是一个高级的分布式协调Redis客服端，能帮助用户在分布式环境中轻松实现一些Java的对象，Redisson、Jedis、Lettuce 是三个不同的操作 Redis 的客户端，Jedis、Lettuce 的 API 更侧重对 Reids 数据库的 CRUD（增删改查），而 Redisson API 侧重于分布式开发。</p>
+<h3 id="导入依赖-1"><a href="#导入依赖-1" class="headerlink" title="导入依赖"></a>导入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.redisson/redisson --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.redisson<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>redisson<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.17.4<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/redis.clients/jedis --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>redis.clients<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jedis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>4.2.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>启动两个Redis实例，一台作为数据存储（6379），一台用作分布锁（6380）。</p>
+<h3 id="测试使用-1"><a href="#测试使用-1" class="headerlink" title="测试使用"></a>测试使用</h3><blockquote>
+<p>⚠️注意：这里必须是在main方法中执行，否则无法实现效果。主要原因可能在于创建线程。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><span class="hljs-keyword">import</span> org.redisson.Redisson;<br><span class="hljs-keyword">import</span> org.redisson.api.RLock;<br><span class="hljs-keyword">import</span> org.redisson.api.RedissonClient;<br><span class="hljs-keyword">import</span> org.redisson.config.Config;<br><span class="hljs-keyword">import</span> redis.clients.jedis.Jedis;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/9/21 23:40</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JEMain</span> </span>&#123;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Config config = <span class="hljs-keyword">new</span> Config();<br>    <span class="hljs-comment">//配置连接的Redis分布式锁的实例，也可以指定集群</span><br>    config.useSingleServer().setAddress(<span class="hljs-string">&quot;redis://127.0.0.1:6380&quot;</span>);<br>    <span class="hljs-comment">//创建RedissonClient客户端</span><br>    RedissonClient client =  Redisson.create(config);   <br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>      <span class="hljs-keyword">new</span> Thread(() -&gt; &#123;<br>        <span class="hljs-keyword">try</span>(Jedis jedis = <span class="hljs-keyword">new</span> Jedis(<span class="hljs-string">&quot;127.0.0.1&quot;</span>, <span class="hljs-number">6379</span>))&#123;<br>          RLock lock = client.getLock(<span class="hljs-string">&quot;testLock&quot;</span>);    <span class="hljs-comment">//指定锁的名称，拿到锁对象</span><br>          <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">100</span>; j++) &#123;<br>            lock.lock();    <span class="hljs-comment">//加锁</span><br>            <span class="hljs-keyword">int</span> a = Integer.parseInt(jedis.get(<span class="hljs-string">&quot;a&quot;</span>)) + <span class="hljs-number">1</span>;<br>            jedis.set(<span class="hljs-string">&quot;a&quot;</span>, a+<span class="hljs-string">&quot;&quot;</span>);<br>            lock.unlock();   <span class="hljs-comment">//解锁</span><br>          &#125;<br>        &#125;<br>        System.out.println(<span class="hljs-string">&quot;结束！&quot;</span>);<br>      &#125;).start();<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<p>也可以使用另外一种方法操作Redis数据，可参考：<a href="https://tothefor.com/DragonOne/97262d5b.html">《SpringBoot-（二十四）SpringBoot简单整合操作Redis 》</a></p>
+<h3 id="其他依赖参考"><a href="#其他依赖参考" class="headerlink" title="其他依赖参考"></a>其他依赖参考</h3><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/org.redisson/redisson-spring-boot-starter --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.redisson<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>redisson-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.17.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/SpringCloud/">SpringCloud</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                    
+                      <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3afc6600.html">https://tothefor.com/DragonOne/3afc6600.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/452fbf26.html">
+                        <span class="hidden-mobile">星星之火-Mac安装Oh-My-Zsh</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
