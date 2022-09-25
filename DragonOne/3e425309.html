@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      430 字
+      444 字
     </span>
   
 
@@ -319,7 +319,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="数据库创建用户并授权问题"><a href="#数据库创建用户并授权问题" class="headerlink" title="数据库创建用户并授权问题"></a>数据库创建用户并授权问题</h2><h3 id="密码强度问题"><a href="#密码强度问题" class="headerlink" title="密码强度问题"></a>密码强度问题</h3><blockquote>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="数据库创建用户并授权问题"><a href="#数据库创建用户并授权问题" class="headerlink" title="数据库创建用户并授权问题"></a>数据库创建用户并授权问题</h2><p>使用的是数据库工具Navicat进行创建。</p>
+<h3 id="密码强度问题"><a href="#密码强度问题" class="headerlink" title="密码强度问题"></a>密码强度问题</h3><blockquote>
 <p>Your password does not satisfy the current policy requirements</p>
 </blockquote>
 <h4 id="修改数据库默认密码强度"><a href="#修改数据库默认密码强度" class="headerlink" title="修改数据库默认密码强度"></a>修改数据库默认密码强度</h4><figure class="highlight plain"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mysql">SHOW VARIABLES LIKE &#39;validate_password%&#39;; # 查看 mysql 初始的密码策略<br>set global validate_password_policy&#x3D;LOW; # 修改密码强度等级为LOW<br>set global validate_password_length&#x3D;6; # 修改密码长度，根据情况自定义修改<br></code></pre></div></td></tr></table></figure>
