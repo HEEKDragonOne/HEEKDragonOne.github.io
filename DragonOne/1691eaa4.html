@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      887 字
+      941 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      14
+      15
        分钟
     </span>
   
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 18, 2022 pm
+                  本文最后更新于：September 25, 2022 pm
                 
               </p>
             
@@ -355,6 +355,16 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <ul>
 <li><code>&lt;jsp:getProperty name=&quot;user&quot; property=&quot;username&quot; /&gt;</code>  这个就是输出这个<code>Bean</code> 对象的一些属性值。<code>name</code> 就是 <code>useBean</code> 中的 <code>id</code> ，<code>property</code> 就是 <code>Bean</code> 中的属性。</li>
 </ul>
+<h2 id="JSP间传参跳转"><a href="#JSP间传参跳转" class="headerlink" title="JSP间传参跳转"></a>JSP间传参跳转</h2><p>A.jsp：（传入参数username）</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;a href=&quot;./B.jsp?username=$&#123;requestScope.username&#125;&quot;&gt;个人信息&lt;/a&gt; <br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>B.jsp：（获取参数）</p>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs jsp">&lt;span class=&quot;text&quot;&gt;$&#123;param.username&#125;&lt;/span&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
 
             </div>
             <hr>
