@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      979 字
+      1.1k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      16
        分钟
     </span>
   
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：September 24, 2022 pm
+                  本文最后更新于：September 25, 2022 pm
                 
               </p>
             
@@ -386,6 +386,26 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </li>
 <li>@ApiModelProperty：用于实体类属性的描述。</li>
 </ul>
+<h2 id="报错问题"><a href="#报错问题" class="headerlink" title="报错问题"></a>报错问题</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">org.springframework.context.ApplicationContextException: Failed to start bean <span class="hljs-string">&#x27;documentationPluginsBootstrapper&#x27;</span>; nested exception is java.lang.NullPointerException<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>主要原因：这是因为Spring Boot 2.6.x 和Swagger 3.0.0 整合的时候，报的错。因为Springfox 使用的路径匹配是基于AntPathMatcher的，而Spring Boot 2.6.X使用的是PathPatternMatcher。</p>
+<ul>
+<li>解决方案如下：（添加配置即可）</li>
+</ul>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">mvc:</span><br>    <span class="hljs-attr">pathmatch:</span><br>      <span class="hljs-attr">matching-strategy:</span> <span class="hljs-string">ANT_PATH_MATCHER</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
