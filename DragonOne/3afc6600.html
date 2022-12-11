@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.8k 字
+      4.2k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      51
+      56
        分钟
     </span>
   
@@ -333,7 +333,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <blockquote>
-<p>在执行 make test 报错如下（在执行了上面的卸载命令后会出现）：You need tcl 8.5 or newer in order to run the Redis test<br>make: *** [test] Error 1</p>
+<p>在执行 make test 报错如下（一般在执行了上面的卸载命令后会出现，啊在阿里云的服务器上也会出现）：You need tcl 8.5 or newer in order to run the Redis test<br>make:  [test] Error 1</p>
 </blockquote>
 <p>安装TCL，并进入unix目录执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget http://downloads.sourceforge.net/tcl/tcl8.6.1-src.tar.gz<br>tar xzvf tcl8.6.1-src.tar.gz -C /usr/<span class="hljs-built_in">local</span>/<br><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/tcl8.6.1/unix/<br>./configure<br>make<br>make install<br></code></pre></div></td></tr></table></figure>
@@ -511,8 +511,20 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 
-
-
+<h3 id="服务器部署问题"><a href="#服务器部署问题" class="headerlink" title="服务器部署问题"></a>服务器部署问题</h3><blockquote>
+<p>在使用多台服务器进行搭建时，会出现程序发生阻塞，一直等待节点加入的问题（Waiting for the cluster to join），如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Can I <span class="hljs-built_in">set</span> the above configuration? (<span class="hljs-built_in">type</span> <span class="hljs-string">&#x27;yes&#x27;</span> to accept): yes<br>&gt;&gt;&gt; Nodes configuration updated<br>&gt;&gt;&gt; Assign a different config epoch to each node<br>&gt;&gt;&gt; Sending CLUSTER MEET messages to join the cluster<br>Waiting <span class="hljs-keyword">for</span> the cluster to join<br>..........................................<br></code></pre></div></td></tr></table></figure>
+</blockquote>
+<ul>
+<li>造成这种的原因：遇到这种情况大部分是因为<strong>集群总线</strong>的端口没有开放！</li>
+</ul>
+<blockquote>
+<p><strong>集群总线</strong></p>
+<p>每个Redis集群中的节点都需要打开两个TCP连接。一个连接用于正常的给Client提供服务，比如6379，还有一个额外的端口（通过在这个端口号上加10000）作为数据端口，例如：redis的端口为6379，那么另外一个需要开通的端口是：6379 + 10000， 即需要开启 16379。16379端口用于集群总线，这是一个用二进制协议的点对点通信信道。这个集群总线（Cluster bus）用于节点的失败侦测、配置更新、故障转移授权，等等。</p>
+</blockquote>
+<ul>
+<li>解决办法：只需要将开启Redis端口对应的 集群总线端口即可。例如： 6379 + 10000 = 16379。所以开放每个集群节点的客户端端口和集群总线端口才能成功创建集群！</li>
+</ul>
 <h2 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h2><blockquote>
 <p>原开发者实现：当线程加锁成功，开始执行业务时，会在后台另开一个分线程。分线程中开启一个定时任务，每过一段时间就去检查一下主线程所持有的锁在Redis中是否还存在。如果还存在则会重新设置一个过期时间（覆盖。原本设置的5秒，过了2秒检查发现依旧存在，则又重新设置为5秒），定时任务的执行时间间隔不能超过重新设置的时间。为什么这样做了，这样就保证了在业务没有执行完的情况下，锁不会释放，只有业务执行完毕后锁才会被释放。而Redisson就是这种。</p>
 </blockquote>
