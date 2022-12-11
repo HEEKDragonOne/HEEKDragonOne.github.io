@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 10, 2022 pm
+                  本文最后更新于：December 11, 2022 pm
                 
               </p>
             
@@ -326,12 +326,17 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">make  <span class="hljs-comment"># 编译</span><br>make install <span class="hljs-comment"># 安装</span><br>make <span class="hljs-built_in">test</span><br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
-<p>在执行 make test 报错如下：You need tcl 8.5 or newer in order to run the Redis test<br>make: *** [test] Error 1</p>
+<p>卸载Redis。⚠️非必要不要使用：</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get autoremove --purge redis-server<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>在执行 make test 报错如下（在执行了上面的卸载命令后会出现）：You need tcl 8.5 or newer in order to run the Redis test<br>make: *** [test] Error 1</p>
 </blockquote>
 <p>安装TCL，并进入unix目录执行命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">wget http://downloads.sourceforge.net/tcl/tcl8.6.1-src.tar.gz<br>tar xzvf tcl8.6.1-src.tar.gz -C /usr/<span class="hljs-built_in">local</span>/<br><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span>/tcl8.6.1/unix/<br>./configure<br>make<br>make install<br></code></pre></div></td></tr></table></figure>
-
-
 
 
 
