@@ -1,0 +1,848 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>星星之火-快速入门Nginx - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="星星之火-快速入门Nginx">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-12-20 12:00" pubdate>
+        December 20, 2022 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">星星之火-快速入门Nginx</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：December 20, 2022 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt install nginx<br></code></pre></div></td></tr></table></figure>
+
+<p>查看安装路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">whereis nginx<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>Nginx的配置文件默认放在：/etc/nginx 目录下。</p>
+</blockquote>
+<p>我的安装路径：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">nginx: /usr/sbin/nginx /usr/lib/nginx /etc/nginx /usr/share/nginx /usr/share/man/man8/nginx.8.gz<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>找到自己安装的Nginx二进制文件的路径。（找到Nginx的二进制文件进行启动）</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#检查 nginx.conf 配置文件是否有错</span><br>/usr/<span class="hljs-built_in">local</span>/nginx/sbin/nginx -t<br><span class="hljs-comment">#nginx启动命令:</span><br>/usr/<span class="hljs-built_in">local</span>/nginx/sbin/nginx<br><span class="hljs-comment">#指定配置文件启动</span><br>/usr/<span class="hljs-built_in">local</span>/nginx/sbin/nginx -c /usr/<span class="hljs-built_in">local</span>/nginx/conf/nginx.conf<br><span class="hljs-comment">#关闭命令:</span><br>/usr/<span class="hljs-built_in">local</span>/nginx/sbin/nginx -s stop<br><span class="hljs-comment">#重启命令:</span><br>/usr/<span class="hljs-built_in">local</span>/nginx/sbin/nginx -s reload<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="手动安装"><a href="#手动安装" class="headerlink" title="手动安装"></a>手动安装</h2><p>手动安装：即将Nginx的安装包上传到服务器，然后再安装。那么，就需要一些其他的依赖。</p>
+<h3 id="在线安装"><a href="#在线安装" class="headerlink" title="在线安装"></a>在线安装</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum install pcre -y<br>yum install pcre-devel -y<br>yum install zlib -y<br>yum install zlib-devel -y<br>yum install openssl -y<br>yum install openssl-devel -y<br></code></pre></div></td></tr></table></figure>
+
+<p>然后再解压Nginx、再安装Nginx：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment">#解压</span><br><span class="hljs-built_in">cd</span> /usr/<span class="hljs-built_in">local</span><br>tar -zxvf nginx-1.16.0.tar.gz<br><span class="hljs-comment">#进行configure配置,查看是否报错</span><br><span class="hljs-built_in">cd</span> nginx-1.16.0/<br>./configure<br><span class="hljs-comment">#编译</span><br>make<br><span class="hljs-comment">#安装</span><br>make install<br><span class="hljs-comment">#在 /usr/local/nginx目录下,可以看到如下4个目录:</span><br><span class="hljs-comment">#conf配置文件,html网页文件,logs日志文件,sbin主要二进制程序</span><br></code></pre></div></td></tr></table></figure>
+
+<p><strong>PS</strong>：如果出现这个错误：./configure: error: C compiler cc is not found，则执行这个命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">yum -y install gcc gcc-c++ autoconf automake make<br></code></pre></div></td></tr></table></figure>
+
+<p>启动命令同上。</p>
+<h3 id="离线安装"><a href="#离线安装" class="headerlink" title="离线安装"></a>离线安装</h3><blockquote>
+<p>安装pcre</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">tar -xvf pcre-8.43.tar.gz<br><span class="hljs-built_in">cd</span> pcre-8.43<br>./configure  <br>make<br>make install<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>安装openssl</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">tar -xvf openssl-1.0.2r.tar.gz<br><span class="hljs-built_in">cd</span> openssl-1.0.2r<br>./config<br>make<br>make install<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>安装zlib</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">tar -zxvf zlib-1.2.11.tar.gz<br><span class="hljs-built_in">cd</span> zlib-1.2.11<br>./configure<br>make<br>make install<br></code></pre></div></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>安装Nginx</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">tar -zxvf nginx-1.16.0.tar.gz<br><span class="hljs-built_in">cd</span> nginx-1.16.0<br>./configure<br>make<br>make install<br></code></pre></div></td></tr></table></figure>
+
+<p>启动命令同上。</p>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">user</span> <span class="hljs-string">www-data;</span><br><span class="hljs-string">worker_processes</span> <span class="hljs-string">auto;</span><br><span class="hljs-string">pid</span> <span class="hljs-string">/run/nginx.pid;</span><br><span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/modules-enabled/*.conf;</span><br><br><span class="hljs-string">events</span> &#123;<br>	<span class="hljs-string">worker_connections</span> <span class="hljs-number">768</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># multi_accept on;</span><br>&#125;<br><br><span class="hljs-string">http</span> &#123;<br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Basic Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">sendfile</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nopush</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nodelay</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">keepalive_timeout</span> <span class="hljs-number">65</span><span class="hljs-string">;</span><br>	<span class="hljs-string">types_hash_max_size</span> <span class="hljs-number">2048</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># server_tokens off;</span><br><br>	<span class="hljs-comment"># server_names_hash_bucket_size 64;</span><br>	<span class="hljs-comment"># server_name_in_redirect off;</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/mime.types;</span><br>	<span class="hljs-string">default_type</span> <span class="hljs-string">application/octet-stream;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># SSL Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">ssl_protocols</span> <span class="hljs-string">TLSv1</span> <span class="hljs-string">TLSv1.1</span> <span class="hljs-string">TLSv1.2</span> <span class="hljs-string">TLSv1.3;</span> <span class="hljs-comment"># Dropping SSLv3, ref: POODLE</span><br>	<span class="hljs-string">ssl_prefer_server_ciphers</span> <span class="hljs-string">on;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Logging Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">access_log</span> <span class="hljs-string">/var/log/nginx/access.log;</span><br>	<span class="hljs-string">error_log</span> <span class="hljs-string">/var/log/nginx/error.log;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Gzip Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">gzip</span> <span class="hljs-string">on;</span><br><br>	<span class="hljs-comment"># gzip_vary on;</span><br>	<span class="hljs-comment"># gzip_proxied any;</span><br>	<span class="hljs-comment"># gzip_comp_level 6;</span><br>	<span class="hljs-comment"># gzip_buffers 16 8k;</span><br>	<span class="hljs-comment"># gzip_http_version 1.1;</span><br>	<span class="hljs-comment"># gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Virtual Host Configs</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/conf.d/*.conf;</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/sites-enabled/*;</span><br>&#125;<br><br><br><span class="hljs-comment">#mail &#123;</span><br><span class="hljs-comment">#	# See sample authentication script at:</span><br><span class="hljs-comment">#	# http://wiki.nginx.org/ImapAuthenticateWithApachePhpScript</span><br><span class="hljs-comment"># </span><br><span class="hljs-comment">#	# auth_http localhost/auth.php;</span><br><span class="hljs-comment">#	# pop3_capabilities &quot;TOP&quot; &quot;USER&quot;;</span><br><span class="hljs-comment">#	# imap_capabilities &quot;IMAP4rev1&quot; &quot;UIDPLUS&quot;;</span><br><span class="hljs-comment"># </span><br><span class="hljs-comment">#	server &#123;</span><br><span class="hljs-comment">#		listen     localhost:110;</span><br><span class="hljs-comment">#		protocol   pop3;</span><br><span class="hljs-comment">#		proxy      on;</span><br><span class="hljs-comment">#	&#125;</span><br><span class="hljs-comment"># </span><br><span class="hljs-comment">#	server &#123;</span><br><span class="hljs-comment">#		listen     localhost:143;</span><br><span class="hljs-comment">#		protocol   imap;</span><br><span class="hljs-comment">#		proxy      on;</span><br><span class="hljs-comment">#	&#125;</span><br><span class="hljs-comment">#&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="全局模块"><a href="#全局模块" class="headerlink" title="全局模块"></a>全局模块</h3><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">user</span> <span class="hljs-string">www-data;</span><br><span class="hljs-string">worker_processes</span> <span class="hljs-string">auto;</span><br><span class="hljs-string">pid</span> <span class="hljs-string">/run/nginx.pid;</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>worker_processes：数值越大，Nginx的并发能力越强。<code>但是，这是需要根据服务器的配置情况而定的，不能随意写！！！</code></li>
+</ul>
+<h3 id="event块"><a href="#event块" class="headerlink" title="event块"></a>event块</h3><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">events</span> &#123;<br>	<span class="hljs-string">worker_connections</span> <span class="hljs-number">768</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># multi_accept on;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>worker_connections：数值越大，Nginx的并发能力越强。同样的，是根据服务器配置来设置，不能随意写。</li>
+</ul>
+<h3 id="http块"><a href="#http块" class="headerlink" title="http块"></a>http块</h3><blockquote>
+<p>该模块中最重要的就是server模块，因为这才是转发跳转的关键。</p>
+<p>并且，一个server块里面可以写多个location。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Basic Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">sendfile</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nopush</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nodelay</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">keepalive_timeout</span> <span class="hljs-number">65</span><span class="hljs-string">;</span><br>	<span class="hljs-string">types_hash_max_size</span> <span class="hljs-number">2048</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># server_tokens off;</span><br><br>	<span class="hljs-comment"># server_names_hash_bucket_size 64;</span><br>	<span class="hljs-comment"># server_name_in_redirect off;</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/mime.types;</span><br>	<span class="hljs-string">default_type</span> <span class="hljs-string">application/octet-stream;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># SSL Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">ssl_protocols</span> <span class="hljs-string">TLSv1</span> <span class="hljs-string">TLSv1.1</span> <span class="hljs-string">TLSv1.2</span> <span class="hljs-string">TLSv1.3;</span> <span class="hljs-comment"># Dropping SSLv3, ref: POODLE</span><br>	<span class="hljs-string">ssl_prefer_server_ciphers</span> <span class="hljs-string">on;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Logging Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">access_log</span> <span class="hljs-string">/var/log/nginx/access.log;</span><br>	<span class="hljs-string">error_log</span> <span class="hljs-string">/var/log/nginx/error.log;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Gzip Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">gzip</span> <span class="hljs-string">on;</span><br><br>	<span class="hljs-comment"># gzip_vary on;</span><br>	<span class="hljs-comment"># gzip_proxied any;</span><br>	<span class="hljs-comment"># gzip_comp_level 6;</span><br>	<span class="hljs-comment"># gzip_buffers 16 8k;</span><br>	<span class="hljs-comment"># gzip_http_version 1.1;</span><br>	<span class="hljs-comment"># gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Virtual Host Configs</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/conf.d/*.conf;</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/sites-enabled/*;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>include：引入外部文件。</li>
+<li>include /etc/nginx/conf.d/*.conf;：引入了外部所有的conf文件。我们可以去该目录下查看一下。有的可能没有文件（比如我），那再去sites-enabled目录下看看，有一个default文件。打开后可以看见里面有一个server模块，如下。</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">##</span><br><span class="hljs-comment"># You should look at the following URL&#x27;s in order to grasp a solid understanding</span><br><span class="hljs-comment"># of Nginx configuration files in order to fully unleash the power of Nginx.</span><br><span class="hljs-comment"># https://www.nginx.com/resources/wiki/start/</span><br><span class="hljs-comment"># https://www.nginx.com/resources/wiki/start/topics/tutorials/config_pitfalls/</span><br><span class="hljs-comment"># https://wiki.debian.org/Nginx/DirectoryStructure</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># In most cases, administrators will remove this file from sites-enabled/ and</span><br><span class="hljs-comment"># leave it as reference inside of sites-available where it will continue to be</span><br><span class="hljs-comment"># updated by the nginx packaging team.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># This file will automatically load configuration files provided by other</span><br><span class="hljs-comment"># applications, such as Drupal or Wordpress. These applications will be made</span><br><span class="hljs-comment"># available underneath a path with that package name, such as /drupal8.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># Please see /usr/share/doc/nginx-doc/examples/ for more detailed examples.</span><br><span class="hljs-comment">##</span><br><br><span class="hljs-comment"># Default server configuration</span><br><span class="hljs-comment">#</span><br><span class="hljs-string">server</span> &#123;<br>	<span class="hljs-string">listen</span> <span class="hljs-number">80</span> <span class="hljs-string">default_server;</span><br>	<span class="hljs-string">listen</span> [<span class="hljs-string">::</span>]<span class="hljs-string">:80</span> <span class="hljs-string">default_server;</span><br><br>	<span class="hljs-comment"># SSL configuration</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment"># listen 443 ssl default_server;</span><br>	<span class="hljs-comment"># listen [::]:443 ssl default_server;</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> You should disable gzip for SSL traffic.</span><br>	<span class="hljs-comment"># See: https://bugs.debian.org/773332</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment"># Read up on ssl_ciphers to ensure a secure configuration.</span><br>	<span class="hljs-comment"># See: https://bugs.debian.org/765782</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment"># Self signed certs generated by the ssl-cert package</span><br>	<span class="hljs-comment"># Don&#x27;t use them in a production server!</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment"># include snippets/snakeoil.conf;</span><br><br>	<span class="hljs-string">root</span> <span class="hljs-string">/var/www/html;</span><br><br>	<span class="hljs-comment"># Add index.php to the list if you are using PHP</span><br>	<span class="hljs-string">index</span> <span class="hljs-string">index.html</span> <span class="hljs-string">index.htm</span> <span class="hljs-string">index.nginx-debian.html;</span><br><br>	<span class="hljs-string">server_name</span> <span class="hljs-string">_;</span><br><br>	<span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>		<span class="hljs-comment"># First attempt to serve request as file, then</span><br>		<span class="hljs-comment"># as directory, then fall back to displaying a 404.</span><br>		<span class="hljs-string">try_files</span> <span class="hljs-string">$uri</span> <span class="hljs-string">$uri/</span> <span class="hljs-string">=404;</span><br>	&#125;<br><br>	<span class="hljs-comment"># pass PHP scripts to FastCGI server</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment">#location ~ \.php$ &#123;</span><br>	<span class="hljs-comment">#	include snippets/fastcgi-php.conf;</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment">#	# With php-fpm (or other unix sockets):</span><br>	<span class="hljs-comment">#	fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;</span><br>	<span class="hljs-comment">#	# With php-cgi (or other tcp sockets):</span><br>	<span class="hljs-comment">#	fastcgi_pass 127.0.0.1:9000;</span><br>	<span class="hljs-comment">#&#125;</span><br><br>	<span class="hljs-comment"># deny access to .htaccess files, if Apache&#x27;s document root</span><br>	<span class="hljs-comment"># concurs with nginx&#x27;s one</span><br>	<span class="hljs-comment">#</span><br>	<span class="hljs-comment">#location ~ /\.ht &#123;</span><br>	<span class="hljs-comment">#	deny all;</span><br>	<span class="hljs-comment">#&#125;</span><br>&#125;<br><br><br><span class="hljs-comment"># Virtual Host configuration for example.com</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment"># You can move that to a different file under sites-available/ and symlink that</span><br><span class="hljs-comment"># to sites-enabled/ to enable it.</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#server &#123;</span><br><span class="hljs-comment">#	listen 80;</span><br><span class="hljs-comment">#	listen [::]:80;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#	server_name example.com;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#	root /var/www/example.com;</span><br><span class="hljs-comment">#	index index.html;</span><br><span class="hljs-comment">#</span><br><span class="hljs-comment">#	location / &#123;</span><br><span class="hljs-comment">#		try_files $uri $uri/ =404;</span><br><span class="hljs-comment">#	&#125;</span><br><span class="hljs-comment">#&#125;</span><br><br></code></pre></div></td></tr></table></figure>
+
+<p>在http模块中引入了该文件，所以相当于把server模块里面的内容都放在了http模块中，如下（去除了注释掉的部分）</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br><br><br>	<span class="hljs-string">sendfile</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nopush</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nodelay</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">keepalive_timeout</span> <span class="hljs-number">65</span><span class="hljs-string">;</span><br>	<span class="hljs-string">types_hash_max_size</span> <span class="hljs-number">2048</span><span class="hljs-string">;</span><br><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/mime.types;</span><br>	<span class="hljs-string">default_type</span> <span class="hljs-string">application/octet-stream;</span><br><br><br>	<span class="hljs-string">ssl_protocols</span> <span class="hljs-string">TLSv1</span> <span class="hljs-string">TLSv1.1</span> <span class="hljs-string">TLSv1.2</span> <span class="hljs-string">TLSv1.3;</span> <span class="hljs-comment"># Dropping SSLv3, ref: POODLE</span><br>	<span class="hljs-string">ssl_prefer_server_ciphers</span> <span class="hljs-string">on;</span><br><br><br>	<span class="hljs-string">access_log</span> <span class="hljs-string">/var/log/nginx/access.log;</span><br>	<span class="hljs-string">error_log</span> <span class="hljs-string">/var/log/nginx/error.log;</span><br><br><br>	<span class="hljs-string">gzip</span> <span class="hljs-string">on;</span><br><br><br>    <span class="hljs-string">server</span> &#123;<br>    <span class="hljs-string">listen</span> <span class="hljs-number">80</span> <span class="hljs-string">default_server;</span><br>    <span class="hljs-string">listen</span> [<span class="hljs-string">::</span>]<span class="hljs-string">:80</span> <span class="hljs-string">default_server;</span><br>    <br>    <span class="hljs-string">root</span> <span class="hljs-string">/var/www/html;</span><br><br>    <span class="hljs-string">index</span> <span class="hljs-string">index.html</span> <span class="hljs-string">index.htm</span> <span class="hljs-string">index.nginx-debian.html;</span><br><br>    <span class="hljs-string">server_name</span> <span class="hljs-string">_;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>      <span class="hljs-string">try_files</span> <span class="hljs-string">$uri</span> <span class="hljs-string">$uri/</span> <span class="hljs-string">=404;</span><br>    &#125;<br><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这也是为什么默认在80端口可以看见Nginx的页面。</p>
+<ul>
+<li>listen：Nginx监听的端口号。</li>
+<li>server_name：代表Nginx接受请求的IP。</li>
+<li>root：将接收到的请求根据该值去查找静态资源。</li>
+<li>index：默认去上述（root）的路径中找到指定的文件。</li>
+</ul>
+<h2 id="反向代理示例"><a href="#反向代理示例" class="headerlink" title="反向代理示例"></a>反向代理示例</h2><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">user</span> <span class="hljs-string">www-data;</span><br><span class="hljs-string">worker_processes</span> <span class="hljs-string">auto;</span><br><span class="hljs-string">pid</span> <span class="hljs-string">/run/nginx.pid;</span><br><span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/modules-enabled/*.conf;</span><br><br><span class="hljs-string">events</span> &#123;<br>	<span class="hljs-string">worker_connections</span> <span class="hljs-number">768</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># multi_accept on;</span><br>&#125;<br><br><span class="hljs-string">http</span> &#123; <br>        <br>      <span class="hljs-string">server</span>&#123;<br>         <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>         <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br>         <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>           <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://111.222.11.22:80/;</span><br>         &#125;<br>      &#125;<br><br><br><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Basic Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">sendfile</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nopush</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">tcp_nodelay</span> <span class="hljs-string">on;</span><br>	<span class="hljs-string">keepalive_timeout</span> <span class="hljs-number">65</span><span class="hljs-string">;</span><br>	<span class="hljs-string">types_hash_max_size</span> <span class="hljs-number">2048</span><span class="hljs-string">;</span><br>	<span class="hljs-comment"># server_tokens off;</span><br><br>	<span class="hljs-comment"># server_names_hash_bucket_size 64;</span><br>	<span class="hljs-comment"># server_name_in_redirect off;</span><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/mime.types;</span><br>	<span class="hljs-string">default_type</span> <span class="hljs-string">application/octet-stream;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># SSL Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">ssl_protocols</span> <span class="hljs-string">TLSv1</span> <span class="hljs-string">TLSv1.1</span> <span class="hljs-string">TLSv1.2</span> <span class="hljs-string">TLSv1.3;</span> <span class="hljs-comment"># Dropping SSLv3, ref: POODLE</span><br>	<span class="hljs-string">ssl_prefer_server_ciphers</span> <span class="hljs-string">on;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Logging Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">access_log</span> <span class="hljs-string">/var/log/nginx/access.log;</span><br>	<span class="hljs-string">error_log</span> <span class="hljs-string">/var/log/nginx/error.log;</span><br><br>	<span class="hljs-comment">##</span><br>	<span class="hljs-comment"># Gzip Settings</span><br>	<span class="hljs-comment">##</span><br><br>	<span class="hljs-string">gzip</span> <span class="hljs-string">on;</span><br><br><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/conf.d/*.conf;</span><br>	<span class="hljs-string">include</span> <span class="hljs-string">/etc/nginx/sites-enabled/*;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>请求访问：110.119.120.123:8081，会转发请求跳转到：111.222.11.22:80</p>
+</blockquote>
+<h2 id="location映射路径"><a href="#location映射路径" class="headerlink" title="location映射路径"></a>location映射路径</h2><h3 id="精准匹配"><a href="#精准匹配" class="headerlink" title="精准匹配"></a>精准匹配</h3><blockquote>
+<p>等号（=）匹配</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">location</span> <span class="hljs-string">=</span> <span class="hljs-string">/</span> &#123;<br>	<span class="hljs-comment"># 精准匹配，主机名后面不能带任何的字符串</span><br>	<span class="hljs-comment"># 如：www.baidu.com 可以，但 www.baidu.com/xxx 就不行</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">server&#123;</span><br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>    	<span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://111.222.11.22:80/;</span><br>    &#125;<br><span class="hljs-string">&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>直接请求 110.119.120.123:8081 将被转发到 111.222.11.22:80。</li>
+</ul>
+<h3 id="通用匹配"><a href="#通用匹配" class="headerlink" title="通用匹配"></a>通用匹配</h3><p>就是文件默认的一种。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">location</span> <span class="hljs-string">/xxx</span> &#123;<br>	<span class="hljs-comment"># 匹配所有以 /xxx 开头的路径</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>示例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">server&#123;</span><br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br>    <span class="hljs-string">location</span> <span class="hljs-string">/test</span> &#123;<br>    	<span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://111.222.11.22:80/;</span><br>    &#125;<br><span class="hljs-string">&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>直接请求 110.119.120.123:8081/test 将被转发到 111.222.11.22:80。</li>
+</ul>
+<h3 id="正则匹配"><a href="#正则匹配" class="headerlink" title="正则匹配"></a>正则匹配</h3><blockquote>
+<p>和通用匹配一样的效果，但是优先级高于通用匹配。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">location</span> <span class="hljs-string">~</span> <span class="hljs-string">/xxx</span> &#123;<br>	<span class="hljs-comment"># 匹配所有以 /xxx 开头的路径</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="路径前缀匹配"><a href="#路径前缀匹配" class="headerlink" title="路径前缀匹配"></a>路径前缀匹配</h3><blockquote>
+<p>优先级高于正则匹配。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">location</span> <span class="hljs-string">^~</span> <span class="hljs-string">/xxx/</span> &#123;<br>	<span class="hljs-comment"># 匹配所有以 /xxx 开头的路径</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">server&#123;</span><br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br><br>  <span class="hljs-string">location</span> <span class="hljs-string">/te</span> &#123;<br>  	<span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://111.222.11.22:80/nacos;</span><br>  &#125;<br><br>  <span class="hljs-string">location</span> <span class="hljs-string">~</span> <span class="hljs-string">/te</span> &#123;<br>  	<span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://baidu.com;</span><br>  &#125;<br><br>  <span class="hljs-string">location</span> <span class="hljs-string">^~</span> <span class="hljs-string">/te/</span> &#123;<br>  	<span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://www.tothefor.com;</span><br>  &#125;<br><br><span class="hljs-string">&#125;</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>访问 110.119.120.123:8081/te 转发到 <a target="_blank" rel="noopener" href="http://www.tothefor.com/te/">www.tothefor.com/te/</a> 。</p>
+<p>删除第三个，保留第一和第二个。访问 110.119.120.123:8081/te 转发到 baidu.com/search/error.html。</p>
+</blockquote>
+<ul>
+<li>个人总结：也就是根据什么匹配，然后会代理到对应的服务，并且会带上请求的路径。</li>
+</ul>
+<h2 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h2><p>Nginx默认提供了三种负载均衡的策略：</p>
+<ul>
+<li>轮训：将客户端发起的请求，平均分配给每一台服务器。</li>
+<li>权重：将客户端发起的请求，根据服务器的权重不同，分配不同的数量。</li>
+<li>IP_Hash：基于发起请求的客户端的IP地址不同，始终将请求发送到指定的服务器上。</li>
+</ul>
+<h3 id="轮训"><a href="#轮训" class="headerlink" title="轮训"></a>轮训</h3><p>使用和之前差不多，只是在配置转发代理的时候，用了一个类似数组的东西，将所有的都放在了里面。每次请求就和每次访问数组中的一个元素一样，下标不同得到的数据就不同。这里在upstream中声明多个服务器，每次请求都会转发到其中一个上。</p>
+<p>使用：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br><br>	<span class="hljs-string">upstream</span> <span class="hljs-string">myServer</span>&#123;<br>	  <span class="hljs-string">server</span> <span class="hljs-string">ip:port;</span><br>	  <span class="hljs-string">server</span> <span class="hljs-string">ip:port;</span><br>	  <span class="hljs-string">...</span><br>	&#125;<br><br>  <span class="hljs-string">server</span>&#123;<br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>      <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://myServer;</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>示例：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br><br>	<span class="hljs-string">upstream</span> <span class="hljs-string">myServer</span>&#123;<br>	  <span class="hljs-string">server</span> <span class="hljs-number">111.111</span><span class="hljs-number">.111</span><span class="hljs-number">.11</span><span class="hljs-string">:8081;</span><br>	  <span class="hljs-string">server</span> <span class="hljs-number">222.222</span><span class="hljs-number">.222</span><span class="hljs-number">.22</span><span class="hljs-string">:8081;</span><br>	&#125;<br><br>  <span class="hljs-string">server</span>&#123;<br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>      <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://myServer;</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>访问 110.119.120.123:8081 会将请求转发到 111.111.111.11:8081;222.222.222.22:8081; 两台服务器上。每次访问的服务器一般不会相同，但是不一定。</p>
+</blockquote>
+<h3 id="权重"><a href="#权重" class="headerlink" title="权重"></a>权重</h3><p>在轮训的基础上，加一点配置即可。如下：</p>
+<blockquote>
+<p>weight：表示权重，值越大被转发到的几率越大。配置好的服务器就可以将权重设置大点。</p>
+</blockquote>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br><br>	<span class="hljs-string">upstream</span> <span class="hljs-string">myServer</span>&#123;<br>	  <span class="hljs-string">server</span> <span class="hljs-number">111.111</span><span class="hljs-number">.111</span><span class="hljs-number">.11</span><span class="hljs-string">:8081</span> <span class="hljs-string">weight=10;</span> <span class="hljs-comment"># weight表示权重，越大被转发到的几率越大</span><br>	  <span class="hljs-string">server</span> <span class="hljs-number">222.222</span><span class="hljs-number">.222</span><span class="hljs-number">.22</span><span class="hljs-string">:8081</span> <span class="hljs-string">weight=5;</span><br>	&#125;<br><br>  <span class="hljs-string">server</span>&#123;<br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>      <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://myServer;</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="IP-Hash"><a href="#IP-Hash" class="headerlink" title="IP_Hash"></a>IP_Hash</h3><p>在权重的基础上，再加一个配置即可，但此时已经和权重没有关系了。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">http</span> &#123;<br><br>	<span class="hljs-string">upstream</span> <span class="hljs-string">myServer</span>&#123;<br>	<span class="hljs-string">ip_hash;</span> <span class="hljs-comment"># 表示ip_hash</span><br>	  <span class="hljs-string">server</span> <span class="hljs-number">111.111</span><span class="hljs-number">.111</span><span class="hljs-number">.11</span><span class="hljs-string">:8081</span> <span class="hljs-string">weight=10;</span> <span class="hljs-comment"># weight表示权重，越大被转发到的几率越大</span><br>	  <span class="hljs-string">server</span> <span class="hljs-number">222.222</span><span class="hljs-number">.222</span><span class="hljs-number">.22</span><span class="hljs-string">:8081</span> <span class="hljs-string">weight=5;</span><br>	&#125;<br><br>  <span class="hljs-string">server</span>&#123;<br>  <span class="hljs-string">listen</span> <span class="hljs-number">8081</span><span class="hljs-string">;</span><br>  <span class="hljs-string">server_name</span> <span class="hljs-number">110.119</span><span class="hljs-number">.120</span><span class="hljs-number">.123</span><span class="hljs-string">;</span><br><br>    <span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>      <span class="hljs-string">proxy_pass</span> <span class="hljs-string">http://myServer;</span><br>    &#125;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h2><blockquote>
+<p>Nginx的并发能力： worker_processes * worker_connections / 4 | 2 = Nginx的并发能力。动态资源除以4，静态资源除以2。</p>
+</blockquote>
+<h3 id="动态资源代理"><a href="#动态资源代理" class="headerlink" title="动态资源代理"></a>动态资源代理</h3><p>动态资源代理就和前面的使用一样。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>	<span class="hljs-string">proxy_pass</span> <span class="hljs-string">路径;</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h3 id="静态资源代理"><a href="#静态资源代理" class="headerlink" title="静态资源代理"></a>静态资源代理</h3><p>即放在Nginx服务器上的静态资源，如：html、css、图片等。</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">location</span> <span class="hljs-string">/</span> &#123;<br>	<span class="hljs-string">root</span> <span class="hljs-string">静态资源路径;</span><br>	<span class="hljs-string">index</span> <span class="hljs-string">默认访问路径下的哪个资源;</span><br>	<span class="hljs-string">autoindex</span> <span class="hljs-string">on;</span> <span class="hljs-comment"># 表示展示静态资源下的全部内容，以列表的形式展示在界面上</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/e56f579d.html">https://tothefor.com/DragonOne/e56f579d.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/f656351e.html">
+                        <span class="hidden-mobile">IDEA-未引用包显示灰色</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
