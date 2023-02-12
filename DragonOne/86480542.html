@@ -1,0 +1,781 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>RocketMQ-（三）SpringBoot整合RocketMQ - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="RocketMQ-（三）SpringBoot整合RocketMQ">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-12 15:12" pubdate>
+        February 12, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RocketMQ-（三）SpringBoot整合RocketMQ</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：February 12, 2023 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>RocketMQ作为一款纯Java、分布式、队列模型的开源消息中间件，支持事务消息、顺序消息、批量消息、定时消息、消息回溯等，主要功能是异步解耦和流量削峰。RocketMQ主要有四大核心组成部分：<strong>NameServer</strong>、<strong>Broker</strong>、<strong>Producer</strong>以及<strong>Consumer</strong>四部分。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
+<p>部署的RocketMQ版本：4.9.3</p>
+</blockquote>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.rocketmq<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>rocketmq-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.2.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span> <span class="hljs-comment">&lt;!-- 2.2.2 对应MQ4.9.3版本 --&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">rocketmq:</span><br>  <span class="hljs-attr">name-server:</span> <span class="hljs-number">13.39</span><span class="hljs-number">.8</span><span class="hljs-number">.9</span><span class="hljs-string">:9876</span> <span class="hljs-comment"># 服务地址</span><br>  <span class="hljs-attr">producer:</span><br>    <span class="hljs-attr">group:</span> <span class="hljs-string">ToTheFor</span> <span class="hljs-comment"># 生产者组</span><br>    <span class="hljs-attr">send-message-timeout:</span> <span class="hljs-number">10000</span> <span class="hljs-comment"># 发送消息超时时间</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><blockquote>
+<p>调用RocketMQTemplate的convertAndSend()方法进行消息的发送。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 11:14</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQProducer</span> </span>&#123;<br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> RocketMQTemplate rocketMQTemplate;<br><br>    <span class="hljs-comment">// 发送消息的实例，如果需要增加Tag，只需要拼在topic后面即可，如：topic:tag</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(String topic, String msg)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;发送消息了&quot;</span>);<br>        rocketMQTemplate.convertAndSend(topic, msg);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><blockquote>
+<p>实现RocketMQListener&lt;?&gt;接口，重写onMessage()方法。具体的业务逻辑在此方法中进行处理。</p>
+<p>增加@RocketMQMessageListener注解：</p>
+<ul>
+<li>consumerGroup：消费者组。</li>
+<li>topic：设置Topic。</li>
+<li>selectorExpression：选择Tag，默认所有（*）。部分选择：tag1 || tag2。</li>
+</ul>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 12:46</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RocketMQMessageListener(consumerGroup = &quot;ToTheFor&quot;, topic = &quot;baseTopic&quot;,selectorExpression = &quot;*&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQListener</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String s)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;接受到的消息为：&quot;</span> + s);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RocketMQProducer rocketMQProducer;<br><span class="hljs-meta">@Token</span><br><span class="hljs-meta">@RequestMapping(&quot;/sendM&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">testRM</span><span class="hljs-params">()</span> </span>&#123;<br>  rocketMQProducer.sendMessage(<span class="hljs-string">&quot;baseTopic&quot;</span>,<span class="hljs-string">&quot;少时诵诗书&quot;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> JSONObject()<br>    .fluentPut(<span class="hljs-string">&quot;flag&quot;</span>, <span class="hljs-string">&quot;ok&quot;</span>)<br>    ;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>在上述完成后，进行启动，会发现报错如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">invokeSync call the addr[null] timeout<br></code></pre></div></td></tr></table></figure>
+
+<p>在经过漫长的寻找和处理后，解决办法如下，降低依赖版本：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.apache.rocketmq<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>rocketmq-spring-boot-starter<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.2.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后再次启动，访问对应请求即可成功。</p>
+<h3 id="其他消息"><a href="#其他消息" class="headerlink" title="其他消息"></a>其他消息</h3><blockquote>
+<p>均为生产者发送消息。</p>
+</blockquote>
+<h4 id="同步消息"><a href="#同步消息" class="headerlink" title="同步消息"></a>同步消息</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 11:14</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQProducer</span> </span>&#123;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RocketMQTemplate rocketMQTemplate;<br><br>  <span class="hljs-comment">// 发送消息的实例，如果需要增加Tag，只需要拼在topic后面即可，如：topic:tag</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(String topic, String msg)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;发送消息了&quot;</span>);<br>    rocketMQTemplate.syncSend(topic,msg);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h4 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendCallback;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendResult;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 11:14</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQProducer</span> </span>&#123;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RocketMQTemplate rocketMQTemplate;<br><br>  <span class="hljs-comment">// 发送消息的实例，如果需要增加Tag，只需要拼在topic后面即可，如：topic:tag</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(String topic, String msg)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;发送消息了&quot;</span>);<br>    rocketMQTemplate.asyncSend(topic, msg, <span class="hljs-keyword">new</span> SendCallback() &#123;<br>      <span class="hljs-meta">@Override</span><br>      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSuccess</span><span class="hljs-params">(SendResult sendResult)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;发送成功&quot;</span>);<br>      &#125;<br><br>      <span class="hljs-meta">@Override</span><br>      <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onException</span><span class="hljs-params">(Throwable throwable)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;发送失败&quot;</span>);<br>      &#125;<br>    &#125;);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="单向消息"><a href="#单向消息" class="headerlink" title="单向消息"></a>单向消息</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendCallback;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendResult;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 11:14</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQProducer</span> </span>&#123;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RocketMQTemplate rocketMQTemplate;<br><br>  <span class="hljs-comment">// 发送消息的实例，如果需要增加Tag，只需要拼在topic后面即可，如：topic:tag</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(String topic, String msg)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;发送消息了&quot;</span>);<br>    rocketMQTemplate.sendOneWay(topic,msg);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="延时消息"><a href="#延时消息" class="headerlink" title="延时消息"></a>延时消息</h4><blockquote>
+<p>必须发同步消息。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendCallback;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendResult;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.messaging.support.MessageBuilder;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 11:14</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQProducer</span> </span>&#123;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RocketMQTemplate rocketMQTemplate;<br><br>  <span class="hljs-comment">// 发送消息的实例，如果需要增加Tag，只需要拼在topic后面即可，如：topic:tag</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(String topic, String msg)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;发送消息了&quot;</span>);<br>    rocketMQTemplate.syncSend(topic, MessageBuilder.withPayload(msg).build(),<span class="hljs-number">10000</span>,<span class="hljs-number">3</span>);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>发送超时时间10s，延时等级为3级（10s）。</li>
+</ul>
+<h3 id="过滤"><a href="#过滤" class="headerlink" title="过滤"></a>过滤</h3><h4 id="Tag过滤"><a href="#Tag过滤" class="headerlink" title="Tag过滤"></a>Tag过滤</h4><p>消费者：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 12:46</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RocketMQMessageListener(consumerGroup = &quot;ToTheFor&quot;, topic = &quot;baseTopic&quot;,selectorExpression = &quot;*&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQListener</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String s)</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;接受到的消息为：&quot;</span> + s);<br>    &#125;<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>selectorExpression：需要的Tag。</li>
+</ul>
+<h4 id="语法过滤"><a href="#语法过滤" class="headerlink" title="语法过滤"></a>语法过滤</h4><p>消费者：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.SelectorType;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 12:46</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RocketMQMessageListener(consumerGroup = &quot;ToTheFor&quot;, topic = &quot;baseTopic&quot;,selectorType = SelectorType.SQL92,selectorExpression = &quot;age &gt; 10&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQListener</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;接受到的消息为：&quot;</span> + s);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>selectorType：指定过滤类型。默认SelectorType.TAG。</li>
+<li>selectorExpression：过滤条件。</li>
+</ul>
+<h3 id="消费者模式"><a href="#消费者模式" class="headerlink" title="消费者模式"></a>消费者模式</h3><p>修改消费者的消费模式。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.MessageModel;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.SelectorType;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 12:46</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RocketMQMessageListener(consumerGroup = &quot;ToTheFor&quot;, topic = &quot;baseTopic&quot;,messageModel = MessageModel.BROADCASTING)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQListener</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;接受到的消息为：&quot;</span> + s);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>messageModel：设置消费者模式。默认MessageModel.CLUSTERING（集群模式）。</li>
+</ul>
+<h3 id="顺序消息"><a href="#顺序消息" class="headerlink" title="顺序消息"></a>顺序消息</h3><p>生产者的多种发送方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">rocketMQTemplate.syncSendOrderly(); <span class="hljs-comment">// 发送同步顺序消息；</span><br>rocketMQTemplate.asyncSendOrderly(); <span class="hljs-comment">// 发送异步顺序消息；</span><br>rocketMQTemplate.sendOneWayOrderly(); <span class="hljs-comment">// 发送单向顺序消息；</span><br></code></pre></div></td></tr></table></figure>
+
+<p>消费者：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.ConsumeMode;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 12:46</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RocketMQMessageListener(consumerGroup = &quot;ToTheFor&quot;, topic = &quot;baseTopic&quot;,consumeMode = ConsumeMode.ORDERLY)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQListener</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;接受到的消息为：&quot;</span> + s);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>consumeMode：消费模式。默认并发消费模式（ConsumeMode.CONCURRENTLY）。</li>
+</ul>
+<h3 id="事务消息"><a href="#事务消息" class="headerlink" title="事务消息"></a>事务消息</h3><h4 id="正常事务"><a href="#正常事务" class="headerlink" title="正常事务"></a>正常事务</h4><h5 id="生产者-1"><a href="#生产者-1" class="headerlink" title="生产者"></a>生产者</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.TransactionSendResult;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQTemplate;<br><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;<br><span class="hljs-keyword">import</span> org.springframework.messaging.support.MessageBuilder;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 11:14</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Component</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQProducer</span> </span>&#123;<br>  <span class="hljs-meta">@Autowired</span><br>  <span class="hljs-keyword">private</span> RocketMQTemplate rocketMQTemplate;<br><br>  <span class="hljs-comment">// 发送消息的实例，如果需要增加Tag，只需要拼在topic后面即可，如：topic:tag</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sendMessage</span><span class="hljs-params">(String topic, String msg)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;发送消息了&quot;</span>);<br>    TransactionSendResult transactionSendResult = rocketMQTemplate.sendMessageInTransaction(topic, MessageBuilder.withPayload(msg).build(), <span class="hljs-keyword">null</span>);<br>    System.out.println(<span class="hljs-string">&quot;发送状态：&quot;</span>+transactionSendResult.getSendStatus().name());<br>    System.out.println(<span class="hljs-string">&quot;本地事务执行状态：&quot;</span>+transactionSendResult.getLocalTransactionState().name());<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+<h5 id="消费者-1"><a href="#消费者-1" class="headerlink" title="消费者"></a>消费者</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQMessageListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQListener;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/10 12:46</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Title</span></span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Description</span></span><br><span class="hljs-comment"> */</span><br><br><span class="hljs-meta">@Component</span><br><span class="hljs-meta">@RocketMQMessageListener(consumerGroup = &quot;ToTheFor&quot;, topic = &quot;baseTopic&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">RocketMQConsumer</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQListener</span>&lt;<span class="hljs-title">String</span>&gt; </span>&#123;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onMessage</span><span class="hljs-params">(String s)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;接受到的消息为：&quot;</span> + s);<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h5 id="事务监听器"><a href="#事务监听器" class="headerlink" title="事务监听器"></a>事务监听器</h5><p>发送事务消息除了生产者和消费者以外，我们还需要创建生产者的消息监听器，来监听本地事务执行的状态和检查本地事务状态。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.console.consumer;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.LocalTransactionState;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;<br><span class="hljs-keyword">import</span> org.springframework.messaging.Message;<br><span class="hljs-keyword">import</span> org.springframework.stereotype.Component;<br><br><span class="hljs-keyword">import</span> java.nio.charset.StandardCharsets;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * 生产者消息监听器：</span><br><span class="hljs-comment"> *    用于监听本地事务执行的状态和检查本地事务状态。</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> qzz</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@RocketMQTransactionListener</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TransactionMsgListener</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">RocketMQLocalTransactionListener</span> </span>&#123;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 执行本地事务（在发送消息成功时执行）</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> message</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> o</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> commit or rollback or unknown</span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> RocketMQLocalTransactionState <span class="hljs-title">executeLocalTransaction</span><span class="hljs-params">(Message message, Object o)</span> </span>&#123;<br>    System.out.println(<span class="hljs-string">&quot;正常本地事务执行...&quot;</span>);<br>    <span class="hljs-keyword">return</span> RocketMQLocalTransactionState.COMMIT;<br>  &#125;<br><br>  <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * 检查本地事务的状态</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> message</span><br><span class="hljs-comment">     * <span class="hljs-doctag">@return</span></span><br><span class="hljs-comment">     */</span><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> RocketMQLocalTransactionState <span class="hljs-title">checkLocalTransaction</span><span class="hljs-params">(Message message)</span> </span>&#123;<br>    String jsonStr = <span class="hljs-keyword">new</span> String((<span class="hljs-keyword">byte</span>[]) message.getPayload(), StandardCharsets.UTF_8);<br>    System.out.println(<span class="hljs-string">&quot;调用回查本地事务接口：&quot;</span>+jsonStr);<br>    <span class="hljs-keyword">return</span> RocketMQLocalTransactionState.COMMIT;<br>  &#125;<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>RocketMQLocalTransactionState有三种状态：</p>
+<ul>
+<li>COMMIT：提交。</li>
+<li>ROLLBACK：回滚。</li>
+<li>UNKNOWN：未知。</li>
+</ul>
+</blockquote>
+<h5 id="访问接口"><a href="#访问接口" class="headerlink" title="访问接口"></a>访问接口</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Autowired</span><br><span class="hljs-keyword">private</span> RocketMQProducer rocketMQProducer;<br><span class="hljs-meta">@RequestMapping(&quot;/sendM&quot;)</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">testRM</span><span class="hljs-params">()</span> </span>&#123;<br>  rocketMQProducer.sendMessage(<span class="hljs-string">&quot;baseTopic&quot;</span>,<span class="hljs-string">&quot;少时诵诗书&quot;</span>);<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> JSONObject()<br>    .fluentPut(<span class="hljs-string">&quot;flag&quot;</span>, <span class="hljs-string">&quot;ok&quot;</span>)<br>    ;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<h5 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h5><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">发送消息了<br>正常本地事务执行...<br>发送状态：SEND_OK<br>本地事务执行状态：COMMIT_MESSAGE<br>接受到的消息为：少时诵诗书<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="回滚"><a href="#回滚" class="headerlink" title="回滚"></a>回滚</h4><p>上面是正常的一个流程，现在演示回滚场景。只需要修改事务监听器里面的返回值即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> RocketMQLocalTransactionState <span class="hljs-title">executeLocalTransaction</span><span class="hljs-params">(Message message, Object o)</span> </span>&#123;<br>  System.out.println(<span class="hljs-string">&quot;正常本地事务执行...&quot;</span>);<br>  <span class="hljs-keyword">return</span> RocketMQLocalTransactionState.ROLLBACK; <span class="hljs-comment">// 返回值修改</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后访问接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">发送消息了<br>正常本地事务执行...<br>发送状态：SEND_OK<br>本地事务执行状态：ROLLBACK_MESSAGE<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="补偿"><a href="#补偿" class="headerlink" title="补偿"></a>补偿</h4><p>需要修改事务监听器里面的返回值。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> RocketMQLocalTransactionState <span class="hljs-title">executeLocalTransaction</span><span class="hljs-params">(Message message, Object o)</span> </span>&#123;<br>  System.out.println(<span class="hljs-string">&quot;正常本地事务执行...&quot;</span>);<br>  <span class="hljs-keyword">return</span> RocketMQLocalTransactionState.UNKNOWN; <span class="hljs-comment">// 修改</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>输出为：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">发送消息了<br>正常本地事务执行...<br>发送状态：SEND_OK<br>本地事务执行状态：UNKNOW<br>调用回查本地事务接口：少时诵诗书<br>接受到的消息为：少时诵诗书<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/RocketMQ/">RocketMQ</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
+                    
+                      <a class="hover-with-bg" href="/tags/RocketMQ/">RocketMQ</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/86480542.html">https://tothefor.com/DragonOne/86480542.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/3b617eab.html">
+                        <span class="hidden-mobile">RocketMQ-（二）RocketMQ的基本使用</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>

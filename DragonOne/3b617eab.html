@@ -1,0 +1,866 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <link rel="icon" href="https://img-blog.csdnimg.cn/a458bf114f6f4912953f8b73eab00580.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>RocketMQ-（二）RocketMQ的基本使用 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://img-blog.csdnimg.cn/af560031e20c4a8f8d05ed9f18fe4ef3.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="RocketMQ-（二）RocketMQ的基本使用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-02-12 13:12" pubdate>
+        February 12, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RocketMQ-（二）RocketMQ的基本使用</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：February 12, 2023 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>RocketMQ作为一款纯Java、分布式、队列模型的开源消息中间件，支持事务消息、顺序消息、批量消息、定时消息、消息回溯等，主要功能是异步解耦和流量削峰。RocketMQ主要有四大核心组成部分：<strong>NameServer</strong>、<strong>Broker</strong>、<strong>Producer</strong>以及<strong>Consumer</strong>四部分。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
+<p>RocketMQ版本：4.9.3</p>
+</blockquote>
+<h2 id="简单生产者"><a href="#简单生产者" class="headerlink" title="简单生产者"></a>简单生产者</h2><blockquote>
+<p>创建生产者步骤：</p>
+</blockquote>
+<ul>
+<li>谁来发？</li>
+<li>发给谁？</li>
+<li>怎么发？</li>
+<li>发什么？</li>
+<li>发的结果是什么？</li>
+<li>关闭。</li>
+</ul>
+<h3 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h3><blockquote>
+<p>最好版本是和MQ版本一样。</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">&lt;dependency&gt;<br>  &lt;groupId&gt;org.apache.rocketmq&lt;/groupId&gt;<br>  &lt;artifactId&gt;rocketmq-client&lt;/artifactId&gt;<br>  &lt;version&gt;4.9.3&lt;/version&gt;<br>&lt;/dependency&gt;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.mqdemo.produce;<br><br><span class="hljs-keyword">import</span> com.alibaba.fastjson.JSON;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.DefaultMQProducer;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.producer.SendResult;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.message.Message;<br><br><span class="hljs-keyword">import</span> java.nio.charset.StandardCharsets;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/6 21:35</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyProducer</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>        DefaultMQProducer producer = <span class="hljs-keyword">new</span> DefaultMQProducer(<span class="hljs-string">&quot;group1&quot;</span>);<br>        <span class="hljs-comment">// 设置超时时间</span><br>        producer.setMqClientApiTimeout(<span class="hljs-number">1000</span>*<span class="hljs-number">10</span>);<br>        producer.setNamesrvAddr(<span class="hljs-string">&quot;13.39.8.9:9876&quot;</span>);<br>        producer.start();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20</span>; ++i) &#123;<br>            Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br>            <span class="hljs-comment">// 此处的timeout是等待broker响应信息的时长，设置为10s，以防超时。默认只有3s</span><br>            SendResult send = producer.send(message,<span class="hljs-number">10000</span>);<br>            System.out.println(<span class="hljs-string">&quot;第&quot;</span> + i + <span class="hljs-string">&quot;个的发送结果为:&quot;</span> + JSON.toJSONString(send));<br>        &#125;<br>        producer.shutdown();<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="简单消费者"><a href="#简单消费者" class="headerlink" title="简单消费者"></a>简单消费者</h2><blockquote>
+<p>步骤同生产者类似。</p>
+</blockquote>
+<ul>
+<li>谁来收？</li>
+<li>从哪儿收？</li>
+<li>监听哪一个消息队列。（push模式）</li>
+<li>注册监听器。</li>
+<li>处理业务。</li>
+</ul>
+<blockquote>
+<p>📢注意：不能关闭消费者，因为有监听器监听消息，是一个长连接。</p>
+</blockquote>
+<h3 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.mqdemo;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.message.MessageExt;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.protocol.heartbeat.MessageModel;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/6 22:17</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyConsumer</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    System.out.println(System.getProperty(<span class="hljs-string">&quot;user.home&quot;</span>) + File.separator + <span class="hljs-string">&quot;.rocketmq_offsets&quot;</span>);<br>    DefaultMQPushConsumer consumer = <span class="hljs-keyword">new</span> DefaultMQPushConsumer(<span class="hljs-string">&quot;group1&quot;</span>);<br>    consumer.setMqClientApiTimeout(<span class="hljs-number">1000</span> * <span class="hljs-number">10</span>);<br>    consumer.setNamesrvAddr(<span class="hljs-string">&quot;13.39.8.9:9876&quot;</span>);<br>    consumer.subscribe(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);<br>    consumer.registerMessageListener(<span class="hljs-keyword">new</span> MessageListenerConcurrently() &#123;<br>      <span class="hljs-meta">@Override</span><br>      <span class="hljs-function"><span class="hljs-keyword">public</span> ConsumeConcurrentlyStatus <span class="hljs-title">consumeMessage</span><span class="hljs-params">(List&lt;MessageExt&gt; list, ConsumeConcurrentlyContext consumeConcurrentlyContext)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (MessageExt messageExt : list) &#123;<br>          System.out.println(messageExt);<br>          String body = <span class="hljs-keyword">new</span> String(messageExt.getBody());<br>          System.out.println(body);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ConsumeConcurrentlyStatus.CONSUME_SUCCESS;<br>      &#125;<br>    &#125;);<br>    consumer.start();<br>    System.out.println(<span class="hljs-string">&quot;消费者启动...&quot;</span>);<br><br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="遇坑"><a href="#遇坑" class="headerlink" title="遇坑"></a>遇坑</h3><blockquote>
+<p>org.apache.rocketmq.client.exception.MQClientException: readLocalOffset Exception, maybe fastjson version too low<br>See <a target="_blank" rel="noopener" href="http://rocketmq.apache.org/docs/faq/">http://rocketmq.apache.org/docs/faq/</a> for further details.</p>
+</blockquote>
+<p>报错fastjson版本太低。</p>
+<ul>
+<li>原因：广播模式会在本地生成一些文件。把删除即可。查看文件位置：（Java语句打印）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">System.out.println(System.getProperty(<span class="hljs-string">&quot;user.home&quot;</span>) + File.separator + <span class="hljs-string">&quot;.rocketmq_offsets&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="多消费者模式"><a href="#多消费者模式" class="headerlink" title="多消费者模式"></a>多消费者模式</h2><ul>
+<li>IDEA同时启动多个实例：在右上角的修改配置Edit Configurations -&gt; 选择需要多实例启动的Application -&gt; Modify options -&gt; Allow Multiple Instances。</li>
+</ul>
+<blockquote>
+<p>一个生产者，多个消费者。</p>
+</blockquote>
+<h3 id="分享"><a href="#分享" class="headerlink" title="分享"></a>分享</h3><blockquote>
+<p>即生产者生成的消息会分给不同的消费者，每个消费者拿到一部分信息进行消费。</p>
+</blockquote>
+<ul>
+<li>同一个消费者组，同一个Topic。每个消费者只能拿到一部分。（分享）</li>
+</ul>
+<p>比如：生产者发送了10条信息。看一张图，理解一下：</p>
+<p><img src="https://img-blog.csdnimg.cn/989598f9174741648924d4c9d531f54c.png" srcset="/img/loading.gif"></p>
+<p>示例代码同上面的一样即可，只是在生产者发送完消息后，同时启动两个消费者进行消费。（在两个消费者启动完成后，生产者再发送消息。所以，可以先启动两个消费者，再启动生产者。）</p>
+<h3 id="共享"><a href="#共享" class="headerlink" title="共享"></a>共享</h3><blockquote>
+<p>生产者生成的消息会完整的复制多份，给每个消费者的信息都是完整的。</p>
+</blockquote>
+<ul>
+<li>不同消费者组，同一个Topic。每个消费者都会拿到该Topic下完整的信息。（共享）</li>
+</ul>
+<p>比如：生产者发送了10条信息。看一张图，理解一下：</p>
+<p><img src="https://img-blog.csdnimg.cn/c69978db7e904d1d81681ff37c21b311.png" srcset="/img/loading.gif"></p>
+<p>生成者同上。消费者有点小区别。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.mqdemo;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.message.MessageExt;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.protocol.heartbeat.MessageModel;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/6 22:17</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyConsumer</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    DefaultMQPushConsumer consumer = <span class="hljs-keyword">new</span> DefaultMQPushConsumer(<span class="hljs-string">&quot;group1&quot;</span>);<br>    <span class="hljs-comment">// 区别在这：先group1启动，再修改为group2启动</span><br>    <span class="hljs-comment">// DefaultMQProducer producer = new DefaultMQProducer(&quot;group2&quot;);</span><br>    consumer.setMqClientApiTimeout(<span class="hljs-number">1000</span> * <span class="hljs-number">10</span>);<br>    consumer.setNamesrvAddr(<span class="hljs-string">&quot;13.39.8.9:9876&quot;</span>);<br>    consumer.subscribe(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);<br>    consumer.registerMessageListener(<span class="hljs-keyword">new</span> MessageListenerConcurrently() &#123;<br>      <span class="hljs-meta">@Override</span><br>      <span class="hljs-function"><span class="hljs-keyword">public</span> ConsumeConcurrentlyStatus <span class="hljs-title">consumeMessage</span><span class="hljs-params">(List&lt;MessageExt&gt; list, ConsumeConcurrentlyContext consumeConcurrentlyContext)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (MessageExt messageExt : list) &#123;<br>          System.out.println(messageExt);<br>          String body = <span class="hljs-keyword">new</span> String(messageExt.getBody());<br>          System.out.println(body);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ConsumeConcurrentlyStatus.CONSUME_SUCCESS;<br>      &#125;<br>    &#125;);<br>    consumer.start();<br>    System.out.println(<span class="hljs-string">&quot;消费者启动...&quot;</span>);<br><br><br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="设置消费者模式"><a href="#设置消费者模式" class="headerlink" title="设置消费者模式"></a>设置消费者模式</h3><blockquote>
+<p>在上面的图片中，如果要Group1中的consumer1和consumer2都收到10条信息，需要怎么处理？</p>
+</blockquote>
+<p>在上面是示例中，RocketMQ默认消费者同一个组中是负载均衡模式（分享），也就是集群模式。但是我们可以进行修改消费者模式：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.mqdemo;<br><br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.message.MessageExt;<br><span class="hljs-keyword">import</span> org.apache.rocketmq.common.protocol.heartbeat.MessageModel;<br><br><span class="hljs-keyword">import</span> java.io.File;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/2/6 22:17</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyConsumer</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    DefaultMQPushConsumer consumer = <span class="hljs-keyword">new</span> DefaultMQPushConsumer(<span class="hljs-string">&quot;group1&quot;</span>);<br>    <span class="hljs-comment">// 先group1启动，再修改为group2启动</span><br>    <span class="hljs-comment">// DefaultMQProducer producer = new DefaultMQProducer(&quot;group2&quot;);</span><br>    consumer.setMqClientApiTimeout(<span class="hljs-number">1000</span> * <span class="hljs-number">10</span>);<br>    consumer.setNamesrvAddr(<span class="hljs-string">&quot;13.39.8.9:9876&quot;</span>);<br>    <span class="hljs-comment">// 设置广播模式，默认集群模式</span><br>    consumer.setMessageModel(MessageModel.BROADCASTING);<br>    consumer.subscribe(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);<br>    consumer.registerMessageListener(<span class="hljs-keyword">new</span> MessageListenerConcurrently() &#123;<br>      <span class="hljs-meta">@Override</span><br>      <span class="hljs-function"><span class="hljs-keyword">public</span> ConsumeConcurrentlyStatus <span class="hljs-title">consumeMessage</span><span class="hljs-params">(List&lt;MessageExt&gt; list, ConsumeConcurrentlyContext consumeConcurrentlyContext)</span> </span>&#123;<br>        <span class="hljs-keyword">for</span> (MessageExt messageExt : list) &#123;<br>          System.out.println(messageExt);<br>          String body = <span class="hljs-keyword">new</span> String(messageExt.getBody());<br>          System.out.println(body);<br>        &#125;<br>        <span class="hljs-keyword">return</span> ConsumeConcurrentlyStatus.CONSUME_SUCCESS;<br>      &#125;<br>    &#125;);<br>    consumer.start();<br>    System.out.println(<span class="hljs-string">&quot;消费者启动...&quot;</span>);<br><br>  &#125;<br>&#125;<br><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="多生产者"><a href="#多生产者" class="headerlink" title="多生产者"></a>多生产者</h2><p>不管有多少个生产者，只要Topic一样，那么在消费者进行消费时和上述一样。</p>
+<h2 id="消息类别"><a href="#消息类别" class="headerlink" title="消息类别"></a>消息类别</h2><h3 id="同步消息"><a href="#同步消息" class="headerlink" title="同步消息"></a>同步消息</h3><blockquote>
+<p>及时性强，是重要的消息，且必须有回执的消息，例如：通知转账成功。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20</span>; ++i) &#123;<br>  Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br><br>  SendResult send = producer.send(message, <span class="hljs-number">10000</span>);<br>  System.out.println(<span class="hljs-string">&quot;第&quot;</span> + i + <span class="hljs-string">&quot;个的发送结果为:&quot;</span> + JSON.toJSONString(send));<br>&#125;<br>producer.shutdown();<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>发送消息后有一个结果，且是在发送完成后才能继续向下执行，从而再执行打印语句，是顺序执行的。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">第<span class="hljs-number">1</span>个的发送结果为:xxxxx<br>第<span class="hljs-number">2</span>个的发送结果为:xxxxx<br>...<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="异步消息"><a href="#异步消息" class="headerlink" title="异步消息"></a>异步消息</h3><blockquote>
+<p>即时性较弱，但需要有回执的消息。也就是发送了消息，但是不一定非要等到结果才继续向下执行。</p>
+<p>就好像你先发你的，我先走我的，等你有了结果再说。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20</span>; ++i) &#123;<br>  Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br>  <span class="hljs-keyword">int</span> finalI = i;<br>  producer.send(message, <span class="hljs-keyword">new</span> SendCallback() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onSuccess</span><span class="hljs-params">(SendResult sendResult)</span> </span>&#123;<br>      System.out.println(<span class="hljs-string">&quot;第 &quot;</span> + finalI + <span class="hljs-string">&quot; 个执行成功了&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">onException</span><span class="hljs-params">(Throwable throwable)</span> </span>&#123;<br>      System.out.println(<span class="hljs-string">&quot;第 &quot;</span> + finalI + <span class="hljs-string">&quot; 个执行失败了&quot;</span>);<br>    &#125;<br>  &#125;);<br>  System.out.println(<span class="hljs-string">&quot;第 &quot;</span> + i + <span class="hljs-string">&quot; 个发完了&quot;</span>);<br>&#125;<br><span class="hljs-comment">// producer.shutdown();</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>最后的关闭操作必须进行注释掉，因为是异步，消息还没发出去，可能就应该被关了。</li>
+</ul>
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">第 <span class="hljs-number">1</span> 个发完了<br>第 <span class="hljs-number">2</span> 个发完了<br>...<br>第 <span class="hljs-number">19</span> 个发完了<br>第 <span class="hljs-number">20</span> 个发完了<br>第 <span class="hljs-number">14</span> 个执行成功了<br>第 <span class="hljs-number">1</span> 个执行成功了<br>...<br>第 <span class="hljs-number">11</span> 个执行成功了<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="单向信息"><a href="#单向信息" class="headerlink" title="单向信息"></a>单向信息</h3><blockquote>
+<p>不需要有回执的信息。即：只管发，不管结果。可能成功了，也可能失败了。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">producer.sendOneway(message);<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="延时消息"><a href="#延时消息" class="headerlink" title="延时消息"></a>延时消息</h3><blockquote>
+<p>消息发送时并不直接发送到信息服务器，而是根据设定的等待时间等级达到，起到一定的延时到达的缓冲作用。消息等级从左到右依从增加（从1开始）：</p>
+<ul>
+<li>1s 5s 10s 30s 1m 2m 3m 4m 5m 6m 7m 8m 9m10m 20m 30m 1h 2h</li>
+</ul>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20</span>; ++i) &#123;<br>  Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br>  message.setDelayTimeLevel(<span class="hljs-number">3</span>); <span class="hljs-comment">// 第三等级 10s</span><br>  <span class="hljs-comment">// 此处的timeout是等待broker响应信息的时长，设置为10s，以防超时。默认只有3s</span><br>  SendResult send = producer.send(message, <span class="hljs-number">10000</span>);<br>  System.out.println(<span class="hljs-string">&quot;第&quot;</span> + i + <span class="hljs-string">&quot;个的发送结果为:&quot;</span> + JSON.toJSONString(send));<br>&#125;<br>producer.shutdown();<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="批量消息"><a href="#批量消息" class="headerlink" title="批量消息"></a>批量消息</h3><blockquote>
+<p>一次发送多条消息，从而节约网络开销。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">List&lt;Message&gt; msgs = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">20</span>; ++i) &#123;<br>  Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br>  msgs.add(message);<br>&#125;<br><br>SendResult send = producer.send(msgs, <span class="hljs-number">10000</span>);<br>producer.shutdown();<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>📢注意：批量消息不支持设置延时！！！</li>
+</ul>
+<h4 id="限制"><a href="#限制" class="headerlink" title="限制"></a>限制</h4><ul>
+<li>批量消息应该有相同的Topic。</li>
+<li>相同的waitStoreMsgOK。</li>
+<li>不能是延时信息。</li>
+<li>消息内容总长度不能超过4M。</li>
+<li>消息内容总长度包含如下：<ul>
+<li>topic（字符串字节数）</li>
+<li>body（字节数组长度）</li>
+<li>消息追加的属性（key与value对应字符串字节数）</li>
+<li>日志（固定20字节）</li>
+</ul>
+</li>
+</ul>
+<h2 id="消息过滤"><a href="#消息过滤" class="headerlink" title="消息过滤"></a>消息过滤</h2><h3 id="分类过滤"><a href="#分类过滤" class="headerlink" title="分类过滤"></a>分类过滤</h3><blockquote>
+<p>按照Tag过滤信息。</p>
+</blockquote>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-comment">// 生产者</span><br>Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br><br><span class="hljs-comment">// 消费者</span><br>consumer.subscribe(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;*&quot;</span>);  <span class="hljs-comment">// 获取所有的Tag</span><br>consumer.subscribe(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1 || Tags2&quot;</span>); <span class="hljs-comment">// 只获取Tag为Tags1的和Tags2的</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="语法过滤"><a href="#语法过滤" class="headerlink" title="语法过滤"></a>语法过滤</h3><blockquote>
+<p>过滤的是消息追加的属性。</p>
+</blockquote>
+<blockquote>
+<p>基本语法：</p>
+</blockquote>
+<ul>
+<li>数值比较：&gt;、&gt;=、&lt;、&lt;=、BETWEEN、=</li>
+<li>字符比较：=、&lt;&gt;、IN</li>
+<li>IS NULL 或者 IS NOT NULL</li>
+<li>逻辑符号：AND、OR、NOT</li>
+</ul>
+<blockquote>
+<p>常量支持类型：</p>
+</blockquote>
+<ul>
+<li>数值：123、123.456</li>
+<li>字符：’abc’。必须用单引号括起来。</li>
+<li>NULL：特殊的常量</li>
+<li>布尔值：TRUE 或 FALSE。</li>
+</ul>
+<p>生产者：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Message message = <span class="hljs-keyword">new</span> Message(<span class="hljs-string">&quot;Topic1&quot;</span>, <span class="hljs-string">&quot;Tags1&quot;</span>, (<span class="hljs-string">&quot;message&quot;</span> + i).getBytes(StandardCharsets.UTF_8));<br>message.putUserProperty(<span class="hljs-string">&quot;name&quot;</span>,<span class="hljs-string">&quot;墨水记忆&quot;</span>);<br>message.putUserProperty(<span class="hljs-string">&quot;age&quot;</span>,<span class="hljs-string">&quot;13&quot;</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>消费者：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">consumer.subscribe(<span class="hljs-string">&quot;Topic1&quot;</span>, MessageSelector.bySql(<span class="hljs-string">&quot;age &gt;10&quot;</span>));<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>只消费age大于10的。</li>
+</ul>
+<h4 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h4><blockquote>
+<p>默认的broker并没有开启对SQL语法的支持，需要修改配置。</p>
+</blockquote>
+<p>编辑broker.conf文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim broker.conf<br></code></pre></div></td></tr></table></figure>
+
+<p>添加配置项：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">enablePropertyFilter=<span class="hljs-literal">true</span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后重启breoker。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/RocketMQ/">RocketMQ</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/RocketMQ/">RocketMQ</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/3b617eab.html">https://tothefor.com/DragonOne/3b617eab.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/DragonOne/86480542.html">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RocketMQ-（三）SpringBoot整合RocketMQ</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/1e470ec6.html">
+                        <span class="hidden-mobile">MySQL-解决MySQL本地崩溃</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="https://img-blog.csdnimg.cn/19499a592ed54c44a65f3913367ee966.png" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
