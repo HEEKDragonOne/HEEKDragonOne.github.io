@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      3.9k 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      61
+      64
        分钟
     </span>
   
@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：September 4, 2022 pm
+                  本文最后更新于：February 13, 2023 pm
                 
               </p>
             
@@ -428,6 +428,21 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>引入Spring，在Dao类中使用@Mapper注解。而且需要在启动类中配置扫描Mapper文件的路径。</li>
 <li>自定义mapper文件，在入口模块中配置，在dao模块中创建mapper文件。</li>
 </ul>
+<h2 id="多模块引用问题"><a href="#多模块引用问题" class="headerlink" title="多模块引用问题"></a>多模块引用问题</h2><blockquote>
+<p>2023-02-13：解决多模块依赖时bean无法注入的问题。</p>
+</blockquote>
+<p>比如：A模块（com.tothefor.core）是一个公用核心模块，现在B模块（com.tothefor.admin）需要引入A模块，只是简单的在B模块的pom中增加A模块的依赖不行，因为A模块中的bean在B模块中使用时，会提示找不到bean。</p>
+<h3 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h3><p>所以如果不做任何配置的话，只会扫描启动类当前包路径（com.tothefor.admin）及其子路径下的文件，并将符合条件的对象注入到Spring容器中，<br>所以这也就导致了，其他模块中的类，虽然添加了@Bean的注解，也不会加入到容器中的现象。所以在启动类上修改配置如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@SpringBootApplication(scanBasePackages = &#123;&quot;com.tothefor&quot;&#125;)</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
 
             </div>
             <hr>
