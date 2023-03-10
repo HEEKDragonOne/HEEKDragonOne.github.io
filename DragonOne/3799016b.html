@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 30, 2022 pm
+                  本文最后更新于：March 10, 2023 pm
                 
               </p>
             
@@ -321,18 +321,18 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p> final关键字可以用来修饰变量、方法和类。</p>
 <h3 id="修饰变量"><a href="#修饰变量" class="headerlink" title="修饰变量"></a>修饰变量</h3><h4 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h4><p>在定义变量时，系统不会为局部变量进行初始化，局部变量必须由程序员显示初始化。或者在静态代码块中进行赋值（但都必须是在使用之前进行赋值）。如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/30485de5461b42abb8bae7ef1cb91f2a.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/869998a6-bd0f-4786-80cc-839d1de5a8dc.png" srcset="/img/loading.gif"></p>
 <p>但使用 <code>final</code> 修饰局部变量时，只要在使用局部变量前赋值就可以。（如果定义时就初始化了，后面就不能再次赋值；如果定义时未初始化，则只需要在使用之前初始化即可。）如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/acce8f2572944c049d4b9b54cd4c62ad.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/b8d774da-a166-44cd-8b1f-87a0a8a44c66.png" srcset="/img/loading.gif"></p>
 <h4 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h4><p>指的是不能改变引用的指向，即只能指向同一处地址，但是能够修改指向对象的内容。如图：</p>
 <ul>
 <li>修改地址</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/989dd71ad35647498895579641cc11e1.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/42b0da8e-8a7c-4c81-a92a-e856e352b8fb.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>修改内容</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20633358d08e4bf7adf96a2cdf2ef768.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/aa685c75-9481-4f86-b047-f03b57dd40cf.png" srcset="/img/loading.gif"></p>
 <h3 id="修饰方法"><a href="#修饰方法" class="headerlink" title="修饰方法"></a>修饰方法</h3><p>当修饰方法时，该方法无法被子类重写。但子类依然可以继承、重载和调用父类方法。如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/3/30 18:58</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Man</span></span>&#123;<br>        String name;<br>        <span class="hljs-keyword">int</span> age;<br>        <span class="hljs-function"><span class="hljs-keyword">final</span> <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span></span>&#123;<br>            System.out.println(<span class="hljs-string">&quot;我是父类中的展示&quot;</span>);<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Man</span></span>&#123;<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        Son s = <span class="hljs-keyword">new</span> Son();<br>        s.show(); <span class="hljs-comment">//我是父类中的展示</span><br><br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
@@ -348,7 +348,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <h3 id="修饰类"><a href="#修饰类" class="headerlink" title="修饰类"></a>修饰类</h3><p>当修饰类时，则该类无法被继承（“断子绝孙类”）。如图。</p>
-<p><img src="https://img-blog.csdnimg.cn/96d5a9154a7e4f8fa726560ee4293b03.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/625ac107-3ef5-482d-a0b7-792b9f6273d4.png" srcset="/img/loading.gif"></p>
 
             </div>
             <hr>

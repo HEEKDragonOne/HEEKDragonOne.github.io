@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：September 18, 2022 am
+                  本文最后更新于：March 10, 2023 pm
                 
               </p>
             
@@ -381,7 +381,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <h3 id="集群分区"><a href="#集群分区" class="headerlink" title="集群分区"></a>集群分区</h3><p>分区：即将集群进行划分，一个大集群划分成多个有联系的小集群，小集群也可单独完成大集群的所有功能。如下图所示。划分的目的在于优先匹配访问快的，如：就近访问。之所有说有联系，是因为当原本访问快的服务挂掉了，就可以去访问其他的服务了。</p>
 <p>例如：你现在是在成都，那么访问时优先匹配安装在成都服务器上的服务，当成都服务器无法访问时，你也可以去访问重庆服务器。如果你在重庆，那么刚好相反。</p>
-<p><img src="https://img-blog.csdnimg.cn/86cd1c0214c346559a4241e7b9dd64aa.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/253fa3ca-d3b8-4107-8241-145fa3b31e11.png" srcset="/img/loading.gif"></p>
 <p>现有一个消费者服务admin，两个提供者服务user01、user02。</p>
 <p>设置提供者所在的分区名称，对应配置文件中修改分区设置：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">cloud:</span><br>      <span class="hljs-attr">nacos:</span><br>        <span class="hljs-attr">discovery:</span><br>          <span class="hljs-comment"># 配置nacos注册中心地址</span><br>          <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span><br>          <span class="hljs-comment"># 分区名称设置</span><br>          <span class="hljs-attr">cluster-name:</span> <span class="hljs-string">chengdu</span><br></code></pre></div></td></tr></table></figure>
@@ -390,12 +390,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>admin服务配置：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/23c6b044c2fb44c38523b2f452592b17.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/40a08392-6aeb-4bd0-82ef-5545165a8297.png" srcset="/img/loading.gif"></p>
 <p>并没有配置分区，区别可见下图。</p>
 <blockquote>
 <p>user服务配置：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/6529ac8a21ea4f658bf8f7ddac998149.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/94a49192-67f0-4b80-802b-2bba7935c0db.png" srcset="/img/loading.gif"></p>
 <p>命令如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">server.port=8081;spring.cloud.nacos.discovery.cluster-name=chengdu<br></code></pre></div></td></tr></table></figure>
 
@@ -421,12 +421,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">server:</span><br>  <span class="hljs-attr">port:</span> <span class="hljs-number">8081</span><br>  <span class="hljs-attr">servlet:</span><br>    <span class="hljs-attr">context-path:</span> <span class="hljs-string">/adminT</span><br><br><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">adminservice</span><br><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-attr">discovery:</span><br>        <span class="hljs-comment"># 配置nacos注册中心地址</span><br>        <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span><br>    <span class="hljs-comment"># 数据库的配置</span><br>  <span class="hljs-attr">datasource:</span><br>    <span class="hljs-attr">druid:</span><br>      <span class="hljs-attr">username:</span> <span class="hljs-string">root</span><br>      <span class="hljs-attr">password:</span> <span class="hljs-string">root</span><br>      <span class="hljs-attr">url:</span> <span class="hljs-string">jdbc:mysql://localhost:3306/home?serverTimezone=Asia/Shanghai&amp;useUnicode=true&amp;characterEncoding=UTF-8</span><br>      <span class="hljs-attr">driver-class-name:</span> <span class="hljs-string">com.mysql.cj.jdbc.Driver</span><br>      <span class="hljs-attr">type:</span> <span class="hljs-string">com.alibaba.druid.pool.DruidDataSource</span><br><br>  <span class="hljs-comment">#      mybatis-plus配置</span><br><span class="hljs-attr">mybatis-plus:</span><br>  <span class="hljs-comment">#  自定义mapper文件位置</span><br>  <span class="hljs-attr">mapper-locations:</span> <span class="hljs-string">classpath:mapper/*/*.xml</span><br>  <span class="hljs-attr">configuration:</span><br>    <span class="hljs-attr">log-impl:</span> <span class="hljs-string">org.apache.ibatis.logging.stdout.StdOutImpl</span><br><br></code></pre></div></td></tr></table></figure>
 
 <p>现在我们将这些配置都使用nacos的配置中心进行配置：</p>
-<p><img src="https://img-blog.csdnimg.cn/4d3cb216ece048d0b5042d0742e28a8b.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/caec84d9-9bf2-4520-8f0b-2d17c832cee1.png" srcset="/img/loading.gif"></p>
 <p>添加一个配置，将application中需要经常改动的部分配置进去：</p>
 <ul>
 <li>Data ID：服务名称-环境名称.文件格式后缀</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/7f385cf5a43c45b1b78798ab29842690.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/5ec8020a-12b7-4825-92d0-cb4923d8ceb6.png" srcset="/img/loading.gif"></p>
 <p>现在再在项目resource目录下创建一个bootstrap.yml的配置文件，如下：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">spring:</span><br>  <span class="hljs-attr">application:</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">adminservice</span> <span class="hljs-comment"># 上面图片中设置的服务名称</span><br>  <span class="hljs-attr">profiles:</span><br>    <span class="hljs-comment"># nacos的配置中心中配置的文件环境，即上图中的环境部分</span><br>    <span class="hljs-attr">active:</span> <span class="hljs-string">dev</span><br><br>  <span class="hljs-attr">cloud:</span><br>    <span class="hljs-attr">nacos:</span><br>      <span class="hljs-attr">config:</span><br>        <span class="hljs-comment"># 配置文件后缀名</span><br>        <span class="hljs-attr">file-extension:</span> <span class="hljs-string">yml</span><br>        <span class="hljs-comment"># nacos服务地址</span><br>      <span class="hljs-attr">server-addr:</span> <span class="hljs-string">localhost:8848</span><br></code></pre></div></td></tr></table></figure>
 
