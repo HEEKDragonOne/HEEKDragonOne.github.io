@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 20, 2021 pm
+                  本文最后更新于：March 10, 2023 pm
                 
               </p>
             
@@ -323,7 +323,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>大致题意：求有多少个y能使x^y=z（本博客内容中^均为异或操作），且y&lt;x。其中z为质数（素数）。</p>
 <p><strong>📢提示：本题解仅供参考。太菜了，只能写成这样。。。</strong></p>
 <h2 id="前知"><a href="#前知" class="headerlink" title="前知"></a>前知</h2><h3 id="2-0-数的二进制长度"><a href="#2-0-数的二进制长度" class="headerlink" title="2.0 数的二进制长度"></a>2.0 数的二进制长度</h3><p>可以利用对数算出来，使用到log2（N）。但是java中只有log（double）（以e为底的），log10（double）等等函数，这时用换底公式就可以自己实现log2（N）。C++中有log2（x）的函数。</p>
-<p><img src="https://img-blog.csdnimg.cn/2019012410251470.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/27b95a3e-7d8a-4626-8bba-81c12918b9da.png" srcset="/img/loading.gif"></p>
 <p>log2N=logeN/loge2，logeN代表以e为底的N的对数，loge2代表以e为底的2的对数。</p>
 <p>Java中还有一种简单的方法：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">System.out.println(Integer.toBinaryString(<span class="hljs-number">2</span>).length());<br>System.out.println(Integer.toBinaryString(<span class="hljs-number">3</span>).length());<br>System.out.println(Integer.toBinaryString(<span class="hljs-number">5</span>).length());<br>System.out.println(Integer.toBinaryString(<span class="hljs-number">7</span>).length());<br>System.out.println(Integer.toBinaryString(<span class="hljs-number">11</span>).length());<br><br>System.out.println((<span class="hljs-keyword">int</span>) (Math.log(<span class="hljs-number">2</span>)/Math.log(<span class="hljs-number">2</span>)));<br>System.out.println((<span class="hljs-keyword">int</span>) (Math.log(<span class="hljs-number">3</span>)/Math.log(<span class="hljs-number">2</span>)));<br>System.out.println((<span class="hljs-keyword">int</span>) (Math.log(<span class="hljs-number">5</span>)/Math.log(<span class="hljs-number">2</span>)));<br>System.out.println((<span class="hljs-keyword">int</span>) (Math.log(<span class="hljs-number">7</span>)/Math.log(<span class="hljs-number">2</span>)));<br>System.out.println((<span class="hljs-keyword">int</span>) (Math.log(<span class="hljs-number">11</span>)/Math.log(<span class="hljs-number">2</span>)));<br></code></pre></div></td></tr></table></figure>

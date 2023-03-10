@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：March 10, 2023 pm
                 
               </p>
             
@@ -324,7 +324,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>request.getRequestDispatcher(“/目标URL-pattern”).forward(request,response);</p>
 </blockquote>
 <p>使用forward跳转时，是在服务器内部跳转，地址栏不发生变化，这一点与重定向不同。并且是属于同一次请求。即不管跳转几下，都是属于同一次请求。如图。</p>
-<p><img src="https://img-blog.csdnimg.cn/1eb2aec2dae24827a2104b0fb5da099a.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/ea1ad26d-eb54-453d-b817-6253da3b3764.png" srcset="/img/loading.gif"></p>
 <p>示例：</p>
 <p>A.java 代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.Servlet;<br><br><br><span class="hljs-keyword">import</span> javax.servlet.ServletException;<br><span class="hljs-keyword">import</span> javax.servlet.annotation.WebServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServlet;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletRequest;<br><span class="hljs-keyword">import</span> javax.servlet.http.HttpServletResponse;<br><span class="hljs-keyword">import</span> java.io.IOException;<br><span class="hljs-keyword">import</span> java.util.ArrayList;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2021/8/20 22:11</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@WebServlet(value = &quot;/a&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">A</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">HttpServlet</span> </span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doGet</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        req.getRequestDispatcher(<span class="hljs-string">&quot;/b&quot;</span>).forward(req,resp);<br>    &#125;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doPost</span><span class="hljs-params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="hljs-keyword">throws</span> ServletException, IOException </span>&#123;<br>        doGet(req,resp);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
@@ -384,7 +384,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>response.sendRedirect(“URL”); 这里的URL需要和转发中的区别开。这里的URL需要指明的哪个项目下的哪个资源。</p>
 </blockquote>
 <p>URL：统一资源标识符，用来表示服务器中定位一个资源，资源在Web项目中的路径。</p>
-<p><img src="https://img-blog.csdnimg.cn/ca04c11bef6f4ec38c371c353fac2229.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/2853206d-fa72-48e9-9554-15e08b298330.png" srcset="/img/loading.gif"></p>
 <h3 id="2-2-数据传递"><a href="#2-2-数据传递" class="headerlink" title="2.2 数据传递"></a>2.2 数据传递</h3><p>sendRedirect 跳转时，地址栏发生变化，代表客户端重新发送的请求。属于两次请求。</p>
 <blockquote>
 <ol>

@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：February 19, 2023 pm
+                  本文最后更新于：March 10, 2023 pm
                 
               </p>
             
@@ -364,7 +364,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <h2 id="CPU缓存机制"><a href="#CPU缓存机制" class="headerlink" title="CPU缓存机制"></a>CPU缓存机制</h2><p>CPU是计算机的大脑，所有的程序，最终都要变成CPU指令在CPU中去执行。CPU的计算速度是非常快的，但是，程序必须存储在存储介质中，程序启动之后被加载到内存中才能执行。但是内存的读取速度和CPU的计算速度之间存在非常大的差异。那么为了解决这个计算速度之间的差异，就在CPU上增加了缓存来解决这个问题。通常情况下，CPU是三级缓存结构，如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/9884f2ae962c463cad98eee94553f06f.webp" srcset="/img/loading.gif"></p>
+<p><img src="https://raw.githubusercontent.com/DragonOne713/DragonOne713.github.io/main/imgs/9884f2ae962c463cad98eee94553f06f.webp" srcset="/img/loading.gif"></p>
 <p>越靠近CPU的缓存，其容量就越小，但是其速度就越快。所以实际上L1的容量是最小的，这取决于CPU的具体型号。</p>
 <h2 id="缓存行"><a href="#缓存行" class="headerlink" title="缓存行"></a>缓存行</h2><p>为了提高IO效率，CPU每次从内存读取数据并不是只读取我们需要计算的数据，而是将我们需要的数据周围的64个字节（intel处理器的缓存行是64字节）的数据一次性全部读取到缓存中。这64个字节的数据就称为一个<strong>缓存行</strong>(Cache line)。即：一个缓存行可以存放多个数据。</p>
 <ul>
