@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 16, 2021 pm
+                  本文最后更新于：March 10, 2023 pm
                 
               </p>
             
@@ -469,7 +469,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <h3 id="3-3-设置用户名与邮箱"><a href="#3-3-设置用户名与邮箱" class="headerlink" title="3.3 设置用户名与邮箱"></a>3.3 设置用户名与邮箱</h3><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">git config --global user.name <span class="hljs-string">&quot;loong&quot;</span> <span class="hljs-comment">#名称</span><br>git config --global user.email 123456789@qq.com <span class="hljs-comment">#邮箱</span><br></code></pre></div></td></tr></table></figure>
 
 <h2 id="4-Git基本理论"><a href="#4-Git基本理论" class="headerlink" title="4.Git基本理论"></a>4.Git基本理论</h2><p>Git 本地有三个工作区域：工作目录（Working Directory）、暂存区（Stage/index）、资源库(本地仓库)（Repository 或 Git Directory）。如果再加上远程的 git 创库（Remote Directory）就可以分为四个工作区域。它们之间的转换关系为：</p>
-<p><img src="https://img-blog.csdnimg.cn/20210601090432316.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/5668eab8-99c1-40d1-8377-0b6e88e80c02.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>工作区：平时存放项目代码的地方。</li>
 <li>暂存区：用于临时存放改动，事实上它只是一个文件，保存即将提交到文件列表信息。</li>
@@ -477,7 +477,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>远程仓库：托管代码的服务器，可以简单的认为是项目组中的一台电脑用于远程数据交换。</li>
 </ul>
 <h2 id="5-Git项目搭建"><a href="#5-Git项目搭建" class="headerlink" title="5.Git项目搭建"></a>5.Git项目搭建</h2><p>工作目录（WorkSpace）一般就是希望 Git 帮助管理的文件夹，可以是项目的目录，也可以是一个空目录，不要有中文。</p>
-<p><img src="https://img-blog.csdnimg.cn/2021060109103561.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/6376fabc-4ad8-4e02-a4ac-e3df0a1c7261.png" srcset="/img/loading.gif"></p>
 <h3 id="5-1-本地仓库搭建"><a href="#5-1-本地仓库搭建" class="headerlink" title="5.1 本地仓库搭建"></a>5.1 本地仓库搭建</h3><p>创建本地仓库有两种方法：一种是创建全新的仓库，另一种是克隆远程仓库。</p>
 <blockquote>
 <ol>
@@ -588,23 +588,23 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>一开始的时候，master分支是一条线，Git用master指向最新的提交，再用HEAD指向master，就能确定当前分支，以及当前分支的提交点：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210602091951658.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/b4579ddc-2ae5-45e7-88ee-5856474671d6.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>每次提交，master 分支都会向前移动一步，这样，随着你不断提交，master 分支的线也越来越长。<br>当我们创建新的分支，例如 dev 时，Git 新建了一个指针叫 dev，指向 master 相同的提交，再把 HEAD 指向dev，就表示当前分支在 dev 上：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210602092008679.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/38b582bf-6fd7-44e4-b651-7e3115747f72.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>Git 创建一个分支很快，因为除了增加一个dev指针，改改 HEAD 的指向，工作区的文件都没有任何变化！不过，从现在开始，对工作区的修改和提交就是针对 dev 分支了，比如新提交一次后，dev 指针往前移动一步，而 master 指针不变：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210602092026712.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/d26ebb77-7a51-4be3-992f-dea5ad3baaf6.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>假如我们在 dev 上的工作完成了，就可以把 dev 合并到 master 上。Git 怎么合并呢？最简单的方法，就是直接把 master 指向 dev 的当前提交，就完成了合并：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210602092042303.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/bc11d37e-69a1-4d73-b642-8a78f05f7087.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>所以Git合并分支也很快！就改改指针，工作区内容也不变！<br>合并完分支后，甚至可以删除 dev 分支。删除 dev 分支就是把 dev 指针给删掉，删掉后，我们就剩下了一条 master 分支：</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20210602092057598.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/42716a95-652e-4c80-953b-84bf7e064a9e.png" srcset="/img/loading.gif"></p>
 <h3 id="10-1-创建分支"><a href="#10-1-创建分支" class="headerlink" title="10.1 创建分支"></a>10.1 创建分支</h3><blockquote>
 <ol>
 <li>创建并切换分支，如：创建 dev 分支</li>
