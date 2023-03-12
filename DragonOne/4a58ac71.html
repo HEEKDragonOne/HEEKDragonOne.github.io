@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 7, 2022 pm
+                  本文最后更新于：March 12, 2023 pm
                 
               </p>
             
@@ -331,7 +331,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>实时可视化 Hotspot JVM 垃圾回收监控工具：安装插件 visual GC</p>
 </blockquote>
-<h2 id="堆内存结构"><a href="#堆内存结构" class="headerlink" title="堆内存结构"></a>堆内存结构</h2><p><img src="https://img-blog.csdnimg.cn/7a5ca501e96643c597503567d7f71de1.png" srcset="/img/loading.gif"></p>
+<h2 id="堆内存结构"><a href="#堆内存结构" class="headerlink" title="堆内存结构"></a>堆内存结构</h2><p><img src="https://moreoj.com/imgs/bead8203-b4a1-46e7-b62e-e25a601a8d97.png" srcset="/img/loading.gif"></p>
 <h2 id="堆空间大小设置和查看"><a href="#堆空间大小设置和查看" class="headerlink" title="堆空间大小设置和查看"></a>堆空间大小设置和查看</h2><blockquote>
 <p>堆空间大小设置方式</p>
 </blockquote>
@@ -384,7 +384,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jstat -gc 4159<br><br><span class="hljs-comment"># 显示</span><br>    S0C         S1C         S0U         S1U          EC           EU           OC           OU          MC         MU       CCSC      CCSU     YGC     YGCT     FGC    FGCT     CGC    CGCT       GCT   <br>    25600.0     25600.0         0.0         0.0     153600.0      15360.5     409600.0          0.0     4480.0      781.7     384.0      76.6      0     0.000     0     0.000     -         -     0.000<br></code></pre></div></td></tr></table></figure>
 
 <p>因为输出的结果很多，所以比较长。这里我自己画了一个图：</p>
-<p><img src="https://img-blog.csdnimg.cn/87bb159f8a314061b94623a87a670938.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/3cb2b4c0-d8ad-4b41-a617-71a8897451f0.png" srcset="/img/loading.gif"></p>
 <p>我们只看左边（新生代），不看右边。其中以C结尾的表示总大小，以U结尾的表示已使用的大小。</p>
 <p>S0C 、 S1C 表示幸存区S0和S1两个区域的大小，EC表示伊甸区总大小，OC表示老年代的总大小。</p>
 <p>三者相加为：（25600+25600+153600+409600）/ 1024 = 600</p>
@@ -413,7 +413,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor;<br><br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/5 21:12</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestLink</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-keyword">long</span> initM = Runtime.getRuntime().totalMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br>    <span class="hljs-keyword">long</span> MaxM = Runtime.getRuntime().maxMemory() / <span class="hljs-number">1024</span> / <span class="hljs-number">1024</span>;<br><br>    System.out.println(<span class="hljs-string">&quot;-Xms: &quot;</span>+initM+<span class="hljs-string">&quot;M&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;-Xmx: &quot;</span>+MaxM+<span class="hljs-string">&quot;M&quot;</span>);<br>    <span class="hljs-keyword">try</span> &#123;<br>      Thread.sleep(<span class="hljs-number">1000000000</span>);<br>    &#125;<span class="hljs-keyword">catch</span> (Exception e)&#123;<br>      e.printStackTrace();<br>    &#125;<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
 <p>然后看插件监控情况：</p>
-<p><img src="https://img-blog.csdnimg.cn/b45d44e1fff943c689faf3237f796bdc.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/63b13c3c-8623-4750-8520-feca587dc9af.png" srcset="/img/loading.gif"></p>
 <p>可以看见150+25+25 ：400 就是1：2。</p>
 <blockquote>
 <p>默认情况下不会修改这个比例，但是，如果已经知道了存活期长的比较多，那么就可以将老年代比例设大。</p>
@@ -430,7 +430,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">-Xms600m -Xmx600m -XX:+PrintGCDetails -XX:SurvivorRatio=8<br></code></pre></div></td></tr></table></figure>
 
 <p>这样配置后再次查看，就会发现Eden变成了160M，而幸存区中都是20M了，这样就符合8:1:1的比例了。（因为参数设置的总大小600，新生代:老年代为1:2；所以新生代中总大小为200M）如图：</p>
-<p><img src="https://img-blog.csdnimg.cn/ca9d6ba3d1ae4b3e92df1f0eaa2e4f91.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/5dacaa3a-1fdc-4958-aab0-8a58da791db3.png" srcset="/img/loading.gif"></p>
 <h2 id="参数总结"><a href="#参数总结" class="headerlink" title="参数总结"></a>参数总结</h2><blockquote>
 <p>堆空间大小参数</p>
 </blockquote>

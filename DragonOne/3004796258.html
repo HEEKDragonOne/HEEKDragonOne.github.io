@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：December 3, 2021 pm
+                  本文最后更新于：March 12, 2023 pm
                 
               </p>
             
@@ -344,7 +344,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p>HSMF  － 提供读Microsoft Outlook格式档案的功能。</p>
 </blockquote>
-<h4 id="1-1-1-常用类和方法"><a href="#1-1-1-常用类和方法" class="headerlink" title="1.1.1 常用类和方法"></a>1.1.1 常用类和方法</h4><h3 id="1-2-POI实现写入Excel"><a href="#1-2-POI实现写入Excel" class="headerlink" title="1.2 POI实现写入Excel"></a>1.2 POI实现写入Excel</h3><p>首先需要明白下面这张图。<br><img src="https://img-blog.csdnimg.cn/2add3e4a09b34f9a82770224b56109ec.png" srcset="/img/loading.gif"></p>
+<h4 id="1-1-1-常用类和方法"><a href="#1-1-1-常用类和方法" class="headerlink" title="1.1.1 常用类和方法"></a>1.1.1 常用类和方法</h4><h3 id="1-2-POI实现写入Excel"><a href="#1-2-POI实现写入Excel" class="headerlink" title="1.2 POI实现写入Excel"></a>1.2 POI实现写入Excel</h3><p>首先需要明白下面这张图。<br><img src="https://moreoj.com/imgs/837be8e2-56c2-4296-99a9-2bfb4472dbcf.png" srcset="/img/loading.gif"></p>
 <p>其中哪儿是工作簿、哪儿是工作表。应该不会有人看不懂。</p>
 <p><strong>Excel03版、和Excel07版的区别是：03版最多有65536条数据，而07版无限制。</strong></p>
 <blockquote>
@@ -369,7 +369,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>java: 错误: 不支持发行版本 5</p>
 </blockquote>
 <p>首先要确保你的JDK没问题。然后看下面的图中是否对。（我在测试时用的是JDK8，所有的都是设置为了8）<br>File -&gt; settings-&gt; Build,Execution,Deployment -&gt; Compiler -&gt; Java Compiler</p>
-<p><img src="https://img-blog.csdnimg.cn/bcf86055c0f44fc4907a6598b4523fca.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/fb65c9da-4cb3-4c15-8263-2b24a4657540.png" srcset="/img/loading.gif"></p>
 <h4 id="1-2-4-批量写入"><a href="#1-2-4-批量写入" class="headerlink" title="1.2.4 批量写入"></a>1.2.4 批量写入</h4><p>直接套上双重for即可。一个for控制行，一个for控制列。不演示了。<br>另外，用03版的速度比较快，但数据有限制。<br>用07版的数据无限制，但速度慢。则需要进行优化。这时，就需要使用07版加强版。</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Workbook workbook = <span class="hljs-keyword">new</span> SXSSFWorkbook();<span class="hljs-comment">//默认100</span><br>Workbook workbook = <span class="hljs-keyword">new</span> SXSSFWorkbook(<span class="hljs-number">10000</span>); <span class="hljs-comment">//自定义10000条</span><br></code></pre></div></td></tr></table></figure>
 <p>依旧其他的都不变，只是变对象。优势在与可以写入非常大的数据量，且速度也快。但需要注意的是：过程中会产生临时文件，需要清除临时文件。默认由100条记录被保存在内存中，如果超过这数量，则最前面的数据被写入临时文件。当然，也可以自定义内存中的数据的数量。而且在关闭流后面还需要写清除临时文件的代码：</p>
