@@ -1,0 +1,782 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  
+    <meta name="description" content="墨水记忆">
+  
+  <meta name="author" content="DragonOne">
+  <meta name="keywords" content="墨水记忆,墨水的记忆,最好的记忆不如最淡的墨水,DragonOne,tothefor,tothefor.com,www.ththefor.com,个人博客,Java,SpringBoot,Vue3,Vite2">
+  
+    <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
+  
+  <title>MyBatis源码分析-（一）事务管理机制源码分析 - 墨水记忆</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="/css/macpanel.css">
+<link rel="stylesheet" href="/css/default.min.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"tothefor.com","root":"/","version":"1.8.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":true,"baidu":"952d55c20fecac468ce267fb5ef10df9","google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz","app_key":"tL3DrseUcom3imP7y6HAnTfh","server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="墨水记忆" type="application/atom+xml">
+</head>
+
+
+
+<body><!-- hexo injector body_begin start --><div id="web_bg"></div><!-- hexo injector body_begin end -->
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>墨水记忆</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友情链接
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="iconfont icon-books"></i>
+                文档
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/databases/">
+                    
+                    资料库
+                  </a>
+                
+                  
+                  
+                  
+                  <a class="dropdown-item" href="/javaProject/">
+                    
+                    Java项目
+                  </a>
+                
+              </div>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/comment/">
+                <i class="iconfont icon-comment"></i>
+                留言板
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="MyBatis源码分析-（一）事务管理机制源码分析">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-author" aria-hidden="true"></i>
+      DragonOne
+    </span>
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2023-03-18 16:46" pubdate>
+        March 18, 2023 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      27
+       分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--动态线条背景-->
+<!-- <script type="text/javascript"
+color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
+</script> -->
+
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">MyBatis源码分析-（一）事务管理机制源码分析</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：March 18, 2023 pm
+                
+              </p>
+            
+            <div class="markdown-body">
+              <p>MyBatis 是一款优秀的持久层框架，它支持自定义 SQL、存储过程以及高级映射。MyBatis 免除了几乎所有的 JDBC 代码以及设置参数和获取结果集的工作。MyBatis 可以通过简单的 XML 或注解来配置和映射原始类型、接口和 Java POJO（Plain Old Java Objects，普通老式 Java 对象）为数据库中的记录。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>首先简单的回顾一下MyBatis的初始使用过程：</p>
+<ul>
+<li><p>创建Maven项目并引入Mybatis和MySQL连接依赖。</p>
+</li>
+<li><p>创建并编写MyBatis主配置文件：mybatis-config.xml，并配置数据源、事务等信息。</p>
+</li>
+<li><p>创建并编写对应的Mapper文件：xxxxMapper.xml，编写SQL语句。</p>
+</li>
+<li><p>在主配置文件中声明Mapper文件。</p>
+</li>
+<li><p>然后主函数中进行使用，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.MybatisMember;<br><br><span class="hljs-keyword">import</span> org.apache.ibatis.io.Resources;<br><span class="hljs-keyword">import</span> org.apache.ibatis.session.SqlSession;<br><span class="hljs-keyword">import</span> org.apache.ibatis.session.SqlSessionFactory;<br><span class="hljs-keyword">import</span> org.apache.ibatis.session.SqlSessionFactoryBuilder;<br><br><span class="hljs-keyword">import</span> java.io.InputStream;<br><span class="hljs-keyword">import</span> java.util.List;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2023/3/10 22:27</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> Exception</span>&#123;<br>    InputStream resourceAsStream = Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>);<br>    SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="hljs-keyword">new</span> SqlSessionFactoryBuilder();<br>    SqlSessionFactory build = sqlSessionFactoryBuilder.build(resourceAsStream);<br>    SqlSession session = build.openSession();<br><br>    <span class="hljs-keyword">int</span> insert = session.insert(<span class="hljs-string">&quot;insertTest&quot;</span>);<br>    System.out.println(insert);<br>    session.commit();<br>  &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure></li>
+</ul>
+<p>在这里，我们需要注意MyBatis的几个核心对象：SqlSessionFactoryBuilder、SqlSessionFactory、SqlSession。</p>
+<blockquote>
+<p>面试题：在MyBatis中，负责执行SQL语句的对象叫什么？</p>
+</blockquote>
+<ul>
+<li>答案：SqlSession。</li>
+</ul>
+<p>但是，如何才能获取到SqlSession呢？要想获取SqlSession对象，需要先获取SqlSessionFactory对象，通过SqlSessionFactory来生产SqlSession；但是，要想获取SqlSessionFactory对象，又需要先获取SqlSessionFactoryBuilder对象，通过SqlSessionFactoryBuilder对象的build方法获取SqlSessionFactory对象。具体代码可见初始示例，核心代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">InputStream resourceAsStream = Resources.getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>); <span class="hljs-comment">// 文件路径相对根路径（resource目录）</span><br>SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="hljs-keyword">new</span> SqlSessionFactoryBuilder();<br>SqlSessionFactory build = sqlSessionFactoryBuilder.build(resourceAsStream);<br>SqlSession session = build.openSession();<br></code></pre></div></td></tr></table></figure>
+
+<p>其中，SqlSessionFactoryBuilder对象的build方法需要InputStream流，获取InputStream流的方式很多。上面示例中是通过MyBatis包中的一个Resources工具类进行获取的，当然也可以自行直接进行new，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="hljs-keyword">new</span> SqlSessionFactoryBuilder();<br>InputStream inputStream = <span class="hljs-keyword">new</span> FileInputStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>); <span class="hljs-comment">// 需要文件绝对路径</span><br>SqlSessionFactory build = sqlSessionFactoryBuilder.build(inputStream);<br>SqlSession session = build.openSession();<br></code></pre></div></td></tr></table></figure>
+
+<p>还有一种获取方式，通过系统的类加载器进行获取，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">SqlSessionFactoryBuilder sqlSessionFactoryBuilder = <span class="hljs-keyword">new</span> SqlSessionFactoryBuilder();<br>InputStream resourceAsStream = ClassLoader.getSystemClassLoader().getResourceAsStream(<span class="hljs-string">&quot;mybatis-config.xml&quot;</span>); <span class="hljs-comment">// 文件路径相对根路径（resource目录）</span><br>SqlSessionFactory build = sqlSessionFactoryBuilder.build(resourceAsStream);<br>SqlSession session = build.openSession();<br></code></pre></div></td></tr></table></figure>
+
+<p>我们对MyBatis提供的Resources工具类进行源码查看可知，其底层实现就是通过调用类加载器。源码如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> ClassLoaderWrapper classLoaderWrapper = <span class="hljs-keyword">new</span> ClassLoaderWrapper();<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InputStream <span class="hljs-title">getResourceAsStream</span><span class="hljs-params">(String resource)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>  <span class="hljs-keyword">return</span> getResourceAsStream((ClassLoader)<span class="hljs-keyword">null</span>, resource);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InputStream <span class="hljs-title">getResourceAsStream</span><span class="hljs-params">(ClassLoader loader, String resource)</span> <span class="hljs-keyword">throws</span> IOException </span>&#123;<br>  InputStream in = classLoaderWrapper.getResourceAsStream(resource, loader); <span class="hljs-comment">// 核心</span><br>  <span class="hljs-keyword">if</span> (in == <span class="hljs-keyword">null</span>) &#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IOException(<span class="hljs-string">&quot;Could not find resource &quot;</span> + resource);<br>  &#125; <span class="hljs-keyword">else</span> &#123;<br>    <span class="hljs-keyword">return</span> in;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>其中的classLoaderWrapper的实现方式为：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ClassLoaderWrapper</span> </span>&#123;<br>  ClassLoader defaultClassLoader;<br>  ClassLoader systemClassLoader;<br><br>  ClassLoaderWrapper() &#123;<br>    <span class="hljs-keyword">try</span> &#123;<br>      <span class="hljs-keyword">this</span>.systemClassLoader = ClassLoader.getSystemClassLoader();<br>    &#125; <span class="hljs-keyword">catch</span> (SecurityException var2) &#123;<br>    &#125;<br><br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>📚小知识：一般情况下，名称中带resource的都是以根节点（resource目录）作为查找起点的。</p>
+</blockquote>
+<h2 id="事务管理机制"><a href="#事务管理机制" class="headerlink" title="事务管理机制"></a>事务管理机制</h2><p>MyBatis的主配置文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">configuration</span></span><br><span class="hljs-meta">        <span class="hljs-meta-keyword">PUBLIC</span> <span class="hljs-meta-string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span><br><span class="hljs-meta">        <span class="hljs-meta-string">&quot;https://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">environments</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>      <span class="hljs-tag">&lt;<span class="hljs-name">dataSource</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;POOLED&quot;</span>&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;driver&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;com.mysql.cj.jdbc.Driver&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;jdbc:mysql://localhost:3306/jwgl?serverTimezone=UTC&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;username&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;root&quot;</span>/&gt;</span><br>        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;password&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;root&quot;</span>/&gt;</span><br>      <span class="hljs-tag">&lt;/<span class="hljs-name">dataSource</span>&gt;</span><br>    <span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">environments</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">mappers</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">mapper</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">&quot;mappers/XsxkbMapper1.xml&quot;</span>/&gt;</span><br>  <span class="hljs-tag">&lt;/<span class="hljs-name">mappers</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span><br><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>在最开始的实例中可以看见，最后一行是session.commit();。那么这是干嘛的呢？是用来提交事务的，因为MyBatis中默认是需要手动进行提交的。</p>
+<p>在MyBatis中，通过主配置文件的</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">environment</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;development&quot;</span>&gt;</span><br>  <span class="hljs-tag">&lt;<span class="hljs-name">transactionManager</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;JDBC&quot;</span>/&gt;</span><br>  ...<br><span class="hljs-tag">&lt;/<span class="hljs-name">environment</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+
+<p>进行事务的管理，其中type支持两种值：</p>
+<ul>
+<li>JDBC。</li>
+<li>MANAGED。</li>
+</ul>
+<p>如果type的值为JDBC，则表示MyBatis框架自行管理事务，使用原生的JDBC代码进行事务的管理。比如：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">coon.setAutoCommit(<span class="hljs-keyword">false</span>); <span class="hljs-comment">// 是否自动提交。也就是是否开启是否。如果自动提交，则表示关闭事务；如果手动提交，则表示开启事务。</span><br>coon.commit(); <span class="hljs-comment">// 提交事务</span><br></code></pre></div></td></tr></table></figure>
+
+<p>但是，在MyBatis的使用中，我们发现并没有使用过这两句代码，主要是因为被封装了。</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">SqlSession session = build.openSession(); <span class="hljs-comment">// 底层是：coon.setAutoCommit(false);</span><br>session.commit(); <span class="hljs-comment">// 底层是：coon.commit();</span><br></code></pre></div></td></tr></table></figure>
+
+<blockquote>
+<p>提示：以上仅是type为JDBC时，采用了JDBC的事务管理器。</p>
+</blockquote>
+<p>相反，如果type为MANAGED，则表示使用MANAGED事务管理器。也就是表示MyBatis不再负责事务的管理了，而是交给了其他容器来负责，比如：Spring。如果配置值为MANAGED，但又没有其他进行管理，则表示事务没有开启。</p>
+<h2 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h2><h3 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h3><h4 id="手动提交"><a href="#手动提交" class="headerlink" title="手动提交"></a>手动提交</h4><p>首先，我们在openSession()处打一个断点：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">SqlSession session = build.openSession();<br></code></pre></div></td></tr></table></figure>
+
+<p>然后DeBug进去，可以看见如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> SqlSession <span class="hljs-title">openSession</span><span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.openSessionFromDataSource(<span class="hljs-keyword">this</span>.configuration.getDefaultExecutorType(), (TransactionIsolationLevel)<span class="hljs-keyword">null</span>, <span class="hljs-keyword">false</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里面，需要注意最后一个参数为false，这也表示是否自动提交。然后再进入openSessionFromDataSource里面：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">private</span> SqlSession <span class="hljs-title">openSessionFromDataSource</span><span class="hljs-params">(ExecutorType execType, TransactionIsolationLevel level, <span class="hljs-keyword">boolean</span> autoCommit)</span> </span>&#123;<br>  Transaction tx = <span class="hljs-keyword">null</span>;<br><br>  DefaultSqlSession var8;<br>  <span class="hljs-keyword">try</span> &#123;<br>    Environment environment = <span class="hljs-keyword">this</span>.configuration.getEnvironment();<br>    TransactionFactory transactionFactory = <span class="hljs-keyword">this</span>.getTransactionFactoryFromEnvironment(environment);<br>    tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);<br>    Executor executor = <span class="hljs-keyword">this</span>.configuration.newExecutor(tx, execType);<br>    var8 = <span class="hljs-keyword">new</span> DefaultSqlSession(<span class="hljs-keyword">this</span>.configuration, executor, autoCommit);<br>  &#125; <span class="hljs-keyword">catch</span> (Exception var12) &#123;<br>    <span class="hljs-keyword">this</span>.closeTransaction(tx);<br>    <span class="hljs-keyword">throw</span> ExceptionFactory.wrapException(<span class="hljs-string">&quot;Error opening session.  Cause: &quot;</span> + var12, var12);<br>  &#125; <span class="hljs-keyword">finally</span> &#123;<br>    ErrorContext.instance().reset();<br>  &#125;<br><br>  <span class="hljs-keyword">return</span> var8;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>在这里面，我们可以看见一个事务管理器接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Transaction tx = <span class="hljs-keyword">null</span>;<br></code></pre></div></td></tr></table></figure>
+
+<p>而该事务管理器接口有两个实现类，刚好对应type的两个值：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JdbcTransaction</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Transaction</span></span><br><span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">ManagedTransaction</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Transaction</span></span><br></code></pre></div></td></tr></table></figure>
+
+<p>然后一步一步往下走，一直走到：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">tx = transactionFactory.newTransaction(environment.getDataSource(), level, autoCommit);<br></code></pre></div></td></tr></table></figure>
+
+<p>这里就表示创建一个事务管理器。</p>
+<p>然后再进入newTransaction：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> Transaction <span class="hljs-title">newTransaction</span><span class="hljs-params">(DataSource ds, TransactionIsolationLevel level, <span class="hljs-keyword">boolean</span> autoCommit)</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> JdbcTransaction(ds, level, autoCommit, <span class="hljs-keyword">this</span>.skipSetAutoCommitOnClose);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里，我们就可以看见，其实是通过JDBC实现的，接下来继续往下走，直到JDBC的构造方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">JdbcTransaction</span><span class="hljs-params">(DataSource ds, TransactionIsolationLevel desiredLevel, <span class="hljs-keyword">boolean</span> desiredAutoCommit, <span class="hljs-keyword">boolean</span> skipSetAutoCommitOnClose)</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>.dataSource = ds;<br>  <span class="hljs-keyword">this</span>.level = desiredLevel;<br>  <span class="hljs-keyword">this</span>.autoCommit = desiredAutoCommit;<br>  <span class="hljs-keyword">this</span>.skipSetAutoCommitOnClose = skipSetAutoCommitOnClose;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>在这里，就是将desiredAutoCommit赋值给autoCommit的，表示是否需要自动提交，这里为false。</p>
+<p>所以，当type为JDBC时，底层其实就是使用的传统JDBC进行事务的处理。</p>
+<h4 id="自动提交"><a href="#自动提交" class="headerlink" title="自动提交"></a>自动提交</h4><p>接下来，再看看设置自动提交的源码过程，同时打断点：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">SqlSession session = build.openSession(<span class="hljs-keyword">true</span>);<br></code></pre></div></td></tr></table></figure>
+
+<p>然后同样的方式，一直到：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">JdbcTransaction</span><span class="hljs-params">(DataSource ds, TransactionIsolationLevel desiredLevel, <span class="hljs-keyword">boolean</span> desiredAutoCommit, <span class="hljs-keyword">boolean</span> skipSetAutoCommitOnClose)</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>.dataSource = ds;<br>  <span class="hljs-keyword">this</span>.level = desiredLevel;<br>  <span class="hljs-keyword">this</span>.autoCommit = desiredAutoCommit;<br>  <span class="hljs-keyword">this</span>.skipSetAutoCommitOnClose = skipSetAutoCommitOnClose;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后找到该类（JdbcTransaction）中的openConnection()方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">openConnection</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> SQLException </span>&#123;<br>  <span class="hljs-keyword">if</span> (log.isDebugEnabled()) &#123;<br>    log.debug(<span class="hljs-string">&quot;Opening JDBC Connection&quot;</span>);<br>  &#125;<br>  connection = dataSource.getConnection();<br>  <span class="hljs-keyword">if</span> (level != <span class="hljs-keyword">null</span>) &#123;<br>    connection.setTransactionIsolation(level.getLevel());<br>  &#125;<br>  setDesiredAutoCommit(autoCommit);<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>然后查看：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">setDesiredAutoCommit(autoCommit);<br></code></pre></div></td></tr></table></figure>
+
+<p>源码如下（删除无用代码）：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDesiredAutoCommit</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> desiredAutoCommit)</span> </span>&#123;<br>  <span class="hljs-keyword">try</span> &#123;<br>    <span class="hljs-keyword">if</span> (connection.getAutoCommit() != desiredAutoCommit) &#123;<br>      ...<br>      connection.setAutoCommit(desiredAutoCommit);<br>    &#125;<br>  &#125; <span class="hljs-keyword">catch</span> (SQLException e) &#123;<br>    ...<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>这里非常重要。</p>
+<p>首先，看一下判断条件：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">connection.getAutoCommit() != desiredAutoCommit<br></code></pre></div></td></tr></table></figure>
+
+<p>我们知道，这时的desiredAutoCommit是为true的，表示自动提交。那connection.getAutoCommit()的值是什么呢？</p>
+<blockquote>
+<p>首先，我们需要知道，如果在JDBC的代码中没有执行过：connection.setAutoCommit(false)的话，那么默认是为true的。即：JDBC中默认事务是自动提交的。</p>
+</blockquote>
+<p>而且，我们也并没有设置过，所以，此时的 connection.getAutoCommit() 是为true的。那么，</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">connection.getAutoCommit() != desiredAutoCommit<br></code></pre></div></td></tr></table></figure>
+
+<p>的结果为false才对。即然为false了，那源码中的：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">connection.setAutoCommit(desiredAutoCommit);<br></code></pre></div></td></tr></table></figure>
+
+<p>就不会被执行。虽然没有被执行，但是默认就是设置的为true，所以，并没有影响。</p>
+<blockquote>
+<p>总结</p>
+</blockquote>
+<ul>
+<li>只要setCommit是true，则表示没有开启事务；为false表示开启事务。</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/MyBatis%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90/">MyBatis源码分析</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%BA%90%E7%A0%81/">源码</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MyBatis/">MyBatis</a>
+                    
+                  </div>
+                
+              </div>
+              <!-- 
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+               -->
+              <p class="note note-warning">
+                <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/476722da.html">https://tothefor.com/DragonOne/476722da.html</a> <br>
+                <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                   </p>
+                   
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/DragonOne/18b3a384.html">
+                        <span class="hidden-mobile">更新动态</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                  
+                
+                
+  <div id="vcomments"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('vcomments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function () {
+        new Valine({
+          el: "#vcomments",
+          app_id: "jx7bocft2eNXc79VRkkkNmhT-gzGzoHsz",
+          app_key: "tL3DrseUcom3imP7y6HAnTfh",
+          placeholder: "无需登录，匿名评论。  \n客官，来说点什么吧！(*╹▽╹*)",
+          path: window.location.pathname,
+          avatar: "retro",
+          meta: ["nick","mail"],
+          pageSize: "10",
+          lang: "zh-CN",
+          highlight: true,
+          recordIP: false,
+          serverURLs: "",
+        });
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the
+    <a target="_blank" href="https://valine.js.org" rel="nofollow noopener noopener">comments powered by Valine.</a>
+  </noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+  <div class="col-lg-7 mx-auto nopadding-x-md">
+    <div class="container custom post-custom mx-auto">
+      <img src="/img/pay.jpg" srcset="/img/loading.gif" class="rounded mx-auto d-block mt-5" style="width:150px; height:150px;">   </br>  <p align="center">	(*╹▽╹*)ﾞ您的鼓励是我最大的动力。ヾ(◍°∇°◍)ﾉ</p>
+    </div>
+  </div>
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="javascript:" rel="nofollow noopener"><span>墨水记忆</span></a> <i class="iconfont icon-love"></i> <a href="javascript:" rel="nofollow noopener"><span>DragonOne</span></a> <div> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="javascript:" rel="nofollow noopener">
+        最好的记忆不如最淡的墨水
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    <!-- Baidu Analytics -->
+    <script defer>
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?952d55c20fecac468ce267fb5ef10df9";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/highlight.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- 雪花特效 -->
+<!-- <script type="text/javascript" src="\js\snow.js"></script> -->
+<!--单击显示文字-->
+<script type="text/javascript" src="/js/click_show_text.js"></script>
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+<!-- hexo injector body_end start --><script src="/js/backgroundize.js"></script>
+  <link defer rel="stylesheet" href="/styles/backgroundize.css" />
+  <!-- hexo injector body_end end --></body>
+</html>
