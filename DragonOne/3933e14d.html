@@ -313,27 +313,27 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 8, 2022 pm
+                  本文最后更新于：March 21, 2023 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
 <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="对象分配的一般过程"><a href="#对象分配的一般过程" class="headerlink" title="对象分配的一般过程"></a>对象分配的一般过程</h2><p>堆内存分布：</p>
-<p><img src="https://img-blog.csdnimg.cn/7a5ca501e96643c597503567d7f71de1.png" srcset="/img/loading.gif" alt="谁空谁是to区"></p>
+<p><img src="https://moreoj.com/imgs/7a329fc5-04bb-4205-9e0c-65980336d339.png" srcset="/img/loading.gif" alt="谁空谁是to区"></p>
 <blockquote>
 <p>首先对象放在伊甸区（小对象），当伊甸区放满了之后，将会进行MinorGC。</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/f8a65c206c7d474c99b5c0509f5a2a46.png" srcset="/img/loading.gif" alt="红色表示被GC 绿色表示未被GC"></p>
+<p><img src="https://moreoj.com/imgs/ebc48043-1e3a-4750-bc83-777a966f3f33.png" srcset="/img/loading.gif" alt="红色表示被GC 绿色表示未被GC"></p>
 <p>GC仍然存活的对象，将会转移到幸存区（S0区）中，并且对象的年龄计数器将会增加1。</p>
 <blockquote>
 <p>在GC后，伊甸区将继续存放对象。当再一次满了的时候会再次GC。这一次的GC会将伊甸区和已经存放对象部分的幸存区进行GC。然后放入另外一块未被占用的幸存区。同样对象的年龄计数器会加1。</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/896c54297d6b4e3a9ef18d293ca494e3.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/19fca934-02db-417c-9bed-4443ea641e50.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>伊甸区再次满时，再进行GC，在幸存区中的对象，如果年龄计数器达到了15（15是默认值。可以通过参数<code>-XX:MaxTenuringThreshold=15</code>进行修改设置），则将会进入老年代中。</p>
 </blockquote>
-<p><img src="https://img-blog.csdnimg.cn/41fa2e39274842db99f1f359f2b79343.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/1541b9f3-8b9f-4c8d-a937-41b0dcf4e864.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>大对象（如：数组）直接进入老年代中（对象要占的内存比伊甸区总大小还大）。当老年代内存不足以存放对象时，会触发Major GC。如果在Major GC后仍然无法进行对象的保存，则会产生OOM异常。</p>
 </blockquote>
@@ -344,7 +344,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>对于垃圾回收：频繁在新生代收集，很少在老年代收集，几乎不在元空间（方法区）收集。</li>
 </ul>
 <h2 id="分配特殊情况"><a href="#分配特殊情况" class="headerlink" title="分配特殊情况"></a>分配特殊情况</h2><p>具体也可见<a href="https://tothefor.com/DragonOne/46d0d953.html">《JAVA知识点-Java对象的分配详解 》</a> 。</p>
-<p><img src="https://img-blog.csdnimg.cn/db1b20237b2b4a2a99c8d7655da1eed3.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/imgs/2377a010-7413-4dcb-bb29-51c7360b18a7.png" srcset="/img/loading.gif"></p>
 <h2 id="初谈GC区别"><a href="#初谈GC区别" class="headerlink" title="初谈GC区别"></a>初谈GC区别</h2><p>分为Minor GC、Major GC、Full GC。</p>
 <blockquote>
 <p>针对HotSpot VM的实现，GC按照回收区域又分为两中类型：一种是部分收集（Partial GC）、一种是整堆收集（Full GC）。</p>
