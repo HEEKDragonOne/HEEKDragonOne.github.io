@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 26, 2023 am
+                  本文最后更新于：March 26, 2023 pm
                 
               </p>
             
@@ -329,7 +329,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <h2 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h2><p>首先看一下@Autowired的装配顺序：</p>
-<p><img src="https://raw.githubusercontent.com/HEEKDragonOne/imgs/main/2023/F2CB8AC9-357D-476D-A94D-8C98D670E034.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/2023/F2CB8AC9-357D-476D-A94D-8C98D670E034.png" srcset="/img/loading.gif"></p>
 <h3 id="默认装配"><a href="#默认装配" class="headerlink" title="默认装配"></a>默认装配</h3><p>默认情况下是通过byType自动装配的。先写一个实现类，如下所示：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Service</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MapperImpl</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Mapper</span></span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">show</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;MapperImpl-实现类&quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
@@ -350,19 +350,19 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <p>执行的方法也就是指定的Bean的名称中的方法。</p>
 <h2 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h2><p>在上面，我们已经有了两个实现类，在此基础上完成下面的测试。</p>
 <h3 id="同时指定name和type"><a href="#同时指定name和type" class="headerlink" title="同时指定name和type"></a>同时指定name和type</h3><p>装配顺序如图：</p>
-<p><img src="https://raw.githubusercontent.com/HEEKDragonOne/imgs/main/2023/img.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/2023/img.png" srcset="/img/loading.gif"></p>
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Resource(name = &quot;mapperImpl&quot;,type = Mapper.class)</span><br><span class="hljs-keyword">private</span> Mapper mapper;<br><br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>  System.out.println(mapper);<br>  mapper.show();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>这里，我们指定了类型为Mapper，而且名称也必须是mapperImpl，当然了，名称也可以是mapperImpl2，根据情况而定。但是，如果指定的这两个不能唯一找到，则会报错。</p>
 <h3 id="指定name"><a href="#指定name" class="headerlink" title="指定name"></a>指定name</h3><p>装配顺序如图：</p>
-<p><img src="https://raw.githubusercontent.com/HEEKDragonOne/imgs/main/2023/img_1.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/2023/img_1.png" srcset="/img/loading.gif"></p>
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Resource(name = &quot;mapperImpl&quot;)</span><br><span class="hljs-keyword">private</span> Mapper mapper;<br><br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>  System.out.println(mapper);<br>  mapper.show();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>可以正常执行，但是，如果有多个类型有相同的Bean名称为mapperImpl，则会报错。</p>
 <h3 id="指定type"><a href="#指定type" class="headerlink" title="指定type"></a>指定type</h3><p>装配顺序如图：</p>
-<p><img src="https://raw.githubusercontent.com/HEEKDragonOne/imgs/main/2023/img_2.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/2023/img_2.png" srcset="/img/loading.gif"></p>
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Resource(type = Mapper.class)</span><br><span class="hljs-keyword">private</span> Mapper mapper;<br><br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>  System.out.println(mapper);<br>  mapper.show();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
@@ -374,7 +374,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 
 <h3 id="不指定"><a href="#不指定" class="headerlink" title="不指定"></a>不指定</h3><p>装配顺序如图：</p>
-<p><img src="https://raw.githubusercontent.com/HEEKDragonOne/imgs/main/2023/img_3.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.com/2023/img_3.png" srcset="/img/loading.gif"></p>
 <p>示例：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Resource</span><br><span class="hljs-keyword">private</span> Mapper mapper;<br><br><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">contextLoads</span><span class="hljs-params">()</span> </span>&#123;<br>  System.out.println(mapper);<br>  mapper.show();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
