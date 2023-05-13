@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>IDEA使用JRebel实现热部署 - 墨水记忆</title>
+  <title>实用小技能-Mac实现JDK版本切换 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="IDEA使用JRebel实现热部署">
+            <span class="h2" id="subtitle" title="实用小技能-Mac实现JDK版本切换">
               
             </span>
 
@@ -244,8 +244,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-05-12 12:32" pubdate>
-        May 12, 2023 pm
+      <time datetime="2023-05-13 17:03" pubdate>
+        May 13, 2023 pm
       </time>
     </span>
   
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      869 字
+      489 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      6
        分钟
     </span>
   
@@ -309,7 +309,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">IDEA使用JRebel实现热部署</h1>
+            <h1 style="display: none">实用小技能-Mac实现JDK版本切换</h1>
             
               <p class="note note-info">
                 
@@ -319,39 +319,44 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote>
-<p>JRebel 是国外团队开发的一款收费工具，JRebel 允许开发团队在有限的时间内完成更多的任务修正更多的问题，发布更高质量的软件产品，JRebel 可快速实现热部署，节省了大量重启时间，提高了个人开发效率。<br>JRebel 是一款 JAVA 虚拟机插件，它使得 Java 程序员能在不进行重部署的情况下，即时看到代码的改变对一个应用程序带来的影响。</p>
-</blockquote>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
-<p>在IDEA中搜索 <code>jrebel</code> 并安装。</p>
-</blockquote>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>在Mac上安装了多个JDK版本，然后实现JDK版本的自由切换。</p>
 <blockquote>
-<p>或者下载对应的压缩包，然后在IDEA插件中导入进去。</p>
-<p><a target="_blank" rel="noopener" href="https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel/versions">https://plugins.jetbrains.com/plugin/4441-jrebel-and-xrebel/versions</a></p>
+<p>📢⚠️：配置在重启后可能会失效！！！失效后需要重新配置</p>
 </blockquote>
-<h2 id="激活"><a href="#激活" class="headerlink" title="激活"></a>激活</h2><p>安装之后需要重启IDEA，JRebel插件会提示需要激活，点击<code>Jrebel Activation</code>进行激活。</p>
-<blockquote>
-<p>打开<code>File</code>—&gt;<code>Settings</code>—&gt;<code>JRebel &amp; XRebel</code>，点击右侧的<code>Activate now</code></p>
-</blockquote>
-<p>用<a target="_blank" rel="noopener" href="https://www.guidgen.com/">在线GUID地址</a>在线生成GUID。</p>
-<p>下载激活软件：<a target="_blank" rel="noopener" href="https://github.com/ilanyu/ReverseProxy/releases/tag/v1.0">GitHub地址</a> 下载后点击exe运行程序。</p>
-<p>然后打开IDEA激活窗口，设置URL：<a target="_blank" rel="noopener" href="http://127.0.0.1:8888/%7BGUID%7D%EF%BC%8C%E9%82%AE%E7%AE%B1%E4%BB%BB%E6%84%8F%E3%80%82">http://127.0.0.1:8888/{GUID}，邮箱任意。</a></p>
-<p>如果失败的话，刷新GUID重新替换即可。</p>
-<h2 id="设置"><a href="#设置" class="headerlink" title="设置"></a>设置</h2><h3 id="离线模式"><a href="#离线模式" class="headerlink" title="离线模式"></a>离线模式</h3><p>选择<code>File</code>—&gt;<code>Settings</code>—&gt;<code>JRebel &amp; XRebel</code>，点击右侧的<code>WORK OFFLINE</code></p>
-<h3 id="自动编译"><a href="#自动编译" class="headerlink" title="自动编译"></a>自动编译</h3><p>打开<code>File</code>—&gt;<code>Settings</code>—&gt;<code>Build,Execution,Deployment</code>—&gt;<code>Compiler</code>—&gt;勾选<code>Build project automatically</code>。</p>
-<h3 id="运行时编译"><a href="#运行时编译" class="headerlink" title="运行时编译"></a><strong>运行时编译</strong></h3><p>打开<code>File</code>—&gt;<code>Settings</code>—&gt;<code>Advanced Settings</code>, 找到右侧的<code>Compiler</code>选项，然后勾选</p>
-<h3 id="修改热部署时间"><a href="#修改热部署时间" class="headerlink" title="修改热部署时间"></a>修改热部署时间</h3><p>打开<code>File</code>—&gt;<code>Settings</code>—&gt;<code>JRebel &amp; XRebel</code>，右侧找到<code>time Saved Statistics</code><br>下面有个时间线，可以自己任意调，滑到最左边是1秒生效。</p>
-<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p><strong>运行项目时要点击JRebel的按钮，而非原生的idea启动方式</strong>。出现如下则表示热部署启动成功：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">2023-05-11 14:11:17 JRebel:  Starting logging to file: C:\Users\DragonOne\.jrebel\jrebel.log<br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  <span class="hljs-comment">#############################################################</span><br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  JRebel Agent 2023.2.1 (202305020925)<br>2023-05-11 14:11:17 JRebel:  (c) Copyright 2007-2023 Perforce Software, Inc.<br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  Over the last 1 days JRebel prevented<br>2023-05-11 14:11:17 JRebel:  at least 6 redeploys/restarts saving you about 0 hours.<br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  License acquired from License Server: http://127.0.0.1:8888<br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  Licensed to DragonOne.<br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  You are using an offline license.<br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  <br>2023-05-11 14:11:17 JRebel:  <span class="hljs-comment">#############################################################</span><br></code></pre></div></td></tr></table></figure>
+<h2 id="查看JDK版本"><a href="#查看JDK版本" class="headerlink" title="查看JDK版本"></a>查看JDK版本</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">/usr/libexec/java_home -V<br></code></pre></div></td></tr></table></figure>
 
-<p>当修改代码后，控制台上出现如下则表示修改已更新：</p>
-<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">2023-05-11 14:14:54 JRebel: Reloading class <span class="hljs-string">&#x27;com.tothefor.demo.DemoCtr&#x27;</span>.<br>2023-05-11 14:14:54 JRebel: Reconfiguring reprocessed bean <span class="hljs-string">&#x27;demoCtr&#x27;</span> [com.tothefor.demo.DemoCtr]<br></code></pre></div></td></tr></table></figure>
+<p>执行后输出如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">➜  jenkinsDemo /usr/libexec/java_home -V<br>Matching Java Virtual Machines (3):<br>    16.0.1 (x86_64) <span class="hljs-string">&quot;Oracle Corporation&quot;</span> - <span class="hljs-string">&quot;OpenJDK 16.0.1&quot;</span> /Users/dragonone/Library/Java/JavaVirtualMachines/openjdk-16.0.1/Contents/Home<br>    11.0.13 (x86_64) <span class="hljs-string">&quot;Amazon.com Inc.&quot;</span> - <span class="hljs-string">&quot;Amazon Corretto 11&quot;</span> /Users/dragonone/Library/Java/JavaVirtualMachines/corretto-11.0.13/Contents/Home<br>    1.8.0_292 (x86_64) <span class="hljs-string">&quot;Amazon&quot;</span> - <span class="hljs-string">&quot;Amazon Corretto 8&quot;</span> /Users/dragonone/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home<br>/Users/dragonone/Library/Java/JavaVirtualMachines/openjdk-16.0.1/Contents/Home<br></code></pre></div></td></tr></table></figure>
 
-<p>修改后不手动保存，热部署等待的时间较长；修改后保存一下，则热部署会很快。也就是相当于保存是告诉IDEA是否已修改完毕了，不告诉让他自己感受就会慢，告诉了就很快。</p>
-<p>参考</p>
-<blockquote>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42694593/article/details/126448828">https://blog.csdn.net/weixin_42694593/article/details/126448828</a></p>
+<p>最后一行表示当前JDK版本的位置。</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><blockquote>
+<p>如果当前使用的shell是zsh就编辑.zshrc文件，如果是bash就编辑.bash_profile文件。</p>
 </blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim ~/.bash_profile <br><span class="hljs-comment"># 或者 </span><br>vim ~/.zshrc<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>博主是zsh。</li>
+</ul>
+<p>添加以下内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">JAVA_HOME_16=/Users/dragonone/Library/Java/JavaVirtualMachines/openjdk-16.0.1/Contents/Home<br>JAVA_HOME_11=/Users/dragonone/Library/Java/JavaVirtualMachines/corretto-11.0.13/Contents/Home<br>JAVA_HOME_8=/Users/dragonone/Library/Java/JavaVirtualMachines/corretto-1.8.0_292/Contents/Home<br>JRE_HOME=<span class="hljs-variable">$JAVA_HOME</span>/jre<br>PATH=<span class="hljs-variable">$PATH</span>:<span class="hljs-variable">$JAVA_HOME</span>/bin<br>CLASSPATH=<span class="hljs-variable">$JAVA_HOME</span>/lib/tools.jar:<span class="hljs-variable">$JAVA_HOME</span>/lib/dt.jar:.<br><span class="hljs-built_in">export</span> JAVA_HOME=<span class="hljs-variable">$JAVA_HOME_8</span><br><span class="hljs-built_in">export</span> JRE_HOME<br><span class="hljs-built_in">export</span> PATH<br><span class="hljs-built_in">export</span> CLASSPATH<br><br><span class="hljs-built_in">alias</span> jdk8=<span class="hljs-string">&quot;export JAVA_HOME=<span class="hljs-variable">$JAVA_HOME_8</span>&quot;</span><br><span class="hljs-built_in">alias</span> jdk11=<span class="hljs-string">&quot;export JAVA_HOME=<span class="hljs-variable">$JAVA_HOME_11</span>&quot;</span><br><span class="hljs-built_in">alias</span> jdk16=<span class="hljs-string">&quot;export JAVA_HOME=<span class="hljs-variable">$JAVA_HOME_16</span>&quot;</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>默认设置为JDK8。</li>
+</ul>
+<p>然后让配置生效：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-built_in">source</span> ~/.bash_profile <br><span class="hljs-comment"># 或者 </span><br><span class="hljs-built_in">source</span> ~/.zshrc<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>查看当前版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">java -version<br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li>如果显示当前版本为JDK8，则表示成功。因为上面配置时默认设置为了8。</li>
+</ul>
+<h2 id="切换"><a href="#切换" class="headerlink" title="切换"></a>切换</h2><p>直接输入上面配置文件中设置的名称进行切换：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">jdk8 <span class="hljs-comment"># 切换为8</span><br>jdk11 <span class="hljs-comment"># 切换为11</span><br>jdk16 <span class="hljs-comment"># 切换为16</span><br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -361,7 +366,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/IDEA/">IDEA</a>
+                      <a class="hover-with-bg" href="/categories/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/">实用小技能</a>
                     
                   </div>
                 
@@ -369,9 +374,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/IDEA/">IDEA</a>
-                    
-                      <a class="hover-with-bg" href="/tags/JRebel/">JRebel</a>
+                      <a class="hover-with-bg" href="/tags/%E5%AE%9E%E7%94%A8%E5%B0%8F%E6%8A%80%E8%83%BD/">实用小技能</a>
                     
                   </div>
                 
@@ -385,7 +388,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/d4896fc1.html">https://tothefor.com/DragonOne/d4896fc1.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/9860fca3.html">https://tothefor.com/DragonOne/9860fca3.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -394,18 +397,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/bb55fa36.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Vue3-（十一）Vue3自定义指令实现防连点</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/66502bd5.html">
-                        <span class="hidden-mobile">kkFileView实现文档在线预览、加水印</span>
+                      <a href="/DragonOne/bb55fa36.html">
+                        <span class="hidden-mobile">Vue3-（十一）Vue3自定义指令实现防连点</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
