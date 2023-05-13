@@ -313,13 +313,13 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 16, 2023 pm
+                  本文最后更新于：May 13, 2023 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="对象的实例化"><a href="#对象的实例化" class="headerlink" title="对象的实例化"></a>对象的实例化</h2><p><img src="https://moreoj.com/imgs/33ccfd28-795a-4e00-b232-0bf446fef8fe.png" srcset="/img/loading.gif"></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="对象的实例化"><a href="#对象的实例化" class="headerlink" title="对象的实例化"></a>对象的实例化</h2><p><img src="https://moreoj.cn/imgs/33ccfd28-795a-4e00-b232-0bf446fef8fe.png" srcset="/img/loading.gif"></p>
 <h3 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h3><p>创建对象的步骤：（需要注意的是：这里的步骤为6步，有些地方可能为4、5步。至于多少步是无关紧要的，只要有重点部分即可）</p>
 <blockquote>
 <p>Step1：类加载检查。判断对象对应的类是否加载。</p>
@@ -374,15 +374,15 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <ul>
 <li>在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了，但从 Java 程序的视角来看，对象创建才刚开始，<code>&lt;init&gt;</code> 方法还没有执行，所有的字段都还为零。所以一般来说，执行 new 指令之后会接着执行 <code>&lt;init&gt;</code> 方法，把对象按照程序员的意愿进行初始化，这样一个真正可用的对象才算完全产生出来。</li>
 </ul>
-<h2 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h2><p><img src="https://moreoj.com/imgs/00ec5be2-5b21-49ac-aca9-0abba4d225ad.png" srcset="/img/loading.gif"></p>
+<h2 id="对象的内存布局"><a href="#对象的内存布局" class="headerlink" title="对象的内存布局"></a>对象的内存布局</h2><p><img src="https://moreoj.cn/imgs/00ec5be2-5b21-49ac-aca9-0abba4d225ad.png" srcset="/img/loading.gif"></p>
 <p>具体也可见<a href="https://tothefor.com/DragonOne/51b6f561.html">《JAVA知识点-对象的创建和类的加载介绍 》</a></p>
-<p><img src="https://moreoj.com/imgs/f7824a59-5fe6-4219-9235-6dfb446cccfa.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/f7824a59-5fe6-4219-9235-6dfb446cccfa.png" srcset="/img/loading.gif"></p>
 <h2 id="对象的访问定位"><a href="#对象的访问定位" class="headerlink" title="对象的访问定位"></a>对象的访问定位</h2><p>建立对象就是为了使用对象，Java 程序通过栈上的 reference 数据来操作堆上的具体对象。对象的访问方式由虚拟机实现而定，目前主流的访问方式有：<strong>使用句柄</strong>、<strong>直接指针</strong>。</p>
 <h3 id="句柄"><a href="#句柄" class="headerlink" title="句柄"></a>句柄</h3><p>如果使用句柄的话，那么 Java 堆中将会划分出一块内存来作为句柄池，reference 中存储的就是对象的句柄地址，而句柄中包含了对象实例数据与类型数据各自的具体地址信息。</p>
-<p><img src="https://moreoj.com/imgs/399b8b77-478b-421d-8fbd-53943619f6bc.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/399b8b77-478b-421d-8fbd-53943619f6bc.png" srcset="/img/loading.gif"></p>
 <h3 id="直接指针"><a href="#直接指针" class="headerlink" title="直接指针"></a>直接指针</h3><p>HotSpot采用的方式。</p>
 <p>如果使用直接指针访问，那么 Java 堆对象的布局中就必须考虑如何放置访问类型数据的相关信息，而 reference 中存储的直接就是对象的地址。</p>
-<p><img src="https://moreoj.com/imgs/32c30cb0-fa01-42af-ada6-056ba27184e7.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/32c30cb0-fa01-42af-ada6-056ba27184e7.png" srcset="/img/loading.gif"></p>
 <p>这两种对象访问方式各有优势。</p>
 <ul>
 <li><p>使用句柄来访问的最大好处是 reference 中存储的是稳定的句柄地址，在对象被移动时只会改变句柄中的实例数据指针，而 reference 本身不需要修改。但是速度相对来说慢。</p>

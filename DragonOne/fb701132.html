@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 10, 2023 pm
+                  本文最后更新于：May 13, 2023 pm
                 
               </p>
             
@@ -331,7 +331,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>autodetect：在Spring3中<code>已经弃用</code>。该模式自动探测使用构造器自动装配或者 byType 自动装配。首先，首先会 尝试找合适的带 参数的构造器，如果找到的话就是用构造器自动装配，如果在 bean 内部没有找到相应的构造器或者是无参构造 器，容器就会自动选择 byTpe 的自动装配方式。</li>
 </ul>
 <h2 id="Bean的生命周期回调方法及其实现方式"><a href="#Bean的生命周期回调方法及其实现方式" class="headerlink" title="Bean的生命周期回调方法及其实现方式"></a>Bean的生命周期回调方法及其实现方式</h2><p>生命周期的回调方法主要分为两种：一种是在Bean初始化的时候进行调用；另一种是在Bean销毁的时候调用。这两种又分别有三种实现方式：注解、接口、配置文件。</p>
-<p><img src="https://moreoj.com/imgs/d2c9c7ea-f633-4d4d-b424-7375e52ea32b.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/d2c9c7ea-f633-4d4d-b424-7375e52ea32b.png" srcset="/img/loading.gif"></p>
 <p>首先需要在启动类中加入销毁的调用：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">package</span> com.tothefor.sprbean;<br><br><span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;<br><span class="hljs-keyword">import</span> org.springframework.context.annotation.AnnotationConfigApplicationContext;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Author</span> DragonOne</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@Date</span> 2022/6/6 16:43</span><br><span class="hljs-comment"> * @墨水记忆 www.tothefor.com</span><br><span class="hljs-comment"> */</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestSpbean</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        AnnotationConfigApplicationContext annotationConfigApplicationContext = <span class="hljs-keyword">new</span> AnnotationConfigApplicationContext(<span class="hljs-string">&quot;com.tothefor.sprbean&quot;</span>);<br>        UserService bean = annotationConfigApplicationContext.getBean(UserService.class);<br><br>        annotationConfigApplicationContext.close();<br><br>    &#125;<br>&#125;<br><br></code></pre></div></td></tr></table></figure>
 
@@ -368,7 +368,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>执行顺序：先注解的，再接口，最后配置文件。</p>
 <h2 id="Spring在加载过程中Bean的形态"><a href="#Spring在加载过程中Bean的形态" class="headerlink" title="Spring在加载过程中Bean的形态"></a>Spring在加载过程中Bean的形态</h2><p>可以类比创建一辆车的步骤。</p>
-<p><img src="https://moreoj.com/imgs/577718ce-6406-4ab1-b898-21d31fcc5c8a.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/577718ce-6406-4ab1-b898-21d31fcc5c8a.png" srcset="/img/loading.gif"></p>
 <h2 id="Import的用法"><a href="#Import的用法" class="headerlink" title="Import的用法"></a>Import的用法</h2><p>有四种方式。</p>
 <ul>
 <li>直接指定类。</li>

@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 10, 2023 pm
+                  本文最后更新于：May 13, 2023 pm
                 
               </p>
             
@@ -375,9 +375,9 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>预热（动态调整）：可能很多情况下，大量的访问都是某一时间段内突然来，而如果采用上面的方法，那么会造成很多用户无法访问。所以，可以根据某一段时间内的访问量来适当的提高阈值。可以缓慢的将阈值提高到指定阈值，形成一个缓冲保护。</li>
 <li>排队等待。当达到阈值时，不再接受请求，但也不是直接拒绝掉。而是在等待规定时间后，如果可以执行就执行，否则就拒绝。</li>
 </ul>
-<h3 id="Sentinel设置限流"><a href="#Sentinel设置限流" class="headerlink" title="Sentinel设置限流"></a>Sentinel设置限流</h3><p><img src="https://moreoj.com/imgs/674d7a64-6365-4849-add9-d541ac91ca0f.png" srcset="/img/loading.gif"></p>
+<h3 id="Sentinel设置限流"><a href="#Sentinel设置限流" class="headerlink" title="Sentinel设置限流"></a>Sentinel设置限流</h3><p><img src="https://moreoj.cn/imgs/674d7a64-6365-4849-add9-d541ac91ca0f.png" srcset="/img/loading.gif"></p>
 <p>增加规则：</p>
-<p><img src="https://moreoj.com/imgs/d4a71a25-461f-49e4-be87-30e27a94031f.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/d4a71a25-461f-49e4-be87-30e27a94031f.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>单机阈值：即每台每秒的访问次数。</li>
 <li>流控模式-直接：只针对当前接口。</li>
@@ -453,7 +453,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>限流阈值：当每秒访问次数到达改值时进行限流。</li>
 </ul>
 <p>例如：限流第一个参数，每秒只能访问一次，但如果该参数为3，则每秒可以访问2次。</p>
-<p><img src="https://moreoj.com/imgs/04087a43-bfec-4147-aac3-cc2ec7cb989a.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/04087a43-bfec-4147-aac3-cc2ec7cb989a.png" srcset="/img/loading.gif"></p>
 <h2 id="服务熔断与降级"><a href="#服务熔断与降级" class="headerlink" title="服务熔断与降级"></a>服务熔断与降级</h2><p>服务降级：当下游服务因为某种原因变得不可用或响应过慢时，上游服务为了保证自己整体服务的可用性，不再继续调用目标服务，而是快速返回或是执行自己的替代方案。 </p>
 <p>熔断器的三个状态：</p>
 <ul>
@@ -465,7 +465,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <blockquote>
 <p> 熔断策略的三种模式：</p>
 </blockquote>
-<p><img src="https://moreoj.com/imgs/ef67230b-9a0c-4961-b71e-57df97e8169f.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/ef67230b-9a0c-4961-b71e-57df97e8169f.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>慢调用比例：如果出现半天都处理不完的调用，有可能是服务器故障导致卡顿。而慢调用的判定：如果某一次请求超过了指定的<code>最大RT（最大相应时间）</code>，就会被判定为<code>慢调用</code>。如果在某一时间段内（<code>统计时长</code>）的请求数大于规定的<code>最小请求数</code>（如图：必须是1秒内请求总数超过5次，这是前提。如果没有达到，即使超过比例阈值也不会熔断。），并且这部分请求中被判定为慢调用的数量比例超过<code>比例阈值</code>，那么将会触发熔断。在经过<code>熔断时长</code>后，将会进入半开状态进行重试（尝试请求访问）。如果请求通过则熔断器关闭，否则继续打开。再依次循环等待与重试。（简单说就是：看失败的概率。）</li>
 <li>异常比例：和慢调用比例类似，只是这里判断的是出现异常的次数。</li>

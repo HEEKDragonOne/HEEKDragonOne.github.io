@@ -313,14 +313,14 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 21, 2023 pm
+                  本文最后更新于：May 13, 2023 pm
                 
               </p>
             
             <div class="markdown-body">
               <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="JVM整体结构图"><a href="#JVM整体结构图" class="headerlink" title="JVM整体结构图"></a>JVM整体结构图</h2><p><img src="https://moreoj.com/imgs/e4de9005-7402-4733-b00c-0d07d9acd069.png" srcset="/img/loading.gif"></p>
-<h2 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h2><p><img src="https://moreoj.com/imgs/e0fd6671-8b07-4df6-bf4f-3ee2733dbf6c.png" srcset="/img/loading.gif"></p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><h2 id="JVM整体结构图"><a href="#JVM整体结构图" class="headerlink" title="JVM整体结构图"></a>JVM整体结构图</h2><p><img src="https://moreoj.cn/imgs/e4de9005-7402-4733-b00c-0d07d9acd069.png" srcset="/img/loading.gif"></p>
+<h2 id="类加载子系统"><a href="#类加载子系统" class="headerlink" title="类加载子系统"></a>类加载子系统</h2><p><img src="https://moreoj.cn/imgs/e0fd6671-8b07-4df6-bf4f-3ee2733dbf6c.png" srcset="/img/loading.gif"></p>
 <ul>
 <li><p>类加载器子系统负责从文件系统或者网络中加载Class文件。Class文件在文件开头有特定的文件标识，用来标识是否是一个能被虚拟机接受的Class文件。它是每个Class文件的头4个字节组成，称为魔数。</p>
 </li>
@@ -330,7 +330,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </li>
 </ul>
 <h3 id="类的加载过程"><a href="#类的加载过程" class="headerlink" title="类的加载过程"></a>类的加载过程</h3><p>类的加载过程分为三步：<strong>加载-&gt;链接-&gt;初始化</strong>。其中，<code>链接</code>又分为：<strong>验证-&gt;准备-&gt;解析</strong>。</p>
-<p><img src="https://moreoj.com/imgs/8eaa6380-af52-4488-83bd-7e4a9937cbf4.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/8eaa6380-af52-4488-83bd-7e4a9937cbf4.png" srcset="/img/loading.gif"></p>
 <h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><ul>
 <li>通过全类名获取定义此类的二进制字节流。</li>
 <li>将字节流所代表的静态存储结构转换为方法区的运行时数据结构。</li>
@@ -353,7 +353,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>目的在于确保Class文件的字节流中包含的信息符合当前虚拟机的要求，保证被加载类的正确性，确保不会危害虚拟机自身的安全。</li>
 <li>主要包括四种验证：文件格式验证、元数据验证、字节码验证、符号引用验证。</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/60af48f5-ec8d-4f40-8210-85c2c175fcb7.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/60af48f5-ec8d-4f40-8210-85c2c175fcb7.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>准备</p>
 </blockquote>
@@ -401,8 +401,8 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>如果父类加载器也还存在父类加载器，则也会进行向上委托，请求最终会到达顶层的启动类加载器；</li>
 <li>到顶之后，从最高加载器开始。如果父类加载器可以完成类加载任务，就成功返回；如果父类加载器无法完成此加载任务，则子加载器才会尝试自己去加载。</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/c7726af2-48ca-439a-9a7a-2d3b1b6cb6f4.png" srcset="/img/loading.gif"></p>
-<p><img src="https://moreoj.com/imgs/cffd7179-32fc-4b62-a3a2-0a1ec356224e.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/c7726af2-48ca-439a-9a7a-2d3b1b6cb6f4.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/cffd7179-32fc-4b62-a3a2-0a1ec356224e.png" srcset="/img/loading.gif"></p>
 <p>双亲委派模型的好处：</p>
 <ul>
 <li>保证了 Java 程序的稳定运行，可以避免类的重复加载。也保证了 Java 的核心 API 不被篡改。如果没有使用双亲委派模型，而是每个类加载器加载自己的话就会出现一些问题，比如我们编写一个称为 <code>java.lang.Object</code> 类的话，那么程序运行的时候，系统就会出现多个不同的 <code>Object</code> 类。</li>

@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 16, 2023 pm
+                  本文最后更新于：May 13, 2023 pm
                 
               </p>
             
@@ -427,11 +427,11 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>并行（Parallel）：指<code>多条垃圾收集线程</code>并行工作，但此时用户线程仍处于等待状态。如：ParNew、Parallel、Scavenge、Parallel Old；</li>
 <li>串行（Serial）：相较于并行的概念，单线程执行。如果内存不够，则程序暂停，启动JVM垃圾回收器进行垃圾回收。回收完，再启动程序的线程。</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/1614371e-2fe9-48ea-84eb-38f057f4768a.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/1614371e-2fe9-48ea-84eb-38f057f4768a.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>并发（Concurrent）：值用户线程与垃圾收集线程同时执行（但不一定是并行的，可能会交替执行），垃圾回收线程在执行时不会停顿用户程序的运行。用户程序在继续运行，而垃圾收集程序线程运行于另一个CPU上。如CMS、G1。</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/0a7d0b5f-7ed6-42d3-a9e7-804ecc05430c.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/0a7d0b5f-7ed6-42d3-a9e7-804ecc05430c.png" srcset="/img/loading.gif"></p>
 <h2 id="安全点与安全区域"><a href="#安全点与安全区域" class="headerlink" title="安全点与安全区域"></a>安全点与安全区域</h2><h3 id="安全点（safe-Point）"><a href="#安全点（safe-Point）" class="headerlink" title="安全点（safe Point）"></a>安全点（safe Point）</h3><p>程序执行时并非在所有地方都能停顿下来开始GC，只有在特定的位置才能停顿下来开始GC，这些位置称为”安全点”（Safepoint）。</p>
 <blockquote>
 <p>Safe Point 的选择很重要，如果太少可能导致GC等待的时间太长，如果太频繁可能导致运行时的性能问题。大部分指令的执行时间都非常短暂，通过会根据”是否具有让程序长时间执行的特征”为标准。比如：选择一些执行时间较长的指令作为Safe Point，如方法调用、循环跳转和异常跳转等。</p>

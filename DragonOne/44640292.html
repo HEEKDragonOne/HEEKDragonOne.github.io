@@ -313,7 +313,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：March 16, 2023 pm
+                  本文最后更新于：May 13, 2023 pm
                 
               </p>
             
@@ -345,7 +345,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <ul>
 <li>从分代上看，G1依然属于分代型垃圾回收器，它会区分年轻代和老年代，年轻代依然有Eden区和Survivor区。但从堆的结构上看，它不要求整个Eden区、年轻代或者老年代都是连续的，也不再坚持固定大小和固定数量。如下图：其中每块区域同一时刻只能担任一个角色（E、S、O等），并且在被清空后可以担任其他角色。</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/0a104044-5a2a-4fb5-b2f7-ff9ab167d9b3.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/0a104044-5a2a-4fb5-b2f7-ff9ab167d9b3.png" srcset="/img/loading.gif"></p>
 <ul>
 <li>将堆空间分为若干个区域（Region），这些区域中包含了逻辑上的年轻代和老年代。</li>
 <li>和之前的各类回收器不同，它同时兼顾年轻代和老年代。对比其他回收器，或者工作在年轻代，或者工作在老年代。</li>
@@ -419,7 +419,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 </blockquote>
 <h2 id="分区Region"><a href="#分区Region" class="headerlink" title="分区Region"></a>分区Region</h2><p>使用G1收集器时，它将整个Java堆划分成约2048个大小相同的独立Region块，每个Region块大小根据堆空间的实际大小而定，整体被控制在1MB到32MB之间，且为2的N次幂，即1、2、4、8…可以通过-XX:G1HeapRegionSize设定。所有的Region大小相同，且在JVM生命周期内不会被改变。</p>
 <p>虽然还保留有新生代和老年代的概念，但新生代和老年代不再是物理隔离的了，它们都是一部分Region（无需连续）的集合。通过Region的动态分配方式实现逻辑上的连续。</p>
-<p><img src="https://moreoj.com/imgs/672a3253-a271-4f53-afa8-d24d3063f79b.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/672a3253-a271-4f53-afa8-d24d3063f79b.png" srcset="/img/loading.gif"></p>
 <p>一个Region有可能属于Eden、Survivor或者Old/Tenured内存区域。但是一个Region只可能属于一个角色。但在Region被完全清理之后可能变成其他角色。图中的E表示该Region属于Eden内存区域，S表示属于Survivor内存区域，O表示属于Old内存区域。图中空白的表示未使用的内存空间。</p>
 <ul>
 <li>G1垃圾收集器还增加了一种新的内存区域，叫做Humongous内存区域，如图中的H块。主要用于存储大对象，如果超过1.5个Region，就放到H。</li>
@@ -437,7 +437,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>混合回收（Mixed GC）</li>
 <li>如果需要，单线程、独占式、高强度的Full GC还是继续存在的。它针对GC的评估失败提供了一种失败保护机制，即强力回收。</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/25d30bda-07e3-4634-a2f1-a9747af6ff65.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/25d30bda-07e3-4634-a2f1-a9747af6ff65.png" srcset="/img/loading.gif"></p>
 <p>顺时针，Young GC -&gt; Young GC + Concurrent Mark -&gt; Mixed GC顺序，进行垃圾回收。</p>
 <ul>
 <li>应用程序分配内存，当年轻代的Eden区用尽时开始年轻代回收过程；G1的年轻代收集阶段是一个并行的独占式收集器。在年轻代回收期，G1 GC暂停所有应用程序线程，启动多线程执行年轻代回收。然后从年轻代区间移动存活对象到Survivor区间或者老年区间，也有可能是两个区间都会涉及。</li>
@@ -459,7 +459,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>这样的话会降低Minor GC的效率。</li>
 <li>例如：一个Eden RegionA 中的对象被另外一个Eden RegionB引用，在进行垃圾回收的时候，这种情况比较好处理，因为都是在Eden区中；但是如果是Old区中引用了Eden区中的对象，那么在判断某个对象是否可达时，就需要把Eden区和Old区进行遍历查看是否被引用。那么这个效率是比较差的，因为现在在Eden区中，但是还是需要去Old区中进行遍历，而遍历过程是STW的。如图：</li>
 </ul>
-<p><img src="https://moreoj.com/imgs/af28ec2d-ecb4-4c18-a6a4-5fc4dd495124.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/af28ec2d-ecb4-4c18-a6a4-5fc4dd495124.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>解决办法</p>
 </blockquote>
@@ -492,7 +492,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>独占清理（cleanup，STW）：计算各个区域的存活对象和GC回收比例，并进行排序，识别可以混合回收的区域。为下阶段做铺垫。是STW的。这个阶段并不会实际上去做垃圾的收集。</li>
 <li>并发清理阶段：识别并清理完全空闲的区域。</li>
 </ul>
-<h3 id="回收过程三：混合回收"><a href="#回收过程三：混合回收" class="headerlink" title="回收过程三：混合回收"></a>回收过程三：混合回收</h3><p><img src="https://moreoj.com/imgs/418fff7a-ec3c-429e-9607-bdf1bdfa66f1.png" srcset="/img/loading.gif"></p>
+<h3 id="回收过程三：混合回收"><a href="#回收过程三：混合回收" class="headerlink" title="回收过程三：混合回收"></a>回收过程三：混合回收</h3><p><img src="https://moreoj.cn/imgs/418fff7a-ec3c-429e-9607-bdf1bdfa66f1.png" srcset="/img/loading.gif"></p>
 <p>当越来越多的对象晋升到老年代Old Region时，为了避免堆内存被耗尽，虚拟机会触发一个混合的垃圾收集器，即Mixed GC，该算法并不是一个Old GC，除了回收整个Young Region，还会回收一部分的Old Region。这里需要注意：是一部分老年代，而不是全部老年代。可以选择哪些Old Region进行收集，从而可以对垃圾回收的耗时时间进行控制。也要注意的是Mixed GC并不是Full GC。</p>
 <ul>
 <li>并发标记结束以后，老年代中百分百为垃圾的内存分段被回收了，部分为垃圾的内存分段被计算了出来。默认情况下，这些老年代的内存分段会分为8次（可以通过-XX:G1MixedGCCountTarget设置）被回收。</li>
@@ -524,7 +524,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>评估G1 GC的吞吐量时，暂停时间目标不要太严苛。目标太过严苛表示你愿意承受更多的垃圾回收开销，而这些会直接影响到吞吐量。</li>
 </ul>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>截止JDK1.8，一共有7款不同的垃圾收集器。每一款不同的垃圾收集器都有不同的特点。</p>
-<p><img src="https://moreoj.com/imgs/12e2b939-ac17-4301-99ba-2bbf71554b1b.png" srcset="/img/loading.gif"></p>
+<p><img src="https://moreoj.cn/imgs/12e2b939-ac17-4301-99ba-2bbf71554b1b.png" srcset="/img/loading.gif"></p>
 <blockquote>
 <p>GC发展阶段：</p>
 </blockquote>
