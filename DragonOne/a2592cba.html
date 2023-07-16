@@ -22,7 +22,7 @@
   
     <meta name="baidu-site-verification" content="code-A374Jvt3Q0" />
   
-  <title>SpringBoot-（三十七）CSV文件的读取与存储 - 墨水记忆</title>
+  <title>星星之火-Arrays.asList()的UnsupportedOperationException异常坑 - 墨水记忆</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -229,7 +229,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SpringBoot-（三十七）CSV文件的读取与存储">
+            <span class="h2" id="subtitle" title="星星之火-Arrays.asList()的UnsupportedOperationException异常坑">
               
             </span>
 
@@ -244,8 +244,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2023-06-09 15:02" pubdate>
-        June 9, 2023 pm
+      <time datetime="2023-07-16 21:00" pubdate>
+        July 16, 2023 pm
       </time>
     </span>
   
@@ -256,7 +256,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      683 字
+      553 字
     </span>
   
 
@@ -266,7 +266,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      7
        分钟
     </span>
   
@@ -309,38 +309,47 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SpringBoot-（三十七）CSV文件的读取与存储</h1>
+            <h1 style="display: none">星星之火-Arrays.asList()的UnsupportedOperationException异常坑</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：June 11, 2023 pm
+                  本文最后更新于：July 16, 2023 pm
                 
               </p>
             
             <div class="markdown-body">
-              <p>SpringBoot框架中有两个非常重要的策略：开箱即用和约定优于配置。其设计目的是用来简化新Spring应用的初始搭建以及开发过程。该框架使用了特定的方式来进行配置，从而使开发人员不再需要定义样板化的配置。</p>
-<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p><strong>逗号分隔值</strong>（Comma-Separated Values，<strong>CSV</strong>，有时也称为<strong>字符分隔值</strong>，因为分隔字符也可以不是逗号），其文件以纯文本形式存储表格数据（数字和文本）。</p>
-<p>CSV文件可以直接用Excel打开，所有在读取和存储时，可以类比Excel。</p>
-<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>com.opencsv<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>opencsv<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span><br>    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>5.7.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span><br><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span><br></code></pre></div></td></tr></table></figure>
+              <p>积土成山，风雨兴焉；积水成渊，蛟龙生焉；积善成德，而神明自得，圣心备焉。故不积跬步，无以至千里，不积小流无以成江海。齐骥一跃，不能十步，驽马十驾，功不在舍。面对悬崖峭壁，一百年也看不出一条裂缝来，但用斧凿，能进一寸进一寸，能进一尺进一尺，不断积累，飞跃必来，突破随之。</p>
+<h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>今天写项目自测的过程中发现Arrays.asList()的一个小坑，特此记录。</p>
+<h2 id="实例代码"><a href="#实例代码" class="headerlink" title="实例代码"></a>实例代码</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>  List&lt;String&gt; list = Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>);<br>  list.add(<span class="hljs-string">&quot;d&quot;</span>);<br><br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>在运行上述代码后，会发现报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">Exception <span class="hljs-keyword">in</span> thread <span class="hljs-string">&quot;main&quot;</span> java.lang.UnsupportedOperationException<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="读取"><a href="#读取" class="headerlink" title="读取"></a>读取</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">testC</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    String path = <span class="hljs-string">&quot;test.csv&quot;</span>;<br>    <span class="hljs-comment">// 创建 CSVReader 对象</span><br>    CSVReader reader = <span class="hljs-keyword">new</span> CSVReader(<span class="hljs-keyword">new</span> FileReader(path));<br>    <span class="hljs-comment">// 逐行读取 CSV 文件并处理数据</span><br>    String[] line;<br>    <span class="hljs-keyword">while</span> ((line = reader.readNext()) != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-comment">// 处理每一行的每一列数据</span><br>        String c1 = line[<span class="hljs-number">0</span>]; <span class="hljs-comment">// 第一列</span><br>        String c2 = line[<span class="hljs-number">1</span>]; <span class="hljs-comment">// 第二列</span><br>        String c3 = line[<span class="hljs-number">2</span>]; <span class="hljs-comment">// 第三列</span><br>        System.out.printf(<span class="hljs-string">&quot;c1=%s c2=%s c3=%s%n&quot;</span>,c1,c2,c3);<br>    &#125;<br>    <span class="hljs-comment">// 关闭 CSVReader 对象</span><br>    reader.close();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><ul>
+<li><p>因为Arrays.asList()方法返回的List对象，是一个固定大小的List，不能进行结构上的修改，否则会抛出异常。</p>
+</li>
+<li><p>Arrays.asList()方法得到的List对象并不是java.util.ArrayList对象，而是Arrays内部的ArrayList对象（java.util.Arrays.ArrayList）。源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> &lt;T&gt; <span class="hljs-function">List&lt;T&gt; <span class="hljs-title">asList</span><span class="hljs-params">(T... a)</span> </span>&#123;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(a);<br>&#125;<br></code></pre></div></td></tr></table></figure></li>
+<li><p><code>Arrays.ArrayList</code>类继承自<code>AbstractList</code>，实现了<code>List</code>接口。它重写了<code>add()</code>、<code>remove()</code>等修改List结构的方法，并且直接抛出<code>UnsupportedOperationException</code>异常，从而禁止了对List结构的修改。是final类型的a变量。</p>
+</li>
+</ul>
+<p>ArrayList构造源码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ArrayList</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractList</span>&lt;<span class="hljs-title">E</span>&gt;</span><br><span class="hljs-class">  <span class="hljs-keyword">implements</span> <span class="hljs-title">RandomAccess</span>, <span class="hljs-title">java</span>.<span class="hljs-title">io</span>.<span class="hljs-title">Serializable</span></span>&#123;<br>  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> E[] a;<br><br>  ArrayList(E[] array) &#123;<br>    a = Objects.requireNonNull(array);<br>  &#125;<br><br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">size</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> a.length;<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+<p>AbstractList重写修改List结构的方法源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractList</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractCollection</span>&lt;<span class="hljs-title">E</span>&gt; <span class="hljs-keyword">implements</span> <span class="hljs-title">List</span>&lt;<span class="hljs-title">E</span>&gt;</span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">add</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index, E element)</span> </span>&#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> E <span class="hljs-title">remove</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index)</span> </span>&#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> E <span class="hljs-title">set</span><span class="hljs-params">(<span class="hljs-keyword">int</span> index, E element)</span> </span>&#123;<br>    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> UnsupportedOperationException();<br>  &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="存储"><a href="#存储" class="headerlink" title="存储"></a>存储</h2><p>将数据存储到指定CSV文件中，会自动生成。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readcsv</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    String path_r = <span class="hljs-string">&quot;result.csv&quot;</span>;<br>    <span class="hljs-comment">// 创建 CSVWriter 对象，true表示内容追加</span><br>    CSVWriter writer = <span class="hljs-keyword">new</span> CSVWriter(<span class="hljs-keyword">new</span> FileWriter(path_r, <span class="hljs-keyword">true</span>));<br>    <span class="hljs-comment">// 一行3列</span><br>    String[] temp = <span class="hljs-keyword">new</span> String[<span class="hljs-number">3</span>];<br>    temp[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;zhang&quot;</span>; <span class="hljs-comment">// 姓名列</span><br>    temp[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;20&quot;</span>; <span class="hljs-comment">// 年龄列</span><br>    temp[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;上海市&quot;</span>; <span class="hljs-comment">// 地址列</span><br>    <span class="hljs-comment">// 写入文件</span><br>    writer.writeNext(temp);<br><br>    <span class="hljs-comment">// 关闭 CSVWriter 对象</span><br>    writer.close();<br>    <span class="hljs-comment">// 关闭 CSVReader 对象</span><br>    reader.close();<br>&#125;<br></code></pre></div></td></tr></table></figure>
+<h2 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h2><p>总体来说，就是用另外一个新的List来进行操作。只是怎么获取这个新的List的方式不同而已。</p>
+<h3 id="构造函数"><a href="#构造函数" class="headerlink" title="构造函数"></a>构造函数</h3><p>使用我们熟悉的java.util.ArrayList的构造函数：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>  List&lt;String&gt; list = Arrays.asList(<span class="hljs-string">&quot;a&quot;</span>, <span class="hljs-string">&quot;b&quot;</span>, <span class="hljs-string">&quot;c&quot;</span>);<br>  List&lt;String&gt; newList = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(list);<br>  newList.add(<span class="hljs-string">&quot;d&quot;</span>);<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
-<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><p>将test.csv文件里的内容读取到另一新文件中。</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readcsv</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    String path = <span class="hljs-string">&quot;test.csv&quot;</span>;<br>    String path_r = <span class="hljs-string">&quot;result.csv&quot;</span>;<br><br>    <span class="hljs-comment">// 创建 CSVReader 对象</span><br>    CSVReader reader = <span class="hljs-keyword">new</span> CSVReader(<span class="hljs-keyword">new</span> FileReader(path));<br>    <span class="hljs-comment">// 创建 CSVWriter 对象</span><br>    CSVWriter writer = <span class="hljs-keyword">new</span> CSVWriter(<span class="hljs-keyword">new</span> FileWriter(path_r, <span class="hljs-keyword">true</span>));<br><br>    <span class="hljs-comment">// 逐行读取 CSV 文件并处理数据</span><br>    String[] line;<br>    <span class="hljs-keyword">while</span> ((line = reader.readNext()) != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-comment">// 写入数据到 CSV 文件</span><br>        writer.writeNext(line);<br>    &#125;<br><br><br>    <span class="hljs-comment">// 关闭 CSVWriter 对象</span><br>    writer.close();<br><br>    <span class="hljs-comment">// 关闭 CSVReader 对象</span><br>    reader.close();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-
-
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><p>如果想加一个和Excel一样的表头，可以先往CSV文件里面写入一列表头信息，然后再存入数据。稍改上面的示例，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-meta">@Test</span><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">readcsv</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    String path = <span class="hljs-string">&quot;test.csv&quot;</span>;<br>    String path_r = <span class="hljs-string">&quot;result.csv&quot;</span>;<br><br>    <span class="hljs-comment">// 创建 CSVReader 对象</span><br>    CSVReader reader = <span class="hljs-keyword">new</span> CSVReader(<span class="hljs-keyword">new</span> FileReader(path));<br>    <span class="hljs-comment">// 创建 CSVWriter 对象</span><br>    CSVWriter writer = <span class="hljs-keyword">new</span> CSVWriter(<span class="hljs-keyword">new</span> FileWriter(path_r, <span class="hljs-keyword">true</span>));<br><br>    <span class="hljs-comment">// 添加表头信息</span><br>    String[] head = <span class="hljs-keyword">new</span> String[<span class="hljs-number">3</span>];<br>    head[<span class="hljs-number">0</span>] = <span class="hljs-string">&quot;name&quot;</span>;<br>    head[<span class="hljs-number">1</span>] = <span class="hljs-string">&quot;age&quot;</span>;<br>    head[<span class="hljs-number">2</span>] = <span class="hljs-string">&quot;address&quot;</span>;<br>    writer.writeNext(head);<br><br>    <span class="hljs-comment">// 逐行读取 CSV 文件并处理数据</span><br>    String[] line;<br>    <span class="hljs-keyword">while</span> ((line = reader.readNext()) != <span class="hljs-keyword">null</span>) &#123;<br>        <span class="hljs-comment">// 写入数据到 CSV 文件</span><br>        writer.writeNext(line);<br>    &#125;<br><br><br>    <span class="hljs-comment">// 关闭 CSVWriter 对象</span><br>    writer.close();<br><br>    <span class="hljs-comment">// 关闭 CSVReader 对象</span><br>    reader.close();<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
 
@@ -355,7 +364,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/SpringBoot/">SpringBoot</a>
+                      <a class="hover-with-bg" href="/categories/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
                     
                   </div>
                 
@@ -363,9 +372,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/SpringBoot/">SpringBoot</a>
-                    
-                      <a class="hover-with-bg" href="/tags/LogBack/">LogBack</a>
+                      <a class="hover-with-bg" href="/tags/%E6%98%9F%E6%98%9F%E4%B9%8B%E7%81%AB/">星星之火</a>
                     
                   </div>
                 
@@ -379,7 +386,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                -->
               <p class="note note-warning">
                 <strong>本文作者: </strong><a href="/">墨水记忆</a> <br>
-                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/cbb3530d.html">https://tothefor.com/DragonOne/cbb3530d.html</a> <br>
+                <strong>本文链接: </strong><a href="https://tothefor.com/DragonOne/a2592cba.html">https://tothefor.com/DragonOne/a2592cba.html</a> <br>
                 <strong>版权声明: </strong>本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
                    </p>
                    
@@ -388,18 +395,12 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/DragonOne/a2592cba.html">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">星星之火-Arrays.asList()的UnsupportedOperationException异常坑</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/DragonOne/28dbe5ef.html">
-                        <span class="hidden-mobile">SpringBoot-（三十六）logback实现日志分类输出存储</span>
+                      <a href="/DragonOne/cbb3530d.html">
+                        <span class="hidden-mobile">SpringBoot-（三十七）CSV文件的读取与存储</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
