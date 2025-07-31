@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>Linux-实现同步共享文件夹</title>
+    <link href="/DragonOne/9e9e8ed1.html"/>
+    <url>/DragonOne/9e9e8ed1.html</url>
+    
+    <content type="html"><![CDATA[<p>Linux，全称GNU/Linux，是一种免费使用和自由传播的类UNIX操作系统。主要受到Minix和Unix思想的启发，是一个基于POSIX的多用户、多任务、支持多线程和多CPU的操作系统。它能运行主要的Unix工具软件、应用程序和网络协议。它支持32位和64位硬件。Linux继承了Unix以网络为核心的设计思想，是一个性能稳定的多用户网络操作系统。Linux有上百种不同的发行版。</p><p>Linux不仅系统性能稳定，而且是开源软件。其核心防火墙组件性能高效、配置简单，保证了系统的安全。在很多企业网络中，为了追求速度和安全，Linux不仅仅是被网络运维人员当作服务器使用，甚至当作网络防火墙。Linux具有开放源码、没有版权、技术社区用户多等特点，开放源码使得用户可以自由裁剪，灵活性高，功能强大，成本低。尤其系统中内嵌网络协议栈，经过适当的配置就可实现路由器的功能。</p><ul><li>该文章环境为ubuntu系统。</li></ul><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">sudo apt-get install nfs-kernel-server<br></code></pre></div></td></tr></table></figure><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="共享服务器"><a href="#共享服务器" class="headerlink" title="共享服务器"></a>共享服务器</h3><h4 id="创建共享目录"><a href="#创建共享目录" class="headerlink" title="创建共享目录"></a>创建共享目录</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mkdir /dolphinscheduler<br>chmod 777 -R /dolphinscheduler<br></code></pre></div></td></tr></table></figure><h4 id="配置NFS"><a href="#配置NFS" class="headerlink" title="配置NFS"></a>配置NFS</h4><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">vim /etc/exports<br><span class="hljs-comment"># 添加配置</span><br>/dolphinscheduler 192.168.1.0/24(rw,sync,no_subtree_check)<br></code></pre></div></td></tr></table></figure><ul><li><code>/dolphinscheduler</code>：是共享目录路径</li><li>192.168.1.0/24：是允许访问该共享目录的IP地址范围，可替换为具体的IP或者是星号（*-表示所有）</li><li>rw：表示该共享目录可读写</li><li>sync：表示所有写操作都同步到磁盘</li></ul><p>配置重载：</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">exportfs -r<br></code></pre></div></td></tr></table></figure><h3 id="其他服务器"><a href="#其他服务器" class="headerlink" title="其他服务器"></a>其他服务器</h3><p>使用以下命令挂载该共享目录：</p><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash">mount -t nfs 192.168.199.18:/dolphinscheduler /local_folder<br></code></pre></div></td></tr></table></figure><ul><li>IP：是共享主机的IP地址</li><li>/home/nfs_share：是共享目录的路径</li><li>/local_folder：是当前服务器文件夹路径。</li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Linux</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Linux</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Docker-（四）Docker进阶</title>
     <link href="/DragonOne/c3a48866.html"/>
     <url>/DragonOne/c3a48866.html</url>
