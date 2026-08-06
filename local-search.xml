@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>星星之火-Git实现代码仓库以及提交记录迁移</title>
+    <link href="/DragonOne/3a0e6125.html"/>
+    <url>/DragonOne/3a0e6125.html</url>
+    
+    <content type="html"><![CDATA[<p>背景：最近因为特殊情况，GitLab重新部署到了另外一台服务器（情况特殊，没有办法正常迁移），所以需要手动迁移一下仓库，但是还需要保留原提交记录，所以记录一下。</p><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote><p>环境：</p><ul><li>旧仓库：<a href="http://192.168.199.150:8888/lcl/java-system.git">http://192.168.199.150:8888/lcl/java-system.git</a></li><li>新仓库：<a href="http://192.168.199.7:8888/lcl/java-system.git%EF%BC%88%E9%9C%80%E8%A6%81%E4%B8%BA%E7%A9%BA%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E4%B8%9C%E8%A5%BF%EF%BC%89">http://192.168.199.7:8888/lcl/java-system.git（需要为空，没有任何东西）</a></li></ul></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 临时放行内网不安全http （可选操作，遇到SSL问题需要）</span><br>git config --global credential.allowUnsafeRemotes <span class="hljs-literal">true</span><br><br><span class="hljs-comment"># 克隆旧仓库</span><br>git <span class="hljs-built_in">clone</span> --mirror http://192.168.199.150:8888/lcl/java-system.git<br><br><span class="hljs-built_in">cd</span> java-system.git<br><br><span class="hljs-comment"># 把origin改成目标新仓库地址</span><br>git remote set-url origin http://192.168.199.7:8888/lcl/java-system.git<br><br><span class="hljs-comment"># 查看旧仓库有哪些分支</span><br>git ls-remote --heads http://192.168.199.150:8888/lcl/java-system.git<br><br><span class="hljs-comment"># 查看当前本地仓库已经拿到的所有分支/tag</span><br>git show-ref<br><br><span class="hljs-comment"># 执行推送：</span><br>git push --mirror origin<br><br><span class="hljs-comment"># 迁移完成，撤销 http 安全豁免（可选操作）</span><br>git config --global --<span class="hljs-built_in">unset</span> credential.allowUnsafeRemotes<br></code></pre></div></td></tr></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>星星之火</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Git</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Kubernetes-（一）Ubuntu20.04安装Kubernetes</title>
     <link href="/DragonOne/f20c32d6.html"/>
     <url>/DragonOne/f20c32d6.html</url>
@@ -11241,31 +11266,6 @@
       <tag>JAVA</tag>
       
       <tag>JDBC</tag>
-      
-    </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>星星之火-Git实现代码仓库以及提交记录迁移</title>
-    <link href="/DragonOne/3a0e6125.html"/>
-    <url>/DragonOne/3a0e6125.html</url>
-    
-    <content type="html"><![CDATA[<p>背景：最近因为特殊情况，GitLab重新部署到了另外一台服务器（情况特殊，没有办法正常迁移），所以需要手动迁移一下仓库，但是还需要保留原提交记录，所以记录一下。</p><h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><blockquote><p>环境：</p><ul><li>旧仓库：<a href="http://192.168.199.150:8888/lcl/java-system.git">http://192.168.199.150:8888/lcl/java-system.git</a></li><li>新仓库：<a href="http://192.168.199.7:8888/lcl/java-system.git%EF%BC%88%E9%9C%80%E8%A6%81%E4%B8%BA%E7%A9%BA%EF%BC%8C%E6%B2%A1%E6%9C%89%E4%BB%BB%E4%BD%95%E4%B8%9C%E8%A5%BF%EF%BC%89">http://192.168.199.7:8888/lcl/java-system.git（需要为空，没有任何东西）</a></li></ul></blockquote><figure class="highlight bash"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs bash"><span class="hljs-comment"># 临时放行内网不安全http （可选操作，遇到SSL问题需要）</span><br>git config --global credential.allowUnsafeRemotes <span class="hljs-literal">true</span><br><br><span class="hljs-comment"># 克隆旧仓库</span><br>git <span class="hljs-built_in">clone</span> --mirror http://192.168.199.150:8888/lcl/java-system.git<br><br><span class="hljs-built_in">cd</span> java-system.git<br><br><span class="hljs-comment"># 把origin改成目标新仓库地址</span><br>git remote set-url origin http://192.168.199.7:8888/lcl/java-system.git<br><br><span class="hljs-comment"># 查看旧仓库有哪些分支</span><br>git ls-remote --heads http://192.168.199.150:8888/lcl/java-system.git<br><br><span class="hljs-comment"># 查看当前本地仓库已经拿到的所有分支/tag</span><br>git show-ref<br><br><span class="hljs-comment"># 执行推送：</span><br>git push --mirror origin<br><br><span class="hljs-comment"># 迁移完成，撤销 http 安全豁免（可选操作）</span><br>git config --global --<span class="hljs-built_in">unset</span> credential.allowUnsafeRemotes<br></code></pre></div></td></tr></table></figure>]]></content>
-    
-    
-    <categories>
-      
-      <category>星星之火</category>
-      
-    </categories>
-    
-    
-    <tags>
-      
-      <tag>Git</tag>
       
     </tags>
     
