@@ -336,7 +336,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
             
               <p class="note note-info">
                 
-                  本文最后更新于：November 21, 2026 pm
+                  本文最后更新于：November 22, 2026 pm
                 
               </p>
             
@@ -349,7 +349,7 @@ color="220,220,220" opacity='0.7' zIndex="-2" count="200" src="//cdn.bootcss.com
 <li>@AfterThrowing ：目标方法抛出异常后执行。</li>
 <li>@Around ：包裹目标方法，可控制目标方法是否执行、参数和返回值替换，是最灵活的通知。属于<code>最外层</code>的执行。</li>
 </ul>
-<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><p><img src="/blogimg/aopzxsx.png" srcset="/img/loading.gif" alt="AOP执行顺序"></p>
+<h2 id="执行顺序"><a href="#执行顺序" class="headerlink" title="执行顺序"></a>执行顺序</h2><p><img src="/blogimg/xlbj/aopzxsx.png" srcset="/img/loading.gif" alt="AOP执行顺序"></p>
 <ul>
 <li><strong>正常返回</strong>：<code>@Around 前置</code> → <code>@Before</code> → 目标方法 → <code>@AfterReturning</code> → <code>@After</code> → <code>@Around 后置</code>。</li>
 <li><strong>抛出异常</strong>：<code>@Around 前置</code> → <code>@Before</code> → 目标方法 (抛异常) → <code>@AfterThrowing</code> → <code>@After</code>；此时 <code>@AfterReturning</code> 与<br><code>@Around 后置</code> 被跳过。</li>
